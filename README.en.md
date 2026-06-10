@@ -7,10 +7,15 @@ English · [中文](./README.md)
 ![Bilingual README](https://img.shields.io/badge/README-Bilingual-0f766e?style=flat-square)
 ![Trend Radar](https://img.shields.io/badge/AI%20Agent-Trend%20Radar-3178c6?style=flat-square)
 ![Local Console](https://img.shields.io/badge/Console-Read%20Only-c2410c?style=flat-square)
+![Online App](https://img.shields.io/badge/Online-App%20Available-0284c7?style=flat-square)
 
 ![AgentRadar overview](./docs/assets/readme-radar-banner.svg)
 
 > Collect public signals, score momentum, and turn ecosystem movement into reusable research artifacts.
+
+> **Try the hosted app**
+>
+> Visit [app.agentradar.top](https://app.agentradar.top/) to browse the online version directly. The hosted site supports login, which is useful if you want to inspect outputs before running anything locally.
 
 ---
 
@@ -32,6 +37,31 @@ If you often ask questions like these, this project is for you:
 - Which emerging projects are worth watching before they reach the main board?
 - Why did a project rank highly, and what evidence supports that?
 
+## Online access
+
+<table>
+  <tr>
+    <td width="50%">
+      <strong>🌐 Browse online</strong><br/>
+      Open <a href="https://app.agentradar.top/">app.agentradar.top</a> to jump straight into the homepage, project library, weekly trends, and observer views.
+    </td>
+    <td width="50%">
+      <strong>🔐 Account support</strong><br/>
+      The hosted version supports login. This repository mostly documents the open workflow and local artifact system.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Best for</strong><br/>
+      Readers who want to inspect value first and decide on local setup later
+    </td>
+    <td>
+      <strong>Planned next</strong><br/>
+      Implicit personalized memory built from user behavior in the hosted product
+    </td>
+  </tr>
+</table>
+
 ## Why it matters
 
 Many projects can scrape `GitHub Trending` once. The harder part comes after that:
@@ -44,6 +74,8 @@ Many projects can scrape `GitHub Trending` once. The harder part comes after tha
 AgentRadar connects those steps into one workflow and stores the results as inspectable daily and weekly artifacts instead of stopping at a subjective take.
 
 ## What you get
+
+> `Collect → Score → Synthesize → Archive → Reuse`
 
 ### 1. Daily trend board
 
@@ -70,7 +102,104 @@ AgentRadar connects those steps into one workflow and stores the results as insp
 
 ### 5. Local read-only workbench
 
-The OSS edition includes a lightweight local web console for browsing generated artifacts, but it does not include login, registration, sessions, or account management.
+The repository includes a lightweight local read-only web console for browsing generated artifacts.
+
+### 6. Hosted online app
+
+- Hosted URL: [`https://app.agentradar.top/`](https://app.agentradar.top/)
+- Browse the homepage, project library, weekly trends, run health, and emerging-project views directly
+- Supports login
+- Implicit personalized memory based on user behavior is part of the next hosted-product direction
+
+`🔄 daily refresh` · `↗ weekly judgment` · `◎ emerging watch` · `▣ knowledge archive`
+
+![AgentRadar panels](./docs/assets/readme-radar-panels.svg)
+
+## How to read this repository
+
+<table>
+  <tr>
+    <td width="33%">
+      <strong>📈 Trend view</strong><br/>
+      Use the board, scores, and summaries to understand what changed today.
+    </td>
+    <td width="33%">
+      <strong>🧭 Research view</strong><br/>
+      Use weekly reports and judgments to separate real movement from short-lived spikes.
+    </td>
+    <td width="33%">
+      <strong>🗂️ Archive view</strong><br/>
+      Use knowledge cards and the observer pool for long-term tracking and review.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>Start with</strong><br/>
+      <code>daily.md</code> / <code>run-summary.json</code>
+    </td>
+    <td>
+      <strong>Start with</strong><br/>
+      <code>weekly.md</code> / <code>weekly.judgment.json</code>
+    </td>
+    <td>
+      <strong>Start with</strong><br/>
+      <code>data/kb/</code> / <code>data/observer/</code>
+    </td>
+  </tr>
+</table>
+
+## What the agents inside the system do
+
+AgentRadar is not “one all-purpose agent.” It is a set of scoped agents and workflows that work together to turn public signals into readable, verifiable, reusable trend artifacts.
+
+<table>
+  <tr>
+    <td width="25%">
+      <strong>📡 Signal Collection Agent</strong><br/>
+      Pulls raw signals from public sources, handles basic source differences, and writes into <code>data/raw/</code>.
+    </td>
+    <td width="25%">
+      <strong>⚖️ Normalization &amp; Scoring Agent</strong><br/>
+      Converts mixed-source inputs into a unified structure, fills scoring fields, and produces interpretable ranking outputs.
+    </td>
+    <td width="25%">
+      <strong>🗞️ Daily Report Agent</strong><br/>
+      Produces the daily board, project summaries, recommendation reasons, risk notes, and run summaries.
+    </td>
+    <td width="25%">
+      <strong>📈 Weekly Trend Agent</strong><br/>
+      Reviews a 7-day window of topic movement to separate durable trends from short-lived spikes.
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <strong>🔭 Observer Agent</strong><br/>
+      Watches for promising repositories that are still early and not yet strong enough for the main board.
+    </td>
+    <td>
+      <strong>🧠 Knowledge Card Agent</strong><br/>
+      Turns high-value projects into reusable cards for later indexing, review, and long-term research.
+    </td>
+    <td>
+      <strong>🧵 Agent Memory Workflow</strong><br/>
+      Stores part of the development and workflow context so the system itself is easier to evolve over time.
+    </td>
+    <td>
+      <strong>🔄 How they work together</strong><br/>
+      The pipeline moves from collection to scoring, then into daily reports, weekly synthesis, observer tracking, and knowledge-card archival.
+    </td>
+  </tr>
+</table>
+
+### Special note: the weekly trend agent
+
+The weekly trend agent is one of the most important layers in the project. It does more than stitch together seven days of data. It is trying to answer research-grade questions like:
+
+- Which directions are only one-day heat, and which are becoming durable trends?
+- Which projects should stay in a trend cluster, and which should be downgraded, merged, or split?
+- Which evidence is strong enough to support the conclusion that a real weekly shift happened?
+
+If the daily board answers “what changed today,” the weekly trend agent is much closer to answering “what actually changed this week.”
 
 ## Workflow at a glance
 
@@ -130,6 +259,29 @@ Default address:
 corepack pnpm visual-console -- --view overview --date latest
 ```
 
+### 5. Or use the hosted site directly
+
+- Hosted URL: [`https://app.agentradar.top/`](https://app.agentradar.top/)
+- Best when you want to inspect outputs before deciding on local setup or deeper customization
+
+## Suggested reading path
+
+> **If you only want to inspect outputs**
+>
+> Open the local web console or browse `data/reports/latest.*` first. You can understand the repository's daily outputs in a few minutes.
+
+> **If you want to run the pipeline once**
+>
+> A good order is `run-daily -> verify-daily -> run-weekly`. That gives you generation, validation, and then a higher-level synthesis.
+
+> **If you want to adapt it into your own radar**
+>
+> Start with `config.yaml` and source rules before changing every workflow. The repository is easier to extend incrementally than to rewrite in one pass.
+
+`→ inspect first` `→ run next` `→ customize after`
+
+`signal agent → scoring agent → daily agent → weekly trend agent → observer / kb`
+
 ## Common commands
 
 ### Daily workflows
@@ -160,6 +312,8 @@ corepack pnpm test
 
 ### Current focus directions
 
+`◌ signals` `◌ momentum` `◌ trend` `◌ observer` `◌ archive`
+
 - coding agents
 - agent runtime
 - skills / tools / MCP
@@ -184,7 +338,13 @@ To avoid exposing secrets, configuration, and private attack surfaces, the OSS e
 - private operational docs
 - `.env` / `.env.local`
 
-In other words, this is a no-login, read-only browsing, data-workflow-capable public edition.
+In other words, the repository's OSS edition is a no-login, read-only browsing, data-workflow-capable public edition.
+
+### Hosted-product note
+
+- The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)
+- The hosted site supports login, so it has a different product boundary from the repository's local read-only console
+- Planned hosted features include implicit personalized memory generated from reading, clicking, and follow behavior
 
 ## Contributing
 
@@ -196,6 +356,8 @@ This project benefits heavily from the open-source community and public data sou
 - the broader ecosystem of open-source agent builders and maintainers
 
 Ways to contribute:
+
+`fork → adjust rules → generate artifacts → open PR`
 
 - open issues for bugs
 - open PRs for README, rules, data sources, and workflows

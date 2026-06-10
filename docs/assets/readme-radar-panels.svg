@@ -1,0 +1,22 @@
+<svg width="960" height="220" viewBox="0 0 960 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="220" rx="24" fill="#FCFCFD"/>
+  <rect x="24" y="24" width="912" height="172" rx="20" fill="#F8FAFC" stroke="#E2E8F0"/>
+
+  <rect x="52" y="52" width="252" height="116" rx="18" fill="#EFF6FF"/>
+  <circle cx="86" cy="86" r="10" fill="#2563EB"/>
+  <text x="106" y="92" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Daily Board</text>
+  <text x="72" y="122" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">Capture one-day movement with</text>
+  <text x="72" y="144" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">scores, summaries, and run health.</text>
+
+  <rect x="354" y="52" width="252" height="116" rx="18" fill="#ECFDF5"/>
+  <circle cx="388" cy="86" r="10" fill="#059669"/>
+  <text x="408" y="92" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Weekly Lens</text>
+  <text x="374" y="122" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">Separate durable trends from</text>
+  <text x="374" y="144" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">short-lived spikes and noise.</text>
+
+  <rect x="656" y="52" width="252" height="116" rx="18" fill="#FFF7ED"/>
+  <circle cx="690" cy="86" r="10" fill="#EA580C"/>
+  <text x="710" y="92" fill="#0F172A" font-family="Segoe UI, Arial, sans-serif" font-size="20" font-weight="700">Knowledge Loop</text>
+  <text x="676" y="122" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">Turn signals into observer pools</text>
+  <text x="676" y="144" fill="#334155" font-family="Segoe UI, Arial, sans-serif" font-size="15">and reusable knowledge cards.</text>
+</svg>

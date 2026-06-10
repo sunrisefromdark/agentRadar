@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-09",
+  "date": "2026-06-10",
   "status": "pass",
-  "summary_path": "data/reports/2026-06-09.run-summary.json",
-  "github_audit_path": "data/raw/github/2026-06-09.enrichment.json",
+  "summary_path": "data/reports/2026-06-10.run-summary.json",
+  "github_audit_path": "data/raw/github/2026-06-10.enrichment.json",
   "checks": [
     {
       "name": "minimum_viable_run_completed",
@@ -12,12 +12,12 @@
     {
       "name": "raw_signals_present",
       "status": "pass",
-      "detail": "raw_signals=202"
+      "detail": "raw_signals=191"
     },
     {
       "name": "scored_projects_present",
       "status": "pass",
-      "detail": "scored_projects=165"
+      "detail": "scored_projects=153"
     },
     {
       "name": "active_sources_present",
@@ -32,12 +32,12 @@
     {
       "name": "low_confidence_share",
       "status": "pass",
-      "detail": "low_confidence_projects=4/165"
+      "detail": "low_confidence_projects=1/153"
     },
     {
       "name": "anomaly_share",
       "status": "pass",
-      "detail": "anomaly_share=0.0909"
+      "detail": "anomaly_share=0.098"
     },
     {
       "name": "uniform_star_velocity",
@@ -47,7 +47,7 @@
     {
       "name": "star_delta_sources_visible",
       "status": "pass",
-      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:92,unavailable:73"
+      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:99,unavailable:54"
     },
     {
       "name": "live_delta_token_missing",
@@ -72,7 +72,7 @@
     {
       "name": "llm_classification_health",
       "status": "pass",
-      "detail": "cache_hits=87; provider=deepseek; attempts=78; success=78; failures=0"
+      "detail": "llm semantic classification is disabled"
     },
     {
       "name": "freshness_sources_complete",
@@ -82,22 +82,22 @@
     {
       "name": "fresh_source_project_alignment",
       "status": "pass",
-      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=60; today_fresh_candidate_count=125"
+      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=67; today_fresh_candidate_count=118"
     },
     {
       "name": "agents_radar_stale_fallback",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-09"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-10"
     },
     {
       "name": "agents_radar_context_only",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-09"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-10"
     },
     {
       "name": "github_audit_written",
       "status": "pass",
-      "detail": "github_enrichment_audits=169"
+      "detail": "github_enrichment_audits=157"
     }
   ],
   "recommended_actions": [

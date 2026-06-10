@@ -1,0 +1,1269 @@
+{
+  "date": "2026-06-10",
+  "generated_at": "2026-06-10T22:33:55+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 191 条",
+    "归一化阶段完成，共 153 个项目",
+    "评分阶段完成，共 153 个已评分项目",
+    "本次运行活跃信号面: 5/5",
+    "仍有 1 个项目处于低置信度，需要后续验证",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": false,
+    "provider": "none",
+    "mode": "rules-only",
+    "classification_cache_hit_count": 96,
+    "classification_attempt_count": 0,
+    "classification_success_count": 0,
+    "classification_failure_count": 0
+  },
+  "overall_daily_status": "数据新鲜，可直接阅读",
+  "freshness_sources": [
+    {
+      "source": "agents-radar",
+      "effective_date": "2026-06-10",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "agents-radar 仓库已同步，可读取 2026-06-10 的最新 digest",
+      "from_realtime_run": true,
+      "source_role": "context"
+    },
+    {
+      "source": "trendshift_live",
+      "effective_date": "2026-06-10",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Trendshift 实时抓取成功，发现 25 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_trending",
+      "effective_date": "2026-06-10",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub Trending 实时发现成功，发现 25 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "watchlist_live_activity",
+      "effective_date": "2026-06-10",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "重点观察清单实时活动抓取成功，发现 73 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_live_star_delta",
+      "effective_date": "2026-06-10",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub 当日涨星信号实时解析成功，发现 3 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    }
+  ],
+  "main_board_mode": "fresh_today_only",
+  "today_fresh_candidate_count": 118,
+  "today_star_count": 67,
+  "context_candidate_count": 35,
+  "pending_confirmation_count": 51,
+  "counts": {
+    "raw_signals": 191,
+    "normalized_projects": 153,
+    "scored_projects": 153,
+    "high_score_projects": 32,
+    "anomaly_projects": 15,
+    "new_projects": 153,
+    "classifications": 96
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 65,
+      "distinct_projects": 61,
+      "status": "active",
+      "notes": [
+        "source produced 65 raw signals",
+        "remote_source_loaded",
+        "agents-radar source loaded from https://github.com/duanyytop/agents-radar via github-http",
+        "source_branch=master",
+        "using requested digest date 2026-06-10",
+        "loaded 65 signals from 2026-06-10"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "source produced 25 raw signals",
+        "fetched live Trendshift HTML for 2026-06-10",
+        "loaded 25 Trendshift signals from 2026-06-10"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "github trending api search succeeded for 2026-06-10",
+        "parsed 25 candidates from GitHub Search API"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 73,
+      "distinct_projects": 73,
+      "status": "active",
+      "notes": [
+        "watchlist org NousResearch produced 1 realtime repos",
+        "watchlist org openai produced 2 realtime repos",
+        "watchlist org anthropics produced 3 realtime repos",
+        "watchlist org google produced 5 realtime repos",
+        "watchlist org google-gemini produced 3 realtime repos",
+        "watchlist org google-deepmind produced 1 realtime repos",
+        "watchlist org microsoft produced 2 realtime repos",
+        "watchlist org aws produced 3 realtime repos",
+        "watchlist org awslabs produced 3 realtime repos",
+        "watchlist org xai-org produced 2 realtime repos",
+        "watchlist org cohere-ai produced 1 realtime repos",
+        "watchlist org QwenLM produced 2 realtime repos",
+        "watchlist org allenai produced 2 realtime repos",
+        "watchlist org THUDM produced 1 realtime repos",
+        "watchlist org InternLM produced 3 realtime repos",
+        "watchlist org bytedance produced 1 realtime repos",
+        "watchlist org ByteDance-Seed produced 1 realtime repos",
+        "watchlist org alibaba produced 1 realtime repos",
+        "watchlist org Tencent produced 1 realtime repos",
+        "watchlist org vercel produced 2 realtime repos",
+        "watchlist org sourcegraph produced 3 realtime repos",
+        "watchlist org continuedev produced 1 realtime repos",
+        "watchlist org run-llama produced 3 realtime repos",
+        "watchlist org pydantic produced 3 realtime repos",
+        "watchlist org camel-ai produced 1 realtime repos",
+        "watchlist org mastra-ai produced 1 realtime repos",
+        "watchlist org langchain-ai produced 5 realtime repos",
+        "watchlist org modelcontextprotocol produced 1 realtime repos",
+        "watchlist org browser-use produced 1 realtime repos",
+        "watchlist org mem0ai produced 1 realtime repos",
+        "watchlist org langfuse produced 5 realtime repos",
+        "watchlist org crewAIInc produced 1 realtime repos",
+        "watchlist org huggingface produced 3 realtime repos",
+        "watchlist org OpenBMB produced 3 realtime repos",
+        "watchlist org HKUDS produced 1 realtime repos"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 188,
+      "distinct_projects": 157,
+      "status": "active",
+      "notes": [
+        "candidate repos=157",
+        "seeded_cache_from_signals=123",
+        "api_hits=188",
+        "html_hits=0",
+        "cache_hits=0",
+        "unavailable=0",
+        "invalid_repo=0",
+        "used fresh GitHub API metrics; github_token=present"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 3,
+    "watchlist_hits": 77,
+    "low_confidence_projects": 1,
+    "medium_confidence_projects": 116,
+    "insufficient_metrics_projects": 0,
+    "suspicious_growth_projects": 0,
+    "single_source_projects": 109,
+    "single_spike_projects": 57,
+    "emerging_projects": 35,
+    "persistent_projects": 61
+  },
+  "diagnostics": {
+    "anomaly_share": 0.098,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 153,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 0
+    },
+    "star_delta_source_distribution": {
+      "github_live": 0,
+      "github_snapshot": 0,
+      "signal": 99,
+      "unavailable": 54
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 20,
+      "live_delta_success": 3,
+      "snapshot_delta_success": 0,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "NousResearch/hermes-agent",
+      "repo_url": "https://github.com/NousResearch/hermes-agent",
+      "total_score": 100,
+      "base_final_rank": 105,
+      "final_rank": 105,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "strong-watch",
+      "judge_score_delta": 0,
+      "summary_source": "template_fallback",
+      "judge_source": "template_fallback",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=1188)",
+        "engagement_score=100 (forks=32790)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "openai/codex",
+      "repo_url": "https://github.com/openai/codex",
+      "total_score": 100,
+      "base_final_rank": 102.5,
+      "final_rank": 102.5,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory",
+      "position_qualification": "strong-watch",
+      "judge_score_delta": 0,
+      "summary_source": "template_fallback",
+      "judge_source": "template_fallback",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=283)",
+        "engagement_score=100 (forks=13274)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "affaan-m/ECC",
+      "repo_url": "https://github.com/affaan-m/ECC",
+      "total_score": 95,
+      "base_final_rank": 102.5,
+      "final_rank": 102.5,
+      "confidence": "high",
+      "paradigm": "agent system",
+      "position_qualification": "strong-watch",
+      "judge_score_delta": 0,
+      "summary_source": "template_fallback",
+      "judge_source": "template_fallback",
+      "why_selected": [
+        "paradigm=agent system",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=844)",
+        "engagement_score=100 (forks=32617)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "anthropics/skills",
+      "repo_url": "https://github.com/anthropics/skills",
+      "total_score": 96.25,
+      "base_final_rank": 101.25,
+      "final_rank": 101.25,
+      "confidence": "high",
+      "paradigm": "agent infra",
+      "position_qualification": "strong-watch",
+      "judge_score_delta": 0,
+      "summary_source": "template_fallback",
+      "judge_source": "template_fallback",
+      "why_selected": [
+        "paradigm=agent infra",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=443)",
+        "engagement_score=100 (forks=17565)",
+        "architecture_shift=85 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "openclaw/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw",
+      "total_score": 98.5,
+      "base_final_rank": 101,
+      "final_rank": 101,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "strong-watch",
+      "judge_score_delta": 0,
+      "summary_source": "template_fallback",
+      "judge_source": "template_fallback",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=135)",
+        "engagement_score=100 (forks=79034)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    }
+  ],
+  "observer_top_candidates": [
+    {
+      "repo_full_name": "langfuse/codex-observability-plugin",
+      "repo_url": "https://github.com/langfuse/codex-observability-plugin",
+      "observer_rank": 1,
+      "base_observer_score": 121,
+      "observer_score": 121,
+      "ecosystems": [
+        "agent-ui-workbench",
+        "coding-agents",
+        "eval-observability-governance",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-ui-workbench、coding-agents、eval-observability-governance、skills-tools-mcp 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "codex",
+          "observability",
+          "plugin"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [
+          "openai/codex"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "langfuse/claude-observability-plugin",
+      "repo_url": "https://github.com/langfuse/claude-observability-plugin",
+      "observer_rank": 2,
+      "base_observer_score": 118,
+      "observer_score": 118,
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents、eval-observability-governance、skills-tools-mcp 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "observability",
+          "plugin"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "repo_url": "https://github.com/alibaba/open-code-review",
+      "observer_rank": 3,
+      "base_observer_score": 115,
+      "observer_score": 115,
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:watch",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "watch",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "alibaba"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个代码审查型 coding agent。它主要是帮你协助做代码审查和变更收敛，也能围绕代码仓库做分析与修改。常见用法是拿它来让它读仓库、改代码、跑测试或协助审 PR。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents、eval-observability-governance 的生态证据，主体 pedigree 为 company:alibaba，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "code review",
+          "review"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,trendshift",
+        "project_tags=watchlist-hit,watchlist:alibaba,fresh-today,agent,code-review,code-review-assistant,harness,repository-level-context,ai-agent,ai-coding,tool-use",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "awslabs/mcp",
+      "repo_url": "https://github.com/awslabs/mcp",
+      "observer_rank": 4,
+      "base_observer_score": 104,
+      "observer_score": 104,
+      "ecosystems": [
+        "browser-computer-use",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "awslabs"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力。大家通常会用它来围绕 MCP 暴露工具能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 browser-computer-use、skills-tools-mcp 的生态证据，主体 pedigree 为 company:awslabs，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "mcp"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [
+          "microsoft/playwright-mcp"
+        ],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:awslabs,fresh-today,aws,mcp,mcp-client,mcp-clients,mcp-host,mcp-server,mcp-servers,mcp-tools,modelcontextprotocol",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-docs",
+      "repo_url": "https://github.com/langfuse/langfuse-docs",
+      "observer_rank": 5,
+      "base_observer_score": 104,
+      "observer_score": 104,
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-72h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-72h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个评测与验证项目。它主要是帮你比较不同模型或代理的表现。常见用法是拿它来比较模型效果、回放失败样本和做回归验收。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-72h。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "observability"
+        ],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,agent-skills,agents,genai,hacktoberfest,langfuse,large-language-models,llms,nextra,observability,prompt-management,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "pydantic/logfire",
+      "repo_url": "https://github.com/pydantic/logfire",
+      "observer_rank": 6,
+      "base_observer_score": 98,
+      "observer_score": 98,
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "pydantic"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个评测与验证项目。它主要是帮你比较不同模型或代理的表现。常见用法是拿它来比较模型效果、回放失败样本和做回归验收。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:pydantic，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "evals",
+          "observability"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:pydantic,fresh-today,agent-observability,ai,ai-observability,ai-tools,evals,fastapi,llm-observability,logging,metrics,observability,openai,opentelemetry,pydantic,pydantic-ai,python,trace",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "modelcontextprotocol/go-sdk",
+      "repo_url": "https://github.com/modelcontextprotocol/go-sdk",
+      "observer_rank": 7,
+      "base_observer_score": 96,
+      "observer_score": 96,
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "modelcontextprotocol"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能把通用能力沉淀成平台或开发底座。大家通常会用它来围绕 MCP 暴露工具能力，也会顺手把通用能力沉淀成平台或开发底座。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 company:modelcontextprotocol，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "context"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": [
+          "modelcontextprotocol"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:modelcontextprotocol,fresh-today,go,mcp",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observer_rank": 8,
+      "base_observer_score": 96,
+      "observer_score": 96,
+      "ecosystems": [
+        "agent-runtime",
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:mixed",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能组织检索和知识调用能力。大家通常会用它来维护长期上下文和知识材料，也会顺手组织检索和知识调用能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime、memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "mcp",
+          "memory"
+        ],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime,tool-use,agent,self-improving",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "OpenBMB/UltraRAG",
+      "repo_url": "https://github.com/OpenBMB/UltraRAG",
+      "observer_rank": 9,
+      "base_observer_score": 95,
+      "observer_score": 95,
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "OpenBMB"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织资料检索、知识调用和上下文复用。大家通常会用它来组织资料检索、知识调用和上下文复用。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 company:OpenBMB，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "rag"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:OpenBMB,fresh-today,deepseek,demo,easy,embedding,flask,gpt,huggingface-transformers,llm,mcp,multimodal,openai,qwen,rag,sentence-transformers,ui,vllm,vlm",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-python",
+      "repo_url": "https://github.com/langfuse/langfuse-python",
+      "observer_rank": 10,
+      "base_observer_score": 90,
+      "observer_score": 90,
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:seed-adjacent",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "seed-adjacent",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一个AI 基础设施或平台项目。它主要是帮你封装模型接入和开发框架，也能把通用能力沉淀成平台或开发底座。大家通常会用它来封装模型接入和开发框架，也会顺手把通用能力沉淀成平台或开发底座。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,decorators,langfuse,pydantic,pydantic-v2,python",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "QwenLM/open-computer-use",
+      "repo_url": "https://github.com/QwenLM/open-computer-use",
+      "observer_rank": 11,
+      "base_observer_score": 82,
+      "observer_score": 82,
+      "ecosystems": [
+        "browser-computer-use",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:new-24h",
+        "history:none",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "QwenLM"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你接管桌面级操作与本地执行流程。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 browser-computer-use、skills-tools-mcp 的生态证据，主体 pedigree 为 company:QwenLM，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "computer use",
+          "mcp"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:QwenLM,fresh-today,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "Kaelio/ktx",
+      "repo_url": "https://github.com/Kaelio/ktx",
+      "observer_rank": 12,
+      "base_observer_score": 61,
+      "observer_score": 61,
+      "ecosystems": [
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能围绕代码仓库做分析与修改。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:claude code",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:claude code",
+        "query=keyword:codex",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "tya5/reyn",
+      "repo_url": "https://github.com/tya5/reyn",
+      "observer_rank": 13,
+      "base_observer_score": 57,
+      "observer_score": 57,
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "project_brief_cn": "这是一个多代理编排平台。它主要是帮你把任务步骤编排成可重复执行的工作流，也能把任务流程自动化串起来。常见用法是拿它来把多个 agent 角色和工具编排成可重复执行的工作流。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "workflow"
+        ],
+        "topic_hints": [
+          "agent-runtime"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=topic:agent-runtime",
+        "query=topic:agent-runtime",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "himkt/cafleet",
+      "repo_url": "https://github.com/himkt/cafleet",
+      "observer_rank": 14,
+      "base_observer_score": 57,
+      "observer_score": 57,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "jeremylongshore/claude-code-plugins-plus-skills",
+      "repo_url": "https://github.com/jeremylongshore/claude-code-plugins-plus-skills",
+      "observer_rank": 15,
+      "base_observer_score": 55,
+      "observer_score": 55,
+      "ecosystems": [
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "skills"
+        ],
+        "topic_hints": [
+          "mcp",
+          "plugin-system"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=skills-tools-mcp source=topic:plugin-system",
+        "query=topic:plugin-system",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "aegntic/compound-engineering",
+      "repo_url": "https://github.com/aegntic/compound-engineering",
+      "observer_rank": 16,
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "这是一个代码审查型 coding agent。它主要是帮你协助做代码审查和变更收敛，也能围绕代码仓库做分析与修改。大家通常会用它来协助做代码审查和变更收敛，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "code review"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:code review",
+        "query ecosystem=coding-agents source=topic:code-review",
+        "query=keyword:code review",
+        "query=topic:code-review",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "nordbyte/nordrelay",
+      "repo_url": "https://github.com/nordbyte/nordrelay",
+      "observer_rank": 17,
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ]
+    }
+  ],
+  "watchouts": [
+    "低置信度项目占比为 1/153",
+    "仍有 109 个项目只有单一信号源，需要跨源或跨天确认",
+    "有 3 个项目缺少描述，语义判断会受限"
+  ],
+  "next_focus": [
+    "为低置信度项目补足描述或结构化 repo 指标",
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源"
+  ],
+  "recommended_actions": [
+    "在信任低置信度排序前，优先补有缺失描述或缺失 metrics 的项目",
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ],
+  "observer_status": {
+    "ecosystem_focus": "active"
+  },
+  "observer_candidate_count": 17,
+  "observer_ecosystem_counts": {
+    "agent-ui-workbench": 1,
+    "coding-agents": 7,
+    "eval-observability-governance": 6,
+    "skills-tools-mcp": 9,
+    "browser-computer-use": 2,
+    "memory-knowledge": 3,
+    "agent-runtime": 2
+  }
+}

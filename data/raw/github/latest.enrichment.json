@@ -1,16 +1,7 @@
 [
   {
-    "repo_url": "https://github.com/mvanhorn/last30days-skill",
-    "repo_full_name": "mvanhorn/last30days-skill",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/Panniantong/Agent-Reach",
-    "repo_full_name": "panniantong/agent-reach",
+    "repo_url": "https://github.com/RyanCodrai/turbovec",
+    "repo_full_name": "ryancodrai/turbovec",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -27,44 +18,17 @@
     ]
   },
   {
-    "repo_url": "https://github.com/RyanCodrai/turbovec",
-    "repo_full_name": "ryancodrai/turbovec",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/google/skills",
-    "repo_full_name": "google/skills",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/openai/plugins",
-    "repo_full_name": "openai/plugins",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/luongnv89/claude-howto",
-    "repo_full_name": "luongnv89/claude-howto",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
     "repo_url": "https://github.com/Andyyyy64/whichllm",
     "repo_full_name": "andyyyy64/whichllm",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vllm-project/vllm",
+    "repo_full_name": "vllm-project/vllm",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -81,17 +45,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/vllm/ollama",
-    "repo_full_name": "vllm/ollama",
-    "status": "unavailable",
-    "metrics_applied": false,
-    "notes": [
-      "repo API returned HTTP 404; github_token=present; no cached metrics available"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/danielmiessler/Personal_AI_Infrastructure",
-    "repo_full_name": "danielmiessler/personal_ai_infrastructure",
+    "repo_url": "https://github.com/OpenHands/OpenHands",
+    "repo_full_name": "openhands/openhands",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -108,6 +63,24 @@
     ]
   },
   {
+    "repo_url": "https://github.com/santifer/career-ops",
+    "repo_full_name": "santifer/career-ops",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/addyosmani/agent-skills",
+    "repo_full_name": "addyosmani/agent-skills",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/NousResearch/hermes-agent",
     "repo_full_name": "nousresearch/hermes-agent",
     "status": "api",
@@ -117,8 +90,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/shareAI-lab/learn-claude-code",
-    "repo_full_name": "shareai-lab/learn-claude-code",
+    "repo_url": "https://github.com/mvanhorn/last30days-skill",
+    "repo_full_name": "mvanhorn/last30days-skill",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -135,8 +108,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/CherryHQ/cherry-studio",
-    "repo_full_name": "cherryhq/cherry-studio",
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "repo_full_name": "significant-gravitas/autogpt",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -144,8 +117,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/activepieces/activepieces",
-    "repo_full_name": "activepieces/activepieces",
+    "repo_url": "https://github.com/shareAI-lab/learn-claude-code",
+    "repo_full_name": "shareai-lab/learn-claude-code",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -153,8 +126,17 @@
     ]
   },
   {
-    "repo_url": "https://github.com/santifer/career-ops",
-    "repo_full_name": "santifer/career-ops",
+    "repo_url": "https://github.com/yikart/AiToEarn",
+    "repo_full_name": "yikart/aitoearn",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/maziyarpanahi/openmed",
+    "repo_full_name": "maziyarpanahi/openmed",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -171,8 +153,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/nocobase/nocobase",
-    "repo_full_name": "nocobase/nocobase",
+    "repo_url": "https://github.com/francescopace/espectre",
+    "repo_full_name": "francescopace/espectre",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -182,6 +164,24 @@
   {
     "repo_url": "https://github.com/ZhuLinsen/daily_stock_analysis",
     "repo_full_name": "zhulinsen/daily_stock_analysis",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/huggingface/transformers",
+    "repo_full_name": "huggingface/transformers",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/browser-use/browser-use",
+    "repo_full_name": "browser-use/browser-use",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -207,33 +207,6 @@
     ]
   },
   {
-    "repo_url": "https://github.com/huggingface/transformers",
-    "repo_full_name": "huggingface/transformers",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/MemPalace/mempalace",
-    "repo_full_name": "mempalace/mempalace",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
-    "repo_full_name": "testtimescaling/testtimescaling.github.io",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
     "repo_url": "https://github.com/galilai-group/stable-pretraining",
     "repo_full_name": "galilai-group/stable-pretraining",
     "status": "api",
@@ -243,8 +216,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/VectifyAI/PageIndex",
-    "repo_full_name": "vectifyai/pageindex",
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "repo_full_name": "open-webui/open-webui",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -252,8 +225,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/mem0ai/mem0",
-    "repo_full_name": "mem0ai/mem0",
+    "repo_url": "https://github.com/langgenius/dify",
+    "repo_full_name": "langgenius/dify",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -261,44 +234,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/infiniflow/ragflow",
-    "repo_full_name": "infiniflow/ragflow",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/milvus-io/milvus",
-    "repo_full_name": "milvus-io/milvus",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/StarTrail-org/LEANN",
-    "repo_full_name": "startrail-org/leann",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/topoteretes/cognee",
-    "repo_full_name": "topoteretes/cognee",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/duanyytop/agents-radar",
-    "repo_full_name": "duanyytop/agents-radar",
+    "repo_url": "https://github.com/open-compass/opencompass",
+    "repo_full_name": "open-compass/opencompass",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -315,8 +252,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/qdrant/qdrant",
-    "repo_full_name": "qdrant/qdrant",
+    "repo_url": "https://github.com/safishamsi/graphify",
+    "repo_full_name": "safishamsi/graphify",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -324,8 +261,53 @@
     ]
   },
   {
-    "repo_url": "https://github.com/HKUDS/nanobot",
-    "repo_full_name": "hkuds/nanobot",
+    "repo_url": "https://github.com/infiniflow/ragflow",
+    "repo_full_name": "infiniflow/ragflow",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "repo_full_name": "mem0ai/mem0",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/VectifyAI/PageIndex",
+    "repo_full_name": "vectifyai/pageindex",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/milvus-io/milvus",
+    "repo_full_name": "milvus-io/milvus",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "repo_full_name": "duanyytop/agents-radar",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/topoteretes/cognee",
+    "repo_full_name": "topoteretes/cognee",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -344,6 +326,24 @@
   {
     "repo_url": "https://github.com/sipeed/picoclaw",
     "repo_full_name": "sipeed/picoclaw",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "repo_full_name": "hkuds/nanobot",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "repo_full_name": "nearai/ironclaw",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -378,8 +378,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/nearai/ironclaw",
-    "repo_full_name": "nearai/ironclaw",
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "repo_full_name": "moltis-org/moltis",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -389,6 +389,15 @@
   {
     "repo_url": "https://github.com/TinyAGI/tinyagi",
     "repo_full_name": "tinyagi/tinyagi",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -414,39 +423,12 @@
     ]
   },
   {
-    "repo_url": "https://github.com/moltis-org/moltis",
-    "repo_full_name": "moltis-org/moltis",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
-    "repo_full_name": "zeroclaw-labs/zeroclaw",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
     "repo_url": "https://github.com/nanocoai/nanoclaw",
     "repo_full_name": "nanocoai/nanoclaw",
     "status": "api",
     "metrics_applied": true,
     "notes": [
       "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/apps/stale",
-    "repo_full_name": "apps/stale",
-    "status": "unavailable",
-    "metrics_applied": false,
-    "notes": [
-      "repo API returned HTTP 404; github_token=present; no cached metrics available"
     ]
   },
   {
@@ -468,26 +450,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/google-gemini/gemini-cli",
-    "repo_full_name": "google-gemini/gemini-cli",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
     "repo_url": "https://github.com/anthropics/claude-code",
     "repo_full_name": "anthropics/claude-code",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/anomalyco/opencode",
-    "repo_full_name": "anomalyco/opencode",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -513,8 +477,26 @@
     ]
   },
   {
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "repo_full_name": "google-gemini/gemini-cli",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/QwenLM/qwen-code",
     "repo_full_name": "qwenlm/qwen-code",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "repo_full_name": "anomalyco/opencode",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -531,8 +513,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/Hmbown/DeepSeek-TUI",
-    "repo_full_name": "hmbown/deepseek-tui",
+    "repo_url": "https://github.com/earendil-works/pi",
+    "repo_full_name": "earendil-works/pi",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -549,8 +531,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/MoonshotAI/kimi-code",
-    "repo_full_name": "moonshotai/kimi-code",
+    "repo_url": "https://github.com/Hmbown/DeepSeek-TUI",
+    "repo_full_name": "hmbown/deepseek-tui",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -558,8 +540,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/earendil-works/pi",
-    "repo_full_name": "earendil-works/pi",
+    "repo_url": "https://github.com/apple/container",
+    "repo_full_name": "apple/container",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -576,8 +558,17 @@
     ]
   },
   {
-    "repo_url": "https://github.com/dmtrKovalenko/fff",
-    "repo_full_name": "dmtrkovalenko/fff",
+    "repo_url": "https://github.com/MSNightmare/RoguePlanet",
+    "repo_full_name": "msnightmare/rogueplanet",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/msitarzewski/agency-agents",
+    "repo_full_name": "msitarzewski/agency-agents",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -594,44 +585,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/harry0703/MoneyPrinterTurbo",
-    "repo_full_name": "harry0703/moneyprinterturbo",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/2aronS/Duel-Agents",
-    "repo_full_name": "2arons/duel-agents",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/refactoringhq/tolaria",
-    "repo_full_name": "refactoringhq/tolaria",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/diffusionstudio/lottie",
-    "repo_full_name": "diffusionstudio/lottie",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/TapXWorld/ChinaTextbook",
-    "repo_full_name": "tapxworld/chinatextbook",
+    "repo_url": "https://github.com/elder-plinius/CL4R1T4S",
+    "repo_full_name": "elder-plinius/cl4r1t4s",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -648,8 +603,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/WenyuChiou/awesome-agentic-ai-zh",
-    "repo_full_name": "wenyuchiou/awesome-agentic-ai-zh",
+    "repo_url": "https://github.com/rdi-berkeley/agents-last-exam",
+    "repo_full_name": "rdi-berkeley/agents-last-exam",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -657,8 +612,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/superloglabs/superlog",
-    "repo_full_name": "superloglabs/superlog",
+    "repo_url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+    "repo_full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -666,8 +621,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/Tencent-Hunyuan/UniRL",
-    "repo_full_name": "tencent-hunyuan/unirl",
+    "repo_url": "https://github.com/bannedbook/fanqiang",
+    "repo_full_name": "bannedbook/fanqiang",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -675,8 +630,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/mattpocock/skills",
-    "repo_full_name": "mattpocock/skills",
+    "repo_url": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "repo_full_name": "harry0703/moneyprinterturbo",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -684,8 +639,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/chopratejas/headroom",
-    "repo_full_name": "chopratejas/headroom",
+    "repo_url": "https://github.com/h4ckf0r0day/obscura",
+    "repo_full_name": "h4ckf0r0day/obscura",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -693,8 +648,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/jlcodes99/cockpit-tools",
-    "repo_full_name": "jlcodes99/cockpit-tools",
+    "repo_url": "https://github.com/jbiaojerry/ebook-treasure-chest",
+    "repo_full_name": "jbiaojerry/ebook-treasure-chest",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -702,8 +657,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/safishamsi/graphify",
-    "repo_full_name": "safishamsi/graphify",
+    "repo_url": "https://github.com/wbh604/UZI-Skill",
+    "repo_full_name": "wbh604/uzi-skill",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -711,8 +666,26 @@
     ]
   },
   {
-    "repo_url": "https://github.com/BigPizzaV3/CodexPlusPlus",
-    "repo_full_name": "bigpizzav3/codexplusplus",
+    "repo_url": "https://github.com/soxoj/maigret",
+    "repo_full_name": "soxoj/maigret",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/diffusionstudio/lottie",
+    "repo_full_name": "diffusionstudio/lottie",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Yuan1z0825/nature-skills",
+    "repo_full_name": "yuan1z0825/nature-skills",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -729,15 +702,6 @@
     ]
   },
   {
-    "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
-    "repo_full_name": "freecodecamp/freecodecamp",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
     "repo_url": "https://github.com/nilbuild/developer-roadmap",
     "repo_full_name": "nilbuild/developer-roadmap",
     "status": "api",
@@ -747,8 +711,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
-    "repo_full_name": "awesome-selfhosted/awesome-selfhosted",
+    "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "repo_full_name": "freecodecamp/freecodecamp",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -756,8 +720,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/vinta/awesome-python",
-    "repo_full_name": "vinta/awesome-python",
+    "repo_url": "https://github.com/react/react",
+    "repo_full_name": "react/react",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -765,8 +729,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/facebook/react",
-    "repo_full_name": "facebook/react",
+    "repo_url": "https://github.com/torvalds/linux",
+    "repo_full_name": "torvalds/linux",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -801,6 +765,15 @@
     ]
   },
   {
+    "repo_url": "https://github.com/ohmyzsh/ohmyzsh",
+    "repo_full_name": "ohmyzsh/ohmyzsh",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/microsoft/vscode",
     "repo_full_name": "microsoft/vscode",
     "status": "api",
@@ -812,24 +785,6 @@
   {
     "repo_url": "https://github.com/flutter/flutter",
     "repo_full_name": "flutter/flutter",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
-    "repo_full_name": "significant-gravitas/autogpt",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/avelino/awesome-go",
-    "repo_full_name": "avelino/awesome-go",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -855,26 +810,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/yt-dlp/yt-dlp",
-    "repo_full_name": "yt-dlp/yt-dlp",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/langgenius/dify",
-    "repo_full_name": "langgenius/dify",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/vercel/next.js",
-    "repo_full_name": "vercel/next.js",
+    "repo_url": "https://github.com/Snailclimb/JavaGuide",
+    "repo_full_name": "snailclimb/javaguide",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -891,8 +828,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
-    "repo_full_name": "x1xhlol/system-prompts-and-models-of-ai-tools",
+    "repo_url": "https://github.com/vercel/next.js",
+    "repo_full_name": "vercel/next.js",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -900,8 +837,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/NousResearch/atropos",
-    "repo_full_name": "nousresearch/atropos",
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "repo_full_name": "langchain-ai/langchain",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -909,8 +846,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/openai/role-specific-plugins",
-    "repo_full_name": "openai/role-specific-plugins",
+    "repo_url": "https://github.com/openai/plugins",
+    "repo_full_name": "openai/plugins",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -918,17 +855,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/anthropics/knowledge-work-plugins",
-    "repo_full_name": "anthropics/knowledge-work-plugins",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/google/comprehensive-rust",
-    "repo_full_name": "google/comprehensive-rust",
+    "repo_url": "https://github.com/microsoft/PowerToys",
+    "repo_full_name": "microsoft/powertoys",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -945,8 +873,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/google-gemini/gemini-live-api-examples",
-    "repo_full_name": "google-gemini/gemini-live-api-examples",
+    "repo_url": "https://github.com/anthropics/claude-cookbooks",
+    "repo_full_name": "anthropics/claude-cookbooks",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -954,8 +882,44 @@
     ]
   },
   {
-    "repo_url": "https://github.com/google/symphony-gcp",
-    "repo_full_name": "google/symphony-gcp",
+    "repo_url": "https://github.com/google/oss-fuzz-vulns",
+    "repo_full_name": "google/oss-fuzz-vulns",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/skills",
+    "repo_full_name": "google/skills",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/boringssl",
+    "repo_full_name": "google/boringssl",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/or-tools",
+    "repo_full_name": "google/or-tools",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/oss-rebuild",
+    "repo_full_name": "google/oss-rebuild",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -972,8 +936,17 @@
     ]
   },
   {
-    "repo_url": "https://github.com/google-deepmind/science-skills",
-    "repo_full_name": "google-deepmind/science-skills",
+    "repo_url": "https://github.com/google-gemini/gemini-live-api-examples",
+    "repo_full_name": "google-gemini/gemini-live-api-examples",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/microsoft/playwright-cli",
+    "repo_full_name": "microsoft/playwright-cli",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -990,8 +963,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/aws/aws-sdk-js-v3",
-    "repo_full_name": "aws/aws-sdk-js-v3",
+    "repo_url": "https://github.com/microsoft/winget-pkgs",
+    "repo_full_name": "microsoft/winget-pkgs",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -999,8 +972,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/aws/agentcore-cli",
-    "repo_full_name": "aws/agentcore-cli",
+    "repo_url": "https://github.com/aws/jsii",
+    "repo_full_name": "aws/jsii",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1008,8 +981,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/microsoft/binskim",
-    "repo_full_name": "microsoft/binskim",
+    "repo_url": "https://github.com/aws/csi-components",
+    "repo_full_name": "aws/csi-components",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1026,35 +999,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/aws/aws-parallelcluster-node",
-    "repo_full_name": "aws/aws-parallelcluster-node",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/awslabs/agentcore-samples",
-    "repo_full_name": "awslabs/agentcore-samples",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/awslabs/mcp",
-    "repo_full_name": "awslabs/mcp",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/awslabs/AutoCorrode",
-    "repo_full_name": "awslabs/autocorrode",
+    "repo_url": "https://github.com/awslabs/multi-az-workshop",
+    "repo_full_name": "awslabs/multi-az-workshop",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1071,6 +1017,33 @@
     ]
   },
   {
+    "repo_url": "https://github.com/awslabs/mcp",
+    "repo_full_name": "awslabs/mcp",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/cohere-ai/melody",
+    "repo_full_name": "cohere-ai/melody",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/xai-org/xai-sdk-python",
+    "repo_full_name": "xai-org/xai-sdk-python",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/xai-org/plugin-marketplace",
     "repo_full_name": "xai-org/plugin-marketplace",
     "status": "api",
@@ -1080,8 +1053,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/mistralai/mistral-common",
-    "repo_full_name": "mistralai/mistral-common",
+    "repo_url": "https://github.com/allenai/open-instruct",
+    "repo_full_name": "allenai/open-instruct",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1089,8 +1062,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/mistralai/platform-docs-public",
-    "repo_full_name": "mistralai/platform-docs-public",
+    "repo_url": "https://github.com/QwenLM/open-computer-use",
+    "repo_full_name": "qwenlm/open-computer-use",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1098,53 +1071,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/cohere-ai/cohere-developer-experience",
-    "repo_full_name": "cohere-ai/cohere-developer-experience",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/cohere-ai/cohere-azure-workshops",
-    "repo_full_name": "cohere-ai/cohere-azure-workshops",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/EleutherAI/bergson",
-    "repo_full_name": "eleutherai/bergson",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/EleutherAI/sparsify",
-    "repo_full_name": "eleutherai/sparsify",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/allenai/olmoearth_pretrain",
-    "repo_full_name": "allenai/olmoearth_pretrain",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/InternLM/xtuner",
-    "repo_full_name": "internlm/xtuner",
+    "repo_url": "https://github.com/InternLM/lmdeploy",
+    "repo_full_name": "internlm/lmdeploy",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1170,8 +1098,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/InternLM/lmdeploy",
-    "repo_full_name": "internlm/lmdeploy",
+    "repo_url": "https://github.com/InternLM/CapRL",
+    "repo_full_name": "internlm/caprl",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1179,17 +1107,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/MiniMax-AI/cli",
-    "repo_full_name": "minimax-ai/cli",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/vercel/next-app-router-playground",
-    "repo_full_name": "vercel/next-app-router-playground",
+    "repo_url": "https://github.com/InternLM/xtuner",
+    "repo_full_name": "internlm/xtuner",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1206,6 +1125,15 @@
     ]
   },
   {
+    "repo_url": "https://github.com/Tencent/WeKnora",
+    "repo_full_name": "tencent/weknora",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/ByteDance-Seed/VeOmni",
     "repo_full_name": "bytedance-seed/veomni",
     "status": "api",
@@ -1215,8 +1143,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/vercel/shop",
-    "repo_full_name": "vercel/shop",
+    "repo_url": "https://github.com/vercel/ai",
+    "repo_full_name": "vercel/ai",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1224,17 +1152,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/vercel/turborepo",
-    "repo_full_name": "vercel/turborepo",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/vercel/workflow",
-    "repo_full_name": "vercel/workflow",
+    "repo_url": "https://github.com/sourcegraph/src-cli",
+    "repo_full_name": "sourcegraph/src-cli",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1269,8 +1188,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/sourcegraph/zoekt",
-    "repo_full_name": "sourcegraph/zoekt",
+    "repo_url": "https://github.com/run-llama/llama-agents",
+    "repo_full_name": "run-llama/llama-agents",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1278,8 +1197,17 @@
     ]
   },
   {
-    "repo_url": "https://github.com/sourcegraph/CodeScaleBench",
-    "repo_full_name": "sourcegraph/codescalebench",
+    "repo_url": "https://github.com/run-llama/llama_index",
+    "repo_full_name": "run-llama/llama_index",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/run-llama/liteparse",
+    "repo_full_name": "run-llama/liteparse",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1305,44 +1233,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/run-llama/liteparse",
-    "repo_full_name": "run-llama/liteparse",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/camel-ai/eigent_search",
-    "repo_full_name": "camel-ai/eigent_search",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/pydantic/skills",
-    "repo_full_name": "pydantic/skills",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/pydantic/arrow-rs",
-    "repo_full_name": "pydantic/arrow-rs",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/langchain-ai/deepagents",
-    "repo_full_name": "langchain-ai/deepagents",
+    "repo_url": "https://github.com/pydantic/pydantic",
+    "repo_full_name": "pydantic/pydantic",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1359,6 +1251,15 @@
     ]
   },
   {
+    "repo_url": "https://github.com/camel-ai/camel",
+    "repo_full_name": "camel-ai/camel",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/langchain-ai/langsmith-sdk",
     "repo_full_name": "langchain-ai/langsmith-sdk",
     "status": "api",
@@ -1368,8 +1269,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/langchain-ai/langchain-google",
-    "repo_full_name": "langchain-ai/langchain-google",
+    "repo_url": "https://github.com/langchain-ai/langgraphjs",
+    "repo_full_name": "langchain-ai/langgraphjs",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1377,8 +1278,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/langchain-ai/langchain",
-    "repo_full_name": "langchain-ai/langchain",
+    "repo_url": "https://github.com/langchain-ai/terraform",
+    "repo_full_name": "langchain-ai/terraform",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1386,8 +1287,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
-    "repo_full_name": "modelcontextprotocol/modelcontextprotocol",
+    "repo_url": "https://github.com/langchain-ai/langgraph",
+    "repo_full_name": "langchain-ai/langgraph",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1395,44 +1296,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/modelcontextprotocol/inspector",
-    "repo_full_name": "modelcontextprotocol/inspector",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/browser-use/browser-use",
-    "repo_full_name": "browser-use/browser-use",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/modelcontextprotocol/csharp-sdk",
-    "repo_full_name": "modelcontextprotocol/csharp-sdk",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/langfuse/langfuse-js",
-    "repo_full_name": "langfuse/langfuse-js",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/langfuse/langfuse-docs",
-    "repo_full_name": "langfuse/langfuse-docs",
+    "repo_url": "https://github.com/modelcontextprotocol/go-sdk",
+    "repo_full_name": "modelcontextprotocol/go-sdk",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1449,44 +1314,35 @@
     ]
   },
   {
+    "repo_url": "https://github.com/langfuse/codex-observability-plugin",
+    "repo_full_name": "langfuse/codex-observability-plugin",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse-docs",
+    "repo_full_name": "langfuse/langfuse-docs",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse-python",
+    "repo_full_name": "langfuse/langfuse-python",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
     "repo_url": "https://github.com/langfuse/claude-observability-plugin",
     "repo_full_name": "langfuse/claude-observability-plugin",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/langfuse/openclaw-x-langfuse-plugin",
-    "repo_full_name": "langfuse/openclaw-x-langfuse-plugin",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/crewAIInc/crewAI",
-    "repo_full_name": "crewaiinc/crewai",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/huggingface/huggingface.js",
-    "repo_full_name": "huggingface/huggingface.js",
-    "status": "api",
-    "metrics_applied": true,
-    "notes": [
-      "used fresh GitHub API metrics; github_token=present"
-    ]
-  },
-  {
-    "repo_url": "https://github.com/OpenBMB/PilotDeck",
-    "repo_full_name": "openbmb/pilotdeck",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1503,8 +1359,8 @@
     ]
   },
   {
-    "repo_url": "https://github.com/huggingface/trl",
-    "repo_full_name": "huggingface/trl",
+    "repo_url": "https://github.com/huggingface/chat-ui",
+    "repo_full_name": "huggingface/chat-ui",
     "status": "api",
     "metrics_applied": true,
     "notes": [
@@ -1512,8 +1368,44 @@
     ]
   },
   {
-    "repo_url": "https://github.com/HKUDS/ViMax",
-    "repo_full_name": "hkuds/vimax",
+    "repo_url": "https://github.com/crewAIInc/crewAI",
+    "repo_full_name": "crewaiinc/crewai",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenBMB/AceBench",
+    "repo_full_name": "openbmb/acebench",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenBMB/VoxCPM",
+    "repo_full_name": "openbmb/voxcpm",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenBMB/UltraRAG",
+    "repo_full_name": "openbmb/ultrarag",
+    "status": "api",
+    "metrics_applied": true,
+    "notes": [
+      "used fresh GitHub API metrics; github_token=present"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/AI-Trader",
+    "repo_full_name": "hkuds/ai-trader",
     "status": "api",
     "metrics_applied": true,
     "notes": [

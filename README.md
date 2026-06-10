@@ -1,212 +1,164 @@
 # AgentRadar
 
-An open-source trend radar and research workbench for the AI agent ecosystem.
+面向 AI Agent 生态的开源趋势雷达与研究工作台。
 
-English · [中文](./README.zh-CN.md)
+[English](./README.en.md) · 中文
 
----
+![Bilingual README](https://img.shields.io/badge/README-%E4%B8%AD%E8%8B%B1%E5%88%87%E6%8D%A2-0f766e?style=flat-square)
+![Trend Radar](https://img.shields.io/badge/AI%20Agent-Trend%20Radar-3178c6?style=flat-square)
+![Local Console](https://img.shields.io/badge/Console-Read%20Only-c2410c?style=flat-square)
 
-## What this is
+![AgentRadar overview](./docs/assets/readme-radar-banner.svg)
 
-AgentRadar continuously collects public signals from the agent ecosystem, normalizes them, scores projects, synthesizes weekly trends, builds knowledge cards, and turns the results into a local artifact set that is easy to browse, verify, and reuse.
-
-You can think of it as an open-source radar system for researchers, developers, investors, product teams, and agent builders:
-
-- It is not a chatbot. It is a repeatable data and analysis pipeline.
-- It is not a black-box recommendation engine. It tries to preserve evidence, score components, and trend reasoning.
-- It does not only track one-day heat. It also tracks persistence and week-level movement.
-
-If you often ask questions like these, this project is for you:
-
-- Which agent projects are most worth looking at today?
-- Which repositories are just one-day hype, and which ones are building momentum?
-- What directions actually formed into trends this week?
-- Which new projects are worth watching before they hit the main board?
-- Why did a project rank highly, and what evidence supports that?
+> 从公开信号里抓变化，从周级趋势里看方向，从可复用产物里做研究。
 
 ---
 
-## Why it is worth a Star
+## 这是什么
 
-Many people can scrape GitHub Trending once. The hard part comes after that:
+AgentRadar 会持续采集 AI Agent 生态里的公开信号，做归一化、评分、周趋势归纳、知识卡沉淀和新兴项目观察，最后把结果整理成一套本地可浏览、可验证、可复用的研究产物。
 
-- How do you align signals from multiple sources?
-- How do you balance same-day heat with long-term persistence?
-- How do you keep weekly trend judgments interpretable?
-- How do you notice emerging projects before they become obvious?
-- How do you turn all of that into stable daily and weekly outputs?
+你可以把它理解成一套开源版的 Agent 生态雷达系统，适合研究者、开发者、投资人、产品团队和 Agent Builder：
 
-AgentRadar connects those steps into one complete workflow and saves the result as inspectable artifacts instead of stopping at “this feels hot.”
+- 它不是聊天机器人，而是一条可重复运行的数据与分析流水线。
+- 它不是黑盒推荐，而是尽量保留证据链、评分拆解和趋势判断依据。
+- 它不只看单日热度，也看持续性、周级移动和新方向浮现。
 
-If this kind of open-source research infrastructure is useful to you, please consider starring this repository. We are also deeply grateful to the public data sources and open ecosystems behind it. If they help you, please consider starring them too.
+如果你经常会问这些问题，这个项目就是为你准备的：
 
----
+- 今天有哪些 Agent 项目值得看？
+- 哪些仓库只是一日热度，哪些在持续抬头？
+- 本周真正成形的趋势方向是什么？
+- 哪些还没进主榜的新项目值得提前盯住？
+- 某个项目为什么排得高，背后的证据是什么？
 
-## What it does
+## 为什么值得关注
 
-### 1. Daily trend radar
+很多项目都能抓一次 `GitHub Trending`，但真正困难的是后半段：
 
-The system aggregates multiple public sources and produces a daily project board, score outputs, evidence summaries, and run health artifacts.
+- 怎么把不同来源的信号对齐成同一种语言？
+- 怎么同时看当天热度和长期持续性？
+- 怎么把“感觉很火”变成可解释、可复核的趋势判断？
+- 怎么在项目爆发前，就把它放进观察池？
 
-You get:
+AgentRadar 把这些步骤连成一套完整工作流，并把结果沉淀成每天、每周都能复查的产物，而不是停在一句主观判断上。
+
+## 你能得到什么
+
+### 1. 每日趋势主榜
 
 - `data/reports/YYYY-MM-DD.daily.json`
 - `data/reports/YYYY-MM-DD.daily.md`
 - `data/reports/YYYY-MM-DD.run-summary.json`
 - `data/reports/YYYY-MM-DD.verify-daily.json`
 
-### 2. Weekly trend synthesis
-
-The system organizes a 7-day window of project behavior, topic clusters, evidence relationships, and rule judgments into a weekly trend view.
-
-You get:
+### 2. 每周趋势归纳
 
 - `data/reports/YYYY-MM-DD.weekly.json`
 - `data/reports/YYYY-MM-DD.weekly.md`
 - `data/reports/YYYY-MM-DD.weekly.judgment.json`
 - `data/reports/YYYY-MM-DD.weekly.audit.json`
 
-### 3. Knowledge card generation
-
-High-value projects are turned into reusable knowledge cards for long-term indexing and review.
-
-You get:
+### 3. 项目知识卡
 
 - `data/kb/latest.json`
 - `data/kb/*.md`
 
-### 4. Emerging-project observer
-
-Besides the main board, the system also watches for “not mature yet, but worth tracking” projects and surfaces them in a dedicated observer view.
-
-You get:
+### 4. 新兴项目观察池
 
 - `data/observer/ecosystem-focus/*.json`
 
-### 5. Local read-only workbench
+### 5. 本地只读工作台
 
-The OSS edition ships with a lightweight local web console for browsing generated artifacts, but it **does not include login, registration, sessions, or account management**.
+开源版自带一个轻量本地 Web Console，用来浏览已生成产物，但不包含登录、注册、会话和账号系统。
 
----
+## 工作流一眼看懂
 
-## The agents inside the system
+```mermaid
+flowchart LR
+    A["公开信号采集"] --> B["归一化与评分"]
+    B --> C["日报生成"]
+    B --> D["周报归纳"]
+    B --> E["新兴项目观察"]
+    C --> F["知识卡沉淀"]
+    D --> F
+    E --> F
+    F --> G["CLI / 本地 Web Console 浏览"]
+```
 
-This is not “one agent.” It is a set of scoped agents and workflows that work together.
+这条路径通常会把原始信号从 `data/raw/` 一路推进到 `data/scores/`、`data/reports/`、`data/observer/` 和 `data/kb/`，因此它既能做本地研究工具，也能做稳定的产物生成器。
 
-### 1. Signal Collection Agent
+## 适合谁使用
 
-Responsibilities:
+- 想持续追踪 Agent 生态变化的研究者
+- 想做项目观察、方向判断和竞品扫描的开发者或产品团队
+- 想把公开信号沉淀成结构化产物的情报工作流搭建者
+- 想基于现有规则和数据源，扩展自己的内部趋势雷达的人
 
-- Pull raw signals from public sources
-- Handle basic source differences
-- Write to `data/raw/`
+## 快速开始
 
-Related capabilities:
+### 1. 安装依赖
 
-- upstream digest reads from `agents-radar`
-- Trendshift snapshot reads
-- GitHub Trending, live metrics, and watchlist activity enrichment
+```bash
+corepack pnpm install
+```
 
-### 2. Normalization & Scoring Agent
+### 2. 准备环境变量
 
-Responsibilities:
+```bash
+cp .env.example .env
+```
 
-- Convert raw signals into a unified structure
-- Score projects with explicit rules
-- Produce interpretable ranking outputs
+说明：
 
-Related outputs:
+- 如果你只是浏览已提交产物，通常不需要补任何 provider key。
+- 如果你想运行带 LLM 增强的流程，再按需补充相关 key。
 
-- `data/normalized/`
-- `data/scores/`
-- `data/classifications/`
+### 3. 启动本地 Web Console
 
-### 3. Daily Report Agent
+```bash
+corepack pnpm visual-console:web
+```
 
-Responsibilities:
+默认地址：
 
-- Produce the daily main board
-- Organize project summaries, why-it-matters notes, risks, and suggested actions
-- Generate the daily report and run summary
+- `http://127.0.0.1:3210`
 
-Related code:
+### 4. 直接看 CLI 视图
 
-- `src/action/dailyReport.ts`
-- `src/action/runSummary.ts`
-- `src/action/dailyVerification.ts`
+```bash
+corepack pnpm visual-console -- --view overview --date latest
+```
 
-### 4. Weekly Trend Review Agent
+## 常用命令
 
-Responsibilities:
+### 每日流程
 
-- Identify real trends across the weekly window
-- Review which candidate trends should be kept, merged, split, or downgraded
-- Produce a weekly output that is more useful for research judgment
+```bash
+corepack pnpm run-daily
+corepack pnpm verify-daily
+corepack pnpm score
+```
 
-Related code:
+### 每周流程
 
-- `src/action/weeklyJudgmentRules.ts`
-- `src/action/weeklyEnhancement.ts`
-- `src/action/weeklyTrendAgent.ts`
-- `src/action/weeklyReport.ts`
+```bash
+corepack pnpm run-weekly
+corepack pnpm sync-weekly
+```
 
-### 5. Observer Agent
+### 其他
 
-Responsibilities:
+```bash
+corepack pnpm capture-github-stars
+corepack pnpm build-kb
+corepack pnpm typecheck
+corepack pnpm test
+```
 
-- Look beyond the main board
-- search the wider agent ecosystem for promising repositories
-- build an observation pool for projects that are early but worth tracking
+## 数据与边界
 
-Related code:
-
-- `src/signal/ecosystemFocusObserver.ts`
-
-### 6. Knowledge Card Agent
-
-Responsibilities:
-
-- Turn projects into durable knowledge cards
-- Support project dossiers, research indexing, and reuse
-
-Related code:
-
-- `src/action/knowledgeCard.ts`
-
-### 7. Agent Memory Workflow
-
-Responsibilities:
-
-- Record part of the development-task and workflow context
-- Make the project itself easier to evolve and automate over time
-
-Related code:
-
-- `src/agentMemory/`
-
-Notes:
-
-- This is an internal workflow capability, not a public login-based product feature.
-- The OSS edition keeps these files, but it does not include any end-user authentication system.
-
----
-
-## Data source acknowledgements
-
-This project benefits heavily from the open-source community and public data sources. Special thanks to:
-
-- [agents-radar](https://github.com/duanyytop/agents-radar)
-- [Trendshift](https://trendshift.io)
-- [GitHub](https://github.com)
-- the broader ecosystem of open-source agent builders and maintainers
-
-If these upstream projects, platforms, and public ecosystems help you, please consider giving them a Star, and please consider starring AgentRadar too.
-
----
-
-## Ecosystem directions it watches
-
-The current configuration focuses on directions like:
+### 当前重点观察方向
 
 - coding agents
 - agent runtime
@@ -217,183 +169,38 @@ The current configuration focuses on directions like:
 - multi-agent coordination
 - agent UI / workbench
 
-These directions come from repository rules and configuration, not from vague prompt-only intuition.
+这些方向来自仓库规则与配置，不是写死在 prompt 里的模糊判断。
 
----
+### 开源版边界
 
-## Repository structure
+为了避免暴露配置、密钥和私有攻击面，当前开源版明确不包含：
 
-```text
-agentRadar/
-├── app/                     # OSS read-only web entry
-├── data/                    # generated daily / weekly / score / KB / observer artifacts
-├── scripts/                 # automation scripts
-├── src/
-│   ├── action/              # daily / weekly / KB core workflows
-│   ├── agentMemory/         # agent memory workflows
-│   ├── db/                  # database foundations
-│   ├── filter/              # scoring and filtering
-│   ├── providers/           # LLM provider adapters
-│   ├── signal/              # source ingestion and aggregation
-│   ├── storage/             # file IO
-│   └── visualConsole/       # console data building
-├── README.md                # English
-├── README.zh-CN.md          # primary Chinese document
-```
-
----
-
-## Quick start
-
-### 1. Install dependencies
-
-```bash
-corepack pnpm install
-```
-
-### 2. Prepare environment variables
-
-```bash
-cp .env.example .env
-```
-
-Notes:
-
-- If you only want to browse committed artifacts, you may not need any provider key at all.
-- If you want LLM-enhanced workflows, add the provider keys you need.
-
-### 3. Start the local web console
-
-```bash
-corepack pnpm visual-console:web
-```
-
-Default address:
-
-- `http://127.0.0.1:3210`
-
-### 4. Use the CLI view directly
-
-```bash
-corepack pnpm visual-console -- --view overview --date latest
-```
-
----
-
-## Common commands
-
-### Daily workflows
-
-```bash
-corepack pnpm run-daily
-corepack pnpm verify-daily
-corepack pnpm score
-```
-
-### Weekly workflows
-
-```bash
-corepack pnpm run-weekly
-corepack pnpm sync-weekly
-```
-
-### Other commands
-
-```bash
-corepack pnpm capture-github-stars
-corepack pnpm build-kb
-corepack pnpm typecheck
-corepack pnpm test
-```
-
----
-
-## How artifacts flow
-
-A common path looks like this:
-
-1. collect raw signals into `data/raw/`
-2. normalize them into `data/normalized/`
-3. classify and score them into `data/classifications/` and `data/scores/`
-4. generate daily reports, weekly reports, observer outputs, and KB outputs into `data/reports/`, `data/observer/`, and `data/kb/`
-5. browse the outputs through the CLI or local web console
-
-This means you can use the project both as a local research tool and as a repeatable artifact generator.
-
----
-
-## OSS boundary
-
-To avoid exposing configuration, secrets, and private attack surfaces, the current OSS edition explicitly excludes:
-
-- login
-- registration
+- 登录
+- 注册
 - OAuth
-- sessions / account settings
-- local auth bootstrap flows
-- private deployment templates
-- private operational docs
+- session / account settings
+- 本地 auth bootstrap
+- 私有部署模板
+- 私有运维文档
 - `.env` / `.env.local`
 
-In other words, the OSS edition is a **no-login, read-only browsing, data-workflow-capable** public version.
+换句话说，开源版是一个无登录、只读浏览、可运行数据工作流的公开版本。
 
----
+## 致谢与贡献
 
-## FAQ
+这个项目高度受益于开源社区和公开数据源，特别感谢：
 
-### 1. Who is this project for?
+- [agents-radar](https://github.com/duanyytop/agents-radar)
+- [Trendshift](https://trendshift.io)
+- [GitHub](https://github.com)
+- 更广泛的 Agent 开源构建者与维护者
 
-It is a good fit for:
+如果这些上游项目和生态对你有帮助，也欢迎顺手给它们一个 Star。
 
-- researchers tracking the agent ecosystem
-- developers who want to monitor momentum over time
-- teams who want structured artifacts from public signals
-- builders who want to adapt the stack into their own radar workflows
+### 贡献方式
 
-### 2. Does this project require a database?
+- 提 Issue 反馈 bug
+- 提 PR 改进 README、规则、数据源和工作流
+- 提出你希望新增的观察方向或指标
 
-No.
-
-The current path is primarily artifact-driven, so you can browse and run most public workflows without standing up a database first. Some DB modules remain for workflow compatibility, but they do not mean you must enable database-backed auth infrastructure to use the project.
-
-### 3. Why is the web console read-only?
-
-That is an intentional safety boundary. The OSS edition does not expose a user system or any login path, which makes it safer and easier to maintain.
-
-### 4. Can I adapt this into my own internal radar?
-
-Yes. Common ways to do that include:
-
-- editing `config.yaml`
-- replacing or extending data sources
-- adjusting scoring rules
-- wiring it into your own automation flow
-
-### 5. Can I adapt this into my own version?
-
-Yes. Common ways to do that include:
-
-- editing `config.yaml`
-- replacing or extending data sources
-- adjusting scoring rules
-- wiring the CLI and artifacts into your own automation stack
-
----
-
-## Contributing
-
-Contributions are welcome:
-
-- open issues for bugs
-- open PRs for README, rules, data sources, and workflows
-- suggest new ecosystem directions or observation dimensions
-
-If you plan to maintain your own long-lived fork, define your own safety boundary early before deciding which capabilities should stay read-only and which ones should be exposed.
-
----
-
-## Star History
-
-If this project helps you, please give it a Star.
-
-And if you know other people working on agent ecosystems, trend research, open-source intelligence, or workflow automation, feel free to share it with them.
+如果 AgentRadar 对你有帮助，也欢迎给这个仓库点一个 Star，并分享给同样在关注 Agent 生态、趋势研究和开源情报工作流的朋友。

@@ -33,6 +33,7 @@ import type { RunAgentTaskWorkflowInput, TaskExecutionReceipt } from "./agentMem
 import { renderVisualConsole } from "./visualConsole/index.ts";
 import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./visualConsole/readLayer.ts";
 import { planWeeklySync } from "./weeklyCadence.ts";
+import { runPrivateSync } from "./privateSync.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -62,6 +63,9 @@ interface CliOptions {
   anchorDate?: string;
   recordAgentMemory?: boolean;
   inputPath?: string;
+  privateRemote?: string;
+  privateBranch?: string;
+  allowDirtyPrivateSync?: boolean;
 }
 
 type FlagHandler = (opts: CliOptions, argv: string[], index: number) => number;
@@ -132,6 +136,18 @@ const FLAG_HANDLERS: Record<string, FlagHandler> = {
   "--input": (opts, argv, index) => {
     if (argv[index + 1]) opts.inputPath = argv[index + 1];
     return index + 1;
+  },
+  "--private-remote": (opts, argv, index) => {
+    if (argv[index + 1]) opts.privateRemote = argv[index + 1];
+    return index + 1;
+  },
+  "--private-branch": (opts, argv, index) => {
+    if (argv[index + 1]) opts.privateBranch = argv[index + 1];
+    return index + 1;
+  },
+  "--allow-dirty-private-sync": (opts, _argv, index) => {
+    opts.allowDirtyPrivateSync = true;
+    return index;
   },
 };
 
@@ -1028,6 +1044,18 @@ export async function visualConsole(opts: CliOptions): Promise<void> {
   console.log(output);
 }
 
+export async function syncPrivate(opts: CliOptions): Promise<void> {
+  const config = loadConfig(opts.configPath);
+  const dryRun = opts.dryRun || config.runtime.dryRunDefault;
+  const logger = new Logger(config.runtime.logging);
+  runPrivateSync(logger, {
+    dryRun,
+    remoteOverride: opts.privateRemote,
+    branchOverride: opts.privateBranch,
+    allowDirtyOverride: opts.allowDirtyPrivateSync,
+  });
+}
+
 async function main(): Promise<void> {
   loadRuntimeEnv(process.cwd(), { overrideProcessEnv: true });
   configureGlobalNetworkProxy();
@@ -1038,6 +1066,7 @@ async function main(): Promise<void> {
     score: runScore,
     "run-weekly": runWeekly,
     "sync-weekly": syncWeeklyReports,
+    "sync-private": syncPrivate,
     "verify-daily": verifyDaily,
     "capture-github-stars": captureGithubStars,
     "build-kb": buildKb,
@@ -1047,7 +1076,7 @@ async function main(): Promise<void> {
   const runner = commands[command];
   if (!runner) {
     throw new Error(
-      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, or visual-console.`,
+      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, sync-private, verify-daily, capture-github-stars, build-kb, record-agent-task, or visual-console.`,
     );
   }
   await runner(opts);

@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "tech-leads-club/agent-skills",
+  "repo_url": "https://github.com/tech-leads-club/agent-skills",
+  "stars": 4353,
+  "forks": 368,
+  "issues": 3,
+  "PR": 12,
+  "description": "The secure, validated skill registry for professional AI coding agents. Extend Antigravity, Claude Code, Cursor, Copilot and more with absolute confidence.",
+  "tags": [
+    "agent",
+    "ai",
+    "antigravity",
+    "claude-code",
+    "copilot",
+    "cursor",
+    "skills"
+  ]
+}

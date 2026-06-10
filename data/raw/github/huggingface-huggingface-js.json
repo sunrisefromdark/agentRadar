@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "huggingface/huggingface.js",
+  "repo_url": "https://github.com/huggingface/huggingface.js",
+  "stars": 2421,
+  "forks": 722,
+  "issues": 126,
+  "PR": 118,
+  "description": "Use Hugging Face with JavaScript",
+  "tags": [
+    "api-client",
+    "hub",
+    "huggingface",
+    "inference",
+    "machine-learning"
+  ]
+}

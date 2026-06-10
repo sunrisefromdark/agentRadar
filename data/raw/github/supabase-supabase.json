@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "supabase/supabase",
+  "repo_url": "https://github.com/supabase/supabase",
+  "stars": 103017,
+  "forks": 12548,
+  "issues": 258,
+  "PR": 782,
+  "description": "The Postgres development platform. Supabase gives you a dedicated Postgres database to build your web, mobile, and AI applications.",
+  "tags": [
+    "ai",
+    "alternative",
+    "auth",
+    "database",
+    "deno",
+    "embeddings",
+    "example",
+    "firebase",
+    "nextjs",
+    "oauth2",
+    "pgvector",
+    "postgis",
+    "postgres",
+    "postgresql",
+    "postgrest",
+    "realtime",
+    "supabase",
+    "vectors",
+    "websockets"
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "shadcn-ui/ui",
+  "repo_url": "https://github.com/shadcn-ui/ui",
+  "stars": 115351,
+  "forks": 8957,
+  "issues": 978,
+  "PR": 1023,
+  "description": "A set of beautifully-designed, accessible components and a code distribution platform. Works with your favorite frameworks. Open Source. Open Code.",
+  "tags": [
+    "base-ui",
+    "components",
+    "laravel",
+    "nextjs",
+    "radix-ui",
+    "react",
+    "shadcn",
+    "tailwindcss",
+    "tanstack",
+    "ui",
+    "vite"
+  ]
+}

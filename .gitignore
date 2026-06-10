@@ -1,0 +1,11 @@
+node_modules
+dist
+.env
+.env.local
+tmp
+test-results
+*.log
+data/agent-memory/**
+!data/agent-memory/.gitkeep
+data/upstream/**
+!data/upstream/.gitkeep

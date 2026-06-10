@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "open-webui/open-webui",
+  "repo_url": "https://github.com/open-webui/open-webui",
+  "stars": 139691,
+  "forks": 20045,
+  "issues": 152,
+  "PR": 107,
+  "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+  "tags": [
+    "ai",
+    "llm",
+    "llm-ui",
+    "llm-webui",
+    "llms",
+    "mcp",
+    "ollama",
+    "ollama-webui",
+    "open-webui",
+    "openai",
+    "openapi",
+    "rag",
+    "self-hosted",
+    "ui",
+    "webui"
+  ]
+}

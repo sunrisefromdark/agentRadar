@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "mastra-ai/mastra",
+  "repo_url": "https://github.com/mastra-ai/mastra",
+  "stars": 24706,
+  "forks": 2185,
+  "issues": 183,
+  "PR": 182,
+  "description": "From the team behind Gatsby, Mastra is a framework for building AI-powered applications and agents with a modern TypeScript stack.",
+  "tags": [
+    "agents",
+    "ai",
+    "chatbots",
+    "evals",
+    "javascript",
+    "llm",
+    "mcp",
+    "nextjs",
+    "nodejs",
+    "reactjs",
+    "tts",
+    "typescript",
+    "workflows"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "alibaba/OpenSandbox",
+  "repo_url": "https://github.com/alibaba/OpenSandbox",
+  "stars": 11052,
+  "forks": 890,
+  "issues": 53,
+  "PR": 26,
+  "description": "Secure, Fast, and Extensible Sandbox runtime for AI agents.",
+  "tags": [
+    "ai",
+    "ai-agent",
+    "ai-infra",
+    "kubernetes",
+    "sandbox"
+  ]
+}

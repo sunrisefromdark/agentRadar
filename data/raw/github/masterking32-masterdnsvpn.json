@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "masterking32/MasterDnsVPN",
+  "repo_url": "https://github.com/masterking32/MasterDnsVPN",
+  "stars": 3800,
+  "forks": 392,
+  "issues": 6,
+  "PR": 0,
+  "description": "Advanced DNS tunneling VPN for censorship bypass, optimized beyond DNSTT and SlipStream with low-overhead ARQ, resolver load balancing, high packet-loss stability and speed.",
+  "tags": [
+    "dns",
+    "dns-client",
+    "dns-proxy",
+    "dns-server",
+    "dns-tunnel",
+    "dns-tunneling",
+    "dnstt",
+    "masterdns",
+    "masterdnsvpn",
+    "slipstream",
+    "tunnel",
+    "vpn"
+  ]
+}

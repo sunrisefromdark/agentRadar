@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "AprilNEA/OpenLogi",
+  "repo_url": "https://github.com/AprilNEA/OpenLogi",
+  "stars": 2061,
+  "forks": 33,
+  "issues": 13,
+  "PR": 8,
+  "description": "⚡️A native, local-first alternative to Logitech Options+, written in Rust 🦀 — remap buttons, DPI, and SmartShift over HID++. No account, no telemetry.",
+  "tags": [
+    "dpi",
+    "gpui",
+    "hid",
+    "hidpp",
+    "local-first",
+    "logitech",
+    "logitech-mouse",
+    "logitech-options",
+    "mouse-remapping",
+    "mx-master",
+    "privacy",
+    "rust",
+    "smartshift"
+  ]
+}

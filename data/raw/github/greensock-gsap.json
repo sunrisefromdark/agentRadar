@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "greensock/GSAP",
+  "repo_url": "https://github.com/greensock/GSAP",
+  "stars": 25249,
+  "forks": 2002,
+  "issues": 5,
+  "PR": 2,
+  "description": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
+  "tags": [
+    "animation",
+    "gsap",
+    "javascript",
+    "javascript-library",
+    "scroll"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "modem-dev/hunk",
+  "repo_url": "https://github.com/modem-dev/hunk",
+  "stars": 4245,
+  "forks": 98,
+  "issues": 27,
+  "PR": 30,
+  "description": "Review-first terminal diff viewer for agentic coders",
+  "tags": [
+    "cli",
+    "code-review",
+    "diff",
+    "git",
+    "tui"
+  ]
+}

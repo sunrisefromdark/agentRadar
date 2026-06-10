@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "NVIDIA-AI-Blueprints/video-search-and-summarization",
+  "repo_url": "https://github.com/NVIDIA-AI-Blueprints/video-search-and-summarization",
+  "stars": 1403,
+  "forks": 292,
+  "issues": 13,
+  "PR": 47,
+  "description": "Suite of reference architectures for building GPU-accelerated vision agents and AI-powered video analytics applications.",
+  "tags": [
+    "agents",
+    "llm",
+    "rag",
+    "skills",
+    "video-analytics",
+    "video-search",
+    "vlm"
+  ]
+}

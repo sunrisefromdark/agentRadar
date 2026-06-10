@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "jingyaogong/minimind",
+  "repo_url": "https://github.com/jingyaogong/minimind",
+  "stars": 51071,
+  "forks": 6548,
+  "issues": 20,
+  "PR": 22,
+  "description": "🧠「大模型」2小时完全从0训练64M的小参数LLM！Train a 64M-parameter LLM from scratch in just 2h!",
+  "tags": [
+    "artificial-intelligence",
+    "large-language-model"
+  ]
+}

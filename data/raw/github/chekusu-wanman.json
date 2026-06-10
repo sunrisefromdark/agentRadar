@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "chekusu/wanman",
+  "repo_url": "https://github.com/chekusu/wanman",
+  "stars": 566,
+  "forks": 90,
+  "issues": 5,
+  "PR": 4,
+  "description": "wanman is an open-source agent matrix runtime inspired by Japanese one-man trains. It lets human users step back into an observer role while local agent runtimes coordinate autonomous multi-agent workflows, task execution, and artifacts.",
+  "tags": [
+    "agent",
+    "claude-code",
+    "codex",
+    "llm"
+  ]
+}

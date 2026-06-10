@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "ConardLi/garden-skills",
+  "repo_url": "https://github.com/ConardLi/garden-skills",
+  "stars": 5505,
+  "forks": 797,
+  "issues": 3,
+  "PR": 2,
+  "description": "ConardLi's open-source Skills collection, featuring web design, knowledge retrieval, image generation, and more.",
+  "tags": [
+    "agent",
+    "claude",
+    "gpt-image-2",
+    "rag",
+    "skills",
+    "web-design"
+  ]
+}

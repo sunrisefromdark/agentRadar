@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "HKUDS/nanobot",
+  "repo_url": "https://github.com/HKUDS/nanobot",
+  "stars": 43571,
+  "forks": 7712,
+  "issues": 268,
+  "PR": 635,
+  "description": "Lightweight, open-source AI agent for your tools, chats, and workflows.",
+  "tags": [
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "anthropic",
+    "chatgpt",
+    "claude",
+    "claude-code",
+    "codex",
+    "codex-cli",
+    "llm",
+    "nanobot",
+    "openai",
+    "openclaw"
+  ]
+}

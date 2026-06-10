@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "browser-use/gemini-demo",
+  "repo_url": "https://github.com/browser-use/gemini-demo",
+  "stars": 9,
+  "forks": 5,
+  "issues": 0,
+  "PR": 0,
+  "description": "demo of gemini-3 filling out a mock application form",
+  "tags": [
+    "ai-agent",
+    "browser-automation",
+    "browser-use-box",
+    "gemini"
+  ]
+}

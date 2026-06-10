@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/hermes-compression-eval",
+  "repo_url": "https://github.com/NousResearch/hermes-compression-eval",
+  "stars": 1,
+  "forks": 3,
+  "issues": 0,
+  "PR": 1,
+  "description": "Offline probe-based evaluation harness for hermes-agent's ContextCompressor. Methodology adapted from Factory's Dec 2025 'Evaluating Compression'.",
+  "tags": []
+}

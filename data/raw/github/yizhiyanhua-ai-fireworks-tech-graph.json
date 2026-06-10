@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "yizhiyanhua-ai/fireworks-tech-graph",
+  "repo_url": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+  "stars": 6954,
+  "forks": 613,
+  "issues": 3,
+  "PR": 0,
+  "description": "Generate production-quality SVG+PNG technical diagrams from natural language. 7 styles, UML support, and AI/Agent workflow patterns.",
+  "tags": [
+    "agent-workflows",
+    "ai",
+    "claude-code",
+    "developer-tools",
+    "diagrams",
+    "svg"
+  ]
+}

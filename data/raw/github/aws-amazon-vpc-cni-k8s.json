@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "aws/amazon-vpc-cni-k8s",
+  "repo_url": "https://github.com/aws/amazon-vpc-cni-k8s",
+  "stars": 2442,
+  "forks": 816,
+  "issues": 17,
+  "PR": 36,
+  "description": "Networking plugin repository for pod networking in Kubernetes using Elastic Network Interfaces on AWS",
+  "tags": [
+    "cni-plugin",
+    "kubernetes",
+    "pod-networking"
+  ]
+}

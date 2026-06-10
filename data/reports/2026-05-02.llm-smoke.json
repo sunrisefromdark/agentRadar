@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-02",
+  "generated_at": "2026-05-02T23:17:27+08:00",
+  "status": "fail",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "error_summary": "Provider timeout for minimax [timeout]"
+}

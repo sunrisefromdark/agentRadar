@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "alibaba/rtp-llm",
+  "repo_url": "https://github.com/alibaba/rtp-llm",
+  "stars": 1167,
+  "forks": 203,
+  "issues": 33,
+  "PR": 94,
+  "description": "RTP-LLM: Alibaba's high-performance LLM inference engine for diverse applications.",
+  "tags": [
+    "gpt",
+    "inference",
+    "llama",
+    "llm",
+    "llm-serving",
+    "llmops",
+    "model-serving"
+  ]
+}

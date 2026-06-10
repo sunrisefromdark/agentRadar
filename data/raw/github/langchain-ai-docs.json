@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "langchain-ai/docs",
+  "repo_url": "https://github.com/langchain-ai/docs",
+  "stars": 343,
+  "forks": 2343,
+  "issues": 231,
+  "PR": 240,
+  "description": "Unified LangChain documentation.",
+  "tags": [
+    "documentation",
+    "langchain",
+    "langgraph",
+    "langsmith"
+  ]
+}

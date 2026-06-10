@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "aws/mcp-proxy-for-aws",
+  "repo_url": "https://github.com/aws/mcp-proxy-for-aws",
+  "stars": 293,
+  "forks": 48,
+  "issues": 6,
+  "PR": 6,
+  "description": "AWS MCP Proxy Server",
+  "tags": [
+    "aws",
+    "mcp",
+    "proxy",
+    "sigv4"
+  ]
+}

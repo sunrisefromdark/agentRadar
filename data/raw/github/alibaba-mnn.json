@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "alibaba/MNN",
+  "repo_url": "https://github.com/alibaba/MNN",
+  "stars": 15376,
+  "forks": 2337,
+  "issues": 20,
+  "PR": 11,
+  "description": "MNN: A blazing-fast, lightweight inference engine battle-tested by Alibaba, powering high-performance on-device LLMs and Edge AI.",
+  "tags": [
+    "arm",
+    "convolution",
+    "deep-learning",
+    "embedded-devices",
+    "llm",
+    "machine-learning",
+    "ml",
+    "mnn",
+    "transformer",
+    "vulkan",
+    "winograd-algorithm"
+  ]
+}

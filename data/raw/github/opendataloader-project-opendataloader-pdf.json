@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "opendataloader-project/opendataloader-pdf",
+  "repo_url": "https://github.com/opendataloader-project/opendataloader-pdf",
+  "stars": 23046,
+  "forks": 2164,
+  "issues": 39,
+  "PR": 15,
+  "description": "PDF Parser for AI-ready data. Automate PDF accessibility. Open-source.",
+  "tags": [
+    "a11y",
+    "accessibility",
+    "ai",
+    "bounding-box",
+    "document-parsing",
+    "eaa",
+    "html",
+    "json",
+    "markdown",
+    "ocr",
+    "ocr-recognition",
+    "pdf",
+    "pdf-accessibility",
+    "pdf-converter",
+    "pdf-extraction",
+    "pdf-parser",
+    "pdf-ua",
+    "rag",
+    "tables",
+    "tagged-pdf"
+  ]
+}

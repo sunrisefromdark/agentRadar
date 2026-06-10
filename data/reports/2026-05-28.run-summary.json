@@ -1,0 +1,319 @@
+{
+  "date": "2026-05-28",
+  "generated_at": "2026-06-06T22:48:26+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 135 条",
+    "归一化阶段完成，共 110 个项目",
+    "评分阶段完成，共 110 个已评分项目",
+    "本次运行活跃信号面: 5/5",
+    "仍有 1 个项目处于低置信度，需要后续验证",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "mode": "semantic-classification",
+    "classification_attempt_count": 0,
+    "classification_success_count": 0,
+    "classification_failure_count": 0,
+    "summary_attempt_count": 9,
+    "summary_success_count": 9,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "overall_daily_status": "数据新鲜，可直接阅读",
+  "freshness_sources": [
+    {
+      "source": "agents-radar",
+      "effective_date": "2026-05-28",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "agents-radar 已同步，可读取 2026-05-28 的上下文摘要",
+      "from_realtime_run": false,
+      "source_role": "context"
+    },
+    {
+      "source": "trendshift_live",
+      "effective_date": "2026-05-28",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Trendshift 快照可用，已恢复 2026-05-28 的趋势信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_trending",
+      "effective_date": "2026-05-28",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub Trending 快照可用，已恢复 2026-05-28 的热度信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_live_star_delta",
+      "effective_date": "2026-05-28",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub star delta 快照可用，已恢复 2026-05-28 的增量信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "watchlist_live_activity",
+      "effective_date": "2026-05-28",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Watchlist 活动快照可用，已恢复 2026-05-28 的观察清单信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    }
+  ],
+  "main_board_mode": "fresh_today_only",
+  "today_fresh_candidate_count": 62,
+  "today_star_count": 4,
+  "context_candidate_count": 48,
+  "pending_confirmation_count": 58,
+  "counts": {
+    "raw_signals": 135,
+    "normalized_projects": 110,
+    "scored_projects": 110,
+    "high_score_projects": 4,
+    "anomaly_projects": 6,
+    "new_projects": 110,
+    "classifications": 85
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 68,
+      "distinct_projects": 60,
+      "status": "active",
+      "notes": [
+        "primary local digest input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "snapshot/http trend input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "GitHub Trending realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 15,
+      "distinct_projects": 15,
+      "status": "active",
+      "notes": [
+        "watchlist realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 109,
+      "distinct_projects": 109,
+      "status": "active",
+      "notes": [
+        "project-level enrichment inferred from structured repo metrics"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 1,
+    "watchlist_hits": 18,
+    "low_confidence_projects": 1,
+    "medium_confidence_projects": 109,
+    "insufficient_metrics_projects": 1,
+    "suspicious_growth_projects": 0,
+    "single_source_projects": 96,
+    "single_spike_projects": 110,
+    "emerging_projects": 0,
+    "persistent_projects": 0
+  },
+  "diagnostics": {
+    "anomaly_share": 0.0545,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 109,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 1
+    },
+    "star_delta_source_distribution": {
+      "github_live": 0,
+      "github_snapshot": 0,
+      "signal": 10,
+      "unavailable": 100
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 0,
+      "live_delta_success": 0,
+      "snapshot_delta_success": 0,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "affaan-m/ECC",
+      "repo_url": "https://github.com/affaan-m/ECC",
+      "total_score": 89.5,
+      "base_final_rank": 97,
+      "final_rank": 98,
+      "confidence": "medium",
+      "paradigm": "agent system",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "日增星约2062，今日双榜命中，新鲜度极高；虽然flags有single_spike但风险可控，主榜头名有力。",
+      "judge_score_delta": 1,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent system",
+        "confidence=medium",
+        "persistence=single-spike",
+        "star_velocity=100 (daily_delta=2062)",
+        "engagement_score=100 (forks=30325)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": [
+        "single-day appearance; persistence is not yet established"
+      ]
+    },
+    {
+      "project_name": "NousResearch/hermes-agent",
+      "repo_url": "https://github.com/NousResearch/hermes-agent",
+      "total_score": 72.25,
+      "base_final_rank": 74.75,
+      "final_rank": 71.75,
+      "confidence": "medium",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "日增星不可用，persistence未验证，仅靠重点观察清单支撑，基础分74.75偏高，不适合紧追ECC。",
+      "judge_score_delta": -3,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=single-spike",
+        "engagement_score=100 (forks=28692)",
+        "architecture_shift=100 (baseline=default_agent_capability)",
+        "autonomy_score=100 (classification.autonomy_level=high)"
+      ],
+      "risks": [
+        "daily growth unavailable; star velocity is not trusted for this project",
+        "single-day appearance; persistence is not yet established"
+      ]
+    },
+    {
+      "project_name": "OpenBMB/PilotDeck",
+      "repo_url": "https://github.com/OpenBMB/PilotDeck",
+      "total_score": 65.15,
+      "base_final_rank": 65.15,
+      "final_rank": 65.15,
+      "confidence": "medium",
+      "paradigm": "tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "日增约235星，三信号命中，范式 tool/skill 清晰，当前 rank 65.15 尚合理，维持即可。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=single-spike",
+        "engagement_score=100 (forks=99)",
+        "architecture_shift=85 (baseline=default_agent_capability)",
+        "star_velocity=47 (daily_delta=235)"
+      ],
+      "risks": [
+        "single-day appearance; persistence is not yet established"
+      ]
+    },
+    {
+      "project_name": "OpenBMB/MiniCPM-Desk-Pet",
+      "repo_url": "https://github.com/OpenBMB/MiniCPM-Desk-Pet",
+      "total_score": 33.7,
+      "base_final_rank": 33.7,
+      "final_rank": 23.7,
+      "confidence": "medium",
+      "paradigm": "AI project with insufficient paradigm signal",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "日增仅30星，brief信息严重不足，无范式主题匹配，近乎占位项目，应大幅下调。",
+      "judge_score_delta": -10,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=AI project with insufficient paradigm signal",
+        "confidence=medium",
+        "persistence=single-spike",
+        "engagement_score=100 (forks=21)",
+        "discussion_score=75 (sources=watchlist_live_activity,github_live_star_delta)",
+        "architecture_shift=25 (baseline=default_agent_capability)"
+      ],
+      "risks": [
+        "single-day appearance; persistence is not yet established"
+      ]
+    },
+    {
+      "project_name": "mukul975/Anthropic-Cybersecurity-Skills",
+      "repo_url": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
+      "total_score": 75.25,
+      "base_final_rank": 77.75,
+      "final_rank": 78.25,
+      "confidence": "medium",
+      "paradigm": "ordinary AI tool",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "日增886星突破潜力明显，安全技能主题有补充价值，context_only内可微幅上调位置。",
+      "judge_score_delta": 0.5,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=ordinary AI tool",
+        "confidence=medium",
+        "persistence=single-spike",
+        "star_velocity=100 (daily_delta=886)",
+        "engagement_score=100 (forks=1291)",
+        "autonomy_score=95 (classification.autonomy_level=low)"
+      ],
+      "risks": [
+        "single-source signal; needs persistence validation",
+        "single-day appearance; persistence is not yet established"
+      ]
+    }
+  ],
+  "observer_top_candidates": [],
+  "watchouts": [
+    "低置信度项目占比为 1/110",
+    "仍有 96 个项目只有单一信号源，需要跨源或跨天确认",
+    "有 1 个项目缺少描述，语义判断会受限"
+  ],
+  "next_focus": [
+    "为低置信度项目补足描述或结构化 repo 指标",
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源"
+  ],
+  "recommended_actions": [
+    "在信任低置信度排序前，优先补有缺失描述或缺失 metrics 的项目",
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ]
+}

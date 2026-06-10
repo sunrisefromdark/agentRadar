@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "aaif-goose/goose",
+  "repo_url": "https://github.com/aaif-goose/goose",
+  "stars": 45611,
+  "forks": 4680,
+  "issues": 114,
+  "PR": 82,
+  "description": "an open source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM",
+  "tags": [
+    "acp",
+    "ai",
+    "ai-agents",
+    "mcp"
+  ]
+}

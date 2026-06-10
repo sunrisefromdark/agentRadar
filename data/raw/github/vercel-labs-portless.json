@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "vercel-labs/portless",
+  "repo_url": "https://github.com/vercel-labs/portless",
+  "stars": 9421,
+  "forks": 288,
+  "issues": 55,
+  "PR": 41,
+  "description": "Replace port numbers with stable, named local URLs. For humans and agents.",
+  "tags": []
+}

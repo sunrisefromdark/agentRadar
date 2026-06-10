@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "InsForge/InsForge",
+  "repo_url": "https://github.com/InsForge/InsForge",
+  "stars": 10408,
+  "forks": 875,
+  "issues": 27,
+  "PR": 26,
+  "description": "The all-in-one, open-source backend platform for agentic coding. InsForge gives your coding agent database, auth, storage, compute, hosting, and AI gateway to ship full-stack apps end-to-end.",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "coding",
+    "deno",
+    "embeddings",
+    "insforge",
+    "nextjs",
+    "oauth2",
+    "pgvector",
+    "postgresql",
+    "realtime",
+    "vectors",
+    "websockets"
+  ]
+}

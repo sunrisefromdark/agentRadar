@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "modelcontextprotocol/ext-apps",
+  "repo_url": "https://github.com/modelcontextprotocol/ext-apps",
+  "stars": 2289,
+  "forks": 286,
+  "issues": 74,
+  "PR": 69,
+  "description": "Official repo for spec & SDK of MCP Apps protocol - standard for UIs embedded AI chatbots, served by MCP servers",
+  "tags": [
+    "ai",
+    "apps",
+    "mcp",
+    "mcp-apps",
+    "modelcontextprotocol",
+    "ui"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "jamiepine/voicebox",
+  "repo_url": "https://github.com/jamiepine/voicebox",
+  "stars": 27314,
+  "forks": 3304,
+  "issues": 327,
+  "PR": 62,
+  "description": "The open-source AI voice studio. Clone, dictate, create.",
+  "tags": [
+    "ai",
+    "cuda",
+    "mlx",
+    "qwen3-tts",
+    "qwen3-tts-ui",
+    "voice-ai",
+    "voice-clone",
+    "whisper"
+  ]
+}

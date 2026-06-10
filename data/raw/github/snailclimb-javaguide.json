@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "Snailclimb/JavaGuide",
+  "repo_url": "https://github.com/Snailclimb/JavaGuide",
+  "stars": 155934,
+  "forks": 46146,
+  "issues": 60,
+  "PR": 0,
+  "description": "Java 面试 & 后端通用面试指南，覆盖计算机基础、数据库、分布式、高并发、系统设计与 AI 应用开发",
+  "tags": [
+    "agent",
+    "ai",
+    "context-engineering",
+    "deepseek",
+    "interview",
+    "java",
+    "mcp",
+    "mysql",
+    "redis",
+    "redisson",
+    "skills",
+    "springai",
+    "system-design"
+  ]
+}

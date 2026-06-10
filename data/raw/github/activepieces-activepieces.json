@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "activepieces/activepieces",
+  "repo_url": "https://github.com/activepieces/activepieces",
+  "stars": 22478,
+  "forks": 3723,
+  "issues": 318,
+  "PR": 180,
+  "description": "AI Agents & MCPs & AI Workflow Automation • (~400 MCP servers for AI agents) • AI Automation / AI Agent with MCPs • AI Workflows & AI Agents • MCPs for AI Agents",
+  "tags": [
+    "ai-agent",
+    "ai-agent-tools",
+    "ai-agents",
+    "ai-agents-framework",
+    "mcp",
+    "mcp-server",
+    "mcp-tools",
+    "mcps",
+    "n8n-alternative",
+    "no-code-automation",
+    "workflow",
+    "workflow-automation",
+    "workflows"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "awslabs/mcp",
+  "repo_url": "https://github.com/awslabs/mcp",
+  "stars": 9182,
+  "forks": 1554,
+  "issues": 167,
+  "PR": 501,
+  "description": "Open source MCP Servers for AWS",
+  "tags": [
+    "aws",
+    "mcp",
+    "mcp-client",
+    "mcp-clients",
+    "mcp-host",
+    "mcp-server",
+    "mcp-servers",
+    "mcp-tools",
+    "modelcontextprotocol"
+  ]
+}

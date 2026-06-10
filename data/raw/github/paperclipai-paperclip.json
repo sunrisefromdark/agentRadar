@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "paperclipai/paperclip",
+  "repo_url": "https://github.com/paperclipai/paperclip",
+  "stars": 61646,
+  "forks": 10896,
+  "issues": 0,
+  "PR": 0,
+  "description": "Open-source orchestration for zero-human companies",
+  "tags": [
+    "ai-agent",
+    "workflow-automation",
+    "agent",
+    "agent-runtime",
+    "automation"
+  ]
+}

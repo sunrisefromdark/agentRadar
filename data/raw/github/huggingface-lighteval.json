@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "huggingface/lighteval",
+  "repo_url": "https://github.com/huggingface/lighteval",
+  "stars": 2429,
+  "forks": 474,
+  "issues": 212,
+  "PR": 104,
+  "description": "Lighteval is your all-in-one toolkit for evaluating LLMs across multiple backends",
+  "tags": [
+    "evaluation",
+    "evaluation-framework",
+    "evaluation-metrics",
+    "huggingface"
+  ]
+}

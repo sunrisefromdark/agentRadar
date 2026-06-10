@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "microsoft/ai-agents-for-beginners",
+  "repo_url": "https://github.com/microsoft/ai-agents-for-beginners",
+  "stars": 64963,
+  "forks": 21432,
+  "issues": 5,
+  "PR": 4,
+  "description": "12 Lessons to Get Started Building AI Agents",
+  "tags": [
+    "agentic-ai",
+    "agentic-framework",
+    "agentic-rag",
+    "ai-agents",
+    "ai-agents-framework",
+    "autogen",
+    "generative-ai",
+    "semantic-kernel"
+  ]
+}

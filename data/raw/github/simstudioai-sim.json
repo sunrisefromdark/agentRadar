@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "simstudioai/sim",
+  "repo_url": "https://github.com/simstudioai/sim",
+  "stars": 28572,
+  "forks": 3614,
+  "issues": 100,
+  "PR": 97,
+  "description": "Build, deploy, and orchestrate AI agents. Sim is the central intelligence layer for your AI workforce.",
+  "tags": [
+    "agent-workflow",
+    "agentic-workflow",
+    "agents",
+    "ai",
+    "aiagents",
+    "anthropic",
+    "artificial-intelligence",
+    "automation",
+    "chatbot",
+    "deepseek",
+    "gemini",
+    "low-code",
+    "nextjs",
+    "no-code",
+    "openai",
+    "rag",
+    "react",
+    "typescript"
+  ]
+}

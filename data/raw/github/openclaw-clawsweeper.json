@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "openclaw/clawsweeper",
+  "repo_url": "https://github.com/openclaw/clawsweeper",
+  "stars": 1666,
+  "forks": 218,
+  "issues": 3,
+  "PR": 3,
+  "description": "ClawSweeper scans all issues and PRs and suggest what we can close, and why. It runs every PR / Issue once a week.",
+  "tags": [
+    "ai",
+    "bot",
+    "openclaw",
+    "review"
+  ]
+}

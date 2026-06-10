@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "qhkm/zeptoclaw",
+  "repo_url": "https://github.com/qhkm/zeptoclaw",
+  "stars": 636,
+  "forks": 97,
+  "issues": 27,
+  "PR": 1,
+  "description": "Fast, small, secure, local-first personal AI assistant infrastructure: one Rust binary for tools, memory, channels, providers, and sandboxed autonomy.",
+  "tags": [
+    "ai",
+    "ai-assistant",
+    "open-source",
+    "rust"
+  ]
+}

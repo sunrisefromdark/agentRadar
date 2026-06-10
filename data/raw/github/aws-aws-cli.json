@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "aws/aws-cli",
+  "repo_url": "https://github.com/aws/aws-cli",
+  "stars": 17004,
+  "forks": 4558,
+  "issues": 471,
+  "PR": 165,
+  "description": "Universal Command Line Interface for Amazon Web Services",
+  "tags": [
+    "aws",
+    "aws-cli",
+    "cloud",
+    "cloud-management"
+  ]
+}

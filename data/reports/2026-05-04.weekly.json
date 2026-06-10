@@ -1,0 +1,1442 @@
+{
+  "date": "2026-05-04",
+  "generated_at": "2026-06-06T22:11:29+08:00",
+  "window_start": "2026-04-28",
+  "window_end": "2026-05-04",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "overall_summary_cn": "本周趋势收敛围绕三个核心主轴：1) Agent 运行时与技能生态（agent-runtime, agent-skills, agent-workflow）；2) AI 编程工具智能体化（ai-coding, agentic-coding, agentic-workflow）；3) 记忆与上下文持久化（memory, persistent memory, ai-memory）。规则层已建立多个高置信度趋势，部分候选因证据未闭环仅保留观察。",
+  "supporting_trend_keys": [
+    "agent-runtime",
+    "ai-coding",
+    "tool-use",
+    "memory"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "Agent 运行时",
+      "trend_summary_cn": "Agent 运行时围绕多模型接入、工具调用和任务自动化持续演化。",
+      "evidence_summary_cn": "pi-mono 周增星 2697，OpenClaw 周增星 2558，QwenPaw 周增星 286",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注 pi-mono 是否继续领涨，以及更多项目集成 MCP 协议。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/badlogic/pi-mono",
+          "project_name": "badlogic/pi-mono",
+          "project_class": "context_only",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "UI"
+          ],
+          "project_brief_cn": "这是一个 AI 编程工具包，内置命令行代码助手、统一 LLM 接口、终端/Web UI 库和 Slack 机器人。开发者用它快速搭建跨模型编码工作流。",
+          "why_today_cn": "未命中今日新鲜源，但作为历史高star项目，star日增322，适合补充观察agent工具生态。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory, UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周连续 6 天出现在趋势中，日增星最高 665，是 Agent 运行时方向的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 97.75,
+          "preference_boost": 2.5,
+          "base_final_rank": 100.25,
+          "final_rank": 100.25,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管的个人 AI 助手，支持任何操作系统和平台。用户可让它在终端里执行任务、调用工具，完全掌控数据隐私。",
+          "why_today_cn": "命中GitHub Trending，多源确认，star日增419，作为自主托管agent shell值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 7 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+          "project_name": "agentscope-ai/QwenPaw",
+          "project_class": "context_only",
+          "objective_score": 76.3,
+          "preference_boost": 5,
+          "base_final_rank": 81.3,
+          "final_rank": 81.3,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能组织检索和知识调用能力。大家通常会用它来维护长期上下文和知识材料，也会顺手组织检索和知识调用能力。",
+          "why_today_cn": "当日获得34个star，增长显著，且其长期上下文维护能力直接对应内存主题。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source，risks=single-source signal; needs persistence validation。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 7 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "Agent 运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 73,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 19
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=322",
+              "weekly_delta=2697"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：daily_delta=322"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5183",
+              "issues=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：forks=5183"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 18,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 badlogic/pi-mono、agentscope-ai/QwenPaw、openclaw/openclaw。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 90,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 90。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 85,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+                "repo_full_name": "agentscope-ai/QwenPaw",
+                "score": 55
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift",
+              "appearances=6"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 85。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：sources=agents-radar,trendshift"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "ai-coding",
+      "trend_name_cn": "AI 编程",
+      "trend_summary_cn": "AI 编程方向聚焦在智能代码生成、技能框架和上下文工程。",
+      "evidence_summary_cn": "pi-mono 周增星 2697，superpowers 周增星 9344，claude-context 日增星 271",
+      "strength": "strong",
+      "worth_following_next_week": "关注 superpowers 的技能框架模式是否持续扩散。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/badlogic/pi-mono",
+          "project_name": "badlogic/pi-mono",
+          "project_class": "context_only",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "UI"
+          ],
+          "project_brief_cn": "AI 编程工具包，提供命令行代码助手和统一 LLM API，帮助开发者快速集成 AI 编码能力。",
+          "why_today_cn": "未命中今日新鲜源，但作为历史高star项目，star日增322，适合补充观察agent工具生态。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-coding",
+          "why_this_week_cn": "最近 6 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/obra/superpowers",
+          "project_name": "obra/superpowers",
+          "project_class": "today_star",
+          "objective_score": 91,
+          "preference_boost": 2.5,
+          "base_final_rank": 93.5,
+          "final_rank": 93.5,
+          "matched_interest_topics": [
+            "skills"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法，也能把通用能力沉淀成平台或开发底座。大家通常会用它来整理现成技能和工作流打法，也会顺手把通用能力沉淀成平台或开发底座。",
+          "why_today_cn": "命中Trendshift当日命中，多源确认，star日增991，作为技能框架新范式值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-coding",
+          "why_this_week_cn": "本周周增星 9344，是 Trending 热点，驱动 AI 编程技能化趋势。"
+        },
+        {
+          "repo_url": "https://github.com/zilliztech/claude-context",
+          "project_name": "zilliztech/claude-context",
+          "project_class": "context_only",
+          "objective_score": 67.3,
+          "preference_boost": 2.5,
+          "base_final_rank": 69.8,
+          "final_rank": 67.8,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "为 Claude Code 提供上下文工程工具，利用向量索引优化代码生成质量，帮助 AI 更好地理解项目背景。",
+          "why_today_cn": "当日获得271颗星，未触发新鲜信号但作为memory主题项目，与兴趣主题memory高度匹配。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source, single_spike，risks=single-source signal; needs persistence validation, single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "ai-coding",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-coding",
+        "focused_trend_name_cn": "AI 编程",
+        "summary_cn": "当前聚焦 ai-coding，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 84.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 54
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=322",
+              "weekly_delta=2697"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 84.7。代表项目包括 badlogic/pi-mono、obra/superpowers、zilliztech/claude-context。证据摘要：daily_delta=322"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5183",
+              "issues=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、obra/superpowers、zilliztech/claude-context。证据摘要：forks=5183"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 badlogic/pi-mono、obra/superpowers、zilliztech/claude-context。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 75,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 65
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 75。代表项目包括 badlogic/pi-mono、zilliztech/claude-context、obra/superpowers。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 75,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 80
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 75。代表项目包括 badlogic/pi-mono、obra/superpowers、zilliztech/claude-context。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 76.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/zilliztech/claude-context",
+                "repo_full_name": "zilliztech/claude-context",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift",
+              "appearances=6"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 76.7。代表项目包括 badlogic/pi-mono、obra/superpowers、zilliztech/claude-context。证据摘要：sources=agents-radar,trendshift"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "tool-use",
+      "trend_name_cn": "工具使用",
+      "trend_summary_cn": "工具使用生态围绕 Agent 运行时扩展，涵盖金融终端、自托管助手等垂直应用。",
+      "evidence_summary_cn": "pi-mono 周增星 2697，FinceptTerminal 日增星 881，OpenClaw 周增星 2558",
+      "strength": "strong",
+      "worth_following_next_week": "观察 FinceptTerminal 的持续性，以及更多垂直工具接入 Agent。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/badlogic/pi-mono",
+          "project_name": "badlogic/pi-mono",
+          "project_class": "context_only",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "UI"
+          ],
+          "project_brief_cn": "AI 编程与工具集，集成了 Slack 机器人、Web UI 等，方便扩展工具使用场景。",
+          "why_today_cn": "未命中今日新鲜源，但作为历史高star项目，star日增322，适合补充观察agent工具生态。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 6 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 97.75,
+          "preference_boost": 2.5,
+          "base_final_rank": 100.25,
+          "final_rank": 100.25,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "个人 AI 助手，可调用多种工具完成自动化任务，用户通过终端交互即可使用。",
+          "why_today_cn": "命中GitHub Trending，多源确认，star日增419，作为自主托管agent shell值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 7 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+          "project_name": "Fincept-Corporation/FinceptTerminal",
+          "project_class": "context_only",
+          "objective_score": 81.75,
+          "preference_boost": 2.5,
+          "base_final_rank": 84.25,
+          "final_rank": 81.25,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "金融交易终端，集成 AI 代理进行市场研究、策略回测和组合决策。类似 Bloomberg 终端的开源替代。",
+          "why_today_cn": "当日星增881，创今日峰值，金融垂直场景 Agent 需求强劲。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source, single_spike，risks=single-source signal; needs persistence validation, single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "tool-use",
+        "focused_trend_name_cn": "工具使用",
+        "summary_cn": "当前聚焦 tool-use，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=322",
+              "weekly_delta=2697"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、Fincept-Corporation/FinceptTerminal。证据摘要：daily_delta=322"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5183",
+              "issues=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、Fincept-Corporation/FinceptTerminal。证据摘要：forks=5183"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 badlogic/pi-mono、openclaw/openclaw、Fincept-Corporation/FinceptTerminal。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、openclaw/openclaw。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 78.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 78.3。代表项目包括 badlogic/pi-mono、openclaw/openclaw、Fincept-Corporation/FinceptTerminal。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 76.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift",
+              "appearances=6"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 76.7。代表项目包括 badlogic/pi-mono、openclaw/openclaw、Fincept-Corporation/FinceptTerminal。证据摘要：sources=agents-radar,trendshift"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "memory",
+      "trend_name_cn": "持久记忆",
+      "trend_summary_cn": "持久记忆方向关注跨会话上下文保持，多家项目提供记忆注入和知识管理能力。",
+      "evidence_summary_cn": "pi-mono 日增星 665，claude-mem 日增星 1051，FinceptTerminal 日增星 881",
+      "strength": "strong",
+      "worth_following_next_week": "关注 claude-mem 的跨 Agent 兼容性是否成为标配。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/badlogic/pi-mono",
+          "project_name": "badlogic/pi-mono",
+          "project_class": "context_only",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "UI"
+          ],
+          "project_brief_cn": "AI 编程工具包，内置持久记忆模块，可跨会话保留上下文，提升编码一致性。",
+          "why_today_cn": "未命中今日新鲜源，但作为历史高star项目，star日增322，适合补充观察agent工具生态。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 6 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+          "project_name": "Fincept-Corporation/FinceptTerminal",
+          "project_class": "context_only",
+          "objective_score": 81.75,
+          "preference_boost": 2.5,
+          "base_final_rank": 84.25,
+          "final_rank": 81.25,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "金融 AI 终端，利用记忆机制持续学习市场模式，为用户提供个性化投资建议。",
+          "why_today_cn": "当日星增881，创今日峰值，金融垂直场景 Agent 需求强劲。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source, single_spike，risks=single-source signal; needs persistence validation, single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/sansan0/TrendRadar",
+          "project_name": "sansan0/TrendRadar",
+          "project_class": "context_only",
+          "objective_score": 75.1,
+          "preference_boost": 2.5,
+          "base_final_rank": 77.6,
+          "final_rank": 75.1,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "MCP 协议下的趋势分析工具，通过记忆历史数据帮助用户追踪技术潮流。",
+          "why_today_cn": "MCP 协议正成为 Agent 基础设施标准，TrendRadar 提供了结构化接入方案。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source, single_spike，risks=single-source signal; needs persistence validation, single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "memory",
+        "focused_trend_name_cn": "持久记忆",
+        "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 92.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 78
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=322",
+              "weekly_delta=2697"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 92.7。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、sansan0/TrendRadar。证据摘要：daily_delta=322"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5183",
+              "issues=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、sansan0/TrendRadar。证据摘要：forks=5183"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 90,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 85
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 90。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、sansan0/TrendRadar。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 88.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 65
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 88.3。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、sansan0/TrendRadar。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 70,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 65
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 70。代表项目包括 badlogic/pi-mono、sansan0/TrendRadar、Fincept-Corporation/FinceptTerminal。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 53.3,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/badlogic/pi-mono",
+                "repo_full_name": "badlogic/pi-mono",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+                "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+                "score": 30
+              },
+              {
+                "repo_url": "https://github.com/sansan0/TrendRadar",
+                "repo_full_name": "sansan0/TrendRadar",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift",
+              "appearances=6"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 53.3。代表项目包括 badlogic/pi-mono、Fincept-Corporation/FinceptTerminal、sansan0/TrendRadar。证据摘要：sources=agents-radar,trendshift"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "用户兴趣 top1，本周 memory 方向有 claude-mem（日增星1051）等高星项目，与需求高度匹配。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/badlogic/pi-mono",
+          "repo_full_name": "badlogic/pi-mono"
+        },
+        {
+          "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+          "repo_full_name": "Fincept-Corporation/FinceptTerminal"
+        },
+        {
+          "repo_url": "https://github.com/sansan0/TrendRadar",
+          "repo_full_name": "sansan0/TrendRadar"
+        }
+      ]
+    }
+  ],
+  "weak_signal_cards": [
+    {
+      "trend_key": "codex-skills",
+      "signal_name_cn": "Codex 技能",
+      "why_weak_cn": "证据仅来自单个项目，尚未形成广泛趋势。",
+      "evidence_summary_cn": "awesome-codex-skills 日增星 1313，但仅有两个来源。",
+      "worth_following_next_week": "若下周出现更多同类项目，则升级。"
+    },
+    {
+      "trend_key": "coding-agent-skills",
+      "signal_name_cn": "编码代理技能",
+      "why_weak_cn": "同样依赖单一项目，证据不足。",
+      "evidence_summary_cn": "awesome-codex-skills 日增星 1313。",
+      "worth_following_next_week": "继续观察。"
+    },
+    {
+      "trend_key": "coding-agents",
+      "signal_name_cn": "编码代理",
+      "why_weak_cn": "项目数量少且出现频率低。",
+      "evidence_summary_cn": "awesome-codex-skills 和 open-design 但后者星增为 0。",
+      "worth_following_next_week": "若无新项目加入，考虑降级。"
+    },
+    {
+      "trend_key": "vibe-coding",
+      "signal_name_cn": "氛围编码",
+      "why_weak_cn": "项目分散且星增数据不稳定。",
+      "evidence_summary_cn": "claude-context 日增星 271，awesome-design-md 周增星 2737 但单源。",
+      "worth_following_next_week": "关注是否有持续项目支撑。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-04",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/agentscope-ai/QwenPaw",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/agentscope-ai/QwenPaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/agentscope-ai/QwenPaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/agentscope-ai/QwenPaw",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/obra/superpowers",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/obra/superpowers",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/zilliztech/claude-context",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/zilliztech/claude-context",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/zilliztech/claude-context",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/badlogic/pi-mono",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/sansan0/TrendRadar",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/sansan0/TrendRadar",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/sansan0/TrendRadar",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "agent-runtime",
+    "focused_trend_name_cn": "Agent 运行时",
+    "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 73,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 19
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=322",
+          "weekly_delta=2697"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：daily_delta=322"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=5183",
+          "issues=16"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：forks=5183"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 18,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 98.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 4,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 95
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_skill_ecosystem"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 badlogic/pi-mono、agentscope-ai/QwenPaw、openclaw/openclaw。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 90,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 5,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 90
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 80
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=medium",
+          "agent_or_swarm_signal"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 90。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：classification.autonomy_level=medium"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 85,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 9,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/badlogic/pi-mono",
+            "repo_full_name": "badlogic/pi-mono",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+            "repo_full_name": "agentscope-ai/QwenPaw",
+            "score": 55
+          }
+        ],
+        "top_evidence": [
+          "sources=agents-radar,trendshift",
+          "appearances=6"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 85。代表项目包括 badlogic/pi-mono、openclaw/openclaw、agentscope-ai/QwenPaw。证据摘要：sources=agents-radar,trendshift"
+      }
+    ]
+  }
+}

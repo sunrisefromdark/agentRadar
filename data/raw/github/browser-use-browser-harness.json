@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "browser-use/browser-harness",
+  "repo_url": "https://github.com/browser-use/browser-harness",
+  "stars": 13911,
+  "forks": 1291,
+  "issues": 13,
+  "PR": 91,
+  "description": "Browser Harness | Self-healing harness that enables LLMs to complete any task.",
+  "tags": [
+    "ai-agent",
+    "browser-agent",
+    "browser-automation",
+    "browser-use",
+    "browser-use-box",
+    "browser-use-cloud",
+    "cdp",
+    "cloud-browser",
+    "llm",
+    "persistent-browser",
+    "playwright",
+    "telegram-agent",
+    "vps-agent",
+    "web-automation"
+  ]
+}

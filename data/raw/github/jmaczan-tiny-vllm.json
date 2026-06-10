@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "jmaczan/tiny-vllm",
+  "repo_url": "https://github.com/jmaczan/tiny-vllm",
+  "stars": 530,
+  "forks": 22,
+  "issues": 0,
+  "PR": 0,
+  "description": "Build your own high performance LLM inference engine in C++ and CUDA - a smaller version of vLLM",
+  "tags": [
+    "ai",
+    "attention",
+    "batching",
+    "course",
+    "cpp",
+    "cuda",
+    "hpc",
+    "inference",
+    "llm",
+    "llm-inference",
+    "pagedattention",
+    "tiny-vllm",
+    "vllm"
+  ]
+}

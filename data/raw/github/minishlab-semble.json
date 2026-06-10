@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "MinishLab/semble",
+  "repo_url": "https://github.com/MinishLab/semble",
+  "stars": 3390,
+  "forks": 128,
+  "issues": 12,
+  "PR": 2,
+  "description": "Fast and Accurate Code Search for Agents. Uses ~98% fewer tokens than grep+read",
+  "tags": [
+    "agents",
+    "code-search",
+    "embeddings",
+    "mcp",
+    "mcp-server",
+    "model-context-protocol",
+    "retrieval"
+  ]
+}

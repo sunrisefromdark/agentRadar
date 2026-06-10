@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "can1357/oh-my-pi",
+  "repo_url": "https://github.com/can1357/oh-my-pi",
+  "stars": 9894,
+  "forks": 806,
+  "issues": 152,
+  "PR": 63,
+  "description": "⌥  AI Coding agent for the terminal — hash-anchored edits, optimized tool harness, LSP, Python, browser, subagents, and more",
+  "tags": [
+    "ai-agent",
+    "ai-coding-agent",
+    "anthropic",
+    "bun",
+    "claude",
+    "cli",
+    "coding-assistant",
+    "llm",
+    "mcp",
+    "multi-provider",
+    "openai",
+    "rust",
+    "terminal",
+    "tui",
+    "typescript"
+  ]
+}

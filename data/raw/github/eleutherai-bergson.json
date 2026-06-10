@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "EleutherAI/bergson",
+  "repo_url": "https://github.com/EleutherAI/bergson",
+  "stars": 58,
+  "forks": 21,
+  "issues": 4,
+  "PR": 7,
+  "description": "Mapping out the \"memory\" of neural nets with data attribution",
+  "tags": [
+    "data-attribution",
+    "influence-functions",
+    "interpretability",
+    "magic",
+    "mechanistic-interpretability",
+    "trackstar"
+  ]
+}

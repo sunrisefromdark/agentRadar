@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "bytedance/Bernini",
+  "repo_url": "https://github.com/bytedance/Bernini",
+  "stars": 127,
+  "forks": 9,
+  "issues": 3,
+  "PR": 0,
+  "description": "Bernini is a unified framework for video generation and editing that combines an MLLM-based semantic planner with a DiT-based renderer.",
+  "tags": [
+    "video-editing",
+    "video-generation"
+  ]
+}

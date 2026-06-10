@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "aws/aws-cdk",
+  "repo_url": "https://github.com/aws/aws-cdk",
+  "stars": 12791,
+  "forks": 4527,
+  "issues": 2356,
+  "PR": 388,
+  "description": "The AWS Cloud Development Kit is a framework for defining cloud infrastructure in code",
+  "tags": [
+    "aws",
+    "cloud-infrastructure",
+    "hacktoberfest",
+    "infrastructure-as-code",
+    "typescript"
+  ]
+}

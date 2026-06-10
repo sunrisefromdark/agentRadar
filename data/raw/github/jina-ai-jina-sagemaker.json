@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "jina-ai/jina-sagemaker",
+  "repo_url": "https://github.com/jina-ai/jina-sagemaker",
+  "stars": 15,
+  "forks": 3,
+  "issues": 2,
+  "PR": 0,
+  "description": "Jina Embedding Models on AWS SageMaker",
+  "tags": [
+    "aws",
+    "embeddings",
+    "sagemaker"
+  ]
+}

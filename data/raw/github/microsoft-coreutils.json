@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "microsoft/coreutils",
+  "repo_url": "https://github.com/microsoft/coreutils",
+  "stars": 1567,
+  "forks": 21,
+  "issues": 16,
+  "PR": 9,
+  "description": "Coreutils for Windows: Installer & Packaging",
+  "tags": [
+    "command-line-tool",
+    "coreutils",
+    "gnu-coreutils"
+  ]
+}

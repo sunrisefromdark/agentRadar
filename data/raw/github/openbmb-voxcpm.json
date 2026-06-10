@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "OpenBMB/VoxCPM",
+  "repo_url": "https://github.com/OpenBMB/VoxCPM",
+  "stars": 25461,
+  "forks": 2906,
+  "issues": 104,
+  "PR": 9,
+  "description": "VoxCPM2: Tokenizer-Free TTS for Multilingual Speech Generation, Creative Voice Design, and True-to-Life Cloning",
+  "tags": [
+    "audio",
+    "deeplearning",
+    "minicpm",
+    "multilingual",
+    "python",
+    "pytorch",
+    "speech",
+    "speech-synthesis",
+    "text-to-speech",
+    "tts",
+    "tts-model",
+    "voice-cloning",
+    "voice-design",
+    "voxcpm"
+  ]
+}

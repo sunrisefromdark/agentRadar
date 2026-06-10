@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "alibaba/spring-ai-alibaba",
+  "repo_url": "https://github.com/alibaba/spring-ai-alibaba",
+  "stars": 9851,
+  "forks": 2196,
+  "issues": 224,
+  "PR": 70,
+  "description": "Agentic AI Framework for Java Developers",
+  "tags": [
+    "agentic",
+    "artificial-intelligence",
+    "context-engineering",
+    "graph",
+    "java",
+    "multi-agent",
+    "reactagent",
+    "spring-ai",
+    "workflow"
+  ]
+}

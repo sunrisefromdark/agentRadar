@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "badlogic/pi-mono",
+  "repo_url": "https://github.com/badlogic/pi-mono",
+  "stars": 45053,
+  "forks": 5309,
+  "issues": 13,
+  "PR": 4,
+  "description": "AI agent toolkit: coding agent CLI, unified LLM API, TUI & web UI libraries, Slack bot, vLLM pods",
+  "tags": []
+}

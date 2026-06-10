@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "huggingface/peft",
+  "repo_url": "https://github.com/huggingface/peft",
+  "stars": 21202,
+  "forks": 2309,
+  "issues": 14,
+  "PR": 34,
+  "description": "🤗 PEFT: State-of-the-art Parameter-Efficient Fine-Tuning.",
+  "tags": [
+    "adapter",
+    "diffusion",
+    "fine-tuning",
+    "llm",
+    "lora",
+    "parameter-efficient-learning",
+    "peft",
+    "python",
+    "pytorch",
+    "transformers"
+  ]
+}

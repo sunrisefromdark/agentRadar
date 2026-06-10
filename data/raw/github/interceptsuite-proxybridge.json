@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "InterceptSuite/ProxyBridge",
+  "repo_url": "https://github.com/InterceptSuite/ProxyBridge",
+  "stars": 4594,
+  "forks": 263,
+  "issues": 33,
+  "PR": 6,
+  "description": "Proxifier Alternative to redirect any Windows/MacOS/Linux TCP and UDP traffic to HTTP/Socks5 proxy",
+  "tags": [
+    "c",
+    "cybersecurity",
+    "http3",
+    "httpproxy",
+    "linux",
+    "linux-proxy",
+    "macos",
+    "macos-app",
+    "macos-proxy",
+    "proxifier",
+    "proxifier-alternative",
+    "proxyclient",
+    "tcp",
+    "thick-client",
+    "udp",
+    "windivert",
+    "windows"
+  ]
+}

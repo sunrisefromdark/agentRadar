@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-07",
+  "generated_at": "2026-05-07T23:56:17+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user asks: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". That is presumably a request for a JSON object exactly with those fields. There's no disallowed content. The user wants compact JSON output. So we respond with that JSON. Use the requested format exactly: {\"ok\":"
+}

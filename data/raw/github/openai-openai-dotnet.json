@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "openai/openai-dotnet",
+  "repo_url": "https://github.com/openai/openai-dotnet",
+  "stars": 2618,
+  "forks": 393,
+  "issues": 44,
+  "PR": 21,
+  "description": "The official .NET library for the OpenAI API",
+  "tags": [
+    "csharp",
+    "dotnet",
+    "openai"
+  ]
+}

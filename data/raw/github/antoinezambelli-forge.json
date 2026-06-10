@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "antoinezambelli/forge",
+  "repo_url": "https://github.com/antoinezambelli/forge",
+  "stars": 1883,
+  "forks": 124,
+  "issues": 5,
+  "PR": 2,
+  "description": "A Python framework for self-hosted LLM tool-calling and multi-step agentic workflows",
+  "tags": [
+    "agentic-ai",
+    "agentic-workflow",
+    "agents",
+    "function-calling",
+    "llama-cpp",
+    "llamafile",
+    "llm",
+    "ollama",
+    "python",
+    "self-hosted",
+    "tool-calling"
+  ]
+}

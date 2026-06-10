@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "unslothai/unsloth",
+  "repo_url": "https://github.com/unslothai/unsloth",
+  "stars": 64873,
+  "forks": 5744,
+  "issues": 1081,
+  "PR": 179,
+  "description": "Unsloth Studio is a web UI for training and running open models like Gemma 4, Qwen3.6, DeepSeek, gpt-oss locally.",
+  "tags": [
+    "agent",
+    "deepseek",
+    "fine-tuning",
+    "gemma",
+    "gemma3",
+    "gpt-oss",
+    "llama",
+    "llama3",
+    "llm",
+    "llms",
+    "mistral",
+    "openai",
+    "qwen",
+    "reinforcement-learning",
+    "self-hosted",
+    "text-to-speech",
+    "tts",
+    "ui",
+    "unsloth"
+  ]
+}

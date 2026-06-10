@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "echo-loop/Echo-Loop",
+  "repo_url": "https://github.com/echo-loop/Echo-Loop",
+  "stars": 711,
+  "forks": 40,
+  "issues": 2,
+  "PR": 0,
+  "description": "Echo Loop 是一款科学、高效的 AI 英语听说训练 App，通过盲听、精听、跟读、复述和间隔复习，自动驱动学习者把每一段音频真正练懂、练熟、练到会说。",
+  "tags": [
+    "ai",
+    "education",
+    "english-learning",
+    "flutter",
+    "language-learning",
+    "listening-practice",
+    "spaced-repetition",
+    "speaking-practice"
+  ]
+}

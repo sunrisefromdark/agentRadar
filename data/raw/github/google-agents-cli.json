@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "google/agents-cli",
+  "repo_url": "https://github.com/google/agents-cli",
+  "stars": 2646,
+  "forks": 310,
+  "issues": 10,
+  "PR": 0,
+  "description": "The CLI and skills that turn any coding assistant into an expert at creating, evaluating, and deploying AI agents on Google Cloud.",
+  "tags": [
+    "adk",
+    "agent-development-kit",
+    "agents",
+    "coding-agent",
+    "gemini",
+    "gemini-enterprise-agent-platform",
+    "generative-ai",
+    "google-cloud"
+  ]
+}

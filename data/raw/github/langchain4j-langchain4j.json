@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "langchain4j/langchain4j",
+  "repo_url": "https://github.com/langchain4j/langchain4j",
+  "stars": 12047,
+  "forks": 2244,
+  "issues": 594,
+  "PR": 151,
+  "description": "LangChain4j is an idiomatic, open-source Java library for building LLM-powered applications on the JVM. It offers a unified API over popular LLM providers and vector stores, and makes implementing tool calling (including MCP support), agents and RAG easy. It integrates seamlessly with enterprise Java frameworks like Quarkus and Spring Boot.",
+  "tags": [
+    "anthropic",
+    "chatgpt",
+    "chroma",
+    "embeddings",
+    "gemini",
+    "gpt",
+    "huggingface",
+    "java",
+    "langchain",
+    "llama",
+    "llm",
+    "llms",
+    "milvus",
+    "ollama",
+    "onnx",
+    "openai",
+    "openai-api",
+    "pgvector",
+    "pinecone",
+    "vector-database"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "yt-dlp/yt-dlp",
+  "repo_url": "https://github.com/yt-dlp/yt-dlp",
+  "stars": 167006,
+  "forks": 14054,
+  "issues": 1939,
+  "PR": 605,
+  "description": "A feature-rich command-line audio/video downloader",
+  "tags": [
+    "cli",
+    "downloader",
+    "python",
+    "sponsorblock",
+    "youtube-dl",
+    "youtube-downloader",
+    "yt-dlp"
+  ]
+}

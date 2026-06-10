@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "topoteretes/cognee",
+  "repo_url": "https://github.com/topoteretes/cognee",
+  "stars": 17658,
+  "forks": 1866,
+  "issues": 25,
+  "PR": 42,
+  "description": "Memory platform for AI Agents in 6 lines of code",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "ai-memory",
+    "cognitive-architecture",
+    "cognitive-memory",
+    "context-engineering",
+    "contributions-welcome",
+    "good-first-issue",
+    "good-first-pr",
+    "graph-database",
+    "graph-rag",
+    "graphrag",
+    "help-wanted",
+    "knowledge",
+    "knowledge-graph",
+    "neo4j",
+    "open-source",
+    "openai",
+    "rag",
+    "vector-database"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "dograh-hq/dograh",
+  "repo_url": "https://github.com/dograh-hq/dograh",
+  "stars": 2432,
+  "forks": 498,
+  "issues": 20,
+  "PR": 9,
+  "description": "Open Source Voice Agent Platform",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "conversational-ai",
+    "fastapi",
+    "llm",
+    "nextjs",
+    "open-source",
+    "outbound-calls",
+    "pipecat",
+    "python",
+    "self-hosted",
+    "speech-to-text",
+    "telephony",
+    "text-to-speech",
+    "voice",
+    "voice-agents",
+    "voice-ai",
+    "voice-assistant",
+    "voip",
+    "webrtc"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "google/android-cuttlefish",
+  "repo_url": "https://github.com/google/android-cuttlefish",
+  "stars": 648,
+  "forks": 206,
+  "issues": 0,
+  "PR": 69,
+  "description": "Cuttlefish host support debian package.",
+  "tags": [
+    "android"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "Shubhamsaboo/awesome-llm-apps",
+  "repo_url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+  "stars": 111883,
+  "forks": 16628,
+  "issues": 6,
+  "PR": 8,
+  "description": "100+ AI Agent & RAG apps you can actually run — clone, customize, ship.",
+  "tags": [
+    "agents",
+    "llms",
+    "python",
+    "rag"
+  ]
+}

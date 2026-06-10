@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "huggingface/smolagents",
+  "repo_url": "https://github.com/huggingface/smolagents",
+  "stars": 27583,
+  "forks": 2625,
+  "issues": 253,
+  "PR": 311,
+  "description": "🤗 smolagents: a barebones library for agents that think in code.",
+  "tags": []
+}

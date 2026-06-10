@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "vercel/next.js",
+  "repo_url": "https://github.com/vercel/next.js",
+  "stars": 139661,
+  "forks": 31196,
+  "issues": 2150,
+  "PR": 1849,
+  "description": "The React Framework",
+  "tags": [
+    "blog",
+    "browser",
+    "compiler",
+    "components",
+    "hybrid",
+    "nextjs",
+    "node",
+    "react",
+    "server-rendering",
+    "ssg",
+    "static",
+    "static-site-generator",
+    "universal",
+    "vercel"
+  ]
+}

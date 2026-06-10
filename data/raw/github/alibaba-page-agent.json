@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "alibaba/page-agent",
+  "repo_url": "https://github.com/alibaba/page-agent",
+  "stars": 18228,
+  "forks": 1558,
+  "issues": 30,
+  "PR": 19,
+  "description": "JavaScript in-page GUI agent. Control web interfaces with natural language.",
+  "tags": [
+    "agent",
+    "ai",
+    "ai-agents",
+    "browser-automation",
+    "javascript",
+    "mcp",
+    "typescript",
+    "web"
+  ]
+}

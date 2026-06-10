@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "steipete/RepoBar",
+  "repo_url": "https://github.com/steipete/RepoBar",
+  "stars": 2042,
+  "forks": 114,
+  "issues": 0,
+  "PR": 1,
+  "description": "Show status of GitHub Repos right in your menu bar and terminal: CI, Issues, Pull Requests, Latest Release.",
+  "tags": [
+    "github",
+    "macos",
+    "statistics"
+  ]
+}

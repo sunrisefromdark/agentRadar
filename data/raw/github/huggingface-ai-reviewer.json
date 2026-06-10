@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "huggingface/ai-reviewer",
+  "repo_url": "https://github.com/huggingface/ai-reviewer",
+  "stars": 2,
+  "forks": 1,
+  "issues": 6,
+  "PR": 1,
+  "description": "Reviews pull requests with any OpenAI-compatible LLM ",
+  "tags": []
+}

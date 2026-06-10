@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "pyinfra-dev/pyinfra",
+  "repo_url": "https://github.com/pyinfra-dev/pyinfra",
+  "stars": 5670,
+  "forks": 501,
+  "issues": 151,
+  "PR": 33,
+  "description": "🔧 pyinfra turns Python code into shell commands and runs them on your servers. Execute ad-hoc commands and write declarative operations. Target SSH servers, local machine and Docker containers. Fast and scales from one server to thousands.",
+  "tags": [
+    "cloud-management",
+    "configuration-management",
+    "high-performance",
+    "infrastructure",
+    "pyinfra",
+    "python",
+    "remote-execution"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "anthropics/claude-plugins-official",
+  "repo_url": "https://github.com/anthropics/claude-plugins-official",
+  "stars": 29234,
+  "forks": 3123,
+  "issues": 694,
+  "PR": 28,
+  "description": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+  "tags": [
+    "claude-code",
+    "mcp",
+    "skills"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "ultralytics/ultralytics",
+  "repo_url": "https://github.com/ultralytics/ultralytics",
+  "stars": 57704,
+  "forks": 11075,
+  "issues": 95,
+  "PR": 224,
+  "description": "Ultralytics YOLO 🚀",
+  "tags": [
+    "cli",
+    "computer-vision",
+    "deep-learning",
+    "hub",
+    "image-classification",
+    "instance-segmentation",
+    "machine-learning",
+    "object-detection",
+    "pose-estimation",
+    "python",
+    "pytorch",
+    "rotated-object-detection",
+    "segment-anything",
+    "tracking",
+    "ultralytics",
+    "yolo",
+    "yolo-world",
+    "yolo11",
+    "yolo26",
+    "yolov8"
+  ]
+}

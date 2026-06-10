@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "microsoft/windows-rs",
+  "repo_url": "https://github.com/microsoft/windows-rs",
+  "stars": 12233,
+  "forks": 616,
+  "issues": 41,
+  "PR": 0,
+  "description": "Rust for Windows",
+  "tags": [
+    "rust",
+    "windows"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "galilai-group/stable-worldmodel",
+  "repo_url": "https://github.com/galilai-group/stable-worldmodel",
+  "stars": 1556,
+  "forks": 173,
+  "issues": 4,
+  "PR": 13,
+  "description": "A platform for reproducible world model research and evaluation",
+  "tags": [
+    "deep-learning",
+    "jepa",
+    "model-predictive-control",
+    "pytorch",
+    "world-model"
+  ]
+}

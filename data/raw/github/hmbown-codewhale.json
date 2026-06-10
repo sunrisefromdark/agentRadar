@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "Hmbown/CodeWhale",
+  "repo_url": "https://github.com/Hmbown/CodeWhale",
+  "stars": 36832,
+  "forks": 3169,
+  "issues": 372,
+  "PR": 52,
+  "description": "DeepSeek + MiMo coding agent in terminal",
+  "tags": [
+    "cli",
+    "deepseek",
+    "llm",
+    "rust",
+    "terminal",
+    "tui"
+  ]
+}

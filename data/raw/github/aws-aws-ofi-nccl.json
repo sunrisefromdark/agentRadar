@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "aws/aws-ofi-nccl",
+  "repo_url": "https://github.com/aws/aws-ofi-nccl",
+  "stars": 216,
+  "forks": 99,
+  "issues": 2,
+  "PR": 9,
+  "description": "This is a plugin which lets EC2 developers use libfabric as network provider while running NCCL applications.",
+  "tags": []
+}

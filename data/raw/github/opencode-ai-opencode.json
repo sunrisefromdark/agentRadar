@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "opencode-ai/opencode",
+  "repo_url": "https://github.com/opencode-ai/opencode",
+  "stars": 12753,
+  "forks": 1421,
+  "issues": 116,
+  "PR": 42,
+  "description": "A powerful AI coding agent. Built for the terminal.",
+  "tags": [
+    "ai",
+    "claude",
+    "code",
+    "llm",
+    "openai"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "russellromney/honker",
+  "repo_url": "https://github.com/russellromney/honker",
+  "stars": 2141,
+  "forks": 56,
+  "issues": 2,
+  "PR": 0,
+  "description": "SQLite extension + bindings for Postgres NOTIFY/LISTEN semantics with durable queues, streams, pub/sub, and scheduler",
+  "tags": []
+}

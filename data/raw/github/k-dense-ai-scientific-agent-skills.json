@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "K-Dense-AI/scientific-agent-skills",
+  "repo_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+  "stars": 24994,
+  "forks": 2625,
+  "issues": 8,
+  "PR": 23,
+  "description": "A set of ready to use Agent Skills for research, science, engineering, analysis, finance and writing.",
+  "tags": [
+    "agent-skills",
+    "ai-scientist",
+    "bioinformatics",
+    "chemoinformatics",
+    "claude",
+    "claude-skills",
+    "claudecode",
+    "clinical-research",
+    "computational-biology",
+    "data-analysis",
+    "drug-discovery",
+    "genomics",
+    "materials-science",
+    "metabolomics",
+    "proteomics",
+    "scientific-computing",
+    "scientific-visualization"
+  ]
+}

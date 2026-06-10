@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "modelcontextprotocol/experimental-ext-variants",
+  "repo_url": "https://github.com/modelcontextprotocol/experimental-ext-variants",
+  "stars": 7,
+  "forks": 2,
+  "issues": 0,
+  "PR": 1,
+  "description": "Status: Experimental. This repository provides a multi-language reference implementation of the variants proposal for the Model Context Protocol (MCP), as described in SEP-2053.",
+  "tags": [
+    "experimental",
+    "extension"
+  ]
+}

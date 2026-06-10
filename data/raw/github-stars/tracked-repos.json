@@ -1,0 +1,4820 @@
+[
+  {
+    "repo_full_name": "0xdeadbeefnetwork/ssh-keysign-pwn",
+    "repo_url": "https://github.com/0xdeadbeefnetwork/ssh-keysign-pwn",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "0xPlaygrounds/rig",
+    "repo_url": "https://github.com/0xPlaygrounds/rig",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 19
+  },
+  {
+    "repo_full_name": "1jehuang/jcode",
+    "repo_url": "https://github.com/1jehuang/jcode",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-05",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "1weiho/open-slide",
+    "repo_url": "https://github.com/1weiho/open-slide",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "521xueweihan/HelloGitHub",
+    "repo_url": "https://github.com/521xueweihan/HelloGitHub",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-29",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "666ghj/MiroFish",
+    "repo_url": "https://github.com/666ghj/MiroFish",
+    "first_seen_date": "2026-05-25",
+    "last_seen_date": "2026-05-29",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "aaif-goose/goose",
+    "repo_url": "https://github.com/aaif-goose/goose",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "abbyshekit/ironclaw-desktop",
+    "repo_url": "https://github.com/abbyshekit/ironclaw-desktop",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "abhigyanpatwari/GitNexus",
+    "repo_url": "https://github.com/abhigyanpatwari/GitNexus",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-30",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "abus-aikorea/voice-pro",
+    "repo_url": "https://github.com/abus-aikorea/voice-pro",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "acon96/home-llm",
+    "repo_url": "https://github.com/acon96/home-llm",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "activepieces/activepieces",
+    "repo_url": "https://github.com/activepieces/activepieces",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-30",
+    "appearances": 25
+  },
+  {
+    "repo_full_name": "addyosmani/agent-skills",
+    "repo_url": "https://github.com/addyosmani/agent-skills",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-05-13",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "addyosmani/Shell",
+    "repo_url": "https://github.com/addyosmani/Shell",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-09",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "affaan-m/ECC",
+    "repo_url": "https://github.com/affaan-m/ECC",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-06-03",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "affaan-m/everything-claude-code",
+    "repo_url": "https://github.com/affaan-m/everything-claude-code",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-18",
+    "appearances": 17
+  },
+  {
+    "repo_full_name": "afshinea/stanford-cs-229-machine-learning",
+    "repo_url": "https://github.com/afshinea/stanford-cs-229-machine-learning",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "agentclientprotocol/registry",
+    "repo_url": "https://github.com/agentclientprotocol/registry",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-14",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "agentscope-ai/CoPaw",
+    "repo_url": "https://github.com/agentscope-ai/CoPaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-04-26",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "agentscope-ai/QwenPaw",
+    "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "AgriciDaniel/claude-seo",
+    "repo_url": "https://github.com/AgriciDaniel/claude-seo",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ahegazy0/linux-basics-for-hackers-notes",
+    "repo_url": "https://github.com/ahegazy0/linux-basics-for-hackers-notes",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "AIDC-AI/Pixelle-Video",
+    "repo_url": "https://github.com/AIDC-AI/Pixelle-Video",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-07",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "alchaincyf/huashu-design",
+    "repo_url": "https://github.com/alchaincyf/huashu-design",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-05-01",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "alibaba/MNN",
+    "repo_url": "https://github.com/alibaba/MNN",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/neug",
+    "repo_url": "https://github.com/alibaba/neug",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/open-code-review",
+    "repo_url": "https://github.com/alibaba/open-code-review",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "alibaba/OpenSandbox",
+    "repo_url": "https://github.com/alibaba/OpenSandbox",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/ROCK",
+    "repo_url": "https://github.com/alibaba/ROCK",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/rtp-llm",
+    "repo_url": "https://github.com/alibaba/rtp-llm",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/skill-up",
+    "repo_url": "https://github.com/alibaba/skill-up",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/spring-ai-alibaba",
+    "repo_url": "https://github.com/alibaba/spring-ai-alibaba",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "alibaba/xquic",
+    "repo_url": "https://github.com/alibaba/xquic",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "alibaba/zvec",
+    "repo_url": "https://github.com/alibaba/zvec",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "alireza0/s-ui",
+    "repo_url": "https://github.com/alireza0/s-ui",
+    "first_seen_date": "2026-05-22",
+    "last_seen_date": "2026-05-22",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Alishahryar1/free-claude-code",
+    "repo_url": "https://github.com/Alishahryar1/free-claude-code",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-05-25",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "allenai/molmoact2",
+    "repo_url": "https://github.com/allenai/molmoact2",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "allenai/molmospaces",
+    "repo_url": "https://github.com/allenai/molmospaces",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "allenai/OLMo-core",
+    "repo_url": "https://github.com/allenai/OLMo-core",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "allenai/open-instruct",
+    "repo_url": "https://github.com/allenai/open-instruct",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Andyyyy64/whichllm",
+    "repo_url": "https://github.com/Andyyyy64/whichllm",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ange-yaghi/engine-sim",
+    "repo_url": "https://github.com/ange-yaghi/engine-sim",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Anil-matcha/Open-Generative-AI",
+    "repo_url": "https://github.com/Anil-matcha/Open-Generative-AI",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "AnInsomniacy/motrix-next",
+    "repo_url": "https://github.com/AnInsomniacy/motrix-next",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "anomalyco/opencode",
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "ant-design/ant-design",
+    "repo_url": "https://github.com/ant-design/ant-design",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "anthropics/anthropic-sdk-go",
+    "repo_url": "https://github.com/anthropics/anthropic-sdk-go",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "anthropics/anthropic-sdk-python",
+    "repo_url": "https://github.com/anthropics/anthropic-sdk-python",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-13",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "anthropics/claude-agent-sdk-python",
+    "repo_url": "https://github.com/anthropics/claude-agent-sdk-python",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "anthropics/claude-code",
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "anthropics/claude-cookbooks",
+    "repo_url": "https://github.com/anthropics/claude-cookbooks",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-20",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "anthropics/claude-for-legal",
+    "repo_url": "https://github.com/anthropics/claude-for-legal",
+    "first_seen_date": "2026-05-13",
+    "last_seen_date": "2026-05-16",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "anthropics/claude-plugins-official",
+    "repo_url": "https://github.com/anthropics/claude-plugins-official",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-02",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "anthropics/financial-services",
+    "repo_url": "https://github.com/anthropics/financial-services",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-30",
+    "appearances": 13
+  },
+  {
+    "repo_full_name": "anthropics/homebrew-tap",
+    "repo_url": "https://github.com/anthropics/homebrew-tap",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "anthropics/knowledge-work-plugins",
+    "repo_url": "https://github.com/anthropics/knowledge-work-plugins",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-06-03",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "anthropics/skills",
+    "repo_url": "https://github.com/anthropics/skills",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "antirez/ds4",
+    "repo_url": "https://github.com/antirez/ds4",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-11",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "antoinezambelli/forge",
+    "repo_url": "https://github.com/antoinezambelli/forge",
+    "first_seen_date": "2026-05-22",
+    "last_seen_date": "2026-05-22",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "apache/casbin-gateway",
+    "repo_url": "https://github.com/apache/casbin-gateway",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "apps/dependabot",
+    "repo_url": "https://github.com/apps/dependabot",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-05",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "AprilNEA/OpenLogi",
+    "repo_url": "https://github.com/AprilNEA/OpenLogi",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Arindam200/awesome-ai-apps",
+    "repo_url": "https://github.com/Arindam200/awesome-ai-apps",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ArthurBrussee/brush",
+    "repo_url": "https://github.com/ArthurBrussee/brush",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-14",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Augani/openreel-video",
+    "repo_url": "https://github.com/Augani/openreel-video",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "avelino/awesome-go",
+    "repo_url": "https://github.com/avelino/awesome-go",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 18
+  },
+  {
+    "repo_full_name": "awesome-selfhosted/awesome-selfhosted",
+    "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 17
+  },
+  {
+    "repo_full_name": "aws/agentcore-cli",
+    "repo_url": "https://github.com/aws/agentcore-cli",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/amazon-vpc-cni-k8s",
+    "repo_url": "https://github.com/aws/amazon-vpc-cni-k8s",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/aws-advanced-jdbc-wrapper",
+    "repo_url": "https://github.com/aws/aws-advanced-jdbc-wrapper",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/aws-cdk",
+    "repo_url": "https://github.com/aws/aws-cdk",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "aws/aws-cli",
+    "repo_url": "https://github.com/aws/aws-cli",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "aws/aws-lc",
+    "repo_url": "https://github.com/aws/aws-lc",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/aws-nitro-enclaves-cli",
+    "repo_url": "https://github.com/aws/aws-nitro-enclaves-cli",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/aws-ofi-nccl",
+    "repo_url": "https://github.com/aws/aws-ofi-nccl",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/aws-sdk-cpp",
+    "repo_url": "https://github.com/aws/aws-sdk-cpp",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/csi-components",
+    "repo_url": "https://github.com/aws/csi-components",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/deep-learning-containers",
+    "repo_url": "https://github.com/aws/deep-learning-containers",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/graph-explorer",
+    "repo_url": "https://github.com/aws/graph-explorer",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "aws/serverless-application-model",
+    "repo_url": "https://github.com/aws/serverless-application-model",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/agentcore-samples",
+    "repo_url": "https://github.com/awslabs/agentcore-samples",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/aidlc-workflows",
+    "repo_url": "https://github.com/awslabs/aidlc-workflows",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "awslabs/duvet",
+    "repo_url": "https://github.com/awslabs/duvet",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/iam-policy-autopilot",
+    "repo_url": "https://github.com/awslabs/iam-policy-autopilot",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/landing-zone-accelerator-on-aws",
+    "repo_url": "https://github.com/awslabs/landing-zone-accelerator-on-aws",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/llrt",
+    "repo_url": "https://github.com/awslabs/llrt",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/mcp",
+    "repo_url": "https://github.com/awslabs/mcp",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "awslabs/metrique",
+    "repo_url": "https://github.com/awslabs/metrique",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/nx-plugin-for-aws",
+    "repo_url": "https://github.com/awslabs/nx-plugin-for-aws",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/ocilot",
+    "repo_url": "https://github.com/awslabs/ocilot",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "awslabs/open-data-registry",
+    "repo_url": "https://github.com/awslabs/open-data-registry",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "b-nnett/goose",
+    "repo_url": "https://github.com/b-nnett/goose",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "badlogic/pi-mono",
+    "repo_url": "https://github.com/badlogic/pi-mono",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-06",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "bannedbook/fanqiang",
+    "repo_url": "https://github.com/bannedbook/fanqiang",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-11",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "beenuar/AiSOC",
+    "repo_url": "https://github.com/beenuar/AiSOC",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "BigBodyCobain/Shadowbroker",
+    "repo_url": "https://github.com/BigBodyCobain/Shadowbroker",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "BigPizzaV3/CodexPlusPlus",
+    "repo_url": "https://github.com/BigPizzaV3/CodexPlusPlus",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-03",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "blader/humanizer",
+    "repo_url": "https://github.com/blader/humanizer",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "blakeblackshear/frigate",
+    "repo_url": "https://github.com/blakeblackshear/frigate",
+    "first_seen_date": "2026-05-25",
+    "last_seen_date": "2026-05-25",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "boona13/image-extender",
+    "repo_url": "https://github.com/boona13/image-extender",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "brokermr810/QuantDinger",
+    "repo_url": "https://github.com/brokermr810/QuantDinger",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "browser-use/browser-harness",
+    "repo_url": "https://github.com/browser-use/browser-harness",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-05-21",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "browser-use/browser-use",
+    "repo_url": "https://github.com/browser-use/browser-use",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "browser-use/browsercode",
+    "repo_url": "https://github.com/browser-use/browsercode",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-19",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "browser-use/bux",
+    "repo_url": "https://github.com/browser-use/bux",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-15",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "browser-use/desktop",
+    "repo_url": "https://github.com/browser-use/desktop",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-20",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "browser-use/desktop-app",
+    "repo_url": "https://github.com/browser-use/desktop-app",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "browser-use/n8n-nodes-browser-use",
+    "repo_url": "https://github.com/browser-use/n8n-nodes-browser-use",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "browser-use/terminal",
+    "repo_url": "https://github.com/browser-use/terminal",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "browser-use/video-use",
+    "repo_url": "https://github.com/browser-use/video-use",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-15",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "browserbase/skills",
+    "repo_url": "https://github.com/browserbase/skills",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-05",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "bwya77/vscode-dark-islands",
+    "repo_url": "https://github.com/bwya77/vscode-dark-islands",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "byoungd/English-level-up-tips",
+    "repo_url": "https://github.com/byoungd/English-level-up-tips",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-01",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "ByteDance-Seed/VeOmni",
+    "repo_url": "https://github.com/ByteDance-Seed/VeOmni",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "bytedance/Bernini",
+    "repo_url": "https://github.com/bytedance/Bernini",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "bytedance/deer-flow",
+    "repo_url": "https://github.com/bytedance/deer-flow",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "bytedance/Lance",
+    "repo_url": "https://github.com/bytedance/Lance",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "bytedance/UI-TARS-desktop",
+    "repo_url": "https://github.com/bytedance/UI-TARS-desktop",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-13",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "c0deJedi/nbd-vram",
+    "repo_url": "https://github.com/c0deJedi/nbd-vram",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "cactus-compute/needle",
+    "repo_url": "https://github.com/cactus-compute/needle",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-15",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "calcom/cal.diy",
+    "repo_url": "https://github.com/calcom/cal.diy",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "camel-ai/camel",
+    "repo_url": "https://github.com/camel-ai/camel",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "camel-ai/GBQA",
+    "repo_url": "https://github.com/camel-ai/GBQA",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "can1357/oh-my-pi",
+    "repo_url": "https://github.com/can1357/oh-my-pi",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-02",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "Chachamaru127/claude-code-harness",
+    "repo_url": "https://github.com/Chachamaru127/claude-code-harness",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "Chalarangelo/30-seconds-of-code",
+    "repo_url": "https://github.com/Chalarangelo/30-seconds-of-code",
+    "first_seen_date": "2026-05-13",
+    "last_seen_date": "2026-05-13",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "cheahjs/free-llm-api-resources",
+    "repo_url": "https://github.com/cheahjs/free-llm-api-resources",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-08",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "chekusu/wanman",
+    "repo_url": "https://github.com/chekusu/wanman",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "CherryHQ/cherry-studio",
+    "repo_url": "https://github.com/CherryHQ/cherry-studio",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-29",
+    "appearances": 22
+  },
+  {
+    "repo_full_name": "chopratejas/headroom",
+    "repo_url": "https://github.com/chopratejas/headroom",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "ChromeDevTools/chrome-devtools-mcp",
+    "repo_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-24",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "CJackHwang/ds2api",
+    "repo_url": "https://github.com/CJackHwang/ds2api",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "clash-verge-rev/clash-verge-rev",
+    "repo_url": "https://github.com/clash-verge-rev/clash-verge-rev",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-06-01",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "ClaudioDrews/memory-os",
+    "repo_url": "https://github.com/ClaudioDrews/memory-os",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "CloakHQ/CloakBrowser",
+    "repo_url": "https://github.com/CloakHQ/CloakBrowser",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-26",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "cocoindex-io/cocoindex",
+    "repo_url": "https://github.com/cocoindex-io/cocoindex",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-06",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "code-yeongyu/oh-my-openagent",
+    "repo_url": "https://github.com/code-yeongyu/oh-my-openagent",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "codecrafters-io/build-your-own-x",
+    "repo_url": "https://github.com/codecrafters-io/build-your-own-x",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-06-01",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "cohere-ai/cloud-api-adaptor",
+    "repo_url": "https://github.com/cohere-ai/cloud-api-adaptor",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "cohere-ai/cohere-azure-workshops",
+    "repo_url": "https://github.com/cohere-ai/cohere-azure-workshops",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "cohere-ai/cohere-developer-experience",
+    "repo_url": "https://github.com/cohere-ai/cohere-developer-experience",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "cohere-ai/cohere-python",
+    "repo_url": "https://github.com/cohere-ai/cohere-python",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "cohere-ai/TNG",
+    "repo_url": "https://github.com/cohere-ai/TNG",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "colbymchenry/codegraph",
+    "repo_url": "https://github.com/colbymchenry/codegraph",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-27",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "Comfy-Org/ComfyUI",
+    "repo_url": "https://github.com/Comfy-Org/ComfyUI",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-06-01",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "ComposioHQ/awesome-codex-skills",
+    "repo_url": "https://github.com/ComposioHQ/awesome-codex-skills",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-30",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "compozy/compozy",
+    "repo_url": "https://github.com/compozy/compozy",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ConardLi/garden-skills",
+    "repo_url": "https://github.com/ConardLi/garden-skills",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-13",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "continuedev/continue",
+    "repo_url": "https://github.com/continuedev/continue",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "CopilotKit/CopilotKit",
+    "repo_url": "https://github.com/CopilotKit/CopilotKit",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "cortexkit/magic-context",
+    "repo_url": "https://github.com/cortexkit/magic-context",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "crewAIInc/crewAI",
+    "repo_url": "https://github.com/crewAIInc/crewAI",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "Crosstalk-Solutions/project-nomad",
+    "repo_url": "https://github.com/Crosstalk-Solutions/project-nomad",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-01",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "cs341-illinois/coursebook",
+    "repo_url": "https://github.com/cs341-illinois/coursebook",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-25",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "cursor/plugins",
+    "repo_url": "https://github.com/cursor/plugins",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "czlonkowski/n8n-mcp",
+    "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+    "first_seen_date": "2026-05-04",
+    "last_seen_date": "2026-05-16",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "D4Vinci/Scrapling",
+    "repo_url": "https://github.com/D4Vinci/Scrapling",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 13
+  },
+  {
+    "repo_full_name": "darrylmorley/whatcable",
+    "repo_url": "https://github.com/darrylmorley/whatcable",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-13",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "datawhalechina/easy-vibe",
+    "repo_url": "https://github.com/datawhalechina/easy-vibe",
+    "first_seen_date": "2026-05-10",
+    "last_seen_date": "2026-05-12",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "datawhalechina/hello-agents",
+    "repo_url": "https://github.com/datawhalechina/hello-agents",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-06-03",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "davila7/claude-code-templates",
+    "repo_url": "https://github.com/davila7/claude-code-templates",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "decolua/9router",
+    "repo_url": "https://github.com/decolua/9router",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-12",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "deepseek-ai/DeepEP",
+    "repo_url": "https://github.com/deepseek-ai/DeepEP",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "DenisSergeevitch/agents-best-practices",
+    "repo_url": "https://github.com/DenisSergeevitch/agents-best-practices",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "denoland/deno",
+    "repo_url": "https://github.com/denoland/deno",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-26",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "DigitalPlatDev/FreeDomain",
+    "repo_url": "https://github.com/DigitalPlatDev/FreeDomain",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-06-01",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "Diolinux/PhotoGIMP",
+    "repo_url": "https://github.com/Diolinux/PhotoGIMP",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-20",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "dmtrKovalenko/fff",
+    "repo_url": "https://github.com/dmtrKovalenko/fff",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "docusealco/docuseal",
+    "repo_url": "https://github.com/docusealco/docuseal",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-07",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "dograh-hq/dograh",
+    "repo_url": "https://github.com/dograh-hq/dograh",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "donnemartin/system-design-primer",
+    "repo_url": "https://github.com/donnemartin/system-design-primer",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-30",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "dontbesilent2025/dbskill",
+    "repo_url": "https://github.com/dontbesilent2025/dbskill",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "dotnet/skills",
+    "repo_url": "https://github.com/dotnet/skills",
+    "first_seen_date": "2026-05-25",
+    "last_seen_date": "2026-05-25",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "dreammis/social-auto-upload",
+    "repo_url": "https://github.com/dreammis/social-auto-upload",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "duanyytop/agents-radar",
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "duixcom/Duix-Avatar",
+    "repo_url": "https://github.com/duixcom/Duix-Avatar",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "DuskMosquito/Lossless-Scaling-Desktop-2026",
+    "repo_url": "https://github.com/DuskMosquito/Lossless-Scaling-Desktop-2026",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-19",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "e2b-dev/E2B",
+    "repo_url": "https://github.com/e2b-dev/E2B",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-06",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "earendil-works/pi",
+    "repo_url": "https://github.com/earendil-works/pi",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-06-03",
+    "appearances": 28
+  },
+  {
+    "repo_full_name": "EbookFoundation/free-programming-books",
+    "repo_url": "https://github.com/EbookFoundation/free-programming-books",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-30",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "echo-loop/Echo-Loop",
+    "repo_url": "https://github.com/echo-loop/Echo-Loop",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "electron/electron",
+    "repo_url": "https://github.com/electron/electron",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-06-01",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "EleutherAI/aria-utils",
+    "repo_url": "https://github.com/EleutherAI/aria-utils",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "EleutherAI/bergson",
+    "repo_url": "https://github.com/EleutherAI/bergson",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "EleutherAI/lm-evaluation-harness",
+    "repo_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "emmabostian/developer-portfolios",
+    "repo_url": "https://github.com/emmabostian/developer-portfolios",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "esengine/DeepSeek-Reasonix",
+    "repo_url": "https://github.com/esengine/DeepSeek-Reasonix",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-06-03",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "EverMind-AI/EverOS",
+    "repo_url": "https://github.com/EverMind-AI/EverOS",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "EveryInc/compound-engineering-plugin",
+    "repo_url": "https://github.com/EveryInc/compound-engineering-plugin",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "everywall/ladder",
+    "repo_url": "https://github.com/everywall/ladder",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "evoiz/Agentic-Design-Patterns",
+    "repo_url": "https://github.com/evoiz/Agentic-Design-Patterns",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "EvoLinkAI/awesome-gpt-image-2-prompts",
+    "repo_url": "https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "excalidraw/excalidraw",
+    "repo_url": "https://github.com/excalidraw/excalidraw",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-11",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "f/prompts.chat",
+    "repo_url": "https://github.com/f/prompts.chat",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "facebook/react",
+    "repo_url": "https://github.com/facebook/react",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 19
+  },
+  {
+    "repo_full_name": "facebook/react-native",
+    "repo_url": "https://github.com/facebook/react-native",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-06-03",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "facebookresearch/detectron2",
+    "repo_url": "https://github.com/facebookresearch/detectron2",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "facebookresearch/faiss",
+    "repo_url": "https://github.com/facebookresearch/faiss",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "facebookresearch/map-anything",
+    "repo_url": "https://github.com/facebookresearch/map-anything",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "facebookresearch/ocean",
+    "repo_url": "https://github.com/facebookresearch/ocean",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "facebookresearch/VLM3",
+    "repo_url": "https://github.com/facebookresearch/VLM3",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "FareedKhan-dev/train-llm-from-scratch",
+    "repo_url": "https://github.com/FareedKhan-dev/train-llm-from-scratch",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "farion1231/cc-switch",
+    "repo_url": "https://github.com/farion1231/cc-switch",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-06-03",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "fathah/hermes-desktop",
+    "repo_url": "https://github.com/fathah/hermes-desktop",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ferdous-alam/GenCAD",
+    "repo_url": "https://github.com/ferdous-alam/GenCAD",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-19",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+    "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-26",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "firecrawl/firecrawl",
+    "repo_url": "https://github.com/firecrawl/firecrawl",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "Fission-AI/OpenSpec",
+    "repo_url": "https://github.com/Fission-AI/OpenSpec",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "floci-io/floci",
+    "repo_url": "https://github.com/floci-io/floci",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-15",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "flutter/flutter",
+    "repo_url": "https://github.com/flutter/flutter",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "FonaTech/Project_Chronos",
+    "repo_url": "https://github.com/FonaTech/Project_Chronos",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "forrestchang/andrej-karpathy-skills",
+    "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-05-13",
+    "appearances": 18
+  },
+  {
+    "repo_full_name": "frappe/erpnext",
+    "repo_url": "https://github.com/frappe/erpnext",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "freeCodeCamp/freeCodeCamp",
+    "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "freemocap/freemocap",
+    "repo_url": "https://github.com/freemocap/freemocap",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "freestylefly/CodexGuide",
+    "repo_url": "https://github.com/freestylefly/CodexGuide",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "fspecii/ace-step-ui",
+    "repo_url": "https://github.com/fspecii/ace-step-ui",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-05",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "FULU-Foundation/OrcaSlicer-bambulab",
+    "repo_url": "https://github.com/FULU-Foundation/OrcaSlicer-bambulab",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-15",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "galilai-group/stable-pretraining",
+    "repo_url": "https://github.com/galilai-group/stable-pretraining",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "galilai-group/stable-worldmodel",
+    "repo_url": "https://github.com/galilai-group/stable-worldmodel",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "garinasset/leak-check",
+    "repo_url": "https://github.com/garinasset/leak-check",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "garrettmoss/restore-claude-history",
+    "repo_url": "https://github.com/garrettmoss/restore-claude-history",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "garrytan/gbrain",
+    "repo_url": "https://github.com/garrytan/gbrain",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-19",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "garrytan/gstack",
+    "repo_url": "https://github.com/garrytan/gstack",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-05-26",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "gastownhall/beads",
+    "repo_url": "https://github.com/gastownhall/beads",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-04-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Genymobile/scrcpy",
+    "repo_url": "https://github.com/Genymobile/scrcpy",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-17",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "getagentseal/codeburn",
+    "repo_url": "https://github.com/getagentseal/codeburn",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "GetBindu/Bindu",
+    "repo_url": "https://github.com/GetBindu/Bindu",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "getpaseo/paseo",
+    "repo_url": "https://github.com/getpaseo/paseo",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ggml-org/llama.cpp",
+    "repo_url": "https://github.com/ggml-org/llama.cpp",
+    "first_seen_date": "2026-05-13",
+    "last_seen_date": "2026-06-01",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "gi-dellav/zerostack",
+    "repo_url": "https://github.com/gi-dellav/zerostack",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "giancarloerra/SocratiCode",
+    "repo_url": "https://github.com/giancarloerra/SocratiCode",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "github/copilot-cli",
+    "repo_url": "https://github.com/github/copilot-cli",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "github/docs",
+    "repo_url": "https://github.com/github/docs",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "github/gitignore",
+    "repo_url": "https://github.com/github/gitignore",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-21",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "github/spec-kit",
+    "repo_url": "https://github.com/github/spec-kit",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-29",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "GitoxideLabs/gitoxide",
+    "repo_url": "https://github.com/GitoxideLabs/gitoxide",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Gloridust/WechatOnCloud",
+    "repo_url": "https://github.com/Gloridust/WechatOnCloud",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "godotengine/godot",
+    "repo_url": "https://github.com/godotengine/godot",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "golang/go",
+    "repo_url": "https://github.com/golang/go",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-30",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "google-deepmind/alphafold3",
+    "repo_url": "https://github.com/google-deepmind/alphafold3",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-deepmind/formal-conjectures",
+    "repo_url": "https://github.com/google-deepmind/formal-conjectures",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-deepmind/gemma",
+    "repo_url": "https://github.com/google-deepmind/gemma",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-deepmind/mujoco",
+    "repo_url": "https://github.com/google-deepmind/mujoco",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "google-deepmind/mujoco_warp",
+    "repo_url": "https://github.com/google-deepmind/mujoco_warp",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-deepmind/science-skills",
+    "repo_url": "https://github.com/google-deepmind/science-skills",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "google-deepmind/tecci",
+    "repo_url": "https://github.com/google-deepmind/tecci",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-gemini/cookbook",
+    "repo_url": "https://github.com/google-gemini/cookbook",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-gemini/gemini",
+    "repo_url": "https://github.com/google-gemini/gemini",
+    "first_seen_date": "2026-05-10",
+    "last_seen_date": "2026-05-10",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-gemini/gemini-cli",
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "google-gemini/gemini-live-api-examples",
+    "repo_url": "https://github.com/google-gemini/gemini-live-api-examples",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google-labs-code/design.md",
+    "repo_url": "https://github.com/google-labs-code/design.md",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-15",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "google/ax",
+    "repo_url": "https://github.com/google/ax",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google/capsem",
+    "repo_url": "https://github.com/google/capsem",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google/dawn",
+    "repo_url": "https://github.com/google/dawn",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google/fonts",
+    "repo_url": "https://github.com/google/fonts",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google/langextract",
+    "repo_url": "https://github.com/google/langextract",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "google/perfetto",
+    "repo_url": "https://github.com/google/perfetto",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "google/skills",
+    "repo_url": "https://github.com/google/skills",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-06-02",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "googleworkspace/cli",
+    "repo_url": "https://github.com/googleworkspace/cli",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-07",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "GordenSun/GordenPPTSkill",
+    "repo_url": "https://github.com/GordenSun/GordenPPTSkill",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "gorhill/uBlock",
+    "repo_url": "https://github.com/gorhill/uBlock",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "greensock/gsap-skills",
+    "repo_url": "https://github.com/greensock/gsap-skills",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-27",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "h4ckf0r0day/obscura",
+    "repo_url": "https://github.com/h4ckf0r0day/obscura",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "hardikpandya/stop-slop",
+    "repo_url": "https://github.com/hardikpandya/stop-slop",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-30",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "harry0703/MoneyPrinterTurbo",
+    "repo_url": "https://github.com/harry0703/MoneyPrinterTurbo",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-02",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "HBAI-Ltd/Toonflow-app",
+    "repo_url": "https://github.com/HBAI-Ltd/Toonflow-app",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "hexojs/hexo",
+    "repo_url": "https://github.com/hexojs/hexo",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-11",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "himself65/finance-skills",
+    "repo_url": "https://github.com/himself65/finance-skills",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "hiyouga/LlamaFactory",
+    "repo_url": "https://github.com/hiyouga/LlamaFactory",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-02",
+    "appearances": 26
+  },
+  {
+    "repo_full_name": "HKDUDS/nanobot",
+    "repo_url": "https://github.com/HKDUDS/nanobot",
+    "first_seen_date": "2026-05-24",
+    "last_seen_date": "2026-05-24",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "HKUDS/AI-Trader",
+    "repo_url": "https://github.com/HKUDS/AI-Trader",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-06-02",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "HKUDS/CLI-Anything",
+    "repo_url": "https://github.com/HKUDS/CLI-Anything",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "HKUDS/DeepTutor",
+    "repo_url": "https://github.com/HKUDS/DeepTutor",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-05-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "HKUDS/LightRAG",
+    "repo_url": "https://github.com/HKUDS/LightRAG",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 13
+  },
+  {
+    "repo_full_name": "HKUDS/nanobot",
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "HKUDS/OpenHarness",
+    "repo_url": "https://github.com/HKUDS/OpenHarness",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "HKUDS/OpenSpace",
+    "repo_url": "https://github.com/HKUDS/OpenSpace",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "HKUDS/RAG-Anything",
+    "repo_url": "https://github.com/HKUDS/RAG-Anything",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-29",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "HKUDS/Vibe-Trading",
+    "repo_url": "https://github.com/HKUDS/Vibe-Trading",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-06-02",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "HKUDS/ViMax",
+    "repo_url": "https://github.com/HKUDS/ViMax",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-29",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "Hmbown/CodeWhale",
+    "repo_url": "https://github.com/Hmbown/CodeWhale",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-03",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "Hmbown/DeepSeek-TUI",
+    "repo_url": "https://github.com/Hmbown/DeepSeek-TUI",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-20",
+    "appearances": 20
+  },
+  {
+    "repo_full_name": "holaboss-ai/holaOS",
+    "repo_url": "https://github.com/holaboss-ai/holaOS",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "home-assistant/core",
+    "repo_url": "https://github.com/home-assistant/core",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "HQarroum/docker-android",
+    "repo_url": "https://github.com/HQarroum/docker-android",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/ai-reviewer",
+    "repo_url": "https://github.com/huggingface/ai-reviewer",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/blog",
+    "repo_url": "https://github.com/huggingface/blog",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/cadgenbench",
+    "repo_url": "https://github.com/huggingface/cadgenbench",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/huggingface.js",
+    "repo_url": "https://github.com/huggingface/huggingface.js",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/lerobot",
+    "repo_url": "https://github.com/huggingface/lerobot",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "huggingface/ml-intern",
+    "repo_url": "https://github.com/huggingface/ml-intern",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "huggingface/optimum-intel",
+    "repo_url": "https://github.com/huggingface/optimum-intel",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "huggingface/transformers",
+    "repo_url": "https://github.com/huggingface/transformers",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "huggingface/transformers-test-ci",
+    "repo_url": "https://github.com/huggingface/transformers-test-ci",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "hugohe3/ppt-master",
+    "repo_url": "https://github.com/hugohe3/ppt-master",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "humanlayer/12-factor-agents",
+    "repo_url": "https://github.com/humanlayer/12-factor-agents",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-20",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "HunxByts/GhostTrack",
+    "repo_url": "https://github.com/HunxByts/GhostTrack",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-30",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "hyperbrowserai/hyperbrowser-app-examples",
+    "repo_url": "https://github.com/hyperbrowserai/hyperbrowser-app-examples",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "iamgio/quarkdown",
+    "repo_url": "https://github.com/iamgio/quarkdown",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "iflytek/astron-agent",
+    "repo_url": "https://github.com/iflytek/astron-agent",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-13",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "igareck/vpn-configs-for-russia",
+    "repo_url": "https://github.com/igareck/vpn-configs-for-russia",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "iii-hq/iii",
+    "repo_url": "https://github.com/iii-hq/iii",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Imbad0202/academic-research-skills",
+    "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-26",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "immich-app/immich",
+    "repo_url": "https://github.com/immich-app/immich",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "imthenachoman/How-To-Secure-A-Linux-Server",
+    "repo_url": "https://github.com/imthenachoman/How-To-Secure-A-Linux-Server",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-15",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "infiniflow/ragflow",
+    "repo_url": "https://github.com/infiniflow/ragflow",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 27
+  },
+  {
+    "repo_full_name": "InsForge/InsForge",
+    "repo_url": "https://github.com/InsForge/InsForge",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "InterceptSuite/ProxyBridge",
+    "repo_url": "https://github.com/InterceptSuite/ProxyBridge",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "InternLM/lmdeploy",
+    "repo_url": "https://github.com/InternLM/lmdeploy",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "InternLM/xtuner",
+    "repo_url": "https://github.com/InternLM/xtuner",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "interviewstreet/hiring-agent",
+    "repo_url": "https://github.com/interviewstreet/hiring-agent",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "iOfficeAI/AionUi",
+    "repo_url": "https://github.com/iOfficeAI/AionUi",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-11",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "iptv-org/iptv",
+    "repo_url": "https://github.com/iptv-org/iptv",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-01",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "iv-org/invidious",
+    "repo_url": "https://github.com/iv-org/invidious",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-04-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "jackwener/OpenCLI",
+    "repo_url": "https://github.com/jackwener/OpenCLI",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-11",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "jamiepine/voicebox",
+    "repo_url": "https://github.com/jamiepine/voicebox",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "jamwithai/production-agentic-rag-course",
+    "repo_url": "https://github.com/jamwithai/production-agentic-rag-course",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "jina-ai/MCP",
+    "repo_url": "https://github.com/jina-ai/MCP",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "jingyaogong/minimind",
+    "repo_url": "https://github.com/jingyaogong/minimind",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 31
+  },
+  {
+    "repo_full_name": "jmaczan/tiny-vllm",
+    "repo_url": "https://github.com/jmaczan/tiny-vllm",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "joeseesun/qiaomu-anything-to-notebooklm",
+    "repo_url": "https://github.com/joeseesun/qiaomu-anything-to-notebooklm",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "JOYCEQL/magic-resume",
+    "repo_url": "https://github.com/JOYCEQL/magic-resume",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "juanjuandog/FinSight-AI",
+    "repo_url": "https://github.com/juanjuandog/FinSight-AI",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "jundot/omlx",
+    "repo_url": "https://github.com/jundot/omlx",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-13",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "jwasham/coding-interview-university",
+    "repo_url": "https://github.com/jwasham/coding-interview-university",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-06",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "K-Dense-AI/scientific-agent-skills",
+    "repo_url": "https://github.com/K-Dense-AI/scientific-agent-skills",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-19",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "k2-fsa/OmniVoice",
+    "repo_url": "https://github.com/k2-fsa/OmniVoice",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "karpathy/nn-zero-to-hero",
+    "repo_url": "https://github.com/karpathy/nn-zero-to-hero",
+    "first_seen_date": "2026-05-23",
+    "last_seen_date": "2026-05-23",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "KeygraphHQ/shannon",
+    "repo_url": "https://github.com/KeygraphHQ/shannon",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-18",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "KKKKhazix/khazix-skills",
+    "repo_url": "https://github.com/KKKKhazix/khazix-skills",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "koala73/worldmonitor",
+    "repo_url": "https://github.com/koala73/worldmonitor",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-04-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "kreuzberg-dev/kreuzberg",
+    "repo_url": "https://github.com/kreuzberg-dev/kreuzberg",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "kubernetes-sigs/agent-sandbox",
+    "repo_url": "https://github.com/kubernetes-sigs/agent-sandbox",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "kubernetes/kubernetes",
+    "repo_url": "https://github.com/kubernetes/kubernetes",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-31",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "lancedb/lancedb",
+    "repo_url": "https://github.com/lancedb/lancedb",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/chat-langchain",
+    "repo_url": "https://github.com/langchain-ai/chat-langchain",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/deepagents",
+    "repo_url": "https://github.com/langchain-ai/deepagents",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 18
+  },
+  {
+    "repo_full_name": "langchain-ai/deepagentsjs",
+    "repo_url": "https://github.com/langchain-ai/deepagentsjs",
+    "first_seen_date": "2026-05-13",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "langchain-ai/docs",
+    "repo_url": "https://github.com/langchain-ai/docs",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langchain",
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 32
+  },
+  {
+    "repo_full_name": "langchain-ai/langchain-aws",
+    "repo_url": "https://github.com/langchain-ai/langchain-aws",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "langchain-ai/langchain-ibm",
+    "repo_url": "https://github.com/langchain-ai/langchain-ibm",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langchainjs",
+    "repo_url": "https://github.com/langchain-ai/langchainjs",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langgraph",
+    "repo_url": "https://github.com/langchain-ai/langgraph",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 19
+  },
+  {
+    "repo_full_name": "langchain-ai/langgraphjs",
+    "repo_url": "https://github.com/langchain-ai/langgraphjs",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langsmith-cli",
+    "repo_url": "https://github.com/langchain-ai/langsmith-cli",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langsmith-docs",
+    "repo_url": "https://github.com/langchain-ai/langsmith-docs",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-05",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/langsmith-java",
+    "repo_url": "https://github.com/langchain-ai/langsmith-java",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/open_deep_research",
+    "repo_url": "https://github.com/langchain-ai/open_deep_research",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain-ai/open-swe",
+    "repo_url": "https://github.com/langchain-ai/open-swe",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-28",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "langchain-ai/voice-sandwich-demo",
+    "repo_url": "https://github.com/langchain-ai/voice-sandwich-demo",
+    "first_seen_date": "2026-05-15",
+    "last_seen_date": "2026-05-15",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langchain4j/langchain4j",
+    "repo_url": "https://github.com/langchain4j/langchain4j",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-11",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langflow-ai/langflow",
+    "repo_url": "https://github.com/langflow-ai/langflow",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "langfuse/.github",
+    "repo_url": "https://github.com/langfuse/.github",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langfuse/langfuse",
+    "repo_url": "https://github.com/langfuse/langfuse",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "langfuse/langfuse-docs",
+    "repo_url": "https://github.com/langfuse/langfuse-docs",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "langfuse/langfuse-js",
+    "repo_url": "https://github.com/langfuse/langfuse-js",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langfuse/langfuse-python",
+    "repo_url": "https://github.com/langfuse/langfuse-python",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langfuse/skills",
+    "repo_url": "https://github.com/langfuse/skills",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "langgenius/dify",
+    "repo_url": "https://github.com/langgenius/dify",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 38
+  },
+  {
+    "repo_full_name": "larksuite/cli",
+    "repo_url": "https://github.com/larksuite/cli",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "LearningCircuit/local-deep-research",
+    "repo_url": "https://github.com/LearningCircuit/local-deep-research",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-09",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "leon-ai/leon",
+    "repo_url": "https://github.com/leon-ai/leon",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Leonxlnx/taste-skill",
+    "repo_url": "https://github.com/Leonxlnx/taste-skill",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-30",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "lobehub/lobehub",
+    "repo_url": "https://github.com/lobehub/lobehub",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-09",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Lordog/dive-into-llms",
+    "repo_url": "https://github.com/Lordog/dive-into-llms",
+    "first_seen_date": "2026-05-10",
+    "last_seen_date": "2026-05-13",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "LOWERTOP/Shadowrocket-First",
+    "repo_url": "https://github.com/LOWERTOP/Shadowrocket-First",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "lsdefine/GenericAgent",
+    "repo_url": "https://github.com/lsdefine/GenericAgent",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-11",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "lukilabs/craft-agents-oss",
+    "repo_url": "https://github.com/lukilabs/craft-agents-oss",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-01",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Lum1104/Understand-Anything",
+    "repo_url": "https://github.com/Lum1104/Understand-Anything",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-29",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "maillab/cloud-mail",
+    "repo_url": "https://github.com/maillab/cloud-mail",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "manaflow-ai/cmux",
+    "repo_url": "https://github.com/manaflow-ai/cmux",
+    "first_seen_date": "2026-05-25",
+    "last_seen_date": "2026-05-25",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "maplefamilycloud-coder/boss-pi",
+    "repo_url": "https://github.com/maplefamilycloud-coder/boss-pi",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-09",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "massgravel/Microsoft-Activation-Scripts",
+    "repo_url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-07",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "masterking32/MasterDnsVPN",
+    "repo_url": "https://github.com/masterking32/MasterDnsVPN",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-11",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "mastra-ai/mastra",
+    "repo_url": "https://github.com/mastra-ai/mastra",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "mastra-ai/weather-agent",
+    "repo_url": "https://github.com/mastra-ai/weather-agent",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "matrix-org/pantalaimon",
+    "repo_url": "https://github.com/matrix-org/pantalaimon",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mattpocock/mattpocock",
+    "repo_url": "https://github.com/mattpocock/mattpocock",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mattpocock/sandcastle",
+    "repo_url": "https://github.com/mattpocock/sandcastle",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mattpocock/skills",
+    "repo_url": "https://github.com/mattpocock/skills",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 25
+  },
+  {
+    "repo_full_name": "mattzh72/articraft",
+    "repo_url": "https://github.com/mattzh72/articraft",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "medusajs/medusa",
+    "repo_url": "https://github.com/medusajs/medusa",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "meilisearch/meilisearch",
+    "repo_url": "https://github.com/meilisearch/meilisearch",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "meituan-longcat/LongCat-Video",
+    "repo_url": "https://github.com/meituan-longcat/LongCat-Video",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-01",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "mem0ai/mem0",
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 37
+  },
+  {
+    "repo_full_name": "memvid/memvid",
+    "repo_url": "https://github.com/memvid/memvid",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "meta-llama/llama-cookbook",
+    "repo_url": "https://github.com/meta-llama/llama-cookbook",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "meta-llama/PurpleLlama",
+    "repo_url": "https://github.com/meta-llama/PurpleLlama",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-23",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "microsoft/agent-governance-toolkit",
+    "repo_url": "https://github.com/microsoft/agent-governance-toolkit",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "microsoft/ai-agents-for-beginners",
+    "repo_url": "https://github.com/microsoft/ai-agents-for-beginners",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "microsoft/coreutils",
+    "repo_url": "https://github.com/microsoft/coreutils",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/go",
+    "repo_url": "https://github.com/microsoft/go",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/graphrag",
+    "repo_url": "https://github.com/microsoft/graphrag",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-04-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/markitdown",
+    "repo_url": "https://github.com/microsoft/markitdown",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-03",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "microsoft/ML-For-Beginners",
+    "repo_url": "https://github.com/microsoft/ML-For-Beginners",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-12",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/node-pty",
+    "repo_url": "https://github.com/microsoft/node-pty",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/PowerToys",
+    "repo_url": "https://github.com/microsoft/PowerToys",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "microsoft/react-native-windows",
+    "repo_url": "https://github.com/microsoft/react-native-windows",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/SkillOpt",
+    "repo_url": "https://github.com/microsoft/SkillOpt",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "microsoft/terminal",
+    "repo_url": "https://github.com/microsoft/terminal",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/typespec",
+    "repo_url": "https://github.com/microsoft/typespec",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/VibeVoice",
+    "repo_url": "https://github.com/microsoft/VibeVoice",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "microsoft/vscode",
+    "repo_url": "https://github.com/microsoft/vscode",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 35
+  },
+  {
+    "repo_full_name": "microsoft/Webwright",
+    "repo_url": "https://github.com/microsoft/Webwright",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "microsoft/winget-pkgs",
+    "repo_url": "https://github.com/microsoft/winget-pkgs",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "millionco/react-doctor",
+    "repo_url": "https://github.com/millionco/react-doctor",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-13",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "milvus-io/milvus",
+    "repo_url": "https://github.com/milvus-io/milvus",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-02",
+    "appearances": 29
+  },
+  {
+    "repo_full_name": "MiniMax-AI/MiniMax-M3",
+    "repo_url": "https://github.com/MiniMax-AI/MiniMax-M3",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "MinishLab/semble",
+    "repo_url": "https://github.com/MinishLab/semble",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-19",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Mintplex-Labs/anything-llm",
+    "repo_url": "https://github.com/Mintplex-Labs/anything-llm",
+    "first_seen_date": "2026-05-04",
+    "last_seen_date": "2026-05-04",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mistralai/client-python",
+    "repo_url": "https://github.com/mistralai/client-python",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "mistralai/mistral-common",
+    "repo_url": "https://github.com/mistralai/mistral-common",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mistralai/mistral-vibe",
+    "repo_url": "https://github.com/mistralai/mistral-vibe",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mistralai/platform-docs-public",
+    "repo_url": "https://github.com/mistralai/platform-docs-public",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mistralai/search-starter-app",
+    "repo_url": "https://github.com/mistralai/search-starter-app",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mksglu/context-mode",
+    "repo_url": "https://github.com/mksglu/context-mode",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-06",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/csharp-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/csharp-sdk",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-08",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/ext-apps",
+    "repo_url": "https://github.com/modelcontextprotocol/ext-apps",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/go-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/go-sdk",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/inspector",
+    "repo_url": "https://github.com/modelcontextprotocol/inspector",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/java-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/java-sdk",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-05",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/kotlin-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/kotlin-sdk",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/modelcontextprotocol",
+    "repo_url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-27",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/python-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/python-sdk",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/registry",
+    "repo_url": "https://github.com/modelcontextprotocol/registry",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-14",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/rust-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/rust-sdk",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/servers",
+    "repo_url": "https://github.com/modelcontextprotocol/servers",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-31",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/typescript-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/typescript-sdk",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-06-02",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "modem-dev/hunk",
+    "repo_url": "https://github.com/modem-dev/hunk",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-08",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "moeru-ai/airi",
+    "repo_url": "https://github.com/moeru-ai/airi",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "moltis-org/moltis",
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "MoonshotAI/kimi-cli",
+    "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "MoonshotAI/kimi-code",
+    "repo_url": "https://github.com/MoonshotAI/kimi-code",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "mrdoob/three.js",
+    "repo_url": "https://github.com/mrdoob/three.js",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-05-04",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "msitarzewski/agency-agents",
+    "repo_url": "https://github.com/msitarzewski/agency-agents",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-22",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "mukul975/Anthropic-Cybersecurity-Skills",
+    "repo_url": "https://github.com/mukul975/Anthropic-Cybersecurity-Skills",
+    "first_seen_date": "2026-05-24",
+    "last_seen_date": "2026-05-28",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "multica-ai/andrej-karpathy-skills",
+    "repo_url": "https://github.com/multica-ai/andrej-karpathy-skills",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-26",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "multica-ai/multica",
+    "repo_url": "https://github.com/multica-ai/multica",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-25",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "n8n-io/n8n",
+    "repo_url": "https://github.com/n8n-io/n8n",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 35
+  },
+  {
+    "repo_full_name": "nanocoai/nanoclaw",
+    "repo_url": "https://github.com/nanocoai/nanoclaw",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-06-03",
+    "appearances": 26
+  },
+  {
+    "repo_full_name": "NawfalMotii79/PLFM_RADAR",
+    "repo_url": "https://github.com/NawfalMotii79/PLFM_RADAR",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "nearai/ironclaw",
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "neilsonnn/image-blaster",
+    "repo_url": "https://github.com/neilsonnn/image-blaster",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "neovim/neovim",
+    "repo_url": "https://github.com/neovim/neovim",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nesquena/hermes-webui",
+    "repo_url": "https://github.com/nesquena/hermes-webui",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "netease-youdao/LobsterAI",
+    "repo_url": "https://github.com/netease-youdao/LobsterAI",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "netease-youdou/LobsterAI",
+    "repo_url": "https://github.com/netease-youdou/LobsterAI",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-11",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nextlevelbuilder/ui-ux-pro-max-skill",
+    "repo_url": "https://github.com/nextlevelbuilder/ui-ux-pro-max-skill",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-06-01",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "nexu-io/html-anything",
+    "repo_url": "https://github.com/nexu-io/html-anything",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nexu-io/open-design",
+    "repo_url": "https://github.com/nexu-io/open-design",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-07",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "nicobailon/pi-subagents",
+    "repo_url": "https://github.com/nicobailon/pi-subagents",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Nightmare-Eclipse/YellowKey",
+    "repo_url": "https://github.com/Nightmare-Eclipse/YellowKey",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-16",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "nilbuild/developer-roadmap",
+    "repo_url": "https://github.com/nilbuild/developer-roadmap",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "NirDiamant/agents-towards-production",
+    "repo_url": "https://github.com/NirDiamant/agents-towards-production",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "NirDiamant/RAG_Techniques",
+    "repo_url": "https://github.com/NirDiamant/RAG_Techniques",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nocobase/nocobase",
+    "repo_url": "https://github.com/nocobase/nocobase",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-14",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "nodejs/node",
+    "repo_url": "https://github.com/nodejs/node",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-01",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "NousResearch/atropos",
+    "repo_url": "https://github.com/NousResearch/atropos",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nousresearch/hermes-agent",
+    "repo_url": "https://github.com/nousresearch/hermes-agent",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "NousResearch/hermes-compression-eval",
+    "repo_url": "https://github.com/NousResearch/hermes-compression-eval",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "NousResearch/Megatron-Bridge",
+    "repo_url": "https://github.com/NousResearch/Megatron-Bridge",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "NousResearch/NemoClaw",
+    "repo_url": "https://github.com/NousResearch/NemoClaw",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-01",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "NousResearch/neural-steering",
+    "repo_url": "https://github.com/NousResearch/neural-steering",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-05-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "NousResearch/pokemon-agent",
+    "repo_url": "https://github.com/NousResearch/pokemon-agent",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nowork-studio/toprank",
+    "repo_url": "https://github.com/nowork-studio/toprank",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "nullclaw/nullclaw",
+    "repo_url": "https://github.com/nullclaw/nullclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "NVIDIA-AI-Blueprints/video-search-and-summarization",
+    "repo_url": "https://github.com/NVIDIA-AI-Blueprints/video-search-and-summarization",
+    "first_seen_date": "2026-05-15",
+    "last_seen_date": "2026-05-16",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "NVIDIA/SkillSpector",
+    "repo_url": "https://github.com/NVIDIA/SkillSpector",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "NVlabs/Sana",
+    "repo_url": "https://github.com/NVlabs/Sana",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "obra/superpowers",
+    "repo_url": "https://github.com/obra/superpowers",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-06-03",
+    "appearances": 37
+  },
+  {
+    "repo_full_name": "ohmyzsh/ohmyzsh",
+    "repo_url": "https://github.com/ohmyzsh/ohmyzsh",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-01",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "ollama/ollama",
+    "repo_url": "https://github.com/ollama/ollama",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 39
+  },
+  {
+    "repo_full_name": "op7418/guizang-ppt-skill",
+    "repo_url": "https://github.com/op7418/guizang-ppt-skill",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-13",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "op7418/guizang-social-card-skill",
+    "repo_url": "https://github.com/op7418/guizang-social-card-skill",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "open-compass/opencompass",
+    "repo_url": "https://github.com/open-compass/opencompass",
+    "first_seen_date": "2026-05-26",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "Open-Dev-Society/OpenStock",
+    "repo_url": "https://github.com/Open-Dev-Society/OpenStock",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "open-jarvis/OpenJarvis",
+    "repo_url": "https://github.com/open-jarvis/OpenJarvis",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Open-LLM-VTuber/Open-LLM-VTuber",
+    "repo_url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "open-webui/open-webui",
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-02",
+    "appearances": 21
+  },
+  {
+    "repo_full_name": "openai/codex",
+    "repo_url": "https://github.com/openai/codex",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "openai/imagegencam",
+    "repo_url": "https://github.com/openai/imagegencam",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "openai/openai-agents-js",
+    "repo_url": "https://github.com/openai/openai-agents-js",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-12",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "openai/openai-agents-python",
+    "repo_url": "https://github.com/openai/openai-agents-python",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-19",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "openai/openai-cli",
+    "repo_url": "https://github.com/openai/openai-cli",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "openai/openai-cookbook",
+    "repo_url": "https://github.com/openai/openai-cookbook",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "openai/openai-python",
+    "repo_url": "https://github.com/openai/openai-python",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "openai/plugins",
+    "repo_url": "https://github.com/openai/plugins",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "openai/realtime-voice-component",
+    "repo_url": "https://github.com/openai/realtime-voice-component",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "openai/role-based-plugins",
+    "repo_url": "https://github.com/openai/role-based-plugins",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "openai/skills",
+    "repo_url": "https://github.com/openai/skills",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-22",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "openai/symphony",
+    "repo_url": "https://github.com/openai/symphony",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-06-02",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "OpenBB-finance/OpenBB",
+    "repo_url": "https://github.com/OpenBB-finance/OpenBB",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-25",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "OpenBMB/ChatDev",
+    "repo_url": "https://github.com/OpenBMB/ChatDev",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-04-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-31",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM-Desk-Pet",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM-Desk-Pet",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM-o",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM-o",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM-o-Demo",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM-o-Demo",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-12",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM-V",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM-V",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-19",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "OpenBMB/MiniCPM-V-edge-demo",
+    "repo_url": "https://github.com/OpenBMB/MiniCPM-V-edge-demo",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-11",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "OpenBMB/PilotDeck",
+    "repo_url": "https://github.com/OpenBMB/PilotDeck",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-03",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "OpenBMB/SciCore-Mol",
+    "repo_url": "https://github.com/OpenBMB/SciCore-Mol",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "OpenBMB/UltraRAG",
+    "repo_url": "https://github.com/OpenBMB/UltraRAG",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "OpenBMB/VoxCPM",
+    "repo_url": "https://github.com/OpenBMB/VoxCPM",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "openclaw/clawsweeper",
+    "repo_url": "https://github.com/openclaw/clawsweeper",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "openclaw/openclaw",
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "opencode-ai/opencode",
+    "repo_url": "https://github.com/opencode-ai/opencode",
+    "first_seen_date": "2026-05-28",
+    "last_seen_date": "2026-05-28",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "OpenCut-app/OpenCut",
+    "repo_url": "https://github.com/OpenCut-app/OpenCut",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "opendataloader-project/opendataloader-pdf",
+    "repo_url": "https://github.com/opendataloader-project/opendataloader-pdf",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "OpenHands/OpenHands",
+    "repo_url": "https://github.com/OpenHands/OpenHands",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 35
+  },
+  {
+    "repo_full_name": "OpenMOSS/MOSS-TTS",
+    "repo_url": "https://github.com/OpenMOSS/MOSS-TTS",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "opensquilla/opensquilla",
+    "repo_url": "https://github.com/opensquilla/opensquilla",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "oracle-devrel/oracle-ai-developer-hub",
+    "repo_url": "https://github.com/oracle-devrel/oracle-ai-developer-hub",
+    "first_seen_date": "2026-05-10",
+    "last_seen_date": "2026-05-10",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "orailnoor/DroidDesk",
+    "repo_url": "https://github.com/orailnoor/DroidDesk",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "oven-sh/bun",
+    "repo_url": "https://github.com/oven-sh/bun",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "p-e-w/heretic",
+    "repo_url": "https://github.com/p-e-w/heretic",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "PaddlePaddle/PaddleOCR",
+    "repo_url": "https://github.com/PaddlePaddle/PaddleOCR",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Panniantong/Agent-Reach",
+    "repo_url": "https://github.com/Panniantong/Agent-Reach",
+    "first_seen_date": "2026-05-23",
+    "last_seen_date": "2026-05-23",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "pascalorg/editor",
+    "repo_url": "https://github.com/pascalorg/editor",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-20",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "patterniha/MITM-DomainFronting",
+    "repo_url": "https://github.com/patterniha/MITM-DomainFronting",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "paywallpro/paywall-gallery",
+    "repo_url": "https://github.com/paywallpro/paywall-gallery",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "pbakaus/impeccable",
+    "repo_url": "https://github.com/pbakaus/impeccable",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "PDFCraftTool/pdfcraft",
+    "repo_url": "https://github.com/PDFCraftTool/pdfcraft",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "penpot/penpot",
+    "repo_url": "https://github.com/penpot/penpot",
+    "first_seen_date": "2026-04-28",
+    "last_seen_date": "2026-04-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "PerryTS/perry",
+    "repo_url": "https://github.com/PerryTS/perry",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "pewdiepie-archdaemon/odysseus",
+    "repo_url": "https://github.com/pewdiepie-archdaemon/odysseus",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "pi-hole/pi-hole",
+    "repo_url": "https://github.com/pi-hole/pi-hole",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Picovoice/picollm",
+    "repo_url": "https://github.com/Picovoice/picollm",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-28",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "pierrecomputer/pierre",
+    "repo_url": "https://github.com/pierrecomputer/pierre",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "plausible/analytics",
+    "repo_url": "https://github.com/plausible/analytics",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "playcanvas/supersplat",
+    "repo_url": "https://github.com/playcanvas/supersplat",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-11",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "PostHog/posthog",
+    "repo_url": "https://github.com/PostHog/posthog",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-27",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "pranshuparmar/witr",
+    "repo_url": "https://github.com/pranshuparmar/witr",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "presenton/presenton",
+    "repo_url": "https://github.com/presenton/presenton",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-24",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "PriorLabs/TabPFN",
+    "repo_url": "https://github.com/PriorLabs/TabPFN",
+    "first_seen_date": "2026-05-06",
+    "last_seen_date": "2026-05-08",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "public-apis/public-apis",
+    "repo_url": "https://github.com/public-apis/public-apis",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-25",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "pydantic/httpx2",
+    "repo_url": "https://github.com/pydantic/httpx2",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "pydantic/logfire",
+    "repo_url": "https://github.com/pydantic/logfire",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "pydantic/monty",
+    "repo_url": "https://github.com/pydantic/monty",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "pydantic/pydantic",
+    "repo_url": "https://github.com/pydantic/pydantic",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "pydantic/pydantic-ai",
+    "repo_url": "https://github.com/pydantic/pydantic-ai",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "pydantic/pydantic-ai-harness",
+    "repo_url": "https://github.com/pydantic/pydantic-ai-harness",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "pydantic/pydantic-settings",
+    "repo_url": "https://github.com/pydantic/pydantic-settings",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "pydantic/skills",
+    "repo_url": "https://github.com/pydantic/skills",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "pyinfra-dev/pyinfra",
+    "repo_url": "https://github.com/pyinfra-dev/pyinfra",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "pytorch/pytorch",
+    "repo_url": "https://github.com/pytorch/pytorch",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-22",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "Q00/ouroboros",
+    "repo_url": "https://github.com/Q00/ouroboros",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "qdrant/qdrant",
+    "repo_url": "https://github.com/qdrant/qdrant",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-01",
+    "appearances": 21
+  },
+  {
+    "repo_full_name": "qhkm/zeptoclaw",
+    "repo_url": "https://github.com/qhkm/zeptoclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "QuantConnect/Lean",
+    "repo_url": "https://github.com/QuantConnect/Lean",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "QwenLM/qwen-code",
+    "repo_url": "https://github.com/QwenLM/qwen-code",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "QwenLM/Qwen-VLA",
+    "repo_url": "https://github.com/QwenLM/Qwen-VLA",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "QwenLM/Qwen3.6",
+    "repo_url": "https://github.com/QwenLM/Qwen3.6",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "qwibitai/nanoclaw",
+    "repo_url": "https://github.com/qwibitai/nanoclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-08",
+    "appearances": 14
+  },
+  {
+    "repo_full_name": "RainBowLuoCS/OpenOmni",
+    "repo_url": "https://github.com/RainBowLuoCS/OpenOmni",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-14",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "rasbt/LLMs-from-scratch",
+    "repo_url": "https://github.com/rasbt/LLMs-from-scratch",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-06-03",
+    "appearances": 21
+  },
+  {
+    "repo_full_name": "reconurge/flowsint",
+    "repo_url": "https://github.com/reconurge/flowsint",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-06-01",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "refactoringhq/tolaria",
+    "repo_url": "https://github.com/refactoringhq/tolaria",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-26",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "revfactory/harness",
+    "repo_url": "https://github.com/revfactory/harness",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-06-02",
+    "appearances": 4,
+    "manually_tracked": true,
+    "tracking_source": "hybrid"
+  },
+  {
+    "repo_full_name": "ripienaar/free-for-dev",
+    "repo_url": "https://github.com/ripienaar/free-for-dev",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "rmyndharis/OpenWA",
+    "repo_url": "https://github.com/rmyndharis/OpenWA",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "rohitg00/agentmemory",
+    "repo_url": "https://github.com/rohitg00/agentmemory",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-28",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+    "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-28",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "rowboatlabs/rowboat",
+    "repo_url": "https://github.com/rowboatlabs/rowboat",
+    "first_seen_date": "2026-05-10",
+    "last_seen_date": "2026-05-10",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "rtk-ai/rtk",
+    "repo_url": "https://github.com/rtk-ai/rtk",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-28",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "run-llama/liteparse",
+    "repo_url": "https://github.com/run-llama/liteparse",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-03",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "run-llama/liteparse-cloudflare-worker-quickstart",
+    "repo_url": "https://github.com/run-llama/liteparse-cloudflare-worker-quickstart",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "run-llama/llama_index",
+    "repo_url": "https://github.com/run-llama/llama_index",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-30",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "run-llama/llama-parse-ts",
+    "repo_url": "https://github.com/run-llama/llama-parse-ts",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "russellromney/honker",
+    "repo_url": "https://github.com/russellromney/honker",
+    "first_seen_date": "2026-05-27",
+    "last_seen_date": "2026-05-27",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "rust-lang/rust",
+    "repo_url": "https://github.com/rust-lang/rust",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-05-26",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "rustdesk/rustdesk",
+    "repo_url": "https://github.com/rustdesk/rustdesk",
+    "first_seen_date": "2026-05-03",
+    "last_seen_date": "2026-06-01",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "ruvnet/ruflo",
+    "repo_url": "https://github.com/ruvnet/ruflo",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-28",
+    "appearances": 27
+  },
+  {
+    "repo_full_name": "ruvnet/RuView",
+    "repo_url": "https://github.com/ruvnet/RuView",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-31",
+    "appearances": 11
+  },
+  {
+    "repo_full_name": "safishamsi/graphify",
+    "repo_url": "https://github.com/safishamsi/graphify",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 28
+  },
+  {
+    "repo_full_name": "sansan0/TrendRadar",
+    "repo_url": "https://github.com/sansan0/TrendRadar",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-04-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "santifer/career-ops",
+    "repo_url": "https://github.com/santifer/career-ops",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-30",
+    "appearances": 21
+  },
+  {
+    "repo_full_name": "saturndec/waoowaoo",
+    "repo_url": "https://github.com/saturndec/waoowaoo",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-04-30",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "ScrapeGraphAI/Scrapegraph-ai",
+    "repo_url": "https://github.com/ScrapeGraphAI/Scrapegraph-ai",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-07",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "shadcn-ui/ui",
+    "repo_url": "https://github.com/shadcn-ui/ui",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "shanraisshan/claude-code-best-practice",
+    "repo_url": "https://github.com/shanraisshan/claude-code-best-practice",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "shareAI-lab/learn-claude-code",
+    "repo_url": "https://github.com/shareAI-lab/learn-claude-code",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-06-03",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "ShareX/ShareX",
+    "repo_url": "https://github.com/ShareX/ShareX",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "shiyu-coder/Kronos",
+    "repo_url": "https://github.com/shiyu-coder/Kronos",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-29",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "Shubhamsaboo/awesome-llm-apps",
+    "repo_url": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-05-27",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Significant-Gravitas/AutoGPT",
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 36
+  },
+  {
+    "repo_full_name": "Silentely/eSIM-Tools",
+    "repo_url": "https://github.com/Silentely/eSIM-Tools",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "simstudioai/sim",
+    "repo_url": "https://github.com/simstudioai/sim",
+    "first_seen_date": "2026-05-02",
+    "last_seen_date": "2026-05-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sindresorhus/awesome",
+    "repo_url": "https://github.com/sindresorhus/awesome",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "sipeed/picoclaw",
+    "repo_url": "https://github.com/sipeed/picoclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "skyzh/tiny-llm",
+    "repo_url": "https://github.com/skyzh/tiny-llm",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-31",
+    "appearances": 15
+  },
+  {
+    "repo_full_name": "Snailclimb/JavaGuide",
+    "repo_url": "https://github.com/Snailclimb/JavaGuide",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-28",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "sourcegraph/docs",
+    "repo_url": "https://github.com/sourcegraph/docs",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sourcegraph/professional-services-public",
+    "repo_url": "https://github.com/sourcegraph/professional-services-public",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sourcegraph/scip-dotnet",
+    "repo_url": "https://github.com/sourcegraph/scip-dotnet",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sourcegraph/scip-typescript",
+    "repo_url": "https://github.com/sourcegraph/scip-typescript",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sourcegraph/sg",
+    "repo_url": "https://github.com/sourcegraph/sg",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "sourcegraph/smoke-tests",
+    "repo_url": "https://github.com/sourcegraph/smoke-tests",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "sourcegraph/sourcegraph-mcp-library",
+    "repo_url": "https://github.com/sourcegraph/sourcegraph-mcp-library",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "soxoj/maigret",
+    "repo_url": "https://github.com/soxoj/maigret",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-29",
+    "appearances": 9
+  },
+  {
+    "repo_full_name": "StarTrail-org/LEANN",
+    "repo_url": "https://github.com/StarTrail-org/LEANN",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "stefan-jansen/machine-learning-for-trading",
+    "repo_url": "https://github.com/stefan-jansen/machine-learning-for-trading",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-03",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "steipete/RepoBar",
+    "repo_url": "https://github.com/steipete/RepoBar",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "stemdeckapp/stemdeck",
+    "repo_url": "https://github.com/stemdeckapp/stemdeck",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "supabase/supabase",
+    "repo_url": "https://github.com/supabase/supabase",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-26",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "supermemoryai/supermemory",
+    "repo_url": "https://github.com/supermemoryai/supermemory",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "supertone-inc/supertonic",
+    "repo_url": "https://github.com/supertone-inc/supertonic",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-19",
+    "appearances": 5
+  },
+  {
+    "repo_full_name": "systemdesign42/system-design-academy",
+    "repo_url": "https://github.com/systemdesign42/system-design-academy",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "t8y2/dbx",
+    "repo_url": "https://github.com/t8y2/dbx",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-06-02",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "TauricResearch/TradingAgents",
+    "repo_url": "https://github.com/TauricResearch/TradingAgents",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 21
+  },
+  {
+    "repo_full_name": "tech-leads-club/agent-skills",
+    "repo_url": "https://github.com/tech-leads-club/agent-skills",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "Tencent/AgentlyMail",
+    "repo_url": "https://github.com/Tencent/AgentlyMail",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/AI-Infra-Guard",
+    "repo_url": "https://github.com/Tencent/AI-Infra-Guard",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/ncnn",
+    "repo_url": "https://github.com/Tencent/ncnn",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/tdesign",
+    "repo_url": "https://github.com/Tencent/tdesign",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/tdesign-miniprogram",
+    "repo_url": "https://github.com/Tencent/tdesign-miniprogram",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/TencentDB-Agent-Memory",
+    "repo_url": "https://github.com/Tencent/TencentDB-Agent-Memory",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-29",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Tencent/Wechat-YATT",
+    "repo_url": "https://github.com/Tencent/Wechat-YATT",
+    "first_seen_date": "2026-05-31",
+    "last_seen_date": "2026-05-31",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "Tencent/WeKnora",
+    "repo_url": "https://github.com/Tencent/WeKnora",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "Tencent/wujie",
+    "repo_url": "https://github.com/Tencent/wujie",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "teng-lin/notebooklm-py",
+    "repo_url": "https://github.com/teng-lin/notebooklm-py",
+    "first_seen_date": "2026-05-22",
+    "last_seen_date": "2026-05-22",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "tensorflow/tensorflow",
+    "repo_url": "https://github.com/tensorflow/tensorflow",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 35
+  },
+  {
+    "repo_full_name": "testtimescaling/testtimescaling.github.io",
+    "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-04-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "TheAlgorithms/Python",
+    "repo_url": "https://github.com/TheAlgorithms/Python",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-22",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "thedotmack/claude-mem",
+    "repo_url": "https://github.com/thedotmack/claude-mem",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 31
+  },
+  {
+    "repo_full_name": "thesysdev/openui",
+    "repo_url": "https://github.com/thesysdev/openui",
+    "first_seen_date": "2026-05-05",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "THUDM/slime",
+    "repo_url": "https://github.com/THUDM/slime",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-31",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Thysrael/Horizon",
+    "repo_url": "https://github.com/Thysrael/Horizon",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-20",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "TinyAGI/tinyagi",
+    "repo_url": "https://github.com/TinyAGI/tinyagi",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "tinyfish-io/bigset",
+    "repo_url": "https://github.com/tinyfish-io/bigset",
+    "first_seen_date": "2026-06-03",
+    "last_seen_date": "2026-06-03",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "tinyhumansai/openhuman",
+    "repo_url": "https://github.com/tinyhumansai/openhuman",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-21",
+    "appearances": 10
+  },
+  {
+    "repo_full_name": "tokio-rs/tokio",
+    "repo_url": "https://github.com/tokio-rs/tokio",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-05-06",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "topoteretes/cognee",
+    "repo_url": "https://github.com/topoteretes/cognee",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 31
+  },
+  {
+    "repo_full_name": "torvalds/linux",
+    "repo_url": "https://github.com/torvalds/linux",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 22
+  },
+  {
+    "repo_full_name": "tracewayapp/traceway",
+    "repo_url": "https://github.com/tracewayapp/traceway",
+    "first_seen_date": "2026-05-14",
+    "last_seen_date": "2026-05-15",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "trekhleb/javascript-algorithms",
+    "repo_url": "https://github.com/trekhleb/javascript-algorithms",
+    "first_seen_date": "2026-05-20",
+    "last_seen_date": "2026-05-28",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "trimstray/the-book-of-secret-knowledge",
+    "repo_url": "https://github.com/trimstray/the-book-of-secret-knowledge",
+    "first_seen_date": "2026-05-22",
+    "last_seen_date": "2026-05-22",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "truelockmc/streambert",
+    "repo_url": "https://github.com/truelockmc/streambert",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-22",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "trycua/cua",
+    "repo_url": "https://github.com/trycua/cua",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-14",
+    "appearances": 8
+  },
+  {
+    "repo_full_name": "TryGhost/Ghost",
+    "repo_url": "https://github.com/TryGhost/Ghost",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "tukuaiai/vibe-coding-cn",
+    "repo_url": "https://github.com/tukuaiai/vibe-coding-cn",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "tw93/Kami",
+    "repo_url": "https://github.com/tw93/Kami",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-28",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "twbs/bootstrap",
+    "repo_url": "https://github.com/twbs/bootstrap",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "twentyhq/twenty",
+    "repo_url": "https://github.com/twentyhq/twenty",
+    "first_seen_date": "2026-05-21",
+    "last_seen_date": "2026-05-30",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "ultralytics/ultralytics",
+    "repo_url": "https://github.com/ultralytics/ultralytics",
+    "first_seen_date": "2026-05-22",
+    "last_seen_date": "2026-05-22",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "ultraworkers/claw-code",
+    "repo_url": "https://github.com/ultraworkers/claw-code",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-03",
+    "appearances": 17
+  },
+  {
+    "repo_full_name": "unclecode/crawl4ai",
+    "repo_url": "https://github.com/unclecode/crawl4ai",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "unslothai/unsloth",
+    "repo_url": "https://github.com/unslothai/unsloth",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "VectifyAI/PageIndex",
+    "repo_url": "https://github.com/VectifyAI/PageIndex",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 26
+  },
+  {
+    "repo_full_name": "vercel-labs/open-agents",
+    "repo_url": "https://github.com/vercel-labs/open-agents",
+    "first_seen_date": "2026-05-08",
+    "last_seen_date": "2026-05-08",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "vercel-labs/portless",
+    "repo_url": "https://github.com/vercel-labs/portless",
+    "first_seen_date": "2026-04-29",
+    "last_seen_date": "2026-04-30",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "vercel-labs/skills",
+    "repo_url": "https://github.com/vercel-labs/skills",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-04-28",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "vercel-labs/zero",
+    "repo_url": "https://github.com/vercel-labs/zero",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-18",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "vercel/ai",
+    "repo_url": "https://github.com/vercel/ai",
+    "first_seen_date": "2026-06-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "vercel/chat",
+    "repo_url": "https://github.com/vercel/chat",
+    "first_seen_date": "2026-06-02",
+    "last_seen_date": "2026-06-02",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "vercel/next.js",
+    "repo_url": "https://github.com/vercel/next.js",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-06-03",
+    "appearances": 24
+  },
+  {
+    "repo_full_name": "vercel/turborepo",
+    "repo_url": "https://github.com/vercel/turborepo",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "vinta/awesome-python",
+    "repo_url": "https://github.com/vinta/awesome-python",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-06-02",
+    "appearances": 22
+  },
+  {
+    "repo_full_name": "virattt/dexter",
+    "repo_url": "https://github.com/virattt/dexter",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-07",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "vllm-project/vllm",
+    "repo_url": "https://github.com/vllm-project/vllm",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 39
+  },
+  {
+    "repo_full_name": "VoltAgent/awesome-design-md",
+    "repo_url": "https://github.com/VoltAgent/awesome-design-md",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-05-20",
+    "appearances": 18
+  },
+  {
+    "repo_full_name": "warpdotdev/warp",
+    "repo_url": "https://github.com/warpdotdev/warp",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "weaviate/weaviate",
+    "repo_url": "https://github.com/weaviate/weaviate",
+    "first_seen_date": "2026-05-29",
+    "last_seen_date": "2026-05-29",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "webadderallorg/Recordly",
+    "repo_url": "https://github.com/webadderallorg/Recordly",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-04",
+    "appearances": 4
+  },
+  {
+    "repo_full_name": "wechat-article/wechat-article-exporter",
+    "repo_url": "https://github.com/wechat-article/wechat-article-exporter",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-19",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "wenge6090-cell/Taiji",
+    "repo_url": "https://github.com/wenge6090-cell/Taiji",
+    "first_seen_date": "2026-05-11",
+    "last_seen_date": "2026-05-11",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "withcoral/coral",
+    "repo_url": "https://github.com/withcoral/coral",
+    "first_seen_date": "2026-05-18",
+    "last_seen_date": "2026-05-18",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "wpzzz/blocked-sites-in-south-korea",
+    "repo_url": "https://github.com/wpzzz/blocked-sites-in-south-korea",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "xai-org/x-algorithm",
+    "repo_url": "https://github.com/xai-org/x-algorithm",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-18",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "xai-org/xai-proto",
+    "repo_url": "https://github.com/xai-org/xai-proto",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-05-30",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "xai-org/xai-sdk-python",
+    "repo_url": "https://github.com/xai-org/xai-sdk-python",
+    "first_seen_date": "2026-05-30",
+    "last_seen_date": "2026-06-02",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "yetone/native-feel-skill",
+    "repo_url": "https://github.com/yetone/native-feel-skill",
+    "first_seen_date": "2026-05-16",
+    "last_seen_date": "2026-05-16",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "yichuan-w/LEANN",
+    "repo_url": "https://github.com/yichuan-w/LEANN",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-27",
+    "appearances": 16
+  },
+  {
+    "repo_full_name": "yikart/AiToEarn",
+    "repo_url": "https://github.com/yikart/AiToEarn",
+    "first_seen_date": "2026-05-09",
+    "last_seen_date": "2026-05-15",
+    "appearances": 7
+  },
+  {
+    "repo_full_name": "yizhiyanhua-ai/fireworks-tech-graph",
+    "repo_url": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+    "first_seen_date": "2026-05-12",
+    "last_seen_date": "2026-05-13",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "YouMind-OpenLab/awesome-gpt-image-2",
+    "repo_url": "https://github.com/YouMind-OpenLab/awesome-gpt-image-2",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-07",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "yt-dlp/yt-dlp",
+    "repo_url": "https://github.com/yt-dlp/yt-dlp",
+    "first_seen_date": "2026-04-27",
+    "last_seen_date": "2026-05-25",
+    "appearances": 6
+  },
+  {
+    "repo_full_name": "Yuan1z0825/nature-skills",
+    "repo_url": "https://github.com/Yuan1z0825/nature-skills",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-06-02",
+    "appearances": 3
+  },
+  {
+    "repo_full_name": "z-lab/dflash",
+    "repo_url": "https://github.com/z-lab/dflash",
+    "first_seen_date": "2026-05-07",
+    "last_seen_date": "2026-05-08",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "Z4nzu/hackingtool",
+    "repo_url": "https://github.com/Z4nzu/hackingtool",
+    "first_seen_date": "2026-04-26",
+    "last_seen_date": "2026-04-28",
+    "appearances": 2
+  },
+  {
+    "repo_full_name": "zakirullin/files.md",
+    "repo_url": "https://github.com/zakirullin/files.md",
+    "first_seen_date": "2026-05-19",
+    "last_seen_date": "2026-05-19",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "zed-industries/zed",
+    "repo_url": "https://github.com/zed-industries/zed",
+    "first_seen_date": "2026-05-01",
+    "last_seen_date": "2026-05-01",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "zeroclaw-labs/zer",
+    "repo_url": "https://github.com/zeroclaw-labs/zer",
+    "first_seen_date": "2026-05-17",
+    "last_seen_date": "2026-05-17",
+    "appearances": 1
+  },
+  {
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 40
+  },
+  {
+    "repo_full_name": "zhayujie/CowAgent",
+    "repo_url": "https://github.com/zhayujie/CowAgent",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-06-03",
+    "appearances": 24
+  },
+  {
+    "repo_full_name": "ZhuLinsen/daily_stock_analysis",
+    "repo_url": "https://github.com/ZhuLinsen/daily_stock_analysis",
+    "first_seen_date": "2026-04-30",
+    "last_seen_date": "2026-06-03",
+    "appearances": 12
+  },
+  {
+    "repo_full_name": "zilliztech/claude-context",
+    "repo_url": "https://github.com/zilliztech/claude-context",
+    "first_seen_date": "2026-04-23",
+    "last_seen_date": "2026-05-27",
+    "appearances": 10
+  }
+]

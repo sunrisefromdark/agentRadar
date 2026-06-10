@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "n8n-io/n8n",
+  "repo_url": "https://github.com/n8n-io/n8n",
+  "stars": 190899,
+  "forks": 58234,
+  "issues": 445,
+  "PR": 1024,
+  "description": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+  "tags": [
+    "ai",
+    "apis",
+    "automation",
+    "cli",
+    "data-flow",
+    "development",
+    "integration-framework",
+    "integrations",
+    "ipaas",
+    "low-code",
+    "low-code-platform",
+    "mcp",
+    "mcp-client",
+    "mcp-server",
+    "n8n",
+    "no-code",
+    "self-hosted",
+    "typescript",
+    "workflow",
+    "workflow-automation"
+  ]
+}

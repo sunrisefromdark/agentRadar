@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "opensquilla/opensquilla",
+  "repo_url": "https://github.com/opensquilla/opensquilla",
+  "stars": 2575,
+  "forks": 177,
+  "issues": 38,
+  "PR": 25,
+  "description": "OpenSquilla — Token-Efficient AI Agent with same budget, higher intelligence density",
+  "tags": [
+    "agent",
+    "ai",
+    "ai-agents",
+    "deep-learning",
+    "foundation-models",
+    "llm",
+    "mcp",
+    "memory",
+    "openclaw",
+    "python",
+    "skills"
+  ]
+}

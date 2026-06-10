@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "iflytek/astron-agent",
+  "repo_url": "https://github.com/iflytek/astron-agent",
+  "stars": 8770,
+  "forks": 853,
+  "issues": 23,
+  "PR": 4,
+  "description": "Enterprise-grade, commercial-friendly agentic workflow platform for building next-generation SuperAgents.",
+  "tags": [
+    "agent",
+    "agentic-workflow",
+    "ai",
+    "enterprise",
+    "iflytek-astron",
+    "llm",
+    "low-code",
+    "mcp",
+    "multi-agent",
+    "next-gen",
+    "orchestration",
+    "python",
+    "superagent",
+    "workflow"
+  ]
+}

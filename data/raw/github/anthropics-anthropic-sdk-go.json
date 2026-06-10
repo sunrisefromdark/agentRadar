@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "anthropics/anthropic-sdk-go",
+  "repo_url": "https://github.com/anthropics/anthropic-sdk-go",
+  "stars": 1047,
+  "forks": 172,
+  "issues": 43,
+  "PR": 31,
+  "description": "Access to Anthropic's safety-first language model APIs via Go",
+  "tags": []
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "nanocoai/nanoclaw",
+  "repo_url": "https://github.com/nanocoai/nanoclaw",
+  "stars": 29664,
+  "forks": 12910,
+  "issues": 249,
+  "PR": 475,
+  "description": "A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK",
+  "tags": [
+    "ai-agents",
+    "ai-assistant",
+    "claude-code",
+    "claude-skills",
+    "openclaw"
+  ]
+}

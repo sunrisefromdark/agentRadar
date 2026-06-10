@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "vllm-project/vllm",
+  "repo_url": "https://github.com/vllm-project/vllm",
+  "stars": 81821,
+  "forks": 17601,
+  "issues": 1984,
+  "PR": 3170,
+  "description": "A high-throughput and memory-efficient inference and serving engine for LLMs",
+  "tags": [
+    "amd",
+    "blackwell",
+    "cuda",
+    "deepseek",
+    "deepseek-v3",
+    "gpt",
+    "gpt-oss",
+    "inference",
+    "kimi",
+    "llama",
+    "llm",
+    "llm-serving",
+    "model-serving",
+    "moe",
+    "openai",
+    "pytorch",
+    "qwen",
+    "qwen3",
+    "tpu",
+    "transformer"
+  ]
+}

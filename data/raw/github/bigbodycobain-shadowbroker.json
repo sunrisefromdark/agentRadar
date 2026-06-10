@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "BigBodyCobain/Shadowbroker",
+  "repo_url": "https://github.com/BigBodyCobain/Shadowbroker",
+  "stars": 8526,
+  "forks": 1282,
+  "issues": 21,
+  "PR": 0,
+  "description": "Open-source intelligence for the global theater. Track everything from the corporate/private jets of the wealthy, and spy satellites, to seismic events in one unified interface. Hook an AI agent up to have it parse through data and find previously unseen correlations. The knowledge is available to all but rarely aggregated in the open, until now.",
+  "tags": [
+    "air-force-one",
+    "airforce1",
+    "asdb",
+    "cctv",
+    "cctv-cameras",
+    "cctv-surveillance",
+    "earthquake-visualization",
+    "elonjet",
+    "osint",
+    "osint-resources",
+    "osint-tool",
+    "sattelite",
+    "sattelite-imagery",
+    "sdr"
+  ]
+}

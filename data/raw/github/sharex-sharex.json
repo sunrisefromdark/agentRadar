@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "ShareX/ShareX",
+  "repo_url": "https://github.com/ShareX/ShareX",
+  "stars": 37621,
+  "forks": 3747,
+  "issues": 646,
+  "PR": 0,
+  "description": "ShareX is a free and open-source application that enables users to capture or record any area of their screen with a single keystroke. It also supports uploading images, text, and various file types to a wide range of destinations.",
+  "tags": [
+    "avalonia",
+    "capture",
+    "color-picker",
+    "csharp",
+    "dropbox",
+    "file-sharing",
+    "file-upload",
+    "ftp",
+    "gif",
+    "gif-recorder",
+    "image-annotation",
+    "ocr",
+    "productivity",
+    "region-capture",
+    "screen-capture",
+    "screen-recorder",
+    "screenshot",
+    "share",
+    "sharex",
+    "url-shortener"
+  ]
+}

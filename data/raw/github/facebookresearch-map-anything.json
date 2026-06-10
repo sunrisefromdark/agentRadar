@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "facebookresearch/map-anything",
+  "repo_url": "https://github.com/facebookresearch/map-anything",
+  "stars": 3430,
+  "forks": 260,
+  "issues": 28,
+  "PR": 1,
+  "description": "MapAnything: Universal Feed-Forward Metric 3D Reconstruction",
+  "tags": [
+    "3d-reconstruction",
+    "ai",
+    "calibration",
+    "depth-completion",
+    "depth-estimation",
+    "image-to-3d",
+    "multi-view-stereo",
+    "robotics",
+    "sfm"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "facebook/react-native",
+  "repo_url": "https://github.com/facebook/react-native",
+  "stars": 125931,
+  "forks": 25175,
+  "issues": 740,
+  "PR": 541,
+  "description": "A framework for building native applications using React",
+  "tags": [
+    "android",
+    "app-framework",
+    "cross-platform",
+    "ios",
+    "mobile",
+    "mobile-development",
+    "react",
+    "react-native"
+  ]
+}

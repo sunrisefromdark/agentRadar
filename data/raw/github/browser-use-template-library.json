@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "browser-use/template-library",
+  "repo_url": "https://github.com/browser-use/template-library",
+  "stars": 24,
+  "forks": 4,
+  "issues": 0,
+  "PR": 0,
+  "description": "Template library for browser-use CLI",
+  "tags": [
+    "ai-agent",
+    "browser-automation",
+    "browser-use-box",
+    "scheduler",
+    "telegram-automation",
+    "watchlist-hit",
+    "watchlist:browser-use",
+    "fresh-today"
+  ]
+}

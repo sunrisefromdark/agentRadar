@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "leon-ai/leon",
+  "repo_url": "https://github.com/leon-ai/leon",
+  "stars": 17245,
+  "forks": 1449,
+  "issues": 90,
+  "PR": 15,
+  "description": "🧠 Leon is your open-source personal assistant.",
+  "tags": [
+    "ai",
+    "ai-agent",
+    "ai-assistant",
+    "artificial-intelligence",
+    "assistant",
+    "automation",
+    "bot",
+    "chatbot",
+    "leon",
+    "nodejs",
+    "offline",
+    "personal-assistant",
+    "privacy",
+    "python",
+    "speech-recognition",
+    "speech-synthesis",
+    "speech-to-text",
+    "text-to-speech",
+    "virtual-assistant",
+    "voice-assistant"
+  ]
+}

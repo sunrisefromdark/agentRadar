@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "chopratejas/headroom",
+  "repo_url": "https://github.com/chopratejas/headroom",
+  "stars": 8418,
+  "forks": 561,
+  "issues": 76,
+  "PR": 63,
+  "description": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.",
+  "tags": [
+    "agent",
+    "ai",
+    "anthropic",
+    "claude-code",
+    "compression",
+    "context-engineering",
+    "context-window",
+    "cursor",
+    "fastapi",
+    "langchain",
+    "llm",
+    "mcp",
+    "openai",
+    "prompt-engineering",
+    "proxy",
+    "python",
+    "rag",
+    "token-optimization",
+    "tokens",
+    "typescript"
+  ]
+}

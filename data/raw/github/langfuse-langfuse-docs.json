@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "langfuse/langfuse-docs",
+  "repo_url": "https://github.com/langfuse/langfuse-docs",
+  "stars": 208,
+  "forks": 235,
+  "issues": 24,
+  "PR": 113,
+  "description": "🪢 Langfuse documentation -- Langfuse is the open source LLM Engineering Platform. Observability, evals, prompt management, playground and metrics to debug and improve LLM apps",
+  "tags": [
+    "agent-skills",
+    "agents",
+    "genai",
+    "hacktoberfest",
+    "langfuse",
+    "large-language-models",
+    "llms",
+    "nextra",
+    "observability",
+    "prompt-management"
+  ]
+}

@@ -1,0 +1,1334 @@
+{
+  "date": "2026-05-16",
+  "generated_at": "2026-06-06T22:30:39+08:00",
+  "window_start": "2026-05-10",
+  "window_end": "2026-05-16",
+  "enhancement_status": "agent-full",
+  "personalized_weekly_focus_applicable": true,
+  "personalized_weekly_focus_note_cn": "本周你关注的memory、skills、claude code主题在agent-runtime趋势中集中体现，ruflo是跨趋势的核心项目值得深入学习。UI主题在ai-workflow趋势的claude-for-legal中有所展现，可关注垂直应用场景。",
+  "overall_summary_cn": "本周AI代理领域持续围绕智能体运行时（agent-runtime）、工作流自动化（workflow-automation）、智能体工作流（agentic-workflow）和AI编码（ai-coding）等核心范式快速聚合。多个趋势共享项目和证据，如ruvnet/ruflo同时出现在多个趋势中，显示生态高度融合。主要趋势仍为agent-runtime、workflow-automation、agentic-workflow和ai-workflow，均获强证据支持。长期记忆（persistent memory）和技能生态（tool/skill ecosystem）作为底层能力持续扩散。用户关注的memory、UI、skills、claude code方向均有对应项目活跃。",
+  "supporting_trend_keys": [
+    "ai-workflow",
+    "workflow-automation",
+    "agent-runtime",
+    "agentic-workflow"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "ai-workflow",
+      "trend_name_cn": "AI工作流",
+      "trend_summary_cn": "AI工作流围绕智能体运行时、持久记忆、自改进循环和工具技能生态快速融合，成为Claude Code等编码代理的执行和编排平台。",
+      "evidence_summary_cn": "ruvnet/ruflo本周获得10860星增长，多源覆盖9天；iflytek/astron-agent和anthropics/claude-for-legal也持续活跃。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注ruflo是否继续领跑，以及法律插件是否能扩展至更多垂直场景。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "ruflo是一个针对Claude的多代理编排平台，能部署智能体集群、协调自动化工作流并集成RAG知识库，支持Claude Code原生整合。",
+          "why_today_cn": "今天获 GitHub 涨星信号追踪，虽然没有单日爆发增长，但多源确认了它的持续热度，作为灵活的 agent 编排框架值得持续关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "本周9天持续出现在多个数据源，周星增10860，显示出强劲的社区增长和稳定的活跃度。"
+        },
+        {
+          "repo_url": "https://github.com/iflytek/astron-agent",
+          "project_name": "iflytek/astron-agent",
+          "project_class": "today_star",
+          "objective_score": 68.5,
+          "preference_boost": 2.5,
+          "base_final_rank": 71,
+          "final_rank": 71,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "astron-agent是面向企业的智能体工作流平台，用于构建具备知识检索和任务编排能力的超级智能体，支持商业友好许可。",
+          "why_today_cn": "今日 Trendshift 新鲜命中，企业级属性突出，适合关注工作流自动化方向。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "本周在趋势中重现，虽星增平缓但fork和issue数表明企业级用户持续关注。"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/claude-for-legal",
+          "project_name": "anthropics/claude-for-legal",
+          "project_class": "today_star",
+          "objective_score": 62.5,
+          "preference_boost": 2.5,
+          "base_final_rank": 65,
+          "final_rank": 65,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "这是Anthropic推出的法律工作流插件集，将Claude能力嵌入法律文档审查、合同分析等任务，降低法律人员使用门槛。",
+          "why_today_cn": "命中 Trendshift、重点观察清单和 GitHub 涨星信号，多源确认热度，今日值得优先关注。star 增长 0。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "本周4天从watchlist触发信号，虽星增297但依托Anthropic官方生态，信号可靠。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-workflow",
+        "focused_trend_name_cn": "AI工作流",
+        "summary_cn": "当前聚焦 ai-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 40,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 20
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=10860"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 40。代表项目包括 ruvnet/ruflo、anthropics/claude-for-legal、iflytek/astron-agent。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5393",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：forks=5393"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 32,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 53.3,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 30
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 53.3。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/claude-for-legal",
+                "repo_full_name": "anthropics/claude-for-legal",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=9"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、anthropics/claude-for-legal、iflytek/astron-agent。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "workflow-automation",
+      "trend_name_cn": "工作流自动化",
+      "trend_summary_cn": "工作流自动化平台正融合AI能力，从传统低代码向智能体驱动的工作流演进，n8n和Activepieces是典型代表。",
+      "evidence_summary_cn": "n8n周星增1545，13天持续出现在GitHub Trending；Activepieces提供约400个MCP服务器集成，成为MCP生态关键枢纽。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注n8n的AI特性更新和Activepieces的MCP生态拓展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今天获 GitHub 涨星信号追踪，虽然没有单日爆发增长，但多源确认了它的持续热度，作为灵活的 agent 编排框架值得持续关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周9天持续出现在多个数据源，周星增10860，显示出强劲的社区增长和稳定的活跃度。"
+        },
+        {
+          "repo_url": "https://github.com/n8n-io/n8n",
+          "project_name": "n8n-io/n8n",
+          "project_class": "today_star",
+          "objective_score": 94.25,
+          "preference_boost": 2.5,
+          "base_final_rank": 96.75,
+          "final_rank": 93.75,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "n8n是一个公平代码的工作流自动化平台，提供可视化拖拽构建和400+集成，支持自托管和云部署，内置AI能力。",
+          "why_today_cn": "今日进入 GitHub Trending，日增星约 140，作为成熟平台持续吸引新用户。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周13天出现在GitHub Trending，周星增1545，社区活跃度极高，是工作流自动化领域的常青项目。"
+        },
+        {
+          "repo_url": "https://github.com/activepieces/activepieces",
+          "project_name": "activepieces/activepieces",
+          "project_class": "today_star",
+          "objective_score": 81.25,
+          "preference_boost": 2.5,
+          "base_final_rank": 83.75,
+          "final_rank": 83.75,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "Activepieces是一个整合约400个MCP服务器的AI代理自动化平台，内置持久记忆和工具生态系统，是企业工作流自动化的关键枢纽。",
+          "why_today_cn": "今日 GitHub 涨星信号触发，虽无当日新增长，但其 MCP 生态深度对企业自动化至关重要。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周9天出现在多个数据源，周星增153，MCP集成数量领先，持续吸引企业用户。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "workflow-automation",
+        "focused_trend_name_cn": "工作流自动化",
+        "summary_cn": "当前聚焦 workflow-automation，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 70,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 10
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=10860"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 70。代表项目包括 ruvnet/ruflo、n8n-io/n8n、activepieces/activepieces。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5393",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、n8n-io/n8n、activepieces/activepieces。证据摘要：forks=5393"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 91.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 29,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 91.7。代表项目包括 ruvnet/ruflo、activepieces/activepieces、n8n-io/n8n。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 95
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、n8n-io/n8n、activepieces/activepieces。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、n8n-io/n8n、activepieces/activepieces。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/activepieces/activepieces",
+                "repo_full_name": "activepieces/activepieces",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=9"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、n8n-io/n8n、activepieces/activepieces。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "智能体运行时",
+      "trend_summary_cn": "智能体运行时是当前最活跃的趋势，覆盖28个不同项目，从个人AI助手到企业级编排平台，共同推动代理能力从'工具'向'平台'演进。",
+      "evidence_summary_cn": "openclaw本周星增5894，外观17天；Gemini CLI外观14天；Andrej Karpathy Skills周星增34744，成为技能模板标杆。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注openclaw的跨平台能力和Gemini CLI的MCP集成进展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今天获 GitHub 涨星信号追踪，虽然没有单日爆发增长，但多源确认了它的持续热度，作为灵活的 agent 编排框架值得持续关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周9天持续出现在多个数据源，周星增10860，显示出强劲的社区增长和稳定的活跃度。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "openclaw是一个自托管的个人AI助手，支持任何操作系统和平台，提供持久记忆和工具生态系统，用户可自行掌控数据边界。",
+          "why_today_cn": "它命中 GitHub Trending 的实时新鲜信号，并且已经通过多源或多天确认，所以今天仍然值得优先关注；当日 star 增长约 358。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周17天持续出现在多个数据源，周星增5894，跨平台特性和自托管理念吸引大量用户。"
+        },
+        {
+          "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "project_name": "forrestchang/andrej-karpathy-skills",
+          "project_class": "today_star",
+          "objective_score": 83,
+          "preference_boost": 7.5,
+          "base_final_rank": 90.5,
+          "final_rank": 90.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法，也能围绕代码仓库做分析与修改。大家通常会用它来整理现成技能和工作流打法，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "今日 Trendshift 信号触发，同时获得高 fork 数（12464），显示社区对其高度认可。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周13天出现在多个数据源，周星增34744，Karpathy的品牌效应和实用性推动了病毒式传播。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "智能体运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=10860"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5393",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：forks=5393"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 86.7。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=9"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openclaw/openclaw、forrestchang/andrej-karpathy-skills。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agentic-workflow",
+      "trend_name_cn": "智能体工作流",
+      "trend_summary_cn": "智能体工作流趋势从简单编排向兼具持久记忆和自改进的复杂系统演进，dify和astron-agent是企业级代表。",
+      "evidence_summary_cn": "dify本周星增648，7天在GitHub Trending；astron-agent重现且关注企业场景。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注dify的Agentic RAG更新和astron-agent的企业落地案例。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今天获 GitHub 涨星信号追踪，虽然没有单日爆发增长，但多源确认了它的持续热度，作为灵活的 agent 编排框架值得持续关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周9天持续出现在多个数据源，周星增10860，显示出强劲的社区增长和稳定的活跃度。"
+        },
+        {
+          "repo_url": "https://github.com/langgenius/dify",
+          "project_name": "langgenius/dify",
+          "project_class": "today_star",
+          "objective_score": 78.1,
+          "preference_boost": 0,
+          "base_final_rank": 78.1,
+          "final_rank": 78.1,
+          "matched_interest_topics": [],
+          "project_brief_cn": "dify是一个生产级智能体工作流开发平台，提供可视化的Agentic workflow编排，支持RAG、工具调用和模型管理，适合企业构建AI应用。",
+          "why_today_cn": "今日登上 GitHub Trending，star 日增约 108，信号热度高且经过多源确认，值得优先关注。",
+          "enhancement_source": "agent",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周7天出现在GitHub Trending，周星增648，作为成熟平台持续稳定增长。"
+        },
+        {
+          "repo_url": "https://github.com/iflytek/astron-agent",
+          "project_name": "iflytek/astron-agent",
+          "project_class": "today_star",
+          "objective_score": 68.5,
+          "preference_boost": 2.5,
+          "base_final_rank": 71,
+          "final_rank": 71,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "astron-agent是面向企业的智能体工作流平台，拥有851个fork和23个issue，虽星增平缓但社区讨论活跃。",
+          "why_today_cn": "今日 Trendshift 新鲜命中，企业级属性突出，适合关注工作流自动化方向。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周在趋势中重现，虽星增平缓但fork和issue数表明企业级用户持续关注。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agentic-workflow",
+        "focused_trend_name_cn": "智能体工作流",
+        "summary_cn": "当前聚焦 agentic-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 47.7,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 43
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=10860"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 47.7。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5393",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：forks=5393"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 53.3,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 30
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 53.3。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/iflytek/astron-agent",
+                "repo_full_name": "iflytek/astron-agent",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=9"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、langgenius/dify、iflytek/astron-agent。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [],
+  "weak_signal_cards": [
+    {
+      "trend_key": "claude-code-skills",
+      "signal_name_cn": "Claude Code技能",
+      "why_weak_cn": "仅1个唯一项目（ruvnet/ruflo）且与ai-workflow完全重叠，证据不足以来定义独立趋势。",
+      "evidence_summary_cn": "ruvnet/ruflo周星增10860，但其描述偏向编排而非纯技能，信号混杂。",
+      "worth_following_next_week": "若下周出现更多专注于Claude Code技能的项目，再考虑升级。"
+    },
+    {
+      "trend_key": "agentmemory",
+      "signal_name_cn": "代理记忆",
+      "why_weak_cn": "仅2个唯一项目，agentmemory虽星增470但依赖单一项目，记忆赛道尚未形成多个独立项目支撑。",
+      "evidence_summary_cn": "rohitg00/agentmemory周星增470，但oracle-devrel项目关联性弱。",
+      "worth_following_next_week": "若agentmemory继续保持增长且有更多项目涌现，可升级。"
+    },
+    {
+      "trend_key": "memory-system",
+      "signal_name_cn": "记忆系统",
+      "why_weak_cn": "仅lsdefine/GenericAgent一个项目且星增381，与skill-tree趋势重叠。",
+      "evidence_summary_cn": "GenericAgent自演进技能树，但一周仅3天出现，信号单薄。",
+      "worth_following_next_week": "若GenericAgent下周持续出现，考虑升级。"
+    },
+    {
+      "trend_key": "skill-tree",
+      "signal_name_cn": "技能树",
+      "why_weak_cn": "与memory-system共享同一项目，证据完全重叠，无法独立支撑。",
+      "evidence_summary_cn": "GenericAgent同时出现在两个趋势，证据相同，区分度不足。",
+      "worth_following_next_week": "若出现新项目专注技能树概念，再重新评估。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/iflytek/astron-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/claude-for-legal",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/claude-for-legal",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/n8n-io/n8n",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/activepieces/activepieces",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/iflytek/astron-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "ai-workflow",
+    "focused_trend_name_cn": "AI工作流",
+    "summary_cn": "当前聚焦 ai-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 40,
+        "project_count": 3,
+        "high_signal_project_count": 1,
+        "evidence_count": 8,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 20
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 0
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=0",
+          "weekly_delta=10860"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 40。代表项目包括 ruvnet/ruflo、anthropics/claude-for-legal、iflytek/astron-agent。证据摘要：daily_delta=0"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=5393",
+          "issues=406"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：forks=5393"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 81.7,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 32,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 45
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 53.3,
+        "project_count": 3,
+        "high_signal_project_count": 1,
+        "evidence_count": 6,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 30
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 30
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_self_improving_loop"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 53.3。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 7,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "agent_or_swarm_signal"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、iflytek/astron-agent、anthropics/claude-for-legal。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 96.7,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 11,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/claude-for-legal",
+            "repo_full_name": "anthropics/claude-for-legal",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/iflytek/astron-agent",
+            "repo_full_name": "iflytek/astron-agent",
+            "score": 90
+          }
+        ],
+        "top_evidence": [
+          "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+          "appearances=9"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、anthropics/claude-for-legal、iflytek/astron-agent。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+      }
+    ]
+  }
+}

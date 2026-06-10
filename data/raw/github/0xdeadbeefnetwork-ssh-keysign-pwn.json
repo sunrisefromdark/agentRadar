@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "0xdeadbeefnetwork/ssh-keysign-pwn",
+  "repo_url": "https://github.com/0xdeadbeefnetwork/ssh-keysign-pwn",
+  "stars": 642,
+  "forks": 75,
+  "issues": 2,
+  "PR": 0,
+  "description": "Steal SSH host private keys and /etc/shadow via the ptrace_may_access mm-NULL bypass + pidfd_getfd. Pre-31e62c2ebbfd kernels.",
+  "tags": []
+}

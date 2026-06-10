@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "mrdoob/three.js",
+  "repo_url": "https://github.com/mrdoob/three.js",
+  "stars": 112587,
+  "forks": 36374,
+  "issues": 324,
+  "PR": 129,
+  "description": "JavaScript 3D Library.",
+  "tags": [
+    "3d",
+    "augmented-reality",
+    "canvas",
+    "html5",
+    "javascript",
+    "svg",
+    "virtual-reality",
+    "webaudio",
+    "webgl",
+    "webgl2",
+    "webgpu",
+    "webxr"
+  ]
+}

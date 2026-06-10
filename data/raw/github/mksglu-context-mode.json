@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "mksglu/context-mode",
+  "repo_url": "https://github.com/mksglu/context-mode",
+  "stars": 15290,
+  "forks": 1097,
+  "issues": 8,
+  "PR": 3,
+  "description": "Context window optimization for AI coding agents. Sandboxes tool output, 98% reduction. 15 platforms",
+  "tags": [
+    "antigravity",
+    "claude",
+    "claude-code",
+    "claude-code-hooks",
+    "claude-code-plugins",
+    "claude-code-skill",
+    "codex",
+    "codex-cli",
+    "context-mode",
+    "copilot",
+    "cursor-plugin",
+    "kiro",
+    "mcp",
+    "mcp-server",
+    "mcp-tools",
+    "openclaw",
+    "opencode",
+    "pi-agent",
+    "skills",
+    "zed-extension"
+  ]
+}

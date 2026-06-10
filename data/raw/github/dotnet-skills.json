@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "dotnet/skills",
+  "repo_url": "https://github.com/dotnet/skills",
+  "stars": 3160,
+  "forks": 230,
+  "issues": 44,
+  "PR": 37,
+  "description": "Repository for skills to assist AI coding agents with .NET and C#",
+  "tags": [
+    "agent-skills"
+  ]
+}

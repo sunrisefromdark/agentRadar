@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "mem0ai/mem0",
+  "repo_url": "https://github.com/mem0ai/mem0",
+  "stars": 57567,
+  "forks": 6579,
+  "issues": 132,
+  "PR": 286,
+  "description": "Universal memory layer for AI Agents",
+  "tags": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "application",
+    "chatbots",
+    "chatgpt",
+    "genai",
+    "llm",
+    "long-term-memory",
+    "memory",
+    "memory-management",
+    "python",
+    "rag",
+    "state-management"
+  ]
+}

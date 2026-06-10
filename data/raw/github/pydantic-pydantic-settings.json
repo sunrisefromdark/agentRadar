@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "pydantic/pydantic-settings",
+  "repo_url": "https://github.com/pydantic/pydantic-settings",
+  "stars": 1351,
+  "forks": 150,
+  "issues": 43,
+  "PR": 9,
+  "description": "Settings management using pydantic",
+  "tags": [
+    "configuration",
+    "environment",
+    "pydantic",
+    "python",
+    "settings"
+  ]
+}

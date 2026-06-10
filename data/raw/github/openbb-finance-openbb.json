@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "OpenBB-finance/OpenBB",
+  "repo_url": "https://github.com/OpenBB-finance/OpenBB",
+  "stars": 68199,
+  "forks": 6856,
+  "issues": 39,
+  "PR": 43,
+  "description": "Financial data platform for analysts, quants and AI agents.",
+  "tags": [
+    "ai",
+    "crypto",
+    "derivatives",
+    "economics",
+    "equity",
+    "finance",
+    "fixed-income",
+    "machine-learning",
+    "openbb",
+    "options",
+    "python",
+    "quantitative-finance",
+    "stocks"
+  ]
+}

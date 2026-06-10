@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "google-gemini/cookbook",
+  "repo_url": "https://github.com/google-gemini/cookbook",
+  "stars": 17343,
+  "forks": 2654,
+  "issues": 35,
+  "PR": 47,
+  "description": "Examples and guides for using the Gemini API",
+  "tags": [
+    "gemini",
+    "gemini-api"
+  ]
+}

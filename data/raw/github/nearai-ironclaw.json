@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "nearai/ironclaw",
+  "repo_url": "https://github.com/nearai/ironclaw",
+  "stars": 12391,
+  "forks": 1444,
+  "issues": 781,
+  "PR": 315,
+  "description": "IronClaw is an Agent OS focused on privacy, security and extensibility",
+  "tags": [
+    "codeact",
+    "openclaw",
+    "rlm",
+    "rust",
+    "wasm"
+  ]
+}

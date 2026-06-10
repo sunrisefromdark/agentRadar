@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "aws/agent-toolkit-for-aws",
+  "repo_url": "https://github.com/aws/agent-toolkit-for-aws",
+  "stars": 777,
+  "forks": 59,
+  "issues": 5,
+  "PR": 1,
+  "description": "Official, AWS-supported MCP servers, skills, and plugins to help AI agents build on AWS",
+  "tags": []
+}

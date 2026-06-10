@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "o3de/o3de",
+  "repo_url": "https://github.com/o3de/o3de",
+  "stars": 9154,
+  "forks": 2481,
+  "issues": 3412,
+  "PR": 100,
+  "description": "Open 3D Engine (O3DE) is an Apache 2.0-licensed multi-platform 3D engine that enables developers and content creators to build AAA games, cinema-quality 3D worlds, and high-fidelity simulations without any fees or commercial obligations.",
+  "tags": [
+    "3d-graphics",
+    "3d-graphics-engine",
+    "animation",
+    "game-development",
+    "game-engine",
+    "gamedev"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "awslabs/global-capacity-orchestrator-on-aws",
+  "repo_url": "https://github.com/awslabs/global-capacity-orchestrator-on-aws",
+  "stars": 30,
+  "forks": 3,
+  "issues": 0,
+  "PR": 0,
+  "description": "GCO is a platform that spins up EKS Auto Mode clusters across AWS regions, wired together with Global Accelerator for low-latency routing. It handles multi-region compute orchestration — capacity-aware scheduling, spot fallback, globally distributed autoscaling inference — and offers a REST API, CLI, MCP and an integrated analytics environment",
+  "tags": []
+}

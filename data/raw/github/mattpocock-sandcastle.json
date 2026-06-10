@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "mattpocock/sandcastle",
+  "repo_url": "https://github.com/mattpocock/sandcastle",
+  "stars": 4670,
+  "forks": 493,
+  "issues": 97,
+  "PR": 46,
+  "description": "Orchestrate sandboxed coding agents in TypeScript with sandcastle.run()",
+  "tags": []
+}

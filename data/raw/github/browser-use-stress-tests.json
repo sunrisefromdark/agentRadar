@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "browser-use/stress-tests",
+  "repo_url": "https://github.com/browser-use/stress-tests",
+  "stars": 26,
+  "forks": 4,
+  "issues": 2,
+  "PR": 0,
+  "description": "A collection of particularly difficult test scenarios for evaluating browser-use.",
+  "tags": [
+    "ai-agent",
+    "browser-automation",
+    "browser-use",
+    "browser-use-box",
+    "browsers",
+    "evals",
+    "forms",
+    "headless",
+    "html",
+    "playwright",
+    "puppeteer"
+  ]
+}

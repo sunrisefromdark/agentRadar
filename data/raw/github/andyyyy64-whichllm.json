@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "Andyyyy64/whichllm",
+  "repo_url": "https://github.com/Andyyyy64/whichllm",
+  "stars": 1926,
+  "forks": 90,
+  "issues": 17,
+  "PR": 4,
+  "description": "Find the local LLM that actually runs and performs best on your hardware. Ranked by real, recency-aware benchmarks, not parameter count. One command, run it instantly.",
+  "tags": [
+    "ai",
+    "apple-silicon",
+    "benchmarks",
+    "cli",
+    "command-line-tool",
+    "gguf",
+    "gpu",
+    "huggingface",
+    "inference",
+    "llm",
+    "local-llm",
+    "ollama",
+    "python",
+    "vram"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "agentclientprotocol/registry",
+  "repo_url": "https://github.com/agentclientprotocol/registry",
+  "stars": 219,
+  "forks": 137,
+  "issues": 13,
+  "PR": 26,
+  "description": "Registry of agents implementing the Agent Client Protocol (ACP)",
+  "tags": [
+    "acp",
+    "agentclientprotocol",
+    "agents",
+    "ai",
+    "registry"
+  ]
+}

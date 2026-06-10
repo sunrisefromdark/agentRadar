@@ -1,0 +1,515 @@
+{
+  "scope": "ecosystem-focus",
+  "date": "2026-05-29",
+  "generated_at": "2026-05-30T10:38:59+08:00",
+  "status": "active",
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "minimax",
+    "summary_attempt_count": 12,
+    "summary_success_count": 7,
+    "summary_failure_count": 5,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0,
+    "last_error": "observer summary fields are missing or too short"
+  },
+  "candidate_count": 6,
+  "ecosystem_counts": {
+    "memory-knowledge": 1,
+    "skills-tools-mcp": 2,
+    "coding-agents": 2,
+    "eval-observability-governance": 3,
+    "agent-runtime": 1
+  },
+  "notes": [
+    "query ecosystem=coding-agents source=keyword:aider",
+    "query ecosystem=coding-agents source=keyword:claude code",
+    "query ecosystem=coding-agents source=keyword:code review",
+    "query ecosystem=coding-agents source=keyword:codex",
+    "query ecosystem=coding-agents source=topic:code-review",
+    "query ecosystem=coding-agents source=topic:coding-agent",
+    "query ecosystem=coding-agents source=org:anthropics",
+    "query ecosystem=coding-agents source=org:openai",
+    "query ecosystem=coding-agents source=repo:Aider-AI/aider",
+    "query ecosystem=coding-agents source=repo:openai/codex",
+    "daily normalized matches ecosystem=coding-agents count=3",
+    "query ecosystem=agent-runtime source=keyword:execution",
+    "query ecosystem=agent-runtime source=keyword:orchestration",
+    "query ecosystem=agent-runtime source=keyword:runtime",
+    "daily normalized matches ecosystem=agent-runtime count=1",
+    "daily normalized matches ecosystem=skills-tools-mcp count=5",
+    "daily normalized matches ecosystem=memory-knowledge count=4",
+    "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+    "query ecosystem=eval-observability-governance source=repo:openai/evals",
+    "daily normalized matches ecosystem=eval-observability-governance count=2",
+    "query ecosystem=multi-agent-coordination source=keyword:coordination",
+    "query ecosystem=multi-agent-coordination source=keyword:multi-agent",
+    "query ecosystem=multi-agent-coordination source=keyword:swarm",
+    "query ecosystem=multi-agent-coordination source=keyword:team",
+    "query ecosystem=multi-agent-coordination source=topic:multi-agent",
+    "query ecosystem=multi-agent-coordination source=topic:swarm",
+    "query ecosystem=multi-agent-coordination source=org:crewAIInc",
+    "query ecosystem=multi-agent-coordination source=org:openai",
+    "query ecosystem=multi-agent-coordination source=repo:crewAIInc/crewAI",
+    "query ecosystem=multi-agent-coordination source=repo:openai/swarm",
+    "daily normalized matches ecosystem=multi-agent-coordination count=1",
+    "query ecosystem=agent-ui-workbench source=keyword:console",
+    "query ecosystem=agent-ui-workbench source=keyword:operator ui",
+    "query ecosystem=agent-ui-workbench source=keyword:session log",
+    "query ecosystem=agent-ui-workbench source=keyword:viewer",
+    "query ecosystem=agent-ui-workbench source=topic:agent-ui",
+    "query ecosystem=agent-ui-workbench source=topic:session-log",
+    "query ecosystem=agent-ui-workbench source=org:anthropics",
+    "query ecosystem=agent-ui-workbench source=org:openai",
+    "query ecosystem=agent-ui-workbench source=repo:anthropics/claude-code",
+    "query ecosystem=agent-ui-workbench source=repo:openai/codex",
+    "query ecosystem=agentic-rl source=keyword:agentic rl",
+    "query ecosystem=agentic-rl source=keyword:policy optimization",
+    "query ecosystem=agentic-rl source=keyword:reinforcement learning",
+    "query ecosystem=agentic-rl source=keyword:reward model",
+    "query ecosystem=agentic-rl source=topic:agent-training",
+    "query ecosystem=agentic-rl source=topic:reinforcement-learning",
+    "query ecosystem=agentic-rl source=org:huggingface",
+    "daily normalized matches ecosystem=agentic-rl count=1",
+    "query failed ecosystem=agent-runtime source=keyword:sandbox: fetch failed",
+    "query failed ecosystem=agent-runtime source=topic:agent-runtime: fetch failed",
+    "query failed ecosystem=agent-runtime source=topic:workflow-engine: fetch failed",
+    "query failed ecosystem=agent-runtime source=org:langchain-ai: fetch failed",
+    "query failed ecosystem=agent-runtime source=org:openai: fetch failed",
+    "query failed ecosystem=agent-runtime source=repo:langchain-ai/langgraph: fetch failed",
+    "query failed ecosystem=agent-runtime source=repo:openai/swarm: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=keyword:connector: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=keyword:mcp: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=keyword:plugin: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=keyword:skills: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=topic:mcp: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=topic:plugin-system: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=org:modelcontextprotocol: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=org:openai: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=repo:modelcontextprotocol/servers: fetch failed",
+    "query failed ecosystem=skills-tools-mcp source=repo:openai/codex: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:context: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:knowledge: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:memory: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:rag: fetch failed",
+    "query failed ecosystem=memory-knowledge source=topic:agent-memory: fetch failed",
+    "query failed ecosystem=memory-knowledge source=topic:retrieval: fetch failed",
+    "query failed ecosystem=memory-knowledge source=org:langchain-ai: fetch failed",
+    "query failed ecosystem=memory-knowledge source=org:mem0ai: fetch failed",
+    "query failed ecosystem=memory-knowledge source=repo:langchain-ai/langmem: fetch failed",
+    "query failed ecosystem=memory-knowledge source=repo:mem0ai/mem0: fetch failed",
+    "query failed ecosystem=browser-computer-use source=keyword:automation: fetch failed",
+    "query failed ecosystem=browser-computer-use source=keyword:browser agent: fetch failed",
+    "query failed ecosystem=browser-computer-use source=keyword:computer use: fetch failed",
+    "query failed ecosystem=browser-computer-use source=keyword:desktop: fetch failed",
+    "query failed ecosystem=browser-computer-use source=topic:browser-automation: fetch failed",
+    "query failed ecosystem=browser-computer-use source=topic:computer-use: fetch failed",
+    "query failed ecosystem=browser-computer-use source=org:browser-use: fetch failed",
+    "query failed ecosystem=browser-computer-use source=org:microsoft: fetch failed",
+    "query failed ecosystem=browser-computer-use source=repo:browser-use/browser-use: fetch failed",
+    "query failed ecosystem=browser-computer-use source=repo:microsoft/playwright-mcp: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=keyword:eval: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=keyword:guardrail: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=keyword:observability: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=keyword:policy: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=topic:evals: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=topic:observability: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=org:langfuse: fetch failed",
+    "query failed ecosystem=eval-observability-governance source=org:openai: fetch failed",
+    "query failed ecosystem=agentic-rl source=org:openai: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:huggingface/trl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:openai/baselines: GitHub Search returned HTTP 403 for agentic-rl"
+  ],
+  "entries": [
+    {
+      "repo_full_name": "OpenBMB/UltraRAG",
+      "repo_url": "https://github.com/OpenBMB/UltraRAG",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2026-05-29T00:00:00.000Z",
+      "repo_updated_at": "2026-05-29T00:00:00.000Z",
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "rag"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "A Low-Code MCP Framework for Building Complex and Innovative RAG Pipelines",
+      "stars": 5567,
+      "forks": 424,
+      "issues": 8,
+      "PR": 2,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:OpenBMB,fresh-today,deepseek,demo,easy,embedding,flask,gpt,huggingface-transformers,llm,mcp,multimodal,openai,qwen,rag,sentence-transformers,ui,vllm,vlm",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "OpenBMB"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:none",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 87,
+      "observer_score": 92,
+      "observer_rank": 1,
+      "project_brief_cn": "UltraRAG 是由 OpenBMB（面壁智能）开源的低代码 MCP 框架，专门用于快速组装复杂 RAG 管道。它提供可视化配置和模块化组件（检索器、重排序、生成器等），支持多模态文档、混合检索和自定义工作流，让开发者无需从零编码即可构建生产级 RAG 系统。",
+      "why_now_cn": "该项目在 24 小时内被标记为 fresh-24h，说明刚发生重要更新或发布。OpenBMB 拥有面壁大模型和 MiniMax 的背景积累，在 RAG 领域有深厚技术沉淀。当前大模型应用热潮下，低代码 RAG 框架能大幅降低企业落地门槛，项目星标数达 5567 且保持 steady 增长势头，正处于社区关注快速上升期。",
+      "watch_next_cn": "接下来需验证 UltraRAG 的实际落地案例数量、MCP 协议在社区的采用广度，以及低代码配置在复杂业务场景下的灵活性边界。还要关注其与 Qwen、DeepSeek 等国产模型的集成深度是否足够，以及文档和示例的完善程度是否支撑开发者快速上手。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "5567 stars/424 forks的体量已是RAG领域的实质玩家，OpenBMB背景提供了技术背书。低代码MCP框架精准命中当前企业落地痛点，why-now清晰且项目成熟度远超同梯队，去掉owner名字依然在stars维度领先，完全配得上top-tier位置。",
+      "judge_score_delta": 5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "repo_url": "https://github.com/alibaba/open-code-review",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2026-05-29T00:00:00.000Z",
+      "repo_updated_at": "2026-05-29T00:00:00.000Z",
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "code review",
+          "review"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+      "stars": 413,
+      "forks": 14,
+      "issues": 3,
+      "PR": 2,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:alibaba,fresh-today,agent,code-review,code-review-assistant,harness,repository-level-context,github-live-star-delta",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "alibaba"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:none",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 90,
+      "observer_score": 85,
+      "observer_rank": 2,
+      "project_brief_cn": "这是一个围绕 coding-agents、eval-observability-governance 的候选项目，当前可见线索集中在 Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents、eval-observability-governance 的生态证据，主体 pedigree 为 company:alibaba，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "优先继续看 README/代码深度、多源持续出现，以及它是否从观察候选进一步演变成稳定项目。",
+      "summary_source": "template_fallback",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "虽然背靠Alibaba品牌且处于proventier，但413 stars/14 forks的规模表明项目刚起步不久，内容厚度不足。去掉owner名字后只是一个普通的新项目，当前位置过高，需持续观察其真实社区反馈后再调升。",
+      "judge_score_delta": -5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-js",
+      "repo_url": "https://github.com/langfuse/langfuse-js",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2023-07-02T21:43:44Z",
+      "repo_updated_at": "2026-05-29T18:07:31Z",
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "observability"
+        ],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "description": "🪢 Langfuse JS/TS SDKs - Instrument your LLM app and get detailed tracing/observability. Works with any LLM or framework",
+      "stars": 141,
+      "forks": 87,
+      "issues": 20,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+        "query=repo:langfuse/langfuse",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 79,
+      "observer_score": 69,
+      "observer_rank": 3,
+      "project_brief_cn": "Langfuse JS/TS SDK 是一套用于在 JavaScript/TypeScript 项目中给 LLM 应用添加追踪和可观测性能力的库，支持任意 LLM 或框架，提供细粒度的调用链路、日志和指标采集。",
+      "why_now_cn": "随着大模型应用在生产环境快速落地，对可观测性、调试和治理的需求急剧增长；Langfuse 刚刚更新（freshness:active‑today），背靠 langfuse 公司并已被标记为 proven 级别，生态定位在 eval‑observability‑governance，stars 141、forks 87 说明社区关注度正在上升，此时推出 JS/TS SDK 能补齐前端和 Node 生态的可观测工具链，满足开发者在 LLM 项目中快速落地的需求。",
+      "watch_next_cn": "接下来需要关注 SDK 的实际使用量增长、是否出现主要框架（如 Next.js、LangChain）的高质量集成示例、发布稳定版（v1.x）以及社区对这些集成的反馈；同时要留意 Langfuse 平台的功能演进（如评估指标、仪表盘）是否会带动 SDK 的新特性需求，以及维护者对 Issue（当前 20 条）的响应速度。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "虽然背靠Langfuse公司且生态定位明确，但141 stars/87 forks的规模偏小，去掉owner名字后缺乏独立号召力。当前score 79对应位置过高，建议保留在观察名单但降低排名预期。",
+      "judge_score_delta": -10,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2026-05-28T00:00:00.000Z",
+      "repo_updated_at": "2026-05-29T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "| [#1074](https://github.com/moltis-org/moltis/pull/1074) | **已关闭** | 可配置嵌入维度 + 安全自动重索引 | **向量存储基础设施升级**：解决不同嵌入模型维度不兼容的痛点，支持 OpenAI 兼容提供商的灵活切换，自动重索引机制降低运维风险 |",
+      "stars": 2711,
+      "forks": 318,
+      "issues": 46,
+      "PR": 11,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 67,
+      "observer_score": 67,
+      "observer_rank": 4,
+      "project_brief_cn": "这是一个围绕 agent-runtime、skills-tools-mcp 的候选项目，当前可见线索集中在 | [#1074](https://github.com/moltis-org/moltis/pull/1074) | **已关闭** | 可配置嵌入维度 + 安全自动重索引 | **向量存储基础设施升级**：解决不同嵌入模型维度不兼容的痛点，支持 OpenAI 兼容提供商的灵活切换，自动重索引机制降低运维风险 |。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "优先继续看 README/代码深度、多源持续出现，以及它是否从观察候选进一步演变成稳定项目。",
+      "summary_source": "template_fallback",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "2711 stars/318 forks在无背书情况下表现出真实的社区吸引力，说明项目在agent-runtime/mcp领域有硬需求。当前tier:none但数据亮眼，建议保留观察并给予strong-watch评级，跟踪其后续生态渗透情况。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-python",
+      "repo_url": "https://github.com/langfuse/langfuse-python",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2023-07-17T10:56:29Z",
+      "repo_updated_at": "2026-05-29T18:06:23Z",
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "description": "🪢 Langfuse Python SDK - Instrument your LLM app with decorators or low-level SDK and get detailed tracing/observability. Works with any LLM or framework",
+      "stars": 408,
+      "forks": 281,
+      "issues": 61,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+        "query=repo:langfuse/langfuse",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "seed-adjacent",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:seed-adjacent",
+        "freshness:active-today",
+        "history:none",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 69,
+      "observer_score": 61,
+      "observer_rank": 5,
+      "project_brief_cn": "Langfuse Python SDK 为 LLM 应用提供追踪和可观测性支持，通过装饰器或低级 SDK 接口实现详细追踪，可无缝集成任意 LLM 或框架",
+      "why_now_cn": "Langfuse 公司已在可观测性领域建立完整生态，该 SDK 属于核心产品（langfuse 主仓库的 Python 客户端，当前 stars 408、forks 281），标签显示 active-today 表明维护活跃，在 LLM 应用监控需求快速增长背景下，这类基础设施型工具价值凸显",
+      "watch_next_cn": "需验证 SDK 对最新 Python 版本和主流 LLM 框架（如 LangChain、LlamaIndex 等）的兼容覆盖范围，以及在实际生产环境中的追踪数据完整性和性能开销表现",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "408 stars/281 forks数据相对健康，是Langfuse生态的核心SDK，但相比rank 1-2的项目缺少独占性优势。rank 6的初始位置尚可接受，可保留观察但不建议快速升位。",
+      "judge_score_delta": -8,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "juyterman1000/entroly",
+      "repo_url": "https://github.com/juyterman1000/entroly",
+      "observed_at": "2026-05-30T10:38:59+08:00",
+      "repo_created_at": "2026-03-07T23:03:02Z",
+      "repo_updated_at": "2026-05-30T02:37:39Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "claude code",
+          "codex",
+          "cursor"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Local proxy that cuts your Claude / OpenAI / Gemini bill 70%+. Drop-in for Cursor, Claude Code, Codex, Aider — 30 seconds, no code changes.",
+      "stars": 402,
+      "forks": 65,
+      "issues": 1,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query=keyword:aider",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 47,
+      "observer_score": 47,
+      "observer_rank": 6,
+      "project_brief_cn": "entroly是一个本地代理工具，通过智能缓存和请求复用机制，将Claude、OpenAI、Gemini等AI API的调用成本降低70%以上。它设计为即插即用，能在30秒内集成到Cursor、Claude Code、Codex、Aider等主流编码代理中，无需修改代码。",
+      "why_now_cn": "coding-agents生态正在快速扩展，API成本成为开发者的重要负担。entroly今天仍保持活跃状态，且在细分场景（coding agents）中展现出稳定增长势头。用户对其降本效果的关注度持续上升，这反映出AI应用从实验走向生产过程中，成本优化已从可选变为刚需。",
+      "watch_next_cn": "需要验证其缓存机制在不同类型任务中的命中率表现，以及70%+降本数据是否在真实项目中可复现。此外，该项目 pedigree 为空，缺少公开的知名构建者或公司背书，其长期维护性和可靠性尚未得到充分验证。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "402 stars/65 forks在无背书情况下说明确实有降本需求的市场验证。智能缓存复用机制有一定技术含量，值得继续观察其增长趋势和用户留存。给予strong-watch。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    }
+  ]
+}

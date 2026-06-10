@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "openai/openai-go",
+  "repo_url": "https://github.com/openai/openai-go",
+  "stars": 3187,
+  "forks": 310,
+  "issues": 92,
+  "PR": 56,
+  "description": "The official Go library for the OpenAI API",
+  "tags": []
+}

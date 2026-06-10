@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "czlonkowski/n8n-mcp",
+  "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+  "stars": 21145,
+  "forks": 3422,
+  "issues": 48,
+  "PR": 24,
+  "description": "A MCP for Claude Desktop / Claude Code / Windsurf / Cursor to build n8n workflows for you ",
+  "tags": [
+    "mcp",
+    "mcp-server",
+    "n8n",
+    "workflows"
+  ]
+}

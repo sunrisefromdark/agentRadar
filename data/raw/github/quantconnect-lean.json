@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "QuantConnect/Lean",
+  "repo_url": "https://github.com/QuantConnect/Lean",
+  "stars": 19485,
+  "forks": 4846,
+  "issues": 235,
+  "PR": 9,
+  "description": "Lean Algorithmic Trading Engine by QuantConnect (Python, C#)",
+  "tags": [
+    "algorithm",
+    "algorithmic-trading-engine",
+    "c-sharp",
+    "finance",
+    "forex",
+    "lean-engine",
+    "options",
+    "python",
+    "quantconnect",
+    "stock-indicators",
+    "trading",
+    "trading-algorithms",
+    "trading-bot",
+    "trading-platform",
+    "trading-strategies"
+  ]
+}

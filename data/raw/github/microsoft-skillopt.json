@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "microsoft/SkillOpt",
+  "repo_url": "https://github.com/microsoft/SkillOpt",
+  "stars": 4389,
+  "forks": 445,
+  "issues": 6,
+  "PR": 0,
+  "description": "SkillOpt is a text-space optimizer that trains reusable natural-language skills for frozen LLM agents through trajectory-driven edits, validation-gated updates, and deployable best_skill.md artifacts.",
+  "tags": [
+    "agent-skills",
+    "self-evolving-agents"
+  ]
+}

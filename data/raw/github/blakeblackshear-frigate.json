@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "blakeblackshear/frigate",
+  "repo_url": "https://github.com/blakeblackshear/frigate",
+  "stars": 33331,
+  "forks": 3219,
+  "issues": 72,
+  "PR": 56,
+  "description": "NVR with realtime local object detection for IP cameras",
+  "tags": [
+    "ai",
+    "camera",
+    "google-coral",
+    "home-assistant",
+    "home-automation",
+    "homeautomation",
+    "mqtt",
+    "nvr",
+    "object-detection",
+    "realtime",
+    "rtsp",
+    "tensorflow"
+  ]
+}

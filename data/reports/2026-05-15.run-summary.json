@@ -1,0 +1,303 @@
+{
+  "date": "2026-05-15",
+  "generated_at": "2026-06-06T22:29:15+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 149 条",
+    "归一化阶段完成，共 101 个项目",
+    "评分阶段完成，共 101 个已评分项目",
+    "本次运行活跃信号面: 5/5",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "mode": "semantic-classification",
+    "classification_attempt_count": 0,
+    "classification_success_count": 0,
+    "classification_failure_count": 0,
+    "summary_attempt_count": 17,
+    "summary_success_count": 17,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "overall_daily_status": "数据新鲜，可直接阅读",
+  "freshness_sources": [
+    {
+      "source": "agents-radar",
+      "effective_date": "2026-05-15",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "agents-radar 已同步，可读取 2026-05-15 的上下文摘要",
+      "from_realtime_run": false,
+      "source_role": "context"
+    },
+    {
+      "source": "trendshift_live",
+      "effective_date": "2026-05-15",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Trendshift 快照可用，已恢复 2026-05-15 的趋势信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_trending",
+      "effective_date": "2026-05-15",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub Trending 快照可用，已恢复 2026-05-15 的热度信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_live_star_delta",
+      "effective_date": "2026-05-15",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub star delta 快照可用，已恢复 2026-05-15 的增量信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "watchlist_live_activity",
+      "effective_date": "2026-05-15",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Watchlist 活动快照可用，已恢复 2026-05-15 的观察清单信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    }
+  ],
+  "main_board_mode": "fresh_today_only",
+  "today_fresh_candidate_count": 67,
+  "today_star_count": 63,
+  "context_candidate_count": 34,
+  "pending_confirmation_count": 4,
+  "counts": {
+    "raw_signals": 149,
+    "normalized_projects": 101,
+    "scored_projects": 101,
+    "high_score_projects": 31,
+    "anomaly_projects": 13,
+    "new_projects": 101,
+    "classifications": 101
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 62,
+      "distinct_projects": 55,
+      "status": "active",
+      "notes": [
+        "primary local digest input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "snapshot/http trend input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "GitHub Trending realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 17,
+      "distinct_projects": 17,
+      "status": "active",
+      "notes": [
+        "watchlist realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 101,
+      "distinct_projects": 101,
+      "status": "active",
+      "notes": [
+        "project-level enrichment inferred from structured repo metrics"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 3,
+    "watchlist_hits": 20,
+    "low_confidence_projects": 0,
+    "medium_confidence_projects": 56,
+    "insufficient_metrics_projects": 0,
+    "suspicious_growth_projects": 0,
+    "single_source_projects": 50,
+    "single_spike_projects": 15,
+    "emerging_projects": 29,
+    "persistent_projects": 57
+  },
+  "diagnostics": {
+    "anomaly_share": 0.1287,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 101,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 0
+    },
+    "star_delta_source_distribution": {
+      "github_live": 0,
+      "github_snapshot": 0,
+      "signal": 91,
+      "unavailable": 10
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 0,
+      "live_delta_success": 0,
+      "snapshot_delta_success": 0,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "NousResearch/hermes-agent",
+      "repo_url": "https://github.com/NousResearch/hermes-agent",
+      "total_score": 100,
+      "base_final_rank": 105,
+      "final_rank": 105,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "首名，多源确认且活跃度高，符合agent runtime+memory主题，无负面信号，位置合理。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=0)",
+        "engagement_score=100 (forks=23910)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "affaan-m/everything-claude-code",
+      "repo_url": "https://github.com/affaan-m/everything-claude-code",
+      "total_score": 97,
+      "base_final_rank": 104.5,
+      "final_rank": 104.5,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + self-improving + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "高star增长775，多源确认，今日重点，位置与热度匹配。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + self-improving + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=775)",
+        "engagement_score=100 (forks=28115)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "openclaw/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw",
+      "total_score": 100,
+      "base_final_rank": 102.5,
+      "final_rank": 102.5,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "star增长255，自托管AI助手概念新颖，多源确认，排名恰当。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=255)",
+        "engagement_score=100 (forks=77011)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "n8n-io/n8n",
+      "repo_url": "https://github.com/n8n-io/n8n",
+      "total_score": 93.05,
+      "base_final_rank": 95.55,
+      "final_rank": 95.55,
+      "confidence": "high",
+      "paradigm": "agent system",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "老牌项目，今日trending新鲜信号且star正增长，位置与其客观分相符。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent system",
+        "confidence=high",
+        "persistence=persistent",
+        "engagement_score=100 (forks=57637)",
+        "star_velocity=94 (daily_delta=142)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "rohitg00/agentmemory",
+      "repo_url": "https://github.com/rohitg00/agentmemory",
+      "total_score": 91,
+      "base_final_rank": 93.5,
+      "final_rank": 93.5,
+      "confidence": "high",
+      "paradigm": "agent infra",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "专注记忆主题且有863 star增长，符合当前热点，排名恰当。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent infra",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=863)",
+        "engagement_score=100 (forks=762)",
+        "architecture_shift=85 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    }
+  ],
+  "observer_top_candidates": [],
+  "watchouts": [
+    "仍有 50 个项目只有单一信号源，需要跨源或跨天确认",
+    "有 3 个项目缺少描述，语义判断会受限"
+  ],
+  "next_focus": [
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源"
+  ],
+  "recommended_actions": [
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ]
+}

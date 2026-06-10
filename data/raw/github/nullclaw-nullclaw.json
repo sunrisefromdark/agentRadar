@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "nullclaw/nullclaw",
+  "repo_url": "https://github.com/nullclaw/nullclaw",
+  "stars": 7652,
+  "forks": 893,
+  "issues": 57,
+  "PR": 14,
+  "description": "Fastest, smallest, and fully autonomous AI assistant infrastructure written in Zig",
+  "tags": [
+    "ai",
+    "assistant",
+    "personal",
+    "zig"
+  ]
+}

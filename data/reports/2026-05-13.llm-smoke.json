@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-13",
+  "generated_at": "2026-05-13T11:12:30+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "We need to return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\n\nThe user explicitly says: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". So the answer should be exactly that JSON. There's no additional text, no formatting, just the JSON.\n\nCheck for any h"
+}

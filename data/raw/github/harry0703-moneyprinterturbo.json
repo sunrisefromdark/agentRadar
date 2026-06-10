@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "harry0703/MoneyPrinterTurbo",
+  "repo_url": "https://github.com/harry0703/MoneyPrinterTurbo",
+  "stars": 77765,
+  "forks": 11029,
+  "issues": 16,
+  "PR": 6,
+  "description": "利用AI大模型，一键生成高清短视频 Generate short videos with one click using AI LLM.",
+  "tags": [
+    "ai",
+    "automation",
+    "chatgpt",
+    "moviepy",
+    "python",
+    "shortvideo",
+    "tiktok"
+  ]
+}

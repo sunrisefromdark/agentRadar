@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "TheAlgorithms/Python",
+  "repo_url": "https://github.com/TheAlgorithms/Python",
+  "stars": 221443,
+  "forks": 50668,
+  "issues": 125,
+  "PR": 799,
+  "description": "All Algorithms implemented in Python",
+  "tags": [
+    "algorithm",
+    "algorithm-competitions",
+    "algorithms-implemented",
+    "algos",
+    "community-driven",
+    "education",
+    "hacktoberfest",
+    "interview",
+    "learn",
+    "practice",
+    "python",
+    "searches",
+    "sorting-algorithms",
+    "sorts"
+  ]
+}

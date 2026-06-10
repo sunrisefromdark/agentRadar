@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/neural-steering",
+  "repo_url": "https://github.com/NousResearch/neural-steering",
+  "stars": 9,
+  "forks": 4,
+  "issues": 0,
+  "PR": 1,
+  "description": "Implementation of Contrastive Neuron Attribution for behavioral detection and steering.",
+  "tags": []
+}

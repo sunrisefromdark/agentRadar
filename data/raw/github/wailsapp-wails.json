@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "wailsapp/wails",
+  "repo_url": "https://github.com/wailsapp/wails",
+  "stars": 34463,
+  "forks": 1698,
+  "issues": 241,
+  "PR": 154,
+  "description": "Create beautiful applications using Go",
+  "tags": [
+    "angular",
+    "desktop-application",
+    "go",
+    "golang",
+    "javascript",
+    "linux",
+    "macos",
+    "react",
+    "svelte",
+    "vuejs",
+    "windows"
+  ]
+}

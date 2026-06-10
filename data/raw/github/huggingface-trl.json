@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "huggingface/trl",
+  "repo_url": "https://github.com/huggingface/trl",
+  "stars": 18491,
+  "forks": 2754,
+  "issues": 502,
+  "PR": 155,
+  "description": "Train transformer language models with reinforcement learning.",
+  "tags": []
+}

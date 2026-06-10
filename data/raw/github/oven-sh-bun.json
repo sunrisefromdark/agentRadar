@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "oven-sh/bun",
+  "repo_url": "https://github.com/oven-sh/bun",
+  "stars": 92161,
+  "forks": 4616,
+  "issues": 5020,
+  "PR": 1887,
+  "description": "Incredibly fast JavaScript runtime, bundler, test runner, and package manager – all in one",
+  "tags": [
+    "bun",
+    "bundler",
+    "javascript",
+    "javascriptcore",
+    "jsx",
+    "nodejs",
+    "npm",
+    "react",
+    "transpiler",
+    "typescript",
+    "zig",
+    "ziglang"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "mastra-ai/template-text-to-sql",
+  "repo_url": "https://github.com/mastra-ai/template-text-to-sql",
+  "stars": 24,
+  "forks": 11,
+  "issues": 0,
+  "PR": 0,
+  "description": "A Mastra template for natural language to SQL conversion using a local SQLite database.",
+  "tags": []
+}

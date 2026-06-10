@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "browser-use/bux",
+  "repo_url": "https://github.com/browser-use/bux",
+  "stars": 336,
+  "forks": 40,
+  "issues": 1,
+  "PR": 18,
+  "description": "Browser Use Box: a 24/7 Claude Code agent for Playwright-style browser automation with Browser Use Cloud, Telegram, and a real browser on any box you own.",
+  "tags": [
+    "ai-agent",
+    "ai-automation",
+    "automation",
+    "browser-agent",
+    "browser-automation",
+    "browser-use",
+    "browser-use-box",
+    "browser-use-cloud",
+    "claude-code",
+    "claude-code-agent",
+    "cloud-browser",
+    "persistent-browser",
+    "playwright",
+    "playwright-automation",
+    "telegram-agent",
+    "telegram-automation",
+    "telegram-bot",
+    "vps",
+    "vps-agent",
+    "web-automation"
+  ]
+}

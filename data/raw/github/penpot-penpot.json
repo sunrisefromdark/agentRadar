@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "penpot/penpot",
+  "repo_url": "https://github.com/penpot/penpot",
+  "stars": 47978,
+  "forks": 3024,
+  "issues": 582,
+  "PR": 119,
+  "description": "Penpot: The open-source design tool for design and code collaboration",
+  "tags": [
+    "clojure",
+    "clojurescript",
+    "design",
+    "prototyping",
+    "ui",
+    "ux-design",
+    "ux-experience"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "rowboatlabs/rowboat",
+  "repo_url": "https://github.com/rowboatlabs/rowboat",
+  "stars": 14246,
+  "forks": 1427,
+  "issues": 52,
+  "PR": 58,
+  "description": "Open-source AI coworker, with memory",
+  "tags": [
+    "agents",
+    "agents-sdk",
+    "ai",
+    "ai-agents",
+    "ai-agents-automation",
+    "chatgpt",
+    "claude-code",
+    "claude-cowork",
+    "generative-ai",
+    "llm",
+    "multiagent",
+    "opeani",
+    "open-source",
+    "orchestration",
+    "productivity"
+  ]
+}

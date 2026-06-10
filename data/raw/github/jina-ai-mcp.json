@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "jina-ai/MCP",
+  "repo_url": "https://github.com/jina-ai/MCP",
+  "stars": 703,
+  "forks": 72,
+  "issues": 12,
+  "PR": 2,
+  "description": "Official Jina AI Remote MCP Server",
+  "tags": [
+    "mcp",
+    "mcp-server"
+  ]
+}

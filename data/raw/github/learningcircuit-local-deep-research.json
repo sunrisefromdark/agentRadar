@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "LearningCircuit/local-deep-research",
+  "repo_url": "https://github.com/LearningCircuit/local-deep-research",
+  "stars": 7871,
+  "forks": 680,
+  "issues": 93,
+  "PR": 215,
+  "description": " ~95% on SimpleQA (e.g. Qwen3.6-27B on a 3090). Supports all local and cloud LLMs (llama.cpp, Ollama, Google, ...). 10+ search engines - arXiv, PubMed, your private documents. Everything Local & Encrypted.",
+  "tags": [
+    "academia",
+    "anthropic",
+    "arxiv",
+    "brave",
+    "deep-research",
+    "encryption",
+    "home-automation",
+    "homeserver",
+    "local",
+    "local-deep-research",
+    "local-llm",
+    "mistral",
+    "ollama",
+    "openai",
+    "pubmed",
+    "research",
+    "research-tool",
+    "retrieval-augmented-generation",
+    "searxng",
+    "self-hosted"
+  ]
+}

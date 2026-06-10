@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "addyosmani/agent-skills",
+  "repo_url": "https://github.com/addyosmani/agent-skills",
+  "stars": 44343,
+  "forks": 4889,
+  "issues": 42,
+  "PR": 54,
+  "description": "Production-grade engineering skills for AI coding agents.",
+  "tags": [
+    "agent-skills",
+    "antigravity",
+    "antigravity-ide",
+    "claude-code",
+    "cursor",
+    "skills"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "Thysrael/Horizon",
+  "repo_url": "https://github.com/Thysrael/Horizon",
+  "stars": 4286,
+  "forks": 594,
+  "issues": 1,
+  "PR": 0,
+  "description": "📡 Your own AI-powered news radar. Generates daily briefings in English & Chinese. | 用 AI 构建你专属的新闻雷达",
+  "tags": [
+    "aggregator",
+    "feishu-bot",
+    "llm",
+    "mcp",
+    "news",
+    "openclaw",
+    "python",
+    "webhook"
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "nyakang/nyaterm",
+  "repo_url": "https://github.com/nyakang/nyaterm",
+  "stars": 106,
+  "forks": 10,
+  "issues": 10,
+  "PR": 0,
+  "description": "A modern remote terminal workspace",
+  "tags": [
+    "otp",
+    "react",
+    "serialport",
+    "sftp",
+    "sftp-client",
+    "ssh",
+    "ssh-client",
+    "tauri",
+    "telnet",
+    "telnet-client",
+    "terminal",
+    "xterm",
+    "xtermjs"
+  ]
+}

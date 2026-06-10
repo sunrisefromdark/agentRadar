@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "p-e-w/heretic",
+  "repo_url": "https://github.com/p-e-w/heretic",
+  "stars": 23237,
+  "forks": 2482,
+  "issues": 56,
+  "PR": 19,
+  "description": "Fully automatic censorship removal for language models",
+  "tags": [
+    "abliteration",
+    "llm",
+    "transformer"
+  ]
+}

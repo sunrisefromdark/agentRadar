@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "nicobailon/pi-subagents",
+  "repo_url": "https://github.com/nicobailon/pi-subagents",
+  "stars": 1931,
+  "forks": 263,
+  "issues": 27,
+  "PR": 15,
+  "description": "Pi extension for async subagent delegation with truncation, artifacts, and session sharing",
+  "tags": []
+}

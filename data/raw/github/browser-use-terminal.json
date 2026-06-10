@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "browser-use/terminal",
+  "repo_url": "https://github.com/browser-use/terminal",
+  "stars": 501,
+  "forks": 25,
+  "issues": 4,
+  "PR": 4,
+  "description": "Terminal UI to get stuff done in the browser",
+  "tags": [
+    "browser-automation",
+    "browser-use",
+    "cdp",
+    "terminal",
+    "tui"
+  ]
+}

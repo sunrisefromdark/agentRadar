@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "HKUDS/DeepTutor",
+  "repo_url": "https://github.com/HKUDS/DeepTutor",
+  "stars": 24397,
+  "forks": 3294,
+  "issues": 27,
+  "PR": 10,
+  "description": "DeepTutor: Agent-native, Open-sourced Personalized Tutoring. https://deeptutor.info/.",
+  "tags": [
+    "ai-agents",
+    "ai-tutor",
+    "clawdbot",
+    "cli-tool",
+    "deepresearch",
+    "interactive-learning",
+    "large-language-models",
+    "multi-agent-systems",
+    "rag"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "KeygraphHQ/shannon",
+  "repo_url": "https://github.com/KeygraphHQ/shannon",
+  "stars": 43396,
+  "forks": 4971,
+  "issues": 5,
+  "PR": 6,
+  "description": "Shannon Lite is an autonomous, white-box AI pentester for web applications and APIs. It analyzes your source code, identifies attack vectors, and executes real exploits to prove vulnerabilities before they reach production.",
+  "tags": [
+    "penetration-testing",
+    "pentesting",
+    "security-audit",
+    "security-automation",
+    "security-tools"
+  ]
+}

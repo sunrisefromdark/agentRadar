@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "FareedKhan-dev/train-llm-from-scratch",
+  "repo_url": "https://github.com/FareedKhan-dev/train-llm-from-scratch",
+  "stars": 4024,
+  "forks": 541,
+  "issues": 5,
+  "PR": 2,
+  "description": "A straightforward method for training your LLM, from downloading data to generating text.",
+  "tags": [
+    "gemini",
+    "large-language-models",
+    "llm",
+    "openai",
+    "training",
+    "transformers"
+  ]
+}

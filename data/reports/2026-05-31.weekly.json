@@ -1,0 +1,1352 @@
+{
+  "date": "2026-05-31",
+  "generated_at": "2026-06-06T22:52:11+08:00",
+  "window_start": "2026-05-25",
+  "window_end": "2026-05-31",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "overall_summary_cn": "本周趋势回顾确认：agent-runtime、ai-skills、tool-use 和 memory 四个趋势信号明显且可靠，应当提升为确立趋势；同时识别出多个具备发展潜力但证据尚不充分的观察趋势。审核未发现需要直接拒绝的候选，但针对高度重叠的候选做了合理的合并处理。下周需重点监控合并后趋势的持续发展，并关注盲点中提及的普通 AI 工具与新兴范式结合的可能性。",
+  "supporting_trend_keys": [
+    "agent-runtime",
+    "ai-skills",
+    "tool-use",
+    "memory"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "Agent运行时",
+      "trend_summary_cn": "Agent运行时趋势持续升温，多个编码Agent项目活跃，支持持久记忆和工具技能生态。",
+      "evidence_summary_cn": "本周hermes-agent周增18408星，openclaw周增9637星，opencode周增14857星，多个项目长期上榜。",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续关注该方向的新项目涌现及现有项目的能力整合进展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "Hermes Agent是一个会随着你成长的AI助手，能记忆用户偏好、调用工具完成任务，常用于自动化编码和日常任务编排。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多天多源确认，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory和skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的NousResearch仓库有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周持续高星增长（周增18408星），连续27天出现在榜单，是Agent运行时趋势的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "OpenClaw是一个跨平台个人AI助手，支持任何操作系统，可自托管，用于文件管理、命令执行、工具调用等日常自动化。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多源确认，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 29 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/anomalyco/opencode",
+          "project_name": "anomalyco/opencode",
+          "project_class": "today_star",
+          "objective_score": 94,
+          "preference_boost": 2.5,
+          "base_final_rank": 96.5,
+          "final_rank": 95.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "OpenCode是一个开源的编码Agent，能理解代码库、生成补丁、运行测试，帮助开发者加速编码，类似终端里的AI编程搭档。",
+          "why_today_cn": "该项目今日登上 GitHub Trending，并有多日多源数据确认热度，star 增长约 1，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周周增14857星，连续27天出现在榜单，作为编码Agent代表项目持续受关注。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "Agent运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3",
+              "weekly_delta=18408"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：daily_delta=3"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=28637",
+              "issues=14556"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：forks=28637"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 29,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anomalyco/opencode",
+                "repo_full_name": "anomalyco/opencode",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=27"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "ai-skills",
+      "trend_name_cn": "AI技能生态",
+      "trend_summary_cn": "AI技能生态快速扩展，多个项目专注于技能管理、优化和跨平台集成。",
+      "evidence_summary_cn": "ECC项目周增9922星，Understand-Anything周增26161星，skills-management方向新项目cc-switch周增6551星。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注这些技能管理项目能否持续增长，并是否出现更多跨平台技能编排工具。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "Hermes Agent不仅是一个运行时，还内置技能生态系统，用户可以为它添加自定义技能来扩展能力，常用于自动化工作流和工具集成。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多天多源确认，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的NousResearch仓库有更新。",
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "最近 27 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "today_star",
+          "objective_score": 92,
+          "preference_boost": 7.5,
+          "base_final_rank": 99.5,
+          "final_rank": 101,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能围绕代码仓库做分析与修改。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+          "why_today_cn": "该项目登上 GitHub Trending，star 增长约 3，且来自多个数据源，今天值得优先阅读。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、skills和claude code主题，与你关注方向高度一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "本周新晋上榜，周增9922星，作为Agent技能优化工具引发关注。"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "project_name": "Lum1104/Understand-Anything",
+          "project_class": "today_star",
+          "objective_score": 90.25,
+          "preference_boost": 7.5,
+          "base_final_rank": 97.75,
+          "final_rank": 95.75,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "Understand-Anything能将代码或知识库转换为交互式知识图谱，支持Claude Code、Codex等工具，帮助开发者可视化理解复杂项目。",
+          "why_today_cn": "今日星增约 5604，势头迅猛，Trendshift 当日命中，社区关注度极高。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory、skills和claude code主题，与你关注方向高度一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "增长异常，建议核查原始指标后再评估。",
+          "risk_review_source": "agent",
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "本周周增26161星，作为知识图谱与AI技能结合的新项目迅速走红。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-skills",
+        "focused_trend_name_cn": "AI技能生态",
+        "summary_cn": "当前聚焦 ai-skills，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3",
+              "weekly_delta=18408"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：daily_delta=3"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=28637",
+              "issues=14556"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：forks=28637"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 83.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 28,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 83.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 80
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 86.7。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=27"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "tool-use",
+      "trend_name_cn": "工具使用能力",
+      "trend_summary_cn": "Agent工具使用能力持续增强，多个项目支持MCP协议、技能调用和自动化工作流。",
+      "evidence_summary_cn": "hermes-agent和openclaw均具备tool-use信号，ECC作为工具调度系统周增9922星。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注MCP和工具编排方面的进展，特别是跨Agent工具复用趋势。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "Hermes Agent支持丰富的工具调用，能集成MCP服务器和外部API，常用于自动化数据处理和第三方服务编排。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多天多源确认，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory和skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的NousResearch仓库有更新。",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "本周持续高星增长，作为多工具聚合Agent的代表项目受关注。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "OpenClaw作为个人AI助手，内置工具调用能力，可执行文件操作、运行命令、管理日历等，像一个全能的终端管家。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多源确认，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 29 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "today_star",
+          "objective_score": 92,
+          "preference_boost": 7.5,
+          "base_final_rank": 99.5,
+          "final_rank": 101,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "ECC为AI Agent提供工具调用优化，支持技能调度、记忆注入和安全管控，常被用来提升Claude Code等编码Agent的工具使用效率。",
+          "why_today_cn": "该项目登上 GitHub Trending，star 增长约 3，且来自多个数据源，今天值得优先阅读。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、skills和claude code主题，与你关注方向高度一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 7 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "tool-use",
+        "focused_trend_name_cn": "工具使用能力",
+        "summary_cn": "当前聚焦 tool-use，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3",
+              "weekly_delta=18408"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：daily_delta=3"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=28637",
+              "issues=14556"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：forks=28637"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 91.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 27,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 91.7。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=27"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "memory",
+      "trend_name_cn": "持久记忆",
+      "trend_summary_cn": "持久记忆成为Agent标配，多个项目专注于跨会话记忆、上下文压缩和知识图谱。",
+      "evidence_summary_cn": "hermes-agent和openclaw均具备memory信号，ECC和Understand-Anything强调记忆管理，claude-mem等项目推出持久上下文方案。",
+      "strength": "strong",
+      "worth_following_next_week": "下周关注记忆管理新工具的出现，以及记忆与技能结合的进展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 107,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "Hermes Agent具备持久记忆能力，能在多次会话中记住用户偏好、项目上下文，常用于需要长期任务跟踪的场景。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多天多源确认，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的NousResearch仓库有更新。",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 27 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管终端 AI 助手 / agent shell。它主要是帮你强调自托管和用户自己掌控数据边界，也能支持工具调用和本地工作流自动化。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+          "why_today_cn": "今天登上 GitHub Trending，且已有多源确认，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 29 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "today_star",
+          "objective_score": 92,
+          "preference_boost": 7.5,
+          "base_final_rank": 99.5,
+          "final_rank": 101,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能围绕代码仓库做分析与修改。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+          "why_today_cn": "该项目登上 GitHub Trending，star 增长约 3，且来自多个数据源，今天值得优先阅读。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、skills和claude code主题，与你关注方向高度一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 7 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "memory",
+        "focused_trend_name_cn": "持久记忆",
+        "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3",
+              "weekly_delta=18408"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：daily_delta=3"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=28637",
+              "issues=14556"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：forks=28637"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 91.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 27,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 91.7。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=27"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、affaan-m/ECC。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "ai-skills",
+      "matched_interest_topics": [
+        "skills"
+      ],
+      "personalization_reason_cn": "贴近你的skills关注方向，且本周ECC、Understand-Anything等项目活跃。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "repo_full_name": "Lum1104/Understand-Anything"
+        }
+      ]
+    },
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "贴近你的memory关注方向，hermes-agent、openclaw等记忆相关项目持续热门。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "repo_full_name": "openclaw/openclaw"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        }
+      ]
+    }
+  ],
+  "weak_signal_cards": [
+    {
+      "trend_key": "skills-management",
+      "signal_name_cn": "技能管理",
+      "why_weak_cn": "仅有cc-switch一个项目，且来源单一（trendshift），尚未有多源验证。",
+      "evidence_summary_cn": "cc-switch周增6551星，但每日增量为0，增长持续性待观察。",
+      "worth_following_next_week": "若下周出现更多同类项目或该项目持续增长，可考虑升级。"
+    },
+    {
+      "trend_key": "antigravity-skills",
+      "signal_name_cn": "反重力技能（知识图谱）",
+      "why_weak_cn": "仅有Understand-Anything一个项目，且增长异常，风险提示为可疑增长。",
+      "evidence_summary_cn": "Understand-Anything周增26161星，但存在可疑增长信号，需核查。",
+      "worth_following_next_week": "若下周增长趋于正常且出现更多同类项目，可考虑升级。"
+    },
+    {
+      "trend_key": "codex-skills",
+      "signal_name_cn": "Codex技能",
+      "why_weak_cn": "仅有Understand-Anything一个项目关联此关键字，证据薄弱。",
+      "evidence_summary_cn": "Understand-Anything支持Codex，但增长异常，需谨慎。",
+      "worth_following_next_week": "若下周出现更多Codex技能相关项目，可考虑升级。"
+    },
+    {
+      "trend_key": "developer-tools-ai-agent",
+      "signal_name_cn": "开发者AI Agent工具",
+      "why_weak_cn": "仅有Understand-Anything一个项目关联，且存在可疑增长。",
+      "evidence_summary_cn": "Understand-Anything周增26161星，但风险提示可疑。",
+      "worth_following_next_week": "若下周出现更多此类项目，可考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-31",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "insufficient_project_evidence",
+        "reason_detail": "project_brief_cn fell back to template rules (insufficient_project_evidence)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "agent-runtime",
+    "focused_trend_name_cn": "Agent运行时",
+    "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=3",
+          "weekly_delta=18408"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：daily_delta=3"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=28637",
+          "issues=14556"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：forks=28637"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 95,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 29,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 85
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 5,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_skill_ecosystem"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 93.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 7,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 80
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "classification.has_governance_boundary"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 8,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anomalyco/opencode",
+            "repo_full_name": "anomalyco/opencode",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+          "appearances=27"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anomalyco/opencode。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+      }
+    ]
+  }
+}

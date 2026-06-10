@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "galilai-group/stable-pretraining",
+  "repo_url": "https://github.com/galilai-group/stable-pretraining",
+  "stars": 244,
+  "forks": 48,
+  "issues": 17,
+  "PR": 15,
+  "description": "Reliable, minimal and scalable library for pretraining foundation and world models",
+  "tags": [
+    "computer-vision",
+    "computer-vision-algorithms",
+    "contrastive-learning",
+    "deep-learning",
+    "distributed",
+    "foundation-models",
+    "joint-embedding",
+    "joint-embedding-predictive-architecture",
+    "large-language-model",
+    "multimodal-learning",
+    "pytorch",
+    "self-supervised-learning",
+    "stable-pretraining",
+    "transformers"
+  ]
+}

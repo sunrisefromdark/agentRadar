@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "github/gitignore",
+  "repo_url": "https://github.com/github/gitignore",
+  "stars": 174129,
+  "forks": 82476,
+  "issues": 5,
+  "PR": 58,
+  "description": "A collection of useful .gitignore templates",
+  "tags": [
+    "git",
+    "gitignore"
+  ]
+}

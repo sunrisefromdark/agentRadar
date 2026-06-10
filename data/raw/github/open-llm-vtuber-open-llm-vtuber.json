@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "Open-LLM-VTuber/Open-LLM-VTuber",
+  "repo_url": "https://github.com/Open-LLM-VTuber/Open-LLM-VTuber",
+  "stars": 8736,
+  "forks": 1096,
+  "issues": 89,
+  "PR": 37,
+  "description": "Talk to any LLM with hands-free voice interaction, voice interruption, and Live2D taking face running locally across platforms",
+  "tags": [
+    "ai",
+    "ai-companion",
+    "ai-vtuber",
+    "ai-waifu",
+    "chatbots",
+    "live2d",
+    "live2d-web",
+    "llm",
+    "neuro-sama",
+    "ollama"
+  ]
+}

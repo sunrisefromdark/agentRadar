@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "langchain-ai/open-swe",
+  "repo_url": "https://github.com/langchain-ai/open-swe",
+  "stars": 9877,
+  "forks": 1124,
+  "issues": 6,
+  "PR": 10,
+  "description": "An Open-Source Asynchronous Coding Agent",
+  "tags": [
+    "agent",
+    "agents",
+    "ai",
+    "anthropic",
+    "claudecode",
+    "llm",
+    "llms",
+    "openai"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-04",
+  "generated_at": "2026-05-04T16:29:08+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user says: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". They want a compact JSON string with that data. The system is a \"Developer\" channel, but also it's a plain request. The user wants the response to be a compact JSON only (no extra whitespace?) Possibly just that"
+}

@@ -1,0 +1,11 @@
+#!/bin/sh
+set -eu
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+echo "[pre-push] running typecheck"
+corepack pnpm typecheck
+
+echo "[pre-push] running tests"
+corepack pnpm test

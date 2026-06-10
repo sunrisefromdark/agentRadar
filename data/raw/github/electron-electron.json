@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "electron/electron",
+  "repo_url": "https://github.com/electron/electron",
+  "stars": 121501,
+  "forks": 17230,
+  "issues": 726,
+  "PR": 144,
+  "description": ":electron: Build cross-platform desktop apps with JavaScript, HTML, and CSS",
+  "tags": [
+    "c-plus-plus",
+    "chrome",
+    "css",
+    "electron",
+    "html",
+    "javascript",
+    "nodejs",
+    "v8",
+    "works-with-codespaces"
+  ]
+}

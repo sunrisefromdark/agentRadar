@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "joeseesun/qiaomu-anything-to-notebooklm",
+  "repo_url": "https://github.com/joeseesun/qiaomu-anything-to-notebooklm",
+  "stars": 4277,
+  "forks": 454,
+  "issues": 2,
+  "PR": 3,
+  "description": "Claude Skill: Multi-source content processor for NotebookLM. Supports WeChat articles, web pages, YouTube, PDF, Markdown, search queries → Podcast/PPT/MindMap/Quiz etc.",
+  "tags": [
+    "automation",
+    "claude",
+    "mcp",
+    "notebooklm",
+    "skill"
+  ]
+}

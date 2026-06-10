@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "microsoft/PowerToys",
+  "repo_url": "https://github.com/microsoft/PowerToys",
+  "stars": 133743,
+  "forks": 8031,
+  "issues": 6879,
+  "PR": 150,
+  "description": "Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows",
+  "tags": [
+    "advanced-paste",
+    "color-picker",
+    "command-palette",
+    "desktop",
+    "fancyzones",
+    "keyboard-manager",
+    "microsoft-powertoys",
+    "powerrename",
+    "powertoys",
+    "windows",
+    "windows-10",
+    "windows-11"
+  ]
+}

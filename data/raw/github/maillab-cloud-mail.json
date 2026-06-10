@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "maillab/cloud-mail",
+  "repo_url": "https://github.com/maillab/cloud-mail",
+  "stars": 9795,
+  "forks": 13079,
+  "issues": 56,
+  "PR": 10,
+  "description": "A Cloudflare-based email service  | 基于 Cloudflare 的邮箱服务  | Cloudflare Email 邮箱 Mail",
+  "tags": [
+    "cloudflare",
+    "cloudflare-email",
+    "cloudflare-workers",
+    "email",
+    "mail"
+  ]
+}

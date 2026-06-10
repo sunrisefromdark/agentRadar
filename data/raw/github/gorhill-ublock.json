@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "gorhill/uBlock",
+  "repo_url": "https://github.com/gorhill/uBlock",
+  "stars": 64824,
+  "forks": 4118,
+  "issues": 13,
+  "PR": 4,
+  "description": "uBlock Origin - An efficient blocker for Chromium and Firefox. Fast and lean.",
+  "tags": [
+    "blocker",
+    "browser-extension",
+    "chromium",
+    "firefox",
+    "javascript",
+    "ublock",
+    "ublock-origin"
+  ]
+}

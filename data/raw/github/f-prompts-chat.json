@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "f/prompts.chat",
+  "repo_url": "https://github.com/f/prompts.chat",
+  "stars": 163245,
+  "forks": 21216,
+  "issues": 14,
+  "PR": 33,
+  "description": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+  "tags": [
+    "ai",
+    "artificial-intelligence",
+    "awesome-list",
+    "chatgpt",
+    "chatgpt-prompts",
+    "claude",
+    "gemini",
+    "gpt",
+    "gpt-4",
+    "llm",
+    "machine-learning",
+    "nextjs",
+    "open-source",
+    "openai",
+    "prompt-engineering",
+    "prompts",
+    "prompts-chat",
+    "typescript"
+  ]
+}

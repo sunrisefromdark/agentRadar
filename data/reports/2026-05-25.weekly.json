@@ -1,0 +1,1417 @@
+{
+  "date": "2026-05-25",
+  "generated_at": "2026-06-06T22:43:52+08:00",
+  "window_start": "2026-05-19",
+  "window_end": "2026-05-25",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "overall_summary_cn": "本周趋势围绕智能体运行时（agent-runtime）、智能体技能体系（agent-skills）、工具使用（tool-use）和记忆（memory）等方向收敛。多个高信号项目如NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills等持续活跃。MCP协议相关趋势、AI编码、多智能体协作等方向也在发育中。部分候选趋势如claude-code-skills、memory-engine等仍在观察阶段。",
+  "supporting_trend_keys": [
+    "agent-runtime",
+    "ai-skills",
+    "tool-use",
+    "memory"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "智能体运行时",
+      "trend_summary_cn": "智能体运行时方向持续活跃，多个项目强调持久记忆与技能生态，Claude Code、OpenClaw等工具成为开发者的日常编码助手。",
+      "evidence_summary_cn": "NousResearch/hermes-agent日增2063星，周增4425星，持久记忆与技能生态分类确认；openclaw/openclaw周增7471星，自托管AI助手定位；anthropics/skills官方技能仓库持续高热度。",
+      "strength": "strong",
+      "worth_following_next_week": "关注Hermes Agent是否会推出更完善的技能市场，以及OpenClaw在多平台适配上的进展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个AI智能体框架，能记住用户偏好并调用工具完成任务。它帮你管理长期记忆、执行代码和自动化工作流。大家常用它来做个人助手或开发辅助。",
+          "why_today_cn": "命中 Trendshift、GitHub Trending 及重点观察清单，多源确认热度，今日新增 2063 星，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory和skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的代码仓库有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周Hermes Agent持续高星增长，说明开发者对具备记忆能力的智能体兴趣浓厚。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管的终端AI助手，跨平台运行。它帮你读文件、执行命令、串联工具操作，并支持记忆功能。大家常把它作为本地智能体来管理日常开发任务。",
+          "why_today_cn": "命中 GitHub Trending，多源确认热度，今日新增 345 星，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周OpenClaw持续出现在多个趋势方向中，跨平台AI助手定位吸引大量用户。"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "project_name": "anthropics/skills",
+          "project_class": "today_star",
+          "objective_score": 96.25,
+          "preference_boost": 5,
+          "base_final_rank": 101.25,
+          "final_rank": 101.25,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是官方技能仓库，提供Claude Code等智能体的预置技能包。你可以直接下载使用现成的AI技能模块，比如代码审查或文档生成。大家用它来快速扩展智能体的能力。",
+          "why_today_cn": "命中 GitHub Trending 及重点观察清单，多源确认热度，今日新增 913 星，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory和skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的代码仓库有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周Skills仓库活跃度保持高位，官方技能生态的完善推动智能体运行时发展。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "智能体运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=2063",
+              "weekly_delta=4425"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：daily_delta=2063"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=25296",
+              "issues=12041"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：forks=25296"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=21"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "ai-skills",
+      "trend_name_cn": "AI技能体系",
+      "trend_summary_cn": "AI技能方向持续火热，从官方技能仓库到社区注册表，开发者正在构建可复用的智能体能力模块。",
+      "evidence_summary_cn": "anthropics/skills日增913星，周增2583星；tech-leads-club/agent-skills日增626星，专业技能注册表定位。",
+      "strength": "strong",
+      "worth_following_next_week": "关注技能市场的标准化趋势，以及社区注册表与官方仓库的整合。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+          "why_today_cn": "命中 Trendshift、GitHub Trending 及重点观察清单，多源确认热度，今日新增 2063 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "project_name": "anthropics/skills",
+          "project_class": "today_star",
+          "objective_score": 96.25,
+          "preference_boost": 5,
+          "base_final_rank": 101.25,
+          "final_rank": 101.25,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "官方发布的智能体技能集合，包含代码编写、调试、文档生成等预置技能。开发者可以直接安装使用，让Claude Code等工具更强大。",
+          "why_today_cn": "命中 GitHub Trending 及重点观察清单，多源确认热度，今日新增 913 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的代码仓库有更新。",
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/tech-leads-club/agent-skills",
+          "project_name": "tech-leads-club/agent-skills",
+          "project_class": "today_star",
+          "objective_score": 87,
+          "preference_boost": 5,
+          "base_final_rank": 92,
+          "final_rank": 92,
+          "matched_interest_topics": [
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个专业的技能注册表，经过安全验证，支持Claude Code、Coder等多种智能体。你可以在上面查找、安装社区贡献的高质量技能模块。",
+          "why_today_cn": "今日 star 增长约 626，来自 Trendshift 实时信号，值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中skills和claude code主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-skills",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-skills",
+        "focused_trend_name_cn": "AI技能体系",
+        "summary_cn": "当前聚焦 ai-skills，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=2063",
+              "weekly_delta=4425"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、anthropics/skills、tech-leads-club/agent-skills。证据摘要：daily_delta=2063"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=25296",
+              "issues=12041"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、anthropics/skills、tech-leads-club/agent-skills。证据摘要：forks=25296"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 23,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、tech-leads-club/agent-skills、anthropics/skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 85,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 95
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 85。代表项目包括 NousResearch/hermes-agent、anthropics/skills、tech-leads-club/agent-skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 86.7。代表项目包括 NousResearch/hermes-agent、anthropics/skills、tech-leads-club/agent-skills。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/tech-leads-club/agent-skills",
+                "repo_full_name": "tech-leads-club/agent-skills",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=21"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 NousResearch/hermes-agent、anthropics/skills、tech-leads-club/agent-skills。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "tool-use",
+      "trend_name_cn": "工具使用",
+      "trend_summary_cn": "智能体工具使用能力是本周围绕的核心，从终端工具到MCP协议，开发者追求更高效的工具调用方式。",
+      "evidence_summary_cn": "openclaw/openclaw周增7471星，强调工具调用；anthropics/skills持续高热度；Chrome DevTools MCP协议工具新上榜。",
+      "strength": "strong",
+      "worth_following_next_week": "关注MCP协议在浏览器开发工具中的应用，以及工具使用标准化。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+          "why_today_cn": "命中 Trendshift、GitHub Trending 及重点观察清单，多源确认热度，今日新增 2063 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "跨平台终端AI助手，能调用系统工具、执行命令、操作文件。它让开发者通过自然语言即可完成文件读写、代码编译等日常任务。",
+          "why_today_cn": "命中 GitHub Trending，多源确认热度，今日新增 345 星，值得优先关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "本周OpenClaw长期占据趋势榜，工具调用能力是其核心亮点。"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "project_name": "anthropics/skills",
+          "project_class": "today_star",
+          "objective_score": 96.25,
+          "preference_boost": 5,
+          "base_final_rank": 101.25,
+          "final_rank": 101.25,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "官方技能仓库，提供大量工具调用相关的技能模块，如Git操作、API调用等。开发者可一键安装让智能体学会新工具。",
+          "why_today_cn": "命中 GitHub Trending 及重点观察清单，多源确认热度，今日新增 913 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中skills主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的代码仓库有更新。",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "tool-use",
+        "focused_trend_name_cn": "工具使用",
+        "summary_cn": "当前聚焦 tool-use，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=2063",
+              "weekly_delta=4425"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：daily_delta=2063"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=25296",
+              "issues=12041"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：forks=25296"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=21"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "memory",
+      "trend_name_cn": "记忆机制",
+      "trend_summary_cn": "持久记忆成为智能体核心能力，多个项目强化跨会话记忆、知识图谱和上下文管理。",
+      "evidence_summary_cn": "claude-mem周增1691星，实现跨会话记忆；codegraph预索引代码知识图谱降低Token消耗；RAGFlow打造RAG+智能体上下文层。",
+      "strength": "strong",
+      "worth_following_next_week": "关注智能体记忆与知识图谱的融合趋势，以及RAGFlow的Agent化进展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+          "why_today_cn": "命中 Trendshift、GitHub Trending 及重点观察清单，多源确认热度，今日新增 2063 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管终端 AI 助手 / agent shell。它主要是帮你强调自托管和用户自己掌控数据边界，也能支持工具调用和本地工作流自动化。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+          "why_today_cn": "命中 GitHub Trending，多源确认热度，今日新增 345 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 23 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "project_name": "anthropics/skills",
+          "project_class": "today_star",
+          "objective_score": 96.25,
+          "preference_boost": 5,
+          "base_final_rank": 101.25,
+          "final_rank": 101.25,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法。大家通常会用它来整理现成技能和工作流打法。",
+          "why_today_cn": "命中 GitHub Trending 及重点观察清单，多源确认热度，今日新增 913 星，值得优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 21 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "memory",
+        "focused_trend_name_cn": "记忆机制",
+        "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=2063",
+              "weekly_delta=4425"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：daily_delta=2063"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=25296",
+              "issues=12041"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：forks=25296"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/anthropics/skills",
+                "repo_full_name": "anthropics/skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=21"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "ai-skills",
+      "matched_interest_topics": [
+        "skills"
+      ],
+      "personalization_reason_cn": "命中skills主题，与你当前关注的AI技能方向一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "repo_full_name": "anthropics/skills"
+        },
+        {
+          "repo_url": "https://github.com/tech-leads-club/agent-skills",
+          "repo_full_name": "tech-leads-club/agent-skills"
+        }
+      ]
+    },
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "命中memory主题，与你当前关注的智能体记忆方向一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "repo_full_name": "openclaw/openclaw"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "repo_full_name": "anthropics/skills"
+        }
+      ]
+    }
+  ],
+  "weak_signal_cards": [
+    {
+      "trend_key": "multi-agent-coordination",
+      "signal_name_cn": "多智能体协作",
+      "why_weak_cn": "OpenAI发布了agents-python框架，但项目热度仍在早期，尚未形成明显趋势。",
+      "evidence_summary_cn": "openai/openai-agents-python日增50星，周增50星，描述为轻量级多智能体工作流框架。",
+      "worth_following_next_week": "若下周出现更多基于该框架的项目或讨论，可考虑升级。"
+    },
+    {
+      "trend_key": "claude-code-skills",
+      "signal_name_cn": "Claude Code技能生态",
+      "why_weak_cn": "ruflo项目定位为Claude的智能体编排平台，但趋势证据尚不充分。",
+      "evidence_summary_cn": "ruvnet/ruflo日增549星，周增14430星，描述为支持Claude Code/Codex的多智能体协调平台。",
+      "worth_following_next_week": "若下周继续快速增长，考虑升级为核心趋势。"
+    },
+    {
+      "trend_key": "memory-engine",
+      "signal_name_cn": "记忆引擎",
+      "why_weak_cn": "claude-mem项目虽然热度不错，但memory-engine作为独立趋势证据较弱。",
+      "evidence_summary_cn": "thedotmack/claude-mem日增257星，周增1691星，提供跨会话持久记忆。",
+      "worth_following_next_week": "若下周出现更多类似记忆引擎项目，可考虑升级。"
+    },
+    {
+      "trend_key": "openmemory",
+      "signal_name_cn": "开放记忆",
+      "why_weak_cn": "与memory-engine类似，项目单一且证据尚未完成闭环。",
+      "evidence_summary_cn": "thedotmack/claude-mem同时关联openmemory趋势，但独立项目证据不足。",
+      "worth_following_next_week": "若下周出现其他开放记忆项目，可考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/tech-leads-club/agent-skills",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/anthropics/skills",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "agent-runtime",
+    "focused_trend_name_cn": "智能体运行时",
+    "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=2063",
+          "weekly_delta=4425"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：daily_delta=2063"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=25296",
+          "issues=12041"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：forks=25296"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 95,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 26,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 85
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 98.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 4,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 95
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_skill_ecosystem"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 6,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "classification.has_governance_boundary"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 8,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/anthropics/skills",
+            "repo_full_name": "anthropics/skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+          "appearances=21"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、openclaw/openclaw、anthropics/skills。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+      }
+    ]
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "yichuan-w/LEANN",
+  "repo_url": "https://github.com/yichuan-w/LEANN",
+  "stars": 11810,
+  "forks": 1053,
+  "issues": 38,
+  "PR": 22,
+  "description": "[MLsys2026]: RAG on Everything with LEANN. Enjoy 97% storage savings while running a fast, accurate, and 100% private RAG application on your personal device.",
+  "tags": [
+    "ai",
+    "faiss",
+    "gpt-oss",
+    "langchain",
+    "llama-index",
+    "llm",
+    "localstorage",
+    "offline-first",
+    "ollama",
+    "privacy",
+    "python",
+    "rag",
+    "retrieval-augmented-generation",
+    "vector-database",
+    "vector-search",
+    "vectors"
+  ]
+}

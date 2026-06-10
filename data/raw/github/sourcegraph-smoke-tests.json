@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "sourcegraph/smoke-tests",
+  "repo_url": "https://github.com/sourcegraph/smoke-tests",
+  "stars": 10,
+  "forks": 2,
+  "issues": 1,
+  "PR": 23,
+  "description": "Smoke tests for Sourcegraph - basic functionality",
+  "tags": []
+}

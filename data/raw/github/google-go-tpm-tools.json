@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "google/go-tpm-tools",
+  "repo_url": "https://github.com/google/go-tpm-tools",
+  "stars": 298,
+  "forks": 105,
+  "issues": 50,
+  "PR": 83,
+  "description": "Go packages built on go-tpm providing a high-level API for using TPMs",
+  "tags": [
+    "go",
+    "golang",
+    "remote-attestation",
+    "security",
+    "tpm",
+    "tpm2"
+  ]
+}

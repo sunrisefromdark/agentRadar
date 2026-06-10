@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "clash-verge-rev/clash-verge-rev",
+  "repo_url": "https://github.com/clash-verge-rev/clash-verge-rev",
+  "stars": 122270,
+  "forks": 8916,
+  "issues": 354,
+  "PR": 25,
+  "description": "A modern GUI client based on Tauri, designed to run in Windows, macOS and Linux for tailored proxy experience",
+  "tags": [
+    "clash",
+    "clash-meta",
+    "clash-verge",
+    "linux",
+    "mac",
+    "mihomo",
+    "tauri-app",
+    "windows"
+  ]
+}

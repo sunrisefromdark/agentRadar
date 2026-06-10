@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "tokio-rs/tokio",
+  "repo_url": "https://github.com/tokio-rs/tokio",
+  "stars": 32054,
+  "forks": 3056,
+  "issues": 330,
+  "PR": 96,
+  "description": "A runtime for writing reliable asynchronous applications with Rust. Provides I/O, networking, scheduling, timers, ...",
+  "tags": [
+    "asynchronous",
+    "networking",
+    "rust"
+  ]
+}

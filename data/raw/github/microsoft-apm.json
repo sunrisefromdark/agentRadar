@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "microsoft/apm",
+  "repo_url": "https://github.com/microsoft/apm",
+  "stars": 2684,
+  "forks": 214,
+  "issues": 109,
+  "PR": 20,
+  "description": "Agent Package Manager",
+  "tags": [
+    "ai-agents",
+    "claude-code",
+    "codex-cli",
+    "context-engineering",
+    "github-copilot",
+    "package-manager",
+    "prompt-engineering"
+  ]
+}

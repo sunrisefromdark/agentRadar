@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "NVlabs/Eagle",
+  "repo_url": "https://github.com/NVlabs/Eagle",
+  "stars": 1333,
+  "forks": 90,
+  "issues": 39,
+  "PR": 4,
+  "description": "Eagle: Frontier Vision-Language Models with Data-Centric Strategies",
+  "tags": [
+    "demo",
+    "eagle",
+    "gpt4",
+    "huggingface",
+    "large-language-models",
+    "llama",
+    "llama3",
+    "llava",
+    "llm",
+    "lmm",
+    "lvlm",
+    "mllm",
+    "nvdia"
+  ]
+}

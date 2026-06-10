@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "getagentseal/codeburn",
+  "repo_url": "https://github.com/getagentseal/codeburn",
+  "stars": 6807,
+  "forks": 518,
+  "issues": 17,
+  "PR": 24,
+  "description": "See where your AI coding tokens go. Interactive TUI dashboard for Claude Code, Codex, and Cursor cost observability.",
+  "tags": [
+    "ai-coding",
+    "claude-code",
+    "cli",
+    "codex",
+    "cost-tracking",
+    "cursor-ide",
+    "developer-tools",
+    "observability",
+    "terminal-ui",
+    "token-usage"
+  ]
+}

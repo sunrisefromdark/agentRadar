@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "langfuse/langfuse-java",
+  "repo_url": "https://github.com/langfuse/langfuse-java",
+  "stars": 64,
+  "forks": 13,
+  "issues": 5,
+  "PR": 1,
+  "description": "🪢 Auto-generated Java Client for Langfuse API",
+  "tags": [
+    "analytics",
+    "java",
+    "langfuse",
+    "large-language-models",
+    "llm",
+    "llm-observability",
+    "llmops",
+    "monitoring",
+    "observability",
+    "open-source",
+    "openai",
+    "prompt-engineering",
+    "sdk-java",
+    "self-hosted",
+    "ycombinator"
+  ]
+}

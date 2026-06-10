@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "microsoft/graphrag",
+  "repo_url": "https://github.com/microsoft/graphrag",
+  "stars": 33134,
+  "forks": 3506,
+  "issues": 41,
+  "PR": 79,
+  "description": "A modular graph-based Retrieval-Augmented Generation (RAG) system",
+  "tags": [
+    "gpt",
+    "gpt-4",
+    "gpt4",
+    "graphrag",
+    "llm",
+    "llms",
+    "rag"
+  ]
+}

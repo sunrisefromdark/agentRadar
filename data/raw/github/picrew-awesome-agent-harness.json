@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "Picrew/awesome-agent-harness",
+  "repo_url": "https://github.com/Picrew/awesome-agent-harness",
+  "stars": 762,
+  "forks": 60,
+  "issues": 2,
+  "PR": 5,
+  "description": "An awesome list of Agent Harness engineering resources, including GitHub projects, tools, benchmarks, and practical guides.",
+  "tags": [
+    "agent-harness",
+    "context-engineering",
+    "harness-engineering"
+  ]
+}

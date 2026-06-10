@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "huggingface/course",
+  "repo_url": "https://github.com/huggingface/course",
+  "stars": 3938,
+  "forks": 1338,
+  "issues": 225,
+  "PR": 252,
+  "description": "The Hugging Face course on Transformers",
+  "tags": [
+    "deep-learning",
+    "hacktoberfest",
+    "nlp",
+    "transformers"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "ohmyzsh/ohmyzsh",
+  "repo_url": "https://github.com/ohmyzsh/ohmyzsh",
+  "stars": 187542,
+  "forks": 26369,
+  "issues": 150,
+  "PR": 406,
+  "description": "🙃   A delightful community-driven (with 2,500+ contributors) framework for managing your zsh configuration. Includes 300+ optional plugins (rails, git, macOS, hub, docker, homebrew, node, php, python, etc), 140+ themes to spice up your morning, and an auto-update tool that makes it easy to keep up with the latest updates from the community.",
+  "tags": [
+    "cli",
+    "cli-app",
+    "oh-my-zsh",
+    "oh-my-zsh-plugin",
+    "oh-my-zsh-theme",
+    "ohmyzsh",
+    "plugin-framework",
+    "plugins",
+    "productivity",
+    "shell",
+    "terminal",
+    "theme",
+    "themes",
+    "zsh",
+    "zsh-configuration"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "microsoft/react-native-windows",
+  "repo_url": "https://github.com/microsoft/react-native-windows",
+  "stars": 17270,
+  "forks": 1194,
+  "issues": 699,
+  "PR": 48,
+  "description": "A framework for building native Windows apps with React.",
+  "tags": [
+    "dotnet",
+    "react",
+    "react-native",
+    "uwp",
+    "xbox"
+  ]
+}

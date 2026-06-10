@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "HKUDS/Vibe-Trading",
+  "repo_url": "https://github.com/HKUDS/Vibe-Trading",
+  "stars": 9495,
+  "forks": 1944,
+  "issues": 4,
+  "PR": 0,
+  "description": "\"Vibe-Trading: Your Personal Trading Agent\"",
+  "tags": [
+    "ai-agent",
+    "algorithmic-trading",
+    "backtesting",
+    "fintech",
+    "llm",
+    "mcp",
+    "multi-agent",
+    "python",
+    "quantitative-finance",
+    "trading"
+  ]
+}

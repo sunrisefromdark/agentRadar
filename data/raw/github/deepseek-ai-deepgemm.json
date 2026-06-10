@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "deepseek-ai/DeepGEMM",
+  "repo_url": "https://github.com/deepseek-ai/DeepGEMM",
+  "stars": 7313,
+  "forks": 1006,
+  "issues": 48,
+  "PR": 25,
+  "description": "DeepGEMM: clean and efficient FP8 GEMM kernels with fine-grained scaling",
+  "tags": []
+}

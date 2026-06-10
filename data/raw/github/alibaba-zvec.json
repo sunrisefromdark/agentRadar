@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "alibaba/zvec",
+  "repo_url": "https://github.com/alibaba/zvec",
+  "stars": 9737,
+  "forks": 557,
+  "issues": 31,
+  "PR": 20,
+  "description": "A lightweight, lightning-fast, in-process vector database",
+  "tags": [
+    "agent-skills",
+    "db",
+    "embedded",
+    "faiss",
+    "hnsw",
+    "llm-memory",
+    "local",
+    "rag",
+    "search-engine",
+    "semantic-search",
+    "similarity-search",
+    "vector-database",
+    "vector-db"
+  ]
+}

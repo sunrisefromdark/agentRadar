@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "atomicstrata/atomicmemory",
+  "repo_url": "https://github.com/atomicstrata/atomicmemory",
+  "stars": 61,
+  "forks": 1,
+  "issues": 0,
+  "PR": 4,
+  "description": "Portable semantic memory for AI agents: core engine, TypeScript SDK, framework adapters, MCP server, CLI, and host plugins.",
+  "tags": [
+    "agent-infrastructure",
+    "agent-memory",
+    "ai-agents",
+    "ai-memory",
+    "cli",
+    "context-engineering",
+    "developer-tools",
+    "llm",
+    "local-first",
+    "mcp",
+    "memory-layer",
+    "model-context-protocol",
+    "open-source",
+    "pgvector",
+    "postgres",
+    "retrieval",
+    "sdk",
+    "self-hosted",
+    "semantic-memory",
+    "typescript"
+  ]
+}

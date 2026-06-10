@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "trekhleb/javascript-algorithms",
+  "repo_url": "https://github.com/trekhleb/javascript-algorithms",
+  "stars": 196005,
+  "forks": 31068,
+  "issues": 136,
+  "PR": 262,
+  "description": "📝 Algorithms and data structures implemented in JavaScript with explanations and links to further readings",
+  "tags": [
+    "algorithm",
+    "algorithms",
+    "computer-science",
+    "data-structures",
+    "interview",
+    "interview-preparation",
+    "javascript",
+    "javascript-algorithms"
+  ]
+}

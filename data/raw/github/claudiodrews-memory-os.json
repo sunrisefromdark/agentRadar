@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "ClaudioDrews/memory-os",
+  "repo_url": "https://github.com/ClaudioDrews/memory-os",
+  "stars": 456,
+  "forks": 34,
+  "issues": 0,
+  "PR": 3,
+  "description": "A 7-layer memory operating system for Hermes Agent — persistent memory with Qdrant, structured facts, fabric recall, auto-curated wiki, and surgical context injection. Runs locally, any LLM provider.",
+  "tags": []
+}

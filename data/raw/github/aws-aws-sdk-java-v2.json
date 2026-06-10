@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "aws/aws-sdk-java-v2",
+  "repo_url": "https://github.com/aws/aws-sdk-java-v2",
+  "stars": 2584,
+  "forks": 1005,
+  "issues": 321,
+  "PR": 60,
+  "description": "The official AWS SDK for Java - Version 2",
+  "tags": [
+    "amazon",
+    "aws",
+    "aws-sdk",
+    "hacktoberfest",
+    "java"
+  ]
+}

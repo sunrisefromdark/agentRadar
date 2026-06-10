@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "NirDiamant/agents-towards-production",
+  "repo_url": "https://github.com/NirDiamant/agents-towards-production",
+  "stars": 20338,
+  "forks": 2696,
+  "issues": 4,
+  "PR": 3,
+  "description": "End-to-end, code-first tutorials for building production-grade GenAI agents. From prototype to enterprise deployment.",
+  "tags": [
+    "agent",
+    "agent-framework",
+    "agents",
+    "ai-agents",
+    "deployment",
+    "genai",
+    "generative-ai",
+    "langgraph",
+    "llm",
+    "llms",
+    "mlops",
+    "production",
+    "python",
+    "tutorials"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "skyzh/tiny-llm",
+  "repo_url": "https://github.com/skyzh/tiny-llm",
+  "stars": 4220,
+  "forks": 324,
+  "issues": 7,
+  "PR": 3,
+  "description": "A course of learning LLM inference serving on Apple Silicon for systems engineers: build a tiny vLLM + Qwen.",
+  "tags": [
+    "course",
+    "large-language-model",
+    "llm",
+    "python",
+    "qwen",
+    "qwen2",
+    "serving",
+    "vllm"
+  ]
+}

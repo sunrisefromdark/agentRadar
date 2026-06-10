@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "InternLM/lmdeploy",
+  "repo_url": "https://github.com/InternLM/lmdeploy",
+  "stars": 7878,
+  "forks": 701,
+  "issues": 527,
+  "PR": 70,
+  "description": "LMDeploy is a toolkit for compressing, deploying, and serving LLMs.",
+  "tags": [
+    "codellama",
+    "cuda-kernels",
+    "deepspeed",
+    "fastertransformer",
+    "internlm",
+    "llama",
+    "llama2",
+    "llama3",
+    "llm",
+    "llm-inference",
+    "turbomind"
+  ]
+}

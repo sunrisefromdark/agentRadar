@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "withkynam/vibecode-pro-max-kit",
+  "repo_url": "https://github.com/withkynam/vibecode-pro-max-kit",
+  "stars": 368,
+  "forks": 73,
+  "issues": 15,
+  "PR": 1,
+  "description": "Your AI forgets. This remembers. Spec-driven coding harness for vibecoders, product owners, CEOs and real builders — self-improving context memory, 12 agents, 32 skills. Kills context rot, ships features, not spaghetti. Claude Code & Codex. Any stack. 30 seconds",
+  "tags": [
+    "agentic",
+    "ai-agents",
+    "ai-coding-assistant",
+    "ai-development",
+    "ai-workflow",
+    "anthropic",
+    "claude",
+    "claude-code",
+    "cli-tools",
+    "code-quality",
+    "codex",
+    "coding-agents",
+    "cursor",
+    "developer-tools",
+    "llm",
+    "openai",
+    "prompt-engineering",
+    "typescript",
+    "vibe-coding",
+    "vibecoding"
+  ]
+}

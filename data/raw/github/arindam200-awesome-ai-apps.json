@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "Arindam200/awesome-ai-apps",
+  "repo_url": "https://github.com/Arindam200/awesome-ai-apps",
+  "stars": 12379,
+  "forks": 1589,
+  "issues": 39,
+  "PR": 25,
+  "description": "A collection of projects showcasing RAG, agents, workflows, and other AI use cases",
+  "tags": [
+    "agents",
+    "ai",
+    "hacktoberfest",
+    "llm",
+    "mcp"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-31",
+  "generated_at": "2026-05-31T21:42:33+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user says: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". That's a request to output exactly a JSON snippet. The instruction: \"Return compact JSON only\". Likely they want to output exactly that JSON. There's no policy violation. The user wants the assistant to respond "
+}

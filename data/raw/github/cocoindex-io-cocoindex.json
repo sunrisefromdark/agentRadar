@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "cocoindex-io/cocoindex",
+  "repo_url": "https://github.com/cocoindex-io/cocoindex",
+  "stars": 9933,
+  "forks": 776,
+  "issues": 38,
+  "PR": 13,
+  "description": "Incremental engine for long horizon agents 🌟 Star if you like it!",
+  "tags": [
+    "agentic-data-framework",
+    "ai",
+    "ai-agents",
+    "change-data-capture",
+    "codebase-intelligence",
+    "context-engineering",
+    "data-engineering",
+    "data-indexing",
+    "data-processing",
+    "etl",
+    "help-wanted",
+    "indexing",
+    "knowledge-graph",
+    "llm",
+    "long-horizon-agent",
+    "python",
+    "rag",
+    "real-time",
+    "rust",
+    "semantic-search"
+  ]
+}

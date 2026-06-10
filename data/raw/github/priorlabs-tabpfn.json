@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "PriorLabs/TabPFN",
+  "repo_url": "https://github.com/PriorLabs/TabPFN",
+  "stars": 7129,
+  "forks": 699,
+  "issues": 28,
+  "PR": 16,
+  "description": "⚡ TabPFN: Foundation Model for Tabular Data ⚡",
+  "tags": [
+    "data-science",
+    "foundation-models",
+    "machine-learning",
+    "tabpfn",
+    "tabular-data"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "vercel/turborepo",
+  "repo_url": "https://github.com/vercel/turborepo",
+  "stars": 30488,
+  "forks": 2354,
+  "issues": 15,
+  "PR": 12,
+  "description": "Build system optimized for JavaScript and TypeScript, written in Rust",
+  "tags": [
+    "build-system",
+    "build-tool",
+    "javascript",
+    "monorepo",
+    "typescript"
+  ]
+}

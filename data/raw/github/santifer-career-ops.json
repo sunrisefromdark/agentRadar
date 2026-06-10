@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "santifer/career-ops",
+  "repo_url": "https://github.com/santifer/career-ops",
+  "stars": 47903,
+  "forks": 9959,
+  "issues": 78,
+  "PR": 47,
+  "description": "AI-powered job search system built on Claude Code. 14 skill modes, Go dashboard, PDF generation, batch processing.",
+  "tags": [
+    "ai-agent",
+    "anthropic",
+    "automation",
+    "career",
+    "careerops",
+    "claude",
+    "claude-code",
+    "cli",
+    "golang",
+    "interview-prep",
+    "job-search",
+    "open-source",
+    "resume"
+  ]
+}

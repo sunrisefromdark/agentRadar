@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "sourcegraph/src-auth-perms-sync",
+  "repo_url": "https://github.com/sourcegraph/src-auth-perms-sync",
+  "stars": 1,
+  "forks": 0,
+  "issues": 1,
+  "PR": 0,
+  "description": "Set Sourcegraph permissions from authentication provider data",
+  "tags": []
+}

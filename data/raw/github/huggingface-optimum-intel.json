@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "huggingface/optimum-intel",
+  "repo_url": "https://github.com/huggingface/optimum-intel",
+  "stars": 591,
+  "forks": 238,
+  "issues": 61,
+  "PR": 73,
+  "description": "🤗 Optimum Intel: Accelerate inference with Intel optimization tools",
+  "tags": [
+    "diffusers",
+    "distillation",
+    "inference",
+    "intel",
+    "onnx",
+    "openvino",
+    "optimization",
+    "pruning",
+    "quantization",
+    "transformers"
+  ]
+}

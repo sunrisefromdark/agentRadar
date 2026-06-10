@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "cloudflare/agentic-inbox",
+  "repo_url": "https://github.com/cloudflare/agentic-inbox",
+  "stars": 2325,
+  "forks": 286,
+  "issues": 0,
+  "PR": 0,
+  "description": "A self-hosted email client with an AI agent, running entirely on Cloudflare Workers",
+  "tags": [
+    "ai-agent",
+    "cloud-native",
+    "self-hosted",
+    "agent"
+  ]
+}

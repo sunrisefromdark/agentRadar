@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "ollama/ollama",
+  "repo_url": "https://github.com/ollama/ollama",
+  "stars": 173009,
+  "forks": 16410,
+  "issues": 2364,
+  "PR": 944,
+  "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+  "tags": [
+    "deepseek",
+    "gemma",
+    "gemma3",
+    "glm",
+    "go",
+    "golang",
+    "gpt-oss",
+    "llama",
+    "llama3",
+    "llm",
+    "llms",
+    "minimax",
+    "mistral",
+    "ollama",
+    "qwen"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "kubernetes-sigs/agent-sandbox",
+  "repo_url": "https://github.com/kubernetes-sigs/agent-sandbox",
+  "stars": 2408,
+  "forks": 289,
+  "issues": 85,
+  "PR": 99,
+  "description": "agent-sandbox enables easy management of isolated, stateful, singleton workloads, ideal for use cases like AI agent runtimes.",
+  "tags": []
+}

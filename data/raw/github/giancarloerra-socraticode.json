@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "giancarloerra/SocratiCode",
+  "repo_url": "https://github.com/giancarloerra/SocratiCode",
+  "stars": 2713,
+  "forks": 357,
+  "issues": 0,
+  "PR": 0,
+  "description": "Enterprise-grade (40m+ LOC) codebase intelligence, zero-setup, local & private Plugin/Skill/Extension or MCP: hybrid semantic search, polyglot dependency graphs, symbol-level impact analysis & call-flow, interactive HTML viewer, cross-project & branch-aware search, DB/API/infra knowledge. 61% less tokens, 84% fewer calls, 37x faster. Cloud in beta.",
+  "tags": [
+    "ai",
+    "ai-assistant",
+    "ast",
+    "claude",
+    "claude-code",
+    "code-graph",
+    "codebase-intelligence",
+    "context-engine",
+    "docker",
+    "embeddings",
+    "gemini",
+    "gemini-cli-extension",
+    "mcp",
+    "openai",
+    "qdrant",
+    "semantic",
+    "semantic-search",
+    "vector-database",
+    "vector-embeddings",
+    "vector-search"
+  ]
+}

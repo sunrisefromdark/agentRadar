@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/NemoClaw",
+  "repo_url": "https://github.com/NousResearch/NemoClaw",
+  "stars": 13,
+  "forks": 5,
+  "issues": 0,
+  "PR": 6,
+  "description": "Run OpenClaw more securely inside NVIDIA OpenShell with managed inference",
+  "tags": []
+}

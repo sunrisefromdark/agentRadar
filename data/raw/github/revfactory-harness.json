@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "revfactory/harness",
+  "repo_url": "https://github.com/revfactory/harness",
+  "stars": 5443,
+  "forks": 720,
+  "issues": 0,
+  "PR": 8,
+  "description": "A meta-skill that designs domain-specific agent teams, defines specialized agents, and generates the skills they use.",
+  "tags": [
+    "claude-code",
+    "claude-code-plugin",
+    "harness",
+    "harness-engineering"
+  ]
+}

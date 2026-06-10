@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "supertone-inc/supertonic",
+  "repo_url": "https://github.com/supertone-inc/supertonic",
+  "stars": 9023,
+  "forks": 928,
+  "issues": 63,
+  "PR": 26,
+  "description": "Lightning-Fast, On-Device, Multilingual TTS — running natively via ONNX.",
+  "tags": [
+    "cpp",
+    "csharp",
+    "flutter",
+    "go",
+    "ios",
+    "java",
+    "lightweight",
+    "multilingual",
+    "nodejs",
+    "on-device",
+    "onnx",
+    "onnxruntime",
+    "python",
+    "rust",
+    "speech-synthesis",
+    "swift",
+    "text-to-speech",
+    "tts",
+    "web",
+    "webgpu"
+  ]
+}

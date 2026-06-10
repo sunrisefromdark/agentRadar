@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "NirDiamant/RAG_Techniques",
+  "repo_url": "https://github.com/NirDiamant/RAG_Techniques",
+  "stars": 27587,
+  "forks": 3317,
+  "issues": 6,
+  "PR": 7,
+  "description": "This repository showcases various advanced techniques for Retrieval-Augmented Generation (RAG) systems. Each technique has a detailed notebook tutorial.",
+  "tags": [
+    "ai",
+    "embeddings",
+    "langchain",
+    "llama-index",
+    "llm",
+    "llms",
+    "nlp",
+    "openai",
+    "python",
+    "rag",
+    "retrieval-augmented-generation",
+    "tutorials",
+    "vector-database"
+  ]
+}

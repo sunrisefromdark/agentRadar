@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "adobe/react-spectrum",
+  "repo_url": "https://github.com/adobe/react-spectrum",
+  "stars": 15189,
+  "forks": 1434,
+  "issues": 552,
+  "PR": 50,
+  "description": "A collection of libraries and tools that help you build adaptive, accessible, and robust user experiences.",
+  "tags": [
+    "accessibility",
+    "design-systems",
+    "react",
+    "react-components",
+    "ui-components",
+    "wai-aria"
+  ]
+}

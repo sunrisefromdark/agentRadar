@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "HKUDS/LightRAG",
+  "repo_url": "https://github.com/HKUDS/LightRAG",
+  "stars": 36119,
+  "forks": 5106,
+  "issues": 197,
+  "PR": 27,
+  "description": "[EMNLP2025] \"LightRAG: Simple and Fast Retrieval-Augmented Generation\"",
+  "tags": [
+    "genai",
+    "gpt",
+    "gpt-4",
+    "graphrag",
+    "knowledge-graph",
+    "large-language-models",
+    "llm",
+    "rag",
+    "retrieval-augmented-generation"
+  ]
+}

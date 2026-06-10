@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "THUDM/slime",
+  "repo_url": "https://github.com/THUDM/slime",
+  "stars": 5851,
+  "forks": 843,
+  "issues": 196,
+  "PR": 127,
+  "description": "slime is an LLM post-training framework for RL Scaling.",
+  "tags": []
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NVIDIA/SkillSpector",
+  "repo_url": "https://github.com/NVIDIA/SkillSpector",
+  "stars": 509,
+  "forks": 33,
+  "issues": 2,
+  "PR": 2,
+  "description": "Security scanner for AI agent skills. Detect vulnerabilities, malicious patterns, and security risks.",
+  "tags": []
+}

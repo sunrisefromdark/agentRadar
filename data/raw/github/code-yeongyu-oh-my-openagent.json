@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "code-yeongyu/oh-my-openagent",
+  "repo_url": "https://github.com/code-yeongyu/oh-my-openagent",
+  "stars": 59483,
+  "forks": 4844,
+  "issues": 327,
+  "PR": 281,
+  "description": "omo; the best agent harness - previously oh-my-opencode",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "amp",
+    "anthropic",
+    "chatgpt",
+    "claude",
+    "claude-code",
+    "claude-skills",
+    "cursor",
+    "gemini",
+    "ide",
+    "openai",
+    "opencode",
+    "orchestration",
+    "tui",
+    "typescript"
+  ]
+}

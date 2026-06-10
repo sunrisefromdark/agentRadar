@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "e2b-dev/E2B",
+  "repo_url": "https://github.com/e2b-dev/E2B",
+  "stars": 12296,
+  "forks": 909,
+  "issues": 25,
+  "PR": 33,
+  "description": "Open-source, secure environment with real-world tools for enterprise-grade agents.",
+  "tags": [
+    "agent",
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "code-interpreter",
+    "copilot",
+    "development",
+    "devtools",
+    "gpt",
+    "gpt-4",
+    "javascript",
+    "llm",
+    "nextjs",
+    "openai",
+    "python",
+    "react",
+    "software",
+    "typescript"
+  ]
+}

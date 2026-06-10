@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "testtimescaling/testtimescaling.github.io",
+  "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
+  "stars": 98,
+  "forks": 4,
+  "issues": 3,
+  "PR": 2,
+  "description": "\"what, how, where, and how well? a survey on test-time scaling in large language models\" repository",
+  "tags": [
+    "awesome-lists",
+    "large-language-model",
+    "survey",
+    "test-time-scaling"
+  ]
+}

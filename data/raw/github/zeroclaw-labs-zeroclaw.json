@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "zeroclaw-labs/zeroclaw",
+  "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+  "stars": 31713,
+  "forks": 4683,
+  "issues": 304,
+  "PR": 172,
+  "description": "Fast, small, and fully autonomous AI personal assistant infrastructure, any OS, any platform — deploy anywhere, swap anything 🦀",
+  "tags": [
+    "agent",
+    "agentic",
+    "ai",
+    "infra",
+    "ml",
+    "openclaw",
+    "os",
+    "zeroclaw"
+  ]
+}

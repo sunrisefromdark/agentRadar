@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "golang/go",
+  "repo_url": "https://github.com/golang/go",
+  "stars": 134115,
+  "forks": 19076,
+  "issues": 9659,
+  "PR": 473,
+  "description": "The Go programming language",
+  "tags": [
+    "go",
+    "golang",
+    "language",
+    "programming-language"
+  ]
+}

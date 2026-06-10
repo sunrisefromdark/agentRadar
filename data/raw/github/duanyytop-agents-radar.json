@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "duanyytop/agents-radar",
+  "repo_url": "https://github.com/duanyytop/agents-radar",
+  "stars": 786,
+  "forks": 116,
+  "issues": 250,
+  "PR": 3,
+  "description": "Daily AI ecosystem digest from 10 sources (GitHub, ArXiv, HN, HuggingFace, Product Hunt, Dev.to, Lobste.rs). Bilingual ZH/EN reports via GitHub Actions.",
+  "tags": []
+}

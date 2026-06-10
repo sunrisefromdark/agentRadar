@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "pi-hole/pi-hole",
+  "repo_url": "https://github.com/pi-hole/pi-hole",
+  "stars": 58864,
+  "forks": 3197,
+  "issues": 27,
+  "PR": 21,
+  "description": "A black hole for Internet advertisements",
+  "tags": [
+    "ad-blocker",
+    "blocker",
+    "cloud",
+    "dashboard",
+    "dhcp",
+    "dhcp-server",
+    "dns-server",
+    "dnsmasq",
+    "pi-hole",
+    "raspberry-pi",
+    "shell"
+  ]
+}

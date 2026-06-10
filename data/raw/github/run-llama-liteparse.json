@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "run-llama/liteparse",
+  "repo_url": "https://github.com/run-llama/liteparse",
+  "stars": 9024,
+  "forks": 538,
+  "issues": 8,
+  "PR": 4,
+  "description": "A fast, helpful, and open-source document parser",
+  "tags": [
+    "document-ocr",
+    "document-processing",
+    "ocr",
+    "ocr-recognition",
+    "pdf",
+    "pdf-parser",
+    "text-extraction"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "shareAI-lab/learn-claude-code",
+  "repo_url": "https://github.com/shareAI-lab/learn-claude-code",
+  "stars": 64457,
+  "forks": 10526,
+  "issues": 28,
+  "PR": 46,
+  "description": "Bash is all you need -  A nano claude code–like 「agent harness」, built from 0 to 1",
+  "tags": [
+    "agent",
+    "agent-development",
+    "ai-agent",
+    "claude",
+    "claude-code",
+    "educational",
+    "llm",
+    "python",
+    "teaching",
+    "tutorial"
+  ]
+}

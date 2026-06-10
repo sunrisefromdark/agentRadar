@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "alibaba/canal",
+  "repo_url": "https://github.com/alibaba/canal",
+  "stars": 29695,
+  "forks": 7641,
+  "issues": 1169,
+  "PR": 64,
+  "description": "阿里巴巴 MySQL binlog 增量订阅&消费组件 ",
+  "tags": []
+}

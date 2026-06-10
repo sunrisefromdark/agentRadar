@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "malbiruk/driftwm",
+  "repo_url": "https://github.com/malbiruk/driftwm",
+  "stars": 676,
+  "forks": 29,
+  "issues": 8,
+  "PR": 1,
+  "description": "A trackpad-first infinite canvas Wayland compositor.",
+  "tags": [
+    "compositor",
+    "gestures",
+    "infinite-canvas",
+    "linux",
+    "rust",
+    "smithay",
+    "trackpad",
+    "wayland",
+    "wayland-compositor",
+    "window-manager"
+  ]
+}

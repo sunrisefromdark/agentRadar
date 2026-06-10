@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "huggingface/kernels",
+  "repo_url": "https://github.com/huggingface/kernels",
+  "stars": 666,
+  "forks": 97,
+  "issues": 16,
+  "PR": 13,
+  "description": "Build compute kernels and load them from the Hub.",
+  "tags": []
+}

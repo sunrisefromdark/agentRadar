@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "sourcegraph/scip-dotnet",
+  "repo_url": "https://github.com/sourcegraph/scip-dotnet",
+  "stars": 29,
+  "forks": 15,
+  "issues": 3,
+  "PR": 29,
+  "description": "SCIP indexer for the C# programming language. Built with the Roslyn .NET compiler",
+  "tags": []
+}

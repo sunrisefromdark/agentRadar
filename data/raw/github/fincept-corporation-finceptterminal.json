@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+  "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+  "stars": 24312,
+  "forks": 3365,
+  "issues": 15,
+  "PR": 5,
+  "description": "FinceptTerminal is a modern finance application offering advanced market analytics, investment research, and economic data tools, designed for interactive exploration and data-driven decision-making in a user-friendly environment.",
+  "tags": [
+    "ai-agents",
+    "algorithmic-trading",
+    "bloomberg-terminal",
+    "cpp",
+    "finance",
+    "financial-markets",
+    "fintech",
+    "good-first-issue",
+    "investment",
+    "investment-research",
+    "machine-learning",
+    "opensource",
+    "python",
+    "qt",
+    "quantitative-finance",
+    "stock-market",
+    "trading"
+  ]
+}

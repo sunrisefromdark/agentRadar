@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "VoltAgent/awesome-design-md",
+  "repo_url": "https://github.com/VoltAgent/awesome-design-md",
+  "stars": 81941,
+  "forks": 9878,
+  "issues": 280,
+  "PR": 3,
+  "description": "A collection of DESIGN.md files inspired by popular brand design systems. Drop one into your project and let coding agents generate a matching UI.",
+  "tags": [
+    "awesome-list",
+    "design-md",
+    "design-system",
+    "design-tokens",
+    "figma",
+    "google-stitch",
+    "landing-page",
+    "vibe-coding",
+    "vibe-design"
+  ]
+}

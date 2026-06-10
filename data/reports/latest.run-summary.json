@@ -1,0 +1,1179 @@
+{
+  "date": "2026-06-09",
+  "generated_at": "2026-06-09T22:46:33+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 202 条",
+    "归一化阶段完成，共 165 个项目",
+    "评分阶段完成，共 165 个已评分项目",
+    "本次运行活跃信号面: 5/5",
+    "仍有 4 个项目处于低置信度，需要后续验证",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "mode": "semantic-classification",
+    "classification_cache_hit_count": 87,
+    "classification_attempt_count": 78,
+    "classification_success_count": 78,
+    "classification_failure_count": 0,
+    "summary_attempt_count": 17,
+    "summary_success_count": 17,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "overall_daily_status": "数据新鲜，可直接阅读",
+  "freshness_sources": [
+    {
+      "source": "agents-radar",
+      "effective_date": "2026-06-09",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "agents-radar 仓库已同步，可读取 2026-06-09 的最新 digest",
+      "from_realtime_run": true,
+      "source_role": "context"
+    },
+    {
+      "source": "trendshift_live",
+      "effective_date": "2026-06-09",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Trendshift 实时抓取成功，发现 25 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_trending",
+      "effective_date": "2026-06-09",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub Trending 实时发现成功，发现 25 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "watchlist_live_activity",
+      "effective_date": "2026-06-09",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "重点观察清单实时活动抓取成功，发现 79 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_live_star_delta",
+      "effective_date": "2026-06-09",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub 当日涨星信号实时解析成功，发现 5 个候选",
+      "from_realtime_run": true,
+      "source_role": "freshness-driving"
+    }
+  ],
+  "main_board_mode": "fresh_today_only",
+  "today_fresh_candidate_count": 125,
+  "today_star_count": 60,
+  "context_candidate_count": 40,
+  "pending_confirmation_count": 65,
+  "counts": {
+    "raw_signals": 202,
+    "normalized_projects": 165,
+    "scored_projects": 165,
+    "high_score_projects": 31,
+    "anomaly_projects": 15,
+    "new_projects": 165,
+    "classifications": 165
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 68,
+      "distinct_projects": 64,
+      "status": "active",
+      "notes": [
+        "source produced 68 raw signals",
+        "repo_sync_succeeded",
+        "agents-radar repo sync succeeded from https://github.com/duanyytop/agents-radar via github-http",
+        "repo_sync_branch=master",
+        "using requested digest date 2026-06-09",
+        "loaded 68 signals from 2026-06-09"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "source produced 25 raw signals",
+        "fetched live Trendshift HTML for 2026-06-09",
+        "loaded 25 Trendshift signals from 2026-06-09"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "github trending api search succeeded for 2026-06-09",
+        "parsed 25 candidates from GitHub Search API"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 79,
+      "distinct_projects": 79,
+      "status": "active",
+      "notes": [
+        "watchlist org NousResearch produced 2 realtime repos",
+        "watchlist org openai produced 2 realtime repos",
+        "watchlist org anthropics produced 3 realtime repos",
+        "watchlist org google produced 2 realtime repos",
+        "watchlist org google-gemini produced 3 realtime repos",
+        "watchlist org google-deepmind produced 2 realtime repos",
+        "watchlist org microsoft produced 1 realtime repos",
+        "watchlist org aws produced 4 realtime repos",
+        "watchlist org awslabs produced 4 realtime repos",
+        "watchlist org xai-org produced 1 realtime repos",
+        "watchlist org mistralai produced 2 realtime repos",
+        "watchlist org cohere-ai produced 2 realtime repos",
+        "watchlist org QwenLM produced 1 realtime repos",
+        "watchlist org EleutherAI produced 2 realtime repos",
+        "watchlist org allenai produced 2 realtime repos",
+        "watchlist org THUDM produced 1 realtime repos",
+        "watchlist org InternLM produced 2 realtime repos",
+        "watchlist org minimax-ai produced 1 realtime repos",
+        "watchlist org bytedance produced 1 realtime repos",
+        "watchlist org ByteDance-Seed produced 1 realtime repos",
+        "watchlist org alibaba produced 1 realtime repos",
+        "watchlist org vercel produced 5 realtime repos",
+        "watchlist org sourcegraph produced 4 realtime repos",
+        "watchlist org continuedev produced 1 realtime repos",
+        "watchlist org run-llama produced 1 realtime repos",
+        "watchlist org pydantic produced 4 realtime repos",
+        "watchlist org camel-ai produced 1 realtime repos",
+        "watchlist org mastra-ai produced 1 realtime repos",
+        "watchlist org langchain-ai produced 4 realtime repos",
+        "watchlist org modelcontextprotocol produced 3 realtime repos",
+        "watchlist org browser-use produced 1 realtime repos",
+        "watchlist org mem0ai produced 1 realtime repos",
+        "watchlist org langfuse produced 5 realtime repos",
+        "watchlist org crewAIInc produced 1 realtime repos",
+        "watchlist org huggingface produced 4 realtime repos",
+        "watchlist org OpenBMB produced 1 realtime repos",
+        "watchlist org HKUDS produced 2 realtime repos"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 195,
+      "distinct_projects": 169,
+      "status": "active",
+      "notes": [
+        "candidate repos=169",
+        "seeded_cache_from_signals=129",
+        "api_hits=195",
+        "html_hits=0",
+        "cache_hits=0",
+        "unavailable=2",
+        "invalid_repo=0",
+        "used fresh GitHub API metrics; github_token=present",
+        "repo API returned HTTP 404; github_token=present; no cached metrics available"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 5,
+    "watchlist_hits": 83,
+    "low_confidence_projects": 4,
+    "medium_confidence_projects": 131,
+    "insufficient_metrics_projects": 3,
+    "suspicious_growth_projects": 0,
+    "single_source_projects": 124,
+    "single_spike_projects": 78,
+    "emerging_projects": 33,
+    "persistent_projects": 54
+  },
+  "diagnostics": {
+    "anomaly_share": 0.0909,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 163,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 2
+    },
+    "star_delta_source_distribution": {
+      "github_live": 0,
+      "github_snapshot": 0,
+      "signal": 92,
+      "unavailable": 73
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 20,
+      "live_delta_success": 5,
+      "snapshot_delta_success": 0,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "NousResearch/hermes-agent",
+      "repo_url": "https://github.com/NousResearch/hermes-agent",
+      "total_score": 100,
+      "base_final_rank": 105,
+      "final_rank": 105,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "高增长1677星，记忆与技能生态系统，para完整，基础分合理，位居榜首合理。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=1677)",
+        "engagement_score=100 (forks=32472)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "anthropics/claude-code",
+      "repo_url": "https://github.com/anthropics/claude-code",
+      "total_score": 100,
+      "base_final_rank": 105,
+      "final_rank": 105,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "多天确认高信任项目，命中重点观察清单，基础分与hermes-agent并列，位置稳固。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=255)",
+        "engagement_score=100 (forks=21269)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "affaan-m/ECC",
+      "repo_url": "https://github.com/affaan-m/ECC",
+      "total_score": 95,
+      "base_final_rank": 102.5,
+      "final_rank": 102.5,
+      "confidence": "high",
+      "paradigm": "agent system",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "星增1249，兼容主流代理框架，与上下文契合度高，距前两名差距合理。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent system",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=1249)",
+        "engagement_score=100 (forks=32462)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "openclaw/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw",
+      "total_score": 98.5,
+      "base_final_rank": 101,
+      "final_rank": 101,
+      "confidence": "high",
+      "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "星增257但fork量极高，社区活跃，自托管助手定位鲜明，基础分符合表现。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + persistent memory + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=257)",
+        "engagement_score=100 (forks=78991)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "langgenius/dify",
+      "repo_url": "https://github.com/langgenius/dify",
+      "total_score": 94.75,
+      "base_final_rank": 94.75,
+      "final_rank": 95.75,
+      "confidence": "high",
+      "paradigm": "agent runtime",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "成熟agentic框架，星增161，RAG编排优势明显，基础分略保守，可微升。",
+      "judge_score_delta": 1,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime",
+        "confidence=high",
+        "persistence=persistent",
+        "star_velocity=100 (daily_delta=161)",
+        "engagement_score=100 (forks=22748)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    }
+  ],
+  "observer_top_candidates": [
+    {
+      "repo_full_name": "openai/role-specific-plugins",
+      "repo_url": "https://github.com/openai/role-specific-plugins",
+      "observer_rank": 1,
+      "base_observer_score": 115,
+      "observer_score": 140,
+      "ecosystems": [
+        "agent-runtime",
+        "agent-ui-workbench",
+        "agentic-rl",
+        "coding-agents",
+        "eval-observability-governance",
+        "multi-agent-coordination",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "openai"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "这是一套由OpenAI提供的Codex插件模板，专门用于让AI扮演特定角色（如数据分析师、客服等）。开发者可以基于这些模板快速构建具有角色化能力的插件，让Codex模型在执行代码时更像一个懂行的专家助手。",
+      "why_now_cn": "OpenAI刚在24小时内发布此仓库，且获得246星，说明社区关注度急剧上升。作为官方提供的角色化插件模板，它填补了Codex角色定制能力的空白，与当前多智能体协调、技能插件等生态趋势高度契合，值得立即跟进。",
+      "watch_next_cn": "下一步需验证这些模板的实际可用性和兼容性：是否支持自定义角色配置、能否与现有MCP工具链集成、以及社区是否基于它衍生出更多角色插件。此外，需观察OpenAI是否会将其整合到GPTs或Assistant API中。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "OpenAI官方发布，社区热度极高（246星/24h），填补Codex角色定制空白，与多智能体、MCP等核心生态高度契合，去除OpenAI光环仍具独特价值。",
+      "judge_score_delta": 25,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "codex",
+          "plugin"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": [
+          "openai"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:openai,fresh-today",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "repo_url": "https://github.com/alibaba/open-code-review",
+      "observer_rank": 2,
+      "base_observer_score": 115,
+      "observer_score": 140,
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:watch",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "watch",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "alibaba"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "阿里巴巴开源的一个代码审查工具，它结合了传统静态分析和AI大模型，能自动检测代码中的潜在问题（比如空指针、线程安全、XSS、SQL注入），并给出行级别的精准评论。开发者可以用它来替代或辅助人工Code Review，提高代码质量和审查效率。",
+      "why_now_cn": "项目来自阿里巴巴，已在内部大规模验证，近期活跃度极高（日增582星），并且刚刚开源，生态标签显示为'突破性关注'。AI辅助代码审查是当前热门方向，该项目免费、兼容OpenAI和Anthropic，容易集成，值得第一时间试用。",
+      "watch_next_cn": "需验证其实际审查效果是否能在中小规模团队中复现阿里巴巴内部的效率提升；还需关注社区反馈、规则集扩展性以及是否支持更多编程语言和自定义规则。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "阿里巴巴内部验证后开源，日增582星，AI辅助代码审查需求明确，兼容主流模型，实用性强，即使没有阿里品牌仍为明星项目。",
+      "judge_score_delta": 25,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "code review",
+          "review"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,trendshift",
+        "project_tags=watchlist-hit,watchlist:alibaba,fresh-today,agent,code-review,code-review-assistant,harness,repository-level-context,ai-agent,ai-coding,tool-use",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "awslabs/mcp",
+      "repo_url": "https://github.com/awslabs/mcp",
+      "observer_rank": 3,
+      "base_observer_score": 102,
+      "observer_score": 127,
+      "ecosystems": [
+        "browser-computer-use",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "awslabs"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "它是由 AWS 实验室开源的 MCP（Model Context Protocol）服务器集合，让 AWS 的各种云服务能通过标准协议与 AI 代理（如 Claude、Copilot 等）直接交互。开发者通常用它来为 AI 助手添加 AWS 工具调用能力，比如让 AI 自动查询 S3 桶列表、启动 EC2 实例或调用 Lambda 函数。",
+      "why_now_cn": "该项目发布仅 24 小时即获得 9200+ Star，热度极高，且基于当下最火的 MCP 协议（由 Anthropic 提出），背后有 AWS 官方背书。MCP 正迅速成为 AI 与外部工具交互的开放标准，AWS 的加入标志着云巨头正式入局，生态将快速成熟。",
+      "watch_next_cn": "需观察其与 Anthropic 官方 MCP 实现的兼容性、实际可用的 AWS 服务覆盖数量（目前仅列出基础套件），以及是否有配套文档或 CLI 工具降低使用门槛。此外，社区的贡献活跃度和企业用户采纳情况是长期价值的关键指标。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "AWS官方背书，24小时内9200+星，MCP协议成为行业标准趋势明显，去品牌化后仍具强大生态价值和社区认可。",
+      "judge_score_delta": 25,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "mcp"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [
+          "microsoft/playwright-mcp"
+        ],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:awslabs,fresh-today,aws,mcp,mcp-client,mcp-clients,mcp-host,mcp-server,mcp-servers,mcp-tools,modelcontextprotocol",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observer_rank": 4,
+      "base_observer_score": 96,
+      "observer_score": 106,
+      "ecosystems": [
+        "agent-runtime",
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:mixed",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "Moltis 是一个用 Rust 编写的安全持久个人代理服务器。它以一个二进制文件运行，支持沙盒执行、多厂商 LLM、语音、记忆、Telegram、WhatsApp、Discord、Teams 以及 MCP 工具。用户通常用它来构建一个本地运行的、隐私优先的 AI 助手，可集成多种聊天平台并自主执行任务。",
+      "why_now_cn": "该项目近期非常活跃（活跃度标签为 active-today），每日新增约 3 颗星，已获得 2731 颗星，展示了社区快速增长。它覆盖了多个生态（如 agent-runtime、memory-knowledge、skills-tools-mcp），并支持 MCP 协议，契合当前 AI Agent 工具标准化趋势。使用 Rust 编写保证了性能和安全性，适合对隐私有要求的自托管场景。",
+      "watch_next_cn": "下一步需验证其在实际生产环境中的稳定性和易用性，例如沙盒执行的安全性边界、多平台集成的可靠性，以及长期维护的持续性。此外，社区贡献和第三方 MCP 工具的兼容性也是观察重点。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "Rust编写，多生态覆盖（agent-runtime、memory、MCP），2731星且活跃度高，隐私优先定位差异化，品牌无关仍具竞争力。",
+      "judge_score_delta": 10,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "mcp",
+          "memory"
+        ],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime,tool-use,agent,self-improving",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "langfuse/claude-observability-plugin",
+      "repo_url": "https://github.com/langfuse/claude-observability-plugin",
+      "observer_rank": 5,
+      "base_observer_score": 109,
+      "observer_score": 104,
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个让开发者能在Claude Code编程助手中接入Langfuse监控能力的插件。大家通常拿它来追踪Claude Code的调用日志、调试AI代码生成行为、分析使用成本等。",
+      "why_now_cn": "Claude Code刚刚推出自己的Marketplace，Langfuse作为成熟的AI可观测平台迅速适配，反应了AI辅助编程对可观测性工具的需求正在爆发。该仓库24小时内即获得关注，且Langfuse已有企业级背书。",
+      "watch_next_cn": "需验证插件实际安装量及用户反馈，特别是与原生MCP工具链的兼容性。目前star数较少，社区采用度及长期维护计划尚不明确。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "Langfuse品牌加持，但仅2星且无fork，完成度存疑。Claude可观测性方向正确，但需要更多社区验证，现阶段不宜给最高评级。",
+      "judge_score_delta": -5,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "observability",
+          "plugin"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "modelcontextprotocol/csharp-sdk",
+      "repo_url": "https://github.com/modelcontextprotocol/csharp-sdk",
+      "observer_rank": 6,
+      "base_observer_score": 96,
+      "observer_score": 101,
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "modelcontextprotocol"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是 Model Context Protocol（MCP）的官方 C# SDK，由微软合作维护。开发者可以用它快速搭建 MCP 服务器和客户端，让 .NET 应用安全地访问外部数据源（如数据库、文件、API）或工具，实现 AI 代理与数据的无缝交互。简单说，就是给 C# 开发者提供一套工具包，方便他们在 .NET 生态里构建能调用外部资源的 AI 助手。",
+      "why_now_cn": "MCP 协议正快速成为 AI 代理调用外部工具的事实标准，而该 SDK 是官方认证的 C# 实现，由微软背书。仓库 24 小时内活跃度飙升（new-24h），收获 4319 星，议题和 PR 活跃，表明社区响应热烈。对于 .NET 和 Azure 生态开发者而言，现在关注能及时跟上 AI 工具集成浪潮，避免被边缘化。",
+      "watch_next_cn": "下一步需验证 SDK 的稳定性和兼容性：是否支持最新的 MCP 草案、能否平稳对接主流 AI 框架（如 Semantic Kernel、AutoGen）以及社区贡献的深度。同时留意是否需要配合特定 NuGet 包版本，以及文档是否覆盖了常见生产场景（如认证、限流）。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "MCP官方C# SDK，微软背书，4319星，24小时内活跃，但作为SDK创新性有限，仍为重要生态组件。",
+      "judge_score_delta": 5,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "context"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": [
+          "modelcontextprotocol"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:modelcontextprotocol,fresh-today,csharp,dotnet,mcp,mcp-client,mcp-server,modelcontextprotocol",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "pydantic/logfire",
+      "repo_url": "https://github.com/pydantic/logfire",
+      "observer_rank": 7,
+      "base_observer_score": 99,
+      "observer_score": 99,
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-72h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-72h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "pydantic"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "project_brief_cn": "Logfire 是一个专门面向生产环境中 LLM（大语言模型）和 AI Agent 系统的可观测性平台。开发者常用它来跟踪、监控和调试 AI 应用的运行状态，比如记录 LLM 的调用日志、追踪 Agent 的决策过程、收集性能指标等。它通过 OpenTelemetry 等标准协议接入，支持 Python 生态，与 pydantic、FastAPI、OpenAI 等工具链紧密集成。",
+      "why_now_cn": "Logfire 近期（72小时内）出现活跃更新，已获得4290颗星，并且被标记为'breakout:steady'（稳定突破）和'freshness:new-72h'（新鲜）。它来自知名 Python 库 pydantic 的开发团队，该团队的 pydantic-ai 项目也正在快速发展。随着 LLM 和 Agent 系统从实验走向生产，可观测性成为刚需，Logfire 填补了这一细分空白。",
+      "watch_next_cn": "接下来需要验证其生产环境下的实际采用率，以及是否能够支持多种编程语言和框架（目前主要聚焦 Python）。同时，虽然它标记为'proven'，但相比成熟的 APM（如 Datadog）还有差距，应关注其监控深度、告警能力以及与现有观测工具（如 Grafana、Prometheus）的互操作性。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "Pydantic团队出品，4290星，LLM可观测性方向扎实，但近期活跃度不高（new-72h），需观察后续更新节奏。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "evals",
+          "observability"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:pydantic,fresh-today,agent-observability,ai,ai-observability,ai-tools,evals,fastapi,llm-observability,logging,metrics,observability,openai,opentelemetry,pydantic,pydantic-ai,python,trace",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-js",
+      "repo_url": "https://github.com/langfuse/langfuse-js",
+      "observer_rank": 8,
+      "base_observer_score": 96,
+      "observer_score": 96,
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "priority-company",
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "project_brief_cn": "这是一个AI 基础设施或平台项目。它主要是帮你封装模型接入和开发框架，也能把通用能力沉淀成平台或开发底座。大家通常会用它来封装模型接入和开发框架，也会顺手把通用能力沉淀成平台或开发底座。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "Langfuse的JS SDK，正常维护中，但非突破性项目，143星规模较小，保持观察即可。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "observability"
+        ],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,javascript,langfuse,llmops,observability,sdk-js,typescript,github-live-star-delta",
+        "watch_reason=priority-company"
+      ]
+    },
+    {
+      "repo_full_name": "osaurus-ai/osaurus",
+      "repo_url": "https://github.com/osaurus-ai/osaurus",
+      "observer_rank": 9,
+      "base_observer_score": 57,
+      "observer_score": 72,
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "它是一款专为macOS设计的本地AI代理运行环境，让你可以在完全离线、开源的情况下运行任意AI模型，赋予代理持久记忆和自主执行能力，并使用加密身份确保数据归属。通常用于在个人电脑上搭建完全由自己掌控的AI助手或自动化工作流。",
+      "why_now_cn": "该项目近期频繁更新（本月活跃），已获得5631星，社区关注度持续上升；它解决了用户对AI数据隐私和自主控制的核心痛点，且支持MCP（模型上下文协议）等新兴标准，符合当前AI代理本地化部署趋势。",
+      "watch_next_cn": "需要验证其实际可用性，包括对多种模型的兼容稳定性、持久记忆功能的成熟度，以及社区生态（如插件和工具链）的增长情况。同时关注其离线场景下的性能和资源消耗。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "5631星，macOS本地AI运行环境，隐私优先，活跃度高，无企业背书但用户认可度强，应提升排名。",
+      "judge_score_delta": 15,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "execution"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:execution",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:execution",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "raullenchai/Rapid-MLX",
+      "repo_url": "https://github.com/raullenchai/Rapid-MLX",
+      "observer_rank": 10,
+      "base_observer_score": 43,
+      "observer_score": 58,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "Rapid-MLX 是一个专为 Apple Silicon 芯片优化的本地 AI 推理引擎，比 Ollama 快 4.2 倍，支持缓存加速、工具调用和云路由。开发者和 AI 工具（如 Claude Code、Cursor、Aider）常把它当作 OpenAI API 的本地替代品，用来在 Mac 上快速运行 LLM，并实现函数调用、提示缓存等功能。",
+      "why_now_cn": "Rapid-MLX 近期活跃更新，Star 数快速攀升至 2700+，且被主流编码助手（Claude Code、Cursor、Aider）生态支持，显示出强烈的落地需求。它解决了 Apple Silicon 上本地 LLM 推理速度慢的痛点，性能实测远超 Ollama，在当前 AI 工具链本地化趋势下值得关注。",
+      "watch_next_cn": "需要验证其长期维护稳定性、与更多第三方工具的兼容性，以及缓存和路由功能在高并发场景下的实际表现。此外，其工具解析器的覆盖范围和准确性尚未有大规模基准测试，需持续观察生态反馈。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "2711星，Apple Silicon推理引擎，性能突出，被多款编码助手集成，无品牌但技术实力强，应提升排名。",
+      "judge_score_delta": 15,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "claude code",
+          "cursor"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query=keyword:aider",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "hlsitechio/agentic-swarm",
+      "repo_url": "https://github.com/hlsitechio/agentic-swarm",
+      "observer_rank": 11,
+      "base_observer_score": 57,
+      "observer_score": 57,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "Agentic Swarm 是一个让开发者一次性编写 AI 智能体、然后部署到多个编程环境的多智能体编排系统。它预先打包了 60 个专业工程智能体，组成 10 个团队，支持一键分发到 Claude Code、VS Code、Codex、OpenCode、Cursor 和 Pi 等常见编程助手或 IDE。",
+      "why_now_cn": "该项目今天仍有活动，处于活跃开发阶段。虽然星标很少，但定位清晰——解决 AI 智能体在不同编程工具间迁移和协作的痛点。随着 Claude Code、Cursor 等 AI 编程助手快速普及，跨平台复用智能体的需求正在增长，该工具提前布局了多个主流平台对接。",
+      "watch_next_cn": "需要验证：实际使用体验是否顺畅（例如智能体在平台间迁移后是否会丢失上下文）；社区的反馈和实际应用案例；维护者或核心开发者的持续投入意愿；以及是否会有更进一步的功能扩展或性能优化。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "1星但概念新颖，多智能体编排方向有潜力，虽小但非空壳，可继续观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex",
+          "cursor"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=topic:code-review",
+        "query=topic:code-review",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "markyy101/conductor-orchestrator-superpowers",
+      "repo_url": "https://github.com/markyy101/conductor-orchestrator-superpowers",
+      "observer_rank": 12,
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "Conductor Orchestrator Superpowers 是一个为 Claude Code 提供多智能体编排能力的工具，让多个 Claude 实例能够并行执行任务、自动进行质量检查，并协同管理工具调用。用户通常用它来加速复杂的代码开发和测试流程，例如同时运行多个代码审查、测试或重构任务。",
+      "why_now_cn": "该项目在 GitHub 上处于活跃开发状态（freshness: active-today），且专注于多智能体编排这一热门方向，符合当前 AI Agent 生态中工作流引擎（workflow-engine）趋势。尽管星级较低（5 stars），但其明确的主题支持（topic-backed）和 steady 的 breakout 标签表明它已具备初步的生态深度，值得关注其后续发展。",
+      "watch_next_cn": "下一步需要验证其实际使用案例和社区反响，尤其是是否能够吸引更多用户贡献代码或提出反馈。当前 issues 和 PR 数量为零，表明项目尚处于早期阶段；另外需关注其与最新版 Claude Code 的兼容性，以及是否会出现更成熟的替代方案。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "5星，多智能体编排工具，主题热门但社区规模极小，保持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "orchestration"
+        ],
+        "topic_hints": [
+          "workflow-engine"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=topic:workflow-engine",
+        "query=topic:workflow-engine",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "himkt/cafleet",
+      "repo_url": "https://github.com/himkt/cafleet",
+      "observer_rank": 13,
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "它是一个让多个AI编程助手（如Claude Code和Codex）组成团队协同工作的工具，代码完全透明可见。大家通常用它来搭建多AI协作的编码流水线。",
+      "why_now_cn": "该项目今天仍有活跃提交，且主题与当前热门的AI编程助手生态（Claude Code、Codex）紧密相关，虽然星星数不多，但处于稳定增长期，值得关注其后续发展。",
+      "watch_next_cn": "需进一步验证其实际用户采用情况和协作效果，特别是是否有社区贡献或成功案例出现。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "14星，多AI协作工具，活跃开发中，方向适当但需成长。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:claude code",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=keyword:claude code",
+        "query=keyword:codex",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ]
+    },
+    {
+      "repo_full_name": "Soul-Brews-Studio/maw-js",
+      "repo_url": "https://github.com/Soul-Brews-Studio/maw-js",
+      "observer_rank": 14,
+      "base_observer_score": 43,
+      "observer_score": 43,
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "long_tail_reason": "ecosystem-signal",
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "project_brief_cn": "maw是一个基于Bun构建的命令行工具，允许用户通过tmux在多台机器上运行多个AI代理（如Claude Code、Codex、Aider、OpenCode），实现代理唤醒、跨节点通信、屏幕监控和成本跟踪，适用于需要协调多个AI编码助手进行分布式开发的场景。",
+      "why_now_cn": "该项目在2025年4月仍活跃（freshness:active-today），获得31星和34个fork，说明有一定关注度。随着AI编码助手（如Claude Code、Aider）的普及，多代理协同需求增长，maw提供了引擎无关的分布式管理方案，切合当前AI开发工作流优化趋势。",
+      "watch_next_cn": "需验证其稳定性、跨平台兼容性及与更多AI引擎的集成能力。目前只有2个issue，社区反馈较少，实际使用中的可靠性和性能尚不明确。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "31星，分布式多代理管理工具，有实际fork，但创新性一般，保持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent",
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query=keyword:aider",
+        "watch_reason=ecosystem-signal"
+      ]
+    }
+  ],
+  "watchouts": [
+    "低置信度项目占比为 4/165",
+    "仍有 124 个项目只有单一信号源，需要跨源或跨天确认",
+    "有 5 个项目缺少描述，语义判断会受限"
+  ],
+  "next_focus": [
+    "为低置信度项目补足描述或结构化 repo 指标",
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源"
+  ],
+  "recommended_actions": [
+    "在信任低置信度排序前，优先补有缺失描述或缺失 metrics 的项目",
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ],
+  "observer_status": {
+    "ecosystem_focus": "active"
+  },
+  "observer_candidate_count": 14,
+  "observer_ecosystem_counts": {
+    "agent-runtime": 4,
+    "agent-ui-workbench": 1,
+    "agentic-rl": 1,
+    "coding-agents": 7,
+    "eval-observability-governance": 5,
+    "multi-agent-coordination": 1,
+    "skills-tools-mcp": 6,
+    "browser-computer-use": 1,
+    "memory-knowledge": 2
+  }
+}

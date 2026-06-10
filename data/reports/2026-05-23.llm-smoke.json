@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-23",
+  "generated_at": "2026-05-28T20:14:21+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user asks: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". So they want a JSON object. We need to output exactly that JSON, presumably the compact JSON (no extra whitespace). We should respond with that JSON.\n\nBut the question is: what is expected? The user asks for tha"
+}

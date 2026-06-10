@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "anthropics/buffa",
+  "repo_url": "https://github.com/anthropics/buffa",
+  "stars": 725,
+  "forks": 43,
+  "issues": 6,
+  "PR": 4,
+  "description": "Rust implementation of protobuf with editions support, JSON serialization, and zero-copy views",
+  "tags": []
+}

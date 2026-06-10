@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-25",
+  "generated_at": "2026-05-28T20:21:31+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user asks: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". This is a straightforward request to return that JSON. There's no disallowed content. It's just outputting a JSON object. The user explicitly wants compact JSON only. So we just output exactly that JSON.\n\nThe us"
+}

@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "huggingface/optimum",
+  "repo_url": "https://github.com/huggingface/optimum",
+  "stars": 3401,
+  "forks": 647,
+  "issues": 262,
+  "PR": 15,
+  "description": "🚀 Accelerate inference and training of 🤗 Transformers, Diffusers, TIMM and Sentence Transformers with easy to use hardware optimization tools",
+  "tags": [
+    "graphcore",
+    "habana",
+    "inference",
+    "intel",
+    "onnx",
+    "onnxruntime",
+    "optimization",
+    "pytorch",
+    "quantization",
+    "tflite",
+    "training",
+    "transformers"
+  ]
+}

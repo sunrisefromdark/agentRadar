@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "davidhckh/portfolio-2025",
+  "repo_url": "https://github.com/davidhckh/portfolio-2025",
+  "stars": 657,
+  "forks": 137,
+  "issues": 0,
+  "PR": 0,
+  "description": "Interactive developer portfolio built with Three.js, Vue and modern web technologies, focused on immersive user experiences, smooth animations and high-performance frontend architecture.",
+  "tags": [
+    "gsap",
+    "threejs",
+    "typescript",
+    "vite",
+    "vue",
+    "webgl"
+  ]
+}

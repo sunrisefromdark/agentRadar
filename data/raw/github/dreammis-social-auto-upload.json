@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "dreammis/social-auto-upload",
+  "repo_url": "https://github.com/dreammis/social-auto-upload",
+  "stars": 11984,
+  "forks": 2108,
+  "issues": 40,
+  "PR": 16,
+  "description": "自动化上传视频到社交媒体：抖音、小红书、视频号、tiktok、youtube、bilibili",
+  "tags": [
+    "bilibili",
+    "douyin",
+    "tiktok",
+    "xiaohongshu",
+    "youtube"
+  ]
+}

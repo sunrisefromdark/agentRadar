@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "zhayujie/CowAgent",
+  "repo_url": "https://github.com/zhayujie/CowAgent",
+  "stars": 45036,
+  "forks": 10166,
+  "issues": 6,
+  "PR": 2,
+  "description": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, autonomously grows with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (formerly chatgpt-on-wechat)",
+  "tags": [
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "chatgpt-on-wechat",
+    "claude",
+    "claude-code",
+    "codex",
+    "cowagent",
+    "deepseek",
+    "harness",
+    "llm",
+    "mcp",
+    "multi-agent",
+    "openai",
+    "openclaw",
+    "skills"
+  ]
+}

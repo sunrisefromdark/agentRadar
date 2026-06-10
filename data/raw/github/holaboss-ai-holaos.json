@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "holaboss-ai/holaOS",
+  "repo_url": "https://github.com/holaboss-ai/holaOS",
+  "stars": 5654,
+  "forks": 392,
+  "issues": 4,
+  "PR": 2,
+  "description": "Turn repeat work into running AI work-streams.",
+  "tags": [
+    "agent",
+    "agent-harness",
+    "agent-os",
+    "agentic",
+    "ai",
+    "ai-agent",
+    "ai-agents",
+    "artificial-intelligence",
+    "electron",
+    "holaboss",
+    "holaos",
+    "llm",
+    "mcp",
+    "memory",
+    "model-context-protocol",
+    "proactive",
+    "proactive-ai",
+    "runtime",
+    "typescript",
+    "workspace"
+  ]
+}

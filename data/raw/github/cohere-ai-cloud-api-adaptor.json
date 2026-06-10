@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "cohere-ai/cloud-api-adaptor",
+  "repo_url": "https://github.com/cohere-ai/cloud-api-adaptor",
+  "stars": 0,
+  "forks": 0,
+  "issues": 0,
+  "PR": 7,
+  "description": "Ability to create Kata pods using cloud provider APIs aka the peer-pods approach",
+  "tags": []
+}

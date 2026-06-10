@@ -1,0 +1,1868 @@
+[
+  {
+    "project_name": "sansan0/TrendRadar",
+    "repo_url": "https://github.com/sansan0/TrendRadar",
+    "repo_full_name": "sansan0/TrendRadar",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 969,
+    "star_delta_weekly": 969,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "tool-use"
+    ],
+    "description": "| [sansan0/TrendRadar](https://github.com/sansan0/TrendRadar) | ⭐0 / **+969 today** | AI 舆情监控助手，支持 MCP 架构接入，实现自然语言对话分析与情感洞察，中文开发者主导的垂直 Agent |",
+    "raw_signals": [
+      {
+        "project_name": "sansan0/TrendRadar",
+        "repo_url": "https://github.com/sansan0/TrendRadar",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 969,
+        "tags": [
+          "agent",
+          "tool-use"
+        ],
+        "description": "| [sansan0/TrendRadar](https://github.com/sansan0/TrendRadar) | ⭐0 / **+969 today** | AI 舆情监控助手，支持 MCP 架构接入，实现自然语言对话分析与情感洞察，中文开发者主导的垂直 Agent |"
+      }
+    ]
+  },
+  {
+    "project_name": "HKUDS/RAG-Anything",
+    "repo_url": "https://github.com/HKUDS/RAG-Anything",
+    "repo_full_name": "HKUDS/RAG-Anything",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 786,
+    "star_delta_weekly": 786,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "knowledge"
+    ],
+    "description": "| [HKUDS/RAG-Anything](https://github.com/HKUDS/RAG-Anything) | ⭐0 / **+786 today** | \"All-in-One RAG 框架\"，香港大学数据科学团队的检索增强生成一体化方案 |",
+    "raw_signals": [
+      {
+        "project_name": "HKUDS/RAG-Anything",
+        "repo_url": "https://github.com/HKUDS/RAG-Anything",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 786,
+        "tags": [
+          "knowledge"
+        ],
+        "description": "| [HKUDS/RAG-Anything](https://github.com/HKUDS/RAG-Anything) | ⭐0 / **+786 today** | \"All-in-One RAG 框架\"，香港大学数据科学团队的检索增强生成一体化方案 |"
+      }
+    ]
+  },
+  {
+    "project_name": "ruvnet/RuView",
+    "repo_url": "https://github.com/ruvnet/RuView",
+    "repo_full_name": "ruvnet/RuView",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 565,
+    "star_delta_weekly": 565,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "| [ruvnet/RuView](https://github.com/ruvnet/RuView) | ⭐0 / **+565 today** | **WiFi DensePose**——将普通 WiFi 信号转为实时人体姿态估计、生命体征监测与存在检测，无需任何视频像素，边缘感知的突破性创新 |",
+    "raw_signals": [
+      {
+        "project_name": "ruvnet/RuView",
+        "repo_url": "https://github.com/ruvnet/RuView",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 565,
+        "tags": [],
+        "description": "| [ruvnet/RuView](https://github.com/ruvnet/RuView) | ⭐0 / **+565 today** | **WiFi DensePose**——将普通 WiFi 信号转为实时人体姿态估计、生命体征监测与存在检测，无需任何视频像素，边缘感知的突破性创新 |"
+      }
+    ]
+  },
+  {
+    "project_name": "koala73/worldmonitor",
+    "repo_url": "https://github.com/koala73/worldmonitor",
+    "repo_full_name": "koala73/worldmonitor",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 424,
+    "star_delta_weekly": 424,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "| [koala73/worldmonitor](https://github.com/koala73/worldmonitor) | ⭐0 / **+424 today** | 实时全球情报仪表盘，AI 新闻聚合+地缘政治监控+基础设施追踪的统一态势感知界面 |",
+    "raw_signals": [
+      {
+        "project_name": "koala73/worldmonitor",
+        "repo_url": "https://github.com/koala73/worldmonitor",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 424,
+        "tags": [],
+        "description": "| [koala73/worldmonitor](https://github.com/koala73/worldmonitor) | ⭐0 / **+424 today** | 实时全球情报仪表盘，AI 新闻聚合+地缘政治监控+基础设施追踪的统一态势感知界面 |"
+      }
+    ]
+  },
+  {
+    "project_name": "KeygraphHQ/shannon",
+    "repo_url": "https://github.com/KeygraphHQ/shannon",
+    "repo_full_name": "KeygraphHQ/shannon",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 372,
+    "star_delta_weekly": 372,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "| [KeygraphHQ/shannon](https://github.com/KeygraphHQ/shannon) | ⭐0 / **+372 today** | **白盒 AI 渗透测试 Agent**——分析源码、识别攻击向量、执行真实漏洞利用，安全领域的\"自主黑客\"首次登榜 |",
+    "raw_signals": [
+      {
+        "project_name": "KeygraphHQ/shannon",
+        "repo_url": "https://github.com/KeygraphHQ/shannon",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 372,
+        "tags": [
+          "agent"
+        ],
+        "description": "| [KeygraphHQ/shannon](https://github.com/KeygraphHQ/shannon) | ⭐0 / **+372 today** | **白盒 AI 渗透测试 Agent**——分析源码、识别攻击向量、执行真实漏洞利用，安全领域的\"自主黑客\"首次登榜 |"
+      }
+    ]
+  },
+  {
+    "project_name": "vercel-labs/skills",
+    "repo_url": "https://github.com/vercel-labs/skills",
+    "repo_full_name": "vercel-labs/skills",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 333,
+    "star_delta_weekly": 333,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "tool-use"
+    ],
+    "description": "| [vercel-labs/skills](https://github.com/vercel-labs/skills) | ⭐0 / **+333 today** | Vercel 开放的 Agent 技能工具，支持 `npx skills` 一键调用，推动 AI 能力的前端组件化与标准化 |",
+    "raw_signals": [
+      {
+        "project_name": "vercel-labs/skills",
+        "repo_url": "https://github.com/vercel-labs/skills",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 333,
+        "tags": [
+          "agent",
+          "tool-use"
+        ],
+        "description": "| [vercel-labs/skills](https://github.com/vercel-labs/skills) | ⭐0 / **+333 today** | Vercel 开放的 Agent 技能工具，支持 `npx skills` 一键调用，推动 AI 能力的前端组件化与标准化 |"
+      }
+    ]
+  },
+  {
+    "project_name": "AIDC-AI/Pixelle-Video",
+    "repo_url": "https://github.com/AIDC-AI/Pixelle-Video",
+    "repo_full_name": "AIDC-AI/Pixelle-Video",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 308,
+    "star_delta_weekly": 308,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "| [AIDC-AI/Pixelle-Video](https://github.com/AIDC-AI/Pixelle-Video) | ⭐0 / **+308 today** | AI 全自动短视频引擎，内容生产领域的\"一键生成\"工具 |",
+    "raw_signals": [
+      {
+        "project_name": "AIDC-AI/Pixelle-Video",
+        "repo_url": "https://github.com/AIDC-AI/Pixelle-Video",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 308,
+        "tags": [],
+        "description": "| [AIDC-AI/Pixelle-Video](https://github.com/AIDC-AI/Pixelle-Video) | ⭐0 / **+308 today** | AI 全自动短视频引擎，内容生产领域的\"一键生成\"工具 |"
+      }
+    ]
+  },
+  {
+    "project_name": "langfuse/langfuse",
+    "repo_url": "https://github.com/langfuse/langfuse",
+    "repo_full_name": "langfuse/langfuse",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 149,
+    "star_delta_weekly": 149,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "tool-use"
+    ],
+    "description": "🪢 Open source LLM engineering platform: LLM Observability, metrics, evals, prompt management, playground, datasets. Integrates with OpenTelemetry, Langchain, OpenAI SDK, LiteLLM, and more. 🍊YC W23",
+    "raw_signals": [
+      {
+        "project_name": "langfuse/langfuse",
+        "repo_url": "https://github.com/langfuse/langfuse",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "star_delta": 149,
+        "tags": [
+          "tool-use"
+        ],
+        "description": "| [langfuse/langfuse](https://github.com/langfuse/langfuse) | ⭐0 / **+149 today** | YC W23 开源 LLM 工程平台，覆盖可观测性、评估、提示词管理全链路，已集成 OpenTelemetry 与 MCP 生态 |"
+      }
+    ]
+  },
+  {
+    "project_name": "zilliztech/claude-context",
+    "repo_url": "https://github.com/zilliztech/claude-context",
+    "repo_full_name": "zilliztech/claude-context",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "memory",
+      "tool-use",
+      "knowledge"
+    ],
+    "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。",
+    "raw_signals": [
+      {
+        "project_name": "zilliztech/claude-context",
+        "repo_url": "https://github.com/zilliztech/claude-context",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent",
+          "memory",
+          "tool-use",
+          "knowledge"
+        ],
+        "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。"
+      }
+    ]
+  },
+  {
+    "project_name": "Fincept-Corporation/FinceptTerminal",
+    "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+    "repo_full_name": "Fincept-Corporation/FinceptTerminal",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "memory",
+      "tool-use",
+      "knowledge"
+    ],
+    "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。",
+    "raw_signals": [
+      {
+        "project_name": "Fincept-Corporation/FinceptTerminal",
+        "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent",
+          "memory",
+          "tool-use",
+          "knowledge"
+        ],
+        "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。"
+      }
+    ]
+  },
+  {
+    "project_name": "VectifyAI/PageIndex",
+    "repo_url": "https://github.com/VectifyAI/PageIndex",
+    "repo_full_name": "VectifyAI/PageIndex",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "memory",
+      "tool-use",
+      "knowledge"
+    ],
+    "description": "📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG",
+    "raw_signals": [
+      {
+        "project_name": "VectifyAI/PageIndex",
+        "repo_url": "https://github.com/VectifyAI/PageIndex",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent",
+          "memory",
+          "tool-use",
+          "knowledge"
+        ],
+        "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。"
+      }
+    ]
+  },
+  {
+    "project_name": "yichuan-w/LEANN",
+    "repo_url": "https://github.com/yichuan-w/LEANN",
+    "repo_full_name": "yichuan-w/LEANN",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "memory",
+      "tool-use",
+      "knowledge"
+    ],
+    "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。",
+    "raw_signals": [
+      {
+        "project_name": "yichuan-w/LEANN",
+        "repo_url": "https://github.com/yichuan-w/LEANN",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent",
+          "memory",
+          "tool-use",
+          "knowledge"
+        ],
+        "description": "今日 AI 开源领域呈现 **\"Agent 基础设施深化\"** 与 **\"垂直场景爆发\"** 双主线：MCP 协议生态持续扩张，[claude-context](https://github.com/zilliztech/claude-context) 以 871 日增星登顶 Trending，标志着代码 Agent 的上下文工程进入新阶段；同时，金融、舆情、短视频、网络安全等垂直领域 AI 应用密集涌现，[FinceptTerminal](https://github.com/Fincept-Corporation/FinceptTerminal) 单日获星 1772 创今日峰值。RAG 赛道出现 **\"去向量化\"** 创新信号，[PageIndex](https://github.com/VectifyAI/PageIndex) 的 reasoning-based RAG 与 [LEANN](https://github.com/yichuan-w/LEANN) 的 97% 存储压缩技术挑战传统向量数据库范式。"
+      }
+    ]
+  },
+  {
+    "project_name": "langchain-ai/langchain",
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "repo_full_name": "langchain-ai/langchain",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "The agent engineering platform.",
+    "raw_signals": [
+      {
+        "project_name": "langchain-ai/langchain",
+        "repo_url": "https://github.com/langchain-ai/langchain",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [langchain-ai/langchain](https://github.com/langchain-ai/langchain) | ⭐134,530 | \"Agent 工程平台\"定位升级，从 LLM 编排框架向智能体原生基础设施演进 |"
+      }
+    ]
+  },
+  {
+    "project_name": "ollama/ollama",
+    "repo_url": "https://github.com/ollama/ollama",
+    "repo_full_name": "ollama/ollama",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+    "raw_signals": [
+      {
+        "project_name": "ollama/ollama",
+        "repo_url": "https://github.com/ollama/ollama",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [ollama/ollama](https://github.com/ollama/ollama) | ⭐169,725 | 本地大模型运行标准，今日已支持 Kimi-K2.5、GLM-5、MiniMax 等最新模型，边缘推理持续领跑 |"
+      }
+    ]
+  },
+  {
+    "project_name": "vllm-project/vllm",
+    "repo_url": "https://github.com/vllm-project/vllm",
+    "repo_full_name": "vllm-project/vllm",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "A high-throughput and memory-efficient inference and serving engine for LLMs",
+    "raw_signals": [
+      {
+        "project_name": "vllm-project/vllm",
+        "repo_url": "https://github.com/vllm-project/vllm",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [vllm-project/vllm](https://github.com/vllm-project/vllm) | ⭐77,744 | 高吞吐 LLM 推理引擎，PagedAttention 技术成为行业事实标准 |"
+      }
+    ]
+  },
+  {
+    "project_name": "firecrawl/firecrawl",
+    "repo_url": "https://github.com/firecrawl/firecrawl",
+    "repo_full_name": "firecrawl/firecrawl",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "The API to search, scrape, and interact with the web at scale. 🔥",
+    "raw_signals": [
+      {
+        "project_name": "firecrawl/firecrawl",
+        "repo_url": "https://github.com/firecrawl/firecrawl",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [firecrawl/firecrawl](https://github.com/firecrawl/firecrawl) | ⭐111,621 | \"AI 的网络 API\"——搜索、抓取、交互三合一，为 Agent 提供实时世界知识入口 |"
+      }
+    ]
+  },
+  {
+    "project_name": "0xPlaygrounds/rig",
+    "repo_url": "https://github.com/0xPlaygrounds/rig",
+    "repo_full_name": "0xPlaygrounds/rig",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "⚙️🦀 Build modular and scalable LLM Applications in Rust",
+    "raw_signals": [
+      {
+        "project_name": "0xPlaygrounds/rig",
+        "repo_url": "https://github.com/0xPlaygrounds/rig",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [0xPlaygrounds/rig](https://github.com/0xPlaygrounds/rig) | ⭐7,004 | Rust 生态模块化 LLM 应用框架，系统级语言的高性能 Agent 开发新选择 |"
+      }
+    ]
+  },
+  {
+    "project_name": "HKUDS/nanobot",
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "repo_full_name": "HKUDS/nanobot",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 2,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Lightweight, open-source AI agent for your tools, chats, and workflows. - HKUDS/nanobot",
+    "raw_signals": [
+      {
+        "project_name": "HKUDS/nanobot",
+        "repo_url": "https://github.com/HKUDS/nanobot",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [HKUDS/nanobot](https://github.com/HKUDS/nanobot) | ⭐40,538 | \"超轻量级个人 AI Agent\"，香港大学数据科学团队出品，边缘设备上的 Agent 轻量化代表 |"
+      },
+      {
+        "project_name": "HKUDS/nanobot",
+        "repo_url": "https://github.com/HKUDS/nanobot",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [NanoBot](https://github.com/HKUDS/nanobot)"
+      }
+    ]
+  },
+  {
+    "project_name": "langgenius/dify",
+    "repo_url": "https://github.com/langgenius/dify",
+    "repo_full_name": "langgenius/dify",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Production-ready platform for agentic workflow development.",
+    "raw_signals": [
+      {
+        "project_name": "langgenius/dify",
+        "repo_url": "https://github.com/langgenius/dify",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [dify](https://github.com/langgenius/dify) | ⭐138,788 | 生产级 Agentic 工作流开发平台，国内团队打造的国际标杆 |"
+      }
+    ]
+  },
+  {
+    "project_name": "Significant-Gravitas/AutoGPT",
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "repo_full_name": "Significant-Gravitas/AutoGPT",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+    "raw_signals": [
+      {
+        "project_name": "Significant-Gravitas/AutoGPT",
+        "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [AutoGPT](https://github.com/Significant-Gravitas/AutoGPT) | ⭐183,675 | 通用 Agent 愿景的先行者，持续迭代工具使用与长期记忆能力 |"
+      }
+    ]
+  },
+  {
+    "project_name": "OpenHands/OpenHands",
+    "repo_url": "https://github.com/OpenHands/OpenHands",
+    "repo_full_name": "OpenHands/OpenHands",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "🙌 OpenHands: AI-Driven Development",
+    "raw_signals": [
+      {
+        "project_name": "OpenHands/OpenHands",
+        "repo_url": "https://github.com/OpenHands/OpenHands",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) | ⭐71,791 | \"AI 驱动开发\"，代码生成与软件工程自动化的前沿实践 |"
+      }
+    ]
+  },
+  {
+    "project_name": "browser-use/browser-use",
+    "repo_url": "https://github.com/browser-use/browser-use",
+    "repo_full_name": "browser-use/browser-use",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
+    "raw_signals": [
+      {
+        "project_name": "browser-use/browser-use",
+        "repo_url": "https://github.com/browser-use/browser-use",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [browser-use/browser-use](https://github.com/browser-use/browser-use) | ⭐89,529 | 让网站对 AI Agent 可访问，浏览器自动化成为 Agent 触达数字世界的标准接口 |"
+      }
+    ]
+  },
+  {
+    "project_name": "activepieces/activepieces",
+    "repo_url": "https://github.com/activepieces/activepieces",
+    "repo_full_name": "activepieces/activepieces",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "tool-use"
+    ],
+    "description": "| [activepieces/activepieces](https://github.com/activepieces/activepieces) | ⭐21,816 | ~400 个 MCP 服务器的 AI 自动化平台，MCP 生态的集大成者 |",
+    "raw_signals": [
+      {
+        "project_name": "activepieces/activepieces",
+        "repo_url": "https://github.com/activepieces/activepieces",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "tool-use"
+        ],
+        "description": "| [activepieces/activepieces](https://github.com/activepieces/activepieces) | ⭐21,816 | ~400 个 MCP 服务器的 AI 自动化平台，MCP 生态的集大成者 |"
+      }
+    ]
+  },
+  {
+    "project_name": "open-webui/open-webui",
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "repo_full_name": "open-webui/open-webui",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+    "raw_signals": [
+      {
+        "project_name": "open-webui/open-webui",
+        "repo_url": "https://github.com/open-webui/open-webui",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [open-webui/open-webui](https://github.com/open-webui/open-webui) | ⭐133,419 | 支持 Ollama/OpenAI API 的友好型 AI 界面，本地部署的首选交互层 |"
+      }
+    ]
+  },
+  {
+    "project_name": "CherryHQ/cherry-studio",
+    "repo_url": "https://github.com/CherryHQ/cherry-studio",
+    "repo_full_name": "CherryHQ/cherry-studio",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
+    "raw_signals": [
+      {
+        "project_name": "CherryHQ/cherry-studio",
+        "repo_url": "https://github.com/CherryHQ/cherry-studio",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [CherryHQ/cherry-studio](https://github.com/CherryHQ/cherry-studio) | ⭐44,086 | 300+ 助手的 AI 生产力工作室，统一接入前沿 LLM 的客户端方案 |"
+      }
+    ]
+  },
+  {
+    "project_name": "zhayujie/CowAgent",
+    "repo_url": "https://github.com/zhayujie/CowAgent",
+    "repo_full_name": "zhayujie/CowAgent",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Open-source super AI assistant & Agent Harness. Plans tasks, runs tools and skills, autonomously grows with memory and knowledge. Multi-model, multi-channel. Lightweight, extensible, one-line install. (formerly chatgpt-on-wechat)",
+    "raw_signals": [
+      {
+        "project_name": "zhayujie/CowAgent",
+        "repo_url": "https://github.com/zhayujie/CowAgent",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [zhayujie/CowAgent](https://github.com/zhayujie/CowAgent) | ⭐43,640 | 基于大模型的超级 AI 助理，支持微信/飞书/钉钉等多平台，比 OpenClaw 更轻量的中文 Agent 方案 |"
+      }
+    ]
+  },
+  {
+    "project_name": "huggingface/transformers",
+    "repo_url": "https://github.com/huggingface/transformers",
+    "repo_full_name": "huggingface/transformers",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+    "raw_signals": [
+      {
+        "project_name": "huggingface/transformers",
+        "repo_url": "https://github.com/huggingface/transformers",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [huggingface/transformers](https://github.com/huggingface/transformers) | ⭐159,765 | 模型定义框架的事实标准，覆盖文本/视觉/音频/多模态的全场景推理与训练 |"
+      }
+    ]
+  },
+  {
+    "project_name": "hiyouga/LlamaFactory",
+    "repo_url": "https://github.com/hiyouga/LlamaFactory",
+    "repo_full_name": "hiyouga/LlamaFactory",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "| [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | ⭐70,476 | 100+ LLM/VLM 统一高效微调，ACL 2024 收录的国产训练工具标杆 |",
+    "raw_signals": [
+      {
+        "project_name": "hiyouga/LlamaFactory",
+        "repo_url": "https://github.com/hiyouga/LlamaFactory",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [hiyouga/LlamaFactory](https://github.com/hiyouga/LlamaFactory) | ⭐70,476 | 100+ LLM/VLM 统一高效微调，ACL 2024 收录的国产训练工具标杆 |"
+      }
+    ]
+  },
+  {
+    "project_name": "jingyaogong/minimind",
+    "repo_url": "https://github.com/jingyaogong/minimind",
+    "repo_full_name": "jingyaogong/minimind",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "🧠「大模型」2小时完全从0训练64M的小参数LLM！Train a 64M-parameter LLM from scratch in just 2h!",
+    "raw_signals": [
+      {
+        "project_name": "jingyaogong/minimind",
+        "repo_url": "https://github.com/jingyaogong/minimind",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [jingyaogong/minimind](https://github.com/jingyaogong/minimind) | ⭐48,043 | 2 小时从零训练 64M 参数 GPT，大模型教育的极致轻量化实践 |"
+      }
+    ]
+  },
+  {
+    "project_name": "testtimescaling/testtimescaling.github.io",
+    "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
+    "repo_full_name": "testtimescaling/testtimescaling.github.io",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "| [testtimescaling/testtimescaling.github.io](https://github.com/testtimescaling/testtimescaling.github.io) | ⭐95 | Test-Time Scaling 综述仓库，LLM 推理阶段计算扩展的前沿研究汇总 |",
+    "raw_signals": [
+      {
+        "project_name": "testtimescaling/testtimescaling.github.io",
+        "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [testtimescaling/testtimescaling.github.io](https://github.com/testtimescaling/testtimescaling.github.io) | ⭐95 | Test-Time Scaling 综述仓库，LLM 推理阶段计算扩展的前沿研究汇总 |"
+      }
+    ]
+  },
+  {
+    "project_name": "topoteretes/cognee",
+    "repo_url": "https://github.com/topoteretes/cognee",
+    "repo_full_name": "topoteretes/cognee",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "| [topoteretes/cognee](https://github.com/topoteretes/cognee) | ⭐16,640 | 6 行代码构建 AI Agent 记忆的知识引擎，记忆层即服务 |",
+    "raw_signals": [
+      {
+        "project_name": "topoteretes/cognee",
+        "repo_url": "https://github.com/topoteretes/cognee",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [topoteretes/cognee](https://github.com/topoteretes/cognee) | ⭐16,640 | 6 行代码构建 AI Agent 记忆的知识引擎，记忆层即服务 |"
+      }
+    ]
+  },
+  {
+    "project_name": "mem0ai/mem0",
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "repo_full_name": "mem0ai/mem0",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Universal memory layer for AI Agents",
+    "raw_signals": [
+      {
+        "project_name": "mem0ai/mem0",
+        "repo_url": "https://github.com/mem0ai/mem0",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [mem0ai/mem0](https://github.com/mem0ai/mem0) | ⭐53,832 | AI Agent 的通用记忆层，跨会话、跨应用的持久化上下文管理 |"
+      }
+    ]
+  },
+  {
+    "project_name": "infiniflow/ragflow",
+    "repo_url": "https://github.com/infiniflow/ragflow",
+    "repo_full_name": "infiniflow/ragflow",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent",
+      "knowledge"
+    ],
+    "description": "RAGFlow is a leading open-source Retrieval-Augmented Generation (RAG) engine that fuses cutting-edge RAG with Agent capabilities to create a superior context layer for LLMs",
+    "raw_signals": [
+      {
+        "project_name": "infiniflow/ragflow",
+        "repo_url": "https://github.com/infiniflow/ragflow",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent",
+          "knowledge"
+        ],
+        "description": "| [infiniflow/ragflow](https://github.com/infiniflow/ragflow) | ⭐78,768 | RAG 与 Agent 能力融合的开源引擎，深度文档理解的行业领先方案 |"
+      }
+    ]
+  },
+  {
+    "project_name": "milvus-io/milvus",
+    "repo_url": "https://github.com/milvus-io/milvus",
+    "repo_full_name": "milvus-io/milvus",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Milvus is a high-performance, cloud-native vector database built for scalable vector ANN search",
+    "raw_signals": [
+      {
+        "project_name": "milvus-io/milvus",
+        "repo_url": "https://github.com/milvus-io/milvus",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [milvus-io/milvus](https://github.com/milvus-io/milvus) | ⭐43,926 | 云原生高性能向量数据库，Zilliz 出品的 ANN 搜索基础设施 |"
+      }
+    ]
+  },
+  {
+    "project_name": "qdrant/qdrant",
+    "repo_url": "https://github.com/qdrant/qdrant",
+    "repo_full_name": "qdrant/qdrant",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Qdrant - High-performance, massive-scale Vector Database and Vector Search Engine for the next generation of AI. Also available in the cloud https://cloud.qdrant.io/",
+    "raw_signals": [
+      {
+        "project_name": "qdrant/qdrant",
+        "repo_url": "https://github.com/qdrant/qdrant",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "| [qdrant/qdrant](https://github.com/qdrant/qdrant) | ⭐30,573 | Rust 构建的大规模向量搜索引擎，下一代 AI 的高性能存储底座 |"
+      }
+    ]
+  },
+  {
+    "project_name": "duanyytop/agents-radar",
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "repo_full_name": "duanyytop/agents-radar",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 3,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Daily AI ecosystem digest from 10 sources (GitHub, ArXiv, HN, HuggingFace, Product Hunt, Dev.to, Lobste.rs). Bilingual ZH/EN reports via GitHub Actions.",
+    "raw_signals": [
+      {
+        "project_name": "duanyytop/agents-radar",
+        "repo_url": "https://github.com/duanyytop/agents-radar",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "*本日报由 [agents-radar](https://github.com/duanyytop/agents-radar) 自动生成。*"
+      },
+      {
+        "project_name": "duanyytop/agents-radar",
+        "repo_url": "https://github.com/duanyytop/agents-radar",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "*本日报由 [agents-radar](https://github.com/duanyytop/agents-radar) 自动生成。*"
+      },
+      {
+        "project_name": "duanyytop/agents-radar",
+        "repo_url": "https://github.com/duanyytop/agents-radar",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "*本日报由 [agents-radar](https://github.com/duanyytop/agents-radar) 自动生成。*"
+      }
+    ]
+  },
+  {
+    "project_name": "openclaw/openclaw",
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "repo_full_name": "openclaw/openclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞  - openclaw/openclaw",
+    "raw_signals": [
+      {
+        "project_name": "openclaw/openclaw",
+        "repo_url": "https://github.com/openclaw/openclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [OpenClaw](https://github.com/openclaw/openclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "nousresearch/hermes-agent",
+    "repo_url": "https://github.com/nousresearch/hermes-agent",
+    "repo_full_name": "nousresearch/hermes-agent",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 2,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "The agent that grows with you. Contribute to NousResearch/hermes-agent development by creating an account on GitHub.",
+    "raw_signals": [
+      {
+        "project_name": "nousresearch/hermes-agent",
+        "repo_url": "https://github.com/nousresearch/hermes-agent",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "- [Hermes Agent](https://github.com/nousresearch/hermes-agent)"
+      },
+      {
+        "project_name": "NousResearch/hermes-agent",
+        "repo_url": "https://github.com/NousResearch/hermes-agent",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "| [#14204](https://github.com/NousResearch/hermes-agent/pull/14204) | j-sperling | `hermes update` 改用 `npm ci` 替代 `npm install` | 消除 lockfile 漂移导致的脏仓库状态，提升 CLI 更新可靠性 |"
+      }
+    ]
+  },
+  {
+    "project_name": "sipeed/picoclaw",
+    "repo_url": "https://github.com/sipeed/picoclaw",
+    "repo_full_name": "sipeed/picoclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Tiny, Fast, and Deployable anywhere — automate the mundane, unleash your creativity",
+    "raw_signals": [
+      {
+        "project_name": "sipeed/picoclaw",
+        "repo_url": "https://github.com/sipeed/picoclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [PicoClaw](https://github.com/sipeed/picoclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "qwibitai/nanoclaw",
+    "repo_url": "https://github.com/qwibitai/nanoclaw",
+    "repo_full_name": "qwibitai/nanoclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "- [NanoClaw](https://github.com/qwibitai/nanoclaw)",
+    "raw_signals": [
+      {
+        "project_name": "qwibitai/nanoclaw",
+        "repo_url": "https://github.com/qwibitai/nanoclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [NanoClaw](https://github.com/qwibitai/nanoclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "nullclaw/nullclaw",
+    "repo_url": "https://github.com/nullclaw/nullclaw",
+    "repo_full_name": "nullclaw/nullclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Fastest, smallest, and fully autonomous AI assistant infrastructure written in Zig - nullclaw/nullclaw",
+    "raw_signals": [
+      {
+        "project_name": "nullclaw/nullclaw",
+        "repo_url": "https://github.com/nullclaw/nullclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [NullClaw](https://github.com/nullclaw/nullclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "nearai/ironclaw",
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "repo_full_name": "nearai/ironclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "IronClaw is an Agent OS focused on privacy, security and extensibility - nearai/ironclaw",
+    "raw_signals": [
+      {
+        "project_name": "nearai/ironclaw",
+        "repo_url": "https://github.com/nearai/ironclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [IronClaw](https://github.com/nearai/ironclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "netease-youdao/LobsterAI",
+    "repo_url": "https://github.com/netease-youdao/LobsterAI",
+    "repo_full_name": "netease-youdao/LobsterAI",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Your 24/7 all-scenario AI agent that gets work done for you. - netease-youdao/LobsterAI",
+    "raw_signals": [
+      {
+        "project_name": "netease-youdao/LobsterAI",
+        "repo_url": "https://github.com/netease-youdao/LobsterAI",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [LobsterAI](https://github.com/netease-youdao/LobsterAI)"
+      }
+    ]
+  },
+  {
+    "project_name": "TinyAGI/tinyagi",
+    "repo_url": "https://github.com/TinyAGI/tinyagi",
+    "repo_full_name": "TinyAGI/tinyagi",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "TinyAGI is the agent teams orchestrator for One Person Company. (fka TinyClaw)",
+    "raw_signals": [
+      {
+        "project_name": "TinyAGI/tinyagi",
+        "repo_url": "https://github.com/TinyAGI/tinyagi",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [TinyClaw](https://github.com/TinyAGI/tinyagi)"
+      }
+    ]
+  },
+  {
+    "project_name": "moltis-org/moltis",
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "repo_full_name": "moltis-org/moltis",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "A secure persistent personal agent server in Rust. One binary, sandboxed execution, multi-provider LLMs, voice, memory, Telegram, WhatsApp, Discord, Teams, and MCP tools. Secure by design, runs on your hardware.",
+    "raw_signals": [
+      {
+        "project_name": "moltis-org/moltis",
+        "repo_url": "https://github.com/moltis-org/moltis",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Moltis](https://github.com/moltis-org/moltis)"
+      }
+    ]
+  },
+  {
+    "project_name": "agentscope-ai/CoPaw",
+    "repo_url": "https://github.com/agentscope-ai/CoPaw",
+    "repo_full_name": "agentscope-ai/CoPaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "- [CoPaw](https://github.com/agentscope-ai/CoPaw)",
+    "raw_signals": [
+      {
+        "project_name": "agentscope-ai/CoPaw",
+        "repo_url": "https://github.com/agentscope-ai/CoPaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "- [CoPaw](https://github.com/agentscope-ai/CoPaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "qhkm/zeptoclaw",
+    "repo_url": "https://github.com/qhkm/zeptoclaw",
+    "repo_full_name": "qhkm/zeptoclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Fast, small, secure, local-first personal AI assistant infrastructure: one Rust binary for tools, memory, channels, providers, and sandboxed autonomy.",
+    "raw_signals": [
+      {
+        "project_name": "qhkm/zeptoclaw",
+        "repo_url": "https://github.com/qhkm/zeptoclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [ZeptoClaw](https://github.com/qhkm/zeptoclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "zeroclaw-labs/zeroclaw",
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Fast, small, and fully autonomous AI personal assistant infrastructure, any OS, any platform — deploy anywhere, swap anything 🦀 - zeroclaw-labs/zeroclaw",
+    "raw_signals": [
+      {
+        "project_name": "zeroclaw-labs/zeroclaw",
+        "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [ZeroClaw](https://github.com/zeroclaw-labs/zeroclaw)"
+      }
+    ]
+  },
+  {
+    "project_name": "agentscope-ai/QwenPaw",
+    "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+    "repo_full_name": "agentscope-ai/QwenPaw",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "Your Personal AI Assistant; easy to install, deploy on your own machine or on the cloud; supports multiple chat apps with easily extensible capabilities.",
+    "raw_signals": [
+      {
+        "project_name": "agentscope-ai/QwenPaw",
+        "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "### [v1.1.3](https://github.com/agentscope-ai/QwenPaw/releases/tag/v1.1.3) — 备份恢复系统上线"
+      }
+    ]
+  },
+  {
+    "project_name": "anthropics/claude-code",
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "repo_full_name": "anthropics/claude-code",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+    "raw_signals": [
+      {
+        "project_name": "anthropics/claude-code",
+        "repo_url": "https://github.com/anthropics/claude-code",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Claude Code](https://github.com/anthropics/claude-code)"
+      }
+    ]
+  },
+  {
+    "project_name": "openai/codex",
+    "repo_url": "https://github.com/openai/codex",
+    "repo_full_name": "openai/codex",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Lightweight coding agent that runs in your terminal",
+    "raw_signals": [
+      {
+        "project_name": "openai/codex",
+        "repo_url": "https://github.com/openai/codex",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [OpenAI Codex](https://github.com/openai/codex)"
+      }
+    ]
+  },
+  {
+    "project_name": "google-gemini/gemini-cli",
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "repo_full_name": "google-gemini/gemini-cli",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "An open-source AI agent that brings the power of Gemini directly into your terminal. - google-gemini/gemini-cli",
+    "raw_signals": [
+      {
+        "project_name": "google-gemini/gemini-cli",
+        "repo_url": "https://github.com/google-gemini/gemini-cli",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Gemini CLI](https://github.com/google-gemini/gemini-cli)"
+      }
+    ]
+  },
+  {
+    "project_name": "github/copilot-cli",
+    "repo_url": "https://github.com/github/copilot-cli",
+    "repo_full_name": "github/copilot-cli",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "agent"
+    ],
+    "description": "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.  - github/copilot-cli",
+    "raw_signals": [
+      {
+        "project_name": "github/copilot-cli",
+        "repo_url": "https://github.com/github/copilot-cli",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "agent"
+        ],
+        "description": "- [GitHub Copilot CLI](https://github.com/github/copilot-cli)"
+      }
+    ]
+  },
+  {
+    "project_name": "MoonshotAI/kimi-cli",
+    "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+    "repo_full_name": "MoonshotAI/kimi-cli",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "Kimi Code CLI is your next CLI agent. Contribute to MoonshotAI/kimi-cli development by creating an account on GitHub.",
+    "raw_signals": [
+      {
+        "project_name": "MoonshotAI/kimi-cli",
+        "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Kimi Code CLI](https://github.com/MoonshotAI/kimi-cli)"
+      }
+    ]
+  },
+  {
+    "project_name": "anomalyco/opencode",
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "repo_full_name": "anomalyco/opencode",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "The open source coding agent. Contribute to anomalyco/opencode development by creating an account on GitHub.",
+    "raw_signals": [
+      {
+        "project_name": "anomalyco/opencode",
+        "repo_url": "https://github.com/anomalyco/opencode",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [OpenCode](https://github.com/anomalyco/opencode)"
+      }
+    ]
+  },
+  {
+    "project_name": "badlogic/pi-mono",
+    "repo_url": "https://github.com/badlogic/pi-mono",
+    "repo_full_name": "badlogic/pi-mono",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "- [Pi](https://github.com/badlogic/pi-mono)",
+    "raw_signals": [
+      {
+        "project_name": "badlogic/pi-mono",
+        "repo_url": "https://github.com/badlogic/pi-mono",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Pi](https://github.com/badlogic/pi-mono)"
+      }
+    ]
+  },
+  {
+    "project_name": "QwenLM/qwen-code",
+    "repo_url": "https://github.com/QwenLM/qwen-code",
+    "repo_full_name": "QwenLM/qwen-code",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [],
+    "description": "An open-source AI coding agent that lives in your terminal. - QwenLM/qwen-code",
+    "raw_signals": [
+      {
+        "project_name": "QwenLM/qwen-code",
+        "repo_url": "https://github.com/QwenLM/qwen-code",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [],
+        "description": "- [Qwen Code](https://github.com/QwenLM/qwen-code)"
+      }
+    ]
+  },
+  {
+    "project_name": "anthropics/skills",
+    "repo_url": "https://github.com/anthropics/skills",
+    "repo_full_name": "anthropics/skills",
+    "first_seen": "2026-04-23T00:00:00.000Z",
+    "last_seen": "2026-04-23T00:00:00.000Z",
+    "sources": [
+      "agents-radar"
+    ],
+    "appearances": 1,
+    "stars": 0,
+    "star_delta_daily": 0,
+    "star_delta_weekly": 0,
+    "forks": 0,
+    "issues": 0,
+    "PR": 0,
+    "tags": [
+      "tool-use"
+    ],
+    "description": "Public repository for Agent Skills",
+    "raw_signals": [
+      {
+        "project_name": "anthropics/skills",
+        "repo_url": "https://github.com/anthropics/skills",
+        "source": "agents-radar",
+        "timestamp": "2026-04-23T00:00:00.000Z",
+        "tags": [
+          "tool-use"
+        ],
+        "description": "- [Claude Code Skills](https://github.com/anthropics/skills)"
+      }
+    ]
+  }
+]

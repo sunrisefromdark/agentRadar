@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "Panniantong/Agent-Reach",
+  "repo_url": "https://github.com/Panniantong/Agent-Reach",
+  "stars": 20462,
+  "forks": 1809,
+  "issues": 21,
+  "PR": 22,
+  "description": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
+  "tags": [
+    "agent-infrastructure",
+    "ai-agent",
+    "ai-search",
+    "automation",
+    "bilibili",
+    "claude-code",
+    "cli",
+    "cursor",
+    "free-api",
+    "llm-tools",
+    "mcp",
+    "python",
+    "reddit-scraper",
+    "twitter-scraper",
+    "web-scraper",
+    "xiaohongshu",
+    "youtube-transcript"
+  ]
+}

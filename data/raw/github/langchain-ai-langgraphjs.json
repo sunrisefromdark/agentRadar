@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "langchain-ai/langgraphjs",
+  "repo_url": "https://github.com/langchain-ai/langgraphjs",
+  "stars": 2966,
+  "forks": 497,
+  "issues": 92,
+  "PR": 44,
+  "description": "Framework to build resilient language agents as graphs.",
+  "tags": [
+    "agents",
+    "ai",
+    "artificial-intelligence",
+    "generative-ai",
+    "llm",
+    "node",
+    "typescript"
+  ]
+}

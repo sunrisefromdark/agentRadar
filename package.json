@@ -1,0 +1,51 @@
+{
+  "name": "agent-radar",
+  "version": "0.1.0",
+  "private": false,
+  "type": "module",
+  "packageManager": "pnpm@9.15.9",
+  "scripts": {
+    "prepare": "node scripts/setupGitHooks.mjs",
+    "build": "node scripts/buildProduction.mjs",
+    "clean": "node scripts/buildProduction.mjs --clean",
+    "run-daily": "tsx src/cli.ts run-daily",
+    "recover-daily": "tsx src/cli.ts recover-daily",
+    "automation:daily": "bash scripts/automationDailyPipeline.sh",
+    "automation:weekly": "bash scripts/automationWeeklyPipeline.sh",
+    "live:daily-smoke": "bash scripts/liveDailySmoke.sh",
+    "llm:smoke": "tsx scripts/llmProviderSmoke.ts",
+    "run-weekly": "tsx src/cli.ts run-weekly",
+    "sync-weekly": "tsx src/cli.ts sync-weekly",
+    "verify-daily": "tsx src/cli.ts verify-daily",
+    "capture-github-stars": "tsx src/cli.ts capture-github-stars",
+    "score": "tsx src/cli.ts score",
+    "build-kb": "tsx src/cli.ts build-kb",
+    "record-agent-task": "tsx src/cli.ts record-agent-task",
+    "visual-console": "tsx src/cli.ts visual-console",
+    "visual-console:web": "tsx app/server.ts",
+    "start:prod:web": "node dist/app/server.js",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "lint": "npm run typecheck"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.78.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "js-yaml": "^4.1.1",
+    "kysely": "^0.29.2",
+    "openai": "^6.27.0",
+    "pg": "^8.16.3",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "undici": "^6.26.0"
+  },
+  "devDependencies": {
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^25.3.5",
+    "@types/pg": "^8.15.6",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^4.0.18"
+  }
+}

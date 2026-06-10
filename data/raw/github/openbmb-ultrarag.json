@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "OpenBMB/UltraRAG",
+  "repo_url": "https://github.com/OpenBMB/UltraRAG",
+  "stars": 5567,
+  "forks": 424,
+  "issues": 6,
+  "PR": 2,
+  "description": "A Low-Code MCP Framework for Building Complex and Innovative RAG Pipelines",
+  "tags": [
+    "deepseek",
+    "demo",
+    "easy",
+    "embedding",
+    "flask",
+    "gpt",
+    "huggingface-transformers",
+    "llm",
+    "mcp",
+    "multimodal",
+    "openai",
+    "qwen",
+    "rag",
+    "sentence-transformers",
+    "ui",
+    "vllm",
+    "vlm"
+  ]
+}

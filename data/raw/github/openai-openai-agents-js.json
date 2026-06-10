@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "openai/openai-agents-js",
+  "repo_url": "https://github.com/openai/openai-agents-js",
+  "stars": 3146,
+  "forks": 792,
+  "issues": 34,
+  "PR": 21,
+  "description": "A lightweight, powerful framework for multi-agent workflows and voice agents",
+  "tags": [
+    "agents",
+    "openai",
+    "openai-api",
+    "realtime-api",
+    "typescript"
+  ]
+}

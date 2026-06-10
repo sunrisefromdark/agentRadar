@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "microsoft/typespec",
+  "repo_url": "https://github.com/microsoft/typespec",
+  "stars": 5754,
+  "forks": 370,
+  "issues": 1078,
+  "PR": 93,
+  "description": "",
+  "tags": [
+    "json-schema",
+    "openapi3",
+    "protobuf",
+    "typespec"
+  ]
+}

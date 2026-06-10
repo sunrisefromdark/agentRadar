@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "modelcontextprotocol/registry",
+  "repo_url": "https://github.com/modelcontextprotocol/registry",
+  "stars": 6841,
+  "forks": 819,
+  "issues": 74,
+  "PR": 24,
+  "description": "A community driven registry service for Model Context Protocol (MCP) servers.",
+  "tags": [
+    "mcp",
+    "mcp-servers"
+  ]
+}

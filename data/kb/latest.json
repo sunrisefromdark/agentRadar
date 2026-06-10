@@ -1,0 +1,2213 @@
+[
+  {
+    "project_name": "NousResearch/hermes-agent",
+    "repo_url": "https://github.com/NousResearch/hermes-agent",
+    "summary": "The agent that grows with you. Contribute to NousResearch/hermes-agent development by creating an account on GitHub.",
+    "star_growth": "stars=184855, daily_delta=2482, delta_source=signal, weekly_delta=13659, persistence=persistent",
+    "why_it_matters": "Score 100 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "openai/codex",
+    "repo_url": "https://github.com/openai/codex",
+    "summary": "Lightweight coding agent that runs in your terminal",
+    "star_growth": "stars=89084, daily_delta=215, delta_source=signal, weekly_delta=2585, persistence=persistent",
+    "why_it_matters": "Score 100 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "openclaw/openclaw",
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "summary": "Your own personal AI assistant. Any OS. Any Platform. The lobster way. 🦞",
+    "star_growth": "stars=377208, daily_delta=202, delta_source=signal, weekly_delta=1952, persistence=persistent",
+    "why_it_matters": "Score 98.5 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "affaan-m/ECC",
+    "repo_url": "https://github.com/affaan-m/ECC",
+    "summary": "The agent harness performance optimization system. Skills, instincts, memory, security, and research-first development for Claude Code, Codex, Opencode, Cursor and beyond.",
+    "star_growth": "stars=208764, daily_delta=905, delta_source=signal, weekly_delta=13940, persistence=persistent",
+    "why_it_matters": "Score 95 (high confidence, trust=high/1.00). Paradigm signal: agent system. Anti-noise flags: none.",
+    "paradigm": "agent system",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "anthropics/skills",
+    "repo_url": "https://github.com/anthropics/skills",
+    "summary": "Public repository for Agent Skills",
+    "star_growth": "stars=147122, daily_delta=318, delta_source=signal, weekly_delta=4611, persistence=persistent",
+    "why_it_matters": "Score 91.75 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "anthropics/claude-code",
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "summary": "Claude Code is an agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster by executing routine tasks, explaining complex code, and handling git workflows - all through natural language commands.",
+    "star_growth": "stars=130544, daily_delta=220, delta_source=signal, weekly_delta=3291, persistence=persistent",
+    "why_it_matters": "Score 91.75 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "chopratejas/headroom",
+    "repo_url": "https://github.com/chopratejas/headroom",
+    "summary": "Compress tool outputs, logs, files, and RAG chunks before they reach the LLM. 60-95% fewer tokens, same answers. Library, proxy, MCP server.",
+    "star_growth": "stars=15227, daily_delta=1395, delta_source=signal, weekly_delta=10514, persistence=persistent",
+    "why_it_matters": "Score 91 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "anthropics/defending-code-reference-harness",
+    "repo_url": "https://github.com/anthropics/defending-code-reference-harness",
+    "summary": "Skills for threat modeling, scanning, triage, patching, plus an autonomous scanning harness you can /customize",
+    "star_growth": "stars=3695, daily_delta=1938, delta_source=signal, weekly_delta=1938, persistence=emerging",
+    "why_it_matters": "Score 88.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "obra/superpowers",
+    "repo_url": "https://github.com/obra/superpowers",
+    "summary": "An agentic skills framework & software development methodology that works.",
+    "star_growth": "stars=219906, daily_delta=801, delta_source=signal, weekly_delta=3846, persistence=persistent",
+    "why_it_matters": "Score 86 (high confidence, trust=high/1.00). Paradigm signal: agent system. Anti-noise flags: none.",
+    "paradigm": "agent system",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "earendil-works/pi",
+    "repo_url": "https://github.com/earendil-works/pi",
+    "summary": "AI agent toolkit: coding agent CLI, unified LLM API, TUI &amp; web UI libraries, Slack bot, vLLM pods - earendil-works/pi",
+    "star_growth": "stars=60269, daily_delta=259, delta_source=signal, weekly_delta=3470, persistence=persistent",
+    "why_it_matters": "Score 86 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "666ghj/MiroFish",
+    "repo_url": "https://github.com/666ghj/MiroFish",
+    "summary": "A Simple and Universal Swarm Intelligence Engine, Predicting Anything. 简洁通用的群体智能引擎，预测万物",
+    "star_growth": "stars=65151, daily_delta=320, delta_source=signal, weekly_delta=320, persistence=single-spike",
+    "why_it_matters": "Score 85.8 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: single_spike.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "nexu-io/open-design",
+    "repo_url": "https://github.com/nexu-io/open-design",
+    "summary": "🎨 Local-first, open-source alternative to Anthropic's Claude Design. ⚡ 19 Skills · ✨ 71 brand-grade Design Systems 🖼 Generate web · desktop · mobile prototypes · slides · images · videos · HyperFrames 📦 Sandboxed preview · HTML/PDF/PPTX/MP4 export 🤖 Runs on Claude Code / Codex / Cursor / Gemini / OpenCode / Qwen / Copilot / Hermes / Kimi CLI.",
+    "star_growth": "stars=60000, daily_delta=584, delta_source=signal, weekly_delta=584, persistence=emerging",
+    "why_it_matters": "Score 85.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langgenius/dify",
+    "repo_url": "https://github.com/langgenius/dify",
+    "summary": "Production-ready platform for agentic workflow development.",
+    "star_growth": "stars=144124, daily_delta=140, delta_source=signal, weekly_delta=1137, persistence=persistent",
+    "why_it_matters": "Score 84.7 (high confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: none.",
+    "paradigm": "agent runtime",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "Hmbown/CodeWhale",
+    "repo_url": "https://github.com/Hmbown/CodeWhale",
+    "summary": "DeepSeek + MiMo coding agent in terminal. Contribute to Hmbown/CodeWhale development by creating an account on GitHub.",
+    "star_growth": "stars=37286, daily_delta=126, delta_source=signal, weekly_delta=1727, persistence=persistent",
+    "why_it_matters": "Score 84.25 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "mvanhorn/last30days-skill",
+    "repo_url": "https://github.com/mvanhorn/last30days-skill",
+    "summary": "AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary",
+    "star_growth": "stars=28502, daily_delta=500, delta_source=signal, weekly_delta=500, persistence=emerging",
+    "why_it_matters": "Score 82.5 (high confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: none.",
+    "paradigm": "agent runtime",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langchain-ai/langchain",
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "summary": "The agent engineering platform.",
+    "star_growth": "stars=138650, daily_delta=79, delta_source=signal, weekly_delta=326, persistence=persistent",
+    "why_it_matters": "Score 82.15 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "bytedance/deer-flow",
+    "repo_url": "https://github.com/bytedance/deer-flow",
+    "summary": "An open-source long-horizon SuperAgent harness that researches, codes, and creates. With the help of sandboxes, memories, tools, skill, subagents and message gateway, it handles different levels of tasks that could take minutes to hours.",
+    "star_growth": "stars=70593, daily_delta=70, delta_source=signal, weekly_delta=449, persistence=persistent",
+    "why_it_matters": "Score 80.75 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "anomalyco/opencode",
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "summary": "The open source coding agent. Contribute to anomalyco/opencode development by creating an account on GitHub.",
+    "star_growth": "stars=170685, daily_delta=399, delta_source=signal, weekly_delta=4160, persistence=persistent",
+    "why_it_matters": "Score 80.5 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "google-gemini/gemini-cli",
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "summary": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+    "star_growth": "stars=104993, daily_delta=28, delta_source=signal, weekly_delta=310, persistence=persistent",
+    "why_it_matters": "Score 80.45 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "HKUDS/nanobot",
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "summary": "Lightweight, open-source AI agent for your tools, chats, and workflows.",
+    "star_growth": "stars=43775, daily_delta=57, delta_source=signal, weekly_delta=465, persistence=persistent",
+    "why_it_matters": "Score 80.2 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "mem0ai/mem0",
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "summary": "Universal memory layer for AI Agents",
+    "star_growth": "stars=57863, daily_delta=77, delta_source=signal, weekly_delta=725, persistence=persistent",
+    "why_it_matters": "Score 79.1 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "agentscope-ai/QwenPaw",
+    "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+    "summary": "Your Personal AI Assistant; easy to install, deploy on your own machine or on the cloud; supports multiple chat apps with easily extensible capabilities.",
+    "star_growth": "stars=17281, daily_delta=24, delta_source=signal, weekly_delta=239, persistence=persistent",
+    "why_it_matters": "Score 78.7 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "alibaba/open-code-review",
+    "repo_url": "https://github.com/alibaba/open-code-review",
+    "summary": "Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+    "star_growth": "stars=3073, daily_delta=882, delta_source=signal, weekly_delta=2077, persistence=persistent",
+    "why_it_matters": "Score 77.75 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "pewdiepie-archdaemon/odysseus",
+    "repo_url": "https://github.com/pewdiepie-archdaemon/odysseus",
+    "summary": "Self-hosted AI workspace.",
+    "star_growth": "stars=56976, daily_delta=3679, delta_source=signal, weekly_delta=48315, persistence=persistent",
+    "why_it_matters": "Score 77.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "MemPalace/mempalace",
+    "repo_url": "https://github.com/MemPalace/mempalace",
+    "summary": "The best-benchmarked open-source AI memory system. And it's free.",
+    "star_growth": "stars=54245, daily_delta=227, delta_source=signal, weekly_delta=227, persistence=single-spike",
+    "why_it_matters": "Score 77.5 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_spike.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "Panniantong/Agent-Reach",
+    "repo_url": "https://github.com/Panniantong/Agent-Reach",
+    "summary": "Give your AI agent eyes to see the entire internet. Read & search Twitter, Reddit, YouTube, GitHub, Bilibili, XiaoHongShu — one CLI, zero API fees.",
+    "star_growth": "stars=21962, daily_delta=148, delta_source=signal, weekly_delta=148, persistence=single-spike",
+    "why_it_matters": "Score 77.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_spike.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "github/copilot-cli",
+    "repo_url": "https://github.com/github/copilot-cli",
+    "summary": "GitHub Copilot CLI brings the power of Copilot coding agent directly to your terminal.  - github/copilot-cli",
+    "star_growth": "stars=10718, daily_delta=8, delta_source=signal, weekly_delta=84, persistence=persistent",
+    "why_it_matters": "Score 76.7 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "microsoft/pg_durable",
+    "repo_url": "https://github.com/microsoft/pg_durable",
+    "summary": "PostgreSQL in-database durable execution",
+    "star_growth": "stars=970, daily_delta=278, delta_source=signal, weekly_delta=278, persistence=single-spike",
+    "why_it_matters": "Score 75.95 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_spike.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "moltis-org/moltis",
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "summary": "A secure persistent personal agent server in Rust. One binary, sandboxed execution, multi-provider LLMs, voice, memory, Telegram, WhatsApp, Discord, Teams, and MCP tools. Secure by design, runs on your hardware.",
+    "star_growth": "stars=2722, daily_delta=1, delta_source=signal, weekly_delta=13, persistence=persistent",
+    "why_it_matters": "Score 75.7 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "nullclaw/nullclaw",
+    "repo_url": "https://github.com/nullclaw/nullclaw",
+    "summary": "Fastest, smallest, and fully autonomous AI assistant infrastructure written in Zig - nullclaw/nullclaw",
+    "star_growth": "stars=7657, daily_delta=2, delta_source=signal, weekly_delta=27, persistence=persistent",
+    "why_it_matters": "Score 75.15 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "zeroclaw-labs/zeroclaw",
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "summary": "Fast, small, and fully autonomous AI personal assistant infrastructure, any OS, any platform — deploy anywhere, swap anything 🦀 - zeroclaw-labs/zeroclaw",
+    "star_growth": "stars=31789, daily_delta=25, delta_source=signal, weekly_delta=169, persistence=persistent",
+    "why_it_matters": "Score 74.7 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + self-improving. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + self-improving",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "MoonshotAI/kimi-cli",
+    "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+    "summary": "Kimi Code CLI is your next CLI agent. Contribute to MoonshotAI/kimi-cli development by creating an account on GitHub.",
+    "star_growth": "stars=8898, daily_delta=10, delta_source=signal, weekly_delta=112, persistence=persistent",
+    "why_it_matters": "Score 73.9 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + self-improving + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + self-improving + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "openai/plugins",
+    "repo_url": "https://github.com/openai/plugins",
+    "summary": "OpenAI Plugins",
+    "star_growth": "stars=1643, daily_delta=223, delta_source=signal, weekly_delta=223, persistence=emerging",
+    "why_it_matters": "Score 73.75 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langchain-ai/langgraph",
+    "repo_url": "https://github.com/langchain-ai/langgraph",
+    "summary": "Build resilient agents.",
+    "star_growth": "stars=34023, daily_delta=61, delta_source=signal, weekly_delta=369, persistence=persistent",
+    "why_it_matters": "Score 73.75 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "sipeed/picoclaw",
+    "repo_url": "https://github.com/sipeed/picoclaw",
+    "summary": "Tiny, Fast, and Deployable anywhere — automate the mundane, unleash your creativity",
+    "star_growth": "stars=29297, daily_delta=7, delta_source=signal, weekly_delta=92, persistence=persistent",
+    "why_it_matters": "Score 73.7 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "n8n-io/n8n",
+    "repo_url": "https://github.com/n8n-io/n8n",
+    "summary": "Fair-code workflow automation platform with native AI capabilities. Combine visual building with custom code, self-host or cloud, 400+ integrations.",
+    "star_growth": "stars=191313, daily_delta=112, delta_source=signal, weekly_delta=1229, persistence=persistent",
+    "why_it_matters": "Score 73.4 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "nearai/ironclaw",
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "summary": "IronClaw is an Agent OS focused on privacy, security and extensibility - nearai/ironclaw",
+    "star_growth": "stars=12402, daily_delta=7, delta_source=signal, weekly_delta=40, persistence=persistent",
+    "why_it_matters": "Score 73.1 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "farion1231/cc-switch",
+    "repo_url": "https://github.com/farion1231/cc-switch",
+    "summary": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Gemini CLI & Hermes Agent. Only official website: ccswitch.io",
+    "star_growth": "stars=93356, daily_delta=853, delta_source=signal, weekly_delta=9786, persistence=persistent",
+    "why_it_matters": "Score 72.5 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "github/copilot-sdk",
+    "repo_url": "https://github.com/github/copilot-sdk",
+    "summary": "Multi-platform SDK for integrating GitHub Copilot Agent into apps and services",
+    "star_growth": "stars=9357, daily_delta=237, delta_source=signal, weekly_delta=275, persistence=emerging",
+    "why_it_matters": "Score 71.9 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langflow-ai/langflow",
+    "repo_url": "https://github.com/langflow-ai/langflow",
+    "summary": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
+    "star_growth": "stars=149281, daily_delta=24, delta_source=signal, weekly_delta=433, persistence=persistent",
+    "why_it_matters": "Score 71.55 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "awslabs/agentcore-samples",
+    "repo_url": "https://github.com/awslabs/agentcore-samples",
+    "summary": "Amazon Bedrock Agentcore accelerates AI agents into production with the scale, reliability, and security, critical to real-world deployment.",
+    "star_growth": "stars=3000, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 71.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "QwenLM/qwen-code",
+    "repo_url": "https://github.com/QwenLM/qwen-code",
+    "summary": "An open-source AI coding agent that lives in your terminal. - QwenLM/qwen-code",
+    "star_growth": "stars=24948, daily_delta=18, delta_source=signal, weekly_delta=221, persistence=persistent",
+    "why_it_matters": "Score 69.5 (high confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: none.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "nanocoai/nanoclaw",
+    "repo_url": "https://github.com/nanocoai/nanoclaw",
+    "summary": "A lightweight alternative to OpenClaw that runs in containers for security. Connects to WhatsApp, Telegram, Slack, Discord, Gmail and other messaging apps,, has memory, scheduled jobs, and runs directly on Anthropic's Agents SDK",
+    "star_growth": "stars=29723, daily_delta=15, delta_source=signal, weekly_delta=229, persistence=persistent",
+    "why_it_matters": "Score 68.75 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "mastra-ai/mastra",
+    "repo_url": "https://github.com/mastra-ai/mastra",
+    "summary": "From the team behind Gatsby, Mastra is a framework for building AI-powered applications and agents with a modern TypeScript stack.",
+    "star_growth": "stars=24819, daily_delta=24, delta_source=signal, weekly_delta=264, persistence=persistent",
+    "why_it_matters": "Score 68.6 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "google/ax",
+    "repo_url": "https://github.com/google/ax",
+    "summary": "Google's open source distributed agent runtime",
+    "star_growth": "stars=1579, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 67.75 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langchain-ai/deepagents",
+    "repo_url": "https://github.com/langchain-ai/deepagents",
+    "summary": "The batteries-included agent harness.",
+    "star_growth": "stars=23975, daily_delta=46, delta_source=signal, weekly_delta=340, persistence=persistent",
+    "why_it_matters": "Score 66.6 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "Significant-Gravitas/AutoGPT",
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "summary": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+    "star_growth": "stars=184793, daily_delta=19, delta_source=signal, weekly_delta=110, persistence=persistent",
+    "why_it_matters": "Score 66.4 (high confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: none.",
+    "paradigm": "agent runtime",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langchain-ai/deepagentsjs",
+    "repo_url": "https://github.com/langchain-ai/deepagentsjs",
+    "summary": "The batteries included agent harness.",
+    "star_growth": "stars=1302, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 66.25 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory + tool/skill ecosystem. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime + persistent memory + tool/skill ecosystem",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "NVIDIA/cosmos",
+    "repo_url": "https://github.com/NVIDIA/cosmos",
+    "summary": "NVIDIA Cosmos is an open platform of world models, datasets, and tools that enables developers to build Physical AI for robots, autonomous vehicles, smart infrastructure, and more.",
+    "star_growth": "stars=9560, daily_delta=479, delta_source=signal, weekly_delta=479, persistence=single-spike",
+    "why_it_matters": "Score 65.95 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "lfnovo/open-notebook",
+    "repo_url": "https://github.com/lfnovo/open-notebook",
+    "summary": "An Open Source implementation of Notebook LM with more flexibility and features",
+    "star_growth": "stars=26344, daily_delta=815, delta_source=signal, weekly_delta=1027, persistence=emerging",
+    "why_it_matters": "Score 65.5 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "run-llama/liteparse-pi-extension",
+    "repo_url": "https://github.com/run-llama/liteparse-pi-extension",
+    "summary": "LiteParse extension for Pi agents",
+    "star_growth": "stars=1, daily_delta=0, delta_source=signal, weekly_delta=0, persistence=single-spike",
+    "why_it_matters": "Score 64 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_spike.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "huggingface/transformers",
+    "repo_url": "https://github.com/huggingface/transformers",
+    "summary": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training.",
+    "star_growth": "stars=161343, daily_delta=32, delta_source=signal, weekly_delta=324, persistence=persistent",
+    "why_it_matters": "Score 63.4 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "netease-youdao/LobsterAI",
+    "repo_url": "https://github.com/netease-youdao/LobsterAI",
+    "summary": "Your 24/7 all-scenario AI agent that gets work done for you. - netease-youdao/LobsterAI",
+    "star_growth": "stars=5236, daily_delta=3, delta_source=signal, weekly_delta=33, persistence=persistent",
+    "why_it_matters": "Score 63.15 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "duanyytop/agents-radar",
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "summary": "Daily AI ecosystem digest from 10 sources (GitHub, ArXiv, HN, HuggingFace, Product Hunt, Dev.to, Lobste.rs). Bilingual ZH/EN reports via GitHub Actions.",
+    "star_growth": "stars=800, daily_delta=2, delta_source=signal, weekly_delta=32, persistence=persistent",
+    "why_it_matters": "Score 63.15 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "CopilotKit/CopilotKit",
+    "repo_url": "https://github.com/CopilotKit/CopilotKit",
+    "summary": "The Frontend Stack for Agents & Generative UI. React + Angular.  Makers of the AG-UI Protocol",
+    "star_growth": "stars=32968, daily_delta=366, delta_source=signal, weekly_delta=366, persistence=single-spike",
+    "why_it_matters": "Score 63.1 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_spike.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "continuedev/continue",
+    "repo_url": "https://github.com/continuedev/continue",
+    "summary": "⏩ Source-controlled AI checks, enforceable in CI. Powered by the open-source Continue CLI",
+    "star_growth": "stars=33564, daily_delta=19, delta_source=signal, weekly_delta=72, persistence=persistent",
+    "why_it_matters": "Score 63 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "crewAIInc/crewAI",
+    "repo_url": "https://github.com/crewAIInc/crewAI",
+    "summary": "Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.",
+    "star_growth": "stars=52923, daily_delta=42, delta_source=signal, weekly_delta=356, persistence=persistent",
+    "why_it_matters": "Score 62.3 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "BigPizzaV3/CodexPlusPlus",
+    "repo_url": "https://github.com/BigPizzaV3/CodexPlusPlus",
+    "summary": "An enhanced tool for CodexApp, striving to make Codex better to use and more comfortable 一个CodexApp的增强工具，努力让Codex变得更好用更舒服",
+    "star_growth": "stars=14517, daily_delta=561, delta_source=signal, weekly_delta=3210, persistence=persistent",
+    "why_it_matters": "Score 61.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "helloianneo/ian-xiaohei-illustrations",
+    "repo_url": "https://github.com/helloianneo/ian-xiaohei-illustrations",
+    "summary": "中文小黑怪诞正文配图生成 Skill | 16:9 白底手绘 | 少量红橙蓝批注 | Codex Skill",
+    "star_growth": "stars=2717, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 61 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + tool/skill ecosystem. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime + tool/skill ecosystem",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "PaddlePaddle/PaddleOCR",
+    "repo_url": "https://github.com/PaddlePaddle/PaddleOCR",
+    "summary": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
+    "star_growth": "stars=80746, daily_delta=326, delta_source=signal, weekly_delta=467, persistence=emerging",
+    "why_it_matters": "Score 60.75 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "awslabs/aidlc-workflows",
+    "repo_url": "https://github.com/awslabs/aidlc-workflows",
+    "summary": "AI-Driven Life Cycle (AI-DLC) adaptive workflow steering rules for AI coding agents",
+    "star_growth": "stars=2747, daily_delta=16, delta_source=signal, weekly_delta=16, persistence=emerging",
+    "why_it_matters": "Score 60.1 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "anthropics/claude-plugins-official",
+    "repo_url": "https://github.com/anthropics/claude-plugins-official",
+    "summary": "Official, Anthropic-managed directory of high quality Claude Code Plugins.",
+    "star_growth": "stars=29474, daily_delta=69, delta_source=signal, weekly_delta=477, persistence=persistent",
+    "why_it_matters": "Score 59.65 (medium confidence, trust=high/1.00). Paradigm signal: agent system. Anti-noise flags: single_source.",
+    "paradigm": "agent system",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "tensorflow/tensorflow",
+    "repo_url": "https://github.com/tensorflow/tensorflow",
+    "summary": "An Open Source Machine Learning Framework for Everyone",
+    "star_growth": "stars=195565, daily_delta=12, delta_source=signal, weekly_delta=270, persistence=persistent",
+    "why_it_matters": "Score 59.6 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "microsoft/vscode",
+    "repo_url": "https://github.com/microsoft/vscode",
+    "summary": "Visual Studio Code",
+    "star_growth": "stars=185998, daily_delta=34, delta_source=signal, weekly_delta=526, persistence=persistent",
+    "why_it_matters": "Score 59.5 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "openai/openai-agents-python",
+    "repo_url": "https://github.com/openai/openai-agents-python",
+    "summary": "A lightweight, powerful framework for multi-agent workflows",
+    "star_growth": "stars=26946, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 58 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "MadsLorentzen/ai-job-search",
+    "repo_url": "https://github.com/MadsLorentzen/ai-job-search",
+    "summary": "AI-powered job application framework built on Claude Code. Fork it, fill in your profile, and let Claude evaluate jobs, tailor CVs, write cover letters, and prepare you for interviews.",
+    "star_growth": "stars=2470, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 58 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "ollama/ollama",
+    "repo_url": "https://github.com/ollama/ollama",
+    "summary": "Get up and running with Kimi-K2.6, GLM-5.1, MiniMax, DeepSeek, gpt-oss, Qwen, Gemma and other models.",
+    "star_growth": "stars=173336, daily_delta=106, delta_source=signal, weekly_delta=623, persistence=persistent",
+    "why_it_matters": "Score 57.65 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: none.",
+    "paradigm": "agent infra",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "vercel/ai",
+    "repo_url": "https://github.com/vercel/ai",
+    "summary": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source library for building AI-powered applications and agents",
+    "star_growth": "stars=24692, daily_delta=18, delta_source=signal, weekly_delta=18, persistence=emerging",
+    "why_it_matters": "Score 57.3 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "InternLM/xtuner",
+    "repo_url": "https://github.com/InternLM/xtuner",
+    "summary": "A Next-Generation Training Engine Built for Ultra-Large MoE Models",
+    "star_growth": "stars=5152, daily_delta=1, delta_source=signal, weekly_delta=12, persistence=persistent",
+    "why_it_matters": "Score 56.95 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "openai/symphony",
+    "repo_url": "https://github.com/openai/symphony",
+    "summary": "Symphony turns project work into isolated, autonomous implementation runs, allowing teams to manage work instead of supervising coding agents.",
+    "star_growth": "stars=25092, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 56.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "huggingface/ml-intern",
+    "repo_url": "https://github.com/huggingface/ml-intern",
+    "summary": "🤗 ml-intern: an open-source ML engineer that reads papers, trains models, and ships ML models",
+    "star_growth": "stars=10294, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 56.5 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + self-improving. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent runtime + self-improving",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "withastro/flue",
+    "repo_url": "https://github.com/withastro/flue",
+    "summary": "The sandbox agent framework.",
+    "star_growth": "stars=4667, daily_delta=126, delta_source=signal, weekly_delta=126, persistence=single-spike",
+    "why_it_matters": "Score 56.25 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source, single_spike.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "pydantic/pydantic-ai",
+    "repo_url": "https://github.com/pydantic/pydantic-ai",
+    "summary": "AI Agent Framework, the Pydantic way",
+    "star_growth": "stars=17555, daily_delta=17, delta_source=signal, weekly_delta=124, persistence=persistent",
+    "why_it_matters": "Score 56.1 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "Leonxlnx/taste-skill",
+    "repo_url": "https://github.com/Leonxlnx/taste-skill",
+    "summary": "Taste-Skill - gives your AI good taste. stops the AI from generating boring, generic slop",
+    "star_growth": "stars=34646, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 56 (medium confidence, trust=high/1.00). Paradigm signal: agent system. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent system",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "TinyAGI/tinyagi",
+    "repo_url": "https://github.com/TinyAGI/tinyagi",
+    "summary": "TinyAGI is the agent teams orchestrator for One Person Company. (fka TinyClaw)",
+    "star_growth": "stars=3572, daily_delta=0, delta_source=signal, weekly_delta=5, persistence=persistent",
+    "why_it_matters": "Score 56 (medium confidence, trust=high/1.00). Paradigm signal: agent runtime + persistent memory. Anti-noise flags: single_source.",
+    "paradigm": "agent runtime + persistent memory",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langfuse/langfuse",
+    "repo_url": "https://github.com/langfuse/langfuse",
+    "summary": "🪢 Open source LLM engineering platform: LLM Observability, metrics, evals, prompt management, playground, datasets. Integrates with OpenTelemetry, Langchain, OpenAI SDK, LiteLLM, and more. 🍊YC W23",
+    "star_growth": "stars=28575, daily_delta=33, delta_source=signal, weekly_delta=280, persistence=persistent",
+    "why_it_matters": "Score 53.8 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "vercel/next.js",
+    "repo_url": "https://github.com/vercel/next.js",
+    "summary": "The React Framework",
+    "star_growth": "stars=140188, daily_delta=unavailable, delta_source=unavailable, weekly_delta=580, persistence=persistent",
+    "why_it_matters": "Score 50 (high confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "run-llama/llama-parse-ts",
+    "repo_url": "https://github.com/run-llama/llama-parse-ts",
+    "summary": "Typescript SDK for OCR and document parsing in the cloud with LlamaParse",
+    "star_growth": "stars=19, daily_delta=0, delta_source=signal, weekly_delta=1, persistence=emerging",
+    "why_it_matters": "Score 50 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: none.",
+    "paradigm": "ordinary AI tool",
+    "risks": [],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "pydantic/logfire",
+    "repo_url": "https://github.com/pydantic/logfire",
+    "summary": "AI observability platform for production LLM and agent systems.",
+    "star_growth": "stars=4283, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 49 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "freeCodeCamp/freeCodeCamp",
+    "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "summary": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+    "star_growth": "stars=446294, daily_delta=46, delta_source=signal, weekly_delta=769, persistence=persistent",
+    "why_it_matters": "Score 48.95 (medium confidence, trust=high/1.00). Paradigm signal: self-improving. Anti-noise flags: single_source.",
+    "paradigm": "self-improving",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "modelcontextprotocol/python-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/python-sdk",
+    "summary": "The official Python SDK for Model Context Protocol servers and clients",
+    "star_growth": "stars=23254, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 47.5 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "modelcontextprotocol/typescript-sdk",
+    "repo_url": "https://github.com/modelcontextprotocol/typescript-sdk",
+    "summary": "The official TypeScript SDK for Model Context Protocol servers and clients",
+    "star_growth": "stars=12621, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 47.5 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "f/prompts.chat",
+    "repo_url": "https://github.com/f/prompts.chat",
+    "summary": "f.k.a. Awesome ChatGPT Prompts. Share, discover, and collect prompts from the community. Free and open source — self-host for your organization with complete privacy.",
+    "star_growth": "stars=163365, daily_delta=42, delta_source=signal, weekly_delta=405, persistence=persistent",
+    "why_it_matters": "Score 47.4 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "open-webui/open-webui",
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "summary": "User-friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+    "star_growth": "stars=140279, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 46.75 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "qhkm/zeptoclaw",
+    "repo_url": "https://github.com/qhkm/zeptoclaw",
+    "summary": "Fast, small, secure, local-first personal AI assistant infrastructure: one Rust binary for tools, memory, channels, providers, and sandboxed autonomy.",
+    "star_growth": "stars=637, daily_delta=0, delta_source=signal, weekly_delta=4, persistence=persistent",
+    "why_it_matters": "Score 46.25 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source.",
+    "paradigm": "agent infra",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "safishamsi/graphify",
+    "repo_url": "https://github.com/safishamsi/graphify",
+    "summary": "AI coding assistant skill (Claude Code, Codex, OpenCode, Cursor, Gemini CLI, and more). Turn any folder of code, SQL schemas, R scripts, shell scripts, docs, papers, images, or videos into a queryable knowledge graph. App code + database schema + infrastructure in one graph.",
+    "star_growth": "stars=60351, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 45.5 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "microsoft/mxc",
+    "repo_url": "https://github.com/microsoft/mxc",
+    "summary": "Policy-driven, layered isolation and containment",
+    "star_growth": "stars=452, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 43.75 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "run-llama/liteparse",
+    "repo_url": "https://github.com/run-llama/liteparse",
+    "summary": "A fast, helpful, and open-source document parser",
+    "star_growth": "stars=9285, daily_delta=119, delta_source=signal, weekly_delta=119, persistence=emerging",
+    "why_it_matters": "Score 43.55 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "google/dawn",
+    "repo_url": "https://github.com/google/dawn",
+    "summary": "Native WebGPU implementation. Mirror of https://dawn.googlesource.com/dawn. File bugs here: https://crbug.com/dawn/new",
+    "star_growth": "stars=1032, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 42.25 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "golang/go",
+    "repo_url": "https://github.com/golang/go",
+    "summary": "The Go programming language",
+    "star_growth": "stars=134695, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=emerging",
+    "why_it_matters": "Score 40.25 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "avelino/awesome-go",
+    "repo_url": "https://github.com/avelino/awesome-go",
+    "summary": "A curated list of awesome Go frameworks, libraries and software",
+    "star_growth": "stars=174734, daily_delta=106, delta_source=signal, weekly_delta=106, persistence=emerging",
+    "why_it_matters": "Score 39.95 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "byoungd/English-level-up-tips",
+    "repo_url": "https://github.com/byoungd/English-level-up-tips",
+    "summary": "An advanced guide to learn English which might benefit you a lot 🎉 .  离谱的英语学习指南/英语学习教程/英语学习/学英语",
+    "star_growth": "stars=52130, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 39.5 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "OpenBMB/VoxCPM",
+    "repo_url": "https://github.com/OpenBMB/VoxCPM",
+    "summary": "VoxCPM2: Tokenizer-Free TTS for Multilingual Speech Generation, Creative Voice Design, and True-to-Life Cloning",
+    "star_growth": "stars=26912, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 39.5 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "huggingface/lerobot",
+    "repo_url": "https://github.com/huggingface/lerobot",
+    "summary": "🤗 LeRobot: Making AI for Robotics more accessible with end-to-end learning",
+    "star_growth": "stars=24732, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 39.5 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "flutter/flutter",
+    "repo_url": "https://github.com/flutter/flutter",
+    "summary": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+    "star_growth": "stars=176808, daily_delta=18, delta_source=signal, weekly_delta=191, persistence=persistent",
+    "why_it_matters": "Score 39.35 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "google-deepmind/mujoco",
+    "repo_url": "https://github.com/google-deepmind/mujoco",
+    "summary": "Multi-Joint dynamics with Contact. A general purpose physics simulator.",
+    "star_growth": "stars=13773, daily_delta=13, delta_source=signal, weekly_delta=21, persistence=emerging",
+    "why_it_matters": "Score 39.35 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "microsoft/PowerToys",
+    "repo_url": "https://github.com/microsoft/PowerToys",
+    "summary": "Microsoft PowerToys is a collection of utilities that supercharge productivity and customization on Windows",
+    "star_growth": "stars=133831, daily_delta=17, delta_source=signal, weekly_delta=88, persistence=persistent",
+    "why_it_matters": "Score 37.95 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "cpaczek/skylight",
+    "repo_url": "https://github.com/cpaczek/skylight",
+    "summary": "Project the aircraft passing overhead onto your ceiling in real time, from an RTL-SDR — with a live sky layer (sun, moon, stars, ISS) and where each plane is headed.",
+    "star_growth": "stars=1916, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 37.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "AIEraDev/Clypra",
+    "repo_url": "https://github.com/AIEraDev/Clypra",
+    "summary": "A modern video editor built with Tauri, React, and TypeScript. Focus on building free capabilities of premium capcut functionalities",
+    "star_growth": "stars=783, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 37.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "microsoft/winget-pkgs",
+    "repo_url": "https://github.com/microsoft/winget-pkgs",
+    "summary": "The Microsoft community Windows Package Manager manifest repository",
+    "star_growth": "stars=10656, daily_delta=4, delta_source=signal, weekly_delta=4, persistence=emerging",
+    "why_it_matters": "Score 35.95 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "twbs/bootstrap",
+    "repo_url": "https://github.com/twbs/bootstrap",
+    "summary": "The most popular HTML, CSS, and JavaScript framework for developing responsive, mobile first projects on the web.",
+    "star_growth": "stars=174305, daily_delta=2, delta_source=signal, weekly_delta=12, persistence=emerging",
+    "why_it_matters": "Score 35.95 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "mistralai/mistral-common",
+    "repo_url": "https://github.com/mistralai/mistral-common",
+    "summary": "Official inference library for pre-processing of Mistral models",
+    "star_growth": "stars=901, daily_delta=1, delta_source=signal, weekly_delta=1, persistence=emerging",
+    "why_it_matters": "Score 35.75 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "vercel/shop",
+    "repo_url": "https://github.com/vercel/shop",
+    "summary": "vercel/shop",
+    "star_growth": "stars=19, daily_delta=1, delta_source=signal, weekly_delta=1, persistence=emerging",
+    "why_it_matters": "Score 35.75 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "cohere-ai/melody",
+    "repo_url": "https://github.com/cohere-ai/melody",
+    "summary": "Templating rendering and generation parsing for Cohere models.",
+    "star_growth": "stars=2, daily_delta=0, delta_source=signal, weekly_delta=0, persistence=emerging",
+    "why_it_matters": "Score 35.75 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langfuse/langfuse-docs",
+    "repo_url": "https://github.com/langfuse/langfuse-docs",
+    "summary": "🪢 Langfuse documentation -- Langfuse is the open source LLM Engineering Platform. Observability, evals, prompt management, playground and metrics to debug and improve LLM apps",
+    "star_growth": "stars=210, daily_delta=0, delta_source=signal, weekly_delta=0, persistence=emerging",
+    "why_it_matters": "Score 35.5 (high confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: metric_scale_anomaly.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "fork/star ratio looks abnormal; metrics may be polluted"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "promote to weekly theme candidate",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "public-apis/public-apis",
+    "repo_url": "https://github.com/public-apis/public-apis",
+    "summary": "A collective list of free APIs",
+    "star_growth": "stars=439723, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "awesome-selfhosted/awesome-selfhosted",
+    "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "summary": "A list of Free Software network services and web applications which can be hosted on your own servers",
+    "star_growth": "stars=297506, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "torvalds/linux",
+    "repo_url": "https://github.com/torvalds/linux",
+    "summary": "Linux kernel source tree",
+    "star_growth": "stars=235615, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "TapXWorld/ChinaTextbook",
+    "repo_url": "https://github.com/TapXWorld/ChinaTextbook",
+    "summary": "所有小初高、大学PDF教材。",
+    "star_growth": "stars=72035, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "vercel/turborepo",
+    "repo_url": "https://github.com/vercel/turborepo",
+    "summary": "Build system optimized for JavaScript and TypeScript, written in Rust",
+    "star_growth": "stars=30499, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "google/osv-scanner",
+    "repo_url": "https://github.com/google/osv-scanner",
+    "summary": "Vulnerability scanner written in Go which uses the data provided by https://osv.dev",
+    "star_growth": "stars=10447, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "langchain-ai/chat-langchain",
+    "repo_url": "https://github.com/langchain-ai/chat-langchain",
+    "summary": "langchain-ai/chat-langchain appeared in watchlist_live_activity.",
+    "star_growth": "stars=6364, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: missing_description, single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "low_confidence: missing description",
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established",
+      "missing description; semantic classification confidence is low"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "aws/aws-sdk-java-v2",
+    "repo_url": "https://github.com/aws/aws-sdk-java-v2",
+    "summary": "The official AWS SDK for Java - Version 2",
+    "star_growth": "stars=2587, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "MoonshotAI/kimi-code",
+    "repo_url": "https://github.com/MoonshotAI/kimi-code",
+    "summary": "Kimi Code CLI  —  The Starting Point for Next-Gen Agents",
+    "star_growth": "stars=1903, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "pydantic/genai-prices",
+    "repo_url": "https://github.com/pydantic/genai-prices",
+    "summary": "Calculate prices for calling LLM inference APIs.",
+    "star_growth": "stars=301, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 34.25 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "review issue/PR quality to separate real engagement from noise",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "ultraworkers/claw-code",
+    "repo_url": "https://github.com/ultraworkers/claw-code",
+    "summary": "The repo is finally unlocked. enjoy the party! The fastest repo in history to surpass 100K stars ⭐. Join Discord: https://discord.gg/5TUQKqFWd Built in Rust using oh-my-codex.",
+    "star_growth": "stars=193377, daily_delta=64, delta_source=signal, weekly_delta=178, persistence=persistent",
+    "why_it_matters": "Score 33.1 (medium confidence, trust=high/1.00). Paradigm signal: AI project with insufficient paradigm signal. Anti-noise flags: single_source.",
+    "paradigm": "AI project with insufficient paradigm signal",
+    "risks": [
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "ByteDance-Seed/Cola-DLM",
+    "repo_url": "https://github.com/ByteDance-Seed/Cola-DLM",
+    "summary": "The codebase of Cola DLM",
+    "star_growth": "stars=213, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 28 (medium confidence, trust=high/1.00). Paradigm signal: AI project with insufficient paradigm signal. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "AI project with insufficient paradigm signal",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "MiniMax-AI/minimax-code",
+    "repo_url": "https://github.com/MiniMax-AI/minimax-code",
+    "summary": "MiniMax-AI/minimax-code appeared in watchlist_live_activity.",
+    "star_growth": "stars=18, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 28 (medium confidence, trust=high/1.00). Paradigm signal: AI project with insufficient paradigm signal. Anti-noise flags: missing_description, single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "AI project with insufficient paradigm signal",
+    "risks": [
+      "low_confidence: missing description",
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established",
+      "missing description; semantic classification confidence is low"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "cohere-ai/cloud-api-adaptor",
+    "repo_url": "https://github.com/cohere-ai/cloud-api-adaptor",
+    "summary": "Ability to create Kata pods using cloud provider APIs aka the peer-pods approach",
+    "star_growth": "stars=0, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 23.05 (medium confidence, trust=high/1.00). Paradigm signal: agent infra. Anti-noise flags: single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "agent infra",
+    "risks": [
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "sourcegraph/sourcegraph-mcp-library",
+    "repo_url": "https://github.com/sourcegraph/sourcegraph-mcp-library",
+    "summary": "sourcegraph/sourcegraph-mcp-library appeared in watchlist_live_activity.",
+    "star_growth": "stars=0, daily_delta=unavailable, delta_source=unavailable, weekly_delta=unavailable, persistence=single-spike",
+    "why_it_matters": "Score 18.95 (medium confidence, trust=high/1.00). Paradigm signal: ordinary AI tool. Anti-noise flags: missing_description, single_source, single_spike, daily_delta_unavailable.",
+    "paradigm": "ordinary AI tool",
+    "risks": [
+      "low_confidence: missing description",
+      "daily growth unavailable; star velocity is not trusted for this project",
+      "single-source signal; needs persistence validation",
+      "single-day appearance; persistence is not yet established",
+      "missing description; semantic classification confidence is low"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "do not trust star velocity until a real daily delta becomes available"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  },
+  {
+    "project_name": "sourcegraph/smoke-tests",
+    "repo_url": "https://github.com/sourcegraph/smoke-tests",
+    "summary": "Smoke tests for Sourcegraph - basic functionality",
+    "star_growth": "stars=10, daily_delta=0, delta_source=signal, weekly_delta=0, persistence=persistent",
+    "why_it_matters": "Score 16.75 (medium confidence, trust=high/1.00). Paradigm signal: AI project with insufficient paradigm signal. Anti-noise flags: single_source, metric_scale_anomaly.",
+    "paradigm": "AI project with insufficient paradigm signal",
+    "risks": [
+      "issue/PR scale looks abnormal relative to stars",
+      "single-source signal; needs persistence validation"
+    ],
+    "next_actions": [
+      "track for 7-day persistence",
+      "inspect README and release cadence",
+      "compare repeated appearances to confirm trend durability",
+      "review issue/PR quality to separate real engagement from noise"
+    ],
+    "updated_at": "2026-06-06T23:24:14+08:00"
+  }
+]

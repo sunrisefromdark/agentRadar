@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "microsoft/intelligent-terminal",
+  "repo_url": "https://github.com/microsoft/intelligent-terminal",
+  "stars": 235,
+  "forks": 11,
+  "issues": 18,
+  "PR": 18,
+  "description": "A fork of Windows Terminal with native agent integration, right in your command line.",
+  "tags": [
+    "acp",
+    "agent",
+    "agent-client-protocol",
+    "agentic-ai",
+    "ai",
+    "cli",
+    "command-line",
+    "console",
+    "copilot",
+    "terminal",
+    "windows",
+    "windows-terminal"
+  ]
+}

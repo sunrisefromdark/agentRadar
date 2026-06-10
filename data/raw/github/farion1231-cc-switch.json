@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "farion1231/cc-switch",
+  "repo_url": "https://github.com/farion1231/cc-switch",
+  "stars": 90262,
+  "forks": 5876,
+  "issues": 1010,
+  "PR": 271,
+  "description": "A cross-platform desktop All-in-One assistant for Claude Code, Codex, OpenCode, OpenClaw, Gemini CLI & Hermes Agent. Only official website: ccswitch.io",
+  "tags": [
+    "ai-tools",
+    "claude-code",
+    "codex",
+    "desktop-app",
+    "hermes",
+    "hermes-agent",
+    "mcp",
+    "minimax",
+    "omo",
+    "open-source",
+    "openclaw",
+    "openclaw-ui",
+    "opencode",
+    "provider-management",
+    "rust",
+    "skills",
+    "skills-management",
+    "tauri",
+    "typescript",
+    "wsl-support"
+  ]
+}

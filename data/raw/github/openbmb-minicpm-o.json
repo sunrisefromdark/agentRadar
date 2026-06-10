@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "OpenBMB/MiniCPM-o",
+  "repo_url": "https://github.com/OpenBMB/MiniCPM-o",
+  "stars": 24514,
+  "forks": 1908,
+  "issues": 25,
+  "PR": 20,
+  "description": "A Gemini 2.5 Flash Level MLLM for Vision, Speech, and Full-Duplex Multimodal Live Streaming on Your Phone",
+  "tags": [
+    "minicpm",
+    "minicpm-v",
+    "multi-modal"
+  ]
+}

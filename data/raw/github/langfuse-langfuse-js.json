@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "langfuse/langfuse-js",
+  "repo_url": "https://github.com/langfuse/langfuse-js",
+  "stars": 142,
+  "forks": 87,
+  "issues": 3,
+  "PR": 18,
+  "description": "🪢 Langfuse JS/TS SDKs - Instrument your LLM app and get detailed tracing/observability. Works with any LLM or framework",
+  "tags": [
+    "javascript",
+    "langfuse",
+    "llmops",
+    "observability",
+    "sdk-js",
+    "typescript"
+  ]
+}

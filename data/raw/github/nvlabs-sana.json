@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "NVlabs/Sana",
+  "repo_url": "https://github.com/NVlabs/Sana",
+  "stars": 7183,
+  "forks": 524,
+  "issues": 105,
+  "PR": 10,
+  "description": "SANA: Efficient High-Resolution Image Synthesis with Linear Diffusion Transformer",
+  "tags": [
+    "diffusion",
+    "dit",
+    "linear-transformer",
+    "nvfp4",
+    "pytorch",
+    "reinforcement-learning",
+    "sana",
+    "system-algorithm-deisgn",
+    "text-to-image-generation",
+    "text-to-video",
+    "transformers",
+    "video-generation"
+  ]
+}

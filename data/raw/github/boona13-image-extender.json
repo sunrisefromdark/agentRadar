@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "boona13/image-extender",
+  "repo_url": "https://github.com/boona13/image-extender",
+  "stars": 703,
+  "forks": 77,
+  "issues": 0,
+  "PR": 0,
+  "description": "Seamlessly extend any image in any direction with AI. Open-source web app powered by Gemini via OpenRouter, with Poisson-blended seams and best-of-3 variant picker.",
+  "tags": [
+    "ai",
+    "gemini",
+    "image-generation",
+    "nano-banana",
+    "nextjs",
+    "openrouter",
+    "outpainting",
+    "poisson-blending",
+    "tailwindcss",
+    "typescript"
+  ]
+}

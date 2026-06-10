@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "vercel/ai",
+  "repo_url": "https://github.com/vercel/ai",
+  "stars": 24637,
+  "forks": 4519,
+  "issues": 990,
+  "PR": 683,
+  "description": "The AI Toolkit for TypeScript. From the creators of Next.js, the AI SDK is a free open-source library for building AI-powered applications and agents ",
+  "tags": [
+    "anthropic",
+    "artificial-intelligence",
+    "gemini",
+    "generative-ai",
+    "generative-ui",
+    "javascript",
+    "language-model",
+    "llm",
+    "nextjs",
+    "openai",
+    "react",
+    "svelte",
+    "typescript",
+    "vercel",
+    "vue"
+  ]
+}

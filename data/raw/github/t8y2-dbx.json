@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "t8y2/dbx",
+  "repo_url": "https://github.com/t8y2/dbx",
+  "stars": 3190,
+  "forks": 232,
+  "issues": 139,
+  "PR": 0,
+  "description": "15MB, lightweight, cross-platform database client. Supports MySQL, PostgreSQL, SQLite, Redis, MongoDB, DuckDB, ClickHouse, SQL Server and more.15MB，轻量级跨平台数据库客户端。支持 MySQL、PostgreSQL、SQLite、Redis、MongoDB、DuckDB、ClickHouse、SQL Server 等。",
+  "tags": [
+    "clickhouse",
+    "database",
+    "database-client",
+    "database-management",
+    "duckdb",
+    "gui",
+    "mongodb",
+    "mysql",
+    "postgresql",
+    "redis",
+    "rust",
+    "sql-server",
+    "sqlite",
+    "tauri",
+    "vue"
+  ]
+}

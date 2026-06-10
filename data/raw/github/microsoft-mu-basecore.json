@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "microsoft/mu_basecore",
+  "repo_url": "https://github.com/microsoft/mu_basecore",
+  "stars": 284,
+  "forks": 172,
+  "issues": 13,
+  "PR": 14,
+  "description": "Project Mu BaseCore",
+  "tags": [
+    "firmware",
+    "projectmu",
+    "uefi",
+    "uefi-development"
+  ]
+}

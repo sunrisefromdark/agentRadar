@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "langchain-ai/langchain-aws",
+  "repo_url": "https://github.com/langchain-ai/langchain-aws",
+  "stars": 325,
+  "forks": 288,
+  "issues": 67,
+  "PR": 32,
+  "description": "Build LangChain Applications on AWS",
+  "tags": [
+    "aws",
+    "generative-ai",
+    "langchain",
+    "langchain-python"
+  ]
+}

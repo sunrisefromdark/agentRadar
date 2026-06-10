@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/atropos",
+  "repo_url": "https://github.com/NousResearch/atropos",
+  "stars": 1229,
+  "forks": 364,
+  "issues": 16,
+  "PR": 65,
+  "description": "Atropos is a Language Model Reinforcement Learning Environments framework for collecting and evaluating LLM trajectories through diverse environments",
+  "tags": []
+}

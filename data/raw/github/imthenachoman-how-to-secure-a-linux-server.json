@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "imthenachoman/How-To-Secure-A-Linux-Server",
+  "repo_url": "https://github.com/imthenachoman/How-To-Secure-A-Linux-Server",
+  "stars": 27413,
+  "forks": 1800,
+  "issues": 32,
+  "PR": 0,
+  "description": "An evolving how-to guide for securing a Linux server.",
+  "tags": [
+    "cc-by-sa",
+    "hardening",
+    "hardening-steps",
+    "linux",
+    "linux-server",
+    "security",
+    "security-hardening",
+    "server"
+  ]
+}

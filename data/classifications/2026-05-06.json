@@ -1,0 +1,1977 @@
+[
+  {
+    "repo_full_name": "forrestchang/andrej-karpathy-skills",
+    "project_name": "forrestchang/andrej-karpathy-skills",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A single CLAUDE.md file to improve Claude Code behavior",
+        "derived from Andrej Karpathy's observations on LLM coding pitfalls",
+        "persistence_state: persistent"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "D4Vinci/Scrapling",
+    "project_name": "D4Vinci/Scrapling",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "adaptive Web Scraping framework that handles everything from a single request to a full-scale crawl",
+        "tags include infra and web-scraping"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "Hmbown/DeepSeek-TUI",
+    "project_name": "Hmbown/DeepSeek-TUI",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Coding agent for DeepSeek models that runs in your terminal",
+        "Tags include ai-agent, ai-coding, agent",
+        "Terminal-based TUI implementation",
+        "persistence_state: emerging"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "soxoj/maigret",
+    "project_name": "soxoj/maigret",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Collect a dossier on a person by username from 3000+ sites",
+        "CLI tool for OSINT username enumeration",
+        "web-scraping and social-network reconnaissance"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "AIDC-AI/Pixelle-Video",
+    "project_name": "AIDC-AI/Pixelle-Video",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "AI全自动短视频引擎 (AI fully automated short video engine)",
+        "tags include agent, agent-runtime, tool-use, automation, ai-agent",
+        "uses ComfyUI for workflow orchestration",
+        "integrates image-generation, TTS, and video-generation capabilities"
+      ],
+      "confidence": 0.78
+    }
+  },
+  {
+    "repo_full_name": "docusealco/docuseal",
+    "project_name": "docusealco/docuseal",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": true,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "ruvnet/ruflo",
+    "project_name": "ruvnet/ruflo",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": true,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "agent orchestration platform for Claude",
+        "intelligent multi-agent swarms",
+        "coordinate autonomous workflows",
+        "distributed swarm intelligence",
+        "RAG integration",
+        "native Claude Code / Codex Integration",
+        "tags include agent-runtime and ai-agent"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "pyinfra-dev/pyinfra",
+    "project_name": "pyinfra-dev/pyinfra",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "turns Python code into shell commands and runs them on your servers",
+        "Execute ad-hoc commands and write declarative operations",
+        "Target SSH servers, local machine and Docker containers",
+        "configuration-management",
+        "remote-execution",
+        "Fast and scales from one server to thousands"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "TauricResearch/TradingAgents",
+    "project_name": "TauricResearch/TradingAgents",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Multi-Agents LLM Financial Trading Framework",
+        "tags: ai-agent, agent, multiagent, infra",
+        "persistence_state: persistent"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "cheahjs/free-llm-api-resources",
+    "project_name": "cheahjs/free-llm-api-resources",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A list of free LLM inference resources accessible via API",
+        "tags include curated-list, nlp, llm, openai, llama, gemini, claude",
+        "persistence_state is single-spike indicating a one-time contribution"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "cocoindex-io/cocoindex",
+    "project_name": "cocoindex-io/cocoindex",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "msitarzewski/agency-agents",
+    "project_name": "msitarzewski/agency-agents",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A complete AI agency at your fingertips",
+        "Each agent is a specialized expert with personality, processes, and proven deliverables",
+        "From frontend wizards to Reddit community ninjas",
+        "Tags: ai-agent, agent"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "virattt/dexter",
+    "project_name": "virattt/dexter",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "An autonomous agent for deep financial research",
+        "tags include ai-agent and agent",
+        "persistence_state is single-spike indicating no persistent memory between runs"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "anomalyco/opencode",
+    "project_name": "anomalyco/opencode",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Add native LLM core foundation",
+        "packages/llm based on Effect framework",
+        "typed request/event schemas",
+        "provider adapters",
+        "tool runtime",
+        "OPENCODE_EXPERIMENTAL_LLM_NATIVE feature flag progressive rollout",
+        "重大基础设施 (major infrastructure)"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "LearningCircuit/local-deep-research",
+    "project_name": "LearningCircuit/local-deep-research",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "high",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Local deployment achieving 95% accuracy on SimpleQA",
+        "supports 10+ search engines and private documents",
+        "fully encrypted",
+        "research-tool tag indicating specialized research agent",
+        "deep-research tag indicating autonomous research capability",
+        "retrieval-augmented-generation for document processing",
+        "multiple LLM providers: ollama, openai, mistral"
+      ],
+      "confidence": 0.8
+    }
+  },
+  {
+    "repo_full_name": "badlogic/pi-mono",
+    "project_name": "badlogic/pi-mono",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include agent-runtime, ai-agent, ai-coding, tool-use, infra, automation, memory",
+        "persistence_state is persistent",
+        "Issue #4026 discusses gpt-5.3-codex verbosity=low causing tool call reliability drop and commentary-only stagnation"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "santifer/career-ops",
+    "project_name": "santifer/career-ops",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "AI-powered job search system applying AI agents to vertical domain (description)",
+        "Tags include 'agent', 'tool-use', 'ai-agent', 'automation'",
+        "Persistence state is 'persistent'"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "openclaw/openclaw",
+    "project_name": "openclaw/openclaw",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Tagged with agent-runtime, ai-agent, infra",
+        "Has bundled plugins with runtime dependencies",
+        "Self-hosted personal AI agent framework with 'own-your-data' messaging",
+        "Tagged with 'personal' and 'tool-use' indicating user-controlled agent",
+        "persistence_state: persistent"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "PriorLabs/TabPFN",
+    "project_name": "PriorLabs/TabPFN",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Foundation model for tabular data",
+        "Machine learning model for structured data prediction",
+        "Tags: foundation-models, tabular-data, machine-learning",
+        "Single-spike persistence state indicates transient usage"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "n8n-io/n8n",
+    "project_name": "n8n-io/n8n",
+    "classification": {
+      "paradigm_class": "system",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Fair-code workflow automation platform with native AI capabilities",
+        "400+ integrations",
+        "self-host or cloud",
+        "workflow automation",
+        "low-code/no-code platform",
+        "combine visual building with custom code",
+        "mcp-client",
+        "mcp-server"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "langgenius/dify",
+    "project_name": "langgenius/dify",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Production-ready agentic workflow development platform",
+        "agentic-ai agentic-framework agentic-workflow tags",
+        "RAG knowledge base capabilities",
+        "low-code no-code orchestration for building AI agents",
+        "workflow automation platform"
+      ],
+      "confidence": 0.8
+    }
+  },
+  {
+    "repo_full_name": "ollama/ollama",
+    "project_name": "ollama/ollama",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "本地运行大模型的标杆工具",
+        "支持的模型列表已更新至 Kimi-K2.5、GLM-5",
+        "local and privacy computing core",
+        "tags include infra"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "mem0ai/mem0",
+    "project_name": "mem0ai/mem0",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "AI 智能体通用记忆层",
+        "解决 Agent 长期记忆与上下文连续性痛点",
+        "基础设施级组件",
+        "tags include 'infra', 'memory', 'long-term-memory'"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "vllm-project/vllm",
+    "project_name": "vllm-project/vllm",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "High-throughput, memory-efficient LLM inference engine",
+        "Tags include: inference, llm-serving, model-serving, infra",
+        "Standard for deploying and serving large language models"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "avelino/awesome-go",
+    "project_name": "avelino/awesome-go",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A curated list of awesome Go frameworks, libraries and software",
+        "awesome-list tag indicates this is a static curated collection document",
+        "No agent runtime, infrastructure, or autonomous system characteristics present"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "google-gemini/gemini-cli",
+    "project_name": "google-gemini/gemini-cli",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "CLI tool with MCP client/server capabilities enabling agentic behavior",
+        "Tags include 'agent', 'ai-agents', 'tool-use', 'automation', 'memory'",
+        "Persistence state marked as 'persistent'",
+        "Automated bot behavior generating PRs indicates autonomous agent capabilities",
+        "GrepTool mentioned as a tool in the system"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "OpenHands/OpenHands",
+    "project_name": "OpenHands/OpenHands",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "AI-Driven Development competing with Devin",
+        "agent tag in agents-radar source",
+        "persistent state",
+        "developer-tools tag"
+      ],
+      "confidence": 0.88
+    }
+  },
+  {
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "project_name": "zeroclaw-labs/zeroclaw",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": true,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "persistent_state: persistent in sources",
+        "tags include: agent, agentic, agent-runtime, memory, self-improving",
+        "appears in agents-radar with 6 appearances"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "czlonkowski/n8n-mcp",
+    "project_name": "czlonkowski/n8n-mcp",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include agent-runtime and infra indicating runtime infrastructure",
+        "Connects n8n workflow automation with MCP protocol for AI integration",
+        "Description identifies it as part of the 'agent infrastructure layer' in Claude ecosystem",
+        "MCP-server tagged suggesting it serves as a tool provider for AI agents",
+        "Project enables AI agents to interact with n8n workflows but does not itself operate autonomously"
+      ],
+      "confidence": 0.72
+    }
+  },
+  {
+    "repo_full_name": "sipeed/picoclaw",
+    "project_name": "sipeed/picoclaw",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include 'agent', 'tool-use', 'infra'",
+        "Description mentions credential/authentication handling issues",
+        "Persistence state is 'persistent'",
+        "Appears in agents-radar database with 6 appearances"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "jingyaogong/minimind",
+    "project_name": "jingyaogong/minimind",
+    "classification": {
+      "paradigm_class": "system",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "从零训练小型 GPT 的教学项目",
+        "llm-model 标签",
+        "48,656 stars indicating a model/training system project",
+        "2小时训练64M模型 - focuses on model training system"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "qwibitai/nanoclaw",
+    "project_name": "qwibitai/nanoclaw",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "tags include 'agent-runtime', 'agent', 'ai-agents'",
+        "persistence_state is 'persistent'",
+        "tags include 'claude-skills', 'openclaw'",
+        "description mentions '闭环' (closed loop) workflow",
+        "tags include 'tool-use'",
+        "appears in agents-radar source"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "langflow-ai/langflow",
+    "project_name": "langflow-ai/langflow",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "huggingface/transformers",
+    "project_name": "huggingface/transformers",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "model-definition framework for state-of-the-art machine learning models",
+        "for both inference and training",
+        "tag: infra",
+        "model-hub",
+        "pretrained-models",
+        "model-definition framework"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "hiyouga/LlamaFactory",
+    "project_name": "hiyouga/LlamaFactory",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Unified efficient LLM & VLM fine-tuning framework",
+        "Community首选工具之一 for model fine-tuning",
+        "Tags include: infra, fine-tuning, lora, peft, qlora, rlhf, quantization",
+        "Focus on instruction-tuning and model training rather than agent execution"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "agentscope-ai/QwenPaw",
+    "project_name": "agentscope-ai/QwenPaw",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include 'agent', 'agent-runtime', 'memory', 'skills', indicating an agent runtime with persistent memory and skill ecosystem.",
+        "persistence_state is 'persistent', indicating data across sessions.",
+        "Description references version confusion and release trust crisis, showing issues but not self-improving loop."
+      ],
+      "confidence": 0.8
+    }
+  },
+  {
+    "repo_full_name": "microsoft/vscode",
+    "project_name": "microsoft/vscode",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Visual Studio Code is a code editor/IDE with extension marketplace",
+        "User-controlled development tool with no autonomous agent capabilities",
+        "Core function is editing code, not running AI agents with persistent memory loops"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "Significant-Gravitas/AutoGPT",
+    "project_name": "Significant-Gravitas/AutoGPT",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include autonomous-agents, agentic-ai, agents",
+        "Description emphasizes accessible AI for everyone to build on",
+        "Persistence state is single-spike indicating no persistent memory"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "tensorflow/tensorflow",
+    "project_name": "tensorflow/tensorflow",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "TensorFlow is described as a machine learning framework benchmark",
+        "Tags include 'infra' and 'deep-learning'",
+        "C++ core ensures production-level performance"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "QwenLM/qwen-code",
+    "project_name": "QwenLM/qwen-code",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "activepieces/activepieces",
+    "project_name": "activepieces/activepieces",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "~400 个 MCP 服务器的 Agent 自动化平台",
+        "MCP 生态集成度领先",
+        "workflow-automation",
+        "no-code-automation",
+        "AI agent automation platform"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "MoonshotAI/kimi-cli",
+    "project_name": "MoonshotAI/kimi-cli",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": true,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Agent 架构创新：引入 RalphFlow 自动迭代框架",
+        "临时上下文隔离、收敛检测防无限循环",
+        "多步工作流支持",
+        "persistence_state: persistent",
+        "tags include agent, memory, infra, tool-use"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "nullclaw/nullclaw",
+    "project_name": "nullclaw/nullclaw",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "运行时状态/配置读取/模型列表/定时任务 → 通道状态与技能管理 → 配置变更/MCP 服务/会话管理/记忆 CRUD/历史记录/能力查询",
+        "tags include: agent-runtime, agent, memory",
+        "persistence_state: persistent",
+        "零新增依赖，二进制增量 < 30 KB"
+      ],
+      "confidence": 0.8
+    }
+  },
+  {
+    "repo_full_name": "flutter/flutter",
+    "project_name": "flutter/flutter",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+        "tags: android, app-framework, cross-platform, dart, desktop, flutter, ios, linux-desktop, macos, material-design, mobile, mobile-development, skia, web, web-framework, windows"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "milvus-io/milvus",
+    "project_name": "milvus-io/milvus",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "high-performance, cloud-native vector database",
+        "core infrastructure for building RAG systems",
+        "tags include infra, vector-database, distributed, cloud-native"
+      ],
+      "confidence": 0.9
+    }
+  },
+  {
+    "repo_full_name": "topoteretes/cognee",
+    "project_name": "topoteretes/cognee",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "16,972 stars - AI Agent memory/knowledge engine",
+        "6行代码构建 AI Agent 记忆的知识引擎",
+        "极低门槛的 Agent 记忆层",
+        "competes with Mem0",
+        "uses neo4j graph database and vector databases for persistence",
+        "tagged with ai-agents, cognitive-architecture, memory"
+      ],
+      "confidence": 0.78
+    }
+  },
+  {
+    "repo_full_name": "vercel/next.js",
+    "project_name": "vercel/next.js",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "The React Framework",
+        "react",
+        "server-rendering",
+        "static-site-generator",
+        "vercel"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "nearai/ironclaw",
+    "project_name": "nearai/ironclaw",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "主脑追踪Issue维护架构重构策略",
+        "PR分组策略协调合约冻结与分批审查",
+        "避免巨型堆叠PR压垮审阅者",
+        "tracked as infrastructure with persistent state"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "github/copilot-cli",
+    "project_name": "github/copilot-cli",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include agent, agent-runtime, tool-use indicating agent runtime paradigm",
+        "persistence_state marked as persistent",
+        "GitHub Copilot CLI project - developer assistance tool",
+        "description shows platform compatibility bug not being addressed by maintainers"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "moltis-org/moltis",
+    "project_name": "moltis-org/moltis",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "high",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "tags include 'agent', 'agent-runtime', 'ai-agent', 'sandbox'",
+        "description mentions sandbox multi-backend architecture (#942)",
+        "production-level bug reports indicate active usage",
+        "persistence_state marked as 'persistent'",
+        "has i18n and Matrix OIDC debugging capabilities suggesting plugin/extension ecosystem",
+        "tags include 'tool-use' and 'mcp' (Model Context Protocol)"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "yichuan-w/LEANN",
+    "project_name": "yichuan-w/LEANN",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Privacy-first retrieval augmentation breakthrough",
+        "Edge-side RAG with 97% storage savings",
+        "Tags include: rag, vector-database, vector-search, faiss, langchain, llama-index, localstorage, offline-first",
+        "Tags: knowledge, retrieval-augmented-generation, privacy"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "browser-use/n8n-nodes-browser-use",
+    "project_name": "browser-use/n8n-nodes-browser-use",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "n8n node integration for browser-use",
+        "watchlist:browser-use tag indicates browser automation infrastructure",
+        "Provides browser automation capabilities as a workflow node"
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "repo_full_name": "sindresorhus/awesome",
+    "project_name": "sindresorhus/awesome",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "😎 Awesome lists about all kinds of interesting topics",
+        "tags: curated-list, awesome, awesome-list, lists, resources, unicorns",
+        "persistence_state: emerging"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "jwasham/coding-interview-university",
+    "project_name": "jwasham/coding-interview-university",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A complete computer science study plan to become a software engineer",
+        "curated-list",
+        "static README-based learning resource repository"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "obra/superpowers",
+    "project_name": "obra/superpowers",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "An agentic skills framework & software development methodology",
+        "将技能（Skills）提升为方法论层面的框架，旨在定义 AI 代理如何协作完成复杂软件开发任务",
+        "Tags: ai-agent, ai-skills, agent"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "affaan-m/everything-claude-code",
+    "project_name": "affaan-m/everything-claude-code",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Claude Code performance optimization system covering Skills, memory, security, and complete Agent harness",
+        "Tags: agent, memory, tool-use, ai-agents, claude, claude-code, mcp",
+        "Persistence state: single-spike"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "langchain-ai/langchain",
+    "project_name": "langchain-ai/langchain",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Agent 工程平台",
+        "从 LLM 编排进化为智能体基础设施",
+        "agent-runtime",
+        "infra",
+        "persistence_state: persistent"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "open-webui/open-webui",
+    "project_name": "open-webui/open-webui",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "User-Friendly AI Interface (Supports Ollama, OpenAI API, ...)",
+        "llm-ui tag indicates this is an LLM user interface tool",
+        "webui tag confirms this is a web-based user interface",
+        "self-hosted tag indicates deployment tool rather than autonomous agent"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "NousResearch/hermes-agent",
+    "project_name": "NousResearch/hermes-agent",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "high",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Tags include 'agent', 'agent-runtime', 'ai-skills', indicating an agent runtime with skill ecosystem.",
+        "Persistence state 'persistent' suggests persistent memory.",
+        "Description shows sandbox bypass security issue, indicating governance boundary present.",
+        "The project is listed under the 'agent' tag and 'agent-runtime', reflecting its nature as an agent runtime.",
+        "The presence of skill-related tags like 'ai-skills' further confirms a skill ecosystem."
+      ],
+      "confidence": 0.9
+    }
+  },
+  {
+    "repo_full_name": "anthropics/skills",
+    "project_name": "anthropics/skills",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "首个系统性 Skill 审计工具，填补生态自我治理空白",
+        "安全漏洞扫描",
+        "五维度评估 Skill 质量（结构、提示工程、安全性等）",
+        "元技能：五维度评估"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "facebook/react-native",
+    "project_name": "facebook/react-native",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A framework for building native applications using React",
+        "cross-platform mobile development framework",
+        "React Native enables building mobile apps using JavaScript and React components"
+      ],
+      "confidence": 0.9
+    }
+  },
+  {
+    "repo_full_name": "kubernetes/kubernetes",
+    "project_name": "kubernetes/kubernetes",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Production-Grade Container Scheduling and Management",
+        "CNCF project for container orchestration",
+        "Tags include 'containers' and 'kubernetes'",
+        "Infrastructure for deploying/managing containerized applications at scale"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "electron/electron",
+    "project_name": "electron/electron",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Build cross-platform desktop apps with JavaScript, HTML, and CSS",
+        "electron framework wrapping Chrome V8 and Node.js for desktop application development"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "anthropics/claude-code",
+    "project_name": "anthropics/claude-code",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include 'agent-runtime', 'ai-agent', 'agent', 'tool-use', 'automation'",
+        "Listed in 'agents-radar' source",
+        "Persistence state marked as 'persistent'",
+        "Project is claude-code - Anthropic's AI coding agent for automation workflows"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "nodejs/node",
+    "project_name": "nodejs/node",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Node.js is a JavaScript runtime for server-side programming, not an AI agent system",
+        "The project is a general-purpose programming language runtime",
+        "Tags indicate it's about JavaScript runtime, not AI/ML",
+        "persistence_state 'single-spike' suggests one-time appearance as trending, not an AI project"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "iptv-org/iptv",
+    "project_name": "iptv-org/iptv",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Collection of publicly available IPTV channels from all over the world",
+        "Tags include iptv, m3u, playlist, streams, tv",
+        "Persistence state: single-spike"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "firecrawl/firecrawl",
+    "project_name": "firecrawl/firecrawl",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "The API to search, scrape, and interact with the web for AI",
+        "web-crawler",
+        "web-scraper",
+        "scraper",
+        "web-scraping",
+        "ai-crawler",
+        "ai-scraping"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "Comfy-Org/ComfyUI",
+    "project_name": "Comfy-Org/ComfyUI",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface",
+        "Python/PyTorch based diffusion model tool",
+        "Tags: comfyui, stable-diffusion, python, pytorch"
+      ],
+      "confidence": 0.88
+    }
+  },
+  {
+    "repo_full_name": "denoland/deno",
+    "project_name": "denoland/deno",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A modern runtime for JavaScript and TypeScript",
+        "tags: deno, javascript, rust, typescript",
+        "Infrastructure project enabling JavaScript/TypeScript execution outside browsers"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "microsoft/terminal",
+    "project_name": "microsoft/terminal",
+    "classification": {
+      "paradigm_class": "system",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "description: The new Windows Terminal and the original Windows console host, all in the same place!",
+        "tags: cmd, command-line, console, terminal, windows, windows-terminal"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "browser-use/browser-use",
+    "project_name": "browser-use/browser-use",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "让网站对 AI Agent 可访问",
+        "browser automation",
+        "AI Agent 可访问",
+        "agent"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "openai/codex",
+    "project_name": "openai/codex",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Support detect and import MCP/Subagents/hooks/commands from external",
+        "codex-external-agent-migration crate supports migrating configuration from external Agent frameworks to Codex native format"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "thedotmack/claude-mem",
+    "project_name": "thedotmack/claude-mem",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "memory-engine",
+        "long-term-memory",
+        "mem0",
+        "openmemory",
+        "supermemory",
+        "claude-mem",
+        "context optimization",
+        "98% tool output reduction",
+        "session compression",
+        "sqlite",
+        "chromadb"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "VoltAgent/awesome-design-md",
+    "project_name": "VoltAgent/awesome-design-md",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A collection of DESIGN.md files",
+        "curated-list",
+        "awesome-list",
+        "design-system"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "mattpocock/skills",
+    "project_name": "mattpocock/skills",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Skills collection extracted from `.claude` directories of well-known developers",
+        "Modular development automation via Skills module in Claude Code",
+        "Tags include: ai-skills, tool-use, agent, automation",
+        "Persistence_state: persistent"
+      ],
+      "confidence": 0.82
+    }
+  },
+  {
+    "repo_full_name": "safishamsi/graphify",
+    "project_name": "safishamsi/graphify",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "将代码、数据库、基础设施转化为统一知识图，多 IDE 插件支持",
+        "tags: infra, tool-use, knowledge-graph, graphrag, rag, skills"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "HKUDS/nanobot",
+    "project_name": "HKUDS/nanobot",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Session-Level Focus Tool – LLM agent lacks human \"task board\" style attention anchoring",
+        "runtime vars 为运行时草稿本而非持久任务栈",
+        "PR #2334 – 迭代级持久化",
+        "persistence_state: persistent",
+        "tag: agent-runtime"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "tokio-rs/tokio",
+    "project_name": "tokio-rs/tokio",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "异步运行时补丁版本，包含关键修复",
+        "标签包含agent-runtime、asynchronous、networking",
+        "Rust异步运行时基础设施"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "langchain-ai/langgraph",
+    "project_name": "langchain-ai/langgraph",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "VectifyAI/PageIndex",
+    "project_name": "VectifyAI/PageIndex",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "无向量、基于推理的 RAG 文档索引，挑战传统嵌入检索范式",
+        "tags include rag, retrieval-augmented-generation, retrieval, vector-database",
+        "single-spike persistence state indicates no persistent memory",
+        "appears in agents-radar with 27,582 mentions"
+      ],
+      "confidence": 0.72
+    }
+  },
+  {
+    "repo_full_name": "langchain-ai/deepagents",
+    "project_name": "langchain-ai/deepagents",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Python & TypeScript agent harness built with LangChain and LangGraph",
+        "Equipped with a planning tool, a filesystem backend, and the ability to spawn subagents",
+        "well-equipped to handle complex agentic tasks"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "nexu-io/open-design",
+    "project_name": "nexu-io/open-design",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include agent-runtime, ai-agent, agent-skills indicating agent-centric architecture",
+        "Description states '19 Skills' demonstrating skill ecosystem",
+        "Runs on multiple agent runtimes: Claude Code, Codex, Cursor, Gemini, OpenCode, Qwen, Copilot, Hermes, Kimi CLI",
+        "Local-first design tool that orchestrates various coding agents for design generation",
+        "persistence_state marked as emerging but no explicit memory capabilities described"
+      ],
+      "confidence": 0.78
+    }
+  },
+  {
+    "repo_full_name": "jackwener/OpenCLI",
+    "project_name": "jackwener/OpenCLI",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "将任意网站、Electron 应用或本地二进制文件转化为标准化 CLI，专为 AI Agent 发现与执行工具设计",
+        "tags include agent, tool-use, ai-agent",
+        "converts various targets into standardized CLIs for AI agent consumption"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "openai/skills",
+    "project_name": "openai/skills",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Skills Catalog for Codex",
+        "watchlist:openai"
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "repo_full_name": "Leonxlnx/taste-skill",
+    "project_name": "Leonxlnx/taste-skill",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Project name is 'taste-skill' indicating it's a modular skill",
+        "Tags include 'skill', 'skills', 'tool-use', 'ai-agent'",
+        "Description states it 'gives your AI good taste' - a capability injected into an AI agent",
+        "Designed to stop AI from generating 'boring, generic slop' - passive quality enforcement tool",
+        "persistence_state: single-spike indicates on-demand invocation only"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "mksglu/context-mode",
+    "project_name": "mksglu/context-mode",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Context compression technology reducing tool output by 98%",
+        "Part of AI coding context economics battlefield",
+        "Tags include agent-runtime, memory, tool-use, infra, mcp"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "e2b-dev/E2B",
+    "project_name": "e2b-dev/E2B",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Enterprise-level safety sandbox environment for AI agents, providing real-world tool access",
+        "Tags include agent-runtime and tool-use"
+      ],
+      "confidence": 0.85
+    }
+  },
+  {
+    "repo_full_name": "GitoxideLabs/gitoxide",
+    "project_name": "GitoxideLabs/gitoxide",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "CLI tool for Git version control",
+        "Built with Rust",
+        "gix 0.80+ version series for object database APIs",
+        "blazingly-fast git implementation"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "Lum1104/Understand-Anything",
+    "project_name": "Lum1104/Understand-Anything",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Interactive knowledge graph interface for code and knowledge bases",
+        "Works with Claude Code, Codex, Cursor, Copilot, Gemini CLI",
+        "Tags include 'ai-coding', 'ai-skills', 'agent', 'tool-use'",
+        "persistence_state is 'emerging'"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "browser-use/browser-harness",
+    "project_name": "browser-use/browser-harness",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": true,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "high",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Self-healing harness that enables LLMs to complete any task",
+        "Browser Harness"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/inspector",
+    "project_name": "modelcontextprotocol/inspector",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Visual testing tool for MCP servers",
+        "MCP Inspector - developer utility for testing Model Context Protocol servers",
+        "Single-spike appearance suggesting transient use case"
+      ],
+      "confidence": 0.92
+    }
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/modelcontextprotocol",
+    "project_name": "modelcontextprotocol/modelcontextprotocol",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Specification and documentation for the Model Context Protocol"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "abus-aikorea/voice-pro",
+    "project_name": "abus-aikorea/voice-pro",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Gradio WebUI for creators and developers",
+        "TTS (Edge-TTS, kokoro)",
+        "zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice)",
+        "Whisper audio processing",
+        "YouTube download",
+        "Demucs vocal isolation",
+        "multilingual translation",
+        "persistence_state: single-spike"
+      ],
+      "confidence": 0.87
+    }
+  },
+  {
+    "repo_full_name": "bwya77/vscode-dark-islands",
+    "project_name": "bwya77/vscode-dark-islands",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "VSCode theme based off the easemate IDE and Jetbrains islands theme"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "modelcontextprotocol/registry",
+    "project_name": "modelcontextprotocol/registry",
+    "classification": {
+      "paradigm_class": "unknown",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "unknown",
+      "has_governance_boundary": false,
+      "evidence_snippets": [],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "HKUDS/Vibe-Trading",
+    "project_name": "HKUDS/Vibe-Trading",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": true,
+      "autonomy_level": "medium",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "Multi-agent architecture with ai-agent tags",
+        "MCP (Model Context Protocol) implementation",
+        "Algorithmic trading with backtesting capabilities",
+        "Emerging persistence state for memory capabilities",
+        "Trading agent with risk management boundaries"
+      ],
+      "confidence": 0.75
+    }
+  },
+  {
+    "repo_full_name": "netease-youdao/LobsterAI",
+    "project_name": "netease-youdao/LobsterAI",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": true,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Tags include infra/tool-use/self-improving indicating infrastructure for AI agents",
+        "Description shows provider rejected request schema issues - managing LLM provider adaptation layer",
+        "Persistence state marked as persistent",
+        "Focus on mainstream model compatibility and schema/tool payload provider adaptations",
+        "Issues with DeepSeek V4 showing tool-use infrastructure concerns"
+      ],
+      "confidence": 0.65
+    }
+  },
+  {
+    "repo_full_name": "thesysdev/openui",
+    "project_name": "thesysdev/openui",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "The Open Standard for"
+      ],
+      "confidence": 0
+    }
+  },
+  {
+    "repo_full_name": "TinyAGI/tinyagi",
+    "project_name": "TinyAGI/tinyagi",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "TinyClaw — TinyAGI/tinyagi (agent runtime indicator)",
+        "agents-radar source (agent monitoring/management)",
+        "persistence_state: persistent"
+      ],
+      "confidence": 0.6
+    }
+  },
+  {
+    "repo_full_name": "steipete/RepoBar",
+    "project_name": "steipete/RepoBar",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Show status of GitHub Repos right in your menu bar and terminal: CI, Issues, Pull Requests, Latest Release.",
+        "tags: github, macos, statistics",
+        "persistence_state: single-spike"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "anthropics/anthropic-sdk-go",
+    "project_name": "anthropics/anthropic-sdk-go",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Access to Anthropic's safety-first language model APIs via Go",
+        "watchlist-hit",
+        "github-live-star-delta"
+      ],
+      "confidence": 0.95
+    }
+  },
+  {
+    "repo_full_name": "duanyytop/agents-radar",
+    "project_name": "duanyytop/agents-radar",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "project tagged as 'agent'",
+        "persistence_state is 'persistent'",
+        "description indicates automatic report generation capability"
+      ],
+      "confidence": 0.45
+    }
+  },
+  {
+    "repo_full_name": "qhkm/zeptoclaw",
+    "project_name": "qhkm/zeptoclaw",
+    "classification": {
+      "paradigm_class": "infra",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": true,
+      "evidence_snippets": [
+        "SSRF 端点验证",
+        "AI 智能体调用外部 API 时的 SSRF 防护",
+        "--allow-private-endpoints 标志设计体现默认安全、显式放行原则",
+        "persistent"
+      ],
+      "confidence": 0.7
+    }
+  },
+  {
+    "repo_full_name": "cortexkit/magic-context",
+    "project_name": "cortexkit/magic-context",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": true,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "无限上下文/跨会话记忆 (infinite context/cross-session memory)",
+        "agent/memory classification",
+        "memory management plugin",
+        "context-management tags",
+        "langchain integration"
+      ],
+      "confidence": 0.72
+    }
+  },
+  {
+    "repo_full_name": "browser-use/desktop",
+    "project_name": "browser-use/desktop",
+    "classification": {
+      "paradigm_class": "agent_runtime",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "medium",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "Browser Use Desktop App",
+        "tags include browser-agent and agent-browser indicating agent runtime",
+        "browser-use ecosystem focuses on autonomous browser control",
+        "persistence_state is single-spike indicating no persistent memory feature"
+      ],
+      "confidence": 0.55
+    }
+  },
+  {
+    "repo_full_name": "langchain-ai/langsmith-cli",
+    "project_name": "langchain-ai/langsmith-cli",
+    "classification": {
+      "paradigm_class": "ordinary_tool",
+      "has_persistent_memory": false,
+      "has_self_improving_loop": false,
+      "has_skill_ecosystem": false,
+      "autonomy_level": "low",
+      "has_governance_boundary": false,
+      "evidence_snippets": [
+        "A coding agent-first CLI for interacting with LangSmith",
+        "single-spike persistence state",
+        "watchlist-hit, fresh-today"
+      ],
+      "confidence": 0.65
+    }
+  }
+]

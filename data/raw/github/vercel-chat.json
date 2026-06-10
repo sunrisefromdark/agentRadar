@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "vercel/chat",
+  "repo_url": "https://github.com/vercel/chat",
+  "stars": 2033,
+  "forks": 215,
+  "issues": 13,
+  "PR": 20,
+  "description": "A unified TypeScript SDK for building chat bots across Slack, Microsoft Teams, Google Chat, Discord, and more.",
+  "tags": [
+    "ai",
+    "chat",
+    "discord",
+    "google-chat",
+    "slack",
+    "teams",
+    "vercel"
+  ]
+}

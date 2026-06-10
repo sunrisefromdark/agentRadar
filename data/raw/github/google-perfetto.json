@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "google/perfetto",
+  "repo_url": "https://github.com/google/perfetto",
+  "stars": 6020,
+  "forks": 791,
+  "issues": 104,
+  "PR": 136,
+  "description": "Production-grade client-side tracing, profiling, and analysis for complex software systems.",
+  "tags": []
+}

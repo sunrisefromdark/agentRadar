@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "langchain-ai/langgraph",
+  "repo_url": "https://github.com/langchain-ai/langgraph",
+  "stars": 33741,
+  "forks": 5681,
+  "issues": 325,
+  "PR": 232,
+  "description": "Build resilient agents.",
+  "tags": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "chatgpt",
+    "deepagents",
+    "enterprise",
+    "framework",
+    "gemini",
+    "generative-ai",
+    "langchain",
+    "langgraph",
+    "llm",
+    "multiagent",
+    "open-source",
+    "openai",
+    "pydantic",
+    "python",
+    "rag"
+  ]
+}

@@ -1,0 +1,102 @@
+{
+  "enhancement_status": "agent-full",
+  "personalized_weekly_focus": [],
+  "rejected_outputs": [
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/iflytek/astron-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/anthropics/claude-for-legal",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/anthropics/claude-for-legal",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "homogeneous_copy",
+      "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/n8n-io/n8n",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/activepieces/activepieces",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "homogeneous_copy",
+      "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "invalid_purpose_fit",
+      "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "homogeneous_copy",
+      "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/iflytek/astron-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    }
+  ]
+}

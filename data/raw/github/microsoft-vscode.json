@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "microsoft/vscode",
+  "repo_url": "https://github.com/microsoft/vscode",
+  "stars": 185742,
+  "forks": 40334,
+  "issues": 16257,
+  "PR": 2118,
+  "description": "Visual Studio Code",
+  "tags": [
+    "editor",
+    "electron",
+    "microsoft",
+    "typescript",
+    "visual-studio-code"
+  ]
+}

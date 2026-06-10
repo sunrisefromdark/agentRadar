@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "facebookresearch/VLM3",
+  "repo_url": "https://github.com/facebookresearch/VLM3",
+  "stars": 129,
+  "forks": 4,
+  "issues": 1,
+  "PR": 0,
+  "description": "Official implementation of paper \"VLM³: Vision Language Models Are Native 3D Learners\".",
+  "tags": [
+    "3d-foundation-model",
+    "camera-pose-estimation",
+    "depth-estimation",
+    "image-matching",
+    "large-language-models",
+    "object-level-3d",
+    "vlms"
+  ]
+}

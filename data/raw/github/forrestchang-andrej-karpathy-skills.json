@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "forrestchang/andrej-karpathy-skills",
+  "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+  "stars": 127197,
+  "forks": 12927,
+  "issues": 29,
+  "PR": 59,
+  "description": "A single CLAUDE.md file to improve Claude Code behavior, derived from Andrej Karpathy's observations on LLM coding pitfalls.",
+  "tags": []
+}

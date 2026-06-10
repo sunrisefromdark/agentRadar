@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "2dust/v2rayN",
+  "repo_url": "https://github.com/2dust/v2rayN",
+  "stars": 105150,
+  "forks": 14951,
+  "issues": 8,
+  "PR": 6,
+  "description": "A GUI client for Windows, Linux and macOS, support Xray and sing-box and others",
+  "tags": [
+    "proxy",
+    "shadowsocks",
+    "socks5",
+    "trojan",
+    "v2fly",
+    "v2ray",
+    "vless",
+    "vmess",
+    "windows",
+    "xray",
+    "xtls"
+  ]
+}

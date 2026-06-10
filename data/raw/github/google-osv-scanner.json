@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "google/osv-scanner",
+  "repo_url": "https://github.com/google/osv-scanner",
+  "stars": 10419,
+  "forks": 713,
+  "issues": 94,
+  "PR": 15,
+  "description": "Vulnerability scanner written in Go which uses the data provided by https://osv.dev",
+  "tags": [
+    "scanner",
+    "security-audit",
+    "security-tools",
+    "vulnerability-scanner"
+  ]
+}

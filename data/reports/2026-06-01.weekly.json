@@ -1,0 +1,1876 @@
+{
+  "date": "2026-06-01",
+  "generated_at": "2026-06-06T22:53:42+08:00",
+  "window_start": "2026-05-26",
+  "window_end": "2026-06-01",
+  "enhancement_status": "rules-only",
+  "personalized_weekly_focus_applicable": true,
+  "overall_summary_cn": "本周最稳定的方向是 memory，并且已经在多个仓库中重复出现。",
+  "supporting_trend_keys": [
+    "memory",
+    "tool-use",
+    "developer-tools",
+    "mcp"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "memory",
+      "trend_name_cn": "memory",
+      "trend_summary_cn": "memory is converging around agent-runtime + agent-skills + agentic-retrieval.",
+      "evidence_summary_cn": "affaan-m/ECC::daily_delta=2025；affaan-m/ECC::weekly_delta=3056",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个会随着你一起成长的 AI 助手，能记住偏好、调用工具并长期协作，大家通常拿它做个人助理、自动化任务和多轮工作流。",
+          "why_today_cn": "今天同时登上 Trendshift 和 GitHub Trending，star 日增 2343，社区反响强烈。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 24 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "context_only",
+          "objective_score": 95,
+          "preference_boost": 7.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个给 Claude Code、Codex 这类编程 agent 用的增强套件，主要帮你补齐技能、记忆、安全和研究工作流，大家通常拿它统一多工具的 AI 编码体验。",
+          "why_today_cn": "当日star增长1236，但未命中今天的新鲜来源，作为历史补充观察理解背景价值较高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 5 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "project_name": "Lum1104/Understand-Anything",
+          "project_class": "today_star",
+          "objective_score": 90.25,
+          "preference_boost": 7.5,
+          "base_final_rank": 97.75,
+          "final_rank": 95.75,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个把代码库或知识库变成可交互知识图谱的工具，帮你边看边搜边提问，大家通常拿它快速吃透复杂代码和技术资料。",
+          "why_today_cn": "今日星增约 5604，势头迅猛，Trendshift 当日命中，社区关注度极高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=suspicious_growth，risks=suspicious growth spike; review raw metrics before trusting ranking。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "memory",
+        "focused_trend_name_cn": "memory",
+        "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=2343",
+              "weekly_delta=9928"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：daily_delta=2343"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=28568",
+              "issues=14275"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：forks=28568"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 83.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 28,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 83.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+              "appearances=24"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "tool-use",
+      "trend_name_cn": "tool-use",
+      "trend_summary_cn": "tool-use is converging around agent-runtime + agent-skills + agentic-retrieval.",
+      "evidence_summary_cn": "affaan-m/ECC::daily_delta=2025；affaan-m/ECC::weekly_delta=3056",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "context_only",
+          "objective_score": 95,
+          "preference_boost": 7.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个给 Claude Code、Codex 这类编程 agent 用的增强套件，主要帮你补齐技能、记忆、安全和研究工作流，大家通常拿它统一多工具的 AI 编码体验。",
+          "why_today_cn": "当日star增长1236，但未命中今天的新鲜来源，作为历史补充观察理解背景价值较高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 5 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/garrytan/gstack",
+          "project_name": "garrytan/gstack",
+          "project_class": "today_star",
+          "objective_score": 91.5,
+          "preference_boost": 2.5,
+          "base_final_rank": 94,
+          "final_rank": 94,
+          "matched_interest_topics": [
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个围绕 Claude Code 的角色化工具包，内置 CEO、设计、QA 等多种分工，大家通常拿它把产品、开发和测试流程串成一套固定工作流。",
+          "why_today_cn": "今日增长约 640 星，同时登上 Trendshift 和 GitHub Trending，多源验证，值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_spike，risks=single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "project_name": "Lum1104/Understand-Anything",
+          "project_class": "today_star",
+          "objective_score": 90.25,
+          "preference_boost": 7.5,
+          "base_final_rank": 97.75,
+          "final_rank": 95.75,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个把代码库或知识库变成可交互知识图谱的工具，帮你边看边搜边提问，大家通常拿它快速吃透复杂代码和技术资料。",
+          "why_today_cn": "今日星增约 5604，势头迅猛，Trendshift 当日命中，社区关注度极高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=suspicious_growth，risks=suspicious growth spike; review raw metrics before trusting ranking。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "tool-use",
+        "focused_trend_name_cn": "tool-use",
+        "summary_cn": "当前聚焦 tool-use，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=1236",
+              "weekly_delta=6283"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 affaan-m/ECC、garrytan/gstack、Lum1104/Understand-Anything。证据摘要：daily_delta=1236"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=30860",
+              "issues=41"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 affaan-m/ECC、garrytan/gstack、Lum1104/Understand-Anything。证据摘要：forks=30860"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 83.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 24,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 83.3。代表项目包括 garrytan/gstack、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 85,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 4,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 95
+              },
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 85。代表项目包括 affaan-m/ECC、Lum1104/Understand-Anything、garrytan/gstack。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 affaan-m/ECC、garrytan/gstack、Lum1104/Understand-Anything。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 88.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Lum1104/Understand-Anything",
+                "repo_full_name": "Lum1104/Understand-Anything",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/garrytan/gstack",
+                "repo_full_name": "garrytan/gstack",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=5"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 88.3。代表项目包括 affaan-m/ECC、Lum1104/Understand-Anything、garrytan/gstack。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "developer-tools",
+      "trend_name_cn": "developer-tools",
+      "trend_summary_cn": "developer-tools is converging around agentic-coding + ai-coding + ai-skills.",
+      "evidence_summary_cn": "affaan-m/ECC::daily_delta=2025；affaan-m/ECC::weekly_delta=3056",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "context_only",
+          "objective_score": 95,
+          "preference_boost": 7.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个给 Claude Code、Codex 这类编程 agent 用的增强套件，主要帮你补齐技能、记忆、安全和研究工作流，大家通常拿它统一多工具的 AI 编码体验。",
+          "why_today_cn": "当日star增长1236，但未命中今天的新鲜来源，作为历史补充观察理解背景价值较高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "developer-tools",
+          "why_this_week_cn": "最近 5 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/OpenHands/OpenHands",
+          "project_name": "OpenHands/OpenHands",
+          "project_class": "context_only",
+          "objective_score": 82.6,
+          "preference_boost": 2.5,
+          "base_final_rank": 85.1,
+          "final_rank": 85.1,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个 AI 驱动的软件开发助手，能从理解需求到改代码、提 PR 一路往下做，大家通常拿它处理真实工程里的开发和修复任务。",
+          "why_today_cn": "它是一个长期活跃的热门项目，当日 star 增长约 65，可作为历史参考。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "developer-tools",
+          "why_this_week_cn": "最近 4 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/rtk-ai/rtk",
+          "project_name": "rtk-ai/rtk",
+          "project_class": "today_star",
+          "objective_score": 47,
+          "preference_boost": 0,
+          "base_final_rank": 47,
+          "final_rank": 47,
+          "matched_interest_topics": [],
+          "project_brief_cn": "这是一个给开发命令行场景省 token 的 CLI 代理，帮你把常见请求压缩和复用，大家通常拿它降低 Claude Code、Codex 这类工具的调用成本。",
+          "why_today_cn": "命中Trendshift当日信号，多源确认，今日值得关注；当日无明显star增长。",
+          "enhancement_source": "template_fallback",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=daily_delta_unavailable，risks=daily growth unavailable; star velocity is not trusted for this project，trust_flags=daily_delta_unavailable。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "developer-tools",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "developer-tools",
+        "focused_trend_name_cn": "developer-tools",
+        "summary_cn": "当前聚焦 developer-tools，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 37.7,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 13
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=1236",
+              "weekly_delta=6283"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 37.7。代表项目包括 affaan-m/ECC、OpenHands/OpenHands、rtk-ai/rtk。证据摘要：daily_delta=1236"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=30860",
+              "issues=41"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 affaan-m/ECC、OpenHands/OpenHands、rtk-ai/rtk。证据摘要：forks=30860"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 73.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 31,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73.3。代表项目包括 OpenHands/OpenHands、affaan-m/ECC、rtk-ai/rtk。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 66.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 66.7。代表项目包括 affaan-m/ECC、OpenHands/OpenHands、rtk-ai/rtk。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 86.7。代表项目包括 affaan-m/ECC、OpenHands/OpenHands、rtk-ai/rtk。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/OpenHands/OpenHands",
+                "repo_full_name": "OpenHands/OpenHands",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rtk-ai/rtk",
+                "repo_full_name": "rtk-ai/rtk",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=5"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 affaan-m/ECC、OpenHands/OpenHands、rtk-ai/rtk。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "mcp",
+      "trend_name_cn": "mcp",
+      "trend_summary_cn": "mcp is converging around agent-runtime + agentic-workflow + ai-agent-tools.",
+      "evidence_summary_cn": "affaan-m/ECC::daily_delta=2025；affaan-m/ECC::weekly_delta=3056",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "project_name": "affaan-m/ECC",
+          "project_class": "context_only",
+          "objective_score": 95,
+          "preference_boost": 7.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个给 Claude Code、Codex 这类编程 agent 用的增强套件，主要帮你补齐技能、记忆、安全和研究工作流，大家通常拿它统一多工具的 AI 编码体验。",
+          "why_today_cn": "当日star增长1236，但未命中今天的新鲜来源，作为历史补充观察理解背景价值较高。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "mcp",
+          "why_this_week_cn": "最近 5 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/farion1231/cc-switch",
+          "project_name": "farion1231/cc-switch",
+          "project_class": "today_star",
+          "objective_score": 86.5,
+          "preference_boost": 7.5,
+          "base_final_rank": 94,
+          "final_rank": 93.8,
+          "matched_interest_topics": [
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个桌面端的一站式 AI 编程助手控制台，能统一管理 Claude Code、Codex、OpenCode、Gemini CLI 等工具，大家通常拿它切模型、切 provider 和集中管理工作台。",
+          "why_today_cn": "今日在Trendshift中获1053颗星，增长迅猛，但仅单源信号，需后续验证持续性。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source，risks=single-source signal; needs persistence validation。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "mcp",
+          "why_this_week_cn": "最近 4 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+          "project_name": "rohitg00/ai-engineering-from-scratch",
+          "project_class": "today_star",
+          "objective_score": 76.75,
+          "preference_boost": 2.5,
+          "base_final_rank": 79.25,
+          "final_rank": 76.25,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "这是一个从零学 AI 工程的实战教程仓库，边讲边带你做 agent、模型和应用项目，大家通常拿它系统入门并照着练手。",
+          "why_today_cn": "今日被Trendshift标记为新鲜，且当日star增长超3000，社区关注度急剧上升。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "mcp",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "mcp",
+        "focused_trend_name_cn": "mcp",
+        "summary_cn": "当前聚焦 mcp，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=1236",
+              "weekly_delta=6283"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 affaan-m/ECC、farion1231/cc-switch、rohitg00/ai-engineering-from-scratch。证据摘要：daily_delta=1236"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=30860",
+              "issues=41"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 affaan-m/ECC、farion1231/cc-switch、rohitg00/ai-engineering-from-scratch。证据摘要：forks=30860"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 73.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 30,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 75
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73.3。代表项目包括 farion1231/cc-switch、affaan-m/ECC、rohitg00/ai-engineering-from-scratch。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 75,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 65
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 75。代表项目包括 affaan-m/ECC、rohitg00/ai-engineering-from-scratch、farion1231/cc-switch。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 80,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 80
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 80。代表项目包括 affaan-m/ECC、farion1231/cc-switch、rohitg00/ai-engineering-from-scratch。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/affaan-m/ECC",
+                "repo_full_name": "affaan-m/ECC",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/rohitg00/ai-engineering-from-scratch",
+                "repo_full_name": "rohitg00/ai-engineering-from-scratch",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 55
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=5"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 affaan-m/ECC、rohitg00/ai-engineering-from-scratch、farion1231/cc-switch。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "repo_full_name": "Lum1104/Understand-Anything"
+        }
+      ]
+    }
+  ],
+  "weak_signal_cards": [
+    {
+      "trend_key": "antigravity-skills",
+      "signal_name_cn": "antigravity-skills",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "Lum1104/Understand-Anything::daily_delta=5604；Lum1104/Understand-Anything::weekly_delta=5604",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "codex-skills",
+      "signal_name_cn": "codex-skills",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "Lum1104/Understand-Anything::daily_delta=5604；Lum1104/Understand-Anything::weekly_delta=5604",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "developer-tools-ai-agent",
+      "signal_name_cn": "developer-tools-ai-agent",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "Lum1104/Understand-Anything::daily_delta=5604；Lum1104/Understand-Anything::weekly_delta=5604",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "gemini-cli-skills",
+      "signal_name_cn": "gemini-cli-skills",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "Lum1104/Understand-Anything::daily_delta=5604；Lum1104/Understand-Anything::weekly_delta=5604",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-06-01",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "developer-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "mcp",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "antigravity-skills",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "codex-skills",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "developer-tools-ai-agent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "gemini-cli-skills",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/garrytan/gstack",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/OpenHands/OpenHands",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/rtk-ai/rtk",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/rohitg00/ai-engineering-from-scratch",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "personalized_weekly_focus",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "personalization_reason_cn was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-06-01",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/garrytan/gstack",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/garrytan/gstack",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/garrytan/gstack",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/garrytan/gstack",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Lum1104/Understand-Anything",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "developer-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "developer-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "developer-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "developer-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/OpenHands/OpenHands",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/OpenHands/OpenHands",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/OpenHands/OpenHands",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rtk-ai/rtk",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rtk-ai/rtk",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rtk-ai/rtk",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "mcp",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "mcp",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "mcp",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "mcp",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/ECC",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rohitg00/ai-engineering-from-scratch",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rohitg00/ai-engineering-from-scratch",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/rohitg00/ai-engineering-from-scratch",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "antigravity-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "antigravity-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "antigravity-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "antigravity-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "codex-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "codex-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "codex-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "codex-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "developer-tools-ai-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "developer-tools-ai-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "developer-tools-ai-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "developer-tools-ai-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "gemini-cli-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "gemini-cli-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "gemini-cli-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "gemini-cli-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "personalized_weekly_focus",
+        "target_key": "memory",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "memory",
+    "focused_trend_name_cn": "memory",
+    "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=2343",
+          "weekly_delta=9928"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：daily_delta=2343"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=28568",
+          "issues=14275"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：forks=28568"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 83.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 28,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 75
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 75
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 83.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 98.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 4,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 95
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_skill_ecosystem"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 93.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 7,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 80
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "classification.has_governance_boundary"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 96.7,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 11,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/NousResearch/hermes-agent",
+            "repo_full_name": "NousResearch/hermes-agent",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/affaan-m/ECC",
+            "repo_full_name": "affaan-m/ECC",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Lum1104/Understand-Anything",
+            "repo_full_name": "Lum1104/Understand-Anything",
+            "score": 90
+          }
+        ],
+        "top_evidence": [
+          "sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending",
+          "appearances=24"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 NousResearch/hermes-agent、affaan-m/ECC、Lum1104/Understand-Anything。证据摘要：sources=agents-radar,trendshift,watchlist_live_activity,github_live_star_delta,github_trending"
+      }
+    ]
+  }
+}

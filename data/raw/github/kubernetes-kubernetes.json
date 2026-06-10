@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "kubernetes/kubernetes",
+  "repo_url": "https://github.com/kubernetes/kubernetes",
+  "stars": 122579,
+  "forks": 43222,
+  "issues": 1792,
+  "PR": 929,
+  "description": "Production-Grade Container Scheduling and Management",
+  "tags": [
+    "cncf",
+    "containers",
+    "go",
+    "kubernetes"
+  ]
+}

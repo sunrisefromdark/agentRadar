@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "bytedance/xgplayer",
+  "repo_url": "https://github.com/bytedance/xgplayer",
+  "stars": 9229,
+  "forks": 939,
+  "issues": 24,
+  "PR": 3,
+  "description": "A HTML5 video player with a parser that saves traffic",
+  "tags": [
+    "dash",
+    "flv",
+    "flv-parser",
+    "fmp4",
+    "hls",
+    "hls-player",
+    "html5-video",
+    "html5-video-player",
+    "mp4",
+    "mp4box",
+    "player",
+    "video",
+    "video-player",
+    "videoplayer"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "ComposioHQ/awesome-codex-skills",
+  "repo_url": "https://github.com/ComposioHQ/awesome-codex-skills",
+  "stars": 10748,
+  "forks": 993,
+  "issues": 3,
+  "PR": 41,
+  "description": "A curated list of practical Codex skills for automating workflows across the Codex CLI and API.",
+  "tags": [
+    "awesome",
+    "awesome-lists",
+    "awesome-resources",
+    "codex",
+    "codex-cli",
+    "codex-skills",
+    "coding-agent-skills",
+    "coding-agents",
+    "gpt-5-1-codex",
+    "gpt-5-codex",
+    "llm",
+    "skills"
+  ]
+}

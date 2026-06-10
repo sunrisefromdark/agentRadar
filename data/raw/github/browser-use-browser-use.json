@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "browser-use/browser-use",
+  "repo_url": "https://github.com/browser-use/browser-use",
+  "stars": 96925,
+  "forks": 10849,
+  "issues": 63,
+  "PR": 190,
+  "description": "🌐 Make websites accessible for AI agents. Automate tasks online with ease.",
+  "tags": [
+    "ai-agents",
+    "ai-tools",
+    "browser-automation",
+    "browser-use",
+    "llm",
+    "playwright",
+    "python"
+  ]
+}

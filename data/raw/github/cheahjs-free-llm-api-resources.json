@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "cheahjs/free-llm-api-resources",
+  "repo_url": "https://github.com/cheahjs/free-llm-api-resources",
+  "stars": 21930,
+  "forks": 2236,
+  "issues": 15,
+  "PR": 27,
+  "description": "A list of free LLM inference resources accessible via API.",
+  "tags": [
+    "ai",
+    "claude",
+    "gemini",
+    "llama",
+    "llm",
+    "openai"
+  ]
+}

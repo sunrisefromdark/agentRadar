@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "huggingface/diffusers",
+  "repo_url": "https://github.com/huggingface/diffusers",
+  "stars": 33722,
+  "forks": 7008,
+  "issues": 724,
+  "PR": 436,
+  "description": "🤗 Diffusers: State-of-the-art diffusion models for image, video, and audio generation in PyTorch.",
+  "tags": [
+    "deep-learning",
+    "diffusion",
+    "flux",
+    "image-generation",
+    "image2image",
+    "image2video",
+    "latent-diffusion-models",
+    "pytorch",
+    "qwen-image",
+    "score-based-generative-modeling",
+    "stable-diffusion",
+    "stable-diffusion-diffusers",
+    "text2image",
+    "text2video",
+    "video2video"
+  ]
+}

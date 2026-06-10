@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "ai-infra-curriculum/ai-infra-engineer-learning",
+  "repo_url": "https://github.com/ai-infra-curriculum/ai-infra-engineer-learning",
+  "stars": 398,
+  "forks": 62,
+  "issues": 0,
+  "PR": 0,
+  "description": "AI Infrastructure Engineer Learning Track - Production ML infrastructure curriculum (2-4 years experience)",
+  "tags": [
+    "ai-infrastructure",
+    "curriculum",
+    "gpu",
+    "intermediate",
+    "kubernetes",
+    "learning",
+    "llm",
+    "machine-learning",
+    "mlops",
+    "production",
+    "terraform"
+  ]
+}

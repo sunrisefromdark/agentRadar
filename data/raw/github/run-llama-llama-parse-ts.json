@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "run-llama/llama-parse-ts",
+  "repo_url": "https://github.com/run-llama/llama-parse-ts",
+  "stars": 18,
+  "forks": 5,
+  "issues": 0,
+  "PR": 4,
+  "description": "Typescript SDK for OCR and document parsing in the cloud with LlamaParse",
+  "tags": [
+    "agent",
+    "agents",
+    "document-agent",
+    "document-processing",
+    "information-extraction",
+    "llamaparse",
+    "ocr",
+    "parser"
+  ]
+}

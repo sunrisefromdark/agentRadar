@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "RainBowLuoCS/OpenOmni",
+  "repo_url": "https://github.com/RainBowLuoCS/OpenOmni",
+  "stars": 140,
+  "forks": 7,
+  "issues": 1,
+  "PR": 1,
+  "description": "(NIPS 2025) OpenOmni: Official implementation of  Advancing Open-Source Omnimodal Large Language Models with Progressive Multimodal Alignment and Real-Time Self-Aware Emotional Speech Synthesis",
+  "tags": [
+    "image",
+    "large-language-model",
+    "large-multimodal-models",
+    "multimodal",
+    "multimodal-large-language-models",
+    "omni",
+    "speech"
+  ]
+}

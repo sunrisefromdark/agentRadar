@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "googleworkspace/cli",
+  "repo_url": "https://github.com/googleworkspace/cli",
+  "stars": 26455,
+  "forks": 1381,
+  "issues": 96,
+  "PR": 18,
+  "description": "Google Workspace CLI — one command-line tool for Drive, Gmail, Calendar, Sheets, Docs, Chat, Admin, and more. Dynamically built from Google Discovery Service. Includes AI agent skills.",
+  "tags": [
+    "agent-skills",
+    "ai-agent",
+    "automation",
+    "cli",
+    "discovery-api",
+    "gemini-cli-extension",
+    "google-admin",
+    "google-api",
+    "google-calendar",
+    "google-chat",
+    "google-docs",
+    "google-drive",
+    "google-sheets",
+    "google-workspace",
+    "oauth2",
+    "rust"
+  ]
+}

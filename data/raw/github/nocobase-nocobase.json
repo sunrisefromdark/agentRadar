@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "nocobase/nocobase",
+  "repo_url": "https://github.com/nocobase/nocobase",
+  "stars": 22461,
+  "forks": 2617,
+  "issues": 131,
+  "PR": 167,
+  "description": "NocoBase is an open-source AI + no-code platform for building business systems fast. Instead of generating everything from scratch, AI works on top of production-proven infrastructure and a WYSIWYG no-code interface, so you get both speed and reliability.",
+  "tags": [
+    "admin-dashboard",
+    "ai-agent",
+    "ai-agents",
+    "ai-assistant",
+    "ai-tools",
+    "airtable",
+    "crm",
+    "crud",
+    "erp",
+    "internal-tool",
+    "internal-tools",
+    "low-code",
+    "lowcode",
+    "no-code",
+    "nocode",
+    "project-management",
+    "salesforce",
+    "self-hosted",
+    "workflows"
+  ]
+}

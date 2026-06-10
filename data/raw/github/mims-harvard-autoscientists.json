@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "mims-harvard/AutoScientists",
+  "repo_url": "https://github.com/mims-harvard/AutoScientists",
+  "stars": 82,
+  "forks": 16,
+  "issues": 0,
+  "PR": 0,
+  "description": "AutoScientists: Self-Organizing Agent Teams for Long-Running Scientific Experimentation",
+  "tags": [
+    "agents",
+    "ai-for-science",
+    "ai-for-scientific-discovery",
+    "ai-scientists",
+    "automated-science",
+    "long-running-agents",
+    "self-evolving-agents",
+    "self-organizing"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "awslabs/iam-policy-autopilot",
+  "repo_url": "https://github.com/awslabs/iam-policy-autopilot",
+  "stars": 370,
+  "forks": 40,
+  "issues": 27,
+  "PR": 6,
+  "description": "IAM Policy Autopilot is an open source static code analysis tool that helps you quickly create baseline AWS IAM policies that you can refine as your application evolves. This tool is available as a command-line utility and MCP server for use within AI coding assistants for quickly building IAM policies.",
+  "tags": [
+    "aws",
+    "aws-iam",
+    "aws-iam-policies",
+    "aws-security",
+    "cli",
+    "cloud-security",
+    "code-analysis",
+    "iam",
+    "iam-policy",
+    "mcp",
+    "mcp-server",
+    "policy-generation",
+    "policy-generator",
+    "static-code-analysis"
+  ]
+}

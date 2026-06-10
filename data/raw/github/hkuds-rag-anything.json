@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "HKUDS/RAG-Anything",
+  "repo_url": "https://github.com/HKUDS/RAG-Anything",
+  "stars": 20761,
+  "forks": 2411,
+  "issues": 98,
+  "PR": 11,
+  "description": "\"RAG-Anything: All-in-One RAG Framework\"",
+  "tags": [
+    "multi-modal-rag",
+    "retrieval-augmented-generation"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "davila7/claude-code-templates",
+  "repo_url": "https://github.com/davila7/claude-code-templates",
+  "stars": 27454,
+  "forks": 2812,
+  "issues": 74,
+  "PR": 89,
+  "description": "CLI tool for configuring and monitoring Claude Code",
+  "tags": [
+    "anthropic",
+    "anthropic-claude",
+    "claude",
+    "claude-code"
+  ]
+}

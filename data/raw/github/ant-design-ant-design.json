@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "ant-design/ant-design",
+  "repo_url": "https://github.com/ant-design/ant-design",
+  "stars": 98094,
+  "forks": 54601,
+  "issues": 1249,
+  "PR": 125,
+  "description": "An enterprise-class UI design language and React UI library",
+  "tags": [
+    "ant-design",
+    "antd",
+    "design-systems",
+    "react",
+    "typescript",
+    "ui-kit",
+    "ui-library"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "esengine/DeepSeek-Reasonix",
+  "repo_url": "https://github.com/esengine/DeepSeek-Reasonix",
+  "stars": 17222,
+  "forks": 1017,
+  "issues": 455,
+  "PR": 68,
+  "description": "DeepSeek-native AI coding agent for your terminal. Engineered around prefix-cache stability — leave it running.",
+  "tags": [
+    "agent",
+    "agent-framework",
+    "ai-agent",
+    "ai-coding",
+    "cli",
+    "coding-agent",
+    "deepseek",
+    "developer-tools",
+    "ink",
+    "llm",
+    "prompt-caching",
+    "r1",
+    "terminal",
+    "tool-use",
+    "tui",
+    "typescript"
+  ]
+}

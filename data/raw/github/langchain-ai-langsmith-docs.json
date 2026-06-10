@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "langchain-ai/langsmith-docs",
+  "repo_url": "https://github.com/langchain-ai/langsmith-docs",
+  "stars": 167,
+  "forks": 74,
+  "issues": 1,
+  "PR": 16,
+  "description": "This repo is deprecated. Please go to langchain-ai/docs.",
+  "tags": [
+    "documentation",
+    "evaluation",
+    "langchain",
+    "langsmith",
+    "testing",
+    "tracing"
+  ]
+}

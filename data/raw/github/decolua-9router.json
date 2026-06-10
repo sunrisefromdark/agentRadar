@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "decolua/9router",
+  "repo_url": "https://github.com/decolua/9router",
+  "stars": 12984,
+  "forks": 1945,
+  "issues": 196,
+  "PR": 189,
+  "description": "Unlimited FREE AI coding. Connect Claude Code, Codex, Cursor, Cline, Copilot, Antigravity to FREE Claude/GPT/Gemini via 40+ providers. Auto-fallback, RTK -40% tokens, never hit limits.",
+  "tags": [
+    "ai-agents",
+    "ai-gateway",
+    "anthropic",
+    "chatgpt",
+    "claude",
+    "claude-code",
+    "cline",
+    "codex",
+    "copilot",
+    "cursor",
+    "deepseek",
+    "free-ai",
+    "gemini",
+    "gemini-cli",
+    "llm",
+    "llm-gateway",
+    "openai",
+    "openai-proxy",
+    "qwen",
+    "token-saver"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "facebookresearch/egobabyvlm",
+  "repo_url": "https://github.com/facebookresearch/egobabyvlm",
+  "stars": 5,
+  "forks": 0,
+  "issues": 0,
+  "PR": 0,
+  "description": "Repository for the EgoBabyVLM Challenge",
+  "tags": [
+    "ai",
+    "developmental-ai",
+    "egocentric-learning",
+    "egocentric-vision",
+    "multimodal"
+  ]
+}

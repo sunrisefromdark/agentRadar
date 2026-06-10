@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "camel-ai/camel",
+  "repo_url": "https://github.com/camel-ai/camel",
+  "stars": 17106,
+  "forks": 1927,
+  "issues": 217,
+  "PR": 232,
+  "description": "🐫 CAMEL: The first and the best multi-agent framework. Finding the Scaling Law of Agents. https://www.camel-ai.org",
+  "tags": [
+    "agent",
+    "ai-societies",
+    "artificial-intelligence",
+    "communicative-ai",
+    "cooperative-ai",
+    "deep-learning",
+    "large-language-models",
+    "multi-agent-systems",
+    "natural-language-processing"
+  ]
+}

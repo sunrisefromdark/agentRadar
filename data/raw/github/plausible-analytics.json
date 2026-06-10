@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "plausible/analytics",
+  "repo_url": "https://github.com/plausible/analytics",
+  "stars": 26188,
+  "forks": 1511,
+  "issues": 24,
+  "PR": 42,
+  "description": "Open source, privacy-first web analytics. Lightweight, cookie-free Google Analytics alternative. Self-hosted or cloud.",
+  "tags": [
+    "analytics",
+    "analytics-dashboard",
+    "clickhouse",
+    "elixir",
+    "google-analytics",
+    "marketing",
+    "open-source-analytics",
+    "phoenix",
+    "plausible-analytics",
+    "postgresql",
+    "privacy",
+    "privacy-friendly",
+    "self-hosted",
+    "simple-analytics",
+    "statistics",
+    "tailwindcss",
+    "web-analytics",
+    "website-analytics",
+    "website-stats",
+    "website-tracking"
+  ]
+}

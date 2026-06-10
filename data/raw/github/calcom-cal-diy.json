@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "calcom/cal.diy",
+  "repo_url": "https://github.com/calcom/cal.diy",
+  "stars": 43847,
+  "forks": 13537,
+  "issues": 1044,
+  "PR": 275,
+  "description": "Scheduling infrastructure for absolutely everyone.",
+  "tags": [
+    "next-auth",
+    "nextjs",
+    "open-source",
+    "postgresql",
+    "prisma",
+    "t3-stack",
+    "tailwindcss",
+    "trpc",
+    "turborepo",
+    "typescript",
+    "zod"
+  ]
+}

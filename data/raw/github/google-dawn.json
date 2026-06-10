@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "google/dawn",
+  "repo_url": "https://github.com/google/dawn",
+  "stars": 1019,
+  "forks": 178,
+  "issues": 0,
+  "PR": 3,
+  "description": "Native WebGPU implementation. Mirror of https://dawn.googlesource.com/dawn. File bugs here: https://crbug.com/dawn/new",
+  "tags": [
+    "dawn",
+    "emdawnwebgpu",
+    "webgpu"
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "anthropics/skills",
+  "repo_url": "https://github.com/anthropics/skills",
+  "stars": 145956,
+  "forks": 17196,
+  "issues": 254,
+  "PR": 666,
+  "description": "Public repository for Agent Skills",
+  "tags": [
+    "agent-skills"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "awslabs/ocilot",
+  "repo_url": "https://github.com/awslabs/ocilot",
+  "stars": 8,
+  "forks": 2,
+  "issues": 2,
+  "PR": 1,
+  "description": "Ocilot is a command-line tool and Rust library for interacting with OCI (Open Container Initiative) images and container registries.",
+  "tags": []
+}

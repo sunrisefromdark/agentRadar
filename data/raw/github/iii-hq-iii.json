@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "iii-hq/iii",
+  "repo_url": "https://github.com/iii-hq/iii",
+  "stars": 16655,
+  "forks": 1099,
+  "issues": 14,
+  "PR": 27,
+  "description": "Effortlessly compose, extend, and observe every service in real-time for the first time ever.",
+  "tags": [
+    "agents",
+    "ai",
+    "api",
+    "backend",
+    "developer-tools",
+    "framework",
+    "genai",
+    "javascript",
+    "primitives",
+    "python",
+    "rust",
+    "typescript"
+  ]
+}

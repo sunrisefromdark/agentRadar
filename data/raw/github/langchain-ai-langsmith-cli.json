@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "langchain-ai/langsmith-cli",
+  "repo_url": "https://github.com/langchain-ai/langsmith-cli",
+  "stars": 59,
+  "forks": 10,
+  "issues": 2,
+  "PR": 14,
+  "description": "A coding agent-first CLI for interacting with LangSmith.",
+  "tags": []
+}

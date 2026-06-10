@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "google-deepmind/mujoco_warp",
+  "repo_url": "https://github.com/google-deepmind/mujoco_warp",
+  "stars": 1263,
+  "forks": 164,
+  "issues": 27,
+  "PR": 17,
+  "description": "GPU-optimized version of the MuJoCo physics simulator, designed for NVIDIA hardware.",
+  "tags": [
+    "mujoco-warp",
+    "nvidia-warp"
+  ]
+}

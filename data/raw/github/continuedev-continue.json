@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "continuedev/continue",
+  "repo_url": "https://github.com/continuedev/continue",
+  "stars": 33513,
+  "forks": 4600,
+  "issues": 572,
+  "PR": 264,
+  "description": "⏩ Source-controlled AI checks, enforceable in CI. Powered by the open-source Continue CLI",
+  "tags": [
+    "agent",
+    "ai",
+    "cli",
+    "developer-tools",
+    "jetbrains-plugin",
+    "llm",
+    "open-source",
+    "vs-code-extenstion"
+  ]
+}

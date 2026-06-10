@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "abus-aikorea/voice-pro",
+  "repo_url": "https://github.com/abus-aikorea/voice-pro",
+  "stars": 9688,
+  "forks": 1338,
+  "issues": 31,
+  "PR": 10,
+  "description": "Gradio WebUI for creators and developers, featuring key TTS (Edge-TTS, kokoro) and zero-shot Voice Cloning (E2 & F5-TTS, CosyVoice), with Whisper audio processing, YouTube download, Demucs vocal isolation, and multilingual translation.",
+  "tags": [
+    "audiobook",
+    "faster-whisper",
+    "gradio",
+    "karaoke",
+    "podcasts",
+    "speech-recognition",
+    "speech-synthesis",
+    "speech-to-text",
+    "subtitles",
+    "text-to-speech",
+    "transcription",
+    "translator",
+    "tts",
+    "voice-cloning",
+    "voice-conversion",
+    "webui",
+    "whisper",
+    "whisperx",
+    "yt-dlp"
+  ]
+}

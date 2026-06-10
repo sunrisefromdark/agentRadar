@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "GitoxideLabs/gitoxide",
+  "repo_url": "https://github.com/GitoxideLabs/gitoxide",
+  "stars": 11441,
+  "forks": 475,
+  "issues": 171,
+  "PR": 26,
+  "description": "An idiomatic, lean, fast & safe pure Rust implementation of Git",
+  "tags": [
+    "blazingly-fast",
+    "built-with-rust",
+    "cli",
+    "git",
+    "version-control"
+  ]
+}

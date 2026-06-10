@@ -1,0 +1,576 @@
+[
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "0xplaygrounds/rig",
+    "stars": 7102,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "1jehuang/jcode",
+    "stars": 1404,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "abhigyanpatwari/gitnexus",
+    "stars": 33374,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "acon96/home-llm",
+    "stars": 1325,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "activepieces/activepieces",
+    "stars": 21988,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "agentscope-ai/qwenpaw",
+    "stars": 16114,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "alchaincyf/huashu-design",
+    "stars": 9778,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "anomalyco/opencode",
+    "stars": 152059,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "anthropics/claude-code",
+    "stars": 119254,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "anthropics/skills",
+    "stars": 126135,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "badlogic/pi-mono",
+    "stars": 42787,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "bytedance/deer-flow",
+    "stars": 64264,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "cjackhwang/ds2api",
+    "stars": 2744,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "composiohq/awesome-codex-skills",
+    "stars": 4842,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "davila7/claude-code-templates",
+    "stars": 26402,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "donnemartin/system-design-primer",
+    "stars": 345812,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "duanyytop/agents-radar",
+    "stars": 700,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "ebookfoundation/free-programming-books",
+    "stars": 387218,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "everywall/ladder",
+    "stars": 7058,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "evolinkai/awesome-gpt-image-2-prompts",
+    "stars": 9577,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "forrestchang/andrej-karpathy-skills",
+    "stars": 94837,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "github/copilot-cli",
+    "stars": 10308,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "google-gemini/gemini-cli",
+    "stars": 102754,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "googleworkspace/cli",
+    "stars": 25555,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "gorhill/ublock",
+    "stars": 64057,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "hiyouga/llamafactory",
+    "stars": 70773,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "hkuds/lightrag",
+    "stars": 34570,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "hkuds/nanobot",
+    "stars": 41304,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "huggingface/transformers",
+    "stars": 160093,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "hunxbyts/ghosttrack",
+    "stars": 11622,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "iamgio/quarkdown",
+    "stars": 12598,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "iv-org/invidious",
+    "stars": 19443,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "jingyaogong/minimind",
+    "stars": 48576,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "langchain-ai/deepagents",
+    "stars": 22012,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "langchain-ai/langchain",
+    "stars": 135411,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "langchain-ai/langgraph",
+    "stars": 30832,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "langgenius/dify",
+    "stars": 139661,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "lukilabs/craft-agents-oss",
+    "stars": 5366,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "mattpocock/skills",
+    "stars": 45025,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "meilisearch/meilisearch",
+    "stars": 57359,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "mem0ai/mem0",
+    "stars": 54427,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "microsoft/powertoys",
+    "stars": 132424,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "microsoft/vibevoice",
+    "stars": 45724,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "modelcontextprotocol/registry",
+    "stars": 6749,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "moltis-org/moltis",
+    "stars": 2623,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "moonshotai/kimi-cli",
+    "stars": 8322,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "nearai/ironclaw",
+    "stars": 12068,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "netease-youdao/lobsterai",
+    "stars": 5120,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "nousresearch/hermes-agent",
+    "stars": 125159,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "nousresearch/nemoclaw",
+    "stars": 4,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "nullclaw/nullclaw",
+    "stars": 7370,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "obra/superpowers",
+    "stars": 173226,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "ollama/ollama",
+    "stars": 170339,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "open-webui/open-webui",
+    "stars": 134837,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openai/codex",
+    "stars": 78932,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openai/realtime-voice-component",
+    "stars": 301,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openai/symphony",
+    "stars": 16293,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openbmb/chatdev",
+    "stars": 32943,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openclaw/openclaw",
+    "stars": 366407,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "openhands/openhands",
+    "stars": 72375,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "penpot/penpot",
+    "stars": 46973,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "public-apis/public-apis",
+    "stars": 428290,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "qdrant/qdrant",
+    "stars": 30878,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "qhkm/zeptoclaw",
+    "stars": 613,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "qwenlm/qwen-code",
+    "stars": 24038,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "qwibitai/nanoclaw",
+    "stars": 28377,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "run-llama/llama_index",
+    "stars": 49049,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "santifer/career-ops",
+    "stars": 40994,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "saturndec/waoowaoo",
+    "stars": 11878,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "shubhamsaboo/awesome-llm-apps",
+    "stars": 108089,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "sipeed/picoclaw",
+    "stars": 28619,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "soxoj/maigret",
+    "stars": 20286,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "tauricresearch/tradingagents",
+    "stars": 55707,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "thedotmack/claude-mem",
+    "stars": 69782,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "tinyagi/tinyagi",
+    "stars": 3542,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "topoteretes/cognee",
+    "stars": 16924,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "vercel-labs/portless",
+    "stars": 7993,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "vllm-project/vllm",
+    "stars": 78623,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "voltagent/awesome-design-md",
+    "stars": 67275,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "warpdotdev/warp",
+    "stars": 44432,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "stars": 30808,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  },
+  {
+    "date": "2026-04-30",
+    "repo_full_name": "zhulinsen/daily_stock_analysis",
+    "stars": 32840,
+    "metrics_source": "github_api",
+    "captured_at": "2026-04-30T02:15:09.440Z"
+  }
+]

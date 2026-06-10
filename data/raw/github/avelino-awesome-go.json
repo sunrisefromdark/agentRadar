@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "avelino/awesome-go",
+  "repo_url": "https://github.com/avelino/awesome-go",
+  "stars": 174442,
+  "forks": 13285,
+  "issues": 18,
+  "PR": 173,
+  "description": "A curated list of awesome Go frameworks, libraries and software",
+  "tags": [
+    "awesome",
+    "awesome-list",
+    "go",
+    "golang",
+    "golang-library",
+    "hacktoberfest"
+  ]
+}

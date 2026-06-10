@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "VectifyAI/PageIndex",
+  "repo_url": "https://github.com/VectifyAI/PageIndex",
+  "stars": 32492,
+  "forks": 2804,
+  "issues": 86,
+  "PR": 88,
+  "description": "📑 PageIndex: Document Index for Vectorless, Reasoning-based RAG",
+  "tags": [
+    "agentic-ai",
+    "agents",
+    "ai",
+    "ai-agents",
+    "context-engineering",
+    "information-retrieval",
+    "llm",
+    "rag",
+    "reasoning",
+    "retrieval",
+    "retrieval-augmented-generation",
+    "vector-database"
+  ]
+}

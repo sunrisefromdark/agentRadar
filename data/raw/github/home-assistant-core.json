@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "home-assistant/core",
+  "repo_url": "https://github.com/home-assistant/core",
+  "stars": 87159,
+  "forks": 37539,
+  "issues": 3412,
+  "PR": 802,
+  "description": ":house_with_garden: Open source home automation that puts local control and privacy first.",
+  "tags": [
+    "asyncio",
+    "hacktoberfest",
+    "home-automation",
+    "internet-of-things",
+    "iot",
+    "mqtt",
+    "python",
+    "raspberry-pi"
+  ]
+}

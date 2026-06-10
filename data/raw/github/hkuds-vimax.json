@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "HKUDS/ViMax",
+  "repo_url": "https://github.com/HKUDS/ViMax",
+  "stars": 8295,
+  "forks": 1281,
+  "issues": 26,
+  "PR": 7,
+  "description": "\"ViMax: Agentic Video Generation (Director, Screenwriter, Producer, and Video Generator All-in-One)\"",
+  "tags": [
+    "agentic-aigc",
+    "video-generation"
+  ]
+}

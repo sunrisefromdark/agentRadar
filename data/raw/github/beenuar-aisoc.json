@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "beenuar/AiSOC",
+  "repo_url": "https://github.com/beenuar/AiSOC",
+  "stars": 1220,
+  "forks": 135,
+  "issues": 3,
+  "PR": 0,
+  "description": "Open-source AI-powered Security Operations Center — alert fusion, purple-team drills, agent-assisted triage, MITRE ATT&CK investigation. MIT-licensed, self-hostable.",
+  "tags": [
+    "ai-security",
+    "alert-triage",
+    "cybersecurity",
+    "detection-engineering",
+    "docker",
+    "fastapi",
+    "incident-response",
+    "mit-license",
+    "mitre-attack",
+    "nextjs",
+    "open-source",
+    "purple-team",
+    "python",
+    "security-operations",
+    "self-hosted",
+    "siem",
+    "soar",
+    "soc",
+    "threat-detection",
+    "threat-intelligence"
+  ]
+}

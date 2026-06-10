@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "0xPlaygrounds/rig",
+  "repo_url": "https://github.com/0xPlaygrounds/rig",
+  "stars": 7513,
+  "forks": 834,
+  "issues": 59,
+  "PR": 30,
+  "description": "⚙️🦀 Build modular and scalable LLM Applications in Rust",
+  "tags": [
+    "agent",
+    "ai",
+    "artificial-intelligence",
+    "automation",
+    "generative-ai",
+    "large-language-model",
+    "llm",
+    "llmops",
+    "rust",
+    "scalable-ai"
+  ]
+}

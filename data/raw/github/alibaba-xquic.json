@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "alibaba/xquic",
+  "repo_url": "https://github.com/alibaba/xquic",
+  "stars": 1892,
+  "forks": 389,
+  "issues": 183,
+  "PR": 15,
+  "description": "XQUIC Library released by Alibaba is a cross-platform implementation of QUIC and HTTP/3 protocol.",
+  "tags": [
+    "http3",
+    "ietf",
+    "protocol",
+    "quic",
+    "tls13"
+  ]
+}

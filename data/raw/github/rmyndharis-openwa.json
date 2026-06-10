@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "rmyndharis/OpenWA",
+  "repo_url": "https://github.com/rmyndharis/OpenWA",
+  "stars": 5011,
+  "forks": 1008,
+  "issues": 14,
+  "PR": 21,
+  "description": "Free, Open Source, Self-Hosted WhatsApp API Gateway",
+  "tags": [
+    "api",
+    "gateway",
+    "whatsapp"
+  ]
+}

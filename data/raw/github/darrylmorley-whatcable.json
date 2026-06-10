@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "darrylmorley/whatcable",
+  "repo_url": "https://github.com/darrylmorley/whatcable",
+  "stars": 4337,
+  "forks": 126,
+  "issues": 14,
+  "PR": 1,
+  "description": "macOS menu bar app that tells you, in plain English, what each USB-C cable plugged into your Mac can actually do",
+  "tags": [
+    "apple-silicon",
+    "hardware-info",
+    "iokit",
+    "mac-app",
+    "macos",
+    "menubar",
+    "menubar-app",
+    "swift",
+    "swiftui",
+    "thunderbolt",
+    "usb-c",
+    "usb-power-delivery",
+    "utility"
+  ]
+}

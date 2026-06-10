@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "huggingface/blog",
+  "repo_url": "https://github.com/huggingface/blog",
+  "stars": 3426,
+  "forks": 1017,
+  "issues": 162,
+  "PR": 80,
+  "description": "Public repo for HF blog posts",
+  "tags": [
+    "hacktoberfest"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "google/mount-zip",
+  "repo_url": "https://github.com/google/mount-zip",
+  "stars": 241,
+  "forks": 20,
+  "issues": 0,
+  "PR": 1,
+  "description": "FUSE file system for ZIP archives",
+  "tags": [
+    "archiving",
+    "filesystem",
+    "fuse-filesystem",
+    "zip"
+  ]
+}

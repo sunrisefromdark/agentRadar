@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "microsoft/agent-governance-toolkit",
+  "repo_url": "https://github.com/microsoft/agent-governance-toolkit",
+  "stars": 3524,
+  "forks": 502,
+  "issues": 16,
+  "PR": 9,
+  "description": "AI Agent Governance Toolkit — Policy enforcement, zero-trust identity, execution sandboxing, and reliability engineering for autonomous AI agents. Covers 10/10 OWASP Agentic Top 10.",
+  "tags": [
+    "agent-framework",
+    "ai-agents",
+    "ai-safety",
+    "compliance",
+    "governance",
+    "microsoft",
+    "owasp",
+    "policy-engine",
+    "python",
+    "security",
+    "trust",
+    "zero-trust"
+  ]
+}

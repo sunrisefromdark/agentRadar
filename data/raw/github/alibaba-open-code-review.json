@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "alibaba/open-code-review",
+  "repo_url": "https://github.com/alibaba/open-code-review",
+  "stars": 1130,
+  "forks": 77,
+  "issues": 6,
+  "PR": 2,
+  "description": "Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+  "tags": [
+    "agent",
+    "code-review",
+    "code-review-assistant",
+    "harness",
+    "repository-level-context"
+  ]
+}

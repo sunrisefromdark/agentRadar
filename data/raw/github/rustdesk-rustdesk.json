@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "rustdesk/rustdesk",
+  "repo_url": "https://github.com/rustdesk/rustdesk",
+  "stars": 115313,
+  "forks": 17400,
+  "issues": 68,
+  "PR": 41,
+  "description": "An open-source remote desktop application designed for self-hosting, as an alternative to TeamViewer.",
+  "tags": [
+    "android",
+    "anydesk",
+    "dart",
+    "flatpak",
+    "flutter",
+    "flutter-apps",
+    "ios",
+    "linux",
+    "macos",
+    "p2p",
+    "rdp",
+    "remote-control",
+    "remote-desktop",
+    "rust",
+    "rust-lang",
+    "teamviewer",
+    "vnc",
+    "wayland",
+    "windows"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "Genymobile/scrcpy",
+  "repo_url": "https://github.com/Genymobile/scrcpy",
+  "stars": 142638,
+  "forks": 13162,
+  "issues": 2738,
+  "PR": 78,
+  "description": "Display and control your Android device",
+  "tags": [
+    "android",
+    "c",
+    "ffmpeg",
+    "libav",
+    "mirroring",
+    "recording",
+    "screen",
+    "sdl2"
+  ]
+}

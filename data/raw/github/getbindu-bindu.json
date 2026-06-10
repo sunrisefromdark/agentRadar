@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "GetBindu/Bindu",
+  "repo_url": "https://github.com/GetBindu/Bindu",
+  "stars": 6379,
+  "forks": 378,
+  "issues": 24,
+  "PR": 115,
+  "description": "Bindu: The identity, communication, and payments layer for AI agents.",
+  "tags": [
+    "a2a",
+    "agent-communication",
+    "agent-orchestration",
+    "ai-agent",
+    "autonomous-agents",
+    "eu-ai-act",
+    "machine-learning"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "awslabs/soci-snapshotter",
+  "repo_url": "https://github.com/awslabs/soci-snapshotter",
+  "stars": 738,
+  "forks": 83,
+  "issues": 131,
+  "PR": 13,
+  "description": "A containerd snapshotter plugin which enables standard OCI images to be lazily loaded without requiring a build-time conversion step.",
+  "tags": []
+}

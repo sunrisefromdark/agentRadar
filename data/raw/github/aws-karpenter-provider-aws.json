@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "aws/karpenter-provider-aws",
+  "repo_url": "https://github.com/aws/karpenter-provider-aws",
+  "stars": 7638,
+  "forks": 1259,
+  "issues": 387,
+  "PR": 90,
+  "description": "Karpenter is a Kubernetes Node Autoscaler built for flexibility, performance, and simplicity.",
+  "tags": []
+}

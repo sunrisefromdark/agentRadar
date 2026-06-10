@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "cohere-ai/cohere-python",
+  "repo_url": "https://github.com/cohere-ai/cohere-python",
+  "stars": 387,
+  "forks": 90,
+  "issues": 2,
+  "PR": 11,
+  "description": "Python Library for Accessing the Cohere API",
+  "tags": [
+    "python",
+    "sdk"
+  ]
+}

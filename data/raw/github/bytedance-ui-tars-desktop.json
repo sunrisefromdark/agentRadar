@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "bytedance/UI-TARS-desktop",
+  "repo_url": "https://github.com/bytedance/UI-TARS-desktop",
+  "stars": 34866,
+  "forks": 3504,
+  "issues": 317,
+  "PR": 77,
+  "description": "The Open-Source Multimodal AI Agent Stack: Connecting Cutting-Edge AI Models and Agent Infra",
+  "tags": [
+    "agent",
+    "agent-tars",
+    "browser-use",
+    "computer-use",
+    "cowork",
+    "gui-agent",
+    "gui-operator",
+    "mcp",
+    "mcp-server",
+    "multimodal",
+    "tars",
+    "ui-tars",
+    "vision",
+    "vlm"
+  ]
+}

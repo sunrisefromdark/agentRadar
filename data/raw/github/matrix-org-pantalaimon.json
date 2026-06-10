@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "matrix-org/pantalaimon",
+  "repo_url": "https://github.com/matrix-org/pantalaimon",
+  "stars": 330,
+  "forks": 49,
+  "issues": 50,
+  "PR": 6,
+  "description": "E2EE aware proxy daemon for matrix clients.",
+  "tags": [
+    "hacktoberfest"
+  ]
+}

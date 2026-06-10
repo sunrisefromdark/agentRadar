@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "docusealco/docuseal",
+  "repo_url": "https://github.com/docusealco/docuseal",
+  "stars": 16843,
+  "forks": 1562,
+  "issues": 100,
+  "PR": 20,
+  "description": "Open source DocuSign alternative. Create, fill, and sign digital documents ✍️",
+  "tags": [
+    "document-signing",
+    "documents",
+    "e-signature",
+    "hotwired-turbo",
+    "open-source",
+    "pdf",
+    "pdf-sign",
+    "pdf-signature",
+    "ruby-on-rails",
+    "self-hosted",
+    "tailwindcss",
+    "vue",
+    "webpack"
+  ]
+}

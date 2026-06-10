@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "google/material-design-icons",
+  "repo_url": "https://github.com/google/material-design-icons",
+  "stars": 53364,
+  "forks": 9727,
+  "issues": 395,
+  "PR": 10,
+  "description": "Material Design icons by Google (Material Symbols)",
+  "tags": [
+    "android",
+    "icons",
+    "ios",
+    "material",
+    "material-design",
+    "sprites",
+    "web"
+  ]
+}

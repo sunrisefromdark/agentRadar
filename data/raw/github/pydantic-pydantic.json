@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "pydantic/pydantic",
+  "repo_url": "https://github.com/pydantic/pydantic",
+  "stars": 27929,
+  "forks": 2667,
+  "issues": 527,
+  "PR": 38,
+  "description": "Data validation using Python type hints",
+  "tags": [
+    "hints",
+    "json-schema",
+    "parsing",
+    "pydantic",
+    "python",
+    "python310",
+    "python311",
+    "python312",
+    "python313",
+    "python39",
+    "validation"
+  ]
+}

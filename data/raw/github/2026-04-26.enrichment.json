@@ -1,0 +1,749 @@
+[
+  {
+    "repo_url": "https://github.com/zilliztech/claude-context",
+    "repo_full_name": "zilliztech/claude-context",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; github_api_timeout_or_blocked; github_token=missing; GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_html_timeout_or_blocked; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+    "repo_full_name": "fincept-corporation/finceptterminal",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/VectifyAI/PageIndex",
+    "repo_full_name": "vectifyai/pageindex",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/yichuan-w/LEANN",
+    "repo_full_name": "yichuan-w/leann",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vercel-labs/skills",
+    "repo_full_name": "vercel-labs/skills",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse",
+    "repo_full_name": "langfuse/langfuse",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "repo_full_name": "langchain-ai/langchain",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ollama/ollama",
+    "repo_full_name": "ollama/ollama",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vllm-project/vllm",
+    "repo_full_name": "vllm-project/vllm",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/firecrawl/firecrawl",
+    "repo_full_name": "firecrawl/firecrawl",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/0xPlaygrounds/rig",
+    "repo_full_name": "0xplaygrounds/rig",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/KeygraphHQ/shannon",
+    "repo_full_name": "keygraphhq/shannon",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sansan0/TrendRadar",
+    "repo_full_name": "sansan0/trendradar",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "repo_full_name": "hkuds/nanobot",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langgenius/dify",
+    "repo_full_name": "langgenius/dify",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "repo_full_name": "significant-gravitas/autogpt",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenHands/OpenHands",
+    "repo_full_name": "openhands/openhands",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/browser-use/browser-use",
+    "repo_full_name": "browser-use/browser-use",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/activepieces/activepieces",
+    "repo_full_name": "activepieces/activepieces",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/koala73/worldmonitor",
+    "repo_full_name": "koala73/worldmonitor",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/AIDC-AI/Pixelle-Video",
+    "repo_full_name": "aidc-ai/pixelle-video",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/open-webui/open-webui",
+    "repo_full_name": "open-webui/open-webui",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/CherryHQ/cherry-studio",
+    "repo_full_name": "cherryhq/cherry-studio",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/zhayujie/CowAgent",
+    "repo_full_name": "zhayujie/cowagent",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ruvnet/RuView",
+    "repo_full_name": "ruvnet/ruview",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/huggingface/transformers",
+    "repo_full_name": "huggingface/transformers",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/hiyouga/LlamaFactory",
+    "repo_full_name": "hiyouga/llamafactory",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/jingyaogong/minimind",
+    "repo_full_name": "jingyaogong/minimind",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/testtimescaling/testtimescaling.github.io",
+    "repo_full_name": "testtimescaling/testtimescaling.github.io",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/RAG-Anything",
+    "repo_full_name": "hkuds/rag-anything",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/topoteretes/cognee",
+    "repo_full_name": "topoteretes/cognee",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "repo_full_name": "mem0ai/mem0",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/infiniflow/ragflow",
+    "repo_full_name": "infiniflow/ragflow",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/milvus-io/milvus",
+    "repo_full_name": "milvus-io/milvus",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/qdrant/qdrant",
+    "repo_full_name": "qdrant/qdrant",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "repo_full_name": "duanyytop/agents-radar",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "repo_full_name": "openclaw/openclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nousresearch/hermes-agent",
+    "repo_full_name": "nousresearch/hermes-agent",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sipeed/picoclaw",
+    "repo_full_name": "sipeed/picoclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/qwibitai/nanoclaw",
+    "repo_full_name": "qwibitai/nanoclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nullclaw/nullclaw",
+    "repo_full_name": "nullclaw/nullclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "repo_full_name": "nearai/ironclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/netease-youdao/LobsterAI",
+    "repo_full_name": "netease-youdao/lobsterai",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/TinyAGI/tinyagi",
+    "repo_full_name": "tinyagi/tinyagi",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "repo_full_name": "moltis-org/moltis",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/agentscope-ai/CoPaw",
+    "repo_full_name": "agentscope-ai/copaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/qhkm/zeptoclaw",
+    "repo_full_name": "qhkm/zeptoclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/NousResearch/hermes-agent",
+    "repo_full_name": "nousresearch/hermes-agent",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+    "repo_full_name": "agentscope-ai/qwenpaw",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "repo_full_name": "anthropics/claude-code",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/openai/codex",
+    "repo_full_name": "openai/codex",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "repo_full_name": "google-gemini/gemini-cli",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/github/copilot-cli",
+    "repo_full_name": "github/copilot-cli",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+    "repo_full_name": "moonshotai/kimi-cli",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "repo_full_name": "anomalyco/opencode",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/badlogic/pi-mono",
+    "repo_full_name": "badlogic/pi-mono",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/QwenLM/qwen-code",
+    "repo_full_name": "qwenlm/qwen-code",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anthropics/skills",
+    "repo_full_name": "anthropics/skills",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+    "repo_full_name": "forrestchang/andrej-karpathy-skills",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mattpocock/skills",
+    "repo_full_name": "mattpocock/skills",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Alishahryar1/free-claude-code",
+    "repo_full_name": "alishahryar1/free-claude-code",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/codecrafters-io/build-your-own-x",
+    "repo_full_name": "codecrafters-io/build-your-own-x",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/h4ckf0r0day/obscura",
+    "repo_full_name": "h4ckf0r0day/obscura",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/openclaw/clawsweeper",
+    "repo_full_name": "openclaw/clawsweeper",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Z4nzu/hackingtool",
+    "repo_full_name": "z4nzu/hackingtool",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/obra/superpowers",
+    "repo_full_name": "obra/superpowers",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/refactoringhq/tolaria",
+    "repo_full_name": "refactoringhq/tolaria",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HunxByts/GhostTrack",
+    "repo_full_name": "hunxbyts/ghosttrack",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nowork-studio/toprank",
+    "repo_full_name": "nowork-studio/toprank",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ComposioHQ/awesome-codex-skills",
+    "repo_full_name": "composiohq/awesome-codex-skills",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/hyperbrowserai/hyperbrowser-app-examples",
+    "repo_full_name": "hyperbrowserai/hyperbrowser-app-examples",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/chekusu/wanman",
+    "repo_full_name": "chekusu/wanman",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/PostHog/posthog",
+    "repo_full_name": "posthog/posthog",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/browser-use/browser-harness",
+    "repo_full_name": "browser-use/browser-harness",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/VoltAgent/awesome-design-md",
+    "repo_full_name": "voltagent/awesome-design-md",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/abhigyanpatwari/GitNexus",
+    "repo_full_name": "abhigyanpatwari/gitnexus",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HQarroum/docker-android",
+    "repo_full_name": "hqarroum/docker-android",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/kreuzberg-dev/kreuzberg",
+    "repo_full_name": "kreuzberg-dev/kreuzberg",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/donnemartin/system-design-primer",
+    "repo_full_name": "donnemartin/system-design-primer",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/Vibe-Trading",
+    "repo_full_name": "hkuds/vibe-trading",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/getagentseal/codeburn",
+    "repo_full_name": "getagentseal/codeburn",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/davila7/claude-code-templates",
+    "repo_full_name": "davila7/claude-code-templates",
+    "status": "cache",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API fetch threw TimeoutError: The operation was aborted due to timeout; skipped GitHub HTML fallback after recent failure: GitHub HTML fetch threw TimeoutError: The operation was aborted due to timeout; github_token=missing; used cached metrics"
+    ]
+  }
+]

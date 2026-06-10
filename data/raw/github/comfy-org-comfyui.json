@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "Comfy-Org/ComfyUI",
+  "repo_url": "https://github.com/Comfy-Org/ComfyUI",
+  "stars": 115210,
+  "forks": 13467,
+  "issues": 3714,
+  "PR": 331,
+  "description": "The most powerful and modular diffusion model GUI, api and backend with a graph/nodes interface.",
+  "tags": [
+    "ai",
+    "comfy",
+    "comfyui",
+    "python",
+    "pytorch",
+    "stable-diffusion"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "1weiho/open-slide",
+  "repo_url": "https://github.com/1weiho/open-slide",
+  "stars": 4580,
+  "forks": 308,
+  "issues": 8,
+  "PR": 18,
+  "description": "A slide framework built for agents.",
+  "tags": [
+    "agent",
+    "react",
+    "slides"
+  ]
+}

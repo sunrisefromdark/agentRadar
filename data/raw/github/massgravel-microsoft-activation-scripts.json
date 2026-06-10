@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "massgravel/Microsoft-Activation-Scripts",
+  "repo_url": "https://github.com/massgravel/Microsoft-Activation-Scripts",
+  "stars": 175919,
+  "forks": 16900,
+  "issues": 2,
+  "PR": 0,
+  "description": "Open-source Windows and Office activator featuring HWID, Ohook, TSforge, and Online KMS activation methods, along with advanced troubleshooting.",
+  "tags": [
+    "activator",
+    "hwid",
+    "kms",
+    "kms38",
+    "massgrave",
+    "massgravel",
+    "microsoft",
+    "microsoft365",
+    "office",
+    "office365",
+    "ohook",
+    "powershell",
+    "tsforge",
+    "windows",
+    "windows-10",
+    "windows-11"
+  ]
+}

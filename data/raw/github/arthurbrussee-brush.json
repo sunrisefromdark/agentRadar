@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "ArthurBrussee/brush",
+  "repo_url": "https://github.com/ArthurBrussee/brush",
+  "stars": 4571,
+  "forks": 252,
+  "issues": 23,
+  "PR": 7,
+  "description": "3D Reconstruction for all",
+  "tags": [
+    "gaussian-splatting",
+    "graphics",
+    "reconstruction"
+  ]
+}

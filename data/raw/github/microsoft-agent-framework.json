@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "microsoft/agent-framework",
+  "repo_url": "https://github.com/microsoft/agent-framework",
+  "stars": 10929,
+  "forks": 1812,
+  "issues": 653,
+  "PR": 265,
+  "description": "A framework for building, orchestrating and deploying AI agents and multi-agent workflows with support for Python and .NET.",
+  "tags": [
+    "agent-framework",
+    "agentic-ai",
+    "agents",
+    "ai",
+    "dotnet",
+    "multi-agent",
+    "orchestration",
+    "python",
+    "sdk",
+    "workflows"
+  ]
+}

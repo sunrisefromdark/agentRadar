@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-27",
+  "generated_at": "2026-05-27T22:41:07+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "{\"ok\":true,\"ping\":\"pong\",\"provider"
+}

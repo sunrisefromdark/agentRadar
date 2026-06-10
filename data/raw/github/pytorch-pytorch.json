@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "pytorch/pytorch",
+  "repo_url": "https://github.com/pytorch/pytorch",
+  "stars": 100225,
+  "forks": 27870,
+  "issues": 15572,
+  "PR": 2778,
+  "description": "Tensors and Dynamic neural networks in Python with strong GPU acceleration",
+  "tags": [
+    "autograd",
+    "deep-learning",
+    "gpu",
+    "machine-learning",
+    "neural-network",
+    "numpy",
+    "python",
+    "tensor"
+  ]
+}

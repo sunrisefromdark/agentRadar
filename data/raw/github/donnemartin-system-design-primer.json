@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "donnemartin/system-design-primer",
+  "repo_url": "https://github.com/donnemartin/system-design-primer",
+  "stars": 349615,
+  "forks": 56321,
+  "issues": 250,
+  "PR": 295,
+  "description": "Learn how to design large-scale systems. Prep for the system design interview.  Includes Anki flashcards.",
+  "tags": [
+    "design",
+    "design-patterns",
+    "design-system",
+    "development",
+    "interview",
+    "interview-practice",
+    "interview-questions",
+    "programming",
+    "python",
+    "system",
+    "web",
+    "web-application",
+    "webapp"
+  ]
+}

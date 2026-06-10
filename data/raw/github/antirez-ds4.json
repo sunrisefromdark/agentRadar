@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "antirez/ds4",
+  "repo_url": "https://github.com/antirez/ds4",
+  "stars": 11053,
+  "forks": 919,
+  "issues": 33,
+  "PR": 62,
+  "description": "DeepSeek 4 Flash local inference engine for Metal and CUDA",
+  "tags": []
+}

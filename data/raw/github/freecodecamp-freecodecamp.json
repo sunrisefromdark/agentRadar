@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "freeCodeCamp/freeCodeCamp",
+  "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+  "stars": 445955,
+  "forks": 44816,
+  "issues": 99,
+  "PR": 68,
+  "description": "freeCodeCamp.org's open-source codebase and curriculum. Learn math, programming, and computer science for free.",
+  "tags": [
+    "careers",
+    "certification",
+    "community",
+    "curriculum",
+    "d3",
+    "education",
+    "freecodecamp",
+    "javascript",
+    "learn-to-code",
+    "math",
+    "nodejs",
+    "nonprofits",
+    "programming",
+    "react",
+    "teachers"
+  ]
+}

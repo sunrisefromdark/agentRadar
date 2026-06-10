@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "openai/openai-cookbook",
+  "repo_url": "https://github.com/openai/openai-cookbook",
+  "stars": 73870,
+  "forks": 12501,
+  "issues": 60,
+  "PR": 134,
+  "description": "Examples and guides for using the OpenAI API",
+  "tags": [
+    "chatgpt",
+    "gpt-4",
+    "openai",
+    "openai-api"
+  ]
+}

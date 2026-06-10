@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "millionco/react-doctor",
+  "repo_url": "https://github.com/millionco/react-doctor",
+  "stars": 10509,
+  "forks": 338,
+  "issues": 5,
+  "PR": 3,
+  "description": "Your agent writes bad React. This catches it",
+  "tags": [
+    "agents",
+    "code-review",
+    "doctor",
+    "react",
+    "skill"
+  ]
+}

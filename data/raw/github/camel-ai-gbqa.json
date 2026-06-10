@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "camel-ai/GBQA",
+  "repo_url": "https://github.com/camel-ai/GBQA",
+  "stars": 11,
+  "forks": 5,
+  "issues": 0,
+  "PR": 3,
+  "description": "An open-source benchmark towards industrial-level quality assurance evaluation for agents.",
+  "tags": [
+    "agent",
+    "benchmark",
+    "camel",
+    "coding",
+    "harbor",
+    "llm",
+    "software"
+  ]
+}

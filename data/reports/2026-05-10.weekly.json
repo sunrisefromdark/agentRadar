@@ -1,0 +1,1272 @@
+{
+  "date": "2026-05-10",
+  "generated_at": "2026-06-06T22:21:00+08:00",
+  "window_start": "2026-05-04",
+  "window_end": "2026-05-10",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "personalized_weekly_focus_note_cn": "本周多个趋势项目命中你的关注主题（memory、UI、skills、claude code），特别是ruvnet/ruflo同时命中全部四个主题，值得深入了解。",
+  "overall_summary_cn": "规则层输出大量候选趋势，核心收敛方向集中在AI和Agent相关领域。复审发现多个候选趋势高度重叠，例如ai-workflow、agentic-workflow、ai-coding、agent-runtime等均基于相似的范式组合和证据链，可合并为覆盖面更广的主题趋势。部分候选信号弱、证据不足或仅为范式碎片，予以拒绝。未引入外部新趋势，所有最终趋势均映射回候选、项目及证据引用。",
+  "supporting_trend_keys": [
+    "ai-workflow",
+    "workflow-automation",
+    "agent-runtime",
+    "agentic-workflow"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "ai-workflow",
+      "trend_name_cn": "AI工作流",
+      "trend_summary_cn": "AI工作流方向本周由多个高星项目推动，核心是代理编排和自动化工作流。",
+      "evidence_summary_cn": "ruvnet/ruflo（周增1910星）和czlonkowski/n8n-mcp（日增404星）表现突出。",
+      "strength": "strong",
+      "worth_following_next_week": "持续关注ruvnet/ruflo是否能保持增长势头，以及n8n-mcp的生态扩展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个多代理编排平台。它帮助开发者部署智能代理集群、协调自动化工作流，并集成RAG和记忆功能。大家常用它来构建复杂的对话式AI系统和企业级工作流。",
+          "why_today_cn": "今日 Trendshift 实时命中，单日 Star 增长 3219，显示社区高度关注其在智能体编排与工作流自动化方面的突破。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory、UI、skills和claude code，与你的关注点高度匹配。",
+          "risk_review_required": false,
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "本周持续高星增长（周增1910星），并出现在多个趋势中，是AI工作流方向的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+          "project_name": "czlonkowski/n8n-mcp",
+          "project_class": "today_star",
+          "objective_score": 89.95,
+          "preference_boost": 7.5,
+          "base_final_rank": 97.45,
+          "final_rank": 99.45,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个MCP服务器，让Claude Desktop、Claude Code等AI工具能够通过自然语言指令自动创建n8n工作流。它帮助用户无需手动操作即可完成自动化流程搭建。",
+          "why_today_cn": "今天登上 Trendshift 榜单，日增 404 星，说明社区对 AI 编排工作流的方案兴趣浓厚。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、UI和claude code，与你的兴趣相符。",
+          "risk_review_required": false,
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "最近 2 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/firecrawl/firecrawl",
+          "project_name": "firecrawl/firecrawl",
+          "project_class": "context_only",
+          "objective_score": 57.8,
+          "preference_boost": 0,
+          "base_final_rank": 57.8,
+          "final_rank": 57.8,
+          "matched_interest_topics": [],
+          "project_brief_cn": "这是一个网页抓取和内容提取API，能大规模搜索、抓取和转换网页内容为结构化数据。开发者常用它来构建AI代理的网页知识源或监测工具。",
+          "why_today_cn": "当日无显著新鲜信号，属于历史观察项目。作为网页数据采集的基础设施，可补充理解代理工具生态。",
+          "enhancement_source": "agent",
+          "risk_review_required": true,
+          "risk_review_note_cn": "数据信任度为中等，需持续观察。",
+          "risk_review_source": "agent",
+          "trend_key": "ai-workflow",
+          "why_this_week_cn": "本周周增578星，作为AI工作流中的数据处理工具持续受到关注。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-workflow",
+        "focused_trend_name_cn": "AI工作流",
+        "summary_cn": "当前聚焦 ai-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 73.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 81
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 39
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3219",
+              "weekly_delta=5129"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：daily_delta=3219"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=4782",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：forks=4782"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 31,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 55,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 65
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 55。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+                "repo_full_name": "czlonkowski/n8n-mcp",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/firecrawl/firecrawl",
+                "repo_full_name": "firecrawl/firecrawl",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=4"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "workflow-automation",
+      "trend_name_cn": "工作流自动化",
+      "trend_summary_cn": "工作流自动化方向本周受多个明星项目推动，覆盖代理编排到低代码平台。",
+      "evidence_summary_cn": "ruvnet/ruflo（周增1910星）和n8n-io/n8n（周增876星）表现突出。",
+      "strength": "strong",
+      "worth_following_next_week": "关注n8n的AI功能集成和ruvnet/ruflo的生态发展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 Trendshift 实时命中，单日 Star 增长 3219，显示社区高度关注其在智能体编排与工作流自动化方面的突破。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、UI、skills和claude code，与你的关注点高度匹配。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周持续高星增长（周增1910星），并出现在多个趋势中，是工作流自动化方向的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/n8n-io/n8n",
+          "project_name": "n8n-io/n8n",
+          "project_class": "today_star",
+          "objective_score": 87.85,
+          "preference_boost": 2.5,
+          "base_final_rank": 90.35,
+          "final_rank": 86.35,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "这是一个开源的低代码工作流自动化平台。用户可以通过可视化界面和自定义代码构建自动化流程，支持400+集成和原生AI能力。它帮助团队轻松连接各类应用和服务。",
+          "why_today_cn": "进入GitHub Trending，Star增长342，作为成熟平台仍保持活跃。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中UI，与你的界面关注点一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周持续位列GitHub Trending，日增342星，周增876星，显示出强劲的社区活跃度。"
+        },
+        {
+          "repo_url": "https://github.com/Q00/ouroboros",
+          "project_name": "Q00/ouroboros",
+          "project_class": "context_only",
+          "objective_score": 78.25,
+          "preference_boost": 2.5,
+          "base_final_rank": 80.75,
+          "final_rank": 80.75,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个代理操作系统（Agent OS）。它通过指定而不是提示的方式运行代理，支持持久记忆和工具集成。开发者可以用它构建高度自治的AI工作流。",
+          "why_today_cn": "作为历史背景项目，当日无新鲜事件触发，但内存主题持续相关，适合对比观察同类项目进展。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory，与你的记忆关注点相符。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "本周在TrendShift和GitHub Live Star Delta中出现，作为新型自动化范式引起关注。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "workflow-automation",
+        "focused_trend_name_cn": "工作流自动化",
+        "summary_cn": "当前聚焦 workflow-automation，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 56,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 68
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3219",
+              "weekly_delta=5129"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 56。代表项目包括 ruvnet/ruflo、n8n-io/n8n、Q00/ouroboros。证据摘要：daily_delta=3219"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=4782",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、n8n-io/n8n、Q00/ouroboros。证据摘要：forks=4782"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 91.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 28,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 75
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 91.7。代表项目包括 ruvnet/ruflo、Q00/ouroboros、n8n-io/n8n。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 95
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、n8n-io/n8n、Q00/ouroboros。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、n8n-io/n8n、Q00/ouroboros。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Q00/ouroboros",
+                "repo_full_name": "Q00/ouroboros",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=4"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、n8n-io/n8n、Q00/ouroboros。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "代理运行时",
+      "trend_summary_cn": "代理运行时方向本周项目丰富，聚焦于构建和运行AI代理的核心基础设施。",
+      "evidence_summary_cn": "ruvnet/ruflo（周增1910星）和NousResearch/hermes-agent（大规模社区）代表性强。",
+      "strength": "strong",
+      "worth_following_next_week": "关注hermes-agent的更新和new runtime项目的涌现。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 Trendshift 实时命中，单日 Star 增长 3219，显示社区高度关注其在智能体编排与工作流自动化方面的突破。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、UI、skills和claude code，与你的关注点高度匹配。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周持续高星增长（周增1910星），并出现在多个趋势中，是代理运行时方向的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/openai/codex",
+          "project_name": "openai/codex",
+          "project_class": "context_only",
+          "objective_score": 90.4,
+          "preference_boost": 2.5,
+          "base_final_rank": 92.9,
+          "final_rank": 92.9,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个轻量级的终端编码代理。它直接在终端中运行，帮助开发者理解代码库、进行代码修改和执行命令。它类似Claude Code的开源替代。",
+          "why_today_cn": "未命中实时新鲜来源，但作为历史背景补充，今日 star 增长约 260。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory，与你的记忆关注点相符。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周持续出现在多个信号源中，作为OpenAI的标杆代理运行时项目引起广泛关注。"
+        },
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 80,
+          "preference_boost": 5,
+          "base_final_rank": 85,
+          "final_rank": 85,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个成长型代理框架。它支持持久记忆、技能生态系统和高度自治，能够不断学习和进化。开发者可以用它构建能够长期记忆和持续改进的AI助手。",
+          "why_today_cn": "命中 GitHub 当日涨星信号，且来自知名研究团队 NousResearch，今日值得密切关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory和skills，与你的关注点一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "本周持续在多个信号源中出现，拥有近2万分支和5000+PR，社区活跃度极高。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "代理运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 50.7,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 52
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3219",
+              "weekly_delta=5129"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 50.7。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：daily_delta=3219"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=4782",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：forks=4782"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 22,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=4"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、openai/codex、NousResearch/hermes-agent。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agentic-workflow",
+      "trend_name_cn": "代理工作流",
+      "trend_summary_cn": "代理工作流方向强调可编排的智能工作流，本周多个项目表现突出。",
+      "evidence_summary_cn": "ruvnet/ruflo（周增1910星）和langgenius/dify（日增84星）领跑。",
+      "strength": "strong",
+      "worth_following_next_week": "关注dify的版本更新和deer-flow的进一步发展。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 Trendshift 实时命中，单日 Star 增长 3219，显示社区高度关注其在智能体编排与工作流自动化方面的突破。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中memory、UI、skills和claude code，与你的关注点高度匹配。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周持续高星增长（周增1910星），并出现在多个趋势中，是代理工作流方向的核心项目。"
+        },
+        {
+          "repo_url": "https://github.com/langgenius/dify",
+          "project_name": "langgenius/dify",
+          "project_class": "today_star",
+          "objective_score": 91.45,
+          "preference_boost": 2.5,
+          "base_final_rank": 93.95,
+          "final_rank": 91.95,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个生产就绪的代理工作流开发平台。它提供可视化界面让开发者构建和部署AI工作流，支持记忆、工具集成和多模型接入。它类似一个AI应用的后端即服务。",
+          "why_today_cn": "它命中 GitHub Trending 实时信号，且已有多源确认；当日 star 增长约 84。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory，与你的记忆关注点相符。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周持续在GitHub Trending中，日增84星，周增908星，显示出稳定的增长。"
+        },
+        {
+          "repo_url": "https://github.com/bytedance/deer-flow",
+          "project_name": "bytedance/deer-flow",
+          "project_class": "today_star",
+          "objective_score": 84.4,
+          "preference_boost": 2.5,
+          "base_final_rank": 86.9,
+          "final_rank": 86.9,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个开源的长周期超级代理。它结合沙箱、记忆、工具和子代理，能处理从研究到编码的复杂任务。开发者可以用它构建能够数小时持续工作的AI代理。",
+          "why_today_cn": "今日Trendshift命中，日增星61，作为字节跳动项目具有发展潜力。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中memory，与你的记忆关注点相符。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "本周在Agent Radar和TrendShift中出现，作为复杂工作流方案的典型代表。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agentic-workflow",
+        "focused_trend_name_cn": "代理工作流",
+        "summary_cn": "当前聚焦 agentic-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 62.7,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 61
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 27
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=3219",
+              "weekly_delta=5129"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 62.7。代表项目包括 ruvnet/ruflo、langgenius/dify、bytedance/deer-flow。证据摘要：daily_delta=3219"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=4782",
+              "issues=406"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、bytedance/deer-flow。证据摘要：forks=4782"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 28,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、bytedance/deer-flow。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 98.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 95
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 98.3。代表项目包括 ruvnet/ruflo、bytedance/deer-flow、langgenius/dify。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、bytedance/deer-flow。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/bytedance/deer-flow",
+                "repo_full_name": "bytedance/deer-flow",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=4"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、langgenius/dify、bytedance/deer-flow。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [],
+  "weak_signal_cards": [
+    {
+      "trend_key": "claude-code-skills",
+      "signal_name_cn": "Claude Code技能",
+      "why_weak_cn": "本周项目数少，且增长数据不足，证据尚不完整。",
+      "evidence_summary_cn": "仅ruvnet/ruflo关联，周增1910星，但无直接技能生态证据。",
+      "worth_following_next_week": "若下周出现更多技能相关项目，再考虑升级。"
+    },
+    {
+      "trend_key": "cli-tool",
+      "signal_name_cn": "CLI工具",
+      "why_weak_cn": "本周只有HKUDS/DeepTutor一个项目，且增长数据为0，信号较弱。",
+      "evidence_summary_cn": "HKUDS/DeepTutor（日增0星，周增0星）。",
+      "worth_following_next_week": "若下周出现新的CLI代理工具，再考虑升级。"
+    },
+    {
+      "trend_key": "coding-agent",
+      "signal_name_cn": "编码代理",
+      "why_weak_cn": "本周仅1jehuang/jcode一个项目，虽然增长较好但覆盖面窄。",
+      "evidence_summary_cn": "1jehuang/jcode（日增491星，周增2601星）。",
+      "worth_following_next_week": "若下周出现更多编码代理项目，再考虑升级。"
+    },
+    {
+      "trend_key": "agentscope-runtime",
+      "signal_name_cn": "AgentScope运行时",
+      "why_weak_cn": "本周仅agentscope-ai/QwenPaw一个项目，且仅有一个来源。",
+      "evidence_summary_cn": "agentscope-ai/QwenPaw（日增34星，周增286星，单一来源）。",
+      "worth_following_next_week": "若下周出现更多AgentScope生态项目，再考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-10",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/czlonkowski/n8n-mcp",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/ruvnet/ruflo)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "ai-workflow",
+    "focused_trend_name_cn": "AI工作流",
+    "summary_cn": "当前聚焦 ai-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 73.3,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 11,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 81
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 39
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=3219",
+          "weekly_delta=5129"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 73.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：daily_delta=3219"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 16,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=4782",
+          "issues=406"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：forks=4782"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 81.7,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 31,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 45
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 55,
+        "project_count": 3,
+        "high_signal_project_count": 1,
+        "evidence_count": 7,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 65
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 0
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_self_improving_loop"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 55。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 93.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 5,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 80
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "agent_or_swarm_signal"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 93.3,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/czlonkowski/n8n-mcp",
+            "repo_full_name": "czlonkowski/n8n-mcp",
+            "score": 90
+          },
+          {
+            "repo_url": "https://github.com/firecrawl/firecrawl",
+            "repo_full_name": "firecrawl/firecrawl",
+            "score": 90
+          }
+        ],
+        "top_evidence": [
+          "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+          "appearances=4"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、czlonkowski/n8n-mcp、firecrawl/firecrawl。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+      }
+    ]
+  }
+}

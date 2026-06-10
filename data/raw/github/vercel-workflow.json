@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "vercel/workflow",
+  "repo_url": "https://github.com/vercel/workflow",
+  "stars": 2062,
+  "forks": 268,
+  "issues": 89,
+  "PR": 144,
+  "description": "Workflow SDK: Build durable, reliable, and observable apps and AI Agents in TypeScript",
+  "tags": []
+}

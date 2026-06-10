@@ -1,0 +1,1670 @@
+{
+  "date": "2026-05-24",
+  "generated_at": "2026-06-06T22:42:29+08:00",
+  "window_start": "2026-05-18",
+  "window_end": "2026-05-24",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "personalized_weekly_focus_note_cn": "本周核心趋势在 agent 工作流和记忆技能生态方向，与你关注的 memory、UI、skills、claude code 高度相关，建议重点跟踪。",
+  "overall_summary_cn": "本周AI Agent生态各子领域（agent runtime、workflow automation、agentic workflow、ai tools等）出现强烈收敛，多个候选趋势相互交叉、证据共享，需合并为更高级别主干趋势，避免过度碎片化。同时，memory、mcp、coding等方向信号丰富但部分候选证据单一，故分立为观察趋势。",
+  "supporting_trend_keys": [
+    "workflow-automation",
+    "agent-runtime",
+    "agentic-workflow",
+    "ai-tools"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "workflow-automation",
+      "trend_name_cn": "workflow-automation",
+      "trend_summary_cn": "workflow-automation is converging around agent-runtime + agentic-workflow + ai-agent-tools.",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 GitHub 涨星信号促使关注，项目具备多源确认的新鲜度。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "最近 16 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+          "project_name": "Imbad0202/academic-research-skills",
+          "project_class": "context_only",
+          "objective_score": 91,
+          "preference_boost": 5,
+          "base_final_rank": 96,
+          "final_rank": 96,
+          "matched_interest_topics": [
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你把模型接到外部工具、连接器或系统接口，也能组织检索和知识调用能力。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+          "why_today_cn": "今日无新鲜信号，但 Star 增长 6254，且标签包含 ai-workflow 和 agent，与您的 claude code 兴趣点有关。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=suspicious_growth，risks=suspicious growth spike; review raw metrics before trusting ranking。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "最近 4 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/n8n-io/n8n",
+          "project_name": "n8n-io/n8n",
+          "project_class": "today_star",
+          "objective_score": 81.5,
+          "preference_boost": 2.5,
+          "base_final_rank": 84,
+          "final_rank": 84,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你在本地终端里读写文件、执行命令并串联工具操作，也能把任务流程自动化串起来。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+          "why_today_cn": "命中 GitHub Trending 实时信号，日增 229 星，多源确认，其可视化自动化与 AI 集成能力持续受到关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "workflow-automation",
+          "why_this_week_cn": "最近 15 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "workflow-automation",
+        "focused_trend_name_cn": "workflow-automation",
+        "summary_cn": "当前聚焦 workflow-automation，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=13881"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5923",
+              "issues=413"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：forks=5923"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 76.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 28,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 85
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 76.7。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 73.3,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 60
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 73.3。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+                "repo_full_name": "Imbad0202/academic-research-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/n8n-io/n8n",
+                "repo_full_name": "n8n-io/n8n",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "agent-runtime",
+      "trend_summary_cn": "agent-runtime is converging around agent-runtime + agent-skills + agentic-workflow.",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 GitHub 涨星信号促使关注，项目具备多源确认的新鲜度。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 16 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "project_name": "NousResearch/hermes-agent",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 5,
+          "base_final_rank": 105,
+          "final_rank": 105,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+          "why_today_cn": "命中 Trendshift、GitHub Trending 等多源新鲜信号，经多次确认，值得今日关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 20 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/everything-claude-code",
+          "project_name": "affaan-m/everything-claude-code",
+          "project_class": "today_star",
+          "objective_score": 97,
+          "preference_boost": 7.5,
+          "base_final_rank": 104.5,
+          "final_rank": 103,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "登上 GitHub Trending 并获涨星信号，适合关注 AI 编码工具链的读者。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 9 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "agent-runtime",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 8,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=13881"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5923",
+              "issues=413"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：forks=5923"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 26,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/NousResearch/hermes-agent",
+                "repo_full_name": "NousResearch/hermes-agent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/affaan-m/everything-claude-code",
+                "repo_full_name": "affaan-m/everything-claude-code",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、NousResearch/hermes-agent、affaan-m/everything-claude-code。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agentic-workflow",
+      "trend_name_cn": "agentic-workflow",
+      "trend_summary_cn": "agentic-workflow is converging around agent-runtime + agentic-workflow + ai-coding.",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "strength": "medium",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 GitHub 涨星信号促使关注，项目具备多源确认的新鲜度。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "最近 16 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/langgenius/dify",
+          "project_name": "langgenius/dify",
+          "project_class": "context_only",
+          "objective_score": 89.5,
+          "preference_boost": 0,
+          "base_final_rank": 89.5,
+          "final_rank": 89.5,
+          "matched_interest_topics": [],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织资料检索、知识调用和上下文复用，也能把任务流程自动化串起来。大家通常会用它来组织资料检索、知识调用和上下文复用，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "它未命中本次实时新鲜来源，因此这次更适合作为历史补充观察来理解背景；当日 star 增长约 881。",
+          "enhancement_source": "template_fallback",
+          "risk_review_required": false,
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "最近 11 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/antoinezambelli/forge",
+          "project_name": "antoinezambelli/forge",
+          "project_class": "context_only",
+          "objective_score": 70.25,
+          "preference_boost": 0,
+          "base_final_rank": 70.25,
+          "final_rank": 70.25,
+          "matched_interest_topics": [],
+          "project_brief_cn": "这是一个多代理编排平台。它主要是帮你串联工具调用与扩展能力。常见用法是拿它来把多个 agent 角色和工具编排成可重复执行的工作流。",
+          "why_today_cn": "项目今日 star 增长约 398，虽未命中实时新鲜来源，但活跃度提升，值得关注其在多 agent 编排方向的最新发展。",
+          "enhancement_source": "template_fallback",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source, single_spike，risks=single-source signal; needs persistence validation, single-day appearance; persistence is not yet established。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "agentic-workflow",
+          "why_this_week_cn": "最近 1 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agentic-workflow",
+        "focused_trend_name_cn": "agentic-workflow",
+        "summary_cn": "当前聚焦 agentic-workflow，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 10,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=13881"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5923",
+              "issues=413"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：forks=5923"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 18,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 53.3,
+            "project_count": 3,
+            "high_signal_project_count": 1,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 30
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 53.3。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 88.3,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 65
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 88.3。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 76.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/langgenius/dify",
+                "repo_full_name": "langgenius/dify",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/antoinezambelli/forge",
+                "repo_full_name": "antoinezambelli/forge",
+                "score": 30
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 76.7。代表项目包括 ruvnet/ruflo、langgenius/dify、antoinezambelli/forge。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "ai-tools",
+      "trend_name_cn": "ai-tools",
+      "trend_summary_cn": "ai-tools is converging around agent-runtime + agentic-workflow + ai-coding.",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "strength": "strong",
+      "worth_following_next_week": "下周继续确认这一收敛是否扩大。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/ruvnet/ruflo",
+          "project_name": "ruvnet/ruflo",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 10,
+          "base_final_rank": 110,
+          "final_rank": 110,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能把任务流程自动化串起来。大家通常会用它来维护长期上下文和知识材料，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "今日 GitHub 涨星信号促使关注，项目具备多源确认的新鲜度。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "ai-tools",
+          "why_this_week_cn": "最近 16 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/farion1231/cc-switch",
+          "project_name": "farion1231/cc-switch",
+          "project_class": "today_star",
+          "objective_score": 91.75,
+          "preference_boost": 10,
+          "base_final_rank": 101.75,
+          "final_rank": 98.75,
+          "matched_interest_topics": [
+            "memory",
+            "UI",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能围绕代码仓库做分析与修改。大家通常会用它来围绕 MCP 暴露工具能力，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "今日在Trendshift命中，但仅单源信号，需持续验证；star增长不明显。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, UI, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": true,
+          "risk_review_note_cn": "它仍然需要谨慎看待，因为 anti_noise=single_source，risks=single-source signal; needs persistence validation。",
+          "risk_review_source": "template_fallback",
+          "trend_key": "ai-tools",
+          "why_this_week_cn": "最近 4 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/browser-use/browser-use",
+          "project_name": "browser-use/browser-use",
+          "project_class": "context_only",
+          "objective_score": 81,
+          "preference_boost": 0,
+          "base_final_rank": 81,
+          "final_rank": 81,
+          "matched_interest_topics": [],
+          "project_brief_cn": "这是一个AI 基础设施或平台项目。它主要是帮你沉淀模型接入、路由、部署或平台底座能力，也能把任务流程自动化串起来。大家通常会用它来沉淀模型接入、路由、部署或平台底座能力，也会顺手把任务流程自动化串起来。",
+          "why_today_cn": "虽未命中实时新鲜源，但日增星 1079，长期受关注，作为 AI 自动化浏览的关键基础设施值得持续跟踪。",
+          "enhancement_source": "template_fallback",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的对象有更新。",
+          "trend_key": "ai-tools",
+          "why_this_week_cn": "最近 3 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "ai-tools",
+        "focused_trend_name_cn": "ai-tools",
+        "summary_cn": "当前聚焦 ai-tools，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=0",
+              "weekly_delta=13881"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、farion1231/cc-switch、browser-use/browser-use。证据摘要：daily_delta=0"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=5923",
+              "issues=413"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、farion1231/cc-switch、browser-use/browser-use。证据摘要：forks=5923"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 95,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 27,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 85
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 95。代表项目包括 ruvnet/ruflo、farion1231/cc-switch、browser-use/browser-use。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 65,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 95
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 0
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_self_improving_loop"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 65。代表项目包括 ruvnet/ruflo、farion1231/cc-switch、browser-use/browser-use。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=high",
+              "agent_or_swarm_signal"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 ruvnet/ruflo、browser-use/browser-use、farion1231/cc-switch。证据摘要：classification.autonomy_level=high"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/ruvnet/ruflo",
+                "repo_full_name": "ruvnet/ruflo",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/browser-use/browser-use",
+                "repo_full_name": "browser-use/browser-use",
+                "score": 90
+              },
+              {
+                "repo_url": "https://github.com/farion1231/cc-switch",
+                "repo_full_name": "farion1231/cc-switch",
+                "score": 55
+              }
+            ],
+            "top_evidence": [
+              "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+              "appearances=16"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 ruvnet/ruflo、browser-use/browser-use、farion1231/cc-switch。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [],
+  "weak_signal_cards": [
+    {
+      "trend_key": "ai-workflow",
+      "signal_name_cn": "ai-workflow",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "claude-code-skills",
+      "signal_name_cn": "claude-code-skills",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "ruvnet/ruflo::daily_delta=0；ruvnet/ruflo::weekly_delta=13881",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "memory-engine",
+      "signal_name_cn": "memory-engine",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "thedotmack/claude-mem::daily_delta=0；thedotmack/claude-mem::weekly_delta=1434",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    },
+    {
+      "trend_key": "openmemory",
+      "signal_name_cn": "openmemory",
+      "why_weak_cn": "规则层发现了方向，但证据仍未完成闭环。",
+      "evidence_summary_cn": "thedotmack/claude-mem::daily_delta=0；thedotmack/claude-mem::weekly_delta=1434",
+      "worth_following_next_week": "若下周继续出现，再考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-24",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "workflow-automation",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "workflow-automation",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "workflow-automation",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "workflow-automation",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Imbad0202/academic-research-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Imbad0202/academic-research-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Imbad0202/academic-research-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/Imbad0202/academic-research-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/n8n-io/n8n",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/n8n-io/n8n",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/n8n-io/n8n",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/NousResearch/hermes-agent",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/everything-claude-code",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/everything-claude-code",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/affaan-m/everything-claude-code",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agentic-workflow",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agentic-workflow",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agentic-workflow",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agentic-workflow",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/langgenius/dify",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/langgenius/dify",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/antoinezambelli/forge",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/antoinezambelli/forge",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/antoinezambelli/forge",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "ai-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_name_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "ai-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "trend_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "ai-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "evidence_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "ai-tools",
+        "reason_code": "template_fallback",
+        "reason_detail": "worth_following_next_week fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/ruvnet/ruflo",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/farion1231/cc-switch",
+        "reason_code": "missing_field",
+        "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/browser-use/browser-use",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/browser-use/browser-use",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/browser-use/browser-use",
+        "reason_code": "missing_field",
+        "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "ai-workflow",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "ai-workflow",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "ai-workflow",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "ai-workflow",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "claude-code-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "claude-code-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "claude-code-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "claude-code-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "memory-engine",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "memory-engine",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "memory-engine",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "memory-engine",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "openmemory",
+        "reason_code": "missing_field",
+        "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "openmemory",
+        "reason_code": "missing_field",
+        "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "openmemory",
+        "reason_code": "missing_field",
+        "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "openmemory",
+        "reason_code": "missing_field",
+        "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "workflow-automation",
+    "focused_trend_name_cn": "workflow-automation",
+    "summary_cn": "当前聚焦 workflow-automation，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=0",
+          "weekly_delta=13881"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：daily_delta=0"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=5923",
+          "issues=413"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：forks=5923"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 76.7,
+        "project_count": 3,
+        "high_signal_project_count": 2,
+        "evidence_count": 28,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 85
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 45
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 76.7。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 73.3,
+        "project_count": 3,
+        "high_signal_project_count": 1,
+        "evidence_count": 6,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 60
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 60
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_self_improving_loop"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 1 个达到高强度，轴均分 73.3。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 96.7,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 6,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 90
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=high",
+          "agent_or_swarm_signal"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：classification.autonomy_level=high"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 100,
+        "project_count": 3,
+        "high_signal_project_count": 3,
+        "evidence_count": 10,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/ruvnet/ruflo",
+            "repo_full_name": "ruvnet/ruflo",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/Imbad0202/academic-research-skills",
+            "repo_full_name": "Imbad0202/academic-research-skills",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/n8n-io/n8n",
+            "repo_full_name": "n8n-io/n8n",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "sources=trendshift,github_trending,agents-radar,github_live_star_delta",
+          "appearances=16"
+        ],
+        "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 ruvnet/ruflo、Imbad0202/academic-research-skills、n8n-io/n8n。证据摘要：sources=trendshift,github_trending,agents-radar,github_live_star_delta"
+      }
+    ]
+  }
+}

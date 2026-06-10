@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "vercel/sandbox",
+  "repo_url": "https://github.com/vercel/sandbox",
+  "stars": 130,
+  "forks": 24,
+  "issues": 5,
+  "PR": 11,
+  "description": "Vercel Sandbox is an ephemeral compute primitive designed to safely run untrusted or user-generated code.",
+  "tags": []
+}

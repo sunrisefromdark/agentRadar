@@ -1,0 +1,283 @@
+{
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "ai-skills",
+      "matched_interest_topics": [
+        "skills"
+      ],
+      "personalization_reason_cn": "与你关注的 skills 主题直接相关，本周涌现的技能框架和知识图谱工具是该方向的重要进展。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        },
+        {
+          "repo_url": "https://github.com/Lum1104/Understand-Anything",
+          "repo_full_name": "Lum1104/Understand-Anything"
+        }
+      ]
+    },
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "与你关注的 memory 主题高度匹配，本周多个核心项目强化了记忆能力。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "repo_full_name": "openclaw/openclaw"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        }
+      ]
+    }
+  ],
+  "rejected_outputs": [
+    {
+      "layer": "weekly_summary",
+      "target_key": "2026-05-30",
+      "reason_code": "template_fallback",
+      "reason_detail": "overall_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/anomalyco/opencode",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/anomalyco/opencode",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/anomalyco/opencode",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/Lum1104/Understand-Anything",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "invalid_length",
+      "reason_detail": "project_brief_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "invalid_length",
+      "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "invalid_length",
+      "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "invalid_length",
+      "reason_detail": "project_brief_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "invalid_length",
+      "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "codex-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "codex-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "codex-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "codex-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "developer-tools-ai-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "developer-tools-ai-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "developer-tools-ai-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "developer-tools-ai-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "microsoft/tyger",
+  "repo_url": "https://github.com/microsoft/tyger",
+  "stars": 69,
+  "forks": 19,
+  "issues": 12,
+  "PR": 2,
+  "description": "Remote signal processing.",
+  "tags": [
+    "cloud",
+    "signal-processing"
+  ]
+}

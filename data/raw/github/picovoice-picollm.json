@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "Picovoice/picollm",
+  "repo_url": "https://github.com/Picovoice/picollm",
+  "stars": 311,
+  "forks": 23,
+  "issues": 0,
+  "PR": 3,
+  "description": "On-device LLM Inference Powered by X-Bit Quantization",
+  "tags": [
+    "compression",
+    "efficient-inference",
+    "gemma",
+    "generative-ai",
+    "language-model",
+    "language-models",
+    "large-language-model",
+    "llama",
+    "llama2",
+    "llama3",
+    "llm",
+    "llm-inference",
+    "llms",
+    "mistral",
+    "mixtral",
+    "model-compression",
+    "natural-language-processing",
+    "quantization",
+    "self-hosted"
+  ]
+}

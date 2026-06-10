@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "cortexkit/magic-context",
+  "repo_url": "https://github.com/cortexkit/magic-context",
+  "stars": 678,
+  "forks": 33,
+  "issues": 11,
+  "PR": 1,
+  "description": "Magic Context cache-aware infinite context, cross-session memory, and background history compression",
+  "tags": [
+    "agent-framework",
+    "agent-memory",
+    "ai",
+    "ai-agents",
+    "ai-context",
+    "ai-memory",
+    "cache-aware",
+    "context-engineering",
+    "context-management",
+    "langchain",
+    "memory",
+    "opencode",
+    "pi-coding-agent"
+  ]
+}

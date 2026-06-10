@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "aws/aws-nitro-enclaves-cli",
+  "repo_url": "https://github.com/aws/aws-nitro-enclaves-cli",
+  "stars": 148,
+  "forks": 95,
+  "issues": 39,
+  "PR": 17,
+  "description": "Tooling for Nitro Enclave Management",
+  "tags": [
+    "enclave",
+    "nitro",
+    "nitro-enclaves"
+  ]
+}

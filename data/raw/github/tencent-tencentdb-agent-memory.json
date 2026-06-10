@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "Tencent/TencentDB-Agent-Memory",
+  "repo_url": "https://github.com/Tencent/TencentDB-Agent-Memory",
+  "stars": 4504,
+  "forks": 375,
+  "issues": 38,
+  "PR": 19,
+  "description": "TencentDB Agent Memory delivers fully local long-term memory for AI Agents via a 4-tier progressive pipeline, with zero external API dependencies.",
+  "tags": [
+    "agent",
+    "ai-agent",
+    "embedding",
+    "llm",
+    "local-first",
+    "long-term-memory",
+    "memory",
+    "openclaw-plugin",
+    "vector-search"
+  ]
+}

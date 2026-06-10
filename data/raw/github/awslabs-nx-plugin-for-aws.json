@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "awslabs/nx-plugin-for-aws",
+  "repo_url": "https://github.com/awslabs/nx-plugin-for-aws",
+  "stars": 77,
+  "forks": 25,
+  "issues": 34,
+  "PR": 10,
+  "description": "The @aws/nx-plugin is a collection of code generators that automate the creation and configuration of cloud-native applications using AWS, TypeScript, Python and React within the Nx development ecosystem.",
+  "tags": [
+    "aws",
+    "aws-cdk",
+    "cloudfront",
+    "cloudscape",
+    "fastapi",
+    "lambda",
+    "mcp",
+    "nx",
+    "productivity",
+    "python",
+    "react",
+    "tanstack",
+    "trpc",
+    "typescript"
+  ]
+}

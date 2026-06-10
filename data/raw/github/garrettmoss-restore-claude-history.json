@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "garrettmoss/restore-claude-history",
+  "repo_url": "https://github.com/garrettmoss/restore-claude-history",
+  "stars": 1,
+  "forks": 1,
+  "issues": 0,
+  "PR": 0,
+  "description": "Recover deleted Claude Code chat transcripts from macOS Time Machine snapshots.",
+  "tags": []
+}

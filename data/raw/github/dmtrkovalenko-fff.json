@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "dmtrKovalenko/fff",
+  "repo_url": "https://github.com/dmtrKovalenko/fff",
+  "stars": 7408,
+  "forks": 302,
+  "issues": 47,
+  "PR": 24,
+  "description": "The fastest and the most accurate file search toolkit for AI agents, Neovim, Rust, C, and NodeJS",
+  "tags": [
+    "filesearch",
+    "lua",
+    "neovim",
+    "neovim-plugin",
+    "rust"
+  ]
+}

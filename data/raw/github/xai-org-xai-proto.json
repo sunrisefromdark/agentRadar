@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "xai-org/xai-proto",
+  "repo_url": "https://github.com/xai-org/xai-proto",
+  "stars": 120,
+  "forks": 70,
+  "issues": 4,
+  "PR": 12,
+  "description": "Public protobuf definitions for xAI's gRPC APIs",
+  "tags": []
+}

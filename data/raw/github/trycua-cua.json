@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "trycua/cua",
+  "repo_url": "https://github.com/trycua/cua",
+  "stars": 16963,
+  "forks": 1074,
+  "issues": 121,
+  "PR": 197,
+  "description": "Open-source infrastructure for Computer-Use Agents. Sandboxes, SDKs, and benchmarks to train and evaluate AI agents that can control full desktops (macOS, Linux, Windows).",
+  "tags": [
+    "agent",
+    "ai-agent",
+    "apple",
+    "computer-use",
+    "computer-use-agent",
+    "containerization",
+    "cua",
+    "desktop-automation",
+    "hacktoberfest",
+    "lume",
+    "macos",
+    "manus",
+    "operator",
+    "swift",
+    "virtualization",
+    "virtualization-framework",
+    "windows",
+    "windows-sandbox"
+  ]
+}

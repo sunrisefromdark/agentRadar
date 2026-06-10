@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "apache/casbin-gateway",
+  "repo_url": "https://github.com/apache/casbin-gateway",
+  "stars": 560,
+  "forks": 60,
+  "issues": 4,
+  "PR": 8,
+  "description": "Casbin AI & MCP security gateway for HTTP, online demo: https://door.caswaf.com",
+  "tags": [
+    "ai",
+    "firewall",
+    "gateway",
+    "http",
+    "large-language-model",
+    "llm",
+    "modsecurity",
+    "modsecurity-core-rule-set",
+    "oauth",
+    "proxy",
+    "waf",
+    "web-application-firewall"
+  ]
+}

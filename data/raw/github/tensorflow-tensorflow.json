@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "tensorflow/tensorflow",
+  "repo_url": "https://github.com/tensorflow/tensorflow",
+  "stars": 195396,
+  "forks": 75351,
+  "issues": 1030,
+  "PR": 2074,
+  "description": "An Open Source Machine Learning Framework for Everyone",
+  "tags": [
+    "deep-learning",
+    "deep-neural-networks",
+    "distributed",
+    "machine-learning",
+    "ml",
+    "neural-network",
+    "python",
+    "tensorflow"
+  ]
+}

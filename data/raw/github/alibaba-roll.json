@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "alibaba/ROLL",
+  "repo_url": "https://github.com/alibaba/ROLL",
+  "stars": 3192,
+  "forks": 288,
+  "issues": 91,
+  "PR": 20,
+  "description": "An Efficient and User-Friendly Scaling Library for Reinforcement Learning with Large Language Models",
+  "tags": [
+    "agentic",
+    "rlhf",
+    "rlvr"
+  ]
+}

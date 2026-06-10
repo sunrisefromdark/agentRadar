@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "medusajs/medusa",
+  "repo_url": "https://github.com/medusajs/medusa",
+  "stars": 33806,
+  "forks": 4521,
+  "issues": 88,
+  "PR": 77,
+  "description": "The world's most flexible commerce platform.",
+  "tags": [
+    "commerce",
+    "e-commerce",
+    "ecommerce",
+    "framework",
+    "javascript",
+    "medusa",
+    "nodejs",
+    "react",
+    "typescript"
+  ]
+}

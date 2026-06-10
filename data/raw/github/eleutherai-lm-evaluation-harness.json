@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "EleutherAI/lm-evaluation-harness",
+  "repo_url": "https://github.com/EleutherAI/lm-evaluation-harness",
+  "stars": 12785,
+  "forks": 3314,
+  "issues": 567,
+  "PR": 264,
+  "description": "A framework for few-shot evaluation of language models.",
+  "tags": [
+    "evaluation-framework",
+    "language-model",
+    "transformer"
+  ]
+}

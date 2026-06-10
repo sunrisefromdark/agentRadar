@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "modelscope/FunASR",
+  "repo_url": "https://github.com/modelscope/FunASR",
+  "stars": 16543,
+  "forks": 1709,
+  "issues": 16,
+  "PR": 3,
+  "description": "Industrial-grade speech recognition toolkit: 170x realtime, 50+ languages, speaker diarization, emotion detection, streaming, and OpenAI-compatible API.",
+  "tags": [
+    "asr",
+    "audio",
+    "chinese",
+    "emotion-recognition",
+    "mcp-server",
+    "multilingual-asr",
+    "openai-compatible-api",
+    "paraformer",
+    "punctuation",
+    "pytorch",
+    "real-time",
+    "speaker-diarization",
+    "speech-recognition",
+    "speech-to-text",
+    "streaming-asr",
+    "transcription",
+    "vad",
+    "vllm",
+    "voice-activity-detection",
+    "whisper-alternative"
+  ]
+}

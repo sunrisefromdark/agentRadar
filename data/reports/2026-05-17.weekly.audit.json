@@ -1,0 +1,328 @@
+{
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "memory 主题权重 0.25，本周出现 rohitg00/agentmemory 等强相关项目，与你关注方向高度一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "repo_full_name": "openclaw/openclaw"
+        },
+        {
+          "repo_url": "https://github.com/openai/codex",
+          "repo_full_name": "openai/codex"
+        },
+        {
+          "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "repo_full_name": "forrestchang/andrej-karpathy-skills"
+        }
+      ]
+    }
+  ],
+  "rejected_outputs": [
+    {
+      "layer": "weekly_summary",
+      "target_key": "2026-05-17",
+      "reason_code": "template_fallback",
+      "reason_detail": "overall_summary_cn was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "tool-use",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "memory-system",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "skill-tree",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "agentmemory",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "tool",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openai/codex",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/obra/superpowers",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openai/codex",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/rohitg00/agentmemory",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/yikart/AiToEarn",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "personalized_weekly_focus",
+      "target_key": "memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "personalization_reason_cn was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_summary",
+      "target_key": "2026-05-17",
+      "reason_code": "template_fallback",
+      "reason_detail": "overall_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openai/codex",
+      "reason_code": "homogeneous_copy",
+      "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/openai/codex)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openai/codex",
+      "reason_code": "invalid_length",
+      "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/openclaw/openclaw",
+      "reason_code": "homogeneous_copy",
+      "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/openclaw/openclaw)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "invalid_purpose_fit",
+      "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/lsdefine/GenericAgent",
+      "reason_code": "invalid_length",
+      "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    }
+  ]
+}

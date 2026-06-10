@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "langfuse/langfuse-python",
+  "repo_url": "https://github.com/langfuse/langfuse-python",
+  "stars": 409,
+  "forks": 281,
+  "issues": 8,
+  "PR": 53,
+  "description": "🪢 Langfuse Python SDK - Instrument your LLM app with decorators or low-level SDK and get detailed tracing/observability. Works with any LLM or framework",
+  "tags": [
+    "decorators",
+    "langfuse",
+    "pydantic",
+    "pydantic-v2",
+    "python"
+  ]
+}

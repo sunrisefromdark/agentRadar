@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "langchain-ai/deepagentsjs",
+  "repo_url": "https://github.com/langchain-ai/deepagentsjs",
+  "stars": 1291,
+  "forks": 205,
+  "issues": 27,
+  "PR": 35,
+  "description": "The batteries included agent harness.",
+  "tags": [
+    "ai",
+    "deepagents",
+    "langchain",
+    "langgraph"
+  ]
+}

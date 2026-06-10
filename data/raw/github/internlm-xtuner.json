@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "InternLM/xtuner",
+  "repo_url": "https://github.com/InternLM/xtuner",
+  "stars": 5148,
+  "forks": 424,
+  "issues": 238,
+  "PR": 98,
+  "description": "A Next-Generation Training Engine Built for Ultra-Large MoE Models",
+  "tags": [
+    "agent",
+    "deepseek-v3",
+    "gpt-oss",
+    "intern-s1",
+    "internvl",
+    "kimi-k2",
+    "llm",
+    "multimodal",
+    "qwen3-moe",
+    "qwen3-vl",
+    "reinforcement-learning"
+  ]
+}

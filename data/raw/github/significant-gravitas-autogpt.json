@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "Significant-Gravitas/AutoGPT",
+  "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+  "stars": 184727,
+  "forks": 46185,
+  "issues": 264,
+  "PR": 181,
+  "description": "AutoGPT is the vision of accessible AI for everyone, to use and to build on. Our mission is to provide the tools, so that you can focus on what matters.",
+  "tags": [
+    "agentic-ai",
+    "agents",
+    "ai",
+    "artificial-intelligence",
+    "autonomous-agents",
+    "claude",
+    "gpt",
+    "llama-api",
+    "llm",
+    "openai",
+    "python"
+  ]
+}

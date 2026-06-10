@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "moltis-org/moltis",
+  "repo_url": "https://github.com/moltis-org/moltis",
+  "stars": 2717,
+  "forks": 322,
+  "issues": 48,
+  "PR": 12,
+  "description": "A secure persistent personal agent server in Rust. One binary, sandboxed execution, multi-provider LLMs, voice, memory, Telegram, WhatsApp, Discord, Teams, and MCP tools. Secure by design, runs on your hardware.",
+  "tags": [
+    "ai-agent",
+    "ai-assistant",
+    "clawdbot",
+    "llm",
+    "mcp",
+    "openclaw",
+    "rust",
+    "sandbox",
+    "self-hosted",
+    "single-binary",
+    "telegram-bot",
+    "voice-assistant"
+  ]
+}

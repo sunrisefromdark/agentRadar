@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "run-llama/liteparse-cloudflare-worker-quickstart",
+  "repo_url": "https://github.com/run-llama/liteparse-cloudflare-worker-quickstart",
+  "stars": 17,
+  "forks": 1,
+  "issues": 0,
+  "PR": 0,
+  "description": "Quickstart on how to deploy LiteParse as a CloudFlare worker",
+  "tags": []
+}

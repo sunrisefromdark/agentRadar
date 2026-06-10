@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "Silentely/eSIM-Tools",
+  "repo_url": "https://github.com/Silentely/eSIM-Tools",
+  "stars": 1288,
+  "forks": 136,
+  "issues": 0,
+  "PR": 0,
+  "description": "专为已有 Giffgaff 和 Simyo 号码的用户设计的现代化 eSIM 管理工具集，支持将物理 SIM 卡转换为 eSIM、设备更换和二维码生成。(A modern set of eSIM management tools designed specifically for users who already have Giffgaff and Simyo numbers, offering support for converting physical SIM cards to eSIMs, device replacements, and QR code generation.)",
+  "tags": [
+    "esim",
+    "giffgaff",
+    "simyo",
+    "tools"
+  ]
+}

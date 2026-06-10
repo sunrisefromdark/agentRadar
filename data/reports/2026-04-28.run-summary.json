@@ -1,0 +1,276 @@
+{
+  "date": "2026-04-28",
+  "generated_at": "2026-06-06T22:00:18+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 87 条",
+    "归一化阶段完成，共 80 个项目",
+    "评分阶段完成，共 80 个已评分项目",
+    "本次运行活跃信号面: 3/5",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "mode": "semantic-classification",
+    "classification_attempt_count": 0,
+    "classification_success_count": 0,
+    "classification_failure_count": 0,
+    "summary_attempt_count": 14,
+    "summary_success_count": 14,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "overall_daily_status": "数据显著过期，不建议直接用于判断",
+  "freshness_sources": [],
+  "main_board_mode": "no_fresh_main_board",
+  "today_fresh_candidate_count": 0,
+  "today_star_count": 0,
+  "context_candidate_count": 80,
+  "pending_confirmation_count": 0,
+  "counts": {
+    "raw_signals": 87,
+    "normalized_projects": 80,
+    "scored_projects": 80,
+    "high_score_projects": 4,
+    "anomaly_projects": 15,
+    "new_projects": 80,
+    "classifications": 79
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 62,
+      "distinct_projects": 57,
+      "status": "active",
+      "notes": [
+        "primary local digest input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "snapshot/http trend input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 0,
+      "distinct_projects": 0,
+      "status": "empty",
+      "notes": [
+        "GitHub Trending realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 0,
+      "distinct_projects": 0,
+      "status": "empty",
+      "notes": [
+        "watchlist realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 80,
+      "distinct_projects": 80,
+      "status": "active",
+      "notes": [
+        "project-level enrichment inferred from structured repo metrics"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 0,
+    "watchlist_hits": 9,
+    "low_confidence_projects": 0,
+    "medium_confidence_projects": 78,
+    "insufficient_metrics_projects": 0,
+    "suspicious_growth_projects": 2,
+    "single_source_projects": 78,
+    "single_spike_projects": 67,
+    "emerging_projects": 13,
+    "persistent_projects": 0
+  },
+  "diagnostics": {
+    "anomaly_share": 0.1875,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 80,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 0
+    },
+    "star_delta_source_distribution": {
+      "github_live": 20,
+      "github_snapshot": 60,
+      "signal": 0,
+      "unavailable": 0
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 0,
+      "live_delta_success": 0,
+      "snapshot_delta_success": 60,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "badlogic/pi-mono",
+      "repo_url": "https://github.com/badlogic/pi-mono",
+      "total_score": 80.25,
+      "base_final_rank": 82.75,
+      "final_rank": 82.75,
+      "confidence": "high",
+      "paradigm": "agent runtime + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "多工具Agent套件，完成度高，conf high，无flags，虽非实时新鲜来源，但作为历史补充观察位置合理。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=665)",
+        "engagement_score=100 (forks=4914)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "Fincept-Corporation/FinceptTerminal",
+      "repo_url": "https://github.com/Fincept-Corporation/FinceptTerminal",
+      "total_score": 81.75,
+      "base_final_rank": 84.25,
+      "final_rank": 81.25,
+      "confidence": "medium",
+      "paradigm": "persistent memory + self-improving + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "金融终端Agent概念强，但信号仅来自单日spike且无持久性证据，风险为single_source+single_spike，在context_only中位居榜首不合理，建议小幅下调。",
+      "judge_score_delta": -3,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=persistent memory + self-improving + tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=single-spike",
+        "star_velocity=100 (daily_delta=881)",
+        "engagement_score=100 (forks=2290)",
+        "architecture_shift=85 (baseline=default_agent_capability)"
+      ],
+      "risks": [
+        "single-source signal; needs persistence validation",
+        "single-day appearance; persistence is not yet established"
+      ]
+    },
+    {
+      "project_name": "openclaw/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw",
+      "total_score": 80.25,
+      "base_final_rank": 80.25,
+      "final_rank": 80.25,
+      "confidence": "high",
+      "paradigm": "agent runtime + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "自托管个人助手，强调数据自主，conf high，无风险标记，排名恰当。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=534)",
+        "engagement_score=100 (forks=74950)",
+        "architecture_shift=100 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "ComposioHQ/awesome-codex-skills",
+      "repo_url": "https://github.com/ComposioHQ/awesome-codex-skills",
+      "total_score": 73.75,
+      "base_final_rank": 76.25,
+      "final_rank": 76.25,
+      "confidence": "medium",
+      "paradigm": "tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "Codex技能列表，单日star实增1313，与技能生态主题强匹配，虽single_source但数量可信，位置合适。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=1313)",
+        "engagement_score=100 (forks=201)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": [
+        "single-source signal; needs persistence validation"
+      ]
+    },
+    {
+      "project_name": "sansan0/TrendRadar",
+      "repo_url": "https://github.com/sansan0/TrendRadar",
+      "total_score": 75.1,
+      "base_final_rank": 77.6,
+      "final_rank": 75.1,
+      "confidence": "medium",
+      "paradigm": "persistent memory + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "MCP工具接入项目，但single_source+single_spike风险显著，conf中等，缺乏持久性证据，可微降。",
+      "judge_score_delta": -2.5,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=persistent memory + tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=single-spike",
+        "engagement_score=100 (forks=23910)",
+        "architecture_shift=85 (baseline=default_agent_capability)",
+        "star_velocity=78 (daily_delta=206)"
+      ],
+      "risks": [
+        "single-source signal; needs persistence validation",
+        "single-day appearance; persistence is not yet established"
+      ]
+    }
+  ],
+  "observer_top_candidates": [],
+  "watchouts": [
+    "github_trending 已启用，但本次没有产出可用数据",
+    "watchlist_live_activity 已启用，但本次没有产出可用数据",
+    "有 2 个项目出现可疑增长尖峰，需要人工复核 daily_delta",
+    "仍有 78 个项目只有单一信号源，需要跨源或跨天确认"
+  ],
+  "next_focus": [
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源",
+    "修复 github_trending，避免已启用信号源静默失效",
+    "修复 watchlist_live_activity，避免已启用信号源静默失效"
+  ],
+  "recommended_actions": [
+    "检查 GitHub Trending 页面结构是否变化，或当天是否真的没有可解析候选",
+    "确认 watchlist org 当天确实有 pushed_at/updated_at 变化，或适当调整 org 列表",
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "rasbt/LLMs-from-scratch",
+  "repo_url": "https://github.com/rasbt/LLMs-from-scratch",
+  "stars": 96561,
+  "forks": 14771,
+  "issues": 2,
+  "PR": 0,
+  "description": "Implement a ChatGPT-like LLM in PyTorch from scratch, step by step",
+  "tags": [
+    "ai",
+    "artificial-intelligence",
+    "attention-mechanism",
+    "deep-learning",
+    "finetuning",
+    "from-scratch",
+    "generative-ai",
+    "gpt",
+    "instruction-tuning",
+    "language-model",
+    "large-language-models",
+    "llm",
+    "machine-learning",
+    "natural-language-processing",
+    "pretraining",
+    "python",
+    "pytorch",
+    "tokenizer",
+    "transformers"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "sourcegraph/scip-java",
+  "repo_url": "https://github.com/sourcegraph/scip-java",
+  "stars": 123,
+  "forks": 44,
+  "issues": 15,
+  "PR": 43,
+  "description": "SCIP Code Intelligence Protocol generator for Java",
+  "tags": [
+    "java",
+    "java-compiler",
+    "java-language-versions",
+    "java-sources",
+    "lsif",
+    "lsif-dump",
+    "lsif-indexer",
+    "lsif-java",
+    "semanticdb",
+    "semanticdb-files"
+  ]
+}

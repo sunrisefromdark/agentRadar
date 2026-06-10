@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "datawhalechina/hello-agents",
+  "repo_url": "https://github.com/datawhalechina/hello-agents",
+  "stars": 55933,
+  "forks": 6829,
+  "issues": 74,
+  "PR": 69,
+  "description": "📚 《从零开始构建智能体》——从零开始的智能体原理与实践教程",
+  "tags": [
+    "agent",
+    "llm",
+    "rag",
+    "tutorial"
+  ]
+}

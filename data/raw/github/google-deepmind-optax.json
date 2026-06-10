@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "google-deepmind/optax",
+  "repo_url": "https://github.com/google-deepmind/optax",
+  "stars": 2271,
+  "forks": 328,
+  "issues": 29,
+  "PR": 41,
+  "description": "Optax is a gradient processing and optimization library for JAX.",
+  "tags": [
+    "machine-learning",
+    "optimization"
+  ]
+}

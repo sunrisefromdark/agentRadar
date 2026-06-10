@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "google-deepmind/science-skills",
+  "repo_url": "https://github.com/google-deepmind/science-skills",
+  "stars": 1117,
+  "forks": 108,
+  "issues": 0,
+  "PR": 0,
+  "description": "GDM Science Skills to speed up agentic scientific workflows with better grounding and higher token efficiency. Integrate insights from AlphaGenome, AFDB, UniProt and 30+ other databases and tools.",
+  "tags": []
+}

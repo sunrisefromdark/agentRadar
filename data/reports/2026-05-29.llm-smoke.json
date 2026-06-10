@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-29",
+  "generated_at": "2026-05-29T14:59:01+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user request: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". This is presumably a request to the assistant to respond with a JSON object exactly as specified. There's no disallowed content. It's a straightforward request. So I must comply: output the compact JSON: {\"ok"
+}

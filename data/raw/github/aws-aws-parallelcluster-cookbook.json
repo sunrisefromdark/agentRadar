@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "aws/aws-parallelcluster-cookbook",
+  "repo_url": "https://github.com/aws/aws-parallelcluster-cookbook",
+  "stars": 113,
+  "forks": 110,
+  "issues": 0,
+  "PR": 31,
+  "description": "The Chef cookbook used to build and bootstrap AWS ParallelCluster",
+  "tags": []
+}

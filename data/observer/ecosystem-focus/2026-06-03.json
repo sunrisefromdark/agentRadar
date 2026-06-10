@@ -1,0 +1,913 @@
+{
+  "scope": "ecosystem-focus",
+  "date": "2026-06-03",
+  "generated_at": "2026-06-03T21:09:46+08:00",
+  "status": "active",
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "summary_attempt_count": 15,
+    "summary_success_count": 14,
+    "summary_failure_count": 1,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0,
+    "last_error": "Expected ',' or '}' after property value in JSON at position 191 (line 3 column 99)"
+  },
+  "candidate_count": 12,
+  "ecosystem_counts": {
+    "coding-agents": 7,
+    "eval-observability-governance": 2,
+    "agent-runtime": 6,
+    "agent-ui-workbench": 1,
+    "agentic-rl": 1,
+    "multi-agent-coordination": 1,
+    "skills-tools-mcp": 7
+  },
+  "notes": [
+    "query ecosystem=coding-agents source=keyword:aider",
+    "query ecosystem=coding-agents source=keyword:claude code",
+    "query ecosystem=coding-agents source=keyword:code review",
+    "query ecosystem=coding-agents source=keyword:codex",
+    "query ecosystem=coding-agents source=topic:code-review",
+    "query ecosystem=coding-agents source=topic:coding-agent",
+    "query ecosystem=coding-agents source=org:anthropics",
+    "query ecosystem=coding-agents source=org:openai",
+    "query ecosystem=coding-agents source=repo:Aider-AI/aider",
+    "query ecosystem=coding-agents source=repo:openai/codex",
+    "daily normalized matches ecosystem=coding-agents count=6",
+    "query ecosystem=agent-runtime source=keyword:execution",
+    "query ecosystem=agent-runtime source=keyword:orchestration",
+    "query ecosystem=agent-runtime source=keyword:runtime",
+    "query ecosystem=agent-runtime source=keyword:sandbox",
+    "query ecosystem=agent-runtime source=topic:agent-runtime",
+    "query ecosystem=agent-runtime source=topic:workflow-engine",
+    "query ecosystem=agent-runtime source=org:langchain-ai",
+    "query ecosystem=agent-runtime source=org:openai",
+    "query ecosystem=agent-runtime source=repo:langchain-ai/langgraph",
+    "query ecosystem=agent-runtime source=repo:openai/swarm",
+    "daily normalized matches ecosystem=agent-runtime count=6",
+    "query ecosystem=skills-tools-mcp source=keyword:connector",
+    "query ecosystem=skills-tools-mcp source=keyword:mcp",
+    "query ecosystem=skills-tools-mcp source=keyword:plugin",
+    "query ecosystem=skills-tools-mcp source=keyword:skills",
+    "query ecosystem=skills-tools-mcp source=topic:mcp",
+    "query ecosystem=skills-tools-mcp source=topic:plugin-system",
+    "query ecosystem=skills-tools-mcp source=org:modelcontextprotocol",
+    "query ecosystem=skills-tools-mcp source=org:openai",
+    "query ecosystem=skills-tools-mcp source=repo:modelcontextprotocol/servers",
+    "daily normalized matches ecosystem=skills-tools-mcp count=10",
+    "daily normalized matches ecosystem=memory-knowledge count=4",
+    "daily normalized matches ecosystem=browser-computer-use count=4",
+    "daily normalized matches ecosystem=eval-observability-governance count=3",
+    "daily normalized matches ecosystem=multi-agent-coordination count=1",
+    "daily normalized matches ecosystem=agent-ui-workbench count=2",
+    "daily normalized matches ecosystem=agentic-rl count=2",
+    "query failed ecosystem=skills-tools-mcp source=repo:openai/codex: GitHub Search returned HTTP 403 for skills-tools-mcp",
+    "query failed ecosystem=memory-knowledge source=keyword:context: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=keyword:knowledge: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=keyword:memory: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=keyword:rag: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=topic:agent-memory: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=topic:retrieval: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=org:langchain-ai: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=org:mem0ai: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=repo:langchain-ai/langmem: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=memory-knowledge source=repo:mem0ai/mem0: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=browser-computer-use source=keyword:automation: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=keyword:browser agent: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=keyword:computer use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=keyword:desktop: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=topic:browser-automation: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=topic:computer-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=org:browser-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=org:microsoft: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=repo:browser-use/browser-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=repo:microsoft/playwright-mcp: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=eval-observability-governance source=keyword:eval: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:guardrail: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:observability: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:policy: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=topic:evals: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=topic:observability: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=org:langfuse: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=org:openai: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=repo:langfuse/langfuse: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=repo:openai/evals: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=multi-agent-coordination source=keyword:coordination: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:multi-agent: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:team: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:multi-agent: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:crewAIInc: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:openai: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:crewAIInc/crewAI: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:openai/swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=agent-ui-workbench source=keyword:console: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:operator ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:session log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:viewer: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:agent-ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:session-log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:anthropics: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:openai: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:anthropics/claude-code: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:openai/codex: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agentic-rl source=keyword:agentic rl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:policy optimization: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reinforcement learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reward model: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:agent-training: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:reinforcement-learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:huggingface: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:openai: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:huggingface/trl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:openai/baselines: GitHub Search returned HTTP 403 for agentic-rl"
+  ],
+  "entries": [
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "repo_url": "https://github.com/alibaba/open-code-review",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-06-02T00:00:00.000Z",
+      "repo_updated_at": "2026-06-03T00:00:00.000Z",
+      "ecosystems": [
+        "coding-agents",
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "code review",
+          "review"
+        ],
+        "topic_hints": [
+          "code-review"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Battle-tested at Alibaba's scale. Hybrid architecture code review tool: deterministic pipelines + LLM Agent, precise line-level comments, built-in fine-tuned ruleset (NPE, thread-safety, XSS, SQL injection), OpenAI & Anthropic compatible.",
+      "stars": 1130,
+      "forks": 77,
+      "issues": 8,
+      "PR": 2,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:alibaba,fresh-today,agent,code-review,code-review-assistant,harness,repository-level-context",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "alibaba"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 104,
+      "observer_score": 114,
+      "observer_rank": 1,
+      "project_brief_cn": "阿里巴巴开源的代码审查工具，采用混合架构：确定性流水线 + LLM Agent，能够精准定位到代码行并给出审查意见。内置了针对 NPE、线程安全、XSS、SQL 注入等常见问题的精细规则集，同时兼容 OpenAI 和 Anthropic 的 API。",
+      "why_now_cn": "项目由阿里巴巴内部实战验证，上线仅24小时内获得1130星、日增134星，热度极高。在代码审查Agent领域，它结合了传统规则引擎的可靠性与大模型的灵活性，填补了企业级生产环境中对高精度审查工具的需求。且阿里作为背景，项目持续维护和演进的可能性大。",
+      "watch_next_cn": "下一步需观察其规则集对不同语言和框架的覆盖广度，以及LLM Agent在更复杂场景下的误报率。同时，社区贡献和外部企业的采用案例是衡量其通用性的关键。目前issue和PR数量较少，生态协作尚在起步阶段。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "项目由阿里内部验证，24小时内获得1130星，结合确定性规则与LLM，解决企业级代码审查痛点，why-now明确，即使去掉阿里品牌仍具竞争力。",
+      "judge_score_delta": 10,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "openai/role-based-plugins",
+      "repo_url": "https://github.com/openai/role-based-plugins",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-06-03T00:00:00.000Z",
+      "repo_updated_at": "2026-06-03T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "agent-ui-workbench",
+        "agentic-rl",
+        "coding-agents",
+        "eval-observability-governance",
+        "multi-agent-coordination",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "codex",
+          "plugin"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": [
+          "openai"
+        ]
+      },
+      "description": "Role-based Codex plugin templates",
+      "stars": 63,
+      "forks": 7,
+      "issues": 4,
+      "PR": 2,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:openai,fresh-today,github-live-star-delta",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "openai"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:none",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 103,
+      "observer_score": 98,
+      "observer_rank": 2,
+      "project_brief_cn": "该项目是OpenAI提供的基于角色的Codex插件模板集合，旨在为开发者提供构建与AI模型交互的插件框架，支持不同角色和权限的插件开发。",
+      "why_now_cn": "由OpenAI官方发布，24小时内获得63个星标，作为核心项目（tier:core）且跨生态（cross-ecosystem），体现了OpenAI在Agent插件生态的标准化布局，值得关注其如何推动多角色插件的开发范式。",
+      "watch_next_cn": "需观察插件模板的完整性与可用性，验证是否支持实际开发场景（如权限管理、角色切换），以及社区采用率和OpenAI后续更新节奏。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "OpenAI品牌光环明显，但63星和7fork显示实际关注度低，且内容仅为模板集合，完成度不足，去掉OpenAI后缺乏实质性创新，建议降级观察。",
+      "judge_score_delta": -5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-05-28T00:00:00.000Z",
+      "repo_updated_at": "2026-06-03T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "codex"
+        ],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "| #1088 [codex] Handle OpenAI Codex final tool-call arguments | ⏳ **待合并** | 修复 OpenAI Codex provider 中工具调用参数流的边缘 case：记录 `response.function_call_arguments.done` 载荷、在无增量参数时合成流式增量、保持空参数字符串流经诊断管道以避免误报缺失参数错误 | [PR #1088](https://github.com/moltis-org/moltis/pull/1088) |",
+      "stars": 2717,
+      "forks": 322,
+      "issues": 48,
+      "PR": 13,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime,tool-use",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:mixed",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 88,
+      "observer_score": 98,
+      "observer_rank": 3,
+      "project_brief_cn": "Moltis 是一个开源的 Agent 运行时，专注于为 AI 助手（如 Telegram 机器人、语音助手等）提供工具调用能力。它通过 MCP（Model Context Protocol）与外部工具交互，支持单二进制部署、沙箱执行和云端集成。",
+      "why_now_cn": "项目目前持续活跃（今日有提交），Star 稳定增长（日增约1星），并且正在修复 OpenAI Codex 工具调用参数流的边缘 case（PR #1088），表明其正在打磨关键功能。跨生态系统（agent-runtime、coding-agents、skills-tools-mcp）的标签说明它具备多场景适用性，尤其在 AI 代理工具调用领域具有实用价值。",
+      "watch_next_cn": "需要验证 PR #1088 的合并状态及其对 Codex 工具调用可靠性的实际改进。此外，项目缺乏知名公司或工程师背书（entity_tier: none），其长期维护能力和社区贡献者质量仍需观察。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "2717星，活跃开发中，专注Agent运行时与MCP协议，解决AI助手工具调用实际问题，无公司背景仍获高认可，why-now充分。",
+      "judge_score_delta": 10,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "opencue/cuecards",
+      "repo_url": "https://github.com/opencue/cuecards",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-05-22T08:02:50Z",
+      "repo_updated_at": "2026-06-03T13:10:53Z",
+      "ecosystems": [
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex",
+          "mcp",
+          "skills"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Agent profile manager for Claude Code & Codex. Per-directory profiles select which skills, MCP servers, and plugins load — automatically, before launch. Install: npm install -g cue-ai",
+      "stars": 2,
+      "forks": 0,
+      "issues": 1,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:codex",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 69,
+      "observer_score": 74,
+      "observer_rank": 4,
+      "project_brief_cn": "开源的 Claude Code 与 Codex 智能体技能管理器：允许用户为每个目录自动加载特定的技能、MCP 服务器和插件，实现上下文感知的 Agent 配置。",
+      "why_now_cn": "Claude Code 和 Codex 编程助手迅速崛起，但缺乏原生的、基于目录的配置管理。本项目今天仍有活跃提交，填补了这一空白；尽管星数仅 2，属于极早期实用工具，生态深度已获主题背书。",
+      "watch_next_cn": "需验证：能否获得用户采纳（星数、贡献者增长），以及配置功能是否足够稳定（当前仅 0 个合并 PR）。核心风险是最开始仅有 1 个 issue，说明社区反馈和数据尚不充分。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "极早期但填补Claude Code/Codex目录配置空白，今日活跃提交，主题独特，虽星数少但潜力大，建议保留并密切关注。",
+      "judge_score_delta": 5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "Prompthon-IO/agent-systems-handbook",
+      "repo_url": "https://github.com/Prompthon-IO/agent-systems-handbook",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-04-20T13:28:26Z",
+      "repo_updated_at": "2026-06-03T13:10:44Z",
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "workflow"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "A practical AI agents handbook covering agent systems, agentic workflows, LangGraph, MCP/A2A, context engineering, agent memory, evaluation, observability, and multi-agent architecture. Current trend focus: agent-first computing, emerging agent runtimes, and production AI workflow patterns.",
+      "stars": 273,
+      "forks": 48,
+      "issues": 10,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:runtime",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:runtime",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 61,
+      "observer_score": 66,
+      "observer_rank": 5,
+      "project_brief_cn": "这是一本实用的AI智能体系统手册，系统覆盖智能体架构、工作流、LangGraph、MCP/A2A协议、上下文工程、记忆管理、评估、可观测性和多智能体架构等核心主题，并关注智能体优先计算、新兴智能体运行时和生产级AI工作流模式等前沿趋势。",
+      "why_now_cn": "该项目今日活跃更新，紧跟MCP/A2A协议、智能体运行时等当前AI热点，在智能体生态深度上获得主题背书，且处于稳定增长阶段（273星），为开发者提供了及时、全面的实战指南。",
+      "watch_next_cn": "需验证其内容是否持续更新以跟上智能体协议和框架的快速迭代，以及社区反馈和实际应用案例是否足够丰富以证明其作为权威参考的价值。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "273星，持续更新，系统覆盖智能体热点（MCP/A2A），提供实战指南，内容扎实，建议提升关注。",
+      "judge_score_delta": 5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "MrScripty/Pantograph",
+      "repo_url": "https://github.com/MrScripty/Pantograph",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-01-13T02:27:52Z",
+      "repo_updated_at": "2026-06-03T12:47:33Z",
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "matched_by": {
+        "keywords": [
+          "orchestration",
+          "runtime",
+          "workflow"
+        ],
+        "topic_hints": [
+          "workflow-engine"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Local AI workflow orchestration and runtime management framework",
+      "stars": 3,
+      "forks": 0,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=topic:workflow-engine",
+        "query=topic:workflow-engine",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 61,
+      "observer_score": 61,
+      "observer_rank": 6,
+      "project_brief_cn": "Pantograph 是一个本地 AI 工作流编排和运行时管理框架，旨在简化将多个 AI 任务组合成可复用工作流的过程，并支持本地运行以保护数据隐私。",
+      "why_now_cn": "该项目今天仍有活跃提交（active-today），且属于新兴项目（emerging），虽然只有3星但专注本地AI工作流编排，契合当前数据隐私和低延迟需求趋势。作为 topic-backed 项目，其主题（workflow-engine）表明技术方向有明确用户需求，值得早期关注。",
+      "watch_next_cn": "需验证其工作流定义与执行的实际可用性、与主流AI框架（如LangChain、LlamaIndex）的集成能力，以及是否具备插件或扩展生态。目前无社区贡献和明确的工程团队背景，成熟度存疑。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "3星极早期项目，专注本地AI工作流编排，今日活跃，契合隐私和低延迟趋势，但规模太小，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "achappey/aihappey-ai",
+      "repo_url": "https://github.com/achappey/aihappey-ai",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2025-12-22T19:28:12Z",
+      "repo_updated_at": "2026-06-03T12:36:51Z",
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "runtime",
+          "skills"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Stateless unified multi-provider AI runtime with OpenAI & Anthropic-compatible APIs, Vercel UI streaming, managed agents and Skills across 190k+ models.",
+      "stars": 4,
+      "forks": 0,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:runtime",
+        "query ecosystem=skills-tools-mcp source=keyword:mcp",
+        "query ecosystem=skills-tools-mcp source=keyword:skills",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:mcp",
+        "query=keyword:runtime",
+        "query=keyword:skills",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 61,
+      "observer_score": 61,
+      "observer_rank": 7,
+      "project_brief_cn": "AIHappey AI 是一个统一的多提供商 AI 运行时，支持 190k+ 模型，提供 OpenAI 和 Anthropic 兼容 API，以及 Vercel UI 流式输出、托管智能体和技能系统。",
+      "why_now_cn": "该项目今日活跃，覆盖智能体运行时、技能和 MCP 生态，虽星数较少但描述潜力大，适合关注快速迭代的早期项目。",
+      "watch_next_cn": "需验证实际用户采用情况、技能系统与 MCP 的集成效果，以及项目维护者的长期投入意愿。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "4星，今日活跃，多模型运行时概念有潜力，但完成度低，待验证，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "MrWong99/zhi",
+      "repo_url": "https://github.com/MrWong99/zhi",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2025-08-20T21:47:43Z",
+      "repo_updated_at": "2026-06-03T12:02:14Z",
+      "ecosystems": [
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "plugin"
+        ],
+        "topic_hints": [
+          "mcp",
+          "plugin-system"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "zhi is a modern platform for configuration management and provisioning. It provides an extensible plugin system that automatically generates a user-friendly terminal or web UI, while keeping all configs secure by default.",
+      "stars": 1,
+      "forks": 0,
+      "issues": 3,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=skills-tools-mcp source=topic:plugin-system",
+        "query=topic:plugin-system",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 55,
+      "observer_score": 55,
+      "observer_rank": 8,
+      "project_brief_cn": "zhi 是一个配置管理和资源部署平台，通过插件系统自动生成终端或 Web UI，并以安全为默认设计，旨在简化运维工具链的搭建。",
+      "why_now_cn": "项目处于早期活跃开发阶段（今日有更新），专注于 MCP 插件系统和配置管理，契合当前 AI Agent 工具链对可扩展、安全配置平台的需求。虽然 Stars 少，但生态标签表明其与 topic-backed 相关，且没有历史包袱，值得关注其后续发展。",
+      "watch_next_cn": "需验证其插件系统生态能否吸引开发者贡献实际 MCP 插件，以及核心配置管理功能是否足够稳定。目前缺乏工程背景和大社区基础，还需观察设计文档或使用案例的涌现。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "1星，今日活跃，MCP插件配置平台有场景，但极度早期，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "huiyu9144/Huiyu-Pi",
+      "repo_url": "https://github.com/huiyu9144/Huiyu-Pi",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-05-29T09:59:56Z",
+      "repo_updated_at": "2026-06-03T13:11:36Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "codex"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Huiyu Pi webUI,A local open-source Agent tool that lets you build your own Harness system from scratch. Built on Pi and pi-forge, compared to IDE tools like Codex and Claude Code, context is reduced to nearly zero with massive speed improvements. Build cleanly without platform restrictions.",
+      "stars": 1,
+      "forks": 0,
+      "issues": 8,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:claude code",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=keyword:claude code",
+        "query=keyword:codex",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "observer_rank": 9,
+      "project_brief_cn": "Huiyu-Pi 是一个本地开源代理工具，基于 Pi 和 pi-forge 构建，提供 WebUI，让用户从零搭建自己的 Harness 系统。相比于 Codex 和 Claude Code 等 IDE 工具，它大幅降低上下文开销并提升速度，且无平台限制。",
+      "why_now_cn": "项目处于早期但活跃（今日有更新）。描述突出与主流编码代理（Codex、Claude Code）的差异化——近乎零上下文和速度提升，契合当前对轻量级本地代理工具的需求。虽仅1星但生态标签为 topic-backed，且符合 coding-agents 热点。",
+      "watch_next_cn": "需验证：用户能否真正轻松搭建 Harness 系统？上下文降低和速度提升的具体指标是否可复现？无平台限制的实际兼容性如何？当前活跃但缺乏社区反馈，需关注后续 issue 和 star 增长。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "1星，今日活跃，针对编码代理的轻量本地工具，差异化定位，但无实证，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "KorenKrita/nokori",
+      "repo_url": "https://github.com/KorenKrita/nokori",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-05-29T23:30:04Z",
+      "repo_updated_at": "2026-06-03T13:07:42Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "cursor"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Nokori (残り) — behavioral memory layer for Claude Code and Cursor. Turns your corrections into rules that come back when it counts. 经验留下的痕迹，比记忆更深。",
+      "stars": 1,
+      "forks": 1,
+      "issues": 1,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "observer_rank": 10,
+      "project_brief_cn": "Nokori 是一个为 Claude Code 和 Cursor 等编程智能体提供行为记忆层的工具，能够自动将用户的修正反馈转化为规则，以便在相似情境下自动应用，提升长期交互的连贯性。",
+      "why_now_cn": "该仓库近期活跃，且直接服务于当前热门的 AI 编码助手（Claude Code、Cursor），解决了智能体缺乏长期记忆的痛点。生态标签表明它属于编程智能体领域，虽星数少但专注性强，符合适时的细化需求。",
+      "watch_next_cn": "需验证其规则提取的准确性和实际效果，例如是否能在复杂交互中避免误触发；同时关注社区反馈和用户扩散情况，以确认是否持续演进。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "1星1fork，今日活跃，解决编码代理记忆问题，点子好但极早期，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "aptitude-stack/resolver",
+      "repo_url": "https://github.com/aptitude-stack/resolver",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-03-07T16:27:14Z",
+      "repo_updated_at": "2026-06-03T13:12:00Z",
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "mcp",
+          "runtime"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Runtime-facing resolver client for Aptitude: normalizes MCP/CLI skill requests, consumes repository resolution APIs, applies plugins (security/policy/overlap), and returns deterministic execution plans.",
+      "stars": 1,
+      "forks": 0,
+      "issues": 2,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:execution",
+        "query ecosystem=agent-runtime source=keyword:runtime",
+        "query ecosystem=skills-tools-mcp source=keyword:plugin",
+        "query=keyword:execution",
+        "query=keyword:plugin",
+        "query=keyword:runtime",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 51,
+      "observer_score": 51,
+      "observer_rank": 11,
+      "project_brief_cn": "Resolver 是 Aptitude 生态中面向运行时环境的解析客户端，核心功能是标准化处理来自 MCP（Model Context Protocol）和 CLI 的技能请求，调用仓库解析 API，并应用安全、策略和重叠检测等插件，最终生成确定性的执行计划。",
+      "why_now_cn": "该项目今日仍在活跃更新，且处于 Aptitude 生态的关键位置——MCP 是近期 Agent 工具链的热门协议，Resolver 作为请求到执行计划的桥梁，直接服务于运行时决策。虽然星标和分支数极少，但仓库伴有 2 个未关闭 issue，话题覆盖 execution、mcp、runtime，表明有一定讨论度。",
+      "watch_next_cn": "需继续验证插件机制（安全、策略、重叠检测）的实际实现完整度，以及该解析器是否已被上游项目（如 Aptitude 运行时）采用。目前无已知使用者，生态集成深度存疑。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "1星，今日活跃，MCP解析客户端，但无用户基础，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "Yash-Koladiya30/fixfleet",
+      "repo_url": "https://github.com/Yash-Koladiya30/fixfleet",
+      "observed_at": "2026-06-03T21:09:46+08:00",
+      "repo_created_at": "2026-05-01T09:17:48Z",
+      "repo_updated_at": "2026-06-03T12:47:43Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "claude code",
+          "codex",
+          "cursor"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "🚀 Auto-fix GitLab bugs with any AI agent — Claude Code, Codex, Gemini, Cursor, Aider, or any free OpenAI-compatible API. Token-aware, confidence-scored.",
+      "stars": 3,
+      "forks": 0,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query=keyword:aider",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 47,
+      "observer_score": 47,
+      "observer_rank": 12,
+      "project_brief_cn": "FixFleet 是一个自动化修复 GitLab 问题的工具，能够集成多种 AI 代理（如 Claude Code、Codex、Gemini、Cursor、Aider 等），对问题上下文进行 token 感知分析，并输出置信度评分，从而实现智能修复。",
+      "why_now_cn": "该项目今日有活跃更新，并处于 steady 的爆发状态。它直接响应了开发者对多 AI 代理集成和自动化 Bug 修复的强烈需求，且通过关键词匹配（Aider、Claude Code、Codex、Cursor）证明了其在 AI 编码代理生态中的深度关联。尽管目前星标数较少，但它的生态关键词覆盖广泛，具有从零到一的增长潜力。",
+      "watch_next_cn": "需要验证实际修复效果和置信度评分的可靠性，以及是否能在真实 GitLab 项目中稳定工作。其无历史记录、无 PR/issue 的新项目状态意味着可靠性和社区支持尚未证明，下一步应关注集成不同 AI 代理时的修复成功率和 token 消耗效率。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "3星，今日活跃，自动化修复GitLab问题，整合多AI代理，有实用场景，但极早期，维持观察。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    }
+  ]
+}

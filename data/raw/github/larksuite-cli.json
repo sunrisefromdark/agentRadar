@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "larksuite/cli",
+  "repo_url": "https://github.com/larksuite/cli",
+  "stars": 12146,
+  "forks": 810,
+  "issues": 141,
+  "PR": 93,
+  "description": "The official Lark/Feishu CLI tool, maintained by the larksuite team — built for humans and AI Agents. Covers core business domains including Messenger, Docs, Base, Sheets, Calendar, Mail, Tasks, Meetings, and more, with 200+ commands and 20+ AI Agent Skills.",
+  "tags": []
+}

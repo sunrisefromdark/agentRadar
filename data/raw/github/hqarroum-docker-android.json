@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "HQarroum/docker-android",
+  "repo_url": "https://github.com/HQarroum/docker-android",
+  "stars": 5675,
+  "forks": 431,
+  "issues": 13,
+  "PR": 1,
+  "description": "🤖 A minimal and customizable Docker image running the Android emulator as a service.",
+  "tags": [
+    "android",
+    "android-emulator",
+    "ci-pipeline",
+    "docker",
+    "docker-android"
+  ]
+}

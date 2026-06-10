@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "bytedance/Lance",
+  "repo_url": "https://github.com/bytedance/Lance",
+  "stars": 1043,
+  "forks": 74,
+  "issues": 12,
+  "PR": 0,
+  "description": "A 3B-active-parameter native unified multimodal model for image and video understanding, generation, and editing.",
+  "tags": [
+    "image-editing",
+    "image-generation",
+    "image-understanding",
+    "unified-multimodal-models",
+    "video-generation",
+    "video-understanding"
+  ]
+}

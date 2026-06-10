@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "Fission-AI/OpenSpec",
+  "repo_url": "https://github.com/Fission-AI/OpenSpec",
+  "stars": 49641,
+  "forks": 3483,
+  "issues": 246,
+  "PR": 91,
+  "description": "Spec-driven development (SDD) for AI coding assistants.",
+  "tags": [
+    "ai",
+    "context-engineering",
+    "engineering",
+    "planning",
+    "prd",
+    "sdd",
+    "sdlc",
+    "spec",
+    "spec-driven-development",
+    "specification"
+  ]
+}

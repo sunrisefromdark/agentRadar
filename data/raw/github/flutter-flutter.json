@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "flutter/flutter",
+  "repo_url": "https://github.com/flutter/flutter",
+  "stars": 176630,
+  "forks": 30465,
+  "issues": 12281,
+  "PR": 480,
+  "description": "Flutter makes it easy and fast to build beautiful apps for mobile and beyond",
+  "tags": [
+    "android",
+    "app-framework",
+    "cross-platform",
+    "dart",
+    "dart-platform",
+    "desktop",
+    "flutter",
+    "flutter-package",
+    "fuchsia",
+    "ios",
+    "linux-desktop",
+    "macos",
+    "material-design",
+    "mobile",
+    "mobile-development",
+    "skia",
+    "web",
+    "web-framework",
+    "windows"
+  ]
+}

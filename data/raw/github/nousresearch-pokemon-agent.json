@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/pokemon-agent",
+  "repo_url": "https://github.com/NousResearch/pokemon-agent",
+  "stars": 119,
+  "forks": 11,
+  "issues": 0,
+  "PR": 2,
+  "description": "AI-powered Pokemon gameplay agent with headless emulation, REST API, and live dashboard. Works with any LLM.",
+  "tags": []
+}

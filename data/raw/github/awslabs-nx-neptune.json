@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "awslabs/nx-neptune",
+  "repo_url": "https://github.com/awslabs/nx-neptune",
+  "stars": 17,
+  "forks": 3,
+  "issues": 9,
+  "PR": 11,
+  "description": "Graph analytics for your data lake, powered by Amazon Neptune Analytics",
+  "tags": []
+}

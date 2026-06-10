@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "denoland/deno",
+  "repo_url": "https://github.com/denoland/deno",
+  "stars": 106866,
+  "forks": 6062,
+  "issues": 1966,
+  "PR": 307,
+  "description": "A modern runtime for JavaScript and TypeScript.",
+  "tags": [
+    "deno",
+    "javascript",
+    "rust",
+    "typescript"
+  ]
+}

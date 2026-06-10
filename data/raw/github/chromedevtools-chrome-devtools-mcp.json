@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "ChromeDevTools/chrome-devtools-mcp",
+  "repo_url": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+  "stars": 42092,
+  "forks": 2689,
+  "issues": 65,
+  "PR": 16,
+  "description": "Chrome DevTools for coding agents",
+  "tags": [
+    "browser",
+    "chrome",
+    "chrome-devtools",
+    "debugging",
+    "devtools",
+    "mcp",
+    "mcp-server",
+    "puppeteer"
+  ]
+}

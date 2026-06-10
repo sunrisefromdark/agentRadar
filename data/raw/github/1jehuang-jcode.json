@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "1jehuang/jcode",
+  "repo_url": "https://github.com/1jehuang/jcode",
+  "stars": 6410,
+  "forks": 711,
+  "issues": 108,
+  "PR": 47,
+  "description": "Coding Agent Harness",
+  "tags": [
+    "ai",
+    "claude",
+    "cli",
+    "coding-agent",
+    "llm",
+    "mcp",
+    "openai",
+    "rust",
+    "terminal",
+    "tui"
+  ]
+}

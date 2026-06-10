@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "agentscope-ai/QwenPaw",
+  "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+  "stars": 17198,
+  "forks": 2557,
+  "issues": 648,
+  "PR": 238,
+  "description": "Your Personal AI Assistant; easy to install, deploy on your own machine or on the cloud; supports multiple chat apps with easily extensible capabilities.",
+  "tags": [
+    "agent",
+    "agentscope",
+    "agentscope-runtime",
+    "llm-tools",
+    "llms",
+    "skills"
+  ]
+}

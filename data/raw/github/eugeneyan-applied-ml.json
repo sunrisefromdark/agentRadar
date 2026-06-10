@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "eugeneyan/applied-ml",
+  "repo_url": "https://github.com/eugeneyan/applied-ml",
+  "stars": 29188,
+  "forks": 3881,
+  "issues": 3,
+  "PR": 3,
+  "description": "📚 Papers & tech blogs by companies sharing their work on data science & machine learning in production.",
+  "tags": [
+    "applied-data-science",
+    "applied-machine-learning",
+    "computer-vision",
+    "data-discovery",
+    "data-engineering",
+    "data-quality",
+    "data-science",
+    "deep-learning",
+    "machine-learning",
+    "natural-language-processing",
+    "production",
+    "recsys",
+    "reinforcement-learning",
+    "search"
+  ]
+}

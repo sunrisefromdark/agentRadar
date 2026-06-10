@@ -1,0 +1,24 @@
+{
+  "repo_full_name": "PaddlePaddle/PaddleOCR",
+  "repo_url": "https://github.com/PaddlePaddle/PaddleOCR",
+  "stars": 79315,
+  "forks": 10554,
+  "issues": 146,
+  "PR": 63,
+  "description": "Turn any PDF or image document into structured data for your AI. A powerful, lightweight OCR toolkit that bridges the gap between images/PDFs and LLMs. Supports 100+ languages.",
+  "tags": [
+    "ai4science",
+    "chineseocr",
+    "document-parsing",
+    "document-translation",
+    "kie",
+    "ocr",
+    "paddleocr-vl",
+    "pdf-extractor-rag",
+    "pdf-parser",
+    "pdf2markdown",
+    "pp-ocr",
+    "pp-structure",
+    "rag"
+  ]
+}

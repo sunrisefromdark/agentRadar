@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "langfuse/langfuse",
+  "repo_url": "https://github.com/langfuse/langfuse",
+  "stars": 28430,
+  "forks": 2936,
+  "issues": 325,
+  "PR": 340,
+  "description": "🪢 Open source LLM engineering platform: LLM Observability, metrics, evals, prompt management, playground, datasets. Integrates with OpenTelemetry, Langchain, OpenAI SDK, LiteLLM, and more. 🍊YC W23 ",
+  "tags": [
+    "analytics",
+    "autogen",
+    "evaluation",
+    "langchain",
+    "large-language-models",
+    "llama-index",
+    "llm",
+    "llm-evaluation",
+    "llm-observability",
+    "llmops",
+    "monitoring",
+    "observability",
+    "open-source",
+    "openai",
+    "playground",
+    "prompt-engineering",
+    "prompt-management",
+    "self-hosted",
+    "ycombinator"
+  ]
+}

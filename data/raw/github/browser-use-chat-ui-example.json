@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "browser-use/chat-ui-example",
+  "repo_url": "https://github.com/browser-use/chat-ui-example",
+  "stars": 15,
+  "forks": 4,
+  "issues": 0,
+  "PR": 1,
+  "description": "AI chat app using Browser Use v3 SDK",
+  "tags": [
+    "ai-agent",
+    "browser-use-box",
+    "browser-use-cloud",
+    "chat-ui"
+  ]
+}

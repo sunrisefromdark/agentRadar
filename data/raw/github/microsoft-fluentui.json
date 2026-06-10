@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "microsoft/fluentui",
+  "repo_url": "https://github.com/microsoft/fluentui",
+  "stars": 20025,
+  "forks": 2892,
+  "issues": 445,
+  "PR": 292,
+  "description": "Fluent UI web represents a collection of utilities, React components, and web components for building web applications.",
+  "tags": [
+    "components",
+    "fluent",
+    "microsoft",
+    "office-ui-fabric",
+    "react",
+    "react-components"
+  ]
+}

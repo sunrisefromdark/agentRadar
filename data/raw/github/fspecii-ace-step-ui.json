@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "fspecii/ace-step-ui",
+  "repo_url": "https://github.com/fspecii/ace-step-ui",
+  "stars": 3888,
+  "forks": 573,
+  "issues": 27,
+  "PR": 6,
+  "description": "🎵 The Ultimate Open Source Suno Alternative - Professional UI for ACE-Step 1.5 AI Music Generation. Free, local, unlimited. Stop paying for Suno!",
+  "tags": [
+    "ace-step",
+    "ai",
+    "ai-music",
+    "local-first",
+    "music",
+    "music-generation",
+    "open-source",
+    "react",
+    "suno-alternative",
+    "typescript"
+  ]
+}

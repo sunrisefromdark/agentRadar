@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "jundot/omlx",
+  "repo_url": "https://github.com/jundot/omlx",
+  "stars": 14742,
+  "forks": 1240,
+  "issues": 283,
+  "PR": 59,
+  "description": "LLM inference server with continuous batching & SSD caching for Apple Silicon — managed from the macOS menu bar",
+  "tags": [
+    "apple-silicon",
+    "inference-server",
+    "llm",
+    "macos",
+    "mlx",
+    "openai-api"
+  ]
+}

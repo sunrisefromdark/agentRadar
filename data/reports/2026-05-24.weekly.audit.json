@@ -1,0 +1,432 @@
+{
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus": [],
+  "rejected_outputs": [
+    {
+      "layer": "weekly_summary",
+      "target_key": "2026-05-24",
+      "reason_code": "template_fallback",
+      "reason_detail": "overall_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "workflow-automation",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_name_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "workflow-automation",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "workflow-automation",
+      "reason_code": "template_fallback",
+      "reason_detail": "evidence_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "workflow-automation",
+      "reason_code": "template_fallback",
+      "reason_detail": "worth_following_next_week fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/Imbad0202/academic-research-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/Imbad0202/academic-research-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/Imbad0202/academic-research-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/Imbad0202/academic-research-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/n8n-io/n8n",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/n8n-io/n8n",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/n8n-io/n8n",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_name_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "evidence_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "worth_following_next_week fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/everything-claude-code",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/everything-claude-code",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/affaan-m/everything-claude-code",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agentic-workflow",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_name_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agentic-workflow",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agentic-workflow",
+      "reason_code": "template_fallback",
+      "reason_detail": "evidence_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agentic-workflow",
+      "reason_code": "template_fallback",
+      "reason_detail": "worth_following_next_week fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/langgenius/dify",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/langgenius/dify",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/antoinezambelli/forge",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/antoinezambelli/forge",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/antoinezambelli/forge",
+      "reason_code": "missing_field",
+      "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "ai-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_name_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "ai-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "trend_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "ai-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "evidence_summary_cn fell back to template rules."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "ai-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "worth_following_next_week fell back to template rules."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/ruvnet/ruflo",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/farion1231/cc-switch",
+      "reason_code": "missing_field",
+      "reason_detail": "risk_review_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/browser-use/browser-use",
+      "reason_code": "missing_field",
+      "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/browser-use/browser-use",
+      "reason_code": "missing_field",
+      "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weekly_support_project",
+      "target_key": "https://github.com/browser-use/browser-use",
+      "reason_code": "missing_field",
+      "reason_detail": "watchlist_note_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "ai-workflow",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "ai-workflow",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "ai-workflow",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "ai-workflow",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "claude-code-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "claude-code-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "claude-code-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "claude-code-skills",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "memory-engine",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "memory-engine",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "memory-engine",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "memory-engine",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "openmemory",
+      "reason_code": "missing_field",
+      "reason_detail": "signal_name_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "openmemory",
+      "reason_code": "missing_field",
+      "reason_detail": "why_weak_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "openmemory",
+      "reason_code": "missing_field",
+      "reason_detail": "evidence_summary_cn fell back to template rules (missing_field)."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "openmemory",
+      "reason_code": "missing_field",
+      "reason_detail": "worth_following_next_week fell back to template rules (missing_field)."
+    }
+  ]
+}

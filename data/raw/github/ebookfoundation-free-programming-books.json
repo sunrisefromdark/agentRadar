@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "EbookFoundation/free-programming-books",
+  "repo_url": "https://github.com/EbookFoundation/free-programming-books",
+  "stars": 389209,
+  "forks": 66363,
+  "issues": 35,
+  "PR": 47,
+  "description": ":books: Freely available programming books",
+  "tags": [
+    "books",
+    "education",
+    "hacktoberfest",
+    "list",
+    "resource"
+  ]
+}

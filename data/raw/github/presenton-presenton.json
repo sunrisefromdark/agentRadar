@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "presenton/presenton",
+  "repo_url": "https://github.com/presenton/presenton",
+  "stars": 7239,
+  "forks": 1184,
+  "issues": 43,
+  "PR": 5,
+  "description": "Open-Source AI Presentation Generator and API (Gamma, Beautiful AI, Decktopus Alternative)",
+  "tags": [
+    "ai-agent",
+    "ai-presentation",
+    "api",
+    "gamma",
+    "powerpoint-automation",
+    "powerpoint-free",
+    "powerpoint-generation",
+    "presentation"
+  ]
+}

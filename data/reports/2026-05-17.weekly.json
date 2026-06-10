@@ -1,0 +1,1555 @@
+{
+  "date": "2026-05-17",
+  "generated_at": "2026-06-06T22:32:06+08:00",
+  "window_start": "2026-05-11",
+  "window_end": "2026-05-17",
+  "enhancement_status": "agent-partial",
+  "personalized_weekly_focus_applicable": true,
+  "overall_summary_cn": "本周最稳定的方向是 agent-runtime，并且已经在多个仓库中重复出现。",
+  "supporting_trend_keys": [
+    "agent-runtime",
+    "tool-use",
+    "memory",
+    "agent-runtime"
+  ],
+  "core_trend_cards": [
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "终端 AI 助手 / Agent 运行时",
+      "trend_summary_cn": "终端 AI 助手和 agent 运行时项目持续热门，强调自托管、持久记忆与工具/技能生态融合。",
+      "evidence_summary_cn": "openclaw/openclaw 连续 17 天出现在趋势中，周星增 5536；openai/codex、lsdefine/GenericAgent 表现突出。",
+      "strength": "strong",
+      "worth_following_next_week": "关注自托管 AI 助手与记忆系统的集成进展，以及新终端代理的涌现。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个跨平台自托管 AI 个人助手，类似终端里的智能体壳。它主要帮你通过对话完成文件操作、代码编写和系统管理，大家通常用它来搭建私有、可控的 AI 工作流。",
+          "why_today_cn": "它命中 GitHub Trending 的实时新鲜信号，并且已经通过多源或多天确认，所以今天仍然值得优先关注；当日 star 增长约 358。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory 主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "连续 17 天出现在多个趋势源，周增 5894 星，成为本周最稳定的承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openai/codex",
+          "project_name": "openai/codex",
+          "project_class": "today_star",
+          "objective_score": 86.2,
+          "preference_boost": 2.5,
+          "base_final_rank": 88.7,
+          "final_rank": 88.7,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个轻量级终端编码代理，可理解代码仓库并完成代码修改。它主要帮你在命令行里自动完成代码审查、重构和变更，大家常将其与 Claude Code 对比使用。",
+          "why_today_cn": "今天同时命中重点观察清单和 GitHub 涨星信号，作为 OpenAI 的终端编码代理，其持久记忆能力值得关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 memory 主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的 OpenAI 项目有更新。",
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "连续 14 天出现在趋势中，持续作为 agent-runtime 方向的核心承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "project_name": "forrestchang/andrej-karpathy-skills",
+          "project_class": "today_star",
+          "objective_score": 83,
+          "preference_boost": 7.5,
+          "base_final_rank": 90.5,
+          "final_rank": 88.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法，也能围绕代码仓库做分析与修改。大家通常会用它来整理现成技能和工作流打法，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "今日 Trendshift 命中，社区 fork 超 1.2 万，开发者广泛采用。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 14 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "终端 AI 助手 / Agent 运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 84.5,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=358",
+              "weekly_delta=5894"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 84.5。代表项目包括 openclaw/openclaw、forrestchang/andrej-karpathy-skills、openclaw/openclaw。证据摘要：daily_delta=358"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 6,
+            "high_signal_project_count": 6,
+            "evidence_count": 24,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=76736",
+              "issues=7504"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：forks=76736"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 90.8,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 27,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 90.8。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 93.3,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 98.3,
+            "project_count": 6,
+            "high_signal_project_count": 6,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=17"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 98.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "tool-use",
+      "trend_name_cn": "工具与技能生态",
+      "trend_summary_cn": "工具使用和技能生态成为 agent 能力扩展的核心，大量仓库聚焦于技能模板和工具链集成。",
+      "evidence_summary_cn": "openclaw/openclaw、lsdefine/GenericAgent、obra/superpowers 等仓库周增星可观，技能类项目密集出现。",
+      "strength": "strong",
+      "worth_following_next_week": "观察技能模板标准化趋势，以及自改进 agent 对工具生态的依赖加深。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管终端 AI 助手 / agent shell。它主要是帮你强调自托管和用户自己掌控数据边界，也能支持工具调用和本地工作流自动化。大家通常会用它来强调自托管和用户自己掌控数据边界，也会顺手支持工具调用和本地工作流自动化。",
+          "why_today_cn": "它命中 GitHub Trending 的实时新鲜信号，并且已经通过多源或多天确认，所以今天仍然值得优先关注；当日 star 增长约 358。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 17 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/lsdefine/GenericAgent",
+          "project_name": "lsdefine/GenericAgent",
+          "project_class": "today_star",
+          "objective_score": 94.2,
+          "preference_boost": 5,
+          "base_final_rank": 99.2,
+          "final_rank": 99.2,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法。大家通常会用它来整理现成技能和工作流打法。",
+          "why_today_cn": "今日命中 Trendshift，star 增长高达 381，其自我进化的特性在代理领域极具创新性，优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "最近 3 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/obra/superpowers",
+          "project_name": "obra/superpowers",
+          "project_class": "today_star",
+          "objective_score": 91,
+          "preference_boost": 2.5,
+          "base_final_rank": 93.5,
+          "final_rank": 93,
+          "matched_interest_topics": [
+            "skills"
+          ],
+          "project_brief_cn": "这是一个 agent 技能框架和软件开发方法论，提供可复用的技能集合。它主要帮开发者快速构建具备工具调用能力的 agent，大家常将其作为 Claude Code 的技能增强方案。",
+          "why_today_cn": "今日命中 Trendshift 实时信号，且经过多源确认，作为技能框架领域的代表性项目值得关注。",
+          "enhancement_source": "agent",
+          "personalization_reason_cn": "命中 skills 主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "tool-use",
+          "why_this_week_cn": "连续 14 天出现在趋势中，周增 18340 星，是工具使用方向最活跃的项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "tool-use",
+        "focused_trend_name_cn": "工具与技能生态",
+        "summary_cn": "当前聚焦 tool-use，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 92,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 76
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=358",
+              "weekly_delta=5894"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 92。代表项目包括 openclaw/openclaw、obra/superpowers、lsdefine/GenericAgent。证据摘要：daily_delta=358"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 16,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=76736",
+              "issues=7504"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、lsdefine/GenericAgent、obra/superpowers。证据摘要：forks=76736"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 19,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、lsdefine/GenericAgent、obra/superpowers。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 86.7。代表项目包括 openclaw/openclaw、lsdefine/GenericAgent、obra/superpowers。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 80
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、lsdefine/GenericAgent、obra/superpowers。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 96.7,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 11,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/obra/superpowers",
+                "repo_full_name": "obra/superpowers",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/lsdefine/GenericAgent",
+                "repo_full_name": "lsdefine/GenericAgent",
+                "score": 90
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=17"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 96.7。代表项目包括 openclaw/openclaw、obra/superpowers、lsdefine/GenericAgent。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "memory",
+      "trend_name_cn": "持久记忆系统",
+      "trend_summary_cn": "持久记忆成为 agent 核心组件，多个项目专注为 AI 编码代理提供长期记忆能力。",
+      "evidence_summary_cn": "openclaw/openclaw 和 openai/codex 均携带记忆信号；rohitg00/agentmemory 本周星增 1930，专注为编码代理提供持久记忆。",
+      "strength": "strong",
+      "worth_following_next_week": "关注记忆系统如何与 agent 运行时深度集成，以及轻量记忆库的采用情况。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管终端 AI 助手 / agent shell。它主要是帮你强调自托管和用户自己掌控数据边界，也能支持工具调用和本地工作流自动化。大家通常会用它来强调自托管和用户自己掌控数据边界，也会顺手支持工具调用和本地工作流自动化。",
+          "why_today_cn": "它命中 GitHub Trending 的实时新鲜信号，并且已经通过多源或多天确认，所以今天仍然值得优先关注；当日 star 增长约 358。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 17 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/openai/codex",
+          "project_name": "openai/codex",
+          "project_class": "today_star",
+          "objective_score": 86.2,
+          "preference_boost": 2.5,
+          "base_final_rank": 88.7,
+          "final_rank": 88.7,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解代码仓库并协助完成代码审查或变更收敛，也能围绕代码仓库做分析与修改。大家通常会用它来理解代码仓库并协助完成代码审查或变更收敛，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "今天同时命中重点观察清单和 GitHub 涨星信号，作为 OpenAI 的终端编码代理，其持久记忆能力值得关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory 主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "watchlist_note_cn": "你跟踪的 OpenAI 项目有更新。",
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 14 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "project_name": "forrestchang/andrej-karpathy-skills",
+          "project_class": "today_star",
+          "objective_score": 83,
+          "preference_boost": 7.5,
+          "base_final_rank": 90.5,
+          "final_rank": 88.5,
+          "matched_interest_topics": [
+            "memory",
+            "skills",
+            "claude code"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法，也能围绕代码仓库做分析与修改。大家通常会用它来整理现成技能和工作流打法，也会顺手围绕代码仓库做分析与修改。",
+          "why_today_cn": "今日 Trendshift 命中，社区 fork 超 1.2 万，开发者广泛采用。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory, skills, claude code，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "memory",
+          "why_this_week_cn": "最近 14 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "memory",
+        "focused_trend_name_cn": "持久记忆系统",
+        "summary_cn": "当前聚焦 memory，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 77,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 31
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=358",
+              "weekly_delta=5894"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 77。代表项目包括 openclaw/openclaw、forrestchang/andrej-karpathy-skills、openai/codex。证据摘要：daily_delta=358"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=76736",
+              "issues=7504"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：forks=76736"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 81.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 21,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 45
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 81.7。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 5,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 86.7,
+            "project_count": 3,
+            "high_signal_project_count": 2,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 60
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 2 个达到高强度，轴均分 86.7。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 100,
+            "project_count": 3,
+            "high_signal_project_count": 3,
+            "evidence_count": 9,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=17"
+            ],
+            "summary_cn": "3 个项目留下该轴记录，其中 3 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    },
+    {
+      "trend_key": "agent-runtime",
+      "trend_name_cn": "终端 AI 助手 / Agent 运行时",
+      "trend_summary_cn": "终端 AI 助手和 agent 运行时项目持续热门，强调自托管、持久记忆与工具/技能生态融合。",
+      "evidence_summary_cn": "openclaw/openclaw 连续 17 天出现在趋势中，周星增 5536；openai/codex、lsdefine/GenericAgent 表现突出。",
+      "strength": "strong",
+      "worth_following_next_week": "关注自托管 AI 助手与记忆系统的集成进展，以及新终端代理的涌现。",
+      "supporting_projects": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "project_name": "openclaw/openclaw",
+          "project_class": "today_star",
+          "objective_score": 100,
+          "preference_boost": 2.5,
+          "base_final_rank": 102.5,
+          "final_rank": 102.5,
+          "matched_interest_topics": [
+            "memory"
+          ],
+          "project_brief_cn": "这是一个自托管终端 AI 助手 / agent shell。它主要是帮你强调自托管和用户自己掌控数据边界，也能支持工具调用和本地工作流自动化。大家通常会用它来强调自托管和用户自己掌控数据边界，也会顺手支持工具调用和本地工作流自动化。",
+          "why_today_cn": "它命中 GitHub Trending 的实时新鲜信号，并且已经通过多源或多天确认，所以今天仍然值得优先关注；当日 star 增长约 358。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory 主题，与你关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "连续 17 天出现在多个趋势源，周增 5894 星，成为本周最稳定的承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/lsdefine/GenericAgent",
+          "project_name": "lsdefine/GenericAgent",
+          "project_class": "today_star",
+          "objective_score": 94.2,
+          "preference_boost": 5,
+          "base_final_rank": 99.2,
+          "final_rank": 99.2,
+          "matched_interest_topics": [
+            "memory",
+            "skills"
+          ],
+          "project_brief_cn": "这是一个开发者资源包或模板集合。它主要是帮你整理现成技能和工作流打法。大家通常会用它来整理现成技能和工作流打法。",
+          "why_today_cn": "今日命中 Trendshift，star 增长高达 381，其自我进化的特性在代理领域极具创新性，优先关注。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 memory 和 skills 主题，与你关注方向高度匹配。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 3 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        },
+        {
+          "repo_url": "https://github.com/bytedance/UI-TARS-desktop",
+          "project_name": "bytedance/UI-TARS-desktop",
+          "project_class": "today_star",
+          "objective_score": 94,
+          "preference_boost": 2.5,
+          "base_final_rank": 96.5,
+          "final_rank": 96.5,
+          "matched_interest_topics": [
+            "UI"
+          ],
+          "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力。大家通常会用它来围绕 MCP 暴露工具能力。",
+          "why_today_cn": "今日命中 Trendshift，作为字节跳动发布的桌面级 AI 代理栈，聚焦工具互联生态，值得跟踪。",
+          "enhancement_source": "template_fallback",
+          "personalization_reason_cn": "命中 UI，和你当前关注方向一致。",
+          "risk_review_required": false,
+          "trend_key": "agent-runtime",
+          "why_this_week_cn": "最近 4 个日期里它都出现在该方向附近，是这条周趋势的重要承载项目。"
+        }
+      ],
+      "evidence_matrix": {
+        "focused_trend_key": "agent-runtime",
+        "focused_trend_name_cn": "终端 AI 助手 / Agent 运行时",
+        "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+        "axes": [
+          {
+            "axis": "star_velocity",
+            "score": 84.5,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 14,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "daily_delta=358",
+              "weekly_delta=5894"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 84.5。代表项目包括 openclaw/openclaw、forrestchang/andrej-karpathy-skills、openclaw/openclaw。证据摘要：daily_delta=358"
+          },
+          {
+            "axis": "engagement_score",
+            "score": 100,
+            "project_count": 6,
+            "high_signal_project_count": 6,
+            "evidence_count": 24,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "forks=76736",
+              "issues=7504"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：forks=76736"
+          },
+          {
+            "axis": "architecture_shift",
+            "score": 90.8,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 27,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "baseline=default_agent_capability",
+              "classified_as=agent_runtime"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 90.8。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：baseline=default_agent_capability"
+          },
+          {
+            "axis": "compounding_capability",
+            "score": 93.3,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 6,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.has_persistent_memory",
+              "classification.has_skill_ecosystem"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：classification.has_persistent_memory"
+          },
+          {
+            "axis": "autonomy_score",
+            "score": 93.3,
+            "project_count": 6,
+            "high_signal_project_count": 5,
+            "evidence_count": 7,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "classification.autonomy_level=medium",
+              "classification.has_governance_boundary"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：classification.autonomy_level=medium"
+          },
+          {
+            "axis": "discussion_score",
+            "score": 98.3,
+            "project_count": 6,
+            "high_signal_project_count": 6,
+            "evidence_count": 15,
+            "sample_projects": [
+              {
+                "repo_url": "https://github.com/openclaw/openclaw",
+                "repo_full_name": "openclaw/openclaw",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/openai/codex",
+                "repo_full_name": "openai/codex",
+                "score": 100
+              },
+              {
+                "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+                "repo_full_name": "forrestchang/andrej-karpathy-skills",
+                "score": 100
+              }
+            ],
+            "top_evidence": [
+              "sources=agents-radar,trendshift,github_trending",
+              "appearances=17"
+            ],
+            "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 98.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：sources=agents-radar,trendshift,github_trending"
+          }
+        ]
+      }
+    }
+  ],
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "memory 主题权重 0.25，本周出现 rohitg00/agentmemory 等强相关项目，与你关注方向高度一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/openclaw/openclaw",
+          "repo_full_name": "openclaw/openclaw"
+        },
+        {
+          "repo_url": "https://github.com/openai/codex",
+          "repo_full_name": "openai/codex"
+        },
+        {
+          "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+          "repo_full_name": "forrestchang/andrej-karpathy-skills"
+        }
+      ]
+    }
+  ],
+  "weak_signal_cards": [
+    {
+      "trend_key": "memory-system",
+      "signal_name_cn": "记忆系统",
+      "why_weak_cn": "仅 lsdefine/GenericAgent 一个仓库关联，但该仓库本周刚出现且增长快，信号质量较低。",
+      "evidence_summary_cn": "lsdefine/GenericAgent::daily_delta=381；weekly_delta=381。",
+      "worth_following_next_week": "若下周继续出现更多记忆系统相关仓库，再考虑升级。"
+    },
+    {
+      "trend_key": "skill-tree",
+      "signal_name_cn": "技能树",
+      "why_weak_cn": "同样仅 lsdefine/GenericAgent 一个仓库关联，缺乏独立项目支撑。",
+      "evidence_summary_cn": "lsdefine/GenericAgent::daily_delta=381；weekly_delta=381。",
+      "worth_following_next_week": "若下周有专门针对技能树的项目冒出，再考虑升级。"
+    },
+    {
+      "trend_key": "agentmemory",
+      "signal_name_cn": "AgentMemory 库",
+      "why_weak_cn": "仅 rohitg00/agentmemory 一个仓库关联，且日增量不可用。",
+      "evidence_summary_cn": "rohitg00/agentmemory::daily_delta=unavailable；forks=397。",
+      "worth_following_next_week": "若下周日增量恢复且星增持续，再考虑升级。"
+    },
+    {
+      "trend_key": "tool",
+      "signal_name_cn": "泛工具",
+      "why_weak_cn": "仅 yikart/AiToEarn 一个仓库关联，且属特定场景（抖音自动化），通用性不足。",
+      "evidence_summary_cn": "yikart/AiToEarn::daily_delta=0；weekly_delta=0。",
+      "worth_following_next_week": "若下周出现更多通用于具项目，再考虑升级。"
+    }
+  ],
+  "enhancement_audit": {
+    "rejected_outputs": [
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-17",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "tool-use",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "core_trend_card",
+        "target_key": "agent-runtime",
+        "reason_code": "template_fallback",
+        "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "memory-system",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "skill-tree",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "agentmemory",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weak_signal_card",
+        "target_key": "tool",
+        "reason_code": "template_fallback",
+        "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openai/codex",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/obra/superpowers",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openai/codex",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/rohitg00/agentmemory",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_focus_project",
+        "target_key": "https://github.com/yikart/AiToEarn",
+        "reason_code": "template_fallback",
+        "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "personalized_weekly_focus",
+        "target_key": "memory",
+        "reason_code": "template_fallback",
+        "reason_detail": "personalization_reason_cn was generated from template rules rather than an agent output."
+      },
+      {
+        "layer": "weekly_summary",
+        "target_key": "2026-05-17",
+        "reason_code": "template_fallback",
+        "reason_detail": "overall_summary_cn fell back to template rules."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openai/codex",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/openai/codex)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openai/codex",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/forrestchang/andrej-karpathy-skills",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/openclaw/openclaw",
+        "reason_code": "homogeneous_copy",
+        "reason_detail": "project_brief_cn fell back to template rules (homogeneous_copy with https://github.com/openclaw/openclaw)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "invalid_purpose_fit",
+        "reason_detail": "project_brief_cn fell back to template rules (invalid_purpose_fit)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/lsdefine/GenericAgent",
+        "reason_code": "invalid_length",
+        "reason_detail": "why_this_week_cn fell back to template rules (invalid_length)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+        "reason_code": "missing_field",
+        "reason_detail": "project_brief_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+        "reason_code": "missing_field",
+        "reason_detail": "why_this_week_cn fell back to template rules (missing_field)."
+      },
+      {
+        "layer": "weekly_support_project",
+        "target_key": "https://github.com/bytedance/UI-TARS-desktop",
+        "reason_code": "missing_field",
+        "reason_detail": "personalization_reason_cn fell back to template rules (missing_field)."
+      }
+    ]
+  },
+  "evidence_matrix": {
+    "focused_trend_key": "agent-runtime",
+    "focused_trend_name_cn": "终端 AI 助手 / Agent 运行时",
+    "summary_cn": "当前聚焦 agent-runtime，六轴里有 6 个维度具备项目级结构化证据，可直接展开核对。",
+    "axes": [
+      {
+        "axis": "star_velocity",
+        "score": 84.5,
+        "project_count": 6,
+        "high_signal_project_count": 5,
+        "evidence_count": 14,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+            "repo_full_name": "forrestchang/andrej-karpathy-skills",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "daily_delta=358",
+          "weekly_delta=5894"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 84.5。代表项目包括 openclaw/openclaw、forrestchang/andrej-karpathy-skills、openclaw/openclaw。证据摘要：daily_delta=358"
+      },
+      {
+        "axis": "engagement_score",
+        "score": 100,
+        "project_count": 6,
+        "high_signal_project_count": 6,
+        "evidence_count": 24,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openai/codex",
+            "repo_full_name": "openai/codex",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+            "repo_full_name": "forrestchang/andrej-karpathy-skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "forks=76736",
+          "issues=7504"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 100。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：forks=76736"
+      },
+      {
+        "axis": "architecture_shift",
+        "score": 90.8,
+        "project_count": 6,
+        "high_signal_project_count": 5,
+        "evidence_count": 27,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openai/codex",
+            "repo_full_name": "openai/codex",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "baseline=default_agent_capability",
+          "classified_as=agent_runtime"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 90.8。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：baseline=default_agent_capability"
+      },
+      {
+        "axis": "compounding_capability",
+        "score": 93.3,
+        "project_count": 6,
+        "high_signal_project_count": 5,
+        "evidence_count": 6,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openai/codex",
+            "repo_full_name": "openai/codex",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+            "repo_full_name": "forrestchang/andrej-karpathy-skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "classification.has_persistent_memory",
+          "classification.has_skill_ecosystem"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：classification.has_persistent_memory"
+      },
+      {
+        "axis": "autonomy_score",
+        "score": 93.3,
+        "project_count": 6,
+        "high_signal_project_count": 5,
+        "evidence_count": 7,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openai/codex",
+            "repo_full_name": "openai/codex",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "classification.autonomy_level=medium",
+          "classification.has_governance_boundary"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 5 个达到高强度，轴均分 93.3。代表项目包括 openclaw/openclaw、openai/codex、openclaw/openclaw。证据摘要：classification.autonomy_level=medium"
+      },
+      {
+        "axis": "discussion_score",
+        "score": 98.3,
+        "project_count": 6,
+        "high_signal_project_count": 6,
+        "evidence_count": 15,
+        "sample_projects": [
+          {
+            "repo_url": "https://github.com/openclaw/openclaw",
+            "repo_full_name": "openclaw/openclaw",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/openai/codex",
+            "repo_full_name": "openai/codex",
+            "score": 100
+          },
+          {
+            "repo_url": "https://github.com/forrestchang/andrej-karpathy-skills",
+            "repo_full_name": "forrestchang/andrej-karpathy-skills",
+            "score": 100
+          }
+        ],
+        "top_evidence": [
+          "sources=agents-radar,trendshift,github_trending",
+          "appearances=17"
+        ],
+        "summary_cn": "6 个项目留下该轴记录，其中 6 个达到高强度，轴均分 98.3。代表项目包括 openclaw/openclaw、openai/codex、forrestchang/andrej-karpathy-skills。证据摘要：sources=agents-radar,trendshift,github_trending"
+      }
+    ]
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-22",
+  "generated_at": "2026-05-28T20:09:09+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "response_excerpt": "The user says: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". This is a request: \"Return compact JSON only: {\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}\". The user wants the assistant to return a compact JSON. The user gave a sample JSON: {\"ok\":true,\"ping\":\"pong\",\"provider"
+}

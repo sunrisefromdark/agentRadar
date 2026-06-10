@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "unicity-sphere/sphere-sdk",
+  "repo_url": "https://github.com/unicity-sphere/sphere-sdk",
+  "stars": 5120,
+  "forks": 86,
+  "issues": 76,
+  "PR": 13,
+  "description": "The SDK for autonomous economic agents. Give an agent an identity, a wallet, and the ability to find, negotiate with, and settle with other agents - peer-to-peer, with perfect privacy and ultra-fast finality",
+  "tags": [
+    "ai-agents",
+    "artificial-intelligence",
+    "blockchain",
+    "commerce"
+  ]
+}

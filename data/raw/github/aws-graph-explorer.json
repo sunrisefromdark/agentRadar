@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "aws/graph-explorer",
+  "repo_url": "https://github.com/aws/graph-explorer",
+  "stars": 457,
+  "forks": 88,
+  "issues": 291,
+  "PR": 23,
+  "description": "React-based web application that enables users to visualize both property graph and RDF data and explore connections between data without having to write graph queries. ",
+  "tags": [
+    "amazon-neptune",
+    "apache-tinkerpop",
+    "graph",
+    "graph-database",
+    "graph-visualization",
+    "opencypher",
+    "rdf"
+  ]
+}

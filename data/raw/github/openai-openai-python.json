@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "openai/openai-python",
+  "repo_url": "https://github.com/openai/openai-python",
+  "stars": 30800,
+  "forks": 4792,
+  "issues": 214,
+  "PR": 322,
+  "description": "The official Python library for the OpenAI API",
+  "tags": [
+    "openai",
+    "python"
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "aws/aws-sdk-go-v2",
+  "repo_url": "https://github.com/aws/aws-sdk-go-v2",
+  "stars": 3563,
+  "forks": 788,
+  "issues": 107,
+  "PR": 21,
+  "description": "AWS SDK for the Go programming language. ",
+  "tags": [
+    "aws",
+    "aws-sdk",
+    "go",
+    "golang"
+  ]
+}

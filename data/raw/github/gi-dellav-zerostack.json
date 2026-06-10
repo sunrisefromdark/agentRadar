@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "gi-dellav/zerostack",
+  "repo_url": "https://github.com/gi-dellav/zerostack",
+  "stars": 849,
+  "forks": 53,
+  "issues": 9,
+  "PR": 3,
+  "description": "Minimalistic coding agent written in Rust, optimized for memory footprint and performance",
+  "tags": []
+}

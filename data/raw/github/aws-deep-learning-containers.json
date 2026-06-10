@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "aws/deep-learning-containers",
+  "repo_url": "https://github.com/aws/deep-learning-containers",
+  "stars": 1166,
+  "forks": 541,
+  "issues": 3,
+  "PR": 17,
+  "description": " One stop shop for running AI/ML on AWS.",
+  "tags": [
+    "ai",
+    "aws",
+    "ml"
+  ]
+}

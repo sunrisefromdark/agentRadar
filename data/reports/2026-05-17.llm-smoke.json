@@ -1,0 +1,12 @@
+{
+  "date": "2026-05-17",
+  "generated_at": "2026-05-17T19:51:36+08:00",
+  "status": "fail",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "api_style": "anthropic-messages",
+  "error_summary": "Error: 401 {\"type\":\"error\",\"error\":{\"type\":\"authentication_error\",\"message\":\"invalid api key\"},\"request_id\":\"0658decb97bf467a4b00591aa4240310\"}"
+}

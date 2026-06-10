@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "google/heir",
+  "repo_url": "https://github.com/google/heir",
+  "stars": 732,
+  "forks": 135,
+  "issues": 337,
+  "PR": 36,
+  "description": "A compiler for homomorphic encryption",
+  "tags": [
+    "homomorphic-encryption",
+    "mlir"
+  ]
+}

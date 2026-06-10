@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "manaflow-ai/cmux",
+  "repo_url": "https://github.com/manaflow-ai/cmux",
+  "stars": 20076,
+  "forks": 1508,
+  "issues": 1103,
+  "PR": 1127,
+  "description": "Ghostty-based macOS terminal with vertical tabs and notifications for AI coding agents",
+  "tags": [
+    "amp",
+    "claude-code",
+    "codex",
+    "gemini",
+    "ghostty",
+    "opencode",
+    "terminal",
+    "tmux"
+  ]
+}

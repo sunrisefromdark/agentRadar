@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "getpaseo/paseo",
+  "repo_url": "https://github.com/getpaseo/paseo",
+  "stars": 7525,
+  "forks": 712,
+  "issues": 397,
+  "PR": 132,
+  "description": "Coding agents from your phone, desktop and CLI",
+  "tags": [
+    "ade",
+    "agents",
+    "claude-code",
+    "codex",
+    "copilot",
+    "developer-tools",
+    "gemini",
+    "mobile",
+    "opencode",
+    "orchestration",
+    "pi"
+  ]
+}

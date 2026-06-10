@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "open-compass/opencompass",
+  "repo_url": "https://github.com/open-compass/opencompass",
+  "stars": 7057,
+  "forks": 783,
+  "issues": 377,
+  "PR": 82,
+  "description": "OpenCompass is an LLM evaluation platform, supporting a wide range of models (Llama3, Mistral, InternLM2,GPT-4,LLaMa2, Qwen,GLM, Claude, etc) over 100+ datasets.",
+  "tags": [
+    "benchmark",
+    "chatgpt",
+    "evaluation",
+    "large-language-model",
+    "llama2",
+    "llama3",
+    "llm",
+    "openai"
+  ]
+}

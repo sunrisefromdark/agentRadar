@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "lancedb/lancedb",
+  "repo_url": "https://github.com/lancedb/lancedb",
+  "stars": 10354,
+  "forks": 881,
+  "issues": 559,
+  "PR": 108,
+  "description": "Developer-friendly OSS embedded retrieval library for multimodal AI. Search More; Manage Less.",
+  "tags": [
+    "approximate-nearest-neighbor-search",
+    "image-search",
+    "nearest-neighbor-search",
+    "recommender-system",
+    "search-engine",
+    "semantic-search",
+    "similarity-search",
+    "vector-database"
+  ]
+}

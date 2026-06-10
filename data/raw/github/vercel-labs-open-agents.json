@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "vercel-labs/open-agents",
+  "repo_url": "https://github.com/vercel-labs/open-agents",
+  "stars": 5509,
+  "forks": 707,
+  "issues": 30,
+  "PR": 21,
+  "description": "An open source template for building cloud agents.",
+  "tags": [
+    "agent",
+    "agents",
+    "ai",
+    "background-agents"
+  ]
+}

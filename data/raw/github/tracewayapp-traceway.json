@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "tracewayapp/traceway",
+  "repo_url": "https://github.com/tracewayapp/traceway",
+  "stars": 808,
+  "forks": 22,
+  "issues": 21,
+  "PR": 2,
+  "description": "The only tool you need to know what is happening and how to fix it.",
+  "tags": [
+    "alerting",
+    "exception-tracker",
+    "issue-tracking",
+    "logs",
+    "metrics",
+    "monitoring",
+    "observability-platform",
+    "open-telemetry",
+    "otel",
+    "session-replay",
+    "telemetry",
+    "traces"
+  ]
+}

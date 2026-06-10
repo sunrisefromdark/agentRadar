@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "Open-Dev-Society/OpenStock",
+  "repo_url": "https://github.com/Open-Dev-Society/OpenStock",
+  "stars": 12426,
+  "forks": 1646,
+  "issues": 21,
+  "PR": 6,
+  "description": "OpenStock is an open-source alternative to expensive market platforms. Track real-time prices, set personalized alerts, and explore detailed company insights — built openly, for everyone, forever free.",
+  "tags": [
+    "coderabbit",
+    "inngest",
+    "nextjs",
+    "shadcn-ui",
+    "stock-market",
+    "tailwindcss"
+  ]
+}

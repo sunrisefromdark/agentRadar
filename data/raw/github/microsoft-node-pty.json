@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "microsoft/node-pty",
+  "repo_url": "https://github.com/microsoft/node-pty",
+  "stars": 1947,
+  "forks": 319,
+  "issues": 27,
+  "PR": 14,
+  "description": "Fork pseudoterminals in Node.JS",
+  "tags": [
+    "conpty",
+    "forkpty",
+    "openpty",
+    "pseudoterminal",
+    "pty",
+    "terminal",
+    "winpty"
+  ]
+}

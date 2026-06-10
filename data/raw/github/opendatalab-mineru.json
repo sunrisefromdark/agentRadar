@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "opendatalab/MinerU",
+  "repo_url": "https://github.com/opendatalab/MinerU",
+  "stars": 65337,
+  "forks": 5509,
+  "issues": 15,
+  "PR": 10,
+  "description": "Transforms complex documents like PDFs and Office docs into LLM-ready markdown/JSON for your Agentic workflows.",
+  "tags": [
+    "ai4science",
+    "document-analysis",
+    "docx",
+    "extract-data",
+    "layout-analysis",
+    "ocr",
+    "parser",
+    "pdf",
+    "pdf-converter",
+    "pdf-extractor-llm",
+    "pdf-extractor-pretrain",
+    "pdf-extractor-rag",
+    "pdf-parser",
+    "pptx",
+    "python",
+    "xlsx"
+  ]
+}

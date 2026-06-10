@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "NousResearch/Megatron-Bridge",
+  "repo_url": "https://github.com/NousResearch/Megatron-Bridge",
+  "stars": 0,
+  "forks": 0,
+  "issues": 0,
+  "PR": 0,
+  "description": "Training library for Megatron-based models with bidirectional Hugging Face conversion capability",
+  "tags": []
+}

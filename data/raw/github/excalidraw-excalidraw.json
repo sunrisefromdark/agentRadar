@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "excalidraw/excalidraw",
+  "repo_url": "https://github.com/excalidraw/excalidraw",
+  "stars": 123725,
+  "forks": 13725,
+  "issues": 2174,
+  "PR": 901,
+  "description": "Virtual whiteboard for sketching hand-drawn like diagrams",
+  "tags": [
+    "canvas",
+    "collaboration",
+    "diagrams",
+    "drawing",
+    "hacktoberfest",
+    "productivity",
+    "whiteboard"
+  ]
+}

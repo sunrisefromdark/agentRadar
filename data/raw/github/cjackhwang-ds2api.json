@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "CJackHwang/ds2api",
+  "repo_url": "https://github.com/CJackHwang/ds2api",
+  "stars": 4517,
+  "forks": 1437,
+  "issues": 26,
+  "PR": 4,
+  "description": "DeepSeek-Compatible Middleware Interface: A technical exploration project in Go, focusing on high-concurrency protocol adaptation. It serves as a reference implementation for converting diverse web protocols into standardized formats.",
+  "tags": [
+    "api",
+    "claude-api",
+    "deepseek",
+    "deepseek-api",
+    "docker",
+    "freeapi",
+    "go",
+    "openai-api",
+    "proxy",
+    "proxy-server",
+    "react",
+    "vercel",
+    "vercel-deployment",
+    "zeabur"
+  ]
+}

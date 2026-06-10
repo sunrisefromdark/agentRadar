@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "CloakHQ/CloakBrowser",
+  "repo_url": "https://github.com/CloakHQ/CloakBrowser",
+  "stars": 21053,
+  "forks": 1660,
+  "issues": 78,
+  "PR": 12,
+  "description": "Stealth Chromium that passes every bot detection test. Drop-in Playwright replacement with source-level fingerprint patches. 30/30 tests passed.",
+  "tags": [
+    "ai-agents",
+    "anti-detect",
+    "antidetect-browser",
+    "bot-detection",
+    "browser-automation",
+    "captcha-bypass",
+    "chromium",
+    "cloudflare",
+    "cloudflare-bypass",
+    "fingerprint",
+    "headless-browser",
+    "playwright",
+    "puppeteer",
+    "python",
+    "recaptcha",
+    "selenium",
+    "stealth-browser",
+    "undetected",
+    "web-scraping",
+    "webscraping"
+  ]
+}

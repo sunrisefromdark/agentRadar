@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "warpdotdev/warp",
+  "repo_url": "https://github.com/warpdotdev/warp",
+  "stars": 59357,
+  "forks": 4653,
+  "issues": 3451,
+  "PR": 507,
+  "description": "Warp is an agentic development environment, born out of the terminal.",
+  "tags": [
+    "bash",
+    "linux",
+    "macos",
+    "rust",
+    "shell",
+    "terminal",
+    "wasm",
+    "zsh"
+  ]
+}

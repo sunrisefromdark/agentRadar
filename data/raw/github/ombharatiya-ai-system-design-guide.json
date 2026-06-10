@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "ombharatiya/ai-system-design-guide",
+  "repo_url": "https://github.com/ombharatiya/ai-system-design-guide",
+  "stars": 1224,
+  "forks": 268,
+  "issues": 0,
+  "PR": 0,
+  "description": "AI system design guide for engineers building production AI systems and evals.",
+  "tags": [
+    "agentic-ai",
+    "agentic-workflow",
+    "ai",
+    "ai-jobs",
+    "artificial-intelligence",
+    "aws",
+    "azure",
+    "claude",
+    "evals",
+    "forward-deployed-engineer",
+    "gemini",
+    "gen-ai",
+    "interview",
+    "interview-questions",
+    "llm",
+    "machine-learning",
+    "natural-language-processing",
+    "open-ai",
+    "rag",
+    "system-design-interview"
+  ]
+}

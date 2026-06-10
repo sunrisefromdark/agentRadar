@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "vercel/vercel",
+  "repo_url": "https://github.com/vercel/vercel",
+  "stars": 15569,
+  "forks": 3611,
+  "issues": 289,
+  "PR": 389,
+  "description": "Develop. Preview. Ship.",
+  "tags": [
+    "cli",
+    "cloud",
+    "command",
+    "hosting",
+    "jamstack",
+    "ship",
+    "vercel"
+  ]
+}

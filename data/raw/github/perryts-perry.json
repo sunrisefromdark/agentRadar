@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "PerryTS/perry",
+  "repo_url": "https://github.com/PerryTS/perry",
+  "stars": 3478,
+  "forks": 114,
+  "issues": 512,
+  "PR": 10,
+  "description": "A native TypeScript compiler written in Rust. Compiles TypeScript directly to executables using SWC and LLVM.",
+  "tags": [
+    "android",
+    "compile",
+    "harmonyos",
+    "ios",
+    "llvm",
+    "macos",
+    "native",
+    "smc",
+    "typescript",
+    "watchos",
+    "windows"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "google/skills",
+  "repo_url": "https://github.com/google/skills",
+  "stars": 11062,
+  "forks": 882,
+  "issues": 10,
+  "PR": 15,
+  "description": "Agent Skills for Google products and technologies",
+  "tags": [
+    "google",
+    "googlecloud",
+    "skills"
+  ]
+}

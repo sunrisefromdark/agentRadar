@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "CherryHQ/cherry-studio",
+  "repo_url": "https://github.com/CherryHQ/cherry-studio",
+  "stars": 46573,
+  "forks": 4422,
+  "issues": 885,
+  "PR": 211,
+  "description": "AI productivity studio with smart chat, autonomous agents, and 300+ assistants. Unified access to frontier LLMs",
+  "tags": [
+    "agent-skills",
+    "ai-agent",
+    "awesome-skills",
+    "claude-code",
+    "codex",
+    "deepseek",
+    "hermes-agent",
+    "openclaw",
+    "skills",
+    "vibe-coding"
+  ]
+}

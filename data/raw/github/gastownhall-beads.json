@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "gastownhall/beads",
+  "repo_url": "https://github.com/gastownhall/beads",
+  "stars": 23943,
+  "forks": 1586,
+  "issues": 204,
+  "PR": 152,
+  "description": "Beads - A memory upgrade for your coding agent",
+  "tags": [
+    "agents",
+    "claude-code",
+    "coding"
+  ]
+}

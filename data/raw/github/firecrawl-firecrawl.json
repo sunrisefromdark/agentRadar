@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "firecrawl/firecrawl",
+  "repo_url": "https://github.com/firecrawl/firecrawl",
+  "stars": 128017,
+  "forks": 7631,
+  "issues": 75,
+  "PR": 297,
+  "description": "The API to search, scrape, and interact with the web at scale. 🔥",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "ai-crawler",
+    "ai-scraping",
+    "ai-search",
+    "crawler",
+    "data-extraction",
+    "html-to-markdown",
+    "llm",
+    "markdown",
+    "scraper",
+    "scraping",
+    "web-crawler",
+    "web-data",
+    "web-data-extraction",
+    "web-scraper",
+    "web-scraping",
+    "web-search",
+    "webscraping"
+  ]
+}

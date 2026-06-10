@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "awesome-selfhosted/awesome-selfhosted",
+  "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+  "stars": 296782,
+  "forks": 13810,
+  "issues": 0,
+  "PR": 0,
+  "description": "A list of Free Software network services and web applications which can be hosted on your own servers",
+  "tags": [
+    "awesome",
+    "awesome-list",
+    "cloud",
+    "free-software",
+    "hosting",
+    "privacy",
+    "self-hosted",
+    "selfhosted"
+  ]
+}

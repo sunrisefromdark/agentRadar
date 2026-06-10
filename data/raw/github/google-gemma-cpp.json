@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "google/gemma.cpp",
+  "repo_url": "https://github.com/google/gemma.cpp",
+  "stars": 6911,
+  "forks": 640,
+  "issues": 22,
+  "PR": 12,
+  "description": "lightweight, standalone C++ inference engine for Google's Gemma models.",
+  "tags": []
+}

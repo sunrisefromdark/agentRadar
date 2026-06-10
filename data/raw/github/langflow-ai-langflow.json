@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "langflow-ai/langflow",
+  "repo_url": "https://github.com/langflow-ai/langflow",
+  "stars": 149163,
+  "forks": 9179,
+  "issues": 240,
+  "PR": 685,
+  "description": "Langflow is a powerful tool for building and deploying AI-powered agents and workflows.",
+  "tags": [
+    "agents",
+    "chatgpt",
+    "generative-ai",
+    "large-language-models",
+    "multiagent",
+    "react-flow"
+  ]
+}

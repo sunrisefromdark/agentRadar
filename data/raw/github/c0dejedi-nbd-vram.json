@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "c0deJedi/nbd-vram",
+  "repo_url": "https://github.com/c0deJedi/nbd-vram",
+  "stars": 278,
+  "forks": 6,
+  "issues": 0,
+  "PR": 0,
+  "description": "Use your NVIDIA GPU's VRAM as swap space on Linux. Built for laptops with soldered memory and no upgrade path. If you have an RTX card sitting there with 8GB of VRAM and you're getting swapped to SSD, this puts that VRAM to work",
+  "tags": [
+    "cuda",
+    "gpu",
+    "laptop",
+    "linux",
+    "memory",
+    "nbd",
+    "nvidia",
+    "swap",
+    "vram"
+  ]
+}

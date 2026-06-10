@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "aws/aws-lc",
+  "repo_url": "https://github.com/aws/aws-lc",
+  "stars": 785,
+  "forks": 183,
+  "issues": 17,
+  "PR": 30,
+  "description": "AWS-LC is a general-purpose cryptographic library maintained by the AWS Cryptography team for AWS and their customers. It іs based on code from the Google BoringSSL project and the OpenSSL project.",
+  "tags": []
+}

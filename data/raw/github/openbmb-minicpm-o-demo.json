@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "OpenBMB/MiniCPM-o-Demo",
+  "repo_url": "https://github.com/OpenBMB/MiniCPM-o-Demo",
+  "stars": 201,
+  "forks": 36,
+  "issues": 18,
+  "PR": 1,
+  "description": "Official PyTorch+CUDA Full-functional Web Demo for MiniCPM-o 4.5",
+  "tags": []
+}

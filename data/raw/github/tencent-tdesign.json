@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "Tencent/tdesign",
+  "repo_url": "https://github.com/Tencent/tdesign",
+  "stars": 3882,
+  "forks": 321,
+  "issues": 38,
+  "PR": 1,
+  "description": "Enterprise Design System",
+  "tags": [
+    "miniapp",
+    "react",
+    "tdesign",
+    "vue"
+  ]
+}

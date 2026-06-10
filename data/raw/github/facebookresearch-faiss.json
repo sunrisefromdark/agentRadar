@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "facebookresearch/faiss",
+  "repo_url": "https://github.com/facebookresearch/faiss",
+  "stars": 40189,
+  "forks": 4403,
+  "issues": 219,
+  "PR": 55,
+  "description": "A library for efficient similarity search and clustering of dense vectors.",
+  "tags": []
+}

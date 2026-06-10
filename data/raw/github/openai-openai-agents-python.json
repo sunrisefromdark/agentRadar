@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "openai/openai-agents-python",
+  "repo_url": "https://github.com/openai/openai-agents-python",
+  "stars": 26721,
+  "forks": 4115,
+  "issues": 44,
+  "PR": 68,
+  "description": "A lightweight, powerful framework for multi-agent workflows",
+  "tags": [
+    "agents",
+    "ai",
+    "framework",
+    "harness",
+    "llm",
+    "openai",
+    "python"
+  ]
+}

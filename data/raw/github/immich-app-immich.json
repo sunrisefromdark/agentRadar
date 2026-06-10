@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "immich-app/immich",
+  "repo_url": "https://github.com/immich-app/immich",
+  "stars": 101200,
+  "forks": 5653,
+  "issues": 515,
+  "PR": 147,
+  "description": "High performance self-hosted photo and video management solution.",
+  "tags": [
+    "backup-tool",
+    "flutter",
+    "google-photos",
+    "google-photos-alternative",
+    "javascript",
+    "mobile-app",
+    "nestjs",
+    "nodejs",
+    "photo-gallery",
+    "photos",
+    "photos-management",
+    "self-hosted",
+    "svelte",
+    "sveltekit",
+    "typescript",
+    "videos"
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "soxoj/maigret",
+  "repo_url": "https://github.com/soxoj/maigret",
+  "stars": 30958,
+  "forks": 2219,
+  "issues": 39,
+  "PR": 6,
+  "description": "🕵️‍♂️ Collect a dossier on a person by username from 3000+ sites",
+  "tags": [
+    "cli",
+    "cybersecurity",
+    "identification",
+    "information-gathering",
+    "infosec",
+    "investigation",
+    "open-source",
+    "osint",
+    "osint-framework",
+    "osint-python",
+    "pentesting",
+    "python",
+    "python3",
+    "reconnaissance",
+    "redteam",
+    "scraping",
+    "sherlock",
+    "social-network",
+    "socmint",
+    "username"
+  ]
+}

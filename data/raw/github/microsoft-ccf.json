@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "microsoft/CCF",
+  "repo_url": "https://github.com/microsoft/CCF",
+  "stars": 863,
+  "forks": 252,
+  "issues": 96,
+  "PR": 13,
+  "description": "Confidential Consortium Framework",
+  "tags": [
+    "confidentiality",
+    "consortium",
+    "cpp",
+    "distributed-ledger",
+    "distributed-systems",
+    "framework",
+    "governance",
+    "integrity",
+    "javascript",
+    "ledger",
+    "typescript"
+  ]
+}

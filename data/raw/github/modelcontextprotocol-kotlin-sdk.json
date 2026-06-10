@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "modelcontextprotocol/kotlin-sdk",
+  "repo_url": "https://github.com/modelcontextprotocol/kotlin-sdk",
+  "stars": 1380,
+  "forks": 213,
+  "issues": 60,
+  "PR": 15,
+  "description": "The official Kotlin SDK for Model Context Protocol servers and clients. Maintained in collaboration with JetBrains",
+  "tags": [
+    "kotlin-multiplatform",
+    "mcp"
+  ]
+}

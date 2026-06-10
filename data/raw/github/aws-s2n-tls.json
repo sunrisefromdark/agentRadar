@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "aws/s2n-tls",
+  "repo_url": "https://github.com/aws/s2n-tls",
+  "stars": 4729,
+  "forks": 781,
+  "issues": 277,
+  "PR": 32,
+  "description": "An implementation of the TLS/SSL protocols",
+  "tags": [
+    "c",
+    "c99",
+    "crypto",
+    "cryptography",
+    "encryption",
+    "s2n",
+    "ssl",
+    "tls"
+  ]
+}

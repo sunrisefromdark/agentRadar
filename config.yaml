@@ -1,0 +1,372 @@
+sources:
+  agents_radar:
+    enabled: true
+    mode: github-http
+    local_path: data/upstream/agents-radar-source
+    manifest_path: data/upstream/agents-radar-source/manifest.json
+    repo_url: https://github.com/duanyytop/agents-radar
+    refresh_timeout_ms: 300000
+    reports:
+      daily:
+        - ai-trending
+        - ai-agents
+        - ai-cli
+      weekly:
+        - ai-weekly
+      monthly:
+        - ai-monthly
+  trendshift:
+    enabled: true
+    mode: http
+    base_url: https://trendshift.io
+    snapshot_dir: data/raw/trendshift
+  ecosystem_focus:
+    enabled: true
+    mode: github-search
+    recent_days: 7
+    per_ecosystem_limit: 10
+    max_total_candidates: 25
+    historical_precision_days: 45
+    judge_top_n: 20
+    entity_tiers:
+      core:
+        builders:
+          - simonw
+          - paul-gauthier
+          - hwchase17
+          - karpathy
+        companies:
+          - openai
+          - anthropics
+          - google
+          - google-gemini
+          - google-deepmind
+          - microsoft
+          - aws
+          - awslabs
+          - meta-llama
+          - xai-org
+          - mistralai
+          - cohere-ai
+          - deepseek-ai
+          - QwenLM
+        engineers:
+          - addyosmani
+      proven:
+        builders:
+          - yoheinakajima
+          - jxnl
+          - rasbt
+          - samuelcolvin
+        companies:
+          - EleutherAI
+          - allenai
+          - THUDM
+          - InternLM
+          - minimax-ai
+          - ByteDance-Seed
+          - alibaba
+          - Tencent
+          - TencentARC
+          - vercel
+          - sourcegraph
+          - All-Hands-AI
+          - continuedev
+          - run-llama
+          - pydantic
+          - langchain-ai
+          - modelcontextprotocol
+          - browser-use
+          - mem0ai
+          - langfuse
+          - crewAIInc
+          - huggingface
+          - OpenBMB
+          - HKUDS
+        engineers:
+          - thorwebdev
+          - dbieber
+      watch:
+        builders:
+          - mckaywrigley
+          - swyxio
+          - unclecode
+        companies:
+          - NousResearch
+          - facebookresearch
+          - bytedance
+          - camel-ai
+          - jina-ai
+          - mastra-ai
+          - instructor-ai
+        engineers: []
+    ecosystems:
+      - name: coding-agents
+        enabled: true
+        keywords:
+          - claude code
+          - codex
+          - aider
+          - cursor
+          - code review
+          - patch
+          - diff
+          - repo coding
+        topic_hints:
+          - coding-agent
+          - code-review
+        repo_seeds:
+          - openai/codex
+          - Aider-AI/aider
+        org_seeds:
+          - openai
+          - anthropics
+        negative_keywords:
+          - video game
+          - gaming
+          - minecraft
+      - name: agent-runtime
+        enabled: true
+        keywords:
+          - runtime
+          - orchestration
+          - workflow
+          - sandbox
+          - scheduler
+          - execution
+        topic_hints:
+          - agent-runtime
+          - workflow-engine
+        repo_seeds:
+          - langchain-ai/langgraph
+          - openai/swarm
+        org_seeds:
+          - langchain-ai
+          - openai
+        negative_keywords:
+          - airflow
+          - game runtime
+      - name: skills-tools-mcp
+        enabled: true
+        keywords:
+          - skills
+          - mcp
+          - plugin
+          - connector
+          - tool-use
+        topic_hints:
+          - mcp
+          - plugin-system
+        repo_seeds:
+          - modelcontextprotocol/servers
+          - openai/codex
+        org_seeds:
+          - modelcontextprotocol
+          - openai
+        negative_keywords:
+          - minecraft plugin
+          - browser extension
+      - name: memory-knowledge
+        enabled: true
+        keywords:
+          - memory
+          - context
+          - retrieval
+          - knowledge
+          - rag
+        topic_hints:
+          - agent-memory
+          - retrieval
+        repo_seeds:
+          - mem0ai/mem0
+          - langchain-ai/langmem
+        org_seeds:
+          - mem0ai
+          - langchain-ai
+        negative_keywords:
+          - knowledge graph for games
+      - name: browser-computer-use
+        enabled: true
+        keywords:
+          - browser agent
+          - computer use
+          - desktop
+          - gui
+          - automation
+        topic_hints:
+          - browser-automation
+          - computer-use
+        repo_seeds:
+          - browser-use/browser-use
+          - microsoft/playwright-mcp
+        org_seeds:
+          - browser-use
+          - microsoft
+        negative_keywords:
+          - marketing automation
+          - gui game
+      - name: eval-observability-governance
+        enabled: true
+        keywords:
+          - eval
+          - trace
+          - observability
+          - review
+          - guardrail
+          - policy
+        topic_hints:
+          - observability
+          - evals
+        repo_seeds:
+          - openai/evals
+          - langfuse/langfuse
+        org_seeds:
+          - openai
+          - langfuse
+        negative_keywords:
+          - policy gradient
+          - code owners only
+      - name: multi-agent-coordination
+        enabled: true
+        keywords:
+          - swarm
+          - multi-agent
+          - team
+          - coordination
+        topic_hints:
+          - multi-agent
+          - swarm
+        repo_seeds:
+          - openai/swarm
+          - crewAIInc/crewAI
+        org_seeds:
+          - openai
+          - crewAIInc
+        negative_keywords:
+          - sports team
+          - team chat
+      - name: agent-ui-workbench
+        enabled: true
+        keywords:
+          - viewer
+          - console
+          - workbench
+          - session log
+          - operator ui
+        topic_hints:
+          - agent-ui
+          - session-log
+        repo_seeds:
+          - openai/codex
+          - anthropics/claude-code
+        org_seeds:
+          - openai
+          - anthropics
+        negative_keywords:
+          - video viewer
+          - game console
+      - name: agentic-rl
+        enabled: true
+        keywords:
+          - agentic rl
+          - reinforcement learning
+          - rl agent
+          - self-play
+          - trajectory optimization
+          - reward model
+          - policy optimization
+        topic_hints:
+          - reinforcement-learning
+          - agent-training
+        repo_seeds:
+          - openai/baselines
+          - huggingface/trl
+        org_seeds:
+          - openai
+          - huggingface
+        negative_keywords:
+          - robotics only
+          - rl game
+  watchlist_orgs:
+    - NousResearch
+    - openai
+    - anthropics
+    - google
+    - google-gemini
+    - google-deepmind
+    - microsoft
+    - aws
+    - awslabs
+    - meta-llama
+    - facebookresearch
+    - xai-org
+    - mistralai
+    - cohere-ai
+    - deepseek-ai
+    - QwenLM
+    - EleutherAI
+    - allenai
+    - THUDM
+    - InternLM
+    - minimax-ai
+    - bytedance
+    - ByteDance-Seed
+    - alibaba
+    - Tencent
+    - TencentARC
+    - vercel
+    - sourcegraph
+    - All-Hands-AI
+    - continuedev
+    - run-llama
+    - pydantic
+    - camel-ai
+    - jina-ai
+    - mastra-ai
+    - instructor-ai
+    - langchain-ai
+    - modelcontextprotocol
+    - browser-use
+    - mem0ai
+    - langfuse
+    - crewAIInc
+    - huggingface
+    - OpenBMB
+    - HKUDS
+  user_interest_profile:
+    enabled: true
+    topics:
+      - name: memory
+        weight: 0.25
+      - name: UI
+        weight: 0.25
+      - name: skills
+        weight: 0.25
+      - name: claude code
+        weight: 0.25
+llm:
+  enabled: false
+  mode: rules-only
+  provider: none
+  daily_judge_top_n: 12
+weights:
+  star_velocity: 0.2
+  engagement_score: 0.2
+  architecture_shift: 0.2
+  compounding_capability: 0.15
+  autonomy_score: 0.15
+  discussion_score: 0.1
+thresholds:
+  high_score: 75
+  anomaly_star_delta_daily: 500
+  anomaly_star_delta_weekly: 1500
+  min_engagement_ratio: 0.02
+  min_sources_for_discussion_bonus: 2
+runtime:
+  dry_run_default: false
+  retry:
+    attempts: 3
+    base_delay_ms: 1000
+  logging:
+    level: info
+    json: false

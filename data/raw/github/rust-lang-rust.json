@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "rust-lang/rust",
+  "repo_url": "https://github.com/rust-lang/rust",
+  "stars": 113111,
+  "forks": 15001,
+  "issues": 11324,
+  "PR": 1144,
+  "description": "Empowering everyone to build reliable and efficient software.",
+  "tags": [
+    "compiler",
+    "language",
+    "rust"
+  ]
+}

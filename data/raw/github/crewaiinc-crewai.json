@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "crewAIInc/crewAI",
+  "repo_url": "https://github.com/crewAIInc/crewAI",
+  "stars": 52747,
+  "forks": 7355,
+  "issues": 42,
+  "PR": 349,
+  "description": "Framework for orchestrating role-playing, autonomous AI agents. By fostering collaborative intelligence, CrewAI empowers agents to work together seamlessly, tackling complex tasks.",
+  "tags": [
+    "agents",
+    "ai",
+    "ai-agents",
+    "aiagentframework",
+    "llms"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "neovim/neovim",
+  "repo_url": "https://github.com/neovim/neovim",
+  "stars": 99780,
+  "forks": 6906,
+  "issues": 1628,
+  "PR": 291,
+  "description": "Vim-fork focused on extensibility and usability",
+  "tags": [
+    "api",
+    "c",
+    "lua",
+    "neovim",
+    "nvim",
+    "text-editor",
+    "vim"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "iamgio/quarkdown",
+  "repo_url": "https://github.com/iamgio/quarkdown",
+  "stars": 14805,
+  "forks": 422,
+  "issues": 25,
+  "PR": 4,
+  "description": "🪐 Markdown with superpowers: from ideas to papers, presentations, websites, books, and knowledge bases.",
+  "tags": [
+    "compiler",
+    "documentation",
+    "knowledge-management",
+    "markdown",
+    "markup",
+    "markup-language",
+    "paper",
+    "pdf",
+    "presentations",
+    "scripting-language",
+    "slides",
+    "static-site-generator",
+    "typesetting",
+    "typesetting-system",
+    "wiki"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "colbymchenry/codegraph",
+  "repo_url": "https://github.com/colbymchenry/codegraph",
+  "stars": 32986,
+  "forks": 1987,
+  "issues": 88,
+  "PR": 94,
+  "description": "Pre-indexed code knowledge graph for Claude Code, Codex, Gemini, Cursor, OpenCode, AntiGravity, Kiro, and Hermes Agent — fewer tokens, fewer tool calls, 100% local",
+  "tags": []
+}

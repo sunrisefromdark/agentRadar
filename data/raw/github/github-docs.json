@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "github/docs",
+  "repo_url": "https://github.com/github/docs",
+  "stars": 20181,
+  "forks": 67311,
+  "issues": 134,
+  "PR": 91,
+  "description": "The open-source repo for docs.github.com",
+  "tags": [
+    "docs",
+    "works-with-codespaces"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "Kaelio/ktx",
+  "repo_url": "https://github.com/Kaelio/ktx",
+  "stars": 446,
+  "forks": 21,
+  "issues": 14,
+  "PR": 5,
+  "description": "ktx is the context layer for analytics agents",
+  "tags": [
+    "ai-agent",
+    "agent",
+    "memory"
+  ]
+}

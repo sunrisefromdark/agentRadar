@@ -1,0 +1,646 @@
+{
+  "scope": "ecosystem-focus",
+  "date": "2026-06-01",
+  "generated_at": "2026-06-01T15:24:59+08:00",
+  "status": "active",
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "summary_attempt_count": 16,
+    "summary_success_count": 16,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "candidate_count": 8,
+  "ecosystem_counts": {
+    "browser-computer-use": 1,
+    "skills-tools-mcp": 6,
+    "agent-runtime": 6,
+    "coding-agents": 3,
+    "memory-knowledge": 1
+  },
+  "notes": [
+    "query ecosystem=coding-agents source=keyword:aider",
+    "query ecosystem=coding-agents source=keyword:claude code",
+    "query ecosystem=coding-agents source=keyword:code review",
+    "query ecosystem=coding-agents source=keyword:codex",
+    "query ecosystem=coding-agents source=topic:code-review",
+    "query ecosystem=coding-agents source=topic:coding-agent",
+    "query ecosystem=coding-agents source=org:anthropics",
+    "query ecosystem=coding-agents source=org:openai",
+    "query ecosystem=coding-agents source=repo:Aider-AI/aider",
+    "query ecosystem=coding-agents source=repo:openai/codex",
+    "daily normalized matches ecosystem=coding-agents count=5",
+    "query ecosystem=agent-runtime source=keyword:execution",
+    "query ecosystem=agent-runtime source=keyword:orchestration",
+    "query ecosystem=agent-runtime source=keyword:runtime",
+    "query ecosystem=agent-runtime source=keyword:sandbox",
+    "query ecosystem=agent-runtime source=topic:agent-runtime",
+    "query ecosystem=agent-runtime source=topic:workflow-engine",
+    "query ecosystem=agent-runtime source=org:langchain-ai",
+    "query ecosystem=agent-runtime source=org:openai",
+    "query ecosystem=agent-runtime source=repo:langchain-ai/langgraph",
+    "query ecosystem=agent-runtime source=repo:openai/swarm",
+    "daily normalized matches ecosystem=agent-runtime count=6",
+    "query ecosystem=skills-tools-mcp source=keyword:connector",
+    "query ecosystem=skills-tools-mcp source=keyword:mcp",
+    "query ecosystem=skills-tools-mcp source=keyword:plugin",
+    "query ecosystem=skills-tools-mcp source=keyword:skills",
+    "query ecosystem=skills-tools-mcp source=topic:mcp",
+    "query ecosystem=skills-tools-mcp source=topic:plugin-system",
+    "query ecosystem=skills-tools-mcp source=org:modelcontextprotocol",
+    "query ecosystem=skills-tools-mcp source=org:openai",
+    "query ecosystem=skills-tools-mcp source=repo:modelcontextprotocol/servers",
+    "query ecosystem=skills-tools-mcp source=repo:openai/codex",
+    "daily normalized matches ecosystem=skills-tools-mcp count=9",
+    "query ecosystem=memory-knowledge source=keyword:context",
+    "query ecosystem=memory-knowledge source=keyword:knowledge",
+    "query ecosystem=memory-knowledge source=keyword:memory",
+    "query ecosystem=memory-knowledge source=keyword:rag",
+    "query ecosystem=memory-knowledge source=topic:agent-memory",
+    "query ecosystem=memory-knowledge source=topic:retrieval",
+    "query ecosystem=memory-knowledge source=org:langchain-ai",
+    "query ecosystem=memory-knowledge source=org:mem0ai",
+    "query ecosystem=memory-knowledge source=repo:langchain-ai/langmem",
+    "query ecosystem=memory-knowledge source=repo:mem0ai/mem0",
+    "daily normalized matches ecosystem=memory-knowledge count=2",
+    "query ecosystem=browser-computer-use source=keyword:automation",
+    "query ecosystem=browser-computer-use source=keyword:browser agent",
+    "query ecosystem=browser-computer-use source=keyword:computer use",
+    "daily normalized matches ecosystem=browser-computer-use count=2",
+    "daily normalized matches ecosystem=multi-agent-coordination count=1",
+    "daily normalized matches ecosystem=agentic-rl count=1",
+    "query failed ecosystem=browser-computer-use source=keyword:desktop: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=topic:browser-automation: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=topic:computer-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=org:browser-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=org:microsoft: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=repo:browser-use/browser-use: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=browser-computer-use source=repo:microsoft/playwright-mcp: GitHub Search returned HTTP 403 for browser-computer-use",
+    "query failed ecosystem=eval-observability-governance source=keyword:eval: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:guardrail: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:observability: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=keyword:policy: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=topic:evals: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=topic:observability: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=org:langfuse: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=org:openai: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=repo:langfuse/langfuse: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=eval-observability-governance source=repo:openai/evals: GitHub Search returned HTTP 403 for eval-observability-governance",
+    "query failed ecosystem=multi-agent-coordination source=keyword:coordination: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:multi-agent: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:team: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:multi-agent: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:crewAIInc: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:openai: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:crewAIInc/crewAI: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:openai/swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=agent-ui-workbench source=keyword:console: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:operator ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:session log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:viewer: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:agent-ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:session-log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:anthropics: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:openai: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:anthropics/claude-code: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:openai/codex: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agentic-rl source=keyword:agentic rl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:policy optimization: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reinforcement learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reward model: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:agent-training: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:reinforcement-learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:huggingface: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:openai: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:huggingface/trl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:openai/baselines: GitHub Search returned HTTP 403 for agentic-rl"
+  ],
+  "entries": [
+    {
+      "repo_full_name": "awslabs/mcp",
+      "repo_url": "https://github.com/awslabs/mcp",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-05-31T00:00:00.000Z",
+      "repo_updated_at": "2026-06-01T00:00:00.000Z",
+      "ecosystems": [
+        "browser-computer-use",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [
+          "microsoft/playwright-mcp"
+        ],
+        "org_seeds": []
+      },
+      "description": "Open source MCP Servers for AWS",
+      "stars": 9169,
+      "forks": 1551,
+      "issues": 672,
+      "PR": 506,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:awslabs,fresh-today,aws,mcp,mcp-client,mcp-clients,mcp-host,mcp-server,mcp-servers,mcp-tools,modelcontextprotocol",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "awslabs"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 104,
+      "observer_score": 109,
+      "observer_rank": 1,
+      "project_brief_cn": "awslabs/mcp 是 AWS 官方实验室开源的 MCP（Model Context Protocol）服务器集合，为 AWS 服务提供标准化的工具接口，让 AI 智能体能够通过 MCP 协议直接调用 AWS 能力（如计算、存储、数据库等），旨在降低开发者构建 AI Agent 时与云基础设施集成的门槛。",
+      "why_now_cn": "该项目过去 24 小时内被标记为'new-24h'，目前斩获 9169 星和 1551 fork，社区关注度极高；由 AWS 官方实验室主导，具备企业背书，且被归类为'core'层级与'steady'爆发曲线，说明其并非短期炒作，而是生态深度支撑的重要基建。",
+      "watch_next_cn": "需验证 AWS 是否持续维护并跟进上游 MCP 协议演进，以及能否吸引第三方非 AWS 服务贡献者加入；当前'mixed'历史精度提示早期可能存在路线摇摆，下一步应关注官方文档成熟度和实际生产级案例出现频率。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "AWS 官方出品，MCP 协议在 AI Agent 生态中已成为事实标准，该项目提供标准化接口，让 Agent 直接调用 AWS 全系云服务，战略卡位精准。9000+ Star 与 steady 爆发曲线表明不是短期炒作，即使去掉 AWS 品牌，协议深度和服务广度也足以支撑 core 地位。",
+      "judge_score_delta": 5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-05-28T00:00:00.000Z",
+      "repo_updated_at": "2026-06-01T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "codex"
+        ],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "| #1088 [codex] Handle OpenAI Codex final tool-call arguments | ⏳ **待合并** | 修复 OpenAI Codex provider 中工具调用参数流的边缘 case：记录 `response.function_call_arguments.done` 载荷、在无增量参数时合成流式增量、保持空参数字符串流经诊断管道以避免误报缺失参数错误 | [PR #1088](https://github.com/moltis-org/moltis/pull/1088) |",
+      "stars": 2716,
+      "forks": 321,
+      "issues": 46,
+      "PR": 13,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime,tool-use",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:mixed",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 87,
+      "observer_score": 92,
+      "observer_rank": 2,
+      "project_brief_cn": "Moltis 是一个用 Rust 构建的单二进制 AI Agent 运行时，支持自部署、MCP（工具协议）、沙箱执行和语音交互，核心目标是为开发者提供一个轻量但完整的代理运行环境，让 LLM 能可靠地调用外部工具并处理流式参数。当前仓库正在修复 OpenAI Codex provider 中工具调用参数的流式边缘案例，以确保诊断管道不会误报缺失参数错误。",
+      "why_now_cn": "该项目今日仍有活跃 PR 合并（#1088），显示持续维护；拥有 2716 星和跨生态系统标签（agent-runtime、coding-agents、skills-tools-mcp），表明其在 AI 代理基础设施中具备广泛适用性；每日星数净增约 2 个，社区关注度稳定；单二进制、自部署、集成 MCP 和沙箱的特性契合当前开发者对轻量、可控、安全代理运行时的需求。",
+      "watch_next_cn": "下一步需验证其是否能在多 provider 场景下稳定处理所有工具调用参数流边缘案例，尤其是无增量参数时的合成逻辑是否会引入新问题；项目历史标签为 mixed（历史精度不一），需关注其长期维护节奏和核心贡献者活跃度；当前未公开企业或知名工程师背书，商业采用或大规模部署的验证尚缺失。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "Rust 构建的单二进制 Agent 运行时，自带 MCP 支持、沙箱执行和语音交互，工程完成度高，且有持续 PR 合并记录。跨生态标签（agent-runtime/coding-agents/MCP）有实际功能支撑而非贴牌。虽无明显机构背书，但技术栈扎实，应提级观察。",
+      "judge_score_delta": 5,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "revfactory/harness",
+      "repo_url": "https://github.com/revfactory/harness",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-05-31T00:00:00.000Z",
+      "repo_updated_at": "2026-06-01T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "plugin"
+        ],
+        "topic_hints": [
+          "agent-runtime"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "**Agent 基础设施爆发**：今日 Trending 榜单中，Anthropic 官方 [claude-code](https://github.com/anthropics/claude-code) 持续高热（+489 stars），叠加 [compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin)、[harness](https://github.com/revfactory/harness) 等\"Agent 编排层\"项目集体登榜，标志着社区正从\"单点 Agent 工具\"向\"系统化 Agent 工程平台\"迁移。**终端原生 AI**成为明确趋势——Claude Code、Hermes Agent、OpenClaw 等 CLI 优先的交互范式正在重塑开发者工作流。同时，[VoxCPM](https://github.com/OpenBMB/VoxCPM) 以 635 日新增 stars 领跑语音大模型赛道，\"Tokenizer-Free TTS\"技术路线引发关注；[train-llm-from-scratch](https://github.com/FareedKhan-dev/train-llm-from-scratch) 则反映出\"极简 LLM 训练\"教育内容的持续刚需。",
+      "stars": 4809,
+      "forks": 661,
+      "issues": 0,
+      "PR": 6,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar,trendshift",
+        "project_tags=agent,tool-use,infra,claude-code,claude-code-plugin,harness,harness-engineering,ai-agent,ai-skills,agent-runtime",
+        "watch_reason=breakout-newcomer"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "watch",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:watch",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "breakout-newcomer",
+      "base_observer_score": 90,
+      "observer_score": 92,
+      "observer_rank": 3,
+      "project_brief_cn": "Harness 是一个面向 AI Agent 的编排与工程平台，专注于为如 Claude Code 等 Agent 提供插件化能力、运行环境管理和工程化工具链，帮助开发者将零散的 Agent 能力整合为可复用、可组合的系统级工作流，属于 Agent 基础设施层的核心组件。",
+      "why_now_cn": "今日 GitHub Trending 显示 Claude Code（+489 stars）与 Harness（+359 stars/日）等 Agent 编排项目集体登榜，叠加 compound-engineering-plugin 等同类项目，表明社区正从单个 Agent 工具爆发转向系统化工程平台需求，Harness 作为跨生态的编排层基础设施，正好承接这一趋势，其 24 小时内新增 4809 stars 和 661 forks 的增长数据也印证了市场的迫切关注。",
+      "watch_next_cn": "下一步需验证 Harness 能否持续吸引插件贡献者形成生态正循环，以及其与 Claude Code、compound-engineering-plugin 等主流 Agent 的兼容性与性能瓶颈；同时关注该项目在缺乏历史 pedigree 和明确企业背书的背景下，能否在长期维护中保持 API 稳定性和社区活跃度，避免成为趋势中的短期热点。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "切中 Agent 编排与插件化工程平台这一明确痛点，与 Claude Code 形成互补生态，单日增长强劲。但无公司/机构背书，历史标签为 none，代码成熟度与社区治理尚待验证。暂不直接给 core，但上升势能清晰，应强观察。",
+      "judge_score_delta": 2,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "nicobailon/pi-subagents",
+      "repo_url": "https://github.com/nicobailon/pi-subagents",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-06-01T00:00:00.000Z",
+      "repo_updated_at": "2026-06-01T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "context",
+          "mcp",
+          "plugin"
+        ],
+        "topic_hints": [
+          "agent-runtime"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "**Agent 基础设施层进入\"堆栈化\"爆发期**。今日 Trending 中，[claude-code](https://github.com/anthropics/claude-code)、[compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin)、[harness](https://github.com/revfactory/harness)、[pi-subagents](https://github.com/nicobailon/pi-subagents) 形成清晰的\"终端 Agent → 插件扩展 → 团队编排 → 子 Agent 委托\"四层架构，表明社区正在构建**可组合、可扩展的 Agent 操作系统**，而非停留于单一聊天界面。这与 Anthropic 近期 MCP（Model Context Protocol）生态扩张、Claude 4 系列模型发布形成直接呼应——模型能力突破倒逼工具链升级。",
+      "stars": 1931,
+      "forks": 263,
+      "issues": 27,
+      "PR": 15,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar,trendshift",
+        "project_tags=agent,agent-runtime,memory,tool-use,infra,ai-agent,ai-workflow",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:new-24h",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 82,
+      "observer_score": 85,
+      "observer_rank": 4,
+      "project_brief_cn": "pi-subagents 是一个基于 Python 的轻量级子代理委托框架，允许主 Agent 动态创建、协调并回收多个子 Agent 来完成子任务，核心特性包括子 Agent 生命周期管理、上下文桥接、工具注册与 MCP 原生支持，目标是为多 Agent 协作提供可编程的运行时中间层。",
+      "why_now_cn": "该项目发布后24小时内即获取1,931 stars、263 forks，呈现持续性爆发趋势；其所在的'Agent 堆栈化'浪潮与 Anthropic MCP 生态扩张、Claude 4 模型发布同步发生，说明模型能力提升后社区正系统性地构建可组合的 Agent 操作系统，而 pi-subagents 恰好填补了子 Agent 编排这一关键层级。",
+      "watch_next_cn": "需验证其实际运行稳定性与生产环境下的子 Agent 回收效率，尤其是跨任务上下文传递的准确性；目前无历史追踪记录、无已知团队或公司背书，属于单次爆发项目，下一步应观察其 issue 与 PR 的解决速度和社区贡献者活跃度，以判断能否从实验性框架走向生态基础设施。",
+      "summary_source": "agent",
+      "position_qualification": "strong-watch",
+      "position_rationale_cn": "子代理委托框架在 Agent 堆栈化浪潮中定位准确，支持动态创建/协调/回收子 Agent，且原生兼容 MCP，概念与实现匹配。24 小时 1900+ Star 说明社区对此方向有真实需求。缺少知名 builder 背书是减分项，但 why-now 足够明确。",
+      "judge_score_delta": 3,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "langchain-ai/langgraph-swarm-py",
+      "repo_url": "https://github.com/langchain-ai/langgraph-swarm-py",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2025-02-19T15:50:25Z",
+      "repo_updated_at": "2026-05-31T17:51:12Z",
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "matched_by": {
+        "keywords": [],
+        "topic_hints": [],
+        "repo_seeds": [
+          "langchain-ai/langgraph",
+          "openai/swarm"
+        ],
+        "org_seeds": [
+          "langchain-ai"
+        ]
+      },
+      "description": "For your multi-agent needs",
+      "stars": 1500,
+      "forks": 213,
+      "issues": 21,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=repo:langchain-ai/langgraph",
+        "query=repo:langchain-ai/langgraph",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langchain-ai"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "seed-adjacent",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:seed-adjacent",
+        "freshness:active-today",
+        "history:none",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 70,
+      "observer_score": 80,
+      "observer_rank": 5,
+      "project_brief_cn": "LangGraph Swarm（Python版）是一个基于LangGraph构建的轻量级多智能体编排框架，旨在简化将OpenAI Swarm模式（如agent间任务移交、分层协调）集成到LangGraph工作流中的过程，让开发者能用最小的样板代码实现复杂多智能体协作。",
+      "why_now_cn": "项目由LangChain官方推出，直接对接OpenAI Swarm这一热门范式，1500颗星和200+ fork显示社区高度关注；近期活跃更新（freshness:active-today）且处于稳态增长（breakout:steady），LangChain生态的成熟度与公司背书（langchain-ai）进一步降低了采用风险，适合关注多智能体架构落地的团队快速试验。",
+      "watch_next_cn": "下一步需验证其与原生LangGraph的深度集成是否存在性能瓶颈或调试复杂性，特别是大规模agent数量下的稳定性；此外要观察是否存在更复杂的编排模式（如动态任务路由、条件移交）的扩展能力，以及社区的贡献程度和长期维护承诺是否明确。",
+      "summary_source": "agent",
+      "position_qualification": "top-tier-now",
+      "position_rationale_cn": "LangChain 官方出品，将 OpenAI Swarm 范式集成进 LangGraph 生态，直接解决多智能体协作的编排痛点。去掉 LangChain 品牌只看功能完成度，它仍是目前最可用的多 Agent 移交方案之一。1500 Star + steady 增长 + proven 层级，配得上更高位置。",
+      "judge_score_delta": 10,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "Pantani/tdmcp",
+      "repo_url": "https://github.com/Pantani/tdmcp",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-05-25T19:56:05Z",
+      "repo_updated_at": "2026-06-01T07:25:45Z",
+      "ecosystems": [
+        "coding-agents",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "codex",
+          "cursor",
+          "mcp"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "The TouchDesigner MCP server — describe a visual to Claude, Cursor or Codex and it builds a real, playable node network (audio-reactive, generative, particle, 3D, feedback) with live knobs + MIDI/OSC/DMX, then checks for errors and previews its own work.",
+      "stars": 1,
+      "forks": 1,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:codex",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 65,
+      "observer_score": 65,
+      "observer_rank": 6,
+      "project_brief_cn": "TDMCP 是一个 TouchDesigner MCP 服务端，能让 Claude、Cursor 或 Codex 等 AI 编程助手通过自然语言描述直接生成可播放的 TouchDesigner 节点网络，包括音频响应、生成艺术、粒子系统、3D 场景和反馈效果，并自动添加可操控的旋钮、支持 MIDI/OSC/DMX 控制、执行错误检查并预览生成结果。",
+      "why_now_cn": "该项目于今天仍有活跃提交，处于持续开发状态；它切入的是 MCP（Model Context Protocol）生态中一个高度垂直且创意驱动的场景——将 AI 编程能力与实时视觉艺术的节点式创作工具 TouchDesigner 打通。在 Cursor、Codex 等 AI IDE 广泛被开发者采用、MCP 协议成为 AI 工具链标准接口的当下，该项目代表了一种新兴的'AI 辅助创意工具编程'方向，且已有实际可运行的能力（非概念验证），在 GitHub 上获得了初步关注。",
+      "watch_next_cn": "下一步需要验证其生成的节点网络在复杂场景下的稳定性和可编辑性，比如是否支持用户对生成结果进行增量修改而非每次都全量重建；还需观察其是否能够适配 TouchDesigner 的不同版本（尤其是商业版与非商业版的 API 差异），以及是否有社区案例展示它在真实项目（如演出、装置、互动展览）中的使用效果。目前它的 star 和 fork 数量极低，缺乏第三方贡献者和 issue 反馈，社区生态是否能够形成仍是未知数。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "切入 MCP 生态中高度垂直的创意编程场景（TouchDesigner），定位独特且今日有活跃提交。但 1 Star 说明社区尚未验证其价值，功能范围窄，保留当前观察位即可，暂不调整。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "somoore/sir",
+      "repo_url": "https://github.com/somoore/sir",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-04-10T22:35:17Z",
+      "repo_updated_at": "2026-06-01T07:25:49Z",
+      "ecosystems": [
+        "agent-runtime",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "runtime"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Security runtime for AI coding agents. Hook-layer intent classification, IFC taint propagation, and OS-level containment. Go CLI + Rust policy oracle.",
+      "stars": 3,
+      "forks": 0,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:runtime",
+        "query ecosystem=skills-tools-mcp source=keyword:mcp",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:mcp",
+        "query=keyword:runtime",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 57,
+      "observer_score": 59,
+      "observer_rank": 7,
+      "project_brief_cn": "Sir 是一个为 AI 编码代理设计的运行时安全层，通过 Hook 层意图分类、信息流控制（IFC）污点传播和操作系统级隔离来监控和约束代理行为。项目采用 Go CLI 配合 Rust 策略引擎，重点解决 AI 代理在执行代码时可能产生的越权、数据泄露和恶意操作风险。",
+      "why_now_cn": "随着 MCP 协议和 Agent 生态的快速扩张，AI 编码代理开始直接操作文件系统、执行命令和访问网络，安全事件（如代理越狱、敏感数据泄露）频发但缺乏现成的运行时防护方案。该项目今日仍有活跃提交，主题直接契合 MCP 上下文中的安全需求，且其 Hook 层 + IFC 的组合设计在同类开源项目中尚属稀缺，值得早期关注。",
+      "watch_next_cn": "目前零 Star 和零贡献者，且无任何工程背景可追溯，需验证作者的实际开发节奏和后续迭代能力。核心的 IFC 污点传播和策略引擎的成熟度未知，建议关注是否有用于真实 Agent 工作流的集成示例、性能测试数据以及社区反馈（如 Issue 和 PR）的首次出现。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "AI 编码代理的运行时安全层是一个真实且紧迫的痛点，用 IFC 污点传播 + OS 隔离的方案有技术深度。3 Star 但今日活跃，方向正确但需要更多安全社区验证。微调保留观察。",
+      "judge_score_delta": 2,
+      "judge_source": "agent"
+    },
+    {
+      "repo_full_name": "motebit/motebit",
+      "repo_url": "https://github.com/motebit/motebit",
+      "observed_at": "2026-06-01T15:24:59+08:00",
+      "repo_created_at": "2026-02-16T04:33:02Z",
+      "repo_updated_at": "2026-06-01T07:24:03Z",
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "runtime"
+        ],
+        "topic_hints": [
+          "agent-runtime"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Open protocol and reference runtime for the agentic economy. Sovereign identity via Ed25519, algebraic trust routing, and verifiable execution receipts — fail-closed by design.",
+      "stars": 4,
+      "forks": 0,
+      "issues": 15,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:execution",
+        "query ecosystem=agent-runtime source=topic:agent-runtime",
+        "query=keyword:execution",
+        "query=topic:agent-runtime",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 57,
+      "observer_score": 57,
+      "observer_rank": 8,
+      "project_brief_cn": "Motebit 是一个面向智能体经济（agentic economy）的开放协议与参考运行时，核心能力包括基于 Ed25519 的自主身份、代数信任路由与可验证执行收据，系统设计采用故障关闭（fail-closed）原则。",
+      "why_now_cn": "当前 AI 智能体正从单点工具走向相互协作的网络经济，而身份可信、执行可验证、路由可审计是迈向多智能体协同的关键基础设施。Motebit 将这三者整合为开放协议，且项目近期持续活跃（freshness: active-today），在 agent-runtime 生态中有明确的知识定位（生态深度 topic-backed），尽管星标仅 4 颗，但其 15 个 issue 反映出一定的探索与打磨，值得关注。",
+      "watch_next_cn": "需验证其信任路由与执行收据机制能否在真实多智能体场景中稳定运行，以及社区能否从零星贡献者扩展到可持续的开发者参与，当前缺乏建造者、公司或工程师背景（pedigree 为空），且无 PR 记录，协议的实际采纳与可组装性仍属早期不确定因素。",
+      "summary_source": "agent",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "Agent 经济开放协议方向有长期价值，涉及身份/信任/路由等基础设施层级。虽然只有 4 Star，但有'emerging'历史标签说明有一些持续关注。现阶段保持观察，等待协议规范和采用度提升。",
+      "judge_score_delta": 0,
+      "judge_source": "agent"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "awslabs/metrique",
+  "repo_url": "https://github.com/awslabs/metrique",
+  "stars": 69,
+  "forks": 10,
+  "issues": 50,
+  "PR": 5,
+  "description": "Low-overhead wide event metrics, with multi-format outputs.",
+  "tags": []
+}

@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "everywall/ladder",
+  "repo_url": "https://github.com/everywall/ladder",
+  "stars": 7789,
+  "forks": 441,
+  "issues": 19,
+  "PR": 11,
+  "description": "Selfhosted alternative to 12ft.io. and 1ft.io. Proxy to remove CORS headers and modify HTML",
+  "tags": [
+    "bypass",
+    "cors",
+    "cors-proxy",
+    "paywall",
+    "paywall-blocker",
+    "paywall-bypasser"
+  ]
+}

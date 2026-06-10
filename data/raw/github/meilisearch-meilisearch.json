@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "meilisearch/meilisearch",
+  "repo_url": "https://github.com/meilisearch/meilisearch",
+  "stars": 57846,
+  "forks": 2557,
+  "issues": 243,
+  "PR": 64,
+  "description": "A lightning-fast search engine API bringing AI-powered hybrid search to your sites and applications.",
+  "tags": [
+    "ai",
+    "api",
+    "app-search",
+    "database",
+    "enterprise-search",
+    "faceting",
+    "full-text-search",
+    "fuzzy-search",
+    "geosearch",
+    "hybrid-search",
+    "instantsearch",
+    "search",
+    "search-as-you-type",
+    "search-engine",
+    "semantic-search",
+    "site-search",
+    "typo-tolerance",
+    "vector-database",
+    "vector-search",
+    "vectors"
+  ]
+}

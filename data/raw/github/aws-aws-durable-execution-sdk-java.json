@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "aws/aws-durable-execution-sdk-java",
+  "repo_url": "https://github.com/aws/aws-durable-execution-sdk-java",
+  "stars": 28,
+  "forks": 9,
+  "issues": 26,
+  "PR": 3,
+  "description": "Java SDK for AWS Lambda Durable Functions",
+  "tags": [
+    "aws",
+    "durable-execution",
+    "java",
+    "lambda",
+    "serverless"
+  ]
+}

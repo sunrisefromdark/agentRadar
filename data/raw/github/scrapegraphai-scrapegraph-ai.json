@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "ScrapeGraphAI/Scrapegraph-ai",
+  "repo_url": "https://github.com/ScrapeGraphAI/Scrapegraph-ai",
+  "stars": 25699,
+  "forks": 2359,
+  "issues": 2,
+  "PR": 1,
+  "description": "Python scraper based on AI",
+  "tags": [
+    "ai-crawler",
+    "ai-scraping",
+    "ai-search",
+    "crawler",
+    "data-extraction",
+    "firecrawl-alternative",
+    "large-language-model",
+    "llm",
+    "markdown",
+    "rag",
+    "scraping",
+    "scraping-python",
+    "web-crawler",
+    "web-crawlers",
+    "web-data",
+    "web-data-extraction",
+    "web-scraper",
+    "web-scraping",
+    "web-search",
+    "webscraping"
+  ]
+}

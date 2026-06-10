@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "chen08209/FlClash",
+  "repo_url": "https://github.com/chen08209/FlClash",
+  "stars": 40624,
+  "forks": 2548,
+  "issues": 759,
+  "PR": 58,
+  "description": "A multi-platform proxy client based on ClashMeta,simple and easy to use, open-source and ad-free.",
+  "tags": [
+    "clash",
+    "clash-meta",
+    "flutter",
+    "hysteria",
+    "multi-platform",
+    "proxy",
+    "v2ray",
+    "vless",
+    "vpn"
+  ]
+}

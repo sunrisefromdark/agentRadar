@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "Tencent/tgfx",
+  "repo_url": "https://github.com/Tencent/tgfx",
+  "stars": 1534,
+  "forks": 127,
+  "issues": 1,
+  "PR": 3,
+  "description": "A lightweight 2D graphics library for modern GPUs, delivering high-performance text, image, and vector rendering across major platforms.",
+  "tags": [
+    "2d",
+    "blend",
+    "filter",
+    "gpu",
+    "graphics",
+    "image",
+    "layer",
+    "path",
+    "pdf",
+    "rendering",
+    "svg",
+    "text",
+    "tgfx",
+    "vector"
+  ]
+}

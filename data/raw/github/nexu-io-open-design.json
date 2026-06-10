@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "nexu-io/open-design",
+  "repo_url": "https://github.com/nexu-io/open-design",
+  "stars": 48291,
+  "forks": 5482,
+  "issues": 254,
+  "PR": 202,
+  "description": "🎨 Local-first, open-source alternative to Anthropic's Claude Design. ⚡ 19 Skills · ✨ 71 brand-grade Design Systems 🖼 Generate web · desktop · mobile prototypes · slides · images · videos · HyperFrames 📦 Sandboxed preview · HTML/PDF/PPTX/MP4 export 🤖 Runs on Claude Code / Codex / Cursor / Gemini / OpenCode / Qwen / Copilot / Hermes / Kimi CLI.",
+  "tags": [
+    "agent-skills",
+    "ai-agents",
+    "ai-design",
+    "byok",
+    "claude",
+    "claude-code-for-design",
+    "claude-design",
+    "coding-agents",
+    "design-systems",
+    "design-tools",
+    "desktop-app",
+    "figma-alternative",
+    "generative-ai",
+    "hermes-agent",
+    "local-first",
+    "nextjs",
+    "no-code",
+    "prototyping",
+    "ui-generator",
+    "vibe-coding"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "huggingface/huggingface_hub",
+  "repo_url": "https://github.com/huggingface/huggingface_hub",
+  "stars": 3639,
+  "forks": 1041,
+  "issues": 165,
+  "PR": 29,
+  "description": "The official Python client for the Hugging Face Hub.",
+  "tags": [
+    "deep-learning",
+    "hacktoberfest",
+    "machine-learning",
+    "model-hub",
+    "models",
+    "natural-language-processing",
+    "pretrained-models",
+    "pytorch"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "TryGhost/Ghost",
+  "repo_url": "https://github.com/TryGhost/Ghost",
+  "stars": 53574,
+  "forks": 11641,
+  "issues": 71,
+  "PR": 194,
+  "description": "Independent technology for modern publishing, memberships, subscriptions and newsletters.",
+  "tags": [
+    "blogging",
+    "cms",
+    "ghost",
+    "javascript",
+    "journalism",
+    "nodejs",
+    "publishing",
+    "web-application"
+  ]
+}

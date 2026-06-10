@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "pydantic/pydantic-ai",
+  "repo_url": "https://github.com/pydantic/pydantic-ai",
+  "stars": 17486,
+  "forks": 2164,
+  "issues": 396,
+  "PR": 194,
+  "description": "AI Agent Framework, the Pydantic way",
+  "tags": [
+    "agent-framework",
+    "genai",
+    "llm",
+    "pydantic",
+    "python"
+  ]
+}

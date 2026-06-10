@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "pydantic/logfire",
+  "repo_url": "https://github.com/pydantic/logfire",
+  "stars": 4279,
+  "forks": 244,
+  "issues": 177,
+  "PR": 57,
+  "description": "AI observability platform for production LLM and agent systems.",
+  "tags": [
+    "agent-observability",
+    "ai",
+    "ai-observability",
+    "ai-tools",
+    "evals",
+    "fastapi",
+    "llm-observability",
+    "logging",
+    "metrics",
+    "observability",
+    "openai",
+    "opentelemetry",
+    "pydantic",
+    "pydantic-ai",
+    "python",
+    "trace"
+  ]
+}

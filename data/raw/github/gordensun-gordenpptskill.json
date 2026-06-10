@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "GordenSun/GordenPPTSkill",
+  "repo_url": "https://github.com/GordenSun/GordenPPTSkill",
+  "stars": 1195,
+  "forks": 112,
+  "issues": 0,
+  "PR": 0,
+  "description": "AI-friendly PPT builder skill: 17 hand-polished Chinese PPTX templates + non-destructive text-only editing tools (python-pptx based). Pick a template, write edits.json, build a real .pptx with the layout intact. Personal/research use only.",
+  "tags": []
+}

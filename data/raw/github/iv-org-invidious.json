@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "iv-org/invidious",
+  "repo_url": "https://github.com/iv-org/invidious",
+  "stars": 20091,
+  "forks": 2231,
+  "issues": 400,
+  "PR": 77,
+  "description": "Invidious is an alternative front-end to YouTube",
+  "tags": [
+    "agplv3",
+    "hacktoberfest",
+    "invidious",
+    "libre",
+    "video",
+    "watch",
+    "youtube",
+    "youtube-video"
+  ]
+}

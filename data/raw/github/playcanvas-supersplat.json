@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "playcanvas/supersplat",
+  "repo_url": "https://github.com/playcanvas/supersplat",
+  "stars": 8488,
+  "forks": 908,
+  "issues": 132,
+  "PR": 14,
+  "description": "3D Gaussian Splat Editor",
+  "tags": [
+    "3d-gaussian-splatting",
+    "3dgs",
+    "gaussian-splatting",
+    "pcui",
+    "playcanvas",
+    "typescript",
+    "webgl",
+    "webgpu"
+  ]
+}

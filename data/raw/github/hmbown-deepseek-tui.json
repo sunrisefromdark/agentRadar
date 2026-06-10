@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "Hmbown/DeepSeek-TUI",
+  "repo_url": "https://github.com/Hmbown/DeepSeek-TUI",
+  "stars": 32969,
+  "forks": 2820,
+  "issues": 266,
+  "PR": 191,
+  "description": "Coding agent for DeepSeek models that runs in your terminal",
+  "tags": [
+    "cli",
+    "deepseek",
+    "llm",
+    "rust",
+    "terminal",
+    "tui"
+  ]
+}

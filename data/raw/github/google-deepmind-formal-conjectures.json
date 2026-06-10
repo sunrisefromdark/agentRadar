@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "google-deepmind/formal-conjectures",
+  "repo_url": "https://github.com/google-deepmind/formal-conjectures",
+  "stars": 998,
+  "forks": 301,
+  "issues": 714,
+  "PR": 169,
+  "description": "A collection of formalized statements of conjectures in Lean.",
+  "tags": [
+    "formal-mathematics",
+    "lean4"
+  ]
+}

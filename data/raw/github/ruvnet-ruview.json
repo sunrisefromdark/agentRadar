@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "ruvnet/RuView",
+  "repo_url": "https://github.com/ruvnet/RuView",
+  "stars": 69348,
+  "forks": 9253,
+  "issues": 36,
+  "PR": 116,
+  "description": "π RuView turns commodity WiFi signals into real-time spatial intelligence, vital sign monitoring, and presence detection — all without a single pixel of video.",
+  "tags": [
+    "awesome",
+    "claude",
+    "densepose",
+    "esp32",
+    "firmware",
+    "home-assistant",
+    "home-automation",
+    "iot",
+    "monitoring",
+    "networking",
+    "npm",
+    "pose-estimation",
+    "react",
+    "rf",
+    "self-learning",
+    "skills",
+    "spatial-intelligence",
+    "typescript",
+    "wifi",
+    "wifi-security"
+  ]
+}

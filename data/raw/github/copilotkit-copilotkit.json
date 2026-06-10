@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "CopilotKit/CopilotKit",
+  "repo_url": "https://github.com/CopilotKit/CopilotKit",
+  "stars": 31921,
+  "forks": 4121,
+  "issues": 318,
+  "PR": 210,
+  "description": "The Frontend Stack for Agents & Generative UI. React + Angular.  Makers of the AG-UI Protocol",
+  "tags": [
+    "agent",
+    "agent-native",
+    "agentic-ai",
+    "agents",
+    "ai",
+    "ai-agent",
+    "ai-assistant",
+    "assistant",
+    "assistant-chat-bots",
+    "copilot",
+    "copilot-chat",
+    "generative-ui",
+    "js",
+    "llm",
+    "nextjs",
+    "open-source",
+    "react",
+    "reactjs",
+    "ts",
+    "typescript"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "google-gemini/gemini-cli",
+  "repo_url": "https://github.com/google-gemini/gemini-cli",
+  "stars": 104882,
+  "forks": 13987,
+  "issues": 1112,
+  "PR": 257,
+  "description": "An open-source AI agent that brings the power of Gemini directly into your terminal.",
+  "tags": [
+    "ai",
+    "ai-agents",
+    "cli",
+    "gemini",
+    "gemini-api",
+    "mcp-client",
+    "mcp-server"
+  ]
+}

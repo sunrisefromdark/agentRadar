@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "juanjuandog/FinSight-AI",
+  "repo_url": "https://github.com/juanjuandog/FinSight-AI",
+  "stars": 771,
+  "forks": 50,
+  "issues": 2,
+  "PR": 0,
+  "description": "AI equity research agent with resilient workflows, Redis Lua single-flight, pgvector RAG, versioned reports, evidence tracing, and RAG evaluation.",
+  "tags": [
+    "ai-agent",
+    "financial-research",
+    "llm-evaluation",
+    "pgvector",
+    "postgresql",
+    "rabbitmq",
+    "rag",
+    "redis",
+    "spring-boot",
+    "workflow-orchestration"
+  ]
+}

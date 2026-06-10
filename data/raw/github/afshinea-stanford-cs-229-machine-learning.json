@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "afshinea/stanford-cs-229-machine-learning",
+  "repo_url": "https://github.com/afshinea/stanford-cs-229-machine-learning",
+  "stars": 19434,
+  "forks": 4163,
+  "issues": 20,
+  "PR": 0,
+  "description": "VIP cheatsheets for Stanford's CS 229 Machine Learning",
+  "tags": [
+    "cheatsheet",
+    "cs229",
+    "data-science",
+    "deep-learning",
+    "machine-learning",
+    "ml-cheatsheet",
+    "supervised-learning",
+    "unsupervised-learning"
+  ]
+}

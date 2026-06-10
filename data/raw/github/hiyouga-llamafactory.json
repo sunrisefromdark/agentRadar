@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "hiyouga/LlamaFactory",
+  "repo_url": "https://github.com/hiyouga/LlamaFactory",
+  "stars": 71806,
+  "forks": 8777,
+  "issues": 964,
+  "PR": 66,
+  "description": "Unified Efficient Fine-Tuning of 100+ LLMs & VLMs (ACL 2024)",
+  "tags": [
+    "agent",
+    "ai",
+    "deepseek",
+    "fine-tuning",
+    "gemma",
+    "gpt",
+    "instruction-tuning",
+    "large-language-models",
+    "llama",
+    "llama3",
+    "llm",
+    "lora",
+    "moe",
+    "nlp",
+    "peft",
+    "qlora",
+    "quantization",
+    "qwen",
+    "rlhf",
+    "transformers"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "microsoft/go",
+  "repo_url": "https://github.com/microsoft/go",
+  "stars": 422,
+  "forks": 46,
+  "issues": 135,
+  "PR": 3,
+  "description": "The Microsoft build of Go is a modified version of Go that can build FIPS compliant applications that satisfy internal Microsoft policies.",
+  "tags": []
+}

@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "brokermr810/QuantDinger",
+  "repo_url": "https://github.com/brokermr810/QuantDinger",
+  "stars": 6090,
+  "forks": 1330,
+  "issues": 7,
+  "PR": 0,
+  "description": "AI quantitative trading platform for crypto, stocks, and forex with backtesting, live trading, market data, and multi-agent research.vibe-trading ,trading-agents,ai-trader,ai-trading",
+  "tags": [
+    "agent",
+    "algotrade",
+    "alpaca",
+    "backtesting",
+    "binance",
+    "coinbase",
+    "crypto",
+    "exchange",
+    "finance",
+    "fintech",
+    "forex",
+    "mcp-server",
+    "mt5",
+    "python",
+    "quant",
+    "quantitative-finance",
+    "saas",
+    "stocks",
+    "strategy",
+    "trade"
+  ]
+}

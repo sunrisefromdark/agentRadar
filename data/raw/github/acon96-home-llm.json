@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "acon96/home-llm",
+  "repo_url": "https://github.com/acon96/home-llm",
+  "stars": 1349,
+  "forks": 135,
+  "issues": 34,
+  "PR": 0,
+  "description": "A Home Assistant integration & Model to control your smart home using a Local LLM",
+  "tags": [
+    "homeassistant-custom-component",
+    "large-language-model"
+  ]
+}

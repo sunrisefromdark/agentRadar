@@ -1,0 +1,108 @@
+{
+  "date": "2026-05-09",
+  "status": "warn",
+  "summary_path": "data/reports/2026-05-09.run-summary.json",
+  "github_audit_path": "data/raw/github/2026-05-09.enrichment.json",
+  "checks": [
+    {
+      "name": "minimum_viable_run_completed",
+      "status": "pass",
+      "detail": "run summary marked the MVP loop as completed"
+    },
+    {
+      "name": "raw_signals_present",
+      "status": "pass",
+      "detail": "raw_signals=137"
+    },
+    {
+      "name": "scored_projects_present",
+      "status": "pass",
+      "detail": "scored_projects=99"
+    },
+    {
+      "name": "active_sources_present",
+      "status": "pass",
+      "detail": "active_sources=5"
+    },
+    {
+      "name": "enabled_source_failures",
+      "status": "pass",
+      "detail": "no enabled sources failed"
+    },
+    {
+      "name": "low_confidence_share",
+      "status": "pass",
+      "detail": "low_confidence_projects=2/99"
+    },
+    {
+      "name": "anomaly_share",
+      "status": "pass",
+      "detail": "anomaly_share=0.202"
+    },
+    {
+      "name": "uniform_star_velocity",
+      "status": "pass",
+      "detail": "uniform_star_velocity_detected=false"
+    },
+    {
+      "name": "star_delta_sources_visible",
+      "status": "pass",
+      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:82,unavailable:17"
+    },
+    {
+      "name": "live_delta_token_missing",
+      "status": "pass",
+      "detail": "token_missing=0"
+    },
+    {
+      "name": "live_delta_auth_invalid",
+      "status": "pass",
+      "detail": "auth_invalid=0"
+    },
+    {
+      "name": "live_delta_rate_limit",
+      "status": "pass",
+      "detail": "rate_limit=0"
+    },
+    {
+      "name": "live_delta_network_blocked",
+      "status": "pass",
+      "detail": "network_blocked=0"
+    },
+    {
+      "name": "llm_classification_health",
+      "status": "warn",
+      "detail": "cache_hits=0; provider=deepseek; attempts=0; success=0; failures=0; no classification attempts were recorded"
+    },
+    {
+      "name": "freshness_sources_complete",
+      "status": "pass",
+      "detail": "freshness_sources=agents-radar[context],trendshift_live[freshness-driving],github_trending[freshness-driving],github_live_star_delta[freshness-driving],watchlist_live_activity[freshness-driving]"
+    },
+    {
+      "name": "fresh_source_project_alignment",
+      "status": "pass",
+      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=43; today_fresh_candidate_count=61"
+    },
+    {
+      "name": "agents_radar_stale_fallback",
+      "status": "pass",
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-05-09"
+    },
+    {
+      "name": "agents_radar_context_only",
+      "status": "pass",
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-05-09"
+    },
+    {
+      "name": "github_audit_written",
+      "status": "pass",
+      "detail": "github_enrichment_audits=101"
+    }
+  ],
+  "recommended_actions": [
+    "在信任低置信度排序前，优先补有缺失描述或缺失 metrics 的项目",
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ]
+}

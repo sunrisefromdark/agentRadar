@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "TauricResearch/TradingAgents",
+  "repo_url": "https://github.com/TauricResearch/TradingAgents",
+  "stars": 82541,
+  "forks": 16015,
+  "issues": 154,
+  "PR": 140,
+  "description": "TradingAgents: Multi-Agents LLM Financial Trading Framework",
+  "tags": [
+    "agent",
+    "finance",
+    "llm",
+    "multiagent",
+    "trading"
+  ]
+}

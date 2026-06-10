@@ -1,0 +1,31 @@
+{
+  "repo_full_name": "langgenius/dify",
+  "repo_url": "https://github.com/langgenius/dify",
+  "stars": 143694,
+  "forks": 22607,
+  "issues": 291,
+  "PR": 407,
+  "description": "Production-ready platform for agentic workflow development.",
+  "tags": [
+    "agent",
+    "agentic-ai",
+    "agentic-framework",
+    "agentic-workflow",
+    "ai",
+    "automation",
+    "gemini",
+    "genai",
+    "gpt",
+    "gpt-4",
+    "llm",
+    "low-code",
+    "mcp",
+    "nextjs",
+    "no-code",
+    "openai",
+    "orchestration",
+    "python",
+    "rag",
+    "workflow"
+  ]
+}

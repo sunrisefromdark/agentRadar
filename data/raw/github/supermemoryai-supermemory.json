@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "supermemoryai/supermemory",
+  "repo_url": "https://github.com/supermemoryai/supermemory",
+  "stars": 24951,
+  "forks": 2196,
+  "issues": 5,
+  "PR": 20,
+  "description": "Memory engine and app that is extremely fast, scalable. The Memory API for the AI era.",
+  "tags": [
+    "agent-memory",
+    "ai-memory",
+    "cloudflare-kv",
+    "cloudflare-pages",
+    "cloudflare-workers",
+    "drizzle-orm",
+    "memory",
+    "postgres",
+    "remix",
+    "tailwindcss",
+    "typescript",
+    "vite"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "DataTalksClub/data-engineering-zoomcamp",
+  "repo_url": "https://github.com/DataTalksClub/data-engineering-zoomcamp",
+  "stars": 41213,
+  "forks": 8211,
+  "issues": 6,
+  "PR": 1,
+  "description": "Data Engineering Zoomcamp is a free 9-week course on building production-ready data pipelines. The next cohort starts in January 2026. Join the course here 👇🏼",
+  "tags": [
+    "course",
+    "data-engineering",
+    "dbt",
+    "docker",
+    "free",
+    "kafka",
+    "kestra",
+    "spark"
+  ]
+}

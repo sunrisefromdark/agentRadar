@@ -1,0 +1,306 @@
+{
+  "date": "2026-04-29",
+  "generated_at": "2026-06-06T22:02:34+08:00",
+  "dry_run": false,
+  "minimum_viable_run_completed": true,
+  "completion_notes": [
+    "原始信号阶段完成，共 141 条",
+    "归一化阶段完成，共 88 个项目",
+    "评分阶段完成，共 88 个已评分项目",
+    "本次运行活跃信号面: 5/5",
+    "本次运行已成功写盘"
+  ],
+  "llm_diagnostics": {
+    "enabled": true,
+    "provider": "deepseek",
+    "mode": "semantic-classification",
+    "classification_attempt_count": 0,
+    "classification_success_count": 0,
+    "classification_failure_count": 0,
+    "summary_attempt_count": 13,
+    "summary_success_count": 13,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 1,
+    "judge_success_count": 1,
+    "judge_failure_count": 0
+  },
+  "overall_daily_status": "数据新鲜，可直接阅读",
+  "freshness_sources": [
+    {
+      "source": "agents-radar",
+      "effective_date": "2026-04-29",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "agents-radar 已同步，可读取 2026-04-29 的上下文摘要",
+      "from_realtime_run": false,
+      "source_role": "context"
+    },
+    {
+      "source": "trendshift_live",
+      "effective_date": "2026-04-29",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Trendshift 快照可用，已恢复 2026-04-29 的趋势信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_trending",
+      "effective_date": "2026-04-29",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub Trending 快照可用，已恢复 2026-04-29 的热度信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "github_live_star_delta",
+      "effective_date": "2026-04-29",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "GitHub star delta 快照可用，已恢复 2026-04-29 的增量信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    },
+    {
+      "source": "watchlist_live_activity",
+      "effective_date": "2026-04-29",
+      "freshness_state": "fresh_today",
+      "status_summary_cn": "Watchlist 活动快照可用，已恢复 2026-04-29 的观察清单信号",
+      "from_realtime_run": false,
+      "source_role": "freshness-driving"
+    }
+  ],
+  "main_board_mode": "fresh_today_only",
+  "today_fresh_candidate_count": 45,
+  "today_star_count": 33,
+  "context_candidate_count": 43,
+  "pending_confirmation_count": 12,
+  "counts": {
+    "raw_signals": 141,
+    "normalized_projects": 88,
+    "scored_projects": 88,
+    "high_score_projects": 2,
+    "anomaly_projects": 9,
+    "new_projects": 88,
+    "classifications": 88
+  },
+  "source_status": [
+    {
+      "source": "agents-radar",
+      "enabled": true,
+      "item_count": 73,
+      "distinct_projects": 68,
+      "status": "active",
+      "notes": [
+        "primary local digest input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "trendshift",
+      "enabled": true,
+      "item_count": 25,
+      "distinct_projects": 25,
+      "status": "active",
+      "notes": [
+        "snapshot/http trend input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github_trending",
+      "enabled": true,
+      "item_count": 13,
+      "distinct_projects": 13,
+      "status": "active",
+      "notes": [
+        "GitHub Trending realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "watchlist_live_activity",
+      "enabled": true,
+      "item_count": 10,
+      "distinct_projects": 10,
+      "status": "active",
+      "notes": [
+        "watchlist realtime input inferred from cached raw signals"
+      ]
+    },
+    {
+      "source": "github-enrichment",
+      "enabled": true,
+      "item_count": 88,
+      "distinct_projects": 88,
+      "status": "active",
+      "notes": [
+        "project-level enrichment inferred from structured repo metrics"
+      ]
+    }
+  ],
+  "quality": {
+    "missing_descriptions": 1,
+    "watchlist_hits": 15,
+    "low_confidence_projects": 0,
+    "medium_confidence_projects": 70,
+    "insufficient_metrics_projects": 0,
+    "suspicious_growth_projects": 1,
+    "single_source_projects": 52,
+    "single_spike_projects": 33,
+    "emerging_projects": 54,
+    "persistent_projects": 1
+  },
+  "diagnostics": {
+    "anomaly_share": 0.1023,
+    "uniform_star_velocity_detected": false,
+    "metrics_source_distribution": {
+      "embedded": 0,
+      "github_api": 88,
+      "github_html": 0,
+      "github_cache": 0,
+      "unavailable": 0
+    },
+    "star_delta_source_distribution": {
+      "github_live": 0,
+      "github_snapshot": 0,
+      "signal": 68,
+      "unavailable": 20
+    },
+    "github_star_delta": {
+      "live_delta_attempts": 0,
+      "live_delta_success": 0,
+      "snapshot_delta_success": 0,
+      "token_missing": 0,
+      "auth_invalid": 0,
+      "rate_limit": 0,
+      "network_blocked": 0
+    }
+  },
+  "top_projects": [
+    {
+      "project_name": "openclaw/openclaw",
+      "repo_url": "https://github.com/openclaw/openclaw",
+      "total_score": 78.25,
+      "base_final_rank": 78.25,
+      "final_rank": 78.25,
+      "confidence": "high",
+      "paradigm": "agent runtime + tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "自托管AI助手，日增423星，数据隐私与终端集成定位清晰，高置信度，当前主榜首位合理。",
+      "judge_score_delta": 0,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=agent runtime + tool/skill ecosystem",
+        "confidence=high",
+        "persistence=persistent",
+        "engagement_score=100 (forks=75074)",
+        "architecture_shift=100 (baseline=default_agent_capability)",
+        "star_velocity=85 (daily_delta=423)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "ComposioHQ/awesome-codex-skills",
+      "repo_url": "https://github.com/ComposioHQ/awesome-codex-skills",
+      "total_score": 69.25,
+      "base_final_rank": 71.75,
+      "final_rank": 72.75,
+      "confidence": "high",
+      "paradigm": "tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "Codex技能清单，日增1656星，双信源信号强劲，生态关注度高，当前排名略偏低，可小幅上调。",
+      "judge_score_delta": 1,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=tool/skill ecosystem",
+        "confidence=high",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=1656)",
+        "engagement_score=100 (forks=280)",
+        "architecture_shift=45 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "microsoft/VibeVoice",
+      "repo_url": "https://github.com/microsoft/VibeVoice",
+      "total_score": 69.25,
+      "base_final_rank": 69.25,
+      "final_rank": 71.25,
+      "confidence": "high",
+      "paradigm": "tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "微软官开语音AI，日增2334星，双信源，品牌效应强，但项目简介模糊，可微调向上，但应低于有明确技能生态的项目。",
+      "judge_score_delta": 2,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=tool/skill ecosystem",
+        "confidence=high",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=2334)",
+        "engagement_score=100 (forks=5014)",
+        "architecture_shift=45 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    },
+    {
+      "project_name": "obra/superpowers",
+      "repo_url": "https://github.com/obra/superpowers",
+      "total_score": 72.75,
+      "base_final_rank": 75.25,
+      "final_rank": 70.25,
+      "confidence": "medium",
+      "paradigm": "tool/skill ecosystem",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "技能框架方法论，但仅有零星增长和单源信号，证据弱，且存在持久性风险，应适度下调。",
+      "judge_score_delta": -5,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=tool/skill ecosystem",
+        "confidence=medium",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=0)",
+        "engagement_score=100 (forks=14999)",
+        "architecture_shift=85 (baseline=default_agent_capability)"
+      ],
+      "risks": [
+        "single-source signal; needs persistence validation"
+      ]
+    },
+    {
+      "project_name": "donnemartin/system-design-primer",
+      "repo_url": "https://github.com/donnemartin/system-design-primer",
+      "total_score": 72.25,
+      "base_final_rank": 72.25,
+      "final_rank": 70.25,
+      "confidence": "high",
+      "paradigm": "self-improving",
+      "position_qualification": "keep-observing",
+      "position_rationale_cn": "经典资源日增1471星，热度高，但项目简介模糊，缺乏AI相关能力线索，与榜单主题关联度存疑，可微降。",
+      "judge_score_delta": -2,
+      "summary_source": "agent",
+      "judge_source": "agent",
+      "why_selected": [
+        "paradigm=self-improving",
+        "confidence=high",
+        "persistence=emerging",
+        "star_velocity=100 (daily_delta=1471)",
+        "engagement_score=100 (forks=55851)",
+        "architecture_shift=75 (baseline=default_agent_capability)"
+      ],
+      "risks": []
+    }
+  ],
+  "observer_top_candidates": [],
+  "watchouts": [
+    "有 1 个项目出现可疑增长尖峰，需要人工复核 daily_delta",
+    "仍有 52 个项目只有单一信号源，需要跨源或跨天确认",
+    "有 1 个项目缺少描述，语义判断会受限"
+  ],
+  "next_focus": [
+    "在提升弱信号前，先确认跨天 persistence 或第二信号源"
+  ],
+  "recommended_actions": [
+    "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
+    "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
+  ]
+}

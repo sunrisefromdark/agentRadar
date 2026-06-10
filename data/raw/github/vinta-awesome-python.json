@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "vinta/awesome-python",
+  "repo_url": "https://github.com/vinta/awesome-python",
+  "stars": 300890,
+  "forks": 28029,
+  "issues": 15,
+  "PR": 6,
+  "description": "An opinionated list of Python frameworks, libraries, tools, and resources",
+  "tags": [
+    "awesome",
+    "collections",
+    "python",
+    "python-frameworks",
+    "python-libraries",
+    "python-tools"
+  ]
+}

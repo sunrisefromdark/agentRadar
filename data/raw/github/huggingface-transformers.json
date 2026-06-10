@@ -1,0 +1,30 @@
+{
+  "repo_full_name": "huggingface/transformers",
+  "repo_url": "https://github.com/huggingface/transformers",
+  "stars": 161237,
+  "forks": 33393,
+  "issues": 1037,
+  "PR": 1359,
+  "description": "🤗 Transformers: the model-definition framework for state-of-the-art machine learning models in text, vision, audio, and multimodal models, for both inference and training. ",
+  "tags": [
+    "audio",
+    "deep-learning",
+    "deepseek",
+    "gemma",
+    "glm",
+    "hacktoberfest",
+    "llm",
+    "machine-learning",
+    "model-hub",
+    "natural-language-processing",
+    "nlp",
+    "pretrained-models",
+    "python",
+    "pytorch",
+    "pytorch-transformers",
+    "qwen",
+    "speech-recognition",
+    "transformer",
+    "vlm"
+  ]
+}

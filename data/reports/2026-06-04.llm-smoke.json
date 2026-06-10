@@ -1,0 +1,11 @@
+{
+  "date": "2026-06-04",
+  "generated_at": "2026-06-04T20:37:02+08:00",
+  "status": "pass",
+  "enabled": true,
+  "provider": "deepseek",
+  "mode": "semantic-classification",
+  "base_url": "https://api.deepseek.com",
+  "model": "deepseek-v4-flash",
+  "response_excerpt": "{\"ok\":true,\"ping\":\"pong\",\"provider\":\"smoke\"}"
+}

@@ -1,0 +1,25 @@
+{
+  "repo_full_name": "teng-lin/notebooklm-py",
+  "repo_url": "https://github.com/teng-lin/notebooklm-py",
+  "stars": 15374,
+  "forks": 2109,
+  "issues": 2,
+  "PR": 0,
+  "description": "Unofficial Python API and agentic skill for Google NotebookLM. Full programmatic access to NotebookLM's features—including capabilities the web UI doesn't expose—via Python, CLI, and AI agents like Claude Code, Codex, and OpenClaw.",
+  "tags": [
+    "agentic-skill",
+    "api",
+    "claude",
+    "claude-skills",
+    "google-notebooklm",
+    "notebooklm",
+    "notebooklm-api",
+    "notebooklm-skill",
+    "openclaw-skills",
+    "podcast-generator",
+    "python",
+    "python-api",
+    "sdk",
+    "skills"
+  ]
+}

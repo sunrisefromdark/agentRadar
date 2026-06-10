@@ -1,0 +1,29 @@
+{
+  "repo_full_name": "FonaTech/Project_Chronos",
+  "repo_url": "https://github.com/FonaTech/Project_Chronos",
+  "stars": 299,
+  "forks": 57,
+  "issues": 0,
+  "PR": 0,
+  "description": "⚡ Zero-Stall MoE Inference via Lookahead Prediction & Async DMA Prefetching. Optimized for SSD I/O with Hybrid MLA+Sliding Window Attention.",
+  "tags": [
+    "artificial-intelligence",
+    "async-dma",
+    "dual-layer-moe",
+    "generative-ai",
+    "high-throughput",
+    "io-latency-hiding",
+    "large-language-model",
+    "llm",
+    "lookahead-routing",
+    "lora",
+    "mixture-of-experts",
+    "mla-attention",
+    "open-models",
+    "open-source",
+    "predictive-inference",
+    "sliding-window-attention",
+    "ssd-offloading",
+    "streaming-llm"
+  ]
+}

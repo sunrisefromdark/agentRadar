@@ -1,0 +1,18 @@
+{
+  "repo_full_name": "microsoft/markitdown",
+  "repo_url": "https://github.com/microsoft/markitdown",
+  "stars": 142297,
+  "forks": 9705,
+  "issues": 392,
+  "PR": 410,
+  "description": "Python tool for converting files and office documents to Markdown.",
+  "tags": [
+    "autogen",
+    "autogen-extension",
+    "langchain",
+    "markdown",
+    "microsoft-office",
+    "openai",
+    "pdf"
+  ]
+}

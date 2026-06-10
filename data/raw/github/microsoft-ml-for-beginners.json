@@ -1,0 +1,23 @@
+{
+  "repo_full_name": "microsoft/ML-For-Beginners",
+  "repo_url": "https://github.com/microsoft/ML-For-Beginners",
+  "stars": 85890,
+  "forks": 20832,
+  "issues": 0,
+  "PR": 7,
+  "description": "12 weeks, 26 lessons, 52 quizzes, classic Machine Learning for all",
+  "tags": [
+    "data-science",
+    "education",
+    "machine-learning",
+    "machine-learning-algorithms",
+    "machinelearning",
+    "machinelearning-python",
+    "microsoft-for-beginners",
+    "ml",
+    "python",
+    "r",
+    "scikit-learn",
+    "scikit-learn-python"
+  ]
+}

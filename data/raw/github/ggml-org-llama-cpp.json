@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "ggml-org/llama.cpp",
+  "repo_url": "https://github.com/ggml-org/llama.cpp",
+  "stars": 114077,
+  "forks": 19011,
+  "issues": 676,
+  "PR": 1045,
+  "description": "LLM inference in C/C++",
+  "tags": [
+    "ggml"
+  ]
+}

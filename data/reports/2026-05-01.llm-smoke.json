@@ -1,0 +1,11 @@
+{
+  "date": "2026-05-01",
+  "generated_at": "2026-05-02T15:56:13+08:00",
+  "status": "fail",
+  "enabled": true,
+  "provider": "minimax",
+  "mode": "semantic-classification",
+  "base_url": "https://api.minimaxi.com/anthropic",
+  "model": "MiniMax-M2.7",
+  "error_summary": "Unexpected response type from minimax [response_shape]"
+}

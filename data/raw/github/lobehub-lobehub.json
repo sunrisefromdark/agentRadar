@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "lobehub/lobehub",
+  "repo_url": "https://github.com/lobehub/lobehub",
+  "stars": 77451,
+  "forks": 15240,
+  "issues": 50,
+  "PR": 261,
+  "description": "🤯 LobeHub is your Chief Agent Operator, organizing your agents into 7×24 operations by hiring, scheduling, and reporting on your entire AI team.",
+  "tags": [
+    "agent",
+    "agent-collaboration",
+    "agent-harness",
+    "ai",
+    "cao",
+    "chatgpt",
+    "chief-agent-operator",
+    "claude",
+    "deepseek",
+    "gemini",
+    "gpt",
+    "knowledge-base",
+    "mcp",
+    "openai",
+    "skills"
+  ]
+}

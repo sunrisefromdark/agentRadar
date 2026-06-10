@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "Tencent/tdesign-miniprogram",
+  "repo_url": "https://github.com/Tencent/tdesign-miniprogram",
+  "stars": 1671,
+  "forks": 324,
+  "issues": 166,
+  "PR": 23,
+  "description": "Wechat MiniProgram and Uniapp UI components lib for TDesign",
+  "tags": [
+    "miniprogram",
+    "tdesign",
+    "uniapp",
+    "wechat"
+  ]
+}

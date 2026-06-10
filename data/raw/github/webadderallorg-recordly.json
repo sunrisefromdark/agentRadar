@@ -1,0 +1,19 @@
+{
+  "repo_full_name": "webadderallorg/Recordly",
+  "repo_url": "https://github.com/webadderallorg/Recordly",
+  "stars": 14519,
+  "forks": 1032,
+  "issues": 67,
+  "PR": 27,
+  "description": "Create polished screen recordings without editing. Mac/Windows/Linux",
+  "tags": [
+    "electron",
+    "free",
+    "linux",
+    "macos",
+    "open-source",
+    "screen-recorder",
+    "screen-studio",
+    "windows"
+  ]
+}

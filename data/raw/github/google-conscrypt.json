@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "google/conscrypt",
+  "repo_url": "https://github.com/google/conscrypt",
+  "stars": 1388,
+  "forks": 321,
+  "issues": 157,
+  "PR": 22,
+  "description": "Conscrypt is a Java Security Provider that implements parts of the Java Cryptography Extension and Java Secure Socket Extension.",
+  "tags": []
+}

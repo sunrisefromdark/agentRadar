@@ -1,0 +1,21 @@
+{
+  "repo_full_name": "floci-io/floci",
+  "repo_url": "https://github.com/floci-io/floci",
+  "stars": 12622,
+  "forks": 1154,
+  "issues": 35,
+  "PR": 12,
+  "description": "Light, fluffy, and always free - The AWS Local Emulator alternative",
+  "tags": [
+    "aws",
+    "aws-emulation",
+    "devops",
+    "docker",
+    "ec2",
+    "ecs",
+    "localstack",
+    "s3",
+    "sqs",
+    "testcontainers"
+  ]
+}

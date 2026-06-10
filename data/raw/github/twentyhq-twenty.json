@@ -1,0 +1,28 @@
+{
+  "repo_full_name": "twentyhq/twenty",
+  "repo_url": "https://github.com/twentyhq/twenty",
+  "stars": 48657,
+  "forks": 6898,
+  "issues": 92,
+  "PR": 45,
+  "description": "The open alternative to Salesforce, designed for AI.",
+  "tags": [
+    "crm",
+    "crm-system",
+    "customer",
+    "good-first-issue",
+    "graphql",
+    "hacktoberfest",
+    "javascript",
+    "marketing",
+    "monorepo",
+    "nestjs",
+    "open-source",
+    "postgresql",
+    "react",
+    "reactjs",
+    "sales",
+    "typescript",
+    "web"
+  ]
+}

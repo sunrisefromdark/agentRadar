@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "google/syzkaller",
+  "repo_url": "https://github.com/google/syzkaller",
+  "stars": 6217,
+  "forks": 1421,
+  "issues": 494,
+  "PR": 99,
+  "description": "syzkaller is an unsupervised coverage-guided kernel fuzzer",
+  "tags": [
+    "fuzz-testing",
+    "fuzzer",
+    "fuzzing",
+    "kernel",
+    "linux",
+    "security",
+    "security-tools",
+    "security-vulnerability",
+    "testing"
+  ]
+}

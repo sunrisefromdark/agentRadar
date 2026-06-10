@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "huggingface/cadgenbench",
+  "repo_url": "https://github.com/huggingface/cadgenbench",
+  "stars": 1,
+  "forks": 0,
+  "issues": 1,
+  "PR": 0,
+  "description": "A benchmark for AI-driven CAD generation and editing",
+  "tags": [
+    "benchmark-cad-ai-evaluation-huggingface"
+  ]
+}

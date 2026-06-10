@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "EvoLinkAI/awesome-gpt-image-2-prompts",
+  "repo_url": "https://github.com/EvoLinkAI/awesome-gpt-image-2-prompts",
+  "stars": 9984,
+  "forks": 979,
+  "issues": 11,
+  "PR": 0,
+  "description": "Curated GPT-Image-2 prompts fot the Openai API：image examples across portraits, posters, UI mockups, character sheets, and community experiments.",
+  "tags": [
+    "api",
+    "awesome-list",
+    "chatgpt",
+    "generative-",
+    "gpt-image-2",
+    "gpt-image-2-api",
+    "gpt-image-2-prompts",
+    "image-generation",
+    "image-prompt",
+    "image-to-image",
+    "openai",
+    "prompt-",
+    "prompt-collection",
+    "prompts",
+    "text-to-image"
+  ]
+}

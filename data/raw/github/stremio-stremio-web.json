@@ -1,0 +1,13 @@
+{
+  "repo_full_name": "Stremio/stremio-web",
+  "repo_url": "https://github.com/Stremio/stremio-web",
+  "stars": 11144,
+  "forks": 1220,
+  "issues": 62,
+  "PR": 10,
+  "description": "Stremio - Freedom to Stream",
+  "tags": [
+    "hacktoberfest",
+    "stremio"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "pydantic/monty",
+  "repo_url": "https://github.com/pydantic/monty",
+  "stars": 7285,
+  "forks": 325,
+  "issues": 51,
+  "PR": 12,
+  "description": "A minimal, secure Python interpreter written in Rust for use by AI",
+  "tags": []
+}

@@ -1,0 +1,22 @@
+{
+  "repo_full_name": "op7418/guizang-ppt-skill",
+  "repo_url": "https://github.com/op7418/guizang-ppt-skill",
+  "stars": 10772,
+  "forks": 855,
+  "issues": 6,
+  "PR": 5,
+  "description": "AI-agent Skill for generating polished HTML slide decks: editorial magazine and Swiss layouts, image prompts, social covers, and a WebGL/low-power presentation runtime.",
+  "tags": [
+    "ai-agent",
+    "claude-code",
+    "codex",
+    "html-deck",
+    "image-generation",
+    "ppt",
+    "presentation",
+    "skill",
+    "skills",
+    "swiss-design",
+    "web-ppt"
+  ]
+}

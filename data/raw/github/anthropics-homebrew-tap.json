@@ -1,0 +1,10 @@
+{
+  "repo_full_name": "anthropics/homebrew-tap",
+  "repo_url": "https://github.com/anthropics/homebrew-tap",
+  "stars": 15,
+  "forks": 3,
+  "issues": 0,
+  "PR": 0,
+  "description": "Homebrew formulae for Anthropic tools.",
+  "tags": []
+}

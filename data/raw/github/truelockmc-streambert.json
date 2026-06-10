@@ -1,0 +1,26 @@
+{
+  "repo_full_name": "truelockmc/streambert",
+  "repo_url": "https://github.com/truelockmc/streambert",
+  "stars": 4841,
+  "forks": 395,
+  "issues": 22,
+  "PR": 6,
+  "description": "A cross-platform Electron Desktop App to stream and download any Movie, TV Series or Anime in the World. Zero Ads and Tracking",
+  "tags": [
+    "anime",
+    "anime-downloader",
+    "anime-scraper",
+    "downloader",
+    "electron",
+    "modern-ui",
+    "movies",
+    "movies-streaming",
+    "opinionated",
+    "piracy",
+    "series",
+    "streaming",
+    "streaming-video",
+    "tmdb-api",
+    "tv"
+  ]
+}

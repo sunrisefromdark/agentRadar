@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "iptv-org/iptv",
+  "repo_url": "https://github.com/iptv-org/iptv",
+  "stars": 116711,
+  "forks": 6201,
+  "issues": 2,
+  "PR": 0,
+  "description": "Collection of publicly available IPTV channels from all over the world",
+  "tags": [
+    "iptv",
+    "m3u",
+    "playlist",
+    "streams",
+    "tv"
+  ]
+}

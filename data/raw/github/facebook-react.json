@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "facebook/react",
+  "repo_url": "https://github.com/facebook/react",
+  "stars": 245419,
+  "forks": 51172,
+  "issues": 837,
+  "PR": 487,
+  "description": "The library for web and native user interfaces.",
+  "tags": [
+    "declarative",
+    "frontend",
+    "javascript",
+    "library",
+    "react",
+    "ui"
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "repo_full_name": "frappe/erpnext",
+  "repo_url": "https://github.com/frappe/erpnext",
+  "stars": 34755,
+  "forks": 11389,
+  "issues": 1999,
+  "PR": 80,
+  "description": "Free and Open Source Enterprise Resource Planning (ERP)",
+  "tags": [
+    "accounting",
+    "asset-management",
+    "crm",
+    "distribution",
+    "erp",
+    "erpnext",
+    "frappe",
+    "healthcare",
+    "hrms",
+    "manufacturing",
+    "point-of-sale",
+    "procurement",
+    "project-management",
+    "python",
+    "retail",
+    "support"
+  ]
+}

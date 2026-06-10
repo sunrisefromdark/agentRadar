@@ -1,0 +1,16 @@
+{
+  "repo_full_name": "bwya77/vscode-dark-islands",
+  "repo_url": "https://github.com/bwya77/vscode-dark-islands",
+  "stars": 8525,
+  "forks": 273,
+  "issues": 46,
+  "PR": 21,
+  "description": "VSCode theme based off the easemate IDE and Jetbrains islands theme",
+  "tags": [
+    "easemate",
+    "jetbrains",
+    "visual-studio-code",
+    "vscode",
+    "vscode-theme"
+  ]
+}

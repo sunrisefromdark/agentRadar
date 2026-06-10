@@ -1,0 +1,14 @@
+{
+  "repo_full_name": "OpenBMB/MiniCPM-V",
+  "repo_url": "https://github.com/OpenBMB/MiniCPM-V",
+  "stars": 25140,
+  "forks": 1970,
+  "issues": 29,
+  "PR": 20,
+  "description": "A Pocket-Sized MLLM for Ultra-Efficient Image and Video Understanding on Your Phone",
+  "tags": [
+    "minicpm",
+    "minicpm-v",
+    "multi-modal"
+  ]
+}

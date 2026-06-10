@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "browser-use/desktop",
+  "repo_url": "https://github.com/browser-use/desktop",
+  "stars": 553,
+  "forks": 42,
+  "issues": 12,
+  "PR": 19,
+  "description": "Browser Use Desktop App",
+  "tags": [
+    "agent-browser",
+    "browser",
+    "browser-agent",
+    "browser-agents",
+    "browser-harness",
+    "browser-use"
+  ]
+}

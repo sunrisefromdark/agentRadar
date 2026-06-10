@@ -1,0 +1,20 @@
+{
+  "repo_full_name": "nodejs/node",
+  "repo_url": "https://github.com/nodejs/node",
+  "stars": 117453,
+  "forks": 35716,
+  "issues": 1567,
+  "PR": 912,
+  "description": "Node.js JavaScript runtime ✨🐢🚀✨",
+  "tags": [
+    "javascript",
+    "js",
+    "linux",
+    "macos",
+    "mit",
+    "node",
+    "nodejs",
+    "runtime",
+    "windows"
+  ]
+}

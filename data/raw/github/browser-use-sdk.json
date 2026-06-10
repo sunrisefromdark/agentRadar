@@ -1,0 +1,15 @@
+{
+  "repo_full_name": "browser-use/sdk",
+  "repo_url": "https://github.com/browser-use/sdk",
+  "stars": 14,
+  "forks": 6,
+  "issues": 1,
+  "PR": 11,
+  "description": "Browser Use Cloud SDK",
+  "tags": [
+    "ai-agent",
+    "browser-use-box",
+    "browser-use-cloud",
+    "sdk"
+  ]
+}

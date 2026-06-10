@@ -1,0 +1,12 @@
+{
+  "repo_full_name": "microsoft/winget-pkgs",
+  "repo_url": "https://github.com/microsoft/winget-pkgs",
+  "stars": 10634,
+  "forks": 7207,
+  "issues": 1084,
+  "PR": 618,
+  "description": "The Microsoft community Windows Package Manager manifest repository",
+  "tags": [
+    "hacktoberfest"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "repo_full_name": "alibaba/neug",
+  "repo_url": "https://github.com/alibaba/neug",
+  "stars": 99,
+  "forks": 25,
+  "issues": 72,
+  "PR": 14,
+  "description": "High-performance embedded graph database for analytics and real-time transactions",
+  "tags": [
+    "cypher",
+    "embedded-database",
+    "graph-analysis",
+    "graph-database",
+    "graph-intelligence",
+    "graphrag"
+  ]
+}

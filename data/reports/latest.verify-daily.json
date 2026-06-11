@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-10",
+  "date": "2026-06-11",
   "status": "pass",
-  "summary_path": "data/reports/2026-06-10.run-summary.json",
-  "github_audit_path": "data/raw/github/2026-06-10.enrichment.json",
+  "summary_path": "data/reports/2026-06-11.run-summary.json",
+  "github_audit_path": "data/raw/github/2026-06-11.enrichment.json",
   "checks": [
     {
       "name": "minimum_viable_run_completed",
@@ -12,12 +12,12 @@
     {
       "name": "raw_signals_present",
       "status": "pass",
-      "detail": "raw_signals=191"
+      "detail": "raw_signals=192"
     },
     {
       "name": "scored_projects_present",
       "status": "pass",
-      "detail": "scored_projects=153"
+      "detail": "scored_projects=155"
     },
     {
       "name": "active_sources_present",
@@ -32,12 +32,12 @@
     {
       "name": "low_confidence_share",
       "status": "pass",
-      "detail": "low_confidence_projects=1/153"
+      "detail": "low_confidence_projects=3/155"
     },
     {
       "name": "anomaly_share",
       "status": "pass",
-      "detail": "anomaly_share=0.098"
+      "detail": "anomaly_share=0.1032"
     },
     {
       "name": "uniform_star_velocity",
@@ -47,7 +47,7 @@
     {
       "name": "star_delta_sources_visible",
       "status": "pass",
-      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:99,unavailable:54"
+      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:90,unavailable:65"
     },
     {
       "name": "live_delta_token_missing",
@@ -82,22 +82,22 @@
     {
       "name": "fresh_source_project_alignment",
       "status": "pass",
-      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=67; today_fresh_candidate_count=118"
+      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=68; today_fresh_candidate_count=127"
     },
     {
       "name": "agents_radar_stale_fallback",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-10"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-11"
     },
     {
       "name": "agents_radar_context_only",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-10"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-11"
     },
     {
       "name": "github_audit_written",
       "status": "pass",
-      "detail": "github_enrichment_audits=157"
+      "detail": "github_enrichment_audits=158"
     }
   ],
   "recommended_actions": [

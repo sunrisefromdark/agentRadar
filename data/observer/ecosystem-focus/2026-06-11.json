@@ -1,0 +1,948 @@
+{
+  "scope": "ecosystem-focus",
+  "date": "2026-06-11",
+  "generated_at": "2026-06-11T23:27:36+08:00",
+  "status": "active",
+  "llm_diagnostics": {
+    "enabled": false,
+    "provider": "none",
+    "summary_attempt_count": 0,
+    "summary_success_count": 0,
+    "summary_failure_count": 0,
+    "judge_attempt_count": 0,
+    "judge_success_count": 0,
+    "judge_failure_count": 0
+  },
+  "candidate_count": 13,
+  "ecosystem_counts": {
+    "eval-observability-governance": 5,
+    "skills-tools-mcp": 6,
+    "memory-knowledge": 5,
+    "agent-runtime": 4,
+    "coding-agents": 4
+  },
+  "notes": [
+    "query ecosystem=coding-agents source=keyword:aider",
+    "query ecosystem=coding-agents source=keyword:claude code",
+    "query ecosystem=coding-agents source=keyword:code review",
+    "query ecosystem=coding-agents source=keyword:codex",
+    "query ecosystem=coding-agents source=topic:code-review",
+    "query ecosystem=coding-agents source=topic:coding-agent",
+    "query ecosystem=coding-agents source=org:anthropics",
+    "query ecosystem=coding-agents source=org:openai",
+    "query ecosystem=coding-agents source=repo:Aider-AI/aider",
+    "query ecosystem=coding-agents source=repo:openai/codex",
+    "daily normalized matches ecosystem=coding-agents count=2",
+    "query ecosystem=agent-runtime source=keyword:execution",
+    "query ecosystem=agent-runtime source=keyword:orchestration",
+    "query ecosystem=agent-runtime source=keyword:runtime",
+    "query ecosystem=agent-runtime source=keyword:sandbox",
+    "query ecosystem=agent-runtime source=topic:agent-runtime",
+    "query ecosystem=agent-runtime source=topic:workflow-engine",
+    "query ecosystem=agent-runtime source=org:langchain-ai",
+    "query ecosystem=agent-runtime source=org:openai",
+    "query ecosystem=agent-runtime source=repo:langchain-ai/langgraph",
+    "query ecosystem=agent-runtime source=repo:openai/swarm",
+    "daily normalized matches ecosystem=agent-runtime count=7",
+    "query ecosystem=skills-tools-mcp source=keyword:connector",
+    "query ecosystem=skills-tools-mcp source=keyword:mcp",
+    "query ecosystem=skills-tools-mcp source=keyword:plugin",
+    "query ecosystem=skills-tools-mcp source=keyword:skills",
+    "query ecosystem=skills-tools-mcp source=topic:mcp",
+    "query ecosystem=skills-tools-mcp source=topic:plugin-system",
+    "query ecosystem=skills-tools-mcp source=org:modelcontextprotocol",
+    "query ecosystem=skills-tools-mcp source=org:openai",
+    "query ecosystem=skills-tools-mcp source=repo:modelcontextprotocol/servers",
+    "daily normalized matches ecosystem=skills-tools-mcp count=10",
+    "query ecosystem=memory-knowledge source=keyword:rag",
+    "query ecosystem=memory-knowledge source=topic:agent-memory",
+    "query ecosystem=memory-knowledge source=topic:retrieval",
+    "query ecosystem=memory-knowledge source=org:langchain-ai",
+    "query ecosystem=memory-knowledge source=org:mem0ai",
+    "query ecosystem=memory-knowledge source=repo:langchain-ai/langmem",
+    "query ecosystem=memory-knowledge source=repo:mem0ai/mem0",
+    "daily normalized matches ecosystem=memory-knowledge count=3",
+    "query ecosystem=browser-computer-use source=keyword:automation",
+    "query ecosystem=browser-computer-use source=keyword:browser agent",
+    "query ecosystem=browser-computer-use source=keyword:computer use",
+    "query ecosystem=browser-computer-use source=keyword:desktop",
+    "query ecosystem=browser-computer-use source=topic:browser-automation",
+    "query ecosystem=browser-computer-use source=topic:computer-use",
+    "query ecosystem=browser-computer-use source=org:browser-use",
+    "query ecosystem=browser-computer-use source=org:microsoft",
+    "query ecosystem=browser-computer-use source=repo:browser-use/browser-use",
+    "query ecosystem=browser-computer-use source=repo:microsoft/playwright-mcp",
+    "query ecosystem=eval-observability-governance source=keyword:eval",
+    "query ecosystem=eval-observability-governance source=keyword:guardrail",
+    "query ecosystem=eval-observability-governance source=keyword:observability",
+    "query ecosystem=eval-observability-governance source=keyword:policy",
+    "query ecosystem=eval-observability-governance source=topic:evals",
+    "query ecosystem=eval-observability-governance source=topic:observability",
+    "query ecosystem=eval-observability-governance source=org:langfuse",
+    "query ecosystem=eval-observability-governance source=org:openai",
+    "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+    "query ecosystem=eval-observability-governance source=repo:openai/evals",
+    "daily normalized matches ecosystem=eval-observability-governance count=4",
+    "query ecosystem=multi-agent-coordination source=keyword:coordination",
+    "query ecosystem=multi-agent-coordination source=keyword:multi-agent",
+    "daily normalized matches ecosystem=agentic-rl count=1",
+    "query failed ecosystem=skills-tools-mcp source=repo:openai/codex: GitHub Search returned HTTP 403 for skills-tools-mcp",
+    "query failed ecosystem=memory-knowledge source=keyword:context: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:knowledge: fetch failed",
+    "query failed ecosystem=memory-knowledge source=keyword:memory: GitHub Search returned HTTP 403 for memory-knowledge",
+    "query failed ecosystem=multi-agent-coordination source=keyword:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=keyword:team: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:multi-agent: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=topic:swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:crewAIInc: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=org:openai: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:crewAIInc/crewAI: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=multi-agent-coordination source=repo:openai/swarm: GitHub Search returned HTTP 403 for multi-agent-coordination",
+    "query failed ecosystem=agent-ui-workbench source=keyword:console: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:operator ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:session log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=keyword:viewer: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:agent-ui: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=topic:session-log: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:anthropics: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=org:openai: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:anthropics/claude-code: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agent-ui-workbench source=repo:openai/codex: GitHub Search returned HTTP 403 for agent-ui-workbench",
+    "query failed ecosystem=agentic-rl source=keyword:agentic rl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:policy optimization: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reinforcement learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=keyword:reward model: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:agent-training: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=topic:reinforcement-learning: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:huggingface: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=org:openai: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:huggingface/trl: GitHub Search returned HTTP 403 for agentic-rl",
+    "query failed ecosystem=agentic-rl source=repo:openai/baselines: GitHub Search returned HTTP 403 for agentic-rl"
+  ],
+  "entries": [
+    {
+      "repo_full_name": "langfuse/langfuse-docs",
+      "repo_url": "https://github.com/langfuse/langfuse-docs",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2023-05-22T14:48:56Z",
+      "repo_updated_at": "2026-06-11T15:22:59Z",
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "observability"
+        ],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "description": "🪢 Langfuse documentation -- Langfuse is the open source LLM Engineering Platform. Observability, evals, prompt management, playground and metrics to debug and improve LLM apps",
+      "stars": 210,
+      "forks": 240,
+      "issues": 130,
+      "PR": 106,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "candidate_pool=github-search",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,agent-skills,agents,genai,hacktoberfest,langfuse,large-language-models,llms,nextra,observability,prompt-management,github-live-star-delta",
+        "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+        "query ecosystem=eval-observability-governance source=topic:observability",
+        "query=repo:langfuse/langfuse",
+        "query=topic:observability",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "freshness_label": "new-72h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-72h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 106,
+      "observer_score": 106,
+      "observer_rank": 1,
+      "project_brief_cn": "这是一个评测与验证项目。它主要是帮你比较不同模型或代理的表现。常见用法是拿它来比较模型效果、回放失败样本和做回归验收。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-72h。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "langfuse/langfuse-js",
+      "repo_url": "https://github.com/langfuse/langfuse-js",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2023-07-02T21:43:44Z",
+      "repo_updated_at": "2026-06-11T13:41:11Z",
+      "ecosystems": [
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "observability"
+        ],
+        "topic_hints": [
+          "observability"
+        ],
+        "repo_seeds": [
+          "langfuse/langfuse"
+        ],
+        "org_seeds": [
+          "langfuse"
+        ]
+      },
+      "description": "🪢 Langfuse JS/TS SDKs - Instrument your LLM app and get detailed tracing/observability. Works with any LLM or framework",
+      "stars": 142,
+      "forks": 88,
+      "issues": 22,
+      "PR": 19,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "candidate_pool=github-search",
+        "project_sources=watchlist_live_activity,github_live_star_delta",
+        "project_tags=watchlist-hit,watchlist:langfuse,fresh-today,javascript,langfuse,llmops,observability,sdk-js,typescript,github-live-star-delta",
+        "query ecosystem=eval-observability-governance source=repo:langfuse/langfuse",
+        "query=repo:langfuse/langfuse",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "langfuse"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 15,
+      "historical_precision_label": "validated",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:validated",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 103,
+      "observer_score": 103,
+      "observer_rank": 2,
+      "project_brief_cn": "这是一个AI 基础设施或平台项目。它主要是帮你封装模型接入和开发框架，也能把通用能力沉淀成平台或开发底座。大家通常会用它来封装模型接入和开发框架，也会顺手把通用能力沉淀成平台或开发底座。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance 的生态证据，主体 pedigree 为 company:langfuse，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证 README/代码深度、真实使用场景，以及它是否获得持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "awslabs/iam-policy-autopilot",
+      "repo_url": "https://github.com/awslabs/iam-policy-autopilot",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-06-11T00:00:00.000Z",
+      "repo_updated_at": "2026-06-11T00:00:00.000Z",
+      "ecosystems": [
+        "eval-observability-governance",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "policy"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "IAM Policy Autopilot is an open source static code analysis tool that helps you quickly create baseline AWS IAM policies that you can refine as your application evolves. This tool is available as a command-line utility and MCP server for use within AI coding assistants for quickly building IAM policies.",
+      "stars": 374,
+      "forks": 41,
+      "issues": 35,
+      "PR": 8,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:awslabs,fresh-today,aws,aws-iam,aws-iam-policies,aws-security,cli,cloud-security,code-analysis,iam,iam-policy,mcp,mcp-server,policy-generation,policy-generator,static-code-analysis",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "awslabs"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "core",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:core"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 101,
+      "observer_score": 101,
+      "observer_rank": 3,
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力，也能围绕代码仓库做分析与修改。大家通常会用它来围绕 MCP 暴露工具能力，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance、skills-tools-mcp 的生态证据，主体 pedigree 为 company:awslabs，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "OpenBMB/UltraRAG",
+      "repo_url": "https://github.com/OpenBMB/UltraRAG",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-06-10T00:00:00.000Z",
+      "repo_updated_at": "2026-06-11T00:00:00.000Z",
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "rag"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "A Low-Code MCP Framework for Building Complex and Innovative RAG Pipelines",
+      "stars": 5580,
+      "forks": 429,
+      "issues": 13,
+      "PR": 7,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=watchlist_live_activity",
+        "project_tags=watchlist-hit,watchlist:OpenBMB,fresh-today,deepseek,demo,easy,embedding,flask,gpt,huggingface-transformers,llm,mcp,multimodal,openai,qwen,rag,sentence-transformers,ui,vllm,vlm",
+        "watch_reason=priority-company"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [
+          "OpenBMB"
+        ],
+        "engineers": []
+      },
+      "entity_tier": "proven",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "new-24h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-24h",
+        "history:mixed",
+        "pedigree:company",
+        "tier:proven"
+      ],
+      "long_tail_reason": "priority-company",
+      "base_observer_score": 97,
+      "observer_score": 97,
+      "observer_rank": 4,
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织资料检索、知识调用和上下文复用。大家通常会用它来组织资料检索、知识调用和上下文复用。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 company:OpenBMB，并且新鲜度标签为 new-24h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "repo_url": "https://github.com/moltis-org/moltis",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-05-28T00:00:00.000Z",
+      "repo_updated_at": "2026-06-11T00:00:00.000Z",
+      "ecosystems": [
+        "agent-runtime",
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "mcp",
+          "memory"
+        ],
+        "topic_hints": [
+          "agent-runtime",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "A secure persistent personal agent server in Rust. One binary, sandboxed execution, multi-provider LLMs, voice, memory, Telegram, WhatsApp, Discord, Teams, and MCP tools. Secure by design, runs on your hardware.",
+      "stars": 2735,
+      "forks": 323,
+      "issues": 60,
+      "PR": 19,
+      "source_notes": [
+        "candidate_pool=daily-normalized",
+        "project_sources=agents-radar",
+        "project_tags=infra,knowledge,automation,ai-agent,ai-assistant,clawdbot,llm,mcp,openclaw,rust,sandbox,self-hosted,single-binary,telegram-bot,voice-assistant,agent-runtime,tool-use,agent,self-improving",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 8,
+      "historical_precision_label": "mixed",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:mixed",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 96,
+      "observer_score": 96,
+      "observer_rank": 5,
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能组织检索和知识调用能力。大家通常会用它来维护长期上下文和知识材料，也会顺手组织检索和知识调用能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime、memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "roackb2/heddle",
+      "repo_url": "https://github.com/roackb2/heddle",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-03-08T01:38:50Z",
+      "repo_updated_at": "2026-06-11T15:16:56Z",
+      "ecosystems": [
+        "agent-runtime",
+        "coding-agents",
+        "memory-knowledge"
+      ],
+      "matched_by": {
+        "keywords": [
+          "runtime"
+        ],
+        "topic_hints": [
+          "agent-memory",
+          "agent-runtime",
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "An open-source terminal coding agent runtime and CLI for real project work.",
+      "stars": 15,
+      "forks": 3,
+      "issues": 6,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=topic:agent-runtime",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query ecosystem=memory-knowledge source=topic:agent-memory",
+        "query=topic:agent-memory",
+        "query=topic:agent-runtime",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 77,
+      "observer_score": 77,
+      "observer_rank": 6,
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能组织检索和知识调用能力。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手组织检索和知识调用能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime、coding-agents、memory-knowledge 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "eleboucher/memini",
+      "repo_url": "https://github.com/eleboucher/memini",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-06-09T09:20:36Z",
+      "repo_updated_at": "2026-06-11T15:14:46Z",
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "memory",
+          "retrieval"
+        ],
+        "topic_hints": [
+          "agent-memory",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Give any MCP-capable agent persistent memory: remember/recall over a tiered store with hybrid vector + keyword retrieval. Single Go binary, SQLite or Postgres, embedded admin UI.",
+      "stars": 2,
+      "forks": 0,
+      "issues": 2,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=memory-knowledge source=keyword:rag",
+        "query ecosystem=memory-knowledge source=topic:agent-memory",
+        "query ecosystem=skills-tools-mcp source=keyword:mcp",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:mcp",
+        "query=keyword:rag",
+        "query=topic:agent-memory",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "new-72h",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:new-72h",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 74,
+      "observer_score": 74,
+      "observer_rank": 7,
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 new-72h。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "alexherrero/crickets",
+      "repo_url": "https://github.com/alexherrero/crickets",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-05-13T01:47:55Z",
+      "repo_updated_at": "2026-06-11T15:29:30Z",
+      "ecosystems": [
+        "agent-runtime",
+        "coding-agents",
+        "eval-observability-governance"
+      ],
+      "matched_by": {
+        "keywords": [
+          "claude code",
+          "code review",
+          "execution",
+          "review"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Native Claude Code + Antigravity plugins arming AI agents with production-grade dev-lifecycle capabilities. Today: kill-switches, fresh-context evaluators, PII guardrails, dependency-PR repair. Working toward: phase-gated workflows (plan · build · review · release), testing, code review. The execution engine behind Agent M.",
+      "stars": 1,
+      "forks": 0,
+      "issues": 18,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=keyword:execution",
+        "query ecosystem=coding-agents source=keyword:code review",
+        "query ecosystem=eval-observability-governance source=keyword:guardrail",
+        "query=keyword:code review",
+        "query=keyword:execution",
+        "query=keyword:guardrail",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "cross-ecosystem",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:cross-ecosystem",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 71,
+      "observer_score": 71,
+      "observer_rank": 8,
+      "project_brief_cn": "这是一个代码审查型 coding agent。它主要是帮你协助做代码审查和变更收敛，也能围绕代码仓库做分析与修改。常见用法是拿它来让它读仓库、改代码、跑测试或协助审 PR。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime、coding-agents、eval-observability-governance 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "memtomem/memtomem",
+      "repo_url": "https://github.com/memtomem/memtomem",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-03-28T06:33:51Z",
+      "repo_updated_at": "2026-06-11T15:28:39Z",
+      "ecosystems": [
+        "memory-knowledge",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "memory"
+        ],
+        "topic_hints": [
+          "agent-memory",
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Markdown-first, long-term memory infrastructure for AI agents. Hybrid BM25 + semantic search across markdown/code files via MCP.",
+      "stars": 6,
+      "forks": 24,
+      "issues": 11,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=memory-knowledge source=topic:agent-memory",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=topic:agent-memory",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 67,
+      "observer_score": 67,
+      "observer_rank": 9,
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你维护长期上下文和知识材料，也能组织检索和知识调用能力。大家通常会用它来维护长期上下文和知识材料，也会顺手组织检索和知识调用能力。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 memory-knowledge、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "terrene-foundation/kailash-py",
+      "repo_url": "https://github.com/terrene-foundation/kailash-py",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-03-13T12:59:31Z",
+      "repo_updated_at": "2026-06-11T15:12:44Z",
+      "ecosystems": [
+        "agent-runtime"
+      ],
+      "matched_by": {
+        "keywords": [
+          "execution",
+          "orchestration",
+          "workflow"
+        ],
+        "topic_hints": [
+          "workflow-engine"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Kailash Python SDK — workflow orchestration, 140+ nodes, trust-aware execution",
+      "stars": 1,
+      "forks": 3,
+      "issues": 5,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=agent-runtime source=topic:workflow-engine",
+        "query=topic:workflow-engine",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 61,
+      "observer_score": 61,
+      "observer_rank": 10,
+      "project_brief_cn": "这是一个多代理编排平台。它主要是帮你把任务步骤编排成可重复执行的工作流，也能把任务流程自动化串起来。常见用法是拿它来把多个 agent 角色和工具编排成可重复执行的工作流。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 agent-runtime 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证执行闭环是否稳定、工具接入是否扩展，以及是否出现持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "ascending-llc/jarvis-registry",
+      "repo_url": "https://github.com/ascending-llc/jarvis-registry",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2025-10-04T01:52:24Z",
+      "repo_updated_at": "2026-06-11T15:27:03Z",
+      "ecosystems": [
+        "eval-observability-governance",
+        "skills-tools-mcp"
+      ],
+      "matched_by": {
+        "keywords": [
+          "mcp",
+          "observability"
+        ],
+        "topic_hints": [
+          "mcp"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Connect any AI copilot or autonomous agent to your enterprise tools — through a single, secure MCP/Agent gateway with built-in identity, access control, and full observability.",
+      "stars": 1159,
+      "forks": 169,
+      "issues": 2,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=eval-observability-governance source=keyword:observability",
+        "query ecosystem=skills-tools-mcp source=keyword:connector",
+        "query ecosystem=skills-tools-mcp source=topic:mcp",
+        "query=keyword:connector",
+        "query=keyword:observability",
+        "query=topic:mcp",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 61,
+      "observer_score": 61,
+      "observer_rank": 11,
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 eval-observability-governance、skills-tools-mcp 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "0bserver07/chimera",
+      "repo_url": "https://github.com/0bserver07/chimera",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-02-23T00:35:47Z",
+      "repo_updated_at": "2026-06-11T15:21:35Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "codex"
+        ],
+        "topic_hints": [
+          "coding-agent"
+        ],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "Open-source Python framework for building coding agents. Pick your provider, pick your tools, pick your loop. Chimera wires them together. Recreate SWE-Agent, Aider, Cline, Codex in a few lines, or design something entirely new.",
+      "stars": 1,
+      "forks": 0,
+      "issues": 10,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query ecosystem=coding-agents source=topic:coding-agent",
+        "query=keyword:aider",
+        "query=topic:coding-agent",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 0,
+      "historical_precision_label": "none",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "topic-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:topic-backed",
+        "freshness:active-today",
+        "history:none",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 53,
+      "observer_score": 53,
+      "observer_rank": 12,
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback"
+    },
+    {
+      "repo_full_name": "Yash-Koladiya30/fixfleet",
+      "repo_url": "https://github.com/Yash-Koladiya30/fixfleet",
+      "observed_at": "2026-06-11T23:27:36+08:00",
+      "repo_created_at": "2026-05-01T09:17:48Z",
+      "repo_updated_at": "2026-06-11T15:28:49Z",
+      "ecosystems": [
+        "coding-agents"
+      ],
+      "matched_by": {
+        "keywords": [
+          "aider",
+          "claude code",
+          "codex",
+          "cursor"
+        ],
+        "topic_hints": [],
+        "repo_seeds": [],
+        "org_seeds": []
+      },
+      "description": "🚀 Auto-fix GitLab bugs with any AI agent — Claude Code, Codex, Gemini, Cursor, Aider, or any free OpenAI-compatible API. Token-aware, confidence-scored.",
+      "stars": 3,
+      "forks": 0,
+      "issues": 0,
+      "PR": 0,
+      "source_notes": [
+        "candidate_pool=github-search",
+        "query ecosystem=coding-agents source=keyword:aider",
+        "query ecosystem=coding-agents source=keyword:claude code",
+        "query ecosystem=coding-agents source=keyword:codex",
+        "query=keyword:aider",
+        "query=keyword:claude code",
+        "query=keyword:codex",
+        "watch_reason=ecosystem-signal"
+      ],
+      "pedigree": {
+        "builders": [],
+        "companies": [],
+        "engineers": []
+      },
+      "entity_tier": "none",
+      "historical_precision_score": 4,
+      "historical_precision_label": "emerging",
+      "freshness_label": "active-today",
+      "breakout_label": "steady",
+      "ecosystem_depth_label": "keyword-backed",
+      "labels": [
+        "breakout:steady",
+        "ecosystem-depth:keyword-backed",
+        "freshness:active-today",
+        "history:emerging",
+        "tier:none"
+      ],
+      "long_tail_reason": "ecosystem-signal",
+      "base_observer_score": 51,
+      "observer_score": 51,
+      "observer_rank": 13,
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "why_now_cn": "它当前被 observer 捕获，是因为命中了 coding-agents 的生态证据，主体 pedigree 为 none，并且新鲜度标签为 active-today。",
+      "watch_next_cn": "继续验证真实团队接入、跨工具链集成，以及是否形成持续多源确认。",
+      "summary_source": "template_fallback"
+    }
+  ]
+}

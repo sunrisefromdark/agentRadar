@@ -1,0 +1,831 @@
+{
+  "generatedAt": "2026-05-11T08:25:40.091Z",
+  "scannedFiles": 81,
+  "productionFiles": 53,
+  "thresholds": {
+    "maxFunctionComplexity": 10,
+    "maxFunctionLength": 60
+  },
+  "summary": {
+    "filesMissingChineseComments": 0,
+    "filesOverComplexity": 14,
+    "filesOverLength": 8,
+    "functionsOverComplexity": 36,
+    "functionsOverLength": 14
+  },
+  "violations": {
+    "functionsOverComplexity": [
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "matchTopics",
+        "startLine": 136,
+        "endLine": 165,
+        "length": 30,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "projectCard",
+        "startLine": 336,
+        "endLine": 356,
+        "length": 21,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "validateWhyTodayText",
+        "startLine": 652,
+        "endLine": 673,
+        "length": 22,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 746,
+        "endLine": 878,
+        "length": 133,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "qualityChecks",
+        "startLine": 110,
+        "endLine": 156,
+        "length": 47,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "llmChecks",
+        "startLine": 158,
+        "endLine": 183,
+        "length": 26,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "pickStrongFeatureFamily",
+        "startLine": 446,
+        "endLine": 483,
+        "length": 38,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "buildFamilySpecificBrief",
+        "startLine": 540,
+        "endLine": 565,
+        "length": 26,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "matchInterestTopicsFromSearchableText",
+        "startLine": 396,
+        "endLine": 415,
+        "length": 20,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "validateWeeklyProjectBriefText",
+        "startLine": 721,
+        "endLine": 750,
+        "length": 30,
+        "complexity": 12
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "validateWeeklyWhyThisWeekText",
+        "startLine": 752,
+        "endLine": 770,
+        "length": 19,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1056,
+        "endLine": 1324,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "completeLikelyTruncatedJson",
+        "startLine": 41,
+        "endLine": 87,
+        "length": 47,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "extractBalancedJsonValues",
+        "startLine": 109,
+        "endLine": 153,
+        "length": 45,
+        "complexity": 15
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "parseJsonObjectFromText",
+        "startLine": 155,
+        "endLine": 171,
+        "length": 17,
+        "complexity": 12
+      },
+      {
+        "filePath": "src/providers/minimax.ts",
+        "name": "isRetryableMiniMaxTransportError",
+        "startLine": 153,
+        "endLine": 166,
+        "length": 14,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "tryGitHubRepoSync",
+        "startLine": 331,
+        "endLine": 395,
+        "length": 65,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 518,
+        "length": 85,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "fetchGitHubLiveStarDeltaPage",
+        "startLine": 600,
+        "endLine": 652,
+        "length": 53,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "fetchApiMetrics",
+        "startLine": 754,
+        "endLine": 811,
+        "length": 58,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "mergeStarDeltaResolution",
+        "startLine": 835,
+        "endLine": 894,
+        "length": 60,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "starDeltaSummaryFromNotes",
+        "startLine": 896,
+        "endLine": 907,
+        "length": 12,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/signal/githubRealtimeConnectors.ts",
+        "name": "fetchWatchlistLiveActivitySignals",
+        "startLine": 438,
+        "endLine": 503,
+        "length": 66,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "freshnessSummaryCn",
+        "startLine": 127,
+        "endLine": 168,
+        "length": 42,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildRunSnapshot",
+        "startLine": 58,
+        "endLine": 91,
+        "length": 34,
+        "complexity": 12
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildOverviewView",
+        "startLine": 124,
+        "endLine": 183,
+        "length": 60,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildProjectsView",
+        "startLine": 185,
+        "endLine": 249,
+        "length": 65,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "startLine": 251,
+        "endLine": 317,
+        "length": 67,
+        "complexity": 25
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildRunHealthView",
+        "startLine": 319,
+        "endLine": 357,
+        "length": 39,
+        "complexity": 12
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildKnowledgeBaseView",
+        "startLine": 359,
+        "endLine": 414,
+        "length": 56,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/visualConsole/index.ts",
+        "name": "renderVisualConsole",
+        "startLine": 26,
+        "endLine": 49,
+        "length": 24,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/render.ts",
+        "name": "renderWeeklyView",
+        "startLine": 135,
+        "endLine": 191,
+        "length": 57,
+        "complexity": 12
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseSupportProject",
+        "startLine": 31,
+        "endLine": 80,
+        "length": 50,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseCoreTrendCards",
+        "startLine": 82,
+        "endLine": 129,
+        "length": 48,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseWeakSignalCards",
+        "startLine": 131,
+        "endLine": 164,
+        "length": 34,
+        "complexity": 13
+      }
+    ],
+    "functionsOverLength": [
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 746,
+        "endLine": 878,
+        "length": 133,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementPrompt",
+        "startLine": 808,
+        "endLine": 974,
+        "length": 167,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementDraft",
+        "startLine": 976,
+        "endLine": 1054,
+        "length": 79,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1056,
+        "endLine": 1324,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "startLine": 302,
+        "endLine": 368,
+        "length": 67,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "tryGitHubRepoSync",
+        "startLine": 331,
+        "endLine": 395,
+        "length": 65,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 518,
+        "length": 85,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/signal/githubRealtimeConnectors.ts",
+        "name": "fetchWatchlistLiveActivitySignals",
+        "startLine": 438,
+        "endLine": 503,
+        "length": 66,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectSourceSignalsDetailed",
+        "startLine": 261,
+        "endLine": 343,
+        "length": 83,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectPrimarySourceSignals",
+        "startLine": 353,
+        "endLine": 413,
+        "length": 61,
+        "complexity": 2
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectRawSignalsDetailed",
+        "startLine": 686,
+        "endLine": 754,
+        "length": 69,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildProjectsView",
+        "startLine": 185,
+        "endLine": 249,
+        "length": 65,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "startLine": 251,
+        "endLine": 317,
+        "length": 67,
+        "complexity": 25
+      }
+    ],
+    "filesMissingChineseComments": []
+  },
+  "hotspots": {
+    "functionsByComplexity": [
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1056,
+        "endLine": 1324,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 746,
+        "endLine": 878,
+        "length": 133,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "buildFamilySpecificBrief",
+        "startLine": 540,
+        "endLine": 565,
+        "length": 26,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "startLine": 251,
+        "endLine": 317,
+        "length": 67,
+        "complexity": 25
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildKnowledgeBaseView",
+        "startLine": 359,
+        "endLine": 414,
+        "length": 56,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildProjectsView",
+        "startLine": 185,
+        "endLine": 249,
+        "length": 65,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseSupportProject",
+        "startLine": 31,
+        "endLine": 80,
+        "length": 50,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildOverviewView",
+        "startLine": 124,
+        "endLine": 183,
+        "length": 60,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/index.ts",
+        "name": "renderVisualConsole",
+        "startLine": 26,
+        "endLine": 49,
+        "length": 24,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 518,
+        "length": 85,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "completeLikelyTruncatedJson",
+        "startLine": 41,
+        "endLine": 87,
+        "length": 47,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseCoreTrendCards",
+        "startLine": 82,
+        "endLine": 129,
+        "length": 48,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "freshnessSummaryCn",
+        "startLine": 127,
+        "endLine": 168,
+        "length": 42,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "extractBalancedJsonValues",
+        "startLine": 109,
+        "endLine": 153,
+        "length": 45,
+        "complexity": 15
+      }
+    ],
+    "functionsByLength": [
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1056,
+        "endLine": 1324,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementPrompt",
+        "startLine": 808,
+        "endLine": 974,
+        "length": 167,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 746,
+        "endLine": 878,
+        "length": 133,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 518,
+        "length": 85,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectSourceSignalsDetailed",
+        "startLine": 261,
+        "endLine": 343,
+        "length": 83,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementDraft",
+        "startLine": 976,
+        "endLine": 1054,
+        "length": 79,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectRawSignalsDetailed",
+        "startLine": 686,
+        "endLine": 754,
+        "length": 69,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "startLine": 251,
+        "endLine": 317,
+        "length": 67,
+        "complexity": 25
+      },
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "startLine": 302,
+        "endLine": 368,
+        "length": 67,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/signal/githubRealtimeConnectors.ts",
+        "name": "fetchWatchlistLiveActivitySignals",
+        "startLine": 438,
+        "endLine": 503,
+        "length": 66,
+        "complexity": 11
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildProjectsView",
+        "startLine": 185,
+        "endLine": 249,
+        "length": 65,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "tryGitHubRepoSync",
+        "startLine": 331,
+        "endLine": 395,
+        "length": 65,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectPrimarySourceSignals",
+        "startLine": 353,
+        "endLine": 413,
+        "length": 61,
+        "complexity": 2
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildOverviewView",
+        "startLine": 124,
+        "endLine": 183,
+        "length": 60,
+        "complexity": 18
+      }
+    ],
+    "filesByLines": [
+      {
+        "path": "src/action/weeklyEnhancement.ts",
+        "totalLines": 1386,
+        "codeLines": 1270,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 124,
+        "maxFunctionComplexity": 101,
+        "maxFunctionLength": 269
+      },
+      {
+        "path": "src/action/dailyReport.ts",
+        "totalLines": 1018,
+        "codeLines": 924,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 111,
+        "maxFunctionComplexity": 59,
+        "maxFunctionLength": 133
+      },
+      {
+        "path": "src/signal/githubMetrics.ts",
+        "totalLines": 974,
+        "codeLines": 850,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 2,
+        "functionCount": 97,
+        "maxFunctionComplexity": 14,
+        "maxFunctionLength": 60
+      },
+      {
+        "path": "src/signal/index.ts",
+        "totalLines": 755,
+        "codeLines": 692,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 48,
+        "maxFunctionComplexity": 16,
+        "maxFunctionLength": 83
+      },
+      {
+        "path": "src/action/projectBriefs.ts",
+        "totalLines": 675,
+        "codeLines": 618,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 43,
+        "maxFunctionComplexity": 28,
+        "maxFunctionLength": 38
+      },
+      {
+        "path": "src/action/runSummary.ts",
+        "totalLines": 665,
+        "codeLines": 609,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 2,
+        "functionCount": 89,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 59
+      },
+      {
+        "path": "src/signal/agentsRadarConnector.ts",
+        "totalLines": 527,
+        "codeLines": 458,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 37,
+        "maxFunctionComplexity": 17,
+        "maxFunctionLength": 85
+      },
+      {
+        "path": "src/cli.ts",
+        "totalLines": 520,
+        "codeLines": 453,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 47,
+        "maxFunctionComplexity": 8,
+        "maxFunctionLength": 67
+      },
+      {
+        "path": "src/signal/githubRealtimeConnectors.ts",
+        "totalLines": 504,
+        "codeLines": 448,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 42,
+        "maxFunctionComplexity": 11,
+        "maxFunctionLength": 66
+      },
+      {
+        "path": "src/types.ts",
+        "totalLines": 438,
+        "codeLines": 402,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 0,
+        "maxFunctionComplexity": 0,
+        "maxFunctionLength": 0
+      },
+      {
+        "path": "src/visualConsole/build.ts",
+        "totalLines": 415,
+        "codeLines": 390,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 21,
+        "maxFunctionComplexity": 25,
+        "maxFunctionLength": 67
+      },
+      {
+        "path": "src/config.ts",
+        "totalLines": 401,
+        "codeLines": 356,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 28,
+        "maxFunctionComplexity": 7,
+        "maxFunctionLength": 45
+      },
+      {
+        "path": "src/action/dailyVerification.ts",
+        "totalLines": 386,
+        "codeLines": 351,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 40,
+        "maxFunctionComplexity": 27,
+        "maxFunctionLength": 62
+      },
+      {
+        "path": "src/llmClassification.ts",
+        "totalLines": 321,
+        "codeLines": 286,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 20,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 47
+      },
+      {
+        "path": "src/filter/scoreComponents.ts",
+        "totalLines": 306,
+        "codeLines": 276,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 13,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 44
+      }
+    ],
+    "filesMissingChineseComments": []
+  },
+  "recommendedTargets": [
+    "src/action/weeklyEnhancement.ts",
+    "src/action/dailyReport.ts",
+    "src/action/projectBriefs.ts",
+    "src/action/dailyVerification.ts",
+    "src/visualConsole/build.ts",
+    "src/signal/agentsRadarConnector.ts",
+    "src/signal/index.ts"
+  ]
+}

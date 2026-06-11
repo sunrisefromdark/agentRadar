@@ -1,0 +1,150 @@
+[
+  {
+    "skill_id": "manual.code-implementation.feature-delivery.exec-plan",
+    "title": "Code Implementation Skill",
+    "origin": "manual",
+    "trust_tier": "manual",
+    "lifecycle_status": "stable",
+    "drift_status": "trusted",
+    "source_doc_path": "docs/specs/agent-work/CodeImplementation_Skill.md",
+    "source_doc_sha256": "a15bb25d65ff2b12867a3255812d109d0821d6838a89b232392cbfaa70b7a95d",
+    "domain": "code-implementation",
+    "subdomain": "feature-delivery",
+    "task_kinds": [
+      "implement"
+    ],
+    "artifact_types": [
+      "source-code",
+      "test-code",
+      "config"
+    ],
+    "target_paths": [
+      "docs/specs/exec-plans/",
+      "src/",
+      "src/__tests__/"
+    ],
+    "constraint_tags": [
+      "quality-gate",
+      "exec-plan-implementation"
+    ],
+    "goal_terms": [
+      "根据 exec-plan 实施代码落地"
+    ],
+    "required_gates": [
+      {
+        "gate_id": "code-implementation-preflight",
+        "gate_kind": "preflight",
+        "gate_phase": "routing-precondition",
+        "evidence_source_type": "command-exit",
+        "evidence_ref_hint": "npm run code-implementation:preflight",
+        "freshness_rule": "per-task"
+      }
+    ],
+    "script_refs": [],
+    "watch_paths": [
+      "docs/specs/agent-work/CodeImplementation_Skill.md",
+      "docs/specs/exec-plans/",
+      "src/"
+    ],
+    "updated_at": "2026-05-16T18:30:00.000Z"
+  },
+  {
+    "skill_id": "manual.testing.regression-validation.txt-9600dfa0",
+    "title": "Testing Skill",
+    "origin": "manual",
+    "trust_tier": "manual",
+    "lifecycle_status": "stable",
+    "drift_status": "trusted",
+    "source_doc_path": "docs/specs/agent-work/TestingSkill.md",
+    "source_doc_sha256": "c89d7f375210d08c017862da98261391939ecef4f48d4b215022da72df693236",
+    "domain": "testing",
+    "subdomain": "regression-validation",
+    "task_kinds": [
+      "draft",
+      "revise",
+      "verify"
+    ],
+    "artifact_types": [
+      "test-code",
+      "audit-receipt"
+    ],
+    "target_paths": [
+      "src/__tests__/",
+      "docs/specs/agent-work/TestingSkill.md"
+    ],
+    "constraint_tags": [
+      "quality-gate",
+      "testing-workflow"
+    ],
+    "goal_terms": [
+      "测试设计",
+      "补测",
+      "回归验证"
+    ],
+    "required_gates": [
+      {
+        "gate_id": "testing-skill-preflight",
+        "gate_kind": "preflight",
+        "gate_phase": "routing-precondition",
+        "evidence_source_type": "command-exit",
+        "evidence_ref_hint": "npm run testing-skill:preflight",
+        "freshness_rule": "per-task"
+      }
+    ],
+    "script_refs": [],
+    "watch_paths": [
+      "docs/specs/agent-work/TestingSkill.md",
+      "src/__tests__/"
+    ],
+    "updated_at": "2026-05-16T18:30:00.000Z"
+  },
+  {
+    "skill_id": "manual.artifact-review.code-review.code-review",
+    "title": "Code Review Skill",
+    "origin": "manual",
+    "trust_tier": "manual",
+    "lifecycle_status": "stable",
+    "drift_status": "trusted",
+    "source_doc_path": "docs/specs/agent-work/codeReviewSkill.md",
+    "source_doc_sha256": "9f6f4debde2095672b8f1138b615f7a9aeb62942058c172371b5bdf5a90a5ad9",
+    "domain": "artifact-review",
+    "subdomain": "code-review",
+    "task_kinds": [
+      "review"
+    ],
+    "artifact_types": [
+      "source-code",
+      "test-code",
+      "config"
+    ],
+    "target_paths": [
+      "src/",
+      "src/__tests__/",
+      "config.yaml"
+    ],
+    "constraint_tags": [
+      "quality-gate",
+      "code-review"
+    ],
+    "goal_terms": [
+      "code review"
+    ],
+    "required_gates": [
+      {
+        "gate_id": "code-review-preflight",
+        "gate_kind": "preflight",
+        "gate_phase": "task-completion",
+        "evidence_source_type": "command-exit",
+        "evidence_ref_hint": "npm run code-review:preflight",
+        "freshness_rule": "per-task"
+      }
+    ],
+    "script_refs": [],
+    "watch_paths": [
+      "config.yaml",
+      "docs/specs/agent-work/codeReviewSkill.md",
+      "src/"
+    ],
+    "updated_at": "2026-05-16T18:30:00.000Z"
+  }
+]

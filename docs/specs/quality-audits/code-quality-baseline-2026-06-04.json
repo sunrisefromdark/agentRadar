@@ -1,0 +1,990 @@
+{
+  "generatedAt": "2026-06-03T16:35:01.347Z",
+  "scannedFiles": 159,
+  "productionFiles": 94,
+  "thresholds": {
+    "maxFunctionComplexity": 12,
+    "maxFunctionLength": 80
+  },
+  "summary": {
+    "filesMissingChineseComments": 0,
+    "filesOverComplexity": 21,
+    "filesOverLength": 13,
+    "functionsOverComplexity": 54,
+    "functionsOverLength": 16
+  },
+  "violations": {
+    "functionsOverComplexity": [
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "matchTopics",
+        "startLine": 137,
+        "endLine": 166,
+        "length": 30,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "projectCard",
+        "startLine": 358,
+        "endLine": 380,
+        "length": 23,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "validateWhyTodayText",
+        "startLine": 778,
+        "endLine": 799,
+        "length": 22,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "normalizePositionQualification",
+        "startLine": 876,
+        "endLine": 889,
+        "length": 14,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "<anonymous>",
+        "startLine": 968,
+        "endLine": 998,
+        "length": 31,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 1004,
+        "endLine": 1135,
+        "length": 132,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "renderLlmDiagnostics",
+        "startLine": 1318,
+        "endLine": 1343,
+        "length": 26,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "qualityChecks",
+        "startLine": 110,
+        "endLine": 156,
+        "length": 47,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "identifyMissingFields",
+        "startLine": 825,
+        "endLine": 849,
+        "length": 25,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "buildDailyRunSummary",
+        "startLine": 523,
+        "endLine": 630,
+        "length": 108,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "renderLlmDiagnostics",
+        "startLine": 696,
+        "endLine": 720,
+        "length": 25,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "matchInterestTopicsFromSearchableText",
+        "startLine": 613,
+        "endLine": 632,
+        "length": 20,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "validateWeeklyWhyThisWeekText",
+        "startLine": 1277,
+        "endLine": 1295,
+        "length": 19,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1581,
+        "endLine": 1849,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/agentMemory/receipts.ts",
+        "name": "resolveTaskClassification",
+        "startLine": 616,
+        "endLine": 688,
+        "length": 73,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "routeTask",
+        "startLine": 47,
+        "endLine": 103,
+        "length": 57,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "validateProjectFactsFreshness",
+        "startLine": 141,
+        "endLine": 196,
+        "length": 56,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "bindTaskScopeGates",
+        "startLine": 198,
+        "endLine": 246,
+        "length": 49,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/auth/betterAuth.ts",
+        "name": "fetchGitHubUserInfo",
+        "startLine": 223,
+        "endLine": 281,
+        "length": 59,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/auth/config.ts",
+        "name": "readMagicLinkDeliveryConfig",
+        "startLine": 123,
+        "endLine": 165,
+        "length": 43,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/auth/config.ts",
+        "name": "readAuthReadinessReport",
+        "startLine": 177,
+        "endLine": 223,
+        "length": 47,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/auth/doctor.ts",
+        "name": "buildAuthDoctorReport",
+        "startLine": 57,
+        "endLine": 147,
+        "length": 91,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/auth/localSetup.ts",
+        "name": "renderLocalAuthSetupGuide",
+        "startLine": 229,
+        "endLine": 342,
+        "length": 114,
+        "complexity": 34
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "completeLikelyTruncatedJson",
+        "startLine": 41,
+        "endLine": 87,
+        "length": 47,
+        "complexity": 17
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "extractBalancedJsonValues",
+        "startLine": 109,
+        "endLine": 153,
+        "length": 45,
+        "complexity": 15
+      },
+      {
+        "filePath": "src/providers/minimax.ts",
+        "name": "isRetryableMiniMaxTransportError",
+        "startLine": 153,
+        "endLine": 166,
+        "length": 14,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "tryGitHubRepoSync",
+        "startLine": 331,
+        "endLine": 395,
+        "length": 65,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 524,
+        "length": 91,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "historicalOutcomeForRepo",
+        "startLine": 268,
+        "endLine": 306,
+        "length": 39,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "matchRepositoryToEcosystem",
+        "startLine": 409,
+        "endLine": 458,
+        "length": 50,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "scoreObserverEntry",
+        "startLine": 785,
+        "endLine": 831,
+        "length": 47,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "<anonymous>",
+        "startLine": 911,
+        "endLine": 920,
+        "length": 10,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "buildObserverSummaryPrompt",
+        "startLine": 1056,
+        "endLine": 1109,
+        "length": 54,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "<anonymous>",
+        "startLine": 1225,
+        "endLine": 1252,
+        "length": 28,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "normalizePositionQualification",
+        "startLine": 1260,
+        "endLine": 1270,
+        "length": 11,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "enhanceObserverEntriesWithAgent",
+        "startLine": 1272,
+        "endLine": 1450,
+        "length": 179,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "<anonymous>",
+        "startLine": 1383,
+        "endLine": 1388,
+        "length": 6,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "<anonymous>",
+        "startLine": 1433,
+        "endLine": 1438,
+        "length": 6,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "collectEcosystemFocusObserver",
+        "startLine": 1452,
+        "endLine": 1608,
+        "length": 157,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/signal/githubTrackedStars.ts",
+        "name": "refreshTrackedRepoRegistry",
+        "startLine": 85,
+        "endLine": 142,
+        "length": 58,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "freshnessSummaryCn",
+        "startLine": 127,
+        "endLine": 168,
+        "length": 42,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "projectMatchesInterest",
+        "startLine": 180,
+        "endLine": 194,
+        "length": 15,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "<anonymous>",
+        "startLine": 251,
+        "endLine": 286,
+        "length": 36,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "mergeWeeklyMarkdownWithStructuredReport",
+        "startLine": 516,
+        "endLine": 556,
+        "length": 41,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "<anonymous>",
+        "startLine": 565,
+        "endLine": 600,
+        "length": 36,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "startLine": 1146,
+        "endLine": 1197,
+        "length": 52,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildObserverView",
+        "startLine": 1247,
+        "endLine": 1298,
+        "length": 52,
+        "complexity": 13
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildKnowledgeBaseView",
+        "startLine": 1300,
+        "endLine": 1359,
+        "length": 60,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/visualConsole/index.ts",
+        "name": "renderVisualConsole",
+        "startLine": 28,
+        "endLine": 53,
+        "length": 26,
+        "complexity": 20
+      },
+      {
+        "filePath": "src/visualConsole/readLayer.ts",
+        "name": "summarizeWeeklyPreviewState",
+        "startLine": 175,
+        "endLine": 200,
+        "length": 26,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseSupportProject",
+        "startLine": 49,
+        "endLine": 98,
+        "length": 50,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseCoreTrendCards",
+        "startLine": 100,
+        "endLine": 148,
+        "length": 49,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseWeakSignalCards",
+        "startLine": 150,
+        "endLine": 183,
+        "length": 34,
+        "complexity": 14
+      }
+    ],
+    "functionsOverLength": [
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 1004,
+        "endLine": 1135,
+        "length": 132,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "hasConcreteDescriptionSignal",
+        "startLine": 490,
+        "endLine": 580,
+        "length": 91,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "buildDailyRunSummary",
+        "startLine": 523,
+        "endLine": 630,
+        "length": 108,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementPrompt",
+        "startLine": 1333,
+        "endLine": 1499,
+        "length": 167,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1581,
+        "endLine": 1849,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/agentMemory/projectFacts.ts",
+        "name": "extractAgentReadmeFacts",
+        "startLine": 129,
+        "endLine": 216,
+        "length": 88,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/auth/betterAuth.ts",
+        "name": "buildBetterAuthRuntime",
+        "startLine": 283,
+        "endLine": 366,
+        "length": 84,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/auth/doctor.ts",
+        "name": "buildAuthDoctorReport",
+        "startLine": 57,
+        "endLine": 147,
+        "length": 91,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/auth/localSetup.ts",
+        "name": "renderLocalAuthSetupGuide",
+        "startLine": 229,
+        "endLine": 342,
+        "length": 114,
+        "complexity": 34
+      },
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "startLine": 509,
+        "endLine": 663,
+        "length": 155,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/config.ts",
+        "name": "parseEcosystemFocusConfig",
+        "startLine": 503,
+        "endLine": 601,
+        "length": 99,
+        "complexity": 5
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 524,
+        "length": 91,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "finalizeObserverEntries",
+        "startLine": 833,
+        "endLine": 927,
+        "length": 95,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "enhanceObserverEntriesWithAgent",
+        "startLine": 1272,
+        "endLine": 1450,
+        "length": 179,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "collectEcosystemFocusObserver",
+        "startLine": 1452,
+        "endLine": 1608,
+        "length": 157,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectSourceSignalsDetailed",
+        "startLine": 261,
+        "endLine": 343,
+        "length": 83,
+        "complexity": 6
+      }
+    ],
+    "filesMissingChineseComments": []
+  },
+  "hotspots": {
+    "functionsByComplexity": [
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1581,
+        "endLine": 1849,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 1004,
+        "endLine": 1135,
+        "length": 132,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/auth/localSetup.ts",
+        "name": "renderLocalAuthSetupGuide",
+        "startLine": 229,
+        "endLine": 342,
+        "length": 114,
+        "complexity": 34
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "collectEcosystemFocusObserver",
+        "startLine": 1452,
+        "endLine": 1608,
+        "length": 157,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "startLine": 185,
+        "endLine": 246,
+        "length": 62,
+        "complexity": 27
+      },
+      {
+        "filePath": "src/agentMemory/receipts.ts",
+        "name": "resolveTaskClassification",
+        "startLine": 616,
+        "endLine": 688,
+        "length": 73,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildKnowledgeBaseView",
+        "startLine": 1300,
+        "endLine": 1359,
+        "length": 60,
+        "complexity": 23
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "bindTaskScopeGates",
+        "startLine": 198,
+        "endLine": 246,
+        "length": 49,
+        "complexity": 22
+      },
+      {
+        "filePath": "src/auth/doctor.ts",
+        "name": "buildAuthDoctorReport",
+        "startLine": 57,
+        "endLine": 147,
+        "length": 91,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseSupportProject",
+        "startLine": 49,
+        "endLine": 98,
+        "length": 50,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/visualConsole/index.ts",
+        "name": "renderVisualConsole",
+        "startLine": 28,
+        "endLine": 53,
+        "length": 26,
+        "complexity": 20
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 524,
+        "length": 91,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "scoreObserverEntry",
+        "startLine": 785,
+        "endLine": 831,
+        "length": 47,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "mergeWeeklyMarkdownWithStructuredReport",
+        "startLine": 516,
+        "endLine": 556,
+        "length": 41,
+        "complexity": 18
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "<anonymous>",
+        "startLine": 565,
+        "endLine": 600,
+        "length": 36,
+        "complexity": 18
+      }
+    ],
+    "functionsByLength": [
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "startLine": 1581,
+        "endLine": 1849,
+        "length": 269,
+        "complexity": 101
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "enhanceObserverEntriesWithAgent",
+        "startLine": 1272,
+        "endLine": 1450,
+        "length": 179,
+        "complexity": 16
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementPrompt",
+        "startLine": 1333,
+        "endLine": 1499,
+        "length": 167,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "collectEcosystemFocusObserver",
+        "startLine": 1452,
+        "endLine": 1608,
+        "length": 157,
+        "complexity": 28
+      },
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "startLine": 509,
+        "endLine": 663,
+        "length": 155,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "startLine": 1004,
+        "endLine": 1135,
+        "length": 132,
+        "complexity": 59
+      },
+      {
+        "filePath": "src/auth/localSetup.ts",
+        "name": "renderLocalAuthSetupGuide",
+        "startLine": 229,
+        "endLine": 342,
+        "length": 114,
+        "complexity": 34
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "buildDailyRunSummary",
+        "startLine": 523,
+        "endLine": 630,
+        "length": 108,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/config.ts",
+        "name": "parseEcosystemFocusConfig",
+        "startLine": 503,
+        "endLine": 601,
+        "length": 99,
+        "complexity": 5
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "finalizeObserverEntries",
+        "startLine": 833,
+        "endLine": 927,
+        "length": 95,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/auth/doctor.ts",
+        "name": "buildAuthDoctorReport",
+        "startLine": 57,
+        "endLine": 147,
+        "length": 91,
+        "complexity": 21
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 434,
+        "endLine": 524,
+        "length": 91,
+        "complexity": 19
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "hasConcreteDescriptionSignal",
+        "startLine": 490,
+        "endLine": 580,
+        "length": 91,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/agentMemory/projectFacts.ts",
+        "name": "extractAgentReadmeFacts",
+        "startLine": 129,
+        "endLine": 216,
+        "length": 88,
+        "complexity": 1
+      },
+      {
+        "filePath": "src/auth/betterAuth.ts",
+        "name": "buildBetterAuthRuntime",
+        "startLine": 283,
+        "endLine": 366,
+        "length": 84,
+        "complexity": 7
+      }
+    ],
+    "filesByLines": [
+      {
+        "path": "src/action/weeklyEnhancement.ts",
+        "totalLines": 1954,
+        "codeLines": 1805,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 196,
+        "maxFunctionComplexity": 101,
+        "maxFunctionLength": 269
+      },
+      {
+        "path": "src/signal/ecosystemFocusObserver.ts",
+        "totalLines": 1622,
+        "codeLines": 1490,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 137,
+        "maxFunctionComplexity": 28,
+        "maxFunctionLength": 179
+      },
+      {
+        "path": "src/action/dailyReport.ts",
+        "totalLines": 1395,
+        "codeLines": 1275,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 141,
+        "maxFunctionComplexity": 59,
+        "maxFunctionLength": 132
+      },
+      {
+        "path": "src/visualConsole/build.ts",
+        "totalLines": 1360,
+        "codeLines": 1262,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 96,
+        "maxFunctionComplexity": 23,
+        "maxFunctionLength": 64
+      },
+      {
+        "path": "src/cli.ts",
+        "totalLines": 1136,
+        "codeLines": 1025,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 76,
+        "maxFunctionComplexity": 10,
+        "maxFunctionLength": 155
+      },
+      {
+        "path": "src/action/projectBriefs.ts",
+        "totalLines": 1067,
+        "codeLines": 969,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 94,
+        "maxFunctionComplexity": 13,
+        "maxFunctionLength": 91
+      },
+      {
+        "path": "src/agentMemory/workflow.ts",
+        "totalLines": 1034,
+        "codeLines": 964,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 110,
+        "maxFunctionComplexity": 11,
+        "maxFunctionLength": 69
+      },
+      {
+        "path": "src/signal/githubMetrics.ts",
+        "totalLines": 1033,
+        "codeLines": 899,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 2,
+        "functionCount": 105,
+        "maxFunctionComplexity": 11,
+        "maxFunctionLength": 60
+      },
+      {
+        "path": "src/agentMemory/receipts.ts",
+        "totalLines": 843,
+        "codeLines": 779,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 117,
+        "maxFunctionComplexity": 23,
+        "maxFunctionLength": 73
+      },
+      {
+        "path": "src/action/runSummary.ts",
+        "totalLines": 813,
+        "codeLines": 751,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 2,
+        "functionCount": 95,
+        "maxFunctionComplexity": 14,
+        "maxFunctionLength": 108
+      },
+      {
+        "path": "src/signal/index.ts",
+        "totalLines": 755,
+        "codeLines": 692,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 48,
+        "maxFunctionComplexity": 16,
+        "maxFunctionLength": 83
+      },
+      {
+        "path": "src/config.ts",
+        "totalLines": 753,
+        "codeLines": 693,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 38,
+        "maxFunctionComplexity": 7,
+        "maxFunctionLength": 99
+      },
+      {
+        "path": "src/types.ts",
+        "totalLines": 732,
+        "codeLines": 676,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 0,
+        "maxFunctionComplexity": 0,
+        "maxFunctionLength": 0
+      },
+      {
+        "path": "src/auth/betterAuth.ts",
+        "totalLines": 629,
+        "codeLines": 567,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 33,
+        "maxFunctionComplexity": 13,
+        "maxFunctionLength": 84
+      },
+      {
+        "path": "src/signal/agentsRadarConnector.ts",
+        "totalLines": 533,
+        "codeLines": 463,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 37,
+        "maxFunctionComplexity": 19,
+        "maxFunctionLength": 91
+      }
+    ],
+    "filesMissingChineseComments": []
+  },
+  "recommendedTargets": [
+    "src/action/weeklyEnhancement.ts",
+    "src/action/dailyReport.ts",
+    "src/auth/localSetup.ts",
+    "src/signal/ecosystemFocusObserver.ts",
+    "src/action/dailyVerification.ts",
+    "src/cli.ts"
+  ]
+}

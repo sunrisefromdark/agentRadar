@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-05-16T18:30:00.000Z",
+  "source_docs": [
+    {
+      "path": "docs/specs/agent-work/CodeImplementation_Skill.md",
+      "content_sha256": "a15bb25d65ff2b12867a3255812d109d0821d6838a89b232392cbfaa70b7a95d",
+      "observed_at": "2026-05-16T18:30:00.000Z",
+      "skill_ids": [
+        "manual.code-implementation.feature-delivery.exec-plan"
+      ]
+    },
+    {
+      "path": "docs/specs/agent-work/TestingSkill.md",
+      "content_sha256": "c89d7f375210d08c017862da98261391939ecef4f48d4b215022da72df693236",
+      "observed_at": "2026-05-16T18:30:00.000Z",
+      "skill_ids": [
+        "manual.testing.regression-validation.txt-9600dfa0"
+      ]
+    },
+    {
+      "path": "docs/specs/agent-work/codeReviewSkill.md",
+      "content_sha256": "9f6f4debde2095672b8f1138b615f7a9aeb62942058c172371b5bdf5a90a5ad9",
+      "observed_at": "2026-05-16T18:30:00.000Z",
+      "skill_ids": [
+        "manual.artifact-review.code-review.code-review"
+      ]
+    }
+  ]
+}

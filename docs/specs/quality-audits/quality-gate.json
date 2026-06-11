@@ -1,0 +1,437 @@
+{
+  "thresholds": {
+    "maxFunctionComplexity": 12,
+    "maxFunctionLength": 80
+  },
+  "hotspotFilesRequiringChineseComments": [
+    "src/action/runSummary.ts",
+    "src/signal/githubMetrics.ts",
+    "src/providers/index.ts",
+    "src/providers/openai-compatible.ts",
+    "src/providers/anthropic.ts",
+    "src/filter/confidencePolicy.ts",
+    "src/filter/projectNarrative.ts",
+    "src/action/dailyVerification.ts"
+  ],
+  "reasonableLength": {
+    "allowedCategories": [
+      "prompt-builder",
+      "report-composer",
+      "schema-serializer",
+      "data-mapper"
+    ],
+    "defaultMaxLength": 120,
+    "functions": [
+      {
+        "filePath": "src/agentMemory/projectFacts.ts",
+        "name": "extractAgentReadmeFacts",
+        "maxLength": 88,
+        "category": "data-mapper",
+        "rationale": "README fact extraction is linear text normalization and easier to review as one mapping pass."
+      },
+      {
+        "filePath": "src/auth/betterAuth.ts",
+        "name": "buildBetterAuthRuntime",
+        "maxLength": 84,
+        "category": "data-mapper",
+        "rationale": "Better Auth runtime assembly is a linear config mapping step, not branching business logic."
+      },
+      {
+        "filePath": "src/config.ts",
+        "name": "parseEcosystemFocusConfig",
+        "maxLength": 99,
+        "category": "data-mapper",
+        "rationale": "Ecosystem focus config parsing is intentionally kept as one normalization pass for auditability."
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "finalizeObserverEntries",
+        "maxLength": 95,
+        "category": "data-mapper",
+        "rationale": "Final observer entry shaping is a linear data-mapping step and not a complexity hotspot."
+      }
+    ]
+  },
+  "allowedDebt": {
+    "functions": [
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "<anonymous>",
+        "maxComplexity": 13,
+        "maxLength": 31,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "applyDailyEnhancement",
+        "maxComplexity": 59,
+        "maxLength": 132,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "matchTopics",
+        "maxComplexity": 13,
+        "maxLength": 30,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "normalizePositionQualification",
+        "maxComplexity": 13,
+        "maxLength": 14,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "projectCard",
+        "maxComplexity": 16,
+        "maxLength": 23,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "renderLlmDiagnostics",
+        "maxComplexity": 13,
+        "maxLength": 26,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "validateWhyTodayText",
+        "maxComplexity": 14,
+        "maxLength": 22,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "freshnessChecks",
+        "maxComplexity": 27,
+        "maxLength": 62,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "qualityChecks",
+        "maxComplexity": 13,
+        "maxLength": 47,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "hasConcreteDescriptionSignal",
+        "maxComplexity": 7,
+        "maxLength": 91,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/projectBriefs.ts",
+        "name": "identifyMissingFields",
+        "maxComplexity": 13,
+        "maxLength": 25,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "buildDailyRunSummary",
+        "maxComplexity": 14,
+        "maxLength": 108,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "renderLlmDiagnostics",
+        "maxComplexity": 13,
+        "maxLength": 25,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "applyWeeklyEnhancement",
+        "maxComplexity": 101,
+        "maxLength": 269,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "buildWeeklyEnhancementPrompt",
+        "maxComplexity": 1,
+        "maxLength": 167,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "matchInterestTopicsFromSearchableText",
+        "maxComplexity": 13,
+        "maxLength": 20,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/action/weeklyEnhancement.ts",
+        "name": "validateWeeklyWhyThisWeekText",
+        "maxComplexity": 13,
+        "maxLength": 19,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/agentMemory/receipts.ts",
+        "name": "resolveTaskClassification",
+        "maxComplexity": 23,
+        "maxLength": 73,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "bindTaskScopeGates",
+        "maxComplexity": 22,
+        "maxLength": 49,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "routeTask",
+        "maxComplexity": 13,
+        "maxLength": 57,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/agentMemory/routing.ts",
+        "name": "validateProjectFactsFreshness",
+        "maxComplexity": 14,
+        "maxLength": 56,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/auth/betterAuth.ts",
+        "name": "fetchGitHubUserInfo",
+        "maxComplexity": 13,
+        "maxLength": 59,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/auth/config.ts",
+        "name": "readAuthReadinessReport",
+        "maxComplexity": 14,
+        "maxLength": 47,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/auth/config.ts",
+        "name": "readMagicLinkDeliveryConfig",
+        "maxComplexity": 16,
+        "maxLength": 43,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/auth/doctor.ts",
+        "name": "buildAuthDoctorReport",
+        "maxComplexity": 21,
+        "maxLength": 91,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/auth/localSetup.ts",
+        "name": "renderLocalAuthSetupGuide",
+        "maxComplexity": 34,
+        "maxLength": 114,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "maxComplexity": 6,
+        "maxLength": 155,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "completeLikelyTruncatedJson",
+        "maxComplexity": 17,
+        "maxLength": 47,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/jsonObject.ts",
+        "name": "extractBalancedJsonValues",
+        "maxComplexity": 15,
+        "maxLength": 45,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/providers/minimax.ts",
+        "name": "isRetryableMiniMaxTransportError",
+        "maxComplexity": 13,
+        "maxLength": 14,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "maxComplexity": 19,
+        "maxLength": 91,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "tryGitHubRepoSync",
+        "maxComplexity": 13,
+        "maxLength": 65,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "<anonymous>",
+        "maxComplexity": 18,
+        "maxLength": 28,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "buildObserverSummaryPrompt",
+        "maxComplexity": 14,
+        "maxLength": 54,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "collectEcosystemFocusObserver",
+        "maxComplexity": 28,
+        "maxLength": 157,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "enhanceObserverEntriesWithAgent",
+        "maxComplexity": 16,
+        "maxLength": 179,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "historicalOutcomeForRepo",
+        "maxComplexity": 14,
+        "maxLength": 39,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "matchRepositoryToEcosystem",
+        "maxComplexity": 13,
+        "maxLength": 50,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "normalizePositionQualification",
+        "maxComplexity": 13,
+        "maxLength": 11,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/ecosystemFocusObserver.ts",
+        "name": "scoreObserverEntry",
+        "maxComplexity": 19,
+        "maxLength": 47,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/githubTrackedStars.ts",
+        "name": "refreshTrackedRepoRegistry",
+        "maxComplexity": 13,
+        "maxLength": 58,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectSourceSignalsDetailed",
+        "maxComplexity": 6,
+        "maxLength": 83,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "freshnessSummaryCn",
+        "maxComplexity": 16,
+        "maxLength": 42,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "<anonymous>",
+        "maxComplexity": 18,
+        "maxLength": 36,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildKnowledgeBaseView",
+        "maxComplexity": 23,
+        "maxLength": 60,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildObserverView",
+        "maxComplexity": 13,
+        "maxLength": 52,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "buildWeeklyView",
+        "maxComplexity": 13,
+        "maxLength": 52,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "mergeWeeklyMarkdownWithStructuredReport",
+        "maxComplexity": 18,
+        "maxLength": 41,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/build.ts",
+        "name": "projectMatchesInterest",
+        "maxComplexity": 13,
+        "maxLength": 15,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/index.ts",
+        "name": "renderVisualConsole",
+        "maxComplexity": 20,
+        "maxLength": 26,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/readLayer.ts",
+        "name": "summarizeWeeklyPreviewState",
+        "maxComplexity": 14,
+        "maxLength": 26,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseCoreTrendCards",
+        "maxComplexity": 16,
+        "maxLength": 49,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseSupportProject",
+        "maxComplexity": 21,
+        "maxLength": 50,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      },
+      {
+        "filePath": "src/visualConsole/weeklyMarkdown.ts",
+        "name": "parseWeakSignalCards",
+        "maxComplexity": 14,
+        "maxLength": 34,
+        "rationale": "历史债务基线快照（2026-06-04），仅允许保持现状，禁止继续恶化。"
+      }
+    ]
+  }
+}

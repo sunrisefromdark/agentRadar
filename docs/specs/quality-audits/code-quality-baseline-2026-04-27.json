@@ -1,0 +1,438 @@
+{
+  "generatedAt": "2026-04-27T05:28:55.681Z",
+  "scannedFiles": 54,
+  "productionFiles": 36,
+  "thresholds": {
+    "maxFunctionComplexity": 10,
+    "maxFunctionLength": 60
+  },
+  "summary": {
+    "filesMissingChineseComments": 0,
+    "filesOverComplexity": 1,
+    "filesOverLength": 0,
+    "functionsOverComplexity": 1,
+    "functionsOverLength": 0
+  },
+  "violations": {
+    "functionsOverComplexity": [
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "seedGitHubRepoMetricsCacheFromSignal",
+        "startLine": 302,
+        "endLine": 320,
+        "length": 19,
+        "complexity": 14
+      }
+    ],
+    "functionsOverLength": [],
+    "filesMissingChineseComments": []
+  },
+  "hotspots": {
+    "functionsByComplexity": [
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "seedGitHubRepoMetricsCacheFromSignal",
+        "startLine": 302,
+        "endLine": 320,
+        "length": 19,
+        "complexity": 14
+      },
+      {
+        "filePath": "src/llm.ts",
+        "name": "callLlm",
+        "startLine": 36,
+        "endLine": 64,
+        "length": 29,
+        "complexity": 10
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "pickDate",
+        "startLine": 41,
+        "endLine": 92,
+        "length": 52,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/filter/scoreComponents.ts",
+        "name": "scoreAutonomy",
+        "startLine": 225,
+        "endLine": 268,
+        "length": 44,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/normalize.ts",
+        "name": "trustFlags",
+        "startLine": 98,
+        "endLine": 115,
+        "length": 18,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "mergeSignalWithMetrics",
+        "startLine": 72,
+        "endLine": 88,
+        "length": 17,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/filter/projectNarrative.ts",
+        "name": "classificationParadigm",
+        "startLine": 34,
+        "endLine": 46,
+        "length": 13,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/normalize.ts",
+        "name": "descriptionQuality",
+        "startLine": 117,
+        "endLine": 129,
+        "length": 13,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/signal/trendshiftParser.ts",
+        "name": "parseArticleCards",
+        "startLine": 106,
+        "endLine": 148,
+        "length": 43,
+        "complexity": 8
+      },
+      {
+        "filePath": "src/filter/scoreComponents.ts",
+        "name": "scoreCompounding",
+        "startLine": 183,
+        "endLine": 223,
+        "length": 41,
+        "complexity": 8
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "annotateSignalMetricsTrust",
+        "startLine": 53,
+        "endLine": 63,
+        "length": 11,
+        "complexity": 8
+      },
+      {
+        "filePath": "src/signal/trendshiftConnector.ts",
+        "name": "readTrendshiftHtml",
+        "startLine": 188,
+        "endLine": 225,
+        "length": 38,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/signal/parse.ts",
+        "name": "signalsFromMarkdown",
+        "startLine": 49,
+        "endLine": 79,
+        "length": 31,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/signal/trendshiftConnector.ts",
+        "name": "fetchTrendshiftSignalsDetailed",
+        "startLine": 231,
+        "endLine": 253,
+        "length": 23,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/action/dailyVerification.ts",
+        "name": "qualityChecks",
+        "startLine": 77,
+        "endLine": 98,
+        "length": 22,
+        "complexity": 7
+      }
+    ],
+    "functionsByLength": [
+      {
+        "filePath": "src/cli.ts",
+        "name": "runDaily",
+        "startLine": 120,
+        "endLine": 178,
+        "length": 59,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "pickDate",
+        "startLine": 41,
+        "endLine": 92,
+        "length": 52,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "buildDailyRunSummary",
+        "startLine": 363,
+        "endLine": 413,
+        "length": 51,
+        "complexity": 4
+      },
+      {
+        "filePath": "src/normalize.ts",
+        "name": "buildNormalizedProject",
+        "startLine": 182,
+        "endLine": 228,
+        "length": 47,
+        "complexity": 5
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "renderDailyRunSummary",
+        "startLine": 458,
+        "endLine": 503,
+        "length": 46,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/action/dailyReport.ts",
+        "name": "renderDailyReport",
+        "startLine": 107,
+        "endLine": 152,
+        "length": 46,
+        "complexity": 2
+      },
+      {
+        "filePath": "src/signal/agentsRadarConnector.ts",
+        "name": "fetchAgentsRadarSignalsDetailed",
+        "startLine": 94,
+        "endLine": 138,
+        "length": 45,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/filter/scoreComponents.ts",
+        "name": "scoreAutonomy",
+        "startLine": 225,
+        "endLine": 268,
+        "length": 44,
+        "complexity": 9
+      },
+      {
+        "filePath": "src/signal/trendshiftParser.ts",
+        "name": "parseArticleCards",
+        "startLine": 106,
+        "endLine": 148,
+        "length": 43,
+        "complexity": 8
+      },
+      {
+        "filePath": "src/filter/scoreComponents.ts",
+        "name": "scoreCompounding",
+        "startLine": 183,
+        "endLine": 223,
+        "length": 41,
+        "complexity": 8
+      },
+      {
+        "filePath": "src/signal/githubMetrics.ts",
+        "name": "fetchGitHubRepoMetricsFromHtml",
+        "startLine": 239,
+        "endLine": 279,
+        "length": 41,
+        "complexity": 6
+      },
+      {
+        "filePath": "src/action/weeklyReport.ts",
+        "name": "renderWeeklyReport",
+        "startLine": 21,
+        "endLine": 61,
+        "length": 41,
+        "complexity": 4
+      },
+      {
+        "filePath": "src/signal/trendshiftConnector.ts",
+        "name": "readTrendshiftHtml",
+        "startLine": 188,
+        "endLine": 225,
+        "length": 38,
+        "complexity": 7
+      },
+      {
+        "filePath": "src/action/runSummary.ts",
+        "name": "sourceStatuses",
+        "startLine": 138,
+        "endLine": 174,
+        "length": 37,
+        "complexity": 3
+      },
+      {
+        "filePath": "src/signal/index.ts",
+        "name": "collectRawSignalsDetailed",
+        "startLine": 346,
+        "endLine": 382,
+        "length": 37,
+        "complexity": 2
+      }
+    ],
+    "filesByLines": [
+      {
+        "path": "src/action/runSummary.ts",
+        "totalLines": 504,
+        "codeLines": 456,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 81,
+        "maxFunctionComplexity": 6,
+        "maxFunctionLength": 51
+      },
+      {
+        "path": "src/signal/githubMetrics.ts",
+        "totalLines": 402,
+        "codeLines": 346,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 2,
+        "functionCount": 36,
+        "maxFunctionComplexity": 14,
+        "maxFunctionLength": 41
+      },
+      {
+        "path": "src/signal/index.ts",
+        "totalLines": 383,
+        "codeLines": 347,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 27,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 37
+      },
+      {
+        "path": "src/filter/scoreComponents.ts",
+        "totalLines": 302,
+        "codeLines": 272,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 13,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 44
+      },
+      {
+        "path": "src/config.ts",
+        "totalLines": 275,
+        "codeLines": 246,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 19,
+        "maxFunctionComplexity": 4,
+        "maxFunctionLength": 16
+      },
+      {
+        "path": "src/cli.ts",
+        "totalLines": 272,
+        "codeLines": 233,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 25,
+        "maxFunctionComplexity": 5,
+        "maxFunctionLength": 59
+      },
+      {
+        "path": "src/signal/trendshiftConnector.ts",
+        "totalLines": 262,
+        "codeLines": 228,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 21,
+        "maxFunctionComplexity": 7,
+        "maxFunctionLength": 38
+      },
+      {
+        "path": "src/normalize.ts",
+        "totalLines": 238,
+        "codeLines": 206,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 45,
+        "maxFunctionComplexity": 9,
+        "maxFunctionLength": 47
+      },
+      {
+        "path": "src/signal/trendshiftParser.ts",
+        "totalLines": 210,
+        "codeLines": 180,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 16,
+        "maxFunctionComplexity": 8,
+        "maxFunctionLength": 43
+      },
+      {
+        "path": "src/providers/providerErrors.ts",
+        "totalLines": 195,
+        "codeLines": 172,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 23,
+        "maxFunctionComplexity": 5,
+        "maxFunctionLength": 18
+      },
+      {
+        "path": "src/types.ts",
+        "totalLines": 191,
+        "codeLines": 173,
+        "hasChineseComment": false,
+        "chineseCommentBlocks": 0,
+        "functionCount": 0,
+        "maxFunctionComplexity": 0,
+        "maxFunctionLength": 0
+      },
+      {
+        "path": "src/llmClassification.ts",
+        "totalLines": 178,
+        "codeLines": 154,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 15,
+        "maxFunctionComplexity": 5,
+        "maxFunctionLength": 32
+      },
+      {
+        "path": "src/filter/confidencePolicy.ts",
+        "totalLines": 173,
+        "codeLines": 158,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 54,
+        "maxFunctionComplexity": 6,
+        "maxFunctionLength": 12
+      },
+      {
+        "path": "src/action/dailyVerification.ts",
+        "totalLines": 172,
+        "codeLines": 153,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 21,
+        "maxFunctionComplexity": 7,
+        "maxFunctionLength": 22
+      },
+      {
+        "path": "src/signal/rawSignalSchema.ts",
+        "totalLines": 165,
+        "codeLines": 144,
+        "hasChineseComment": true,
+        "chineseCommentBlocks": 1,
+        "functionCount": 19,
+        "maxFunctionComplexity": 6,
+        "maxFunctionLength": 22
+      }
+    ],
+    "filesMissingChineseComments": []
+  },
+  "recommendedTargets": [
+    "src/signal/githubMetrics.ts",
+    "src/llm.ts",
+    "src/signal/agentsRadarConnector.ts",
+    "src/filter/scoreComponents.ts",
+    "src/normalize.ts",
+    "src/cli.ts",
+    "src/action/runSummary.ts"
+  ]
+}

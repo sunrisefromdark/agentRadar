@@ -16,7 +16,6 @@
     "llm:smoke": "tsx scripts/llmProviderSmoke.ts",
     "run-weekly": "tsx src/cli.ts run-weekly",
     "sync-weekly": "tsx src/cli.ts sync-weekly",
-    "sync-private": "tsx src/cli.ts sync-private",
     "verify-daily": "tsx src/cli.ts verify-daily",
     "capture-github-stars": "tsx src/cli.ts capture-github-stars",
     "score": "tsx src/cli.ts score",

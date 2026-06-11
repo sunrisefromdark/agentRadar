@@ -4,7 +4,12 @@ dist
 .env.local
 .sync-private.local.json
 .sync-private.local.*
-!.sync-private.local.example.json
+src/privateSync.ts
+src/privateWorkspaceSync.ts
+src/__tests__/privateSync.test.ts
+src/__tests__/privateWorkspaceSync.test.ts
+scripts/pushPublicAndSyncPrivateWorkspace.mts
+docs/superpowers/plans/2026-06-10-private-sync-safety.md
 tmp
 test-results
 *.log

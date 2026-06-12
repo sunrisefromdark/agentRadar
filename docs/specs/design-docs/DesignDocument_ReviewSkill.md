@@ -66,9 +66,43 @@ A strong design document must do ALL of the following:
    方案必须有清晰的用户心智、少而强的核心机制、明确的取舍，而不是堆规则
 4. Out-think the obvious baseline  
    必须明显优于“第一反应式”的普通设计，而不是停留在最直白、最保守、最机械的展开
+5. Close implementation escape hatches  
+   必须主动封住实现阶段最容易“默认做轻、默认做少、默认保守解释”的逃逸路径
 
 If the design only restates the requirement, that is NOT good design.  
 如果设计文档只是复述需求文档，那不算合格设计。
+
+If the design leaves enough ambiguity that an implementer can satisfy the letter while weakening the product outcome, that is also NOT good design.  
+如果设计文档留下了足够多的模糊空间，使实现者可以“形式上满足、结果上缩水”，那也不算合格设计。
+
+---
+
+## Anti-Laziness Mandate（防偷懒强制要求）
+
+The reviewer MUST assume a realistic failure mode:
+
+- if a mechanism is not explicit, implementation may skip it
+- if a scope is not closed, implementation may shrink it
+- if a target is not measurable, implementation may declare success early
+- if a fallback is not bounded, implementation may overuse it
+- if a distinction is not user-visible, implementation may collapse it
+
+Review standard:
+
+> A design is incomplete if a competent but conservative implementer could follow it and still produce a materially weaker product than the requirement intended.
+
+Therefore reviewer MUST actively look for:
+
+1. soft language replacing hard commitments
+2. examples replacing frozen sets
+3. “at least one pass” replacing outcome guarantees
+4. “lightweight coverage” replacing real coverage
+5. “can be tuned later” replacing design-stage decisions
+6. “implementation decides” hidden inside vague prose
+
+If these escape hatches exist and materially affect outcome:
+
+→ `HIGH` or `BLOCKING`
 
 ---
 
@@ -87,6 +121,8 @@ The reviewer MUST ask:
 5. What are the few strongest mechanisms that would create the required outcomes?
 6. Which product/market/frontier patterns are relevant here?
 7. Which obvious-but-low-quality design moves should be avoided?
+8. Where could an implementer legally under-build this design if I do not freeze it harder?
+9. Which parts need explicit counts, closed lists, thresholds, or state semantics to prevent weakening?
 
 This internal synthesis is REQUIRED even if the final review does not print all of it.
 
@@ -115,6 +151,8 @@ If the design:
 - omits required behavior
 - weakens frozen constraints
 - leaves frozen V1 scope to implementer choice
+- converts hard requirement intent into soft or partial execution language
+- changes “must guarantee outcome” into “should attempt coverage”
 
 → MUST mark as `HIGH` or `BLOCKING`
 
@@ -126,6 +164,8 @@ If the design merely:
 - adds section names without new mechanisms
 - claims “aligned” without real contracts
 - uses examples where requirement needs explicit scope freezing
+- swaps measurable obligations for qualitative wording
+- uses “lightweight / minimal / initial / enough for now” without requirement justification
 
 → MUST mark as `HIGH`
 
@@ -145,6 +185,17 @@ A real design doc must contribute things the requirement doc intentionally does 
 If these are absent:
 
 → `REQUEST_CHANGES` at minimum
+
+If a requirement is vulnerable to implementation minimization, the design must also contribute:
+
+- anti-shortcut constraints（防走捷径约束）
+- measurable minimum obligations（最小可测义务）
+- explicit “not complete unless ...” conditions（未达标不算完成的条件）
+- downgrade boundaries that cannot silently become default behavior（不可默认化的降级边界）
+
+If these are missing where clearly needed:
+
+→ `HIGH`
 
 ### Rule 4: Reviewer Must Judge Against a Stronger Plausible Design（必须对照更强设计基线）
 
@@ -273,6 +324,15 @@ If the design is merely “reasonable” but not “designed”:
 
 → flag it in `Design Quality Assessment`
 
+Also reviewer MUST explicitly ask:
+
+- If implementation tried to do the minimum possible work, what weaker product would still technically fit this document?
+- Does the document prevent that outcome with explicit freezes, thresholds, or failure semantics?
+
+If the answer is no:
+
+→ flag it in `Boundary Clarity` and usually `Required Design Changes`
+
 ---
 
 ### 1. Requirement Alignment（需求对齐）
@@ -313,6 +373,8 @@ Check:
 
 Goal restatement without mechanism → `HIGH`
 
+Mechanism without enforceability when enforceability is clearly needed → `HIGH`
+
 ---
 
 ### 3. Product Quality & Elegance Audit（产品质量与优雅度审核）
@@ -349,6 +411,10 @@ If the design is functional but clumsy:
 → `MEDIUM`
 
 If the design is obviously mechanical or inelegant in a way that harms product understanding:
+
+→ `HIGH`
+
+If the design is elegant in theory but easy to cheapen in implementation because key commitments are soft:
 
 → `HIGH`
 
@@ -397,6 +463,8 @@ Flag as `HIGH` if:
 - the design leaves mandatory V1 scope unspecified
 - the design uses examples where a closed list is required
 - the design hides major scope decisions inside vague prose
+- the design uses open-ended wording where a closed set is clearly required
+- the design leaves quantity / coverage / depth / concurrency / quota choices to implementation when those choices determine user outcome
 
 Special attention:
 
@@ -405,6 +473,8 @@ Special attention:
 - exact exposure semantics
 - quota or priority freeze
 - downgrade boundaries
+- completion criteria
+- minimum search / collection / evaluation obligations where under-execution would defeat the requirement
 
 ---
 
@@ -445,6 +515,9 @@ Check whether the design clearly defines:
 - Error behavior（错误行为）
 - Data ownership（数据归属）
 - Auditability（可审计性）
+- Completion conditions（完成条件）
+- Minimum obligations（最低义务）
+- What cannot be silently downgraded（哪些内容不能被静默降级）
 
 Ambiguous contracts → `HIGH`
 
@@ -496,6 +569,9 @@ Check:
 - Is every important user-visible claim independently testable?
 - 每个重要的用户可见结论是否都可独立验证？
 
+- Can implementation “pass” while doing materially less work than the design intent?
+- 是否存在“实现工作量明显缩水，但仍能宣称符合设计”的路径？
+
 - Are there unit, integration, regression, and negative cases?
 - 是否包含单测、集成、回归、反例？
 
@@ -510,6 +586,10 @@ Check:
 - 是否有办法通过用户可见证据，而不只是内部指标，来验证“这个设计更优雅/更可理解/更值得回访”的主张？
 
 If the design cannot be validated except by “it feels better”:
+
+→ `HIGH`
+
+If the design has no measurable floor that prevents under-execution:
 
 → `HIGH`
 
@@ -569,6 +649,22 @@ The design is coherent and careful, but so conservative or literal that it fails
 
 The design follows the requirement so closely that it never develops its own product-level thesis.
 
+### Smell 10: Soft commitment laundering
+
+The requirement implies a hard outcome, but the design rewrites it into “lightweight”, “initial”, “best effort”, “optional”, or “can be tuned later”.
+
+### Smell 11: Formal coverage, weak reality
+
+The design proves that something was touched, scanned, or attempted, but does not prove that the user’s chance of finding relevant results actually increased.
+
+### Smell 12: Undefined completion
+
+The design never defines what counts as “done”, allowing implementation to stop at the first technically valid pass.
+
+### Smell 13: Hidden cost-first shrinkage
+
+Without saying it explicitly, the design privileges implementation convenience or runtime lightness over the product outcome required by the doc.
+
 ---
 
 ## Anti-Gaming Rule（防作秀规则）
@@ -590,6 +686,7 @@ The reviewer must verify real design quality in:
 - testability
 - strength of product thesis
 - evidence of real synthesis rather than safe paraphrase
+- resistance to implementation weakening
 
 ---
 
@@ -686,6 +783,7 @@ LOW / MEDIUM / HIGH / BLOCKING
 - 是否存在机械性、堆砌感、或者粗暴调参感
 - 是否有自己的产品 thesis，而不是需求影子
 - 是否明显低于一个优秀设计师本应想到的方案
+- 是否足够抗“实现时默认做轻、做少、做保守”的弱化路径
 
 ---
 
@@ -715,6 +813,23 @@ LOW / MEDIUM / HIGH / BLOCKING
 
 - 是否存在模糊或隐式行为
 - 是否存在“示例替代范围定义”
+- 是否存在“形式满足但结果缩水”的实现逃逸口
+
+---
+
+## Anti-Laziness Assessment（防偷懒评估）
+
+必须说明：
+
+- 当前设计最容易被实现时偷懒的 1-3 个位置
+- 文档是否已经用硬约束封住这些位置
+- 如果没有，应该补哪类约束：
+  - closed list
+  - numeric threshold
+  - minimum obligation
+  - explicit completion definition
+  - downgrade boundary
+  - user-visible failure semantics
 
 ---
 
@@ -748,6 +863,16 @@ No blocking or high-confidence issues found.
 ## Required Design Changes（必须修改）
 
 列出最小修改集。
+
+Important:
+
+- Do NOT write “add more detail” as a vague fix.
+- Every required change should point to a specific hardening move:
+  - freeze the set
+  - define the threshold
+  - define the completion condition
+  - define the failure state
+  - define what implementation is NOT allowed to shrink
 
 ---
 

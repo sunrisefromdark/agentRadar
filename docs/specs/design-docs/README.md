@@ -17,6 +17,7 @@
 - `build-vs-fork-decision.md`：为什么独立新建项目，而不是直接改 agents-radar。
 - `daily-report-freshness-readability-design.md`：daily report 的新鲜度状态、主榜单分层、fallback 降级与用户可读卡片设计。
 - `historical-replay-integrity-design.md`：历史 daily / weekly backfill 的双运行模式、source 历史能力分级、归档/回执与独立验证设计。
+- `natural-language-fuzzy-search-recommendation-design.md`：自然语言模糊搜索与推荐入口设计框架，冻结请求解释卡、主/次结果轨、有限口语白名单、冲突澄清门槛、结果契约与 rules-only 降级边界。
 - `postgresql-auth-and-user-state-design.md`：PostgreSQL 认证与用户态隔离设计，冻结 GitHub OAuth + Email Magic Link、server session、`/preferences` / tracking 的按用户持久化，以及 CSRF / SSRF 等安全边界。
 - `reuse-from-agents-radar.md`：哪些 agents-radar-system 模块可以直接搬运、改造复用或仅参考。
 - `self-evolving-skill-tree-design.md`：冻结仓库内 Agent 自进化 Skill 的分层记忆、候选提炼、保守路由、生命周期治理与技能树物化规则。

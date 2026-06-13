@@ -89,6 +89,7 @@ const FALLBACK_SOURCE_NOTES: Record<SignalSource, string> = {
   github_trending: "GitHub Trending realtime input inferred from cached raw signals",
   github_live_star_delta: "GitHub live star delta input inferred from cached raw signals",
   watchlist_live_activity: "watchlist realtime input inferred from cached raw signals",
+  mission_github_search: "mission direction GitHub search input inferred from cached raw signals",
   manual: "manual input inferred from cached raw signals",
 };
 
@@ -400,6 +401,10 @@ const SOURCE_RECOVERY_ACTIONS: Record<
     failed: ["检查 watchlist org GitHub API 连通性，确认 org repo 列表接口没有被限流或阻断"],
     empty: ["确认 watchlist org 当天确实有 pushed_at/updated_at 变化，或适当调整 org 列表"],
   },
+  mission_github_search: {
+    failed: ["检查 mission direction GitHub Search 连通性和 `GITHUB_TOKEN` 配额"],
+    empty: ["检查 mission query pack 是否过窄，或方向边界是否需要补充 seed"],
+  },
   manual: {},
 };
 
@@ -485,8 +490,15 @@ function buildEmptyDailyRunSummary(
     | "main_board_mode"
     | "today_fresh_candidate_count"
     | "today_star_count"
+    | "today_pulse_count"
+    | "mission_match_count"
+    | "explore_ribbon_count"
     | "context_candidate_count"
     | "pending_confirmation_count"
+    | "mission_discovery_status"
+    | "mission_degraded_reason_codes"
+    | "coverage_atlas"
+    | "gap_ledger"
   >;
   const summary: DailyRunSummary = {
     date,
@@ -500,8 +512,15 @@ function buildEmptyDailyRunSummary(
     main_board_mode: reportView.main_board_mode,
     today_fresh_candidate_count: reportView.today_fresh_candidate_count,
     today_star_count: report.today_star_projects.length,
+    today_pulse_count: report.today_pulse_projects.length,
+    mission_match_count: report.mission_match_projects.length,
+    explore_ribbon_count: report.explore_ribbon_projects.length,
     context_candidate_count: reportView.context_candidate_count,
     pending_confirmation_count: reportView.pending_confirmation_count,
+    mission_discovery_status: report.mission_discovery_status,
+    mission_degraded_reason_codes: report.mission_degraded_reason_codes,
+    coverage_atlas: report.coverage_atlas,
+    gap_ledger: report.gap_ledger,
     counts,
     source_status: sourceStatus,
     quality,
@@ -520,6 +539,26 @@ function buildEmptyDailyRunSummary(
   return summary;
 }
 
+function buildMissionMetrics(summary: DailyRunSummary): NonNullable<DailyRunSummary["mission_metrics"]> {
+  const coverageAtlas = summary.coverage_atlas ?? [];
+  const outcome_distribution: Partial<Record<(typeof coverageAtlas)[number]["outcome"], number>> = {};
+  const pressure_state_distribution: Partial<Record<(typeof coverageAtlas)[number]["pressure_state"], number>> = {};
+
+  for (const item of coverageAtlas) {
+    outcome_distribution[item.outcome] = (outcome_distribution[item.outcome] ?? 0) + 1;
+    pressure_state_distribution[item.pressure_state] = (pressure_state_distribution[item.pressure_state] ?? 0) + 1;
+  }
+
+  return {
+    outcome_distribution,
+    pressure_state_distribution,
+    deep_upgrade_direction_count: coverageAtlas.filter((item) => item.next_action === "upgrade_to_deep").length,
+    search_exhausted_direction_count: coverageAtlas.filter((item) => item.search_exhausted).length,
+    quantity_target_met_count: coverageAtlas.filter((item) => item.quantity_target_met).length,
+    observer_promotion_candidate_count: summary.observer_promotion_candidates?.length ?? 0,
+  };
+}
+
 export function buildDailyRunSummary(
   raw: RawSignal[],
   scored: ScoredProject[],
@@ -536,6 +575,8 @@ export function buildDailyRunSummary(
       status: ObserverStatus;
       candidateCount: number;
       ecosystemCounts: Record<string, number>;
+      incubatingDirections?: DailyRunSummary["observer_incubating_directions"];
+      promotionCandidates?: DailyRunSummary["observer_promotion_candidates"];
       topCandidates: Array<
         Pick<
           EcosystemObserverEntry,
@@ -566,6 +607,12 @@ export function buildDailyRunSummary(
           | "source_notes"
         >
       >;
+    };
+    missionInventoryAudit?: {
+      rolling_30d_searchable_catalog_count: number;
+      rolling_30d_vertical_or_task_oriented_count: number;
+      rolling_7d_qualified_non_head_count: number;
+      rolling_30d_direction_qualified_counts: Record<string, number>;
     };
   },
 ): DailyRunSummary {
@@ -624,7 +671,20 @@ export function buildDailyRunSummary(
     summary.observer_status = { ecosystem_focus: opts.observer.status };
     summary.observer_candidate_count = opts.observer.candidateCount;
     summary.observer_ecosystem_counts = opts.observer.ecosystemCounts;
+    summary.observer_incubating_directions = opts.observer.incubatingDirections;
+    summary.observer_promotion_candidates = opts.observer.promotionCandidates;
+    summary.candidate_catalog_additions = opts.observer.promotionCandidates;
     summary.observer_top_candidates = opts.observer.topCandidates;
+  }
+  summary.mission_metrics = buildMissionMetrics(summary);
+  if (opts.missionInventoryAudit) {
+    summary.mission_metrics = {
+      ...summary.mission_metrics,
+      rolling_30d_searchable_catalog_count: opts.missionInventoryAudit.rolling_30d_searchable_catalog_count,
+      rolling_30d_vertical_or_task_oriented_count: opts.missionInventoryAudit.rolling_30d_vertical_or_task_oriented_count,
+      rolling_7d_qualified_non_head_count: opts.missionInventoryAudit.rolling_7d_qualified_non_head_count,
+      rolling_30d_direction_qualified_counts: opts.missionInventoryAudit.rolling_30d_direction_qualified_counts,
+    };
   }
   return summary;
 }
@@ -722,6 +782,9 @@ function renderLlmDiagnostics(summary: DailyRunSummary): string[] {
 function renderObserverSummary(summary: DailyRunSummary): string[] {
   if (!summary.observer_status) return ["- ecosystem_focus: unavailable"];
   const topCandidatesInput = summary.observer_top_candidates ?? [];
+  const incubatingDirections = summary.observer_incubating_directions ?? [];
+  const promotionCandidates = summary.observer_promotion_candidates ?? [];
+  const candidateCatalogAdditions = summary.candidate_catalog_additions ?? [];
 
   const counts =
     summary.observer_ecosystem_counts && Object.keys(summary.observer_ecosystem_counts).length > 0
@@ -743,7 +806,57 @@ function renderObserverSummary(summary: DailyRunSummary): string[] {
     `- ecosystem_focus: ${summary.observer_status.ecosystem_focus}`,
     `- observer_candidate_count: ${summary.observer_candidate_count ?? 0}`,
     `- observer_ecosystem_counts: ${counts}`,
+    ...(incubatingDirections.length > 0
+      ? incubatingDirections.map(
+          (item) =>
+            `- incubating_direction ${item.direction_key}: hits_7d=${item.observer_hits_7d}; repos=${item.candidate_repo_count}; promotion_candidate=${item.promotion_candidate ? "true" : "false"}; unmet_gates=${item.unmet_gates.join(" | ") || "none"}`,
+        )
+      : []),
     ...topCandidates,
+    ...(promotionCandidates.length > 0
+      ? promotionCandidates.map(
+          (item) =>
+            `- observer_promotion_candidate ${item.direction_key}: evidence=${item.evidence.join(" | ") || "none"}; unmet_gates=${item.unmet_gates.join(" | ") || "none"}`,
+        )
+      : []),
+    ...(candidateCatalogAdditions.length > 0
+      ? candidateCatalogAdditions.map(
+          (item) =>
+            `- candidate_catalog_addition ${item.direction_key}: evidence=${item.evidence.join(" | ") || "none"}; unmet_gates=${item.unmet_gates.join(" | ") || "none"}`,
+        )
+      : []),
+  ];
+}
+
+function renderMissionSummary(summary: DailyRunSummary): string[] {
+  const coverageAtlas = summary.coverage_atlas ?? [];
+  const gapLedger = summary.gap_ledger ?? [];
+  const missionMetrics = summary.mission_metrics;
+
+  return [
+    `- mission_discovery_status: ${summary.mission_discovery_status ?? "unknown"}`,
+    `- mission_degraded_reason_codes: ${(summary.mission_degraded_reason_codes ?? []).join(", ") || "none"}`,
+    `- today_pulse_count: ${summary.today_pulse_count ?? 0}`,
+    `- mission_match_count: ${summary.mission_match_count ?? 0}`,
+    `- explore_ribbon_count: ${summary.explore_ribbon_count ?? 0}`,
+    `- coverage_atlas_count: ${coverageAtlas.length}`,
+    `- gap_ledger_count: ${gapLedger.length}`,
+    `- deep_upgrade_direction_count: ${missionMetrics?.deep_upgrade_direction_count ?? 0}`,
+    `- search_exhausted_direction_count: ${missionMetrics?.search_exhausted_direction_count ?? 0}`,
+    `- quantity_target_met_count: ${missionMetrics?.quantity_target_met_count ?? 0}`,
+    `- observer_promotion_candidate_count: ${missionMetrics?.observer_promotion_candidate_count ?? 0}`,
+    `- rolling_30d_searchable_catalog_count: ${missionMetrics?.rolling_30d_searchable_catalog_count ?? 0}`,
+    `- rolling_30d_vertical_or_task_oriented_count: ${missionMetrics?.rolling_30d_vertical_or_task_oriented_count ?? 0}`,
+    `- rolling_7d_qualified_non_head_count: ${missionMetrics?.rolling_7d_qualified_non_head_count ?? 0}`,
+    `- outcome_distribution: ${Object.entries(missionMetrics?.outcome_distribution ?? {}).map(([key, value]) => `${key}=${value}`).join(", ") || "none"}`,
+    `- pressure_state_distribution: ${Object.entries(missionMetrics?.pressure_state_distribution ?? {}).map(([key, value]) => `${key}=${value}`).join(", ") || "none"}`,
+    ...coverageAtlas.slice(0, 8).map(
+      (item) =>
+        `- coverage ${item.direction_key}: outcome=${item.outcome}; pressure=${item.pressure_state}; next_action=${item.next_action}; search_exhausted=${item.search_exhausted ? "true" : "false"}`,
+    ),
+    ...gapLedger.slice(0, 8).map(
+      (item) => `- gap ${item.direction_key}: reasons=${item.reason_codes.join(" | ") || "none"}; next_action=${item.next_action}`,
+    ),
   ];
 }
 
@@ -788,6 +901,10 @@ export function renderDailyRunSummary(summary: DailyRunSummary): string {
     ...summary.source_status.map(
       (source) => `- ${source.source}: ${statusLabel(source.status)} | enabled=${source.enabled} | items=${source.item_count} | projects=${source.distinct_projects}`,
     ),
+    "",
+    "## Mission Discovery",
+    "",
+    ...renderMissionSummary(summary),
     "",
     "## Observer Status",
     "",

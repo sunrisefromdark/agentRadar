@@ -6,16 +6,20 @@ import { parseJsonObjectFromText } from "../jsonObject.ts";
 import { callLlm } from "../llm.ts";
 import type { NormalizedProject } from "../types.ts";
 import type {
+  DirectionPressureState,
   EcosystemObserverArtifact,
   EcosystemObserverEntry,
   EcosystemObserverEntityTier,
   EcosystemObserverHistoryLabel,
   EcosystemObserverPedigree,
   EcosystemObserverMatchEvidence,
+  ObserverIncubatingDirection,
   EcosystemObserverPositionQualification,
   ObserverLlmDiagnostics,
+  ObserverPromotionCandidate,
   ObserverStatus,
 } from "../types.ts";
+import { DIRECTION_CATALOG } from "./directionCatalog.ts";
 
 type EcosystemConfig = SourceConfig["ecosystemFocus"]["ecosystems"][number];
 
@@ -43,6 +47,7 @@ interface ObserverOptions {
   workspaceRoot?: string;
   dailyCandidateProjects?: NormalizedProject[];
   llmConfig?: LlmConfig;
+  gapPressureStates?: Record<string, { pressure_state: DirectionPressureState; counts: Record<string, number> }>;
 }
 
 interface ObserverCollectionResult {
@@ -958,6 +963,231 @@ function collectDailyPoolMatches(
   return matchedEntries;
 }
 
+function ecosystemDisplayNameCn(name: string): string {
+  switch (name) {
+    case "coding-agents":
+      return "编码代理生态";
+    case "agent-runtime":
+      return "代理运行时生态";
+    case "skills-tools-mcp":
+      return "Skills / Tools / MCP 生态";
+    case "memory-knowledge":
+      return "记忆与知识生态";
+    case "browser-computer-use":
+      return "浏览器与计算机使用生态";
+    case "eval-observability-governance":
+      return "评测与治理生态";
+    case "multi-agent-coordination":
+      return "多代理协作生态";
+    case "agent-ui-workbench":
+      return "代理 UI 与工作台生态";
+    case "agentic-rl":
+      return "Agentic RL 生态";
+    default:
+      return name;
+  }
+}
+
+function incubatingDirectionKeyForEcosystem(ecosystemName: string): string {
+  return ecosystemName;
+}
+
+function observerCatalogContextForEcosystem(ecosystemName: string): {
+  overlapDirectionKeys: string[];
+  relatedGapDirectionKeys: string[];
+} {
+  switch (ecosystemName) {
+    case "coding-agents":
+      return {
+        overlapDirectionKeys: ["coding-agent"],
+        relatedGapDirectionKeys: ["coding-agent"],
+      };
+    case "browser-computer-use":
+      return {
+        overlapDirectionKeys: ["browser-computer-use"],
+        relatedGapDirectionKeys: ["browser-computer-use"],
+      };
+    case "agent-runtime":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["workflow-automation-agent"],
+      };
+    case "memory-knowledge":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["research-knowledge-agent"],
+      };
+    case "skills-tools-mcp":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["workflow-automation-agent"],
+      };
+    case "eval-observability-governance":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["security-soc-agent", "legal-compliance-agent"],
+      };
+    case "multi-agent-coordination":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["workflow-automation-agent"],
+      };
+    case "agent-ui-workbench":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: ["workflow-automation-agent"],
+      };
+    case "agentic-rl":
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: [],
+      };
+    default:
+      return {
+        overlapDirectionKeys: [],
+        relatedGapDirectionKeys: [],
+      };
+  }
+}
+
+function buildJtbdSemanticEvidence(ecosystem: EcosystemConfig): string[] {
+  return unique([
+    ...ecosystem.keywords.slice(0, 3).map((item) => `keyword=${item}`),
+    ...ecosystem.topicHints.slice(0, 2).map((item) => `topic=${item}`),
+  ]);
+}
+
+function passesObserverBoundary(ecosystem: EcosystemConfig): boolean {
+  const searchable = [ecosystem.name, ...ecosystem.keywords, ...ecosystem.topicHints].join(" ").toLowerCase();
+  return /\b(agent|automation|workflow|runtime|mcp|tool|knowledge|browser|observability|governance|ui|workbench|rl)\b/.test(
+    searchable,
+  );
+}
+
+function readRecentObserverArtifacts(
+  workspaceRoot: string,
+  anchorDate: string,
+  lookbackDays: number,
+): EcosystemObserverArtifact[] {
+  const observerDir = path.join(workspaceRoot, "data", "observer", "ecosystem-focus");
+  if (!fs.existsSync(observerDir)) return [];
+
+  const earliest = shiftDate(anchorDate, -(lookbackDays - 1));
+  return fs
+    .readdirSync(observerDir)
+    .filter((fileName) => /^\d{4}-\d{2}-\d{2}\.json$/.test(fileName))
+    .map((fileName) => readJsonFile<EcosystemObserverArtifact>(path.join(observerDir, fileName)))
+    .filter((artifact): artifact is EcosystemObserverArtifact => !!artifact && artifact.date >= earliest && artifact.date < anchorDate)
+    .sort((a, b) => a.date.localeCompare(b.date));
+}
+
+export function buildObserverIncubatorArtifacts(input: {
+  date: string;
+  config: SourceConfig["ecosystemFocus"];
+  entries: EcosystemObserverEntry[];
+  workspaceRoot: string;
+  gapPressureStates?: Record<string, { pressure_state: DirectionPressureState; counts: Record<string, number> }>;
+}): {
+  incubatingDirections: ObserverIncubatingDirection[];
+  promotionCandidates: ObserverPromotionCandidate[];
+} {
+  const recentArtifacts = readRecentObserverArtifacts(input.workspaceRoot, input.date, 7);
+  const activeCatalogDirectionKeys = new Set(DIRECTION_CATALOG.map((item) => item.direction_key));
+  const todayGroups = new Map<string, EcosystemObserverEntry[]>();
+
+  for (const entry of input.entries) {
+    for (const ecosystemName of entry.ecosystems) {
+      const bucket = todayGroups.get(ecosystemName) ?? [];
+      bucket.push(entry);
+      todayGroups.set(ecosystemName, bucket);
+    }
+  }
+
+  const incubatingDirections = input.config.ecosystems
+    .filter((ecosystem) => ecosystem.enabled)
+    .map((ecosystem) => {
+      const directionKey = incubatingDirectionKeyForEcosystem(ecosystem.name);
+      const todayEntries = todayGroups.get(ecosystem.name) ?? [];
+      const context = observerCatalogContextForEcosystem(ecosystem.name);
+      const historicalHitDates = new Set(
+        recentArtifacts
+          .filter((artifact) => artifact.entries.some((entry) => entry.ecosystems.includes(ecosystem.name)))
+          .map((artifact) => artifact.date),
+      );
+      if (todayEntries.length > 0) historicalHitDates.add(input.date);
+
+      const representativeRepos = todayEntries.slice(0, 3).map((entry) => ({
+        repo_full_name: entry.repo_full_name,
+        repo_url: entry.repo_url,
+      }));
+      const gapPressureStates = unique(
+        context.relatedGapDirectionKeys
+          .map((directionKeyItem) => input.gapPressureStates?.[directionKeyItem]?.pressure_state)
+          .filter((value): value is DirectionPressureState => !!value && value !== "normal"),
+      ) as DirectionPressureState[];
+      const jtbdEvidence = buildJtbdSemanticEvidence(ecosystem);
+      const unmetGates: string[] = [];
+
+      if (historicalHitDates.size < 3) unmetGates.push("observer_hits_7d<3");
+
+      const duplicateDirectionKeys = unique(
+        context.overlapDirectionKeys.filter((item) => activeCatalogDirectionKeys.has(item)),
+      );
+      if (duplicateDirectionKeys.length > 0) unmetGates.push("duplicate_must_cover_direction");
+
+      if (jtbdEvidence.length === 0) unmetGates.push("missing_job_to_be_done_semantics");
+      if (gapPressureStates.length === 0) unmetGates.push("missing_gap_pressure_or_feedback");
+      if (!passesObserverBoundary(ecosystem)) unmetGates.push("boundary_out_of_scope");
+
+      const evidence = unique([
+        `observer_hits_7d=${historicalHitDates.size}`,
+        `today_repo_count=${todayEntries.length}`,
+        ...representativeRepos.map((repo) => `repo=${repo.repo_full_name}`),
+        ...jtbdEvidence,
+        ...(duplicateDirectionKeys.length > 0 ? [`catalog_overlap=${duplicateDirectionKeys.join(",")}`] : []),
+        ...(gapPressureStates.length > 0 ? [`gap_pressure=${gapPressureStates.join(",")}`] : []),
+        `review_queue=observer promotion review`,
+      ]);
+      const promotionCandidate = todayEntries.length > 0 && unmetGates.length === 0;
+
+      return {
+        direction_key: directionKey,
+        display_name_cn: ecosystemDisplayNameCn(ecosystem.name),
+        status: "incubating-active" as const,
+        observer_hits_7d: historicalHitDates.size,
+        candidate_repo_count: todayEntries.length,
+        related_ecosystems: [ecosystem.name],
+        related_catalog_direction_keys: context.relatedGapDirectionKeys,
+        related_gap_pressure_states: gapPressureStates,
+        representative_repos: representativeRepos,
+        evidence,
+        unmet_gates: unmetGates,
+        promotion_candidate: promotionCandidate,
+        review_queue: "observer promotion review" as const,
+      };
+    })
+    .filter((item) => item.candidate_repo_count > 0 || item.observer_hits_7d > 0)
+    .sort(
+      (a, b) =>
+        Number(b.promotion_candidate) - Number(a.promotion_candidate) ||
+        b.observer_hits_7d - a.observer_hits_7d ||
+        b.candidate_repo_count - a.candidate_repo_count ||
+        a.direction_key.localeCompare(b.direction_key),
+    );
+
+  return {
+    incubatingDirections,
+    promotionCandidates: incubatingDirections
+      .filter((item) => item.promotion_candidate)
+      .map((item) => ({
+        direction_key: item.direction_key,
+        display_name_cn: item.display_name_cn,
+        evidence: item.evidence,
+        unmet_gates: item.unmet_gates,
+      })),
+  };
+}
+
 function buildArtifact(
   date: string,
   generatedAt: string,
@@ -965,11 +1195,23 @@ function buildArtifact(
   entries: EcosystemObserverEntry[],
   notes: string[],
   llmDiagnostics?: ObserverLlmDiagnostics,
+  config?: SourceConfig["ecosystemFocus"],
+  workspaceRoot?: string,
+  gapPressureStates?: Record<string, { pressure_state: DirectionPressureState; counts: Record<string, number> }>,
 ): EcosystemObserverArtifact {
   const ecosystemCounts = entries.reduce<Record<string, number>>((acc, entry) => {
     for (const ecosystem of entry.ecosystems) acc[ecosystem] = (acc[ecosystem] ?? 0) + 1;
     return acc;
   }, {});
+  const incubator = config && workspaceRoot
+    ? buildObserverIncubatorArtifacts({
+        date,
+        config,
+        entries,
+        workspaceRoot,
+        gapPressureStates,
+      })
+    : { incubatingDirections: [], promotionCandidates: [] };
 
   return {
     scope: "ecosystem-focus",
@@ -979,6 +1221,8 @@ function buildArtifact(
     llm_diagnostics: llmDiagnostics,
     candidate_count: entries.length,
     ecosystem_counts: ecosystemCounts,
+    incubating_directions: incubator.incubatingDirections,
+    promotion_candidates: incubator.promotionCandidates,
     notes,
     entries,
   };
@@ -1487,7 +1731,17 @@ export async function collectEcosystemFocusObserver(
   if (!config.enabled) {
     return {
       status: "disabled",
-      artifact: buildArtifact(opts.date, opts.generatedAt, "disabled", [], ["observer disabled by config"], llmDiagnostics),
+      artifact: buildArtifact(
+        opts.date,
+        opts.generatedAt,
+        "disabled",
+        [],
+        ["observer disabled by config"],
+        llmDiagnostics,
+        config,
+        workspaceRoot,
+        opts.gapPressureStates,
+      ),
       used_snapshot_fallback: false,
     };
   }
@@ -1503,6 +1757,9 @@ export async function collectEcosystemFocusObserver(
         [],
         ["no observer ecosystems enabled"],
         llmDiagnostics,
+        config,
+        workspaceRoot,
+        opts.gapPressureStates,
       ),
       used_snapshot_fallback: false,
     };
@@ -1584,16 +1841,21 @@ export async function collectEcosystemFocusObserver(
       if (snapshot) {
         return {
           status: snapshot.candidate_count > 0 ? "active" : "empty",
-          artifact: {
-            ...snapshot,
-            date: opts.date,
-            generated_at: opts.generatedAt,
-            notes: unique([
+          artifact: buildArtifact(
+            opts.date,
+            opts.generatedAt,
+            snapshot.candidate_count > 0 ? "active" : "empty",
+            snapshot.entries,
+            unique([
               ...snapshot.notes,
               ...queryFailures,
               `observer live fetch degraded across ${attemptedQueryCount} queries`,
             ]),
-          },
+            snapshot.llm_diagnostics,
+            config,
+            workspaceRoot,
+            opts.gapPressureStates,
+          ),
           used_snapshot_fallback: true,
         };
       }
@@ -1602,7 +1864,17 @@ export async function collectEcosystemFocusObserver(
     const status: ObserverStatus = enhanced.entries.length > 0 ? "active" : "empty";
     return {
       status,
-      artifact: buildArtifact(opts.date, opts.generatedAt, status, enhanced.entries, notes, enhanced.diagnostics),
+      artifact: buildArtifact(
+        opts.date,
+        opts.generatedAt,
+        status,
+        enhanced.entries,
+        notes,
+        enhanced.diagnostics,
+        config,
+        workspaceRoot,
+        opts.gapPressureStates,
+      ),
       used_snapshot_fallback: false,
     };
   } catch (error) {
@@ -1611,12 +1883,17 @@ export async function collectEcosystemFocusObserver(
     if (snapshot) {
       return {
         status: snapshot.candidate_count > 0 ? "active" : "empty",
-        artifact: {
-          ...snapshot,
-          date: opts.date,
-          generated_at: opts.generatedAt,
-          notes: unique([...snapshot.notes, `live observer fetch failed: ${message}`]),
-        },
+        artifact: buildArtifact(
+          opts.date,
+          opts.generatedAt,
+          snapshot.candidate_count > 0 ? "active" : "empty",
+          snapshot.entries,
+          unique([...snapshot.notes, `live observer fetch failed: ${message}`]),
+          snapshot.llm_diagnostics,
+          config,
+          workspaceRoot,
+          opts.gapPressureStates,
+        ),
         used_snapshot_fallback: true,
       };
     }
@@ -1630,6 +1907,9 @@ export async function collectEcosystemFocusObserver(
         [],
         [`live observer fetch failed: ${message}`],
         llmDiagnostics,
+        config,
+        workspaceRoot,
+        opts.gapPressureStates,
       ),
       used_snapshot_fallback: false,
     };

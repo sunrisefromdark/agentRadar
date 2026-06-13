@@ -1,8 +1,8 @@
 {
-  "date": "2026-06-12",
-  "status": "fail",
-  "summary_path": "data/reports/2026-06-12.run-summary.json",
-  "github_audit_path": "data/raw/github/2026-06-12.enrichment.json",
+  "date": "2026-06-13",
+  "status": "pass",
+  "summary_path": "data/reports/2026-06-13.run-summary.json",
+  "github_audit_path": "data/raw/github/2026-06-13.enrichment.json",
   "checks": [
     {
       "name": "minimum_viable_run_completed",
@@ -12,12 +12,12 @@
     {
       "name": "raw_signals_present",
       "status": "pass",
-      "detail": "raw_signals=459"
+      "detail": "raw_signals=338"
     },
     {
       "name": "scored_projects_present",
       "status": "pass",
-      "detail": "scored_projects=439"
+      "detail": "scored_projects=307"
     },
     {
       "name": "active_sources_present",
@@ -32,12 +32,12 @@
     {
       "name": "low_confidence_share",
       "status": "pass",
-      "detail": "low_confidence_projects=15/439"
+      "detail": "low_confidence_projects=0/307"
     },
     {
       "name": "anomaly_share",
       "status": "pass",
-      "detail": "anomaly_share=0.0296"
+      "detail": "anomaly_share=0.0065"
     },
     {
       "name": "uniform_star_velocity",
@@ -47,12 +47,12 @@
     {
       "name": "star_delta_sources_visible",
       "status": "pass",
-      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:131,unavailable:308"
+      "detail": "star_delta_source_distribution=live:0,snapshot:0,signal:81,unavailable:226"
     },
     {
       "name": "live_delta_token_missing",
-      "status": "warn",
-      "detail": "token_missing=20"
+      "status": "pass",
+      "detail": "token_missing=0"
     },
     {
       "name": "live_delta_auth_invalid",
@@ -71,8 +71,8 @@
     },
     {
       "name": "llm_classification_health",
-      "status": "fail",
-      "detail": "cache_hits=33; provider=deepseek; attempts=406; success=0; failures=406; latest_error=Missing DEEPSEEK_API_KEY for DeepSeek provider. [auth]; provider chain did not produce any successful classification"
+      "status": "pass",
+      "detail": "cache_hits=262; provider=deepseek; attempts=45; success=45; failures=0"
     },
     {
       "name": "freshness_sources_complete",
@@ -82,22 +82,22 @@
     {
       "name": "fresh_source_project_alignment",
       "status": "pass",
-      "detail": "fresh-driving_today_sources=2; context_today_sources=1; today_star_count=4; today_fresh_candidate_count=49"
+      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=4; today_fresh_candidate_count=103"
     },
     {
       "name": "agents_radar_stale_fallback",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-12"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-13"
     },
     {
       "name": "agents_radar_context_only",
       "status": "pass",
-      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-12"
+      "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-13"
     },
     {
       "name": "project_search_daily_fields",
       "status": "pass",
-      "detail": "today_pulse=4; mission_match=2; explore_ribbon=2; coverage_atlas=16; gap_ledger=13"
+      "detail": "today_pulse=4; mission_match=4; explore_ribbon=0; coverage_atlas=16; gap_ledger=7"
     },
     {
       "name": "project_cards_have_direction_and_appearance_reason",
@@ -107,7 +107,7 @@
     {
       "name": "mission_quota_and_explore_ribbon_contract",
       "status": "pass",
-      "detail": "mission_match=2; mission_quota=4; explore_ribbon=2; explore_overlap=false"
+      "detail": "mission_match=4; mission_quota=4; explore_ribbon=0; explore_overlap=false"
     },
     {
       "name": "mission_fairness_constraints",
@@ -122,24 +122,20 @@
     {
       "name": "rolling_inventory_audit_present",
       "status": "pass",
-      "detail": "catalog_30d=1012; vertical_30d=216; non_head_7d=312"
+      "detail": "catalog_30d=1138; vertical_30d=263; non_head_7d=426"
     },
     {
       "name": "rolling_inventory_targets_met",
       "status": "pass",
-      "detail": "catalog_30d=1012/300; vertical_30d=216/180; non_head_7d=312/30; underfilled_directions=none"
+      "detail": "catalog_30d=1138/300; vertical_30d=263/180; non_head_7d=426/30; underfilled_directions=none"
     },
     {
       "name": "github_audit_written",
       "status": "pass",
-      "detail": "github_enrichment_audits=162"
+      "detail": "github_enrichment_audits=134"
     }
   ],
   "recommended_actions": [
-    "在信任低置信度排序前，优先补有缺失描述或缺失 metrics 的项目",
-    "当前 GitHub live star delta 仍因 token 缺失被跳过，补上 `GITHUB_TOKEN` 后再验证 live / snapshot 优先级",
-    "当前未设置 `GITHUB_TOKEN`；网络恢复后建议补上 token，减少 GitHub API 403/限流风险",
-    "当前仍有项目依赖 GitHub HTML fallback，提升优先级恢复 API 指标来源",
     "单源项目先等第二信号源或第二天 persistence，再考虑升级判断",
     "可以把这次运行当作稳定基线，继续推进更强的 GitHub enrichment 或 weekly 汇总"
   ]

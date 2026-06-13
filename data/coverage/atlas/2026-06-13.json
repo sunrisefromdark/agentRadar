@@ -1,0 +1,514 @@
+[
+  {
+    "direction_key": "coding-agent",
+    "family_key": "core-agent-work",
+    "display_name_cn": "开发与编码代理",
+    "boundary_mode": "strict-agent",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「开发与编码代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 33,
+      "boundary_passed_hits": 33,
+      "normalized_hits": 33,
+      "quality_passed_hits": 33,
+      "exposed_hits": 33
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "browser-computer-use",
+    "family_key": "core-agent-work",
+    "display_name_cn": "浏览器 / 桌面执行代理",
+    "boundary_mode": "strict-agent",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「浏览器 / 桌面执行代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 24,
+      "boundary_passed_hits": 24,
+      "normalized_hits": 24,
+      "quality_passed_hits": 24,
+      "exposed_hits": 24
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "workflow-automation-agent",
+    "family_key": "core-agent-work",
+    "display_name_cn": "行业工作流执行代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「行业工作流执行代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "research-knowledge-agent",
+    "family_key": "core-agent-work",
+    "display_name_cn": "研究与知识工作代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「研究与知识工作代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 22,
+      "boundary_passed_hits": 22,
+      "normalized_hits": 22,
+      "quality_passed_hits": 22,
+      "exposed_hits": 22
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "shopping-commerce-agent",
+    "family_key": "revenue-commerce",
+    "display_name_cn": "智能导购与电商运营代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「智能导购与电商运营代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "sales-prospecting-agent",
+    "family_key": "revenue-commerce",
+    "display_name_cn": "销售拓客与线索运营代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「销售拓客与线索运营代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "customer-support-agent",
+    "family_key": "revenue-commerce",
+    "display_name_cn": "客服与服务台代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「客服与服务台代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "marketing-content-ops-agent",
+    "family_key": "revenue-commerce",
+    "display_name_cn": "营销内容与增长运营代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「营销内容与增长运营代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "finance-investment-research-agent",
+    "family_key": "analysis-professional",
+    "display_name_cn": "金融分析与投研代理",
+    "boundary_mode": "regulated-specialist",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "matched",
+    "reason_codes": [
+      "quantity_target_met"
+    ],
+    "explanation_cn": "「金融分析与投研代理」今天已达到覆盖下限。",
+    "next_action": "keep_watching",
+    "candidate_counts": {
+      "raw_hits": 20,
+      "boundary_passed_hits": 20,
+      "normalized_hits": 20,
+      "quality_passed_hits": 20,
+      "exposed_hits": 20
+    },
+    "quantity_target_met": true,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "data-analytics-bi-agent",
+    "family_key": "analysis-professional",
+    "display_name_cn": "数据分析与 BI 代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "deep",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "legal-compliance-agent",
+    "family_key": "analysis-professional",
+    "display_name_cn": "法务与合规代理",
+    "boundary_mode": "regulated-specialist",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "security-soc-agent",
+    "family_key": "analysis-professional",
+    "display_name_cn": "安全运营与安全审计代理",
+    "boundary_mode": "regulated-specialist",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "healthcare-ops-agent",
+    "family_key": "vertical-ops",
+    "display_name_cn": "医疗服务与临床运营代理",
+    "boundary_mode": "regulated-specialist",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "recruiting-hr-agent",
+    "family_key": "vertical-ops",
+    "display_name_cn": "招聘与人力运营代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "supply-chain-procurement-agent",
+    "family_key": "vertical-ops",
+    "display_name_cn": "供应链与采购代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  },
+  {
+    "direction_key": "industrial-field-ops-agent",
+    "family_key": "vertical-ops",
+    "display_name_cn": "工业 / 现场运维代理",
+    "boundary_mode": "workflow-intelligence",
+    "search_depth": "scout",
+    "query_pack_count": 3,
+    "query_template_count": 6,
+    "lane_types": [
+      "canonical",
+      "job-to-be-done",
+      "user-speak",
+      "ecosystem",
+      "adjacent-software"
+    ],
+    "pressure_state": "normal",
+    "outcome": "search_failed",
+    "reason_codes": [
+      "search_failed"
+    ],
+    "explanation_cn": "搜索本身失败了，本次方向发现降级。",
+    "next_action": "needs_human_seed_refinement",
+    "candidate_counts": {
+      "raw_hits": 0,
+      "boundary_passed_hits": 0,
+      "normalized_hits": 0,
+      "quality_passed_hits": 0,
+      "exposed_hits": 0
+    },
+    "quantity_target_met": false,
+    "search_exhausted": false
+  }
+]

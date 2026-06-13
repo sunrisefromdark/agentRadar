@@ -9,7 +9,7 @@
 
 import type OpenAI from "openai";
 import { OpenAICompatibleProvider } from "./openai-compatible.ts";
-import { buildProviderResponseError, classifyProviderError } from "./providerErrors.ts";
+import { buildProviderResponseError, classifyProviderError, ProviderCallError } from "./providerErrors.ts";
 
 const DEEPSEEK_BASE_URL = "https://api.deepseek.com";
 const DEEPSEEK_DEFAULT_MODEL = "deepseek-v4-flash";
@@ -65,12 +65,17 @@ export class DeepSeekProvider extends OpenAICompatibleProvider {
   readonly name = "deepseek";
   private readonly complexModel: string;
   private readonly complexPromptHints: string[];
+  private readonly hasApiKey: boolean;
 
   constructor(opts?: { apiKey?: string; baseURL?: string; model?: string }) {
     const connection = resolveDeepSeekConnectionInfo(opts);
-    super(connection);
+    super({
+      ...connection,
+      apiKey: connection.apiKey?.trim() ? connection.apiKey : "missing-deepseek-api-key",
+    });
     this.complexModel = connection.complexModel;
     this.complexPromptHints = connection.complexPromptHints;
+    this.hasApiKey = Boolean(connection.apiKey?.trim());
   }
 
   private selectModel(prompt: string): string {
@@ -79,6 +84,13 @@ export class DeepSeekProvider extends OpenAICompatibleProvider {
 
   async call(prompt: string, maxTokens: number): Promise<string> {
     try {
+      if (!this.hasApiKey) {
+        throw new ProviderCallError("Missing DEEPSEEK_API_KEY for DeepSeek provider.", {
+          providerName: this.name,
+          kind: "auth",
+          retryable: false,
+        });
+      }
       const request: DeepSeekChatCompletionRequest = {
         model: this.selectModel(prompt),
         max_completion_tokens: maxTokens,

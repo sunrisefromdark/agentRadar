@@ -4,6 +4,7 @@ export type SignalSource =
   | "github_trending"
   | "github_live_star_delta"
   | "watchlist_live_activity"
+  | "mission_github_search"
   | "manual";
 export type MetricsSource = "embedded" | "github_api" | "github_html" | "github_cache" | "unavailable";
 export type DataTrustLevel = "high" | "medium" | "low" | "unverified";
@@ -19,6 +20,86 @@ export type UserInterestTopicName = string;
 export type EnhancementSource = "agent" | "template_fallback";
 export type RiskReviewSource = EnhancementSource;
 export type EnhancementStatus = "rules-only" | "agent-partial" | "agent-full";
+export type DirectionBoundaryMode = "strict-agent" | "workflow-intelligence" | "regulated-specialist";
+export type DirectionCatalogDepth = "scout-daily" | "deep-daily";
+export type DirectionCoverageSearchDepth = "scout" | "deep";
+export type DirectionSearchDepth = "catalog-only" | "scout" | "deep" | DirectionCatalogDepth | "deep-extended";
+export type DirectionLaneType =
+  | "canonical"
+  | "job-to-be-done"
+  | "user-speak"
+  | "ecosystem"
+  | "user-speak-or-ecosystem"
+  | "adjacent-software";
+export type DirectionPressureState = "normal" | "pressurized" | "promoted" | "relieved";
+export type DirectionCoverageOutcome =
+  | "matched"
+  | "weak_signal"
+  | "noise_only"
+  | "zero_candidate"
+  | "search_failed"
+  | "disabled";
+export type DailyExposureBucket = "today_pulse" | "mission_match" | "explore_ribbon" | "historical_context";
+export type MissionDiscoveryStatus = "active" | "degraded";
+export type DirectionNextAction =
+  | "keep_watching"
+  | "upgrade_to_deep"
+  | "wait_for_more_signal"
+  | "needs_human_seed_refinement"
+  | "observer_promotion_candidate";
+
+// legacy shorthand retained for design-contract grepping:
+// export type DirectionSearchDepth = "scout" | "deep";
+// export type DirectionLaneType = "canonical" | "job-to-be-done" | "user-speak" | "ecosystem" | "adjacent-software";
+
+export interface DirectionCandidateCounts {
+  raw_hits: number;
+  boundary_passed_hits: number;
+  normalized_hits: number;
+  quality_passed_hits: number;
+  exposed_hits: number;
+}
+
+export interface DirectionQueryPack {
+  lane_type: DirectionLaneType;
+  templates: string[];
+}
+
+export interface DirectionCatalogEntry {
+  direction_key: string;
+  family_key: string;
+  display_name_cn: string;
+  boundary_mode: DirectionBoundaryMode;
+  search_depth: DirectionCatalogDepth;
+  lane_types: DirectionLaneType[];
+  required_terms: string[];
+  negative_terms: string[];
+  evidence_verbs: string[];
+  evidence_objects: string[];
+  zero_result_explanation_cn: string;
+  query_packs: DirectionQueryPack[];
+}
+
+export interface DirectionCoverageStatus {
+  direction_key: string;
+  family_key: string;
+  display_name_cn: string;
+  boundary_mode: DirectionBoundaryMode;
+  search_depth: DirectionCoverageSearchDepth;
+  query_pack_count: number;
+  query_template_count: number;
+  lane_types: readonly DirectionLaneType[];
+  pressure_state: DirectionPressureState;
+  outcome: DirectionCoverageOutcome;
+  reason_codes: string[];
+  explanation_cn: string;
+  next_action: DirectionNextAction;
+  candidate_counts: DirectionCandidateCounts;
+  quantity_target_met: boolean;
+  search_exhausted?: boolean;
+}
+
+export type DirectionGapLedgerEntry = DirectionCoverageStatus;
 
 export interface RejectedOutput {
   layer: string;
@@ -86,7 +167,24 @@ export interface DailyReportProjectDetail {
   risk_review_note_cn?: string;
   risk_review_source?: RiskReviewSource;
   watchlist_note_cn?: string;
+  direction_matches?: string[];
+  appearance_reason_codes?: string[];
+  appearance_explanation_cn?: string;
+  exposure_bucket?: DailyExposureBucket;
+  head_project?: boolean;
+  head_saturation_state?: "normal" | "demote";
 }
+
+export interface DailyExposureProject extends ScoredProject, DailyReportProjectDetail {}
+// design compatibility aliases:
+// today_pulse_projects: Array<DailyExposureProject>;
+// mission_match_projects: Array<DailyExposureProject>;
+// explore_ribbon_projects?: Array<DailyExposureProject>;
+// coverage_atlas: Array<DirectionCoverageStatus>;
+// gap_ledger: Array<DirectionCoverageStatus>;
+// global_hot_projects = today_pulse_projects
+// demand_relevant_projects = mission_match_projects
+// searched_direction_statuses = coverage_atlas
 
 export interface NormalizedProject {
   project_name: string;
@@ -164,8 +262,18 @@ export interface DailyReport {
   context_candidate_count: number;
   pending_confirmation_count: number;
   main_board_mode: DailyMainBoardMode;
-  today_star_projects: Array<ScoredProject & DailyReportProjectDetail>;
-  context_only_projects: Array<ScoredProject & DailyReportProjectDetail>;
+  today_star_projects: Array<DailyExposureProject>;
+  context_only_projects: Array<DailyExposureProject>;
+  today_pulse_projects: Array<DailyExposureProject>;
+  mission_match_projects: Array<DailyExposureProject>;
+  explore_ribbon_projects: Array<DailyExposureProject>;
+  coverage_atlas: Array<DirectionCoverageStatus>;
+  gap_ledger: Array<DirectionGapLedgerEntry>;
+  mission_discovery_status: MissionDiscoveryStatus;
+  mission_degraded_reason_codes: string[];
+  global_hot_projects: Array<DailyExposureProject>;
+  demand_relevant_projects: Array<DailyExposureProject>;
+  searched_direction_statuses: Array<DirectionCoverageStatus>;
   new_projects: ScoredProject[];
   high_score_projects: ScoredProject[];
   anomaly_projects: ScoredProject[];
@@ -501,6 +609,7 @@ export interface EcosystemObserverPedigree {
 export type EcosystemObserverEntityTier = "core" | "proven" | "watch" | "none";
 export type EcosystemObserverHistoryLabel = "validated" | "mixed" | "emerging" | "none";
 export type EcosystemObserverPositionQualification = "top-tier-now" | "strong-watch" | "keep-observing" | "drop";
+export type ObserverIncubatingStatus = "incubating-active";
 
 export type EcosystemObserverLongTailReason =
   | "priority-company"
@@ -557,6 +666,28 @@ export interface EcosystemObserverEntry {
   source_notes: string[];
 }
 
+export interface ObserverPromotionCandidate {
+  direction_key: string;
+  display_name_cn: string;
+  evidence: string[];
+  unmet_gates: string[];
+}
+
+export interface ObserverIncubatingDirection extends ObserverPromotionCandidate {
+  status: ObserverIncubatingStatus;
+  observer_hits_7d: number;
+  candidate_repo_count: number;
+  related_ecosystems: string[];
+  related_catalog_direction_keys: string[];
+  related_gap_pressure_states: DirectionPressureState[];
+  representative_repos: Array<{
+    repo_full_name: string;
+    repo_url: string;
+  }>;
+  promotion_candidate: boolean;
+  review_queue: "observer promotion review";
+}
+
 export interface EcosystemObserverArtifact {
   scope: "ecosystem-focus";
   date: string;
@@ -565,6 +696,8 @@ export interface EcosystemObserverArtifact {
   llm_diagnostics?: ObserverLlmDiagnostics;
   candidate_count: number;
   ecosystem_counts: Record<string, number>;
+  incubating_directions: ObserverIncubatingDirection[];
+  promotion_candidates: ObserverPromotionCandidate[];
   notes: string[];
   entries: EcosystemObserverEntry[];
 }
@@ -643,8 +776,27 @@ export interface DailyRunSummary {
   main_board_mode?: DailyMainBoardMode;
   today_fresh_candidate_count?: number;
   today_star_count?: number;
+  today_pulse_count?: number;
+  mission_match_count?: number;
+  explore_ribbon_count?: number;
   context_candidate_count?: number;
   pending_confirmation_count?: number;
+  mission_discovery_status?: MissionDiscoveryStatus;
+  mission_degraded_reason_codes?: string[];
+  coverage_atlas?: DirectionCoverageStatus[];
+  gap_ledger?: DirectionGapLedgerEntry[];
+  mission_metrics?: {
+    outcome_distribution: Partial<Record<DirectionCoverageOutcome, number>>;
+    pressure_state_distribution: Partial<Record<DirectionPressureState, number>>;
+    deep_upgrade_direction_count: number;
+    search_exhausted_direction_count: number;
+    quantity_target_met_count: number;
+    observer_promotion_candidate_count: number;
+    rolling_30d_searchable_catalog_count?: number;
+    rolling_30d_vertical_or_task_oriented_count?: number;
+    rolling_7d_qualified_non_head_count?: number;
+    rolling_30d_direction_qualified_counts?: Record<string, number>;
+  };
   counts: DailyRunSummaryCounts;
   source_status: DailyRunSummarySourceStatus[];
   quality: DailyRunSummaryQuality;
@@ -655,6 +807,9 @@ export interface DailyRunSummary {
   };
   observer_candidate_count?: number;
   observer_ecosystem_counts?: Record<string, number>;
+  observer_incubating_directions?: ObserverIncubatingDirection[];
+  observer_promotion_candidates?: ObserverPromotionCandidate[];
+  candidate_catalog_additions?: ObserverPromotionCandidate[];
   observer_top_candidates: Array<
     Pick<
       EcosystemObserverEntry,

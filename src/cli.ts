@@ -2,6 +2,8 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildEnhancedDailyReport, renderDailyReport } from "./action/dailyReport.ts";
+import { applyProjectSearchDailySections } from "./action/projectSearchDailySections.ts";
+import { buildProjectSearchDailySections } from "./action/projectSearchExposurePlanner.ts";
 import { buildVerifyDailyResult, renderVerifyDailyResult } from "./action/dailyVerification.ts";
 import { buildKnowledgeCard, knowledgeCardSlug, renderKnowledgeCard } from "./action/knowledgeCard.ts";
 import { buildDailyRunSummary, renderDailyRunSummary } from "./action/runSummary.ts";
@@ -18,7 +20,13 @@ import { configureGlobalNetworkProxy } from "./network/proxy.ts";
 import { normalizeSignals } from "./normalize.ts";
 import { collectRawSignalsDetailed } from "./signal/index.ts";
 import { collectEcosystemFocusObserver, writeEcosystemFocusObserverArtifact } from "./signal/ecosystemFocusObserver.ts";
+import { aggregateGapPressure, applyObserverPromotions } from "./feedback/gapPressureAggregator.ts";
+import { DIRECTION_CATALOG } from "./signal/directionCatalog.ts";
+import { searchGithubRepositoriesForDirection } from "./signal/githubRepositorySearch.ts";
 import { captureTrackedRepoStarSnapshots } from "./signal/githubTrackedStars.ts";
+import { buildMissionInventoryAudit } from "./signal/missionInventoryAudit.ts";
+import { runMissionDeepDiscovery } from "./signal/missionDeepDiscovery.ts";
+import { runMissionScoutDiscovery } from "./signal/missionScoutDiscovery.ts";
 import {
   ensureDataDirs,
   readJsonFile,
@@ -27,7 +35,16 @@ import {
   writeTextFile,
 } from "./storage/files.ts";
 import type { AppConfig } from "./config.ts";
-import type { DailyFreshnessSource, DailyReport, DailyRunSummary, NormalizedProject, RawSignal, ScoredProject, VerifyDailyResult } from "./types.ts";
+import type {
+  DailyFreshnessSource,
+  DailyReport,
+  DailyRunSummary,
+  DirectionPressureState,
+  NormalizedProject,
+  RawSignal,
+  ScoredProject,
+  VerifyDailyResult,
+} from "./types.ts";
 import type { ClassificationArtifact, ClassificationRunDiagnostics, SemanticClassification } from "./llmClassification.ts";
 import type { RunAgentTaskWorkflowInput, TaskExecutionReceipt } from "./agentMemory/index.ts";
 import { renderVisualConsole } from "./visualConsole/index.ts";
@@ -194,6 +211,22 @@ function previousNormalizedPath(date: string): string | undefined {
   return undefined;
 }
 
+function readRecentDailyReports(anchorDate: string, count: number): DailyReport[] {
+  return listAvailableDailyDates()
+    .filter((date) => date < anchorDate)
+    .slice(-count)
+    .map((date) => readJsonFile<DailyReport | null>(path.join("data", "reports", `${date}.daily.json`), null))
+    .filter((report): report is DailyReport => Boolean(report));
+}
+
+function readRolling30dReports(anchorDate: string): DailyReport[] {
+  return listAvailableDailyDates()
+    .filter((date) => date < anchorDate)
+    .slice(-29)
+    .map((date) => readJsonFile<DailyReport | null>(path.join("data", "reports", `${date}.daily.json`), null))
+    .filter((report): report is DailyReport => Boolean(report));
+}
+
 function runSummaryJsonPath(date: string): string {
   return path.join("data", "reports", `${date}.run-summary.json`);
 }
@@ -212,6 +245,22 @@ function dailyReportJsonPath(date: string): string {
 
 function dailyReportMarkdownPath(date: string): string {
   return path.join("data", "reports", `${date}.daily.md`);
+}
+
+function missionScoutArtifactPath(date: string): string {
+  return path.join("data", "discovery", "mission-scout", `${date}.json`);
+}
+
+function missionDeepArtifactPath(date: string): string {
+  return path.join("data", "discovery", "mission-deep", `${date}.json`);
+}
+
+function coverageAtlasArtifactPath(date: string): string {
+  return path.join("data", "coverage", "atlas", `${date}.json`);
+}
+
+function gapPressureArtifactPath(date: string): string {
+  return path.join("data", "feedback", "gap-pressure", `${date}.json`);
 }
 
 type AgentMemoryCliTaskSpec = {
@@ -428,6 +477,36 @@ function shiftDateStr(date: string, deltaDays: number): string {
   return utc.toISOString().slice(0, 10);
 }
 
+type GapPressureDirectionState = {
+  pressure_state: DirectionPressureState;
+  counts: Record<string, number>;
+};
+
+function readRecentGapPressureStates(anchorDate: string, lookbackDays: number): Record<string, GapPressureDirectionState> {
+  const merged: Record<string, GapPressureDirectionState> = {};
+
+  for (let offset = -lookbackDays; offset < 0; offset += 1) {
+    const date = shiftDateStr(anchorDate, offset);
+    const artifact = readJsonFile<{ direction_states?: Record<string, GapPressureDirectionState> } | null>(
+      gapPressureArtifactPath(date),
+      null,
+    );
+    for (const [directionKey, state] of Object.entries(artifact?.direction_states ?? {})) {
+      const current = merged[directionKey] ?? { pressure_state: "normal" as const, counts: {} };
+      const counts = { ...current.counts };
+      for (const [eventType, count] of Object.entries(state.counts ?? {})) {
+        counts[eventType] = (counts[eventType] ?? 0) + count;
+      }
+      merged[directionKey] = {
+        counts,
+        pressure_state: state.pressure_state === "promoted" ? "promoted" : current.pressure_state,
+      };
+    }
+  }
+
+  return merged;
+}
+
 type WeeklyWindowDay = {
   date: string;
   scored: ScoredProject[];
@@ -516,16 +595,49 @@ export async function runDaily(opts: CliOptions): Promise<void> {
     includeAgentsRadar: opts.includeAgentsRadar,
     includeTrendshift: opts.includeTrendshift,
   });
-  const raw = collection.rawSignals;
+  let raw = collection.rawSignals;
   writeJsonFile(path.join("data", "raw", "latest.json"), raw, dryRun);
   writeJsonFile(path.join("data", "raw", `${opts.date}.json`), raw, dryRun);
   writeJsonFile(githubEnrichmentAuditPath(opts.date), collection.githubEnrichment, dryRun);
   writeJsonFile(path.join("data", "raw", "github", "latest.enrichment.json"), collection.githubEnrichment, dryRun);
 
   const previous = readJsonFile<NormalizedProject[]>(previousNormalizedPath(opts.date) ?? "", []);
-  const normalized = normalizeSignals(raw, previous);
+  let normalized = normalizeSignals(raw, previous);
   writeJsonFile(normalizedPath(opts.date), normalized, dryRun);
   writeJsonFile(path.join("data", "normalized", "latest.json"), normalized, dryRun);
+
+  const scout = await runMissionScoutDiscovery({
+    catalog: DIRECTION_CATALOG,
+    githubSearchEnabled: config.runtime.mission.githubSearchEnabled,
+    search: ({ direction }) =>
+      searchGithubRepositoriesForDirection({
+        direction,
+        projects: normalized,
+        date: opts.date,
+        enableLiveSearch: config.runtime.mission.githubSearchEnabled && !(dryRun && config.runtime.mission.allowDryRunSkipLiveDeep),
+      }),
+  });
+  writeJsonFile(missionScoutArtifactPath(opts.date), scout, dryRun);
+
+  if (scout.raw_signals.length > 0) {
+    raw = [...raw, ...scout.raw_signals];
+    normalized = normalizeSignals(raw, previous);
+    writeJsonFile(path.join("data", "raw", "latest.json"), raw, dryRun);
+    writeJsonFile(path.join("data", "raw", `${opts.date}.json`), raw, dryRun);
+    writeJsonFile(normalizedPath(opts.date), normalized, dryRun);
+    writeJsonFile(path.join("data", "normalized", "latest.json"), normalized, dryRun);
+  }
+
+  const gapPressure = aggregateGapPressure({
+    date: opts.date,
+    previousDirectionStates: readRecentGapPressureStates(opts.date, 6),
+    feedbackEvents: scout.gap_ledger.flatMap((item) =>
+      item.outcome === "zero_candidate"
+        ? [{ direction_key: item.direction_key, event_type: "search_zero_result" as const, timestamp: generatedAt }]
+        : []
+    ),
+  });
+  writeJsonFile(gapPressureArtifactPath(opts.date), gapPressure, dryRun);
 
   const [observer, { classifications, diagnostics: llmDiagnostics }] = await Promise.all([
     collectEcosystemFocusObserver(config.sources.ecosystemFocus, {
@@ -534,6 +646,7 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       dryRun,
       dailyCandidateProjects: normalized,
       llmConfig: config.llm,
+      gapPressureStates: gapPressure.direction_states,
     }),
     classifyProjectsWithCache(normalized, config),
   ]);
@@ -545,12 +658,41 @@ export async function runDaily(opts: CliOptions): Promise<void> {
   writeJsonFile(scorePath(opts.date), scored, dryRun);
   writeJsonFile(path.join("data", "scores", "latest.json"), scored, dryRun);
 
+  const promotedGapStates = applyObserverPromotions(
+    gapPressure.direction_states,
+    observer.artifact.incubating_directions,
+  );
+  writeJsonFile(gapPressureArtifactPath(opts.date), { direction_states: promotedGapStates }, dryRun);
+
+  const deep = await runMissionDeepDiscovery({
+    coverageAtlas: scout.coverage_atlas.map((item) => ({
+      ...item,
+      pressure_state: promotedGapStates[item.direction_key]?.pressure_state ?? item.pressure_state,
+    })),
+    scoredProjects: scored,
+    explicitInterestSignals: [],
+  });
+  writeJsonFile(missionDeepArtifactPath(opts.date), deep, dryRun);
+  writeJsonFile(coverageAtlasArtifactPath(opts.date), deep.coverage_atlas, dryRun);
+
   // report needs freshness metadata to drive the new first-screen layout.
-  const reportWithFreshness = await buildEnhancedDailyReport(scored, config, {
+  let reportWithFreshness = await buildEnhancedDailyReport(scored, config, {
     date: opts.date,
     generatedAt,
     freshnessSources: collection.freshnessSources,
   });
+  reportWithFreshness = applyProjectSearchDailySections(
+    reportWithFreshness,
+    buildProjectSearchDailySections({
+      report: reportWithFreshness,
+      mission_match_projects: deep.mission_match_projects,
+      coverage_atlas: deep.coverage_atlas,
+      gap_ledger: deep.gap_ledger,
+      mission_discovery_status: deep.mission_discovery_status,
+      mission_degraded_reason_codes: deep.mission_degraded_reason_codes,
+      recent_daily_reports: readRecentDailyReports(opts.date, 5),
+    }),
+  );
   reportWithFreshness.llm_diagnostics = {
     enabled: reportWithFreshness.llm_diagnostics?.enabled ?? llmDiagnostics.enabled,
     provider: reportWithFreshness.llm_diagnostics?.provider ?? llmDiagnostics.provider,
@@ -571,6 +713,11 @@ export async function runDaily(opts: CliOptions): Promise<void> {
   };
   writeJsonFile(path.join("data", "reports", `${opts.date}.daily.json`), reportWithFreshness, dryRun);
   writeTextFile(path.join("data", "reports", `${opts.date}.daily.md`), renderDailyReport(reportWithFreshness), dryRun);
+  const missionInventoryAudit = buildMissionInventoryAudit({
+    currentReport: reportWithFreshness,
+    rolling30dReports: readRolling30dReports(opts.date),
+    directionCatalog: DIRECTION_CATALOG,
+  });
 
   const runSummary = buildDailyRunSummary(raw, scored, reportWithFreshness, {
     date: opts.date,
@@ -584,6 +731,8 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       status: observer.artifact.status,
       candidateCount: observer.artifact.candidate_count,
       ecosystemCounts: observer.artifact.ecosystem_counts,
+      incubatingDirections: observer.artifact.incubating_directions,
+      promotionCandidates: observer.artifact.promotion_candidates,
       topCandidates: observer.artifact.entries.map((entry) => ({
         repo_full_name: entry.repo_full_name,
         repo_url: entry.repo_url,
@@ -612,6 +761,7 @@ export async function runDaily(opts: CliOptions): Promise<void> {
         source_notes: entry.source_notes,
       })),
     },
+    missionInventoryAudit,
   });
   writeJsonFile(runSummaryJsonPath(opts.date), runSummary, dryRun);
   writeJsonFile(path.join("data", "reports", "latest.run-summary.json"), runSummary, dryRun);

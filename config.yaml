@@ -24,10 +24,10 @@ sources:
     enabled: true
     mode: github-search
     recent_days: 7
-    per_ecosystem_limit: 10
-    max_total_candidates: 25
+    per_ecosystem_limit: 48
+    max_total_candidates: 240
     historical_precision_days: 45
-    judge_top_n: 20
+    judge_top_n: 48
     entity_tiers:
       core:
         builders:
@@ -345,10 +345,10 @@ sources:
       - name: claude code
         weight: 0.25
 llm:
-  enabled: false
-  mode: rules-only
-  provider: none
-  daily_judge_top_n: 12
+  enabled: true
+  mode: semantic-classification
+  provider: deepseek
+  daily_judge_top_n: 20
 weights:
   star_velocity: 0.2
   engagement_score: 0.2
@@ -370,3 +370,9 @@ runtime:
   logging:
     level: info
     json: false
+  mission:
+    github_search_enabled: true
+    per_direction_concurrency: 4
+    query_timeout_ms: 18000
+    deep_batch_limit: 12
+    allow_dry_run_skip_live_deep: true

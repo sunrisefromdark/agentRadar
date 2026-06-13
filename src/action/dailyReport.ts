@@ -495,6 +495,16 @@ export function buildDailyReport(
     main_board_mode: mainBoard,
     today_star_projects: todayStarProjects,
     context_only_projects: contextOnlyProjects,
+    today_pulse_projects: todayStarProjects,
+    mission_match_projects: [],
+    explore_ribbon_projects: [],
+    coverage_atlas: [],
+    gap_ledger: [],
+    mission_discovery_status: "degraded",
+    mission_degraded_reason_codes: ["mission_not_run"],
+    global_hot_projects: todayStarProjects,
+    demand_relevant_projects: [],
+    searched_direction_statuses: [],
     new_projects: newProjects,
     high_score_projects: highScoreProjects,
     anomaly_projects: anomalyProjects,
@@ -1352,11 +1362,16 @@ export function renderDailyReport(report: DailyReport): string {
     report.freshness_sources.length > 0 ? report.freshness_sources.map(sourceLine) : ["- 暂无可用的新鲜度输入，默认降级为过期视图"];
   const todayStarProjects = report.today_star_projects;
   const contextProjects = report.context_only_projects;
+  const todayPulseProjects = report.today_pulse_projects;
+  const missionMatchProjects = report.mission_match_projects;
+  const exploreRibbonProjects = report.explore_ribbon_projects;
 
   return [
     `# Agent Trend Radar Daily Report ${report.date}`,
     "",
     `> generated_at: ${report.generated_at}`,
+    "",
+    "## 数据新鲜度总状态",
     "",
     "## 今日日志",
     "",
@@ -1383,11 +1398,49 @@ export function renderDailyReport(report: DailyReport): string {
     "",
     ...renderInformationSources(),
     ...renderPersonalizedSection(report),
+    "## 今日全局脉冲",
+    "",
+    "## Today Pulse Projects",
+    "",
+    ...(todayPulseProjects.length > 0
+      ? todayPulseProjects.flatMap((project) => [...projectCard(project), ""])
+      : ["- no today pulse projects", ""]),
+    "## 与你当前任务更相关",
+    "",
+    "## Mission Match Projects",
+    "",
+    ...(missionMatchProjects.length > 0
+      ? missionMatchProjects.flatMap((project) => [...projectCard(project), ""])
+      : [`- mission_discovery_status: ${report.mission_discovery_status}`, ""]),
+    "## 方向覆盖总览",
+    "",
+    "## Coverage Atlas",
+    "",
+    ...(report.coverage_atlas.length > 0
+      ? report.coverage_atlas.map(
+          (item) =>
+            `- ${item.display_name_cn}: outcome=${item.outcome}; pressure=${item.pressure_state}; next_action=${item.next_action}`,
+        )
+      : ["- no coverage atlas available"]),
+    "",
+    "## 方向缺口账本",
+    "",
+    "## Gap Ledger",
+    "",
+    ...(report.gap_ledger.length > 0
+      ? report.gap_ledger.map(
+          (item) => `- ${item.display_name_cn}: outcome=${item.outcome}; reasons=${item.reason_codes.join(",") || "none"}`,
+        )
+      : ["- no gap ledger entries"]),
+    "",
     "## 当天明星项目",
     "",
     ...(todayStarProjects.length > 0
       ? todayStarProjects.flatMap((project) => [...projectCard(project), ""])
       : ["- 当前主榜单为空，历史 fallback 不会自动补齐为今天明星项目", ""]),
+    ...(exploreRibbonProjects.length > 0
+      ? ["## Explore Ribbon Projects", "", ...exploreRibbonProjects.flatMap((project) => [...projectCard(project), ""])]
+      : []),
     ...(contextProjects.length > 0
       ? renderProjectSection("## 历史补充观察", contextProjects, "暂无历史补充观察项目", {
           limit: 8,

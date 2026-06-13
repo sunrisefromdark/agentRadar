@@ -346,11 +346,16 @@ function buildMissionScoutInventoryProject(signal: RawSignal): DailyRankedProjec
   };
 }
 
-function buildMissionScoutInventory(date: string, surfacedProjects: DailyRankedProject[]): DailyRankedProject[] {
+function buildMissionScoutInventory(
+  date: string,
+  surfacedProjects: DailyRankedProject[],
+  prioritizedProjects: DailyRankedProject[] = [],
+): DailyRankedProject[] {
   const artifact = getMissionScoutArtifact(date);
   if (artifact.status !== "ok") return [];
 
   const surfacedKeys = new Set(surfacedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
+  const prioritizedKeys = new Set(prioritizedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
   const perDirectionCount = new Map<string, number>();
   const projects: DailyRankedProject[] = [];
 
@@ -363,7 +368,8 @@ function buildMissionScoutInventory(date: string, surfacedProjects: DailyRankedP
 
     const primaryDirection = candidate.direction_matches?.[0] ?? "unknown";
     const currentCount = perDirectionCount.get(primaryDirection) ?? 0;
-    if (currentCount >= 8) continue;
+    const prioritized = prioritizedKeys.has(repoKey);
+    if (!prioritized && currentCount >= 8) continue;
 
     surfacedKeys.add(repoKey);
     perDirectionCount.set(primaryDirection, currentCount + 1);
@@ -1393,8 +1399,11 @@ export function buildProjectsView(
   const todayPulseProjects = snapshot ? readTodayPulseProjects(snapshot.daily_report) : [];
   const missionMatchProjects = snapshot ? readMissionProjects(snapshot.daily_report) : [];
   const exploreRibbonProjects = snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [];
-  const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...(snapshot ? snapshot.daily_report.context_only_projects : [])];
-  const missionScoutInventoryProjects = snapshot ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects) : [];
+  const contextOnlyProjects = snapshot ? snapshot.daily_report.context_only_projects : [];
+  const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects];
+  const missionScoutInventoryProjects = snapshot
+    ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects, contextOnlyProjects)
+    : [];
   const surfacedWithScoutProjects = [...surfacedProjects, ...missionScoutInventoryProjects];
   const observerInventoryProjects = snapshot?.observer_artifact
     ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry))
@@ -1402,7 +1411,7 @@ export function buildProjectsView(
   const catalogInventoryProjects = snapshot
     ? buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects)
     : [];
-  const historicalContextProjects = [...(snapshot ? snapshot.daily_report.context_only_projects : []), ...catalogInventoryProjects, ...observerInventoryProjects].filter(
+  const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects, ...observerInventoryProjects].filter(
     (project, index, all) =>
       all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
   );

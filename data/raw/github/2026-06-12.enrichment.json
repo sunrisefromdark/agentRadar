@@ -1,0 +1,1626 @@
+[
+  {
+    "repo_url": "https://github.com/ollama/ollama",
+    "repo_full_name": "ollama/ollama",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "repo API returned HTTP 403",
+      "github_token=missing",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vllm-project/vllm",
+    "repo_full_name": "vllm-project/vllm",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "repo API returned HTTP 403",
+      "github_token=missing",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langchain4j/langchain4j",
+    "repo_full_name": "langchain4j/langchain4j",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "repo API returned HTTP 403",
+      "github_token=missing",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/addyosmani/agent-skills",
+    "repo_full_name": "addyosmani/agent-skills",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/obra/superpowers",
+    "repo_full_name": "obra/superpowers",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/NVIDIA/SkillSpector",
+    "repo_full_name": "nvidia/skillspector",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/maziyarpanahi/openmed",
+    "repo_full_name": "maziyarpanahi/openmed",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/hexo-ai/sia",
+    "repo_full_name": "hexo-ai/sia",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/msitarzewski/agency-agents",
+    "repo_full_name": "msitarzewski/agency-agents",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/refactoringhq/tolaria",
+    "repo_full_name": "refactoringhq/tolaria",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/soxoj/maigret",
+    "repo_full_name": "soxoj/maigret",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/hiyouga/LlamaFactory",
+    "repo_full_name": "hiyouga/llamafactory",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/NousResearch/hermes-agent",
+    "repo_full_name": "nousresearch/hermes-agent",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langgenius/dify",
+    "repo_full_name": "langgenius/dify",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/infiniflow/ragflow",
+    "repo_full_name": "infiniflow/ragflow",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mem0ai/mem0",
+    "repo_full_name": "mem0ai/mem0",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/duanyytop/agents-radar",
+    "repo_full_name": "duanyytop/agents-radar",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/openclaw/openclaw",
+    "repo_full_name": "openclaw/openclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sipeed/picoclaw",
+    "repo_full_name": "sipeed/picoclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/nanobot",
+    "repo_full_name": "hkuds/nanobot",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nullclaw/nullclaw",
+    "repo_full_name": "nullclaw/nullclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nearai/ironclaw",
+    "repo_full_name": "nearai/ironclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/qwibitai/nanoclaw",
+    "repo_full_name": "qwibitai/nanoclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/TinyAGI/tinyagi",
+    "repo_full_name": "tinyagi/tinyagi",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/netease-youdao/LobsterAI",
+    "repo_full_name": "netease-youdao/lobsterai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/moltis-org/moltis",
+    "repo_full_name": "moltis-org/moltis",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/zeroclaw-labs/zeroclaw",
+    "repo_full_name": "zeroclaw-labs/zeroclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/qhkm/zeptoclaw",
+    "repo_full_name": "qhkm/zeptoclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/agentscope-ai/CoPaw",
+    "repo_full_name": "agentscope-ai/copaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nanocoai/nanoclaw",
+    "repo_full_name": "nanocoai/nanoclaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/agentscope-ai/QwenPaw",
+    "repo_full_name": "agentscope-ai/qwenpaw",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/openai/codex",
+    "repo_full_name": "openai/codex",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anthropics/claude-code",
+    "repo_full_name": "anthropics/claude-code",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/github/copilot-cli",
+    "repo_full_name": "github/copilot-cli",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google-gemini/gemini-cli",
+    "repo_full_name": "google-gemini/gemini-cli",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/MoonshotAI/kimi-cli",
+    "repo_full_name": "moonshotai/kimi-cli",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anomalyco/opencode",
+    "repo_full_name": "anomalyco/opencode",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/QwenLM/qwen-code",
+    "repo_full_name": "qwenlm/qwen-code",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/badlogic/pi-mono",
+    "repo_full_name": "badlogic/pi-mono",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/earendil-works/pi",
+    "repo_full_name": "earendil-works/pi",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anthropics/skills",
+    "repo_full_name": "anthropics/skills",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Hmbown/DeepSeek-TUI",
+    "repo_full_name": "hmbown/deepseek-tui",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Hmbown/CodeWhale",
+    "repo_full_name": "hmbown/codewhale",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/elder-plinius/CL4R1T4S",
+    "repo_full_name": "elder-plinius/cl4r1t4s",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/SkyBlue997/enableMacosAI",
+    "repo_full_name": "skyblue997/enablemacosai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/LOWERTOP/Shadowrocket-First",
+    "repo_full_name": "lowertop/shadowrocket-first",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/XiaomiMiMo/MiMo-Code",
+    "repo_full_name": "xiaomimimo/mimo-code",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/DanMcInerney/architect-loop",
+    "repo_full_name": "danmcinerney/architect-loop",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/apple/container",
+    "repo_full_name": "apple/container",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/kadevin/ilab-gpt-conjure",
+    "repo_full_name": "kadevin/ilab-gpt-conjure",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/chopratejas/headroom",
+    "repo_full_name": "chopratejas/headroom",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/zhukunpenglinyutong/desktop-cc-gui",
+    "repo_full_name": "zhukunpenglinyutong/desktop-cc-gui",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/alexmcdonnell-airtable/hyperagent-public-skills",
+    "repo_full_name": "alexmcdonnell-airtable/hyperagent-public-skills",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/iptv-org/iptv",
+    "repo_full_name": "iptv-org/iptv",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/phuryn/pm-skills",
+    "repo_full_name": "phuryn/pm-skills",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/music-assistant/server",
+    "repo_full_name": "music-assistant/server",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/farion1231/cc-switch",
+    "repo_full_name": "farion1231/cc-switch",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/GorvGoyl/Clone-Wars",
+    "repo_full_name": "gorvgoyl/clone-wars",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/microsoft/PowerToys",
+    "repo_full_name": "microsoft/powertoys",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/lfnovo/open-notebook",
+    "repo_full_name": "lfnovo/open-notebook",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/YusufB5/ASCILINE",
+    "repo_full_name": "yusufb5/asciline",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/pulkitxm/claude-directory",
+    "repo_full_name": "pulkitxm/claude-directory",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/dexhunter/seedance2-skill",
+    "repo_full_name": "dexhunter/seedance2-skill",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mvanhorn/last30days-skill",
+    "repo_full_name": "mvanhorn/last30days-skill",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/p-e-w/heretic",
+    "repo_full_name": "p-e-w/heretic",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/freeCodeCamp/freeCodeCamp",
+    "repo_full_name": "freecodecamp/freecodecamp",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/public-apis/public-apis",
+    "repo_full_name": "public-apis/public-apis",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/awesome-selfhosted/awesome-selfhosted",
+    "repo_full_name": "awesome-selfhosted/awesome-selfhosted",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/nilbuild/developer-roadmap",
+    "repo_full_name": "nilbuild/developer-roadmap",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vinta/awesome-python",
+    "repo_full_name": "vinta/awesome-python",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/react/react",
+    "repo_full_name": "react/react",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/torvalds/linux",
+    "repo_full_name": "torvalds/linux",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/n8n-io/n8n",
+    "repo_full_name": "n8n-io/n8n",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/tensorflow/tensorflow",
+    "repo_full_name": "tensorflow/tensorflow",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ohmyzsh/ohmyzsh",
+    "repo_full_name": "ohmyzsh/ohmyzsh",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/microsoft/vscode",
+    "repo_full_name": "microsoft/vscode",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Significant-Gravitas/AutoGPT",
+    "repo_full_name": "significant-gravitas/autogpt",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/flutter/flutter",
+    "repo_full_name": "flutter/flutter",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/twbs/bootstrap",
+    "repo_full_name": "twbs/bootstrap",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/avelino/awesome-go",
+    "repo_full_name": "avelino/awesome-go",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/yt-dlp/yt-dlp",
+    "repo_full_name": "yt-dlp/yt-dlp",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/f/prompts.chat",
+    "repo_full_name": "f/prompts.chat",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Snailclimb/JavaGuide",
+    "repo_full_name": "snailclimb/javaguide",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/huggingface/transformers",
+    "repo_full_name": "huggingface/transformers",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langflow-ai/langflow",
+    "repo_full_name": "langflow-ai/langflow",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "repo API returned HTTP 403",
+      "github_token=missing",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/anthropics/knowledge-work-plugins",
+    "repo_full_name": "anthropics/knowledge-work-plugins",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/oss-fuzz",
+    "repo_full_name": "google/oss-fuzz",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/agents-cli",
+    "repo_full_name": "google/agents-cli",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/syzkaller",
+    "repo_full_name": "google/syzkaller",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google/dawn",
+    "repo_full_name": "google/dawn",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google-deepmind/optax",
+    "repo_full_name": "google-deepmind/optax",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/google-deepmind/envlogger",
+    "repo_full_name": "google-deepmind/envlogger",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/aws/jsii-runtime-go",
+    "repo_full_name": "aws/jsii-runtime-go",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/aws/jsii",
+    "repo_full_name": "aws/jsii",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/aws/agent-toolkit-for-aws",
+    "repo_full_name": "aws/agent-toolkit-for-aws",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/aws/aws-cdk",
+    "repo_full_name": "aws/aws-cdk",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/awslabs/aidlc-workflows",
+    "repo_full_name": "awslabs/aidlc-workflows",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/awslabs/iam-policy-autopilot",
+    "repo_full_name": "awslabs/iam-policy-autopilot",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/facebookresearch/neuroai",
+    "repo_full_name": "facebookresearch/neuroai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/facebookresearch/OpenApps",
+    "repo_full_name": "facebookresearch/openapps",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/facebookresearch/eb_jepa",
+    "repo_full_name": "facebookresearch/eb_jepa",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/xai-org/plugin-marketplace",
+    "repo_full_name": "xai-org/plugin-marketplace",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/xai-org/xai-proto",
+    "repo_full_name": "xai-org/xai-proto",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mistralai/search-starter-app",
+    "repo_full_name": "mistralai/search-starter-app",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mistralai/cookbook",
+    "repo_full_name": "mistralai/cookbook",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/cohere-ai/cohere-compass-sdk",
+    "repo_full_name": "cohere-ai/cohere-compass-sdk",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mistralai/mistral-vibe",
+    "repo_full_name": "mistralai/mistral-vibe",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/cohere-ai/cohere-developer-experience",
+    "repo_full_name": "cohere-ai/cohere-developer-experience",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/allenai/molmospaces-resources",
+    "repo_full_name": "allenai/molmospaces-resources",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/cohere-ai/cohere-python",
+    "repo_full_name": "cohere-ai/cohere-python",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/bytedance/Bernini",
+    "repo_full_name": "bytedance/bernini",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/THUDM/slime",
+    "repo_full_name": "thudm/slime",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/MiniMax-AI/MSA",
+    "repo_full_name": "minimax-ai/msa",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ByteDance-Seed/Cola-DLM",
+    "repo_full_name": "bytedance-seed/cola-dlm",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/bytedance/deer-flow",
+    "repo_full_name": "bytedance/deer-flow",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/ByteDance-Seed/VeOmni",
+    "repo_full_name": "bytedance-seed/veomni",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/alibaba/MNN",
+    "repo_full_name": "alibaba/mnn",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/alibaba/PhotonLibOS",
+    "repo_full_name": "alibaba/photonlibos",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/alibaba/page-agent",
+    "repo_full_name": "alibaba/page-agent",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/alibaba/anolisa",
+    "repo_full_name": "alibaba/anolisa",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Tencent/tdesign-react",
+    "repo_full_name": "tencent/tdesign-react",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Tencent/AI-Infra-Guard",
+    "repo_full_name": "tencent/ai-infra-guard",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vercel/next.js",
+    "repo_full_name": "vercel/next.js",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/Tencent/tmagic-editor",
+    "repo_full_name": "tencent/tmagic-editor",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/TencentARC/MotionCrafter",
+    "repo_full_name": "tencentarc/motioncrafter",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sourcegraph/sg",
+    "repo_full_name": "sourcegraph/sg",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/vercel/ai",
+    "repo_full_name": "vercel/ai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sourcegraph/smoke-tests",
+    "repo_full_name": "sourcegraph/smoke-tests",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sourcegraph/artifacts",
+    "repo_full_name": "sourcegraph/artifacts",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/sourcegraph/src-cli",
+    "repo_full_name": "sourcegraph/src-cli",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/continuedev/continue",
+    "repo_full_name": "continuedev/continue",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/run-llama/llama_index",
+    "repo_full_name": "run-llama/llama_index",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/run-llama/llama-agents",
+    "repo_full_name": "run-llama/llama-agents",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/run-llama/liteparse",
+    "repo_full_name": "run-llama/liteparse",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/pydantic/httpx2",
+    "repo_full_name": "pydantic/httpx2",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/pydantic/pydantic-ai",
+    "repo_full_name": "pydantic/pydantic-ai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/run-llama/llama-parse-ts",
+    "repo_full_name": "run-llama/llama-parse-ts",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/pydantic/logfire-helm-chart",
+    "repo_full_name": "pydantic/logfire-helm-chart",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mastra-ai/mastra",
+    "repo_full_name": "mastra-ai/mastra",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/camel-ai/camel",
+    "repo_full_name": "camel-ai/camel",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langchain-ai/langchainjs",
+    "repo_full_name": "langchain-ai/langchainjs",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langchain-ai/deepagents",
+    "repo_full_name": "langchain-ai/deepagents",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/mastra-ai/template-agent-builder",
+    "repo_full_name": "mastra-ai/template-agent-builder",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/modelcontextprotocol/inspector",
+    "repo_full_name": "modelcontextprotocol/inspector",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langchain-ai/langchain",
+    "repo_full_name": "langchain-ai/langchain",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/modelcontextprotocol/modelcontextprotocol",
+    "repo_full_name": "modelcontextprotocol/modelcontextprotocol",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/browser-use/browser-use",
+    "repo_full_name": "browser-use/browser-use",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/modelcontextprotocol/python-sdk",
+    "repo_full_name": "modelcontextprotocol/python-sdk",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/modelcontextprotocol/rust-sdk",
+    "repo_full_name": "modelcontextprotocol/rust-sdk",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse-docs",
+    "repo_full_name": "langfuse/langfuse-docs",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/browser-use/cdp-use",
+    "repo_full_name": "browser-use/cdp-use",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse-js",
+    "repo_full_name": "langfuse/langfuse-js",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse-python",
+    "repo_full_name": "langfuse/langfuse-python",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/langfuse/langfuse",
+    "repo_full_name": "langfuse/langfuse",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/crewAIInc/crewAI",
+    "repo_full_name": "crewaiinc/crewai",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/huggingface/agentcap",
+    "repo_full_name": "huggingface/agentcap",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenBMB/PilotDeck",
+    "repo_full_name": "openbmb/pilotdeck",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/huggingface/lerobot",
+    "repo_full_name": "huggingface/lerobot",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/OpenBMB/UltraRAG",
+    "repo_full_name": "openbmb/ultrarag",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/AI-Trader",
+    "repo_full_name": "hkuds/ai-trader",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/LightRAG",
+    "repo_full_name": "hkuds/lightrag",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  },
+  {
+    "repo_url": "https://github.com/HKUDS/Vibe-Trading",
+    "repo_full_name": "hkuds/vibe-trading",
+    "status": "html",
+    "metrics_applied": true,
+    "notes": [
+      "skipped live GitHub API after recent failure: GitHub API returned HTTP 403",
+      "used GitHub repository HTML fallback metrics"
+    ]
+  }
+]

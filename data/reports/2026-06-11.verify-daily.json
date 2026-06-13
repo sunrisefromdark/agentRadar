@@ -1,6 +1,6 @@
 {
   "date": "2026-06-11",
-  "status": "pass",
+  "status": "warn",
   "summary_path": "data/reports/2026-06-11.run-summary.json",
   "github_audit_path": "data/raw/github/2026-06-11.enrichment.json",
   "checks": [
@@ -93,6 +93,26 @@
       "name": "agents_radar_context_only",
       "status": "pass",
       "detail": "agents-radar source_role=context; freshness_state=fresh_today; effective_date=2026-06-11"
+    },
+    {
+      "name": "project_search_daily_fields",
+      "status": "warn",
+      "detail": "legacy-compatible daily schema detected; today_pulse=68; mission_match=0; coverage_atlas=0"
+    },
+    {
+      "name": "project_cards_have_direction_and_appearance_reason",
+      "status": "warn",
+      "detail": "legacy-compatible daily schema does not guarantee appearance-reason fields"
+    },
+    {
+      "name": "mission_quota_and_explore_ribbon_contract",
+      "status": "pass",
+      "detail": "mission_match=0; mission_quota=4; explore_ribbon=0; explore_overlap=false"
+    },
+    {
+      "name": "mission_degraded_semantics",
+      "status": "warn",
+      "detail": "mission_discovery_status=missing"
     },
     {
       "name": "github_audit_written",

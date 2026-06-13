@@ -1,6 +1,6 @@
 import path from "node:path";
 import { toLocalDateStr } from "../date.ts";
-import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./readLayer.ts";
+import { getRunSummary, listAvailableDailyDates, listAvailableWeeklyAnchors } from "./readLayer.ts";
 import type { ArtifactRef, ContextResolution, TimeSliceWindow, ViewContext, WeeklyWindow } from "./types.ts";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -79,6 +79,27 @@ function resolveTimeSliceWindow(values: string[], selectedValue: string | null):
   };
 }
 
+function resolvePreferredLatestDailyDate(): string | null {
+  const dates = listAvailableDailyDates();
+  if (dates.length === 0) return null;
+
+  for (let index = dates.length - 1; index >= 0; index -= 1) {
+    const date = dates[index];
+    const summary = getRunSummary(date);
+    if (summary.status !== "ok") continue;
+
+    const freshnessSources = Array.isArray(summary.value.freshness_sources) ? summary.value.freshness_sources : [];
+    if (
+      freshnessSources.length > 0 &&
+      freshnessSources.every((entry) => entry && typeof entry === "object" && entry.freshness_state === "fresh_today")
+    ) {
+      return date;
+    }
+  }
+
+  return dates.at(-1) ?? null;
+}
+
 export function resolveNearestWeeklyAnchor(referenceDate: string | null | undefined): string | null {
   const anchors = listAvailableWeeklyAnchors();
   if (anchors.length === 0) return null;
@@ -93,7 +114,7 @@ export function resolveDailyContext(dateOrLatest: string): ContextResolution {
     return { status: "failed", context, message: `unsupported daily date "${dateOrLatest}"` };
   }
 
-  const resolvedDate = dateOrLatest === "latest" ? listAvailableDailyDates().at(-1) ?? null : dateOrLatest;
+  const resolvedDate = dateOrLatest === "latest" ? resolvePreferredLatestDailyDate() : dateOrLatest;
   if (!resolvedDate) return { status: "failed", context, message: "latest 快捷入口无法解析" };
 
   context.selected_date = resolvedDate;

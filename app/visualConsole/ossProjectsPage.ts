@@ -82,6 +82,35 @@ function localizeConfidence(value: string, lang: UiLang): string {
   return value;
 }
 
+const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
+  [/\b(byte[-\s]?dance|bytedance[-\s]?seed|ui[-\s]?tars)\b/i, ["ByteDance", "字节", "字节跳动"]],
+  [/\b(tencent|tencentarc|hunyuan)\b/i, ["Tencent", "腾讯"]],
+  [/\b(alibaba|alibabacloud|aliyun|qwen|tongyi)\b/i, ["Alibaba", "阿里", "阿里巴巴", "通义"]],
+  [/\b(baidu|qianfan|ernie)\b/i, ["Baidu", "百度", "文心"]],
+  [/\b(netease|youdao)\b/i, ["NetEase", "网易", "有道"]],
+  [/\b(microsoft|azure|vscode)\b/i, ["Microsoft", "微软"]],
+  [/\b(google|deepmind|gemini)\b/i, ["Google", "谷歌", "DeepMind"]],
+  [/\b(openai|chatgpt|codex)\b/i, ["OpenAI", "ChatGPT", "Codex"]],
+  [/\b(anthropic|claude)\b/i, ["Anthropic", "Claude"]],
+  [/\b(moonshot|kimi)\b/i, ["Moonshot", "月之暗面", "Kimi"]],
+  [/\b(deepseek)\b/i, ["DeepSeek", "深度求索"]],
+  [/\b(huggingface|hugging[-\s]?face)\b/i, ["Hugging Face", "抱抱脸"]],
+  [/\b(meta|facebook)\b/i, ["Meta", "Facebook"]],
+];
+
+function uniqueProjectSearchStrings(values: Array<string | null | undefined>): string[] {
+  return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
+}
+
+function companySearchAliases(values: Array<string | null | undefined>): string[] {
+  const haystack = values.map((value) => String(value ?? "")).join(" ");
+  const aliases: string[] = [];
+  for (const [pattern, candidates] of COMPANY_SEARCH_ALIASES) {
+    if (pattern.test(haystack)) aliases.push(...candidates);
+  }
+  return uniqueProjectSearchStrings(aliases);
+}
+
 function normalizeSearchSuggestionTerm(value: string): string {
   return value.trim().toLowerCase().replace(/[_/]+/g, " ").replace(/\s+/g, " ");
 }
@@ -155,24 +184,45 @@ function deriveProjectSearchSuggestions(projects: ProjectsViewModel["projects"])
     collectSearchSuggestionsFromText(ranked, project.project.repo_full_name, sourceKey, 1.5);
     collectSearchSuggestionsFromText(ranked, project.project.description ?? "", sourceKey, 1.4);
     collectSearchSuggestionsFromText(ranked, projectSelectionReason(project, "en"), sourceKey, 1.2);
+    companySearchAliases([project.project.repo_full_name, project.project.project_name, project.project.description, ...project.project.tags]).forEach((alias) =>
+      collectSearchSuggestionTerm(ranked, alias, sourceKey, 2.2),
+    );
   });
 
   return finalizeSearchSuggestions(ranked, PROJECT_SEARCH_FALLBACK_SUGGESTIONS);
 }
 
 function projectSearchText(project: ProjectsViewModel["projects"][number], lang: UiLang): string {
+  const repoOwner = project.project.repo_full_name.split("/")[0] ?? "";
   return [
     project.project.repo_full_name,
     project.project.project_name,
+    repoOwner,
+    project.project.repo_url,
     project.project.description,
     projectIntroduction(project, lang),
     projectSelectionReason(project, lang),
     project.appearance_explanation_cn,
+    project.project_brief_cn,
+    project.why_today_cn,
+    project.position_rationale_cn,
     project.exposure_bucket,
     project.score.paradigm,
+    project.project.persistence_state,
     ...project.project.tags,
+    ...project.project.sources,
+    ...project.project.raw_signals.flatMap((signal) => [signal.project_name, signal.repo_url, signal.description ?? "", signal.source, ...signal.tags]),
     ...project.matched_interest_topics,
     ...(project.direction_matches ?? []),
+    ...companySearchAliases([
+      project.project.repo_full_name,
+      project.project.project_name,
+      repoOwner,
+      project.project.description,
+      project.project_brief_cn,
+      project.why_today_cn,
+      ...project.project.tags,
+    ]),
   ]
     .filter(Boolean)
     .join(" ")
@@ -219,16 +269,28 @@ function renderProjectsBucketDeck(model: ProjectsViewModel, lang: UiLang): strin
     explore_ribbon: model.explore_ribbon_projects.length,
     historical_context: model.historical_context_projects.length,
   };
+  const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
 
   return `
     <div class="projects-bucket-deck" data-project-bucket-deck="true">
-      ${PROJECT_BUCKET_ORDER.map((bucket) => `
-        <article class="projects-bucket-card" data-project-bucket-card="${escapeHtml(bucket)}">
-          <span class="context-label">${escapeHtml(projectBucketLabel(bucket, lang))}</span>
-          <strong>${escapeHtml(String(counts[bucket]))}</strong>
+      ${PROJECT_BUCKET_ORDER.map((bucket, index) => {
+        const count = counts[bucket];
+        const share = total > 0 ? Math.max(4, Math.round((count / total) * 100)) : 0;
+        return `
+        <article class="projects-bucket-card projects-bucket-card-${escapeHtml(bucket)}" data-project-bucket-card="${escapeHtml(bucket)}" style="--bucket-share: ${escapeHtml(String(share))}%">
+          <div class="projects-bucket-card-head">
+            <span class="projects-bucket-index">${escapeHtml(String(index + 1).padStart(2, "0"))}</span>
+            <span class="projects-bucket-label">${escapeHtml(projectBucketLabel(bucket, lang))}</span>
+          </div>
+          <div class="projects-bucket-value-row">
+            <strong>${escapeHtml(String(count))}</strong>
+            <span>${escapeHtml(uiText(lang, "项目", "items"))}</span>
+          </div>
+          <div class="projects-bucket-meter" aria-hidden="true"><span></span></div>
           <p>${escapeHtml(projectBucketDescription(bucket, lang))}</p>
         </article>
-      `).join("")}
+      `;
+      }).join("")}
     </div>
   `;
 }

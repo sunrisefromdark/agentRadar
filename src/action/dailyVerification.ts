@@ -1,12 +1,14 @@
 import path from "node:path";
 import { readJsonFile } from "../storage/files.ts";
 import type {
+  DailyReport,
   DailyRunSummary,
   DailyFreshnessSource,
   GitHubEnrichmentAuditEntry,
   VerificationCheck,
   VerifyDailyResult,
 } from "../types.ts";
+import { MISSION_DISCOVERY_CONFIG } from "../signal/missionDiscoveryConfig.ts";
 
 function summaryPath(date: string): string {
   return path.join("data", "reports", `${date}.run-summary.json`);
@@ -14,6 +16,10 @@ function summaryPath(date: string): string {
 
 function githubAuditPath(date: string): string {
   return path.join("data", "raw", "github", `${date}.enrichment.json`);
+}
+
+function dailyReportPath(date: string): string {
+  return path.join("data", "reports", `${date}.daily.json`);
 }
 
 function aggregateStatus(checks: VerificationCheck[]): VerifyDailyResult["status"] {
@@ -261,6 +267,172 @@ function githubAuditCheck(
   );
 }
 
+function projectSearchContractChecks(summary: DailyRunSummary, report: DailyReport | null): VerificationCheck[] {
+  if (!report) {
+    return [buildCheck("project_search_daily_fields", "warn", "daily report missing; cannot verify project-search contract fields")];
+  }
+
+  const todayPulseProjects = Array.isArray(report.today_pulse_projects)
+    ? report.today_pulse_projects
+    : Array.isArray(report.today_star_projects)
+      ? report.today_star_projects
+      : [];
+  const missionMatchProjects = Array.isArray(report.mission_match_projects)
+    ? report.mission_match_projects
+    : Array.isArray(report.demand_relevant_projects)
+      ? report.demand_relevant_projects
+      : [];
+  const exploreRibbonProjects = Array.isArray(report.explore_ribbon_projects) ? report.explore_ribbon_projects : [];
+  const coverageAtlas = Array.isArray(report.coverage_atlas)
+    ? report.coverage_atlas
+    : Array.isArray(report.searched_direction_statuses)
+      ? report.searched_direction_statuses
+      : [];
+  const gapLedger = Array.isArray(report.gap_ledger) ? report.gap_ledger : [];
+  const hasDirectProjectSearchSchema =
+    Array.isArray(report.today_pulse_projects) &&
+    Array.isArray(report.mission_match_projects) &&
+    Array.isArray(report.explore_ribbon_projects) &&
+    Array.isArray(report.coverage_atlas) &&
+    Array.isArray(report.gap_ledger);
+  const hasLegacyCompatibilitySchema =
+    Array.isArray(report.today_star_projects) ||
+    Array.isArray(report.demand_relevant_projects) ||
+    Array.isArray(report.searched_direction_statuses);
+  const requiredFieldsPresent =
+    hasDirectProjectSearchSchema ||
+    (hasLegacyCompatibilitySchema &&
+      todayPulseProjects.length >= 0 &&
+      missionMatchProjects.length >= 0 &&
+      coverageAtlas.length >= 0);
+  const cardsWithAppearanceReasons = [
+    ...todayPulseProjects,
+    ...missionMatchProjects,
+    ...exploreRibbonProjects,
+  ].every(
+    (project) =>
+      Array.isArray(project.appearance_reason_codes) &&
+      project.appearance_reason_codes.length > 0 &&
+      typeof project.appearance_explanation_cn === "string" &&
+      project.appearance_explanation_cn.trim().length > 0 &&
+      Array.isArray(project.direction_matches),
+  );
+  const missionQuota = 4;
+  const missionUnderQuota = missionMatchProjects.length < missionQuota;
+  const exploreAllowed = missionUnderQuota || exploreRibbonProjects.length === 0;
+  const overlap = new Set(missionMatchProjects.map((project) => project.project.repo_full_name.toLowerCase()));
+  const exploreOverlap = exploreRibbonProjects.some((project) =>
+    overlap.has(project.project.repo_full_name.toLowerCase()),
+  );
+  const top3MissionProjects = missionMatchProjects.slice(0, 3);
+  const directionDupInTop3 = top3MissionProjects.some((project, index) =>
+    top3MissionProjects.slice(index + 1).some((other) =>
+      (project.direction_matches ?? []).some((direction) => (other.direction_matches ?? []).includes(direction)),
+    ),
+  );
+  const directionFamilyLookup = new Map([
+    ["coding-agent", "agent-stack"],
+    ["browser-computer-use", "agent-stack"],
+    ["workflow-automation-agent", "agent-stack"],
+    ["research-knowledge-agent", "agent-stack"],
+    ["shopping-commerce-agent", "revenue-commerce"],
+    ["sales-prospecting-agent", "revenue-commerce"],
+    ["customer-support-agent", "revenue-commerce"],
+    ["marketing-content-ops-agent", "revenue-commerce"],
+    ["finance-investment-research-agent", "analysis-professional"],
+    ["data-analytics-bi-agent", "analysis-professional"],
+    ["legal-compliance-agent", "analysis-professional"],
+    ["security-soc-agent", "analysis-professional"],
+    ["healthcare-ops-agent", "vertical-ops"],
+    ["recruiting-hr-agent", "vertical-ops"],
+    ["supply-chain-procurement-agent", "vertical-ops"],
+    ["industrial-field-ops-agent", "vertical-ops"],
+  ]);
+  const familyCounts = new Map<string, number>();
+  for (const project of missionMatchProjects) {
+    for (const direction of new Set(project.direction_matches ?? [])) {
+      const family = directionFamilyLookup.get(direction);
+      if (!family) continue;
+      familyCounts.set(family, (familyCounts.get(family) ?? 0) + 1);
+    }
+  }
+  const familyOverLimit = [...familyCounts.values()].some((count) => count > 2);
+  const degradedExplained =
+    summary.mission_discovery_status !== "degraded" ||
+    (summary.mission_degraded_reason_codes ?? []).length > 0;
+  const missionMetrics = summary.mission_metrics;
+  const rollingInventoryComplete =
+    typeof missionMetrics?.rolling_30d_searchable_catalog_count === "number" &&
+    typeof missionMetrics?.rolling_30d_vertical_or_task_oriented_count === "number" &&
+    typeof missionMetrics?.rolling_7d_qualified_non_head_count === "number";
+  const rollingCatalogMet =
+    (missionMetrics?.rolling_30d_searchable_catalog_count ?? 0) >= MISSION_DISCOVERY_CONFIG.rolling_30d_searchable_catalog_min;
+  const rollingVerticalMet =
+    (missionMetrics?.rolling_30d_vertical_or_task_oriented_count ?? 0) >= MISSION_DISCOVERY_CONFIG.vertical_or_task_oriented_projects_min;
+  const rollingNonHeadMet =
+    (missionMetrics?.rolling_7d_qualified_non_head_count ?? 0) >= MISSION_DISCOVERY_CONFIG.rolling_7d_qualified_non_head_projects_min;
+  const rollingDirectionCounts = missionMetrics?.rolling_30d_direction_qualified_counts ?? {};
+  const underfilledDirections = Object.entries(rollingDirectionCounts)
+    .filter(([, count]) => count < MISSION_DISCOVERY_CONFIG.rolling_30d_qualified_projects_per_direction_min)
+    .map(([directionKey, count]) => `${directionKey}=${count}`);
+
+  return [
+    buildCheck(
+      "project_search_daily_fields",
+      !requiredFieldsPresent ? "fail" : hasDirectProjectSearchSchema ? "pass" : "warn",
+      requiredFieldsPresent
+        ? hasDirectProjectSearchSchema
+          ? `today_pulse=${todayPulseProjects.length}; mission_match=${missionMatchProjects.length}; explore_ribbon=${exploreRibbonProjects.length}; coverage_atlas=${coverageAtlas.length}; gap_ledger=${gapLedger.length}`
+          : `legacy-compatible daily schema detected; today_pulse=${todayPulseProjects.length}; mission_match=${missionMatchProjects.length}; coverage_atlas=${coverageAtlas.length}`
+        : "missing required project-search daily fields",
+    ),
+    buildCheck(
+      "project_cards_have_direction_and_appearance_reason",
+      hasDirectProjectSearchSchema ? (cardsWithAppearanceReasons ? "pass" : "warn") : "warn",
+      cardsWithAppearanceReasons && hasDirectProjectSearchSchema
+        ? "today_pulse / mission_match / explore_ribbon cards all carry direction and appearance reason"
+        : hasDirectProjectSearchSchema
+          ? "one or more project cards are missing direction_matches or appearance reason fields"
+          : "legacy-compatible daily schema does not guarantee appearance-reason fields",
+    ),
+    buildCheck(
+      "mission_quota_and_explore_ribbon_contract",
+      exploreAllowed && !exploreOverlap ? "pass" : "fail",
+      `mission_match=${missionMatchProjects.length}; mission_quota=${missionQuota}; explore_ribbon=${exploreRibbonProjects.length}; explore_overlap=${exploreOverlap ? "true" : "false"}`,
+    ),
+    buildCheck(
+      "mission_fairness_constraints",
+      !directionDupInTop3 && !familyOverLimit ? "pass" : "fail",
+      `top3_direction_collision=${directionDupInTop3 ? "true" : "false"}; family_over_limit=${familyOverLimit ? "true" : "false"}`,
+    ),
+    buildCheck(
+      "mission_degraded_semantics",
+      summary.mission_discovery_status === undefined ? "warn" : degradedExplained ? "pass" : "fail",
+      summary.mission_discovery_status === "degraded"
+        ? `mission_degraded_reason_codes=${(summary.mission_degraded_reason_codes ?? []).join(",") || "none"}`
+        : `mission_discovery_status=${summary.mission_discovery_status ?? "missing"}`,
+    ),
+    buildCheck(
+      "rolling_inventory_audit_present",
+      rollingInventoryComplete ? "pass" : "warn",
+      rollingInventoryComplete
+        ? `catalog_30d=${missionMetrics?.rolling_30d_searchable_catalog_count}; vertical_30d=${missionMetrics?.rolling_30d_vertical_or_task_oriented_count}; non_head_7d=${missionMetrics?.rolling_7d_qualified_non_head_count}`
+        : "mission inventory audit fields are missing from run-summary",
+    ),
+    buildCheck(
+      "rolling_inventory_targets_met",
+      rollingInventoryComplete && rollingCatalogMet && rollingVerticalMet && rollingNonHeadMet && underfilledDirections.length === 0
+        ? "pass"
+        : rollingInventoryComplete
+          ? "fail"
+          : "warn",
+      rollingInventoryComplete
+        ? `catalog_30d=${missionMetrics?.rolling_30d_searchable_catalog_count}/${MISSION_DISCOVERY_CONFIG.rolling_30d_searchable_catalog_min}; vertical_30d=${missionMetrics?.rolling_30d_vertical_or_task_oriented_count}/${MISSION_DISCOVERY_CONFIG.vertical_or_task_oriented_projects_min}; non_head_7d=${missionMetrics?.rolling_7d_qualified_non_head_count}/${MISSION_DISCOVERY_CONFIG.rolling_7d_qualified_non_head_projects_min}; underfilled_directions=${underfilledDirections.join(",") || "none"}`
+        : "mission inventory audit fields are missing from run-summary",
+    ),
+  ];
+}
+
 function defaultDiagnostics(): NonNullable<DailyRunSummary["diagnostics"]> {
   return {
     anomaly_share: 0,
@@ -320,13 +492,14 @@ function normalizeSummaryDiagnostics(summary: DailyRunSummary): DailyRunSummary 
   };
 }
 
-function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAuditEntry[]): VerificationCheck[] {
+function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAuditEntry[], report: DailyReport | null): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
     ...sourceChecks(summary),
     ...qualityChecks(summary),
     ...llmChecks(summary),
     ...freshnessChecks(summary),
+    ...projectSearchContractChecks(summary, report),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
@@ -340,15 +513,17 @@ function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAudi
 export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const runSummaryPath = summaryPath(date);
   const githubEnrichmentPath = githubAuditPath(date);
+  const reportPath = dailyReportPath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
+  const report = readJsonFile<DailyReport | null>(reportPath, null);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
   }
 
   const normalizedSummary = normalizeSummaryDiagnostics(summary);
-  const checks = buildChecks(normalizedSummary, githubAudit);
+  const checks = buildChecks(normalizedSummary, githubAudit, report);
   return {
     date,
     status: aggregateStatus(checks),

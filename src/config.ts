@@ -106,6 +106,13 @@ export interface RuntimeConfig {
     level: "debug" | "info" | "warn" | "error";
     json: boolean;
   };
+  mission: {
+    githubSearchEnabled: boolean;
+    perDirectionConcurrency: number;
+    queryTimeoutMs: number;
+    deepBatchLimit: number;
+    allowDryRunSkipLiveDeep: boolean;
+  };
 }
 
 export interface AppConfig {
@@ -345,6 +352,13 @@ const DEFAULT_CONFIG: AppConfig = {
     logging: {
       level: "info",
       json: false,
+    },
+    mission: {
+      githubSearchEnabled: true,
+      perDirectionConcurrency: 2,
+      queryTimeoutMs: 12000,
+      deepBatchLimit: 6,
+      allowDryRunSkipLiveDeep: true,
     },
   },
 };
@@ -637,6 +651,7 @@ function parseRuntimeConfig(raw: RawRecord): RuntimeConfig {
   const defaults = DEFAULT_CONFIG.runtime;
   const retry = asRecord(raw["retry"]);
   const logging = asRecord(raw["logging"]);
+  const mission = asRecord(raw["mission"]);
   return {
     dryRunDefault: asBoolean(raw["dry_run_default"], defaults.dryRunDefault),
     retry: {
@@ -646,6 +661,13 @@ function parseRuntimeConfig(raw: RawRecord): RuntimeConfig {
     logging: {
       level: asOneOf(logging["level"], defaults.logging.level, ["debug", "info", "warn", "error"]),
       json: asBoolean(logging["json"], defaults.logging.json),
+    },
+    mission: {
+      githubSearchEnabled: asBoolean(mission["github_search_enabled"], defaults.mission.githubSearchEnabled),
+      perDirectionConcurrency: asNumber(mission["per_direction_concurrency"], defaults.mission.perDirectionConcurrency),
+      queryTimeoutMs: asNumber(mission["query_timeout_ms"], defaults.mission.queryTimeoutMs),
+      deepBatchLimit: asNumber(mission["deep_batch_limit"], defaults.mission.deepBatchLimit),
+      allowDryRunSkipLiveDeep: asBoolean(mission["allow_dry_run_skip_live_deep"], defaults.mission.allowDryRunSkipLiveDeep),
     },
   };
 }

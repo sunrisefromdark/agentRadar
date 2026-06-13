@@ -98,6 +98,14 @@ const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
   [/\b(meta|facebook)\b/i, ["Meta", "Facebook"]],
 ];
 
+const DIRECTION_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
+  [/\bshopping-commerce-agent\b|\b(e-?commerce|commerce|shopping|shopify|tiktok-shop|taobao|pinduoduo|jd)\b/i, ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
+  [/\bfinance-investment-research-agent\b|\b(finance|investment|trading|stock|quant)\b/i, ["股票", "投研", "金融", "量化", "交易"]],
+  [/\bcustomer-support-agent\b|\b(customer-support|helpdesk|service-desk)\b/i, ["客服", "服务台", "工单"]],
+  [/\bsales-prospecting-agent\b|\b(sales|prospecting|lead)\b/i, ["销售", "拓客", "线索"]],
+  [/\bmarketing-content-ops-agent\b|\b(marketing|content|growth)\b/i, ["营销", "内容运营", "增长"]],
+];
+
 function uniqueProjectSearchStrings(values: Array<string | null | undefined>): string[] {
   return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
 }
@@ -106,6 +114,15 @@ function companySearchAliases(values: Array<string | null | undefined>): string[
   const haystack = values.map((value) => String(value ?? "")).join(" ");
   const aliases: string[] = [];
   for (const [pattern, candidates] of COMPANY_SEARCH_ALIASES) {
+    if (pattern.test(haystack)) aliases.push(...candidates);
+  }
+  return uniqueProjectSearchStrings(aliases);
+}
+
+function directionSearchAliases(values: Array<string | null | undefined>): string[] {
+  const haystack = values.map((value) => String(value ?? "")).join(" ");
+  const aliases: string[] = [];
+  for (const [pattern, candidates] of DIRECTION_SEARCH_ALIASES) {
     if (pattern.test(haystack)) aliases.push(...candidates);
   }
   return uniqueProjectSearchStrings(aliases);
@@ -222,6 +239,17 @@ function projectSearchText(project: ProjectsViewModel["projects"][number], lang:
       project.project_brief_cn,
       project.why_today_cn,
       ...project.project.tags,
+    ]),
+    ...directionSearchAliases([
+      project.project.repo_full_name,
+      project.project.project_name,
+      project.project.description,
+      project.project_brief_cn,
+      project.why_today_cn,
+      ...project.project.tags,
+      ...project.matched_interest_topics,
+      ...(project.direction_matches ?? []),
+      ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
     ]),
   ]
     .filter(Boolean)

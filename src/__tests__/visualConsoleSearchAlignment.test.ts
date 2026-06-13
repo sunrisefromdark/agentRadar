@@ -3,6 +3,7 @@ import { filterObserverEntries, type ObserverEntry } from "../../app/client/Obse
 import { filterRunHealthNarratives, type NarrativeItem } from "../../app/client/RunHealth.tsx";
 import { rankProjectSearchMatch } from "../../app/visualConsole/clientScript.ts";
 import { renderProjectsWorkbenchPage } from "../../app/visualConsole/ossProjectsPage.ts";
+import { buildProjectsView } from "../visualConsole/build.ts";
 import type { ProjectsViewModel } from "../visualConsole/types.ts";
 
 function makeObserverEntry(overrides: Partial<ObserverEntry> = {}): ObserverEntry {
@@ -177,6 +178,18 @@ describe("visual console search alignment", () => {
     }
   });
 
+  it("matches vertical demand cards by Chinese direction aliases", () => {
+    const card = {
+      searchName: "TonyWang-hub/mcp-cn-commerce",
+      searchDescription: "Chinese e-commerce MCP servers for AI agents.",
+      searchMeta: "shopping-commerce-agent commerce ecommerce 电商 导购 购物 商品 商家经营",
+    };
+
+    for (const query of ["电商", "导购", "购物", "shopping-commerce-agent", "ecommerce"]) {
+      expect(rankProjectSearchMatch(card, query), query).toBeGreaterThan(0);
+    }
+  });
+
   it("renders project search metadata with repo, tags, directions, raw signals, and bilingual company aliases", () => {
     const html = renderProjectsWorkbenchPage(makeProjectsModel(makeProject()), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
 
@@ -192,6 +205,38 @@ describe("visual console search alignment", () => {
     ]) {
       expect(html.toLowerCase(), value).toContain(value.toLowerCase());
     }
+  });
+
+  it("renders vertical direction aliases so Chinese demand searches can find commerce projects", () => {
+    const commerceProject = makeProject({
+      project: {
+        ...makeProject().project,
+        project_name: "mcp-cn-commerce",
+        repo_full_name: "TonyWang-hub/mcp-cn-commerce",
+        repo_url: "https://github.com/TonyWang-hub/mcp-cn-commerce",
+        tags: ["mission-direction:shopping-commerce-agent", "shopping-commerce-agent", "commerce", "ecommerce"],
+        description: "Chinese e-commerce MCP servers for AI agents.",
+      },
+      matched_interest_topics: ["shopping-commerce-agent"],
+      direction_matches: ["shopping-commerce-agent"],
+      project_brief_cn: "电商经营数据 MCP 连接器。",
+      why_today_cn: "命中智能导购与电商运营代理方向。",
+    });
+    const html = renderProjectsWorkbenchPage(makeProjectsModel(commerceProject), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
+
+    for (const value of ["电商", "导购", "购物", "shopping-commerce-agent"]) {
+      expect(html.toLowerCase(), value).toContain(value.toLowerCase());
+    }
+  });
+
+  it("surfaces mission scout commerce candidates in the project workbench inventory", () => {
+    const model = buildProjectsView("2026-06-12");
+    const commerce = model.projects.find((project) => project.project.repo_full_name.toLowerCase() === "tonywang-hub/mcp-cn-commerce");
+
+    expect(commerce).toBeTruthy();
+    expect(commerce?.project_class).toBe("pending_confirmation");
+    expect(commerce?.exposure_bucket).toBe("explore_ribbon");
+    expect(commerce?.direction_matches).toContain("shopping-commerce-agent");
   });
 
   it("matches run health narratives by expanded project, company, direction, and signal text", () => {

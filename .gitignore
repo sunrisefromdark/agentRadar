@@ -1,5 +1,7 @@
 node_modules
 dist
+.corepack
+.pnpm-home
 .env
 .env.local
 .sync-private.local.json

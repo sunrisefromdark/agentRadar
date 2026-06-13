@@ -119,7 +119,7 @@ V1 provider 边界固定如下：
 
 ```text
 src/signal/externalDiscovery/
-  agentReachProvider.ts       # 读取 AgentReach JSON/API 输出
+  agentReachProvider.ts       # 读取 AgentReach 本地 JSON artifact
   externalSignalSchema.ts     # 校验 ExternalSignalEvent 输入边界
   externalSignalAdapter.ts    # provider output -> canonical events
   externalAggregate.ts        # events -> daily aggregate / 7-day window material
@@ -130,7 +130,9 @@ src/signal/externalDiscovery/
 
 ### 3.2 输入方式
 
-V1 冻结为读取 AgentReach 生成的本地 JSON artifact。该 artifact 可以是 checked-in 文件，也可以是本地运行 AgentReach 后生成的文件，但 `agent-trend-radar` 在 V1 不直接调用 AgentReach HTTP API、CLI，也不直接调用 X / Reddit / HN / official source 的平台 API。
+V1 冻结为读取 AgentReach 生成的本地 JSON artifact。该 artifact 默认为 local-only 输入，可以由本地运行 AgentReach 后生成，也可以由协作者显式放入本地工作区；`agent-trend-radar` 在 V1 不直接调用 AgentReach HTTP API、CLI，也不直接调用 X / Reddit / HN / official source 的平台 API。
+
+在 OSS 仓库中，AgentReach raw input 不应作为公开历史数据自动提交。若需要提交示例输入，只能提交经过脱敏的 public-safe fixture，并必须满足第 3.6 节与第 12 节的公开 artifact 边界。
 
 推荐输入路径：
 
@@ -148,6 +150,7 @@ V1 启用与输入发现规则：
 - weekly 不直接读取 provider raw input，而是读取 7 日窗口内已生成的 `DailyExternalAggregate[]`。
 - 默认输入文件缺失且未显式指定输入路径时，provider status 为 `skipped`，`status_reason=input_missing`，主 daily / weekly 继续。
 - 显式指定输入路径但文件缺失、不可读或 JSON 不可解析时，provider status 为 `failed`，主 daily / weekly 继续，但 run-summary / verify 必须记录失败原因。
+- GitHub Actions 默认不得上传或提交 `data/raw/external-discovery/` 下的 provider raw input；唯一例外是文件明确标记为 sanitized fixture，且通过 public-safe / redaction 验证。
 - V1 runtime contract 固定包含 `--no-external-discovery` 与 `--external-discovery-input <path>` 两个 CLI flag；实现阶段必须同步 `cli-runtime.md`、README 和结构测试。
 
 Provider 输入 artifact 应至少包含以下设计级 contract；其中 `ExternalPlatform`、`ExternalProviderStatus` 等枚举语义见后文数据模型与状态定义：
@@ -229,6 +232,38 @@ V1 不设计直接爬取 X / Reddit / HN / 官方网页的采集器，原因：
 - X / Reddit 等平台存在认证、限流、成本和条款风险。
 - 当前需求目标是设计外部发现与补证层，不是替代 AgentReach 构建全量外部采集系统。
 - 结构化 AgentReach 输出更符合可审计、可回放、可降级的仓库契约。
+
+### 3.5 CLI command matrix
+
+V1 必须把 external discovery 的 CLI 语义固定到命令级，避免实现阶段把 raw input 读取范围扩大到 weekly 或 verify。
+
+| 命令 | 是否读取 external raw input | 是否生成 `DailyExternalAggregate` | `--external-discovery-input <path>` | `--no-external-discovery` | dry-run 行为 |
+| --- | --- | --- | --- | --- | --- |
+| `run-daily` | 是。默认读取 `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json`；显式路径优先 | 是。生成当日 aggregate 与 audit，但不得写入 raw input | 允许。路径缺失 / 不可读 / JSON 不可解析时 status=`failed` | 允许。跳过读取与聚合，status=`skipped`，`status_reason=disabled_by_flag` | 只报告 planned reads / planned writes，不写入 aggregate 或 latest 指针 |
+| `recover-daily` | 否，除非显式传入 `--external-discovery-input <path>` | 仅在显式输入时重建；默认只恢复已有 external aggregate 状态引用，不从默认 raw 路径补抓 | 允许。仅用于显式重建当日 aggregate；失败语义同 `run-daily` | 允许。恢复产物中外部层状态为 `skipped` | 只报告 planned recovery，不写入 external artifact |
+| `run-weekly` | 否。只能读取 7 日窗口内已存在的 `DailyExternalAggregate[]` | 否。只消费 daily aggregate，不生成 provider raw 或 daily aggregate | 不允许。传入即参数错误，CLI 必须 fail-fast，不生成 weekly artifact，且不得继续执行 | 允许。weekly external window status 标记为 `skipped`，主 weekly 继续 | 只报告 planned 7 日 aggregate reads / weekly writes，不写入 weekly artifact |
+| `verify-daily` | 否。只读取 daily report、run-summary、verify 目标和当日 aggregate | 否 | 不允许。传入即参数错误，CLI 必须 fail-fast，不写入 verify artifact，且不得继续执行 | 允许。只验证主 daily，并对外部层缺失输出 warn | 只报告 planned verification result，不写入 verify artifact |
+
+固定语义：
+
+- 默认输入缺失且用户未显式指定输入路径时，status 必须为 `skipped`，`status_reason=input_missing`。
+- 显式输入路径缺失、不可读或 JSON 不可解析时，status 必须为 `failed`。
+- weekly 永远不得直接读取 provider raw input；weekly 的 external evidence 只能来自 7 日 `DailyExternalAggregate[]`。
+- `run-weekly` 与 `verify-daily` 收到 `--external-discovery-input <path>` 时必须 fail-fast，避免用户误以为 weekly / verify 会直接消费 provider raw input。
+- `--external-discovery-input <path>` 不得暗示系统会调用 AgentReach、平台 API、远程 latest artifact 或任何登录态采集能力。
+
+### 3.6 OSS / Public Artifact Boundary
+
+AgentRadar OSS 是去登录的公开版本：无登录、无注册、无 OAuth、无 session / account settings，本地 Web Console 以只读浏览已生成产物为边界。外部发现层不得重新引入任何账号态、私有配置或平台登录依赖。
+
+OSS V1 必须冻结以下公开边界：
+
+- 开源版不保存、不读取、不暴露登录态数据、cookie、session、OAuth、账号配置、平台 API 凭据或私有 provider diagnostics。
+- AgentReach raw input 默认为 local-only 输入，不应作为公开历史数据提交，也不得被默认 GitHub Actions 自动上传。
+- 如需提交示例数据，只能提交 sanitized fixture。fixture 不得包含平台原文全文、未脱敏 handle、`profile_url`、cookie / token / session / password / OAuth 字样、私有 query、私有限流细节或不可公开的 provider diagnostics。
+- Public aggregate 只能保留摘要、计数、稳定 evidence id、`source_input_hash`、平台枚举、状态、reason code 与可审计警告；不得保留 raw social text、完整原文、profile URL、未脱敏 handle 或可反推出私有查询的 raw ref。
+- `content_text`、provider raw `text`、`actor.platform_profile_url`、provider `actor.profile_url` 等字段可以存在于 local raw / local canonical 处理边界，但不得进入公开可提交的 aggregate。
+- 公开 artifact 必须能通过 public-safe / redaction 验证；验证失败时不得提交，也不得被 daily / weekly 当作可消费 external layer。
 
 ## 4. 数据模型
 
@@ -394,6 +429,10 @@ interface DailyExternalAggregate {
   status_reason?: string;
   source_input_ref?: string;
   source_input_hash?: string;
+  public_safe: boolean;
+  redaction_policy_version: string;
+  contains_raw_text: false;
+  contains_profile_urls: false;
 
   event_count: number;
   accepted_event_count: number;
@@ -416,6 +455,14 @@ interface DailyExternalAggregate {
 }
 ```
 
+公开可提交的 `DailyExternalAggregate` 必须满足：
+
+- `public_safe=true`。
+- `contains_raw_text=false`。
+- `contains_profile_urls=false`。
+- `redaction_policy_version` 指向稳定脱敏策略版本，例如 `external-discovery-redaction.v1`。
+- `source_input_hash` 必须存在，用于追溯 local raw input，而不是把 raw input 原文沉进公开 aggregate。
+
 `derived_signal_kind_counts` 按 `derived_signal_kinds` 展开计数，因此当同一事件同时具备 discovery 与 evidence 语义时，`derived_signal_kind_counts.discovery + derived_signal_kind_counts.evidence` 可以大于 `accepted_event_count`。消费层不得用该字段反推事件总数。
 
 推荐 artifact：
@@ -425,7 +472,7 @@ data/external-discovery/YYYY-MM-DD.aggregate.json
 data/external-discovery/latest.aggregate.json
 ```
 
-是否落在 `data/raw/external-discovery/` 或 `data/external-discovery/` 的最终目录可在 exec-plan 中定案；但设计上必须区分 provider raw input 与 aggregate output。
+最终目录名可在 exec-plan 中按仓库结构微调；但设计上必须区分 local raw input、sanitized canonical events 与 public daily aggregate，并同步 `.gitignore`、`data/README.md`、GitHub Actions artifact path 和结构测试。
 
 ## 5. V1 平台边界
 
@@ -802,16 +849,18 @@ Daily / weekly / run-summary 应至少能追溯：
 - aggregate 文件存在但结构非法。
 - daily 声称使用了外部层，但审计状态缺失。
 - 外部层结果被错误混写为主源高置信结论。
+- public aggregate 声称 `public_safe=true` 但包含未脱敏 raw 字段，例如 `content_text`、provider raw `text`、`profile_url`、未脱敏 handle、cookie、session、token、password 或 OAuth 字样。
+- public aggregate 缺少 `redaction_policy_version`、`contains_raw_text=false`、`contains_profile_urls=false` 或 `source_input_hash` 中的必要公开安全字段。
 
 ## 12. Artifact contract 与目录规划
 
-V1 设计上应区分三类 artifact，避免把 provider 原始输出、系统内 canonical event 和消费层 aggregate 混成一个文件。
+V1 设计上应区分三类 artifact，避免把 provider 原始输出、系统内 canonical event 和消费层 aggregate 混成一个文件。由于 OSS 仓库会公开提交 `data/` 下历史产物，本节同时冻结每类 artifact 的公开提交边界。
 
-| 层级 | 推荐位置 | 语义 | 消费方 |
-| --- | --- | --- | --- |
-| provider raw input | `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json` | AgentReach 输出快照，保留 provider 原始字段和 diagnostics | external adapter |
-| canonical events | `data/external-discovery/YYYY-MM-DD.events.jsonl` 或 aggregate 内嵌 events | 系统校验后的 `ExternalSignalEvent`，用于审计与重放 | aggregate / tests / verify |
-| daily aggregate | `data/external-discovery/YYYY-MM-DD.aggregate.json` | `DailyExternalAggregate`，按日聚合后的消费契约 | daily / weekly / run-summary / verify |
+| 层级 | 推荐位置 | 语义 | 公开提交策略 | 消费方 |
+| --- | --- | --- | --- | --- |
+| local raw input | `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json` | AgentReach 输出快照，可能包含 provider 原始字段、原文片段、actor hint 和 diagnostics | 默认 local-only，不得被 GitHub Actions 自动上传或提交；只有显式 sanitized fixture 可提交 | external adapter |
+| canonical sanitized events | `data/external-discovery/YYYY-MM-DD.events.jsonl` 或 aggregate 内嵌 sanitized events | 系统校验后的 `ExternalSignalEvent` 脱敏视图，用于审计与重放 | 如保存 JSONL，必须标记 `public_safe=true`，且不得包含 raw social text、profile URL、未脱敏 handle 或私有 diagnostics | aggregate / tests / verify |
+| public daily aggregate | `data/external-discovery/YYYY-MM-DD.aggregate.json` | `DailyExternalAggregate`，按日聚合后的公开消费契约 | 可公开提交，但必须通过 public-safe / redaction 验证 | daily / weekly / run-summary / verify |
 
 推荐 `latest` 指针仅指向 aggregate：
 
@@ -821,11 +870,14 @@ data/external-discovery/latest.aggregate.json
 
 目录规划必须满足：
 
-- provider raw input 可追溯，不能被 aggregate 覆盖。
-- canonical event 与 aggregate 至少保留 `schema_version`、`provider_run_id` 或 `source_input_hash` 中的一种稳定追溯字段。
+- provider raw input 可追溯，不能被 aggregate 覆盖，也不能被默认公开提交。
+- canonical sanitized events 与 aggregate 至少保留 `schema_version`、`provider_run_id` 或 `source_input_hash` 中的一种稳定追溯字段；公开 artifact 必须优先使用 `source_input_hash` 追溯 local raw input。
+- public aggregate 必须包含 `public_safe=true`、`redaction_policy_version`、`contains_raw_text=false`、`contains_profile_urls=false` 与 `source_input_hash`。
+- raw input 不得被 GitHub Actions 默认上传或提交；如需要提交 fixture，文件名或 metadata 必须显式标记 sanitized fixture，并通过结构测试。
 - dry-run 不得写入上述持久化目录；只能报告 planned writes。
 - 如果未来引入 entity registry，registry 应作为独立 artifact 维护，不得塞进每日 aggregate。
 - artifact 缺失应表达为 `skipped` 或 `failed`，不得生成看似成功但空审计的 aggregate。
+- `.gitignore`、`data/README.md` 与 GitHub Actions artifact path 必须与本节目录语义一致；如果它们仍把 `data/raw/external-discovery/` 当作默认公开历史数据，结构测试必须失败。
 
 ## 13. 与现有类型和产物的接口边界
 
@@ -867,17 +919,24 @@ interface ExternalPriorityHint {
 - `docs/specs/services/normalization.md`：说明外部层不直接替代 repo canonical normalization，并定义项目级匹配边界。
 - `docs/specs/services/scoring-engine.md`：如果外部层进入 scoring，必须新增明确组件或 evidence 边界；V1 若仅展示 evidence，也要说明不改主 score。
 - `docs/specs/services/action-output.md`：补充 daily / weekly 外部发现、补证和方向级观察输出。
-- `docs/specs/services/cli-runtime.md`：同步 `--no-external-discovery` 与 `--external-discovery-input <path>` 的 CLI 语义。
+- `docs/specs/services/cli-runtime.md`：同步 `--no-external-discovery` 与 `--external-discovery-input <path>` 的 CLI 语义，并固定 `run-daily`、`recover-daily`、`run-weekly`、`verify-daily` 的命令级矩阵。
 - `docs/specs/constraints/architecture-constraints.md`：补充外部层不得成为主裁决链路。
-- `docs/specs/constraints/structure-tests.md`：补充新 source / external artifact / schema 的结构守护。
+- `docs/specs/constraints/structure-tests.md`：补充新 source / external artifact / schema 的结构守护，以及 public-safe / redaction 守护。
 - `docs/specs/feedback-loops/observability-contract.md`：补充 external event count、provider status、rejected events 等观测信号。
 - `docs/specs/feedback-loops/failure-recovery-loop.md`：补充 AgentReach 失败、unsupported platform、registry miss 等恢复语义。
 
 ### 14.2 README / 运行说明
 
-- `README.md` 与 `README.zh-CN.md`：若对协作者暴露外部层输入路径、配置或运行命令，需要同步说明。
-- `data/README.md`：说明 external-discovery raw / aggregate artifact 的含义。
-- 相关 deploy / automation 文档：仅当 GitHub Actions 或 systemd 自动化消费外部层时同步更新。
+- `README.md`：说明 OSS 版无登录、无账号态 external discovery、raw input local-only、public aggregate 需脱敏。
+- `README.en.md`：同步英文 OSS 边界、运行命令和 public artifact 策略。
+- `README.zh-CN.md`：若继续作为中文入口或跳转页保留，需同步指向主 README 中的 external discovery OSS 边界。
+- `data/README.md`：明确 `data/raw/external-discovery/` 默认不属于公开历史数据，只有 sanitized fixture 例外；说明 `data/external-discovery/*.aggregate.json` 的 public-safe contract。
+- `.gitignore`：默认忽略 local-only external raw input，或通过结构测试确保只有 sanitized fixture 可提交。
+- `.github/workflows/trend-radar-daily.yml`：不得默认 upload / commit external raw input；只允许上传 public aggregate 与 sanitized fixture。
+- `.github/workflows/trend-radar-weekly.yml`：不得读取或上传 provider raw input；只消费 public daily aggregate window。
+- 相关 deploy / automation 文档：仅当 GitHub Actions 或 systemd 自动化消费外部层时同步更新，并必须保留 OSS public-safe 边界。
+
+以上同步项只在本设计获批后的 exec-plan / 实现阶段执行；本轮设计仅冻结要求，不修改这些文件。
 
 ### 14.3 验证脚本与测试
 
@@ -893,18 +952,22 @@ interface ExternalPriorityHint {
 - status 测试：默认输入缺失为 skipped，显式输入缺失 / 不可解析为 failed。
 - structure test：新增 source / artifact / spec 同步检查。
 - verify-daily 测试：外部层缺失 warn、结构非法 fail、主链路不被外部失败拖垮。
+- public-safe / redaction 测试：public aggregate 不得包含 `content_text`、provider raw `text`、`profile_url`、cookie、session、token、password、OAuth、未脱敏 handle 或私有 diagnostics。
+- raw input 发布测试：`data/raw/external-discovery/` 不得被默认 commit / upload；只有显式 sanitized fixture 可进入公开历史。
+- workflow path 测试：GitHub Actions artifact path 不得包含 local-only raw input；weekly workflow 不得读取 provider raw input。
+- OSS boundary 测试：`data/README.md`、`.gitignore`、README 与 external artifact 策略不一致时结构测试失败。
 
 ### 14.4 产物目录
 
 建议新增或保留以下目录语义：
 
 ```text
-data/raw/external-discovery/        # AgentReach provider 原始输入快照
-data/external-discovery/            # normalized external aggregate / latest 指针
-data/external-discovery/entities/   # entity registry 或 tier registry，若拆分维护
+data/raw/external-discovery/        # local-only AgentReach provider 原始输入；仅 sanitized fixture 可公开提交
+data/external-discovery/            # public-safe sanitized events / aggregate / latest 指针
+data/external-discovery/entities/   # entity registry 或 tier registry，若拆分维护；公开版本不得包含私有账号态字段
 ```
 
-最终目录名应在 exec-plan 阶段固定，并同步结构测试与 README。
+最终目录名应在 exec-plan 阶段固定，并同步结构测试、README、`data/README.md`、`.gitignore` 与 GitHub Actions artifact path。
 
 ## 15. Requirement / Acceptance Traceability
 
@@ -943,6 +1006,8 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 不实现 X / Twitter、Reddit、Hacker News、官方网页 / 博客的直接爬虫。
 - 不接入 YouTube、Bilibili、播客、微信公众号或长内容平台。
 - 不把 GitHub 纳入外部层平台。
+- 不在 OSS 版保存、读取或暴露登录态数据、cookie、session、OAuth、账号配置、平台 API 凭据或私有 provider diagnostics。
+- 不把 AgentReach raw input、raw social text、profile URL 或未脱敏 handle 作为默认公开历史数据提交。
 - 不改变现有主 score 公式。
 - 不新增未同步 spec / config / tests 的 score component。
 - 不让 LLM 直接决定外部层是否构成主趋势。
@@ -954,9 +1019,14 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 
 - 是否仍然保持外部层为次级判断信号，而不是主裁决链路。
 - 是否明确 AgentReach 是 provider / artifact 输入，不是本仓库直接平台 crawler。
+- 是否明确 OSS 版无登录、无账号态 external discovery，不读取或保存 cookie、session、OAuth、账号配置、平台 API 凭据或私有 diagnostics。
+- 是否明确 AgentReach raw input 默认为 local-only，默认不得被 GitHub Actions 上传或提交。
+- 是否明确只有 sanitized fixture 可以作为示例输入提交，且不得包含平台原文全文、未脱敏 handle、profile URL、cookie、token、session、password、OAuth 或私有 diagnostics。
 - 是否明确 AgentReach 是 V1 唯一 external provider，多 provider 属于未来扩展。
 - 是否固定外部层默认启用、默认输入缺失为 `skipped`、显式输入失败为 `failed`。
 - 是否固定 V1 CLI runtime contract：`--no-external-discovery` 与 `--external-discovery-input <path>`。
+- 是否固定 `run-daily`、`recover-daily`、`run-weekly`、`verify-daily` 对 external raw input、aggregate、dry-run 与两个 external flags 的命令级语义。
+- 是否明确 weekly 只读 7 日 `DailyExternalAggregate[]`，不得直接读取 provider raw input。
 - 是否同时覆盖 discovery 与 evidence 两种语义。
 - 是否允许单个 `ExternalSignalEvent` 通过 `derived_signal_kinds` 同时具备 discovery 与 evidence，而不是被单值 `signal_kind` 限死。
 - 是否区分 `source_published_at`、`observed_at` 与 `ingested_at`，避免把发布时间、观测时间和入库时间混写。
@@ -971,6 +1041,8 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 是否说明 daily 与 weekly 的消费差异。
 - 是否固定 daily 的 `external_discovery` section 与 weekly 的 `external_discovery_window` section。
 - 是否定义 skipped / partial / failed 的降级和审计语义。
+- 是否定义 public aggregate 必须包含 `public_safe=true`、`redaction_policy_version`、`contains_raw_text=false`、`contains_profile_urls=false` 与 `source_input_hash`。
+- 是否定义 public-safe / redaction 验证：public aggregate 不得包含 `content_text`、provider raw `text`、`profile_url`、cookie、session、token、password、OAuth、未脱敏 handle 或私有 diagnostics。
 - 是否禁止外部层直接改变主 score、`discussion_score`、主源多源确认或高置信主结论。
 - 是否提供 Requirement / Acceptance Traceability，把冻结需求和验收项映射到设计章节。
-- 是否列出后续 specs、README、验证脚本、产物目录的同步清单，但未在本轮创建 exec-plan。
+- 是否列出后续 specs、README、`data/README.md`、`.gitignore`、GitHub Actions、验证脚本、产物目录的同步清单，但未在本轮创建 exec-plan。

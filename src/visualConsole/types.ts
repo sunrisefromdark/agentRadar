@@ -286,6 +286,10 @@ export interface ProjectsViewModel {
   state: VisualConsoleState;
   time_navigator: TimeNavigatorModel;
   route_frame: RouteFrameModel;
+  today_pulse_projects: DailyReport["today_star_projects"];
+  mission_match_projects: DailyReport["today_star_projects"];
+  explore_ribbon_projects: DailyReport["today_star_projects"];
+  historical_context_projects: DailyReport["context_only_projects"];
   projects: Array<DailyReport["today_star_projects"][number] | DailyReport["context_only_projects"][number]>;
   selected_project:
     | {

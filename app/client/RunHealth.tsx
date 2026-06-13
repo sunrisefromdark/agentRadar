@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from "react";
 
 type TelemetryPanelKey = "lowConfidence" | "singleSource" | "missingDesc";
 
-type NarrativeItem = {
+export type NarrativeItem = {
   key: string;
   name: string;
   channel: string;
@@ -10,6 +10,7 @@ type NarrativeItem = {
   confidenceLabel: string;
   reason: string;
   note: string;
+  searchText?: string;
   issue?: string;
 };
 
@@ -390,6 +391,56 @@ function normalizeChannel(channel: string): string {
   return channel === "All" ? "All" : channel;
 }
 
+function normalizeRunHealthSearchText(value: string): string {
+  return value.trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function tokenizeRunHealthSearchText(value: string): string[] {
+  return normalizeRunHealthSearchText(value)
+    .split(/[\s,.;:!?()[\]{}"'`]+/)
+    .filter(Boolean);
+}
+
+function scoreRunHealthSearchField(value: string, query: string, queryTokens: string[], exact: number, partial: number, token: number): number {
+  const normalizedValue = normalizeRunHealthSearchText(value);
+  if (!normalizedValue) return 0;
+
+  let score = 0;
+  if (normalizedValue === query) score += exact;
+  else if (normalizedValue.includes(query)) score += partial;
+
+  const valueTokens = tokenizeRunHealthSearchText(normalizedValue);
+  for (const queryToken of queryTokens) {
+    if (valueTokens.includes(queryToken)) score += token;
+    else if (valueTokens.some((candidate) => candidate.includes(queryToken))) score += Math.round(token * 0.65);
+  }
+
+  return score;
+}
+
+export function rankRunHealthNarrativeMatch(item: NarrativeItem, query: string): number {
+  const normalizedQuery = normalizeRunHealthSearchText(query);
+  if (!normalizedQuery) return 0;
+
+  const queryTokens = tokenizeRunHealthSearchText(normalizedQuery);
+  return (
+    scoreRunHealthSearchField(item.name, normalizedQuery, queryTokens, 800, 560, 180) +
+    scoreRunHealthSearchField(item.searchText ?? "", normalizedQuery, queryTokens, 420, 260, 90) +
+    scoreRunHealthSearchField([item.channel, item.scoreLabel, item.confidenceLabel, item.reason, item.note, item.issue ?? ""].join(" "), normalizedQuery, queryTokens, 180, 120, 45)
+  );
+}
+
+export function filterRunHealthNarratives(items: NarrativeItem[], query: string): NarrativeItem[] {
+  const normalizedQuery = normalizeRunHealthSearchText(query);
+  if (!normalizedQuery) return items;
+
+  return items
+    .map((item, index) => ({ item, index, score: rankRunHealthNarrativeMatch(item, normalizedQuery) }))
+    .filter((entry) => entry.score > 0)
+    .sort((left, right) => right.score - left.score || left.index - right.index)
+    .map((entry) => entry.item);
+}
+
 export default function RunHealthView(props: RunHealthViewProps): React.ReactElement {
   const lang = props.lang ?? "zh";
   const [activeTelemetry, setActiveTelemetry] = useState<null | TelemetryPanelKey>(props.initialTelemetry ?? null);
@@ -409,11 +460,8 @@ export default function RunHealthView(props: RunHealthViewProps): React.ReactEle
   }, [props.singleSourceAll]);
 
   const filteredSingleSources = useMemo(() => {
-    return props.singleSourceAll.filter((item) => {
-      const matchesChannel = subFilterChannel === "All" || item.channel === normalizeChannel(subFilterChannel);
-      const matchesSearch = item.name.toLowerCase().includes(subSearchQuery.trim().toLowerCase());
-      return matchesChannel && matchesSearch;
-    });
+    const channelFiltered = props.singleSourceAll.filter((item) => subFilterChannel === "All" || item.channel === normalizeChannel(subFilterChannel));
+    return filterRunHealthNarratives(channelFiltered, subSearchQuery);
   }, [props.singleSourceAll, subFilterChannel, subSearchQuery]);
 
   const lowConfidenceLead = props.lowConfidenceProjects[0] ?? null;
@@ -644,7 +692,7 @@ export default function RunHealthView(props: RunHealthViewProps): React.ReactEle
                                 type="text"
                                 value={subSearchQuery}
                                 onChange={(event) => setSubSearchQuery(event.target.value)}
-                                placeholder={lang === "en" ? "Search project names..." : "搜索项目名..."}
+                                placeholder={lang === "en" ? "Search projects, repos, companies, or directions..." : "搜索项目、仓库、公司名或方向词..."}
                                 className="w-full px-4 py-3 rounded-2xl text-sm bg-white/65 dark:bg-slate-950/55 border border-neutral-200/70 dark:border-neutral-800 focus:outline-none focus:border-indigo-500/60 text-neutral-800 dark:text-neutral-100"
                               />
 

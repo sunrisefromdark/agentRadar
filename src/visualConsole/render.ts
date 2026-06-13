@@ -6,6 +6,27 @@ import type {
   RunHealthViewModel,
   WeeklyViewModel,
 } from "./types.ts";
+import type { DailyReport } from "../types.ts";
+
+function readObserverIncubatingDirections(model: ObserverViewModel) {
+  return Array.isArray(model.artifact?.incubating_directions) ? model.artifact.incubating_directions : [];
+}
+
+function readObserverPromotionCandidates(model: ObserverViewModel) {
+  return Array.isArray(model.artifact?.promotion_candidates) ? model.artifact.promotion_candidates : [];
+}
+
+function renderProjectLine(
+  project: DailyReport["today_star_projects"][number] | DailyReport["context_only_projects"][number],
+): string[] {
+  return [
+    `- ${project.project.project_name}: repo=${project.project.repo_url}, score=${project.score.total_score}, confidence=${project.score.confidence}, paradigm=${project.score.paradigm}, persistence=${project.project.persistence_state}, exposure_bucket=${project.exposure_bucket ?? "none"}`,
+    `  - directions=${project.direction_matches?.join(", ") || "none"}`,
+    `  - appearance_reason_codes=${project.appearance_reason_codes?.join(" | ") || "none"}`,
+    `  - appearance_explanation=${project.appearance_explanation_cn ?? "none"}`,
+    `  - top_evidence=${project.project_brief_cn}, risks=${project.score.risks.join(" | ") || "none"}, next_actions=${project.score.next_actions.join(" | ") || "none"}, matched_interest_topics=${project.matched_interest_topics.join(", ") || "none"}, enhancement=${project.enhancement_source}`,
+  ];
+}
 
 function renderBanner(model: {
   banner: {
@@ -119,14 +140,29 @@ export function renderProjectsView(model: ProjectsViewModel): string {
       model.selected_project.kb_preview ? `- available: ${model.selected_project.kb_preview.project_name}` : "- KB 鏈敓鎴?/ 涓嶅瓨鍦?",
     );
   } else {
-    lines.push("## Projects", "");
+    lines.push("## Today Pulse", "");
     lines.push(
-      ...(model.projects.length > 0
-        ? model.projects.map(
-            (project) =>
-              `- ${project.project.project_name}: repo=${project.project.repo_url}, score=${project.score.total_score}, confidence=${project.score.confidence}, paradigm=${project.score.paradigm}, persistence=${project.project.persistence_state}, top_evidence=${project.project_brief_cn}, risks=${project.score.risks.join(" | ") || "none"}, next_actions=${project.score.next_actions.join(" | ") || "none"}, matched_interest_topics=${project.matched_interest_topics.join(", ") || "none"}, enhancement=${project.enhancement_source}`,
-          )
-        : ["- 褰撳墠鏃ユ湡娌℃湁宸插睍绀洪」鐩?"]),
+      ...(model.today_pulse_projects.length > 0
+        ? model.today_pulse_projects.flatMap((project) => renderProjectLine(project))
+        : ["- no today pulse projects"]),
+    );
+    lines.push("", "## Mission Match", "");
+    lines.push(
+      ...(model.mission_match_projects.length > 0
+        ? model.mission_match_projects.flatMap((project) => renderProjectLine(project))
+        : ["- no mission match projects"]),
+    );
+    lines.push("", "## Explore Ribbon", "");
+    lines.push(
+      ...(model.explore_ribbon_projects.length > 0
+        ? model.explore_ribbon_projects.flatMap((project) => renderProjectLine(project))
+        : ["- no explore ribbon projects"]),
+    );
+    lines.push("", "## Historical Context", "");
+    lines.push(
+      ...(model.historical_context_projects.length > 0
+        ? model.historical_context_projects.flatMap((project) => renderProjectLine(project))
+        : ["- no historical context projects"]),
     );
   }
   lines.push("");
@@ -192,8 +228,35 @@ export function renderWeeklyView(model: WeeklyViewModel): string {
 }
 
 export function renderRunHealthView(model: RunHealthViewModel): string {
+  const coverageAtlas = model.run_snapshot?.run_summary?.coverage_atlas ?? [];
+  const gapLedger = model.run_snapshot?.run_summary?.gap_ledger ?? [];
   const lines = [
     ...renderBanner(model),
+    "## Mission Health",
+    "",
+    `- mission_discovery_status: ${model.run_snapshot?.run_summary?.mission_discovery_status ?? "missing"}`,
+    `- mission_degraded_reason_codes: ${model.run_snapshot?.run_summary?.mission_degraded_reason_codes?.join(", ") || "none"}`,
+    `- search_exhausted_count: ${coverageAtlas.filter((item) => item.search_exhausted).length}`,
+    `- coverage_unmet_count: ${coverageAtlas.filter((item) => !item.quantity_target_met).length}`,
+    "",
+    "## Coverage Atlas",
+    "",
+    ...(coverageAtlas.length > 0
+      ? coverageAtlas.map(
+          (item) =>
+            `- ${item.direction_key}: outcome=${item.outcome}, pressure_state=${item.pressure_state}, quantity_target_met=${item.quantity_target_met}, search_exhausted=${item.search_exhausted ? "true" : "false"}, next_action=${item.next_action}`,
+        )
+      : ["- coverage atlas missing"]),
+    "",
+    "## Gap Ledger",
+    "",
+    ...(gapLedger.length > 0
+      ? gapLedger.map(
+          (item) =>
+            `- ${item.direction_key}: outcome=${item.outcome}, search_exhausted=${item.search_exhausted ? "true" : "false"}, next_action=${item.next_action}, reason_codes=${item.reason_codes.join(" | ") || "none"}`,
+        )
+      : ["- gap ledger missing"]),
+    "",
     "## Verify Result Summary",
     "",
     `- verify_status: ${model.run_snapshot?.verify_result?.status ?? "missing"}`,
@@ -224,6 +287,8 @@ export function renderRunHealthView(model: RunHealthViewModel): string {
 }
 
 export function renderObserverView(model: ObserverViewModel): string {
+  const incubatingDirections = readObserverIncubatingDirections(model);
+  const promotionCandidates = readObserverPromotionCandidates(model);
   const lines = [
     ...renderBanner(model),
     "## Ecosystem Coverage",
@@ -231,6 +296,19 @@ export function renderObserverView(model: ObserverViewModel): string {
     ...(model.artifact
       ? Object.entries(model.artifact.ecosystem_counts).map(([ecosystem, count]) => `- ${ecosystem}: ${count}`)
       : ["- observer artifact missing"]),
+    "",
+    "## Incubating Directions",
+    "",
+    ...(incubatingDirections.length
+      ? incubatingDirections.flatMap((direction) => [
+          `- ${direction.direction_key}: status=${direction.status}, observer_hits_7d=${direction.observer_hits_7d}, repos=${direction.candidate_repo_count}, promotion_candidate=${direction.promotion_candidate ? "true" : "false"}`,
+          `  - related_catalog_direction_keys=${direction.related_catalog_direction_keys.join(", ") || "none"}`,
+          `  - related_gap_pressure_states=${direction.related_gap_pressure_states.join(", ") || "none"}`,
+          `  - representative_repos=${direction.representative_repos.map((repo) => repo.repo_full_name).join(", ") || "none"}`,
+          `  - unmet_gates=${direction.unmet_gates.join(" | ") || "none"}`,
+          `  - evidence=${direction.evidence.join(" | ") || "none"}`,
+        ])
+      : ["- no incubating directions"]),
     "",
     "## Candidate Bench",
     "",
@@ -244,6 +322,16 @@ export function renderObserverView(model: ObserverViewModel): string {
           `  - source_notes=${entry.source_notes.join(" | ") || "none"}`,
         ])
       : ["- no observer candidates"]),
+    "",
+    "## Promotion Review",
+    "",
+    ...(promotionCandidates.length
+      ? promotionCandidates.flatMap((candidate) => [
+          `- ${candidate.direction_key}: display_name=${candidate.display_name_cn}`,
+          `  - evidence=${candidate.evidence.join(" | ") || "none"}`,
+          `  - unmet_gates=${candidate.unmet_gates.join(" | ") || "none"}`,
+        ])
+      : ["- no promotion candidates"]),
     "",
     "## Observer Guidance",
     "",

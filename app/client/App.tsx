@@ -142,6 +142,10 @@ export type AppProps = {
   projects: OverviewProject[];
   githubStarLabel?: string;
   githubStarHref?: string;
+  githubStarFormAction?: string | null;
+  githubStarMode?: "direct" | "external";
+  githubStarCsrfToken?: string;
+  githubStarReturnTo?: string;
   githubStarStatusText?: string | null;
 };
 
@@ -194,6 +198,10 @@ const DEFAULT_PROPS: AppProps = {
   projects: [],
   githubStarLabel: "⭐ Star on GitHub",
   githubStarHref: "https://github.com/sunrisefromdark/agentRadar",
+  githubStarFormAction: null,
+  githubStarMode: "external",
+  githubStarCsrfToken: "",
+  githubStarReturnTo: "",
   githubStarStatusText: null,
 };
 
@@ -988,7 +996,16 @@ export default function App(rawProps: Partial<AppProps>) {
               <div className="overview-home-actions action-row flex items-center justify-center gap-2 mt-3.5 md:mt-4">
                 <a className="button-link" href={app.runHealthHref ?? "#"}>{app.runHealthLabel ?? "Run Health"}</a>
                 <a className="button-link is-secondary" href={app.projectsHref ?? "#"}>{app.projectsLabel ?? "Projects"}</a>
-                <a
+                {app.githubStarMode === "direct" ? (
+                  <form method="POST" action={app.githubStarFormAction ?? "/github/star"} data-github-star-mode="direct" className="inline-flex">
+                    <input type="hidden" name="csrf_token" value={app.githubStarCsrfToken ?? ""} />
+                    <input type="hidden" name="return_to" value={app.githubStarReturnTo ?? ""} />
+                    <button type="submit" className="button-link is-secondary">
+                      {app.githubStarLabel ?? "⭐ Star on GitHub"}
+                    </button>
+                  </form>
+                ) : (
+                  <a
                     className="button-link is-secondary"
                     href={app.githubStarHref ?? "https://github.com/sunrisefromdark/agentRadar"}
                     target="_blank"
@@ -997,6 +1014,7 @@ export default function App(rawProps: Partial<AppProps>) {
                   >
                     {app.githubStarLabel ?? "⭐ Star on GitHub"}
                   </a>
+                )}
               </div>
               {app.githubStarStatusText ? (
                 <p className="mt-2 text-[11px] md:text-[12px] text-neutral-500 dark:text-neutral-400 font-medium">

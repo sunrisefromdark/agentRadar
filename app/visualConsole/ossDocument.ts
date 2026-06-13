@@ -66,9 +66,15 @@ function renderLanguageSwitcher(requestUrl: URL, lang: UiLang): string {
     <div class="lang-switch premium-control-capsule" aria-label="${escapeHtml(ui.langLabel)}" data-segmented-control="language">
       <span class="segmented-active-bg" data-segmented-active="true" aria-hidden="true"></span>
       <a class="lang-option capsule-btn ${lang === "zh" ? "is-active" : ""}" data-segmented-option="true" href="${escapeHtml(`${zhUrl.pathname}${zhUrl.search}`)}" aria-label="${escapeHtml(ui.langZh)}" title="${escapeHtml(ui.langZh)}">
+        <svg class="capsule-icon capsule-icon-translate" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M4 5h7M8 3v2m0 0c-.35 2.7-1.72 5.17-4 7m4-7c.54 2.1 1.62 3.86 3.25 5.28M13 19l4-9 4 9m-1.18-2.75h-5.64" />
+        </svg>
         <span class="capsule-label">中</span>
       </a>
       <a class="lang-option capsule-btn ${lang === "en" ? "is-active" : ""}" data-segmented-option="true" href="${escapeHtml(`${enUrl.pathname}${enUrl.search}`)}" aria-label="${escapeHtml(ui.langEn)}" title="${escapeHtml(ui.langEn)}">
+        <svg class="capsule-icon capsule-icon-translate" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M4 5h7M8 3v2m0 0c-.35 2.7-1.72 5.17-4 7m4-7c.54 2.1 1.62 3.86 3.25 5.28M13 19l4-9 4 9m-1.18-2.75h-5.64" />
+        </svg>
         <span class="capsule-label">EN</span>
       </a>
     </div>
@@ -85,9 +91,15 @@ function renderThemeSwitcher(requestUrl: URL, lang: UiLang, theme: UiTheme): str
     <div class="theme-switch premium-control-capsule" aria-label="${escapeHtml(uiText(lang, "主题", "Theme"))}" data-segmented-control="theme">
       <span class="segmented-active-bg" data-segmented-active="true" aria-hidden="true"></span>
       <a class="theme-option capsule-btn ${theme === "light" ? "is-active" : ""}" data-segmented-option="true" data-theme-option="light" href="${escapeHtml(`${lightUrl.pathname}${lightUrl.search}`)}" aria-label="${escapeHtml(uiText(lang, "浅", "Light"))}" title="${escapeHtml(uiText(lang, "浅色", "Light"))}">
+        <svg class="capsule-icon capsule-icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M12 4V2.75M12 21.25V20M5.64 5.64l-.88-.88m14.48 14.48-.88-.88M4 12H2.75M21.25 12H20M5.64 18.36l-.88.88M19.24 4.76l-.88.88M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
         <span class="capsule-label">${escapeHtml(uiText(lang, "浅", "Light"))}</span>
       </a>
       <a class="theme-option capsule-btn ${theme === "dark" ? "is-active" : ""}" data-segmented-option="true" data-theme-option="dark" href="${escapeHtml(`${darkUrl.pathname}${darkUrl.search}`)}" aria-label="${escapeHtml(uiText(lang, "深", "Dark"))}" title="${escapeHtml(uiText(lang, "深色", "Dark"))}">
+        <svg class="capsule-icon capsule-icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.9" d="M20.25 14.15A7.2 7.2 0 019.85 3.75a8.25 8.25 0 1010.4 10.4z" />
+        </svg>
         <span class="capsule-label">${escapeHtml(uiText(lang, "深", "Dark"))}</span>
       </a>
     </div>

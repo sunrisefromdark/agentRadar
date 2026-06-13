@@ -1,6 +1,6 @@
 ﻿import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import type { DailyExposureProject, DirectionCoverageStatus, DirectionGapLedgerEntry, KnowledgeCard } from "../../src/types.ts";
+import type { DailyExposureProject, DailyReportProjectDetail, DirectionCoverageStatus, DirectionGapLedgerEntry, KnowledgeCard } from "../../src/types.ts";
 import { buildProjectsView } from "../../src/visualConsole/build.ts";
 import type { KnowledgeBaseViewModel, ObserverViewModel, OverviewViewModel, ProjectsViewModel, RunHealthViewModel, WeeklyViewModel } from "../../src/visualConsole/types.ts";
 import App, { type AppProps as OverviewReactAppProps } from "../client/App.tsx";
@@ -245,6 +245,31 @@ function localizeFieldValue(value: string | null | undefined, _lang: UiLang): st
   return String(value ?? "").trim();
 }
 
+const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
+  [/\b(byte[-\s]?dance|bytedance[-\s]?seed|ui[-\s]?tars)\b/i, ["ByteDance", "字节", "字节跳动"]],
+  [/\b(tencent|tencentarc|hunyuan)\b/i, ["Tencent", "腾讯"]],
+  [/\b(alibaba|alibabacloud|aliyun|qwen|tongyi)\b/i, ["Alibaba", "阿里", "阿里巴巴", "通义"]],
+  [/\b(baidu|qianfan|ernie)\b/i, ["Baidu", "百度", "文心"]],
+  [/\b(netease|youdao)\b/i, ["NetEase", "网易", "有道"]],
+  [/\b(microsoft|azure|vscode)\b/i, ["Microsoft", "微软"]],
+  [/\b(google|deepmind|gemini)\b/i, ["Google", "谷歌", "DeepMind"]],
+  [/\b(openai|chatgpt|codex)\b/i, ["OpenAI", "ChatGPT", "Codex"]],
+  [/\b(anthropic|claude)\b/i, ["Anthropic", "Claude"]],
+  [/\b(moonshot|kimi)\b/i, ["Moonshot", "月之暗面", "Kimi"]],
+  [/\b(deepseek)\b/i, ["DeepSeek", "深度求索"]],
+  [/\b(huggingface|hugging[-\s]?face)\b/i, ["Hugging Face", "抱抱脸"]],
+  [/\b(meta|facebook)\b/i, ["Meta", "Facebook"]],
+];
+
+function companySearchAliases(values: Array<string | null | undefined>): string[] {
+  const haystack = values.map((value) => String(value ?? "")).join(" ");
+  const aliases: string[] = [];
+  for (const [pattern, candidates] of COMPANY_SEARCH_ALIASES) {
+    if (pattern.test(haystack)) aliases.push(...candidates);
+  }
+  return uniqueObserverStrings(aliases);
+}
+
 function localizePersistence(value: string, lang: UiLang): string {
   const normalized = value.trim().toLowerCase();
   if (lang === "zh") {
@@ -276,6 +301,12 @@ function observerHaystackFromProject(project: ProjectsViewModel["projects"][numb
     project.score.paradigm,
     ...project.project.tags,
     ...project.project.sources,
+    ...companySearchAliases([
+      project.project.project_name,
+      project.project.repo_full_name,
+      project.project.description,
+      ...project.project.tags,
+    ]),
     ...project.matched_interest_topics,
     ...(project.direction_matches ?? []),
   ]
@@ -570,6 +601,39 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
   const projectChannel = (project: (typeof allProjects)[number]): string => {
     return project.project.sources[0] ?? project.project.raw_signals[0]?.source ?? "manual";
   };
+  const runHealthSearchText = (project: (typeof allProjects)[number]): string => {
+    const repoOwner = project.project.repo_full_name.split("/")[0] ?? "";
+    const detail = project as Partial<DailyReportProjectDetail>;
+    return uniqueObserverStrings([
+      project.project.project_name,
+      project.project.repo_full_name,
+      repoOwner,
+      project.project.repo_url,
+      project.project.description,
+      project.project.persistence_state,
+      project.project.data_trust,
+      project.score.paradigm,
+      detail.project_class,
+      detail.project_brief_cn,
+      detail.why_today_cn,
+      detail.position_rationale_cn,
+      detail.watchlist_note_cn,
+      ...project.project.tags,
+      ...project.project.sources,
+      ...project.project.raw_signals.flatMap((signal) => [signal.project_name, signal.repo_url, signal.description ?? "", signal.source, ...signal.tags]),
+      ...(detail.matched_interest_topics ?? []),
+      ...(detail.direction_matches ?? []),
+      ...companySearchAliases([
+        project.project.project_name,
+        project.project.repo_full_name,
+        repoOwner,
+        project.project.description,
+        detail.project_brief_cn,
+        detail.why_today_cn,
+        ...project.project.tags,
+      ]),
+    ]).join(" ");
+  };
   const confidenceLabel = (confidence: string): string => {
     if (lang === "zh") {
       if (confidence === "high") return "高置信";
@@ -592,6 +656,7 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
         lang === "zh" ? "该项目目前缺少足够的交叉来源与语义支撑，系统已自动降低其消费优先级。" : "This node lacks enough cross-source and semantic support, so the system automatically reduced its consumption priority.",
       ),
       note: lang === "zh" ? "自动限制其在主榜前列的曝光权重" : "Exposure weight is automatically capped before the main board.",
+      searchText: runHealthSearchText(project),
     }));
   const singleSourceProjects = allProjects
     .filter((project) => new Set(project.project.sources).size <= 1)
@@ -609,6 +674,7 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
       note: lang === "zh"
         ? `等待次日时序判定，当前持久性为 ${readableText(localizePersistence(project.project.persistence_state, lang), "持续观察")}`
         : `Awaiting next-day persistence judgment. Current persistence: ${readableText(localizePersistence(project.project.persistence_state, lang), "watch")}.`,
+      searchText: runHealthSearchText(project),
     }));
   const missingDescriptionProjects = allProjects
     .filter((project) => isMissingDescription(project.project.description, project.project.project_name, project.score.paradigm))
@@ -624,6 +690,7 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
         lang === "zh" ? "该节点缺少稳定描述文本，系统无法可靠建立语义画像。" : "The node does not have stable descriptive text, so semantic profiling is degraded.",
       ),
       note: lang === "zh" ? "已降低检索与推荐权重" : "Retrieval and recommendation weights are reduced.",
+      searchText: runHealthSearchText(project),
       issue:
         lang === "zh"
           ? !String(project.project.description ?? "").trim()
@@ -1614,6 +1681,7 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
         source_view: "observer",
       }),
       repoUrl: entry.repo_url,
+      isTracked: false,
       radarScore: entry.observer_score ?? 0,
       baseObserverScore: entry.base_observer_score ?? entry.observer_score ?? 0,
       trendPath: buildObserverTrendPathFromScores(
@@ -1746,6 +1814,15 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
     ecosystemBadges: Object.entries(artifact?.ecosystem_counts ?? {}).map(([name, count]) => `${name}: ${count}`),
     entries,
     initialSelectedKey,
+    canTrack: false,
+    trackingActionPath: "",
+    trackingReturnTo: `${requestUrl.pathname}${requestUrl.search}`,
+    trackingSignInHref: "#",
+    signInToTrackLabel: uiText(lang, "登录后追踪", "Sign in to track"),
+    csrfToken: "",
+    trackingStatusRepoKey: null,
+    trackingStatusMessage: "",
+    trackingStatusTone: "neutral",
   };
 }
 
@@ -1918,6 +1995,15 @@ export function buildObserverReactProps(model: ObserverViewModel, requestUrl: UR
     ecosystemBadges: Object.entries(combinedEcosystemCounts).map(([name, count]) => `${name}: ${count}`),
     entries,
     initialSelectedKey,
+    canTrack: false,
+    trackingActionPath: "",
+    trackingReturnTo: `${requestUrl.pathname}${requestUrl.search}`,
+    trackingSignInHref: "#",
+    signInToTrackLabel: uiText(lang, "登录后追踪", "Sign in to track"),
+    csrfToken: "",
+    trackingStatusRepoKey: null,
+    trackingStatusMessage: "",
+    trackingStatusTone: "neutral",
   };
 }
 

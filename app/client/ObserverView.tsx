@@ -5,7 +5,7 @@ export type ObserverEntry = {
   repoFullName: string;
   projectHref: string;
   repoUrl: string;
-  isTracked?: boolean;
+  isTracked: boolean;
   radarScore: number;
   baseObserverScore: number;
   trendPath: string;
@@ -102,15 +102,15 @@ export type ObserverViewProps = {
   ecosystemBadges: string[];
   entries: ObserverEntry[];
   initialSelectedKey: string | null;
-  canTrack?: boolean;
-  trackingActionPath?: string;
-  trackingReturnTo?: string;
-  trackingSignInHref?: string;
-  signInToTrackLabel?: string;
-  csrfToken?: string;
-  trackingStatusRepoKey?: string | null;
-  trackingStatusMessage?: string;
-  trackingStatusTone?: "success" | "neutral" | "error";
+  canTrack: boolean;
+  trackingActionPath: string;
+  trackingReturnTo: string;
+  trackingSignInHref: string;
+  signInToTrackLabel: string;
+  csrfToken: string;
+  trackingStatusRepoKey: string | null;
+  trackingStatusMessage: string;
+  trackingStatusTone: "success" | "neutral" | "error";
 };
 
 export type ObserverPagination<T> = {
@@ -562,6 +562,31 @@ function uniqueStrings(values: string[]): string[] {
   return [...new Set(values.map((value) => value.trim()).filter(Boolean))];
 }
 
+const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
+  [/\b(byte[-\s]?dance|bytedance[-\s]?seed|ui[-\s]?tars)\b/i, ["ByteDance", "字节", "字节跳动"]],
+  [/\b(tencent|tencentarc|hunyuan)\b/i, ["Tencent", "腾讯"]],
+  [/\b(alibaba|alibabacloud|aliyun|qwen|tongyi)\b/i, ["Alibaba", "阿里", "阿里巴巴", "通义"]],
+  [/\b(baidu|qianfan|ernie)\b/i, ["Baidu", "百度", "文心"]],
+  [/\b(netease|youdao)\b/i, ["NetEase", "网易", "有道"]],
+  [/\b(microsoft|azure|vscode)\b/i, ["Microsoft", "微软"]],
+  [/\b(google|deepmind|gemini)\b/i, ["Google", "谷歌", "DeepMind"]],
+  [/\b(openai|chatgpt|codex)\b/i, ["OpenAI", "ChatGPT", "Codex"]],
+  [/\b(anthropic|claude)\b/i, ["Anthropic", "Claude"]],
+  [/\b(moonshot|kimi)\b/i, ["Moonshot", "月之暗面", "Kimi"]],
+  [/\b(deepseek)\b/i, ["DeepSeek", "深度求索"]],
+  [/\b(huggingface|hugging[-\s]?face)\b/i, ["Hugging Face", "抱抱脸"]],
+  [/\b(meta|facebook)\b/i, ["Meta", "Facebook"]],
+];
+
+function companySearchAliases(values: Array<string | null | undefined>): string[] {
+  const aliases: string[] = [];
+  const haystack = values.map((value) => String(value ?? "")).join(" ");
+  for (const [pattern, candidates] of COMPANY_SEARCH_ALIASES) {
+    if (pattern.test(haystack)) aliases.push(...candidates);
+  }
+  return uniqueStrings(aliases);
+}
+
 function lowerJoined(values: Array<string | null | undefined>): string {
   return values
     .map((value) => String(value ?? "").trim().toLowerCase())
@@ -589,8 +614,16 @@ function scoreObserverEntryMatch(entry: ObserverEntry, normalizedQuery: string):
     ...repoVariants,
     ...(entry.searchOrganizations ?? []),
     ...pedigreeCompanyTokens(entry),
+    ...entry.orgSeeds,
+    ...companySearchAliases([
+      ...repoVariants,
+      ...(entry.searchOrganizations ?? []),
+      ...pedigreeCompanyTokens(entry),
+      ...entry.orgSeeds,
+      entry.searchText,
+    ]),
   ]);
-  const thematicText = lowerJoined([...entry.ecosystems, ...entry.keywords, ...entry.topics, ...entry.labels]);
+  const thematicText = lowerJoined([...entry.ecosystems, ...entry.keywords, ...entry.topics, ...entry.labels, ...entry.repoSeeds, ...entry.orgSeeds]);
   const narrativeText = lowerJoined([
     entry.attentionReason,
     entry.freshnessTag,
@@ -842,7 +875,7 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
       ? null
       : visibleEntries.find((entry) => entry.key === selectedKey) ?? null;
   const scopedTrackingStatusMessage =
-    selectedEntry && props.trackingStatusRepoKey === selectedEntry.key ? props.trackingStatusMessage ?? "" : "";
+    selectedEntry && props.trackingStatusRepoKey === selectedEntry.key ? props.trackingStatusMessage : "";
   const selectedSignalGroups = compactSignalGroups(selectedEntry, isZh ? "zh" : "en");
   const previewEcosystemBadges = props.ecosystemBadges.slice(0, 4);
   const previewNotes = props.notes.slice(0, 2);
@@ -1106,7 +1139,8 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
                     </div>
 
                     <div className="relative z-10 flex min-h-0 flex-1 flex-col">
-                      <TrackingStatusBanner message={scopedTrackingStatusMessage} tone={props.trackingStatusTone ?? "neutral"} />
+                      <TrackingStatusBanner message={scopedTrackingStatusMessage} tone={props.trackingStatusTone} />
+
                       <div className="flex items-center justify-between mb-3">
                         <span className="text-[12px] md:text-[13px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 font-mono">
                           {props.detailStageLabel}
@@ -1274,7 +1308,8 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
                 </div>
 
                 <div className="relative z-10 flex min-h-0 flex-1 flex-col">
-                  <TrackingStatusBanner message={scopedTrackingStatusMessage} tone={props.trackingStatusTone ?? "neutral"} />
+                  <TrackingStatusBanner message={scopedTrackingStatusMessage} tone={props.trackingStatusTone} />
+
                   <div className="flex items-center justify-between mb-3">
                     <span className="text-[11px] font-black uppercase tracking-[0.2em] text-neutral-400 dark:text-neutral-500 font-mono">
                       {props.detailStageLabel}
@@ -1468,7 +1503,7 @@ function DetailFooter(props: {
             href={props.props.trackingSignInHref}
             className="px-4 py-2 text-[12px] md:text-[13px] font-bold rounded-xl bg-indigo-500 text-white hover:bg-indigo-600 shadow-sm transition-all flex items-center justify-center gap-1"
           >
-            <span>{props.props.signInToTrackLabel || props.props.keepTrackingLabel}</span>
+            <span>{props.props.signInToTrackLabel}</span>
           </a>
         ) : (
           <form method="POST" action={props.props.trackingActionPath}>

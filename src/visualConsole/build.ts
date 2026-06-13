@@ -1,5 +1,6 @@
 import { knowledgeCardSlug } from "../action/knowledgeCard.ts";
-import type { DailyReport, KnowledgeCard, UserInterestTopicName, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
+import { buildProjectBriefFromScoredProject } from "../action/projectBriefs.ts";
+import type { DailyReport, KnowledgeCard, ScoredProject, UserInterestTopicName, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
 import { resolveDailyContext, resolveDailyTimeWindow, resolveNearestWeeklyAnchor, resolveWeeklyContext, resolveWeeklyTimeWindow } from "./context.ts";
 import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
@@ -149,6 +150,125 @@ function summarizeObserverNotes(notes: string[]): string[] {
 
 type DailyRankedProject = DailyReport["today_star_projects"][number];
 
+function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProject {
+  const leadEvidence = project.score.components.flatMap((component) => component.evidence).find(Boolean);
+  const brief = buildProjectBriefFromScoredProject(project);
+  const whyToday =
+    leadEvidence ||
+    project.score.risks[0] ||
+    project.project.description ||
+    `${project.project.project_name} stayed in the extended project inventory for broader search coverage.`;
+
+  return {
+    ...project,
+    project_class: "context_only",
+    objective_score: project.score.total_score,
+    preference_boost: 0,
+    base_final_rank: project.score.total_score,
+    final_rank: project.score.total_score,
+    matched_interest_topics: [],
+    project_brief_cn: brief,
+    why_today_cn: whyToday,
+    enhancement_source: "template_fallback",
+    summary_source: "template_fallback",
+    position_qualification: "keep-observing",
+    judge_score_delta: 0,
+    judge_source: "template_fallback",
+    direction_matches: [],
+    appearance_reason_codes: ["catalog_inventory_backfill"],
+    appearance_explanation_cn: "该项目来自扩展项目池补充，用于提升项目库检索覆盖面，不伪装成今日正式曝光位。",
+    exposure_bucket: "historical_context",
+    head_project: false,
+    head_saturation_state: "normal",
+  };
+}
+
+function buildObserverInventoryProject(
+  entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number],
+): DailyRankedProject {
+  const scoreValue = Number(entry.observer_score ?? entry.base_observer_score ?? 0);
+  const repoKey = entry.repo_full_name.split("/")[1] ?? entry.repo_full_name;
+  const tags = [...new Set([...(entry.labels ?? []), ...(entry.ecosystems ?? []), ...(entry.matched_by.keywords ?? []), ...(entry.matched_by.topic_hints ?? [])])];
+
+  return {
+    project: {
+      project_name: repoKey,
+      repo_url: entry.repo_url,
+      repo_full_name: entry.repo_full_name,
+      first_seen: entry.repo_created_at ?? entry.observed_at,
+      last_seen: entry.repo_updated_at ?? entry.observed_at,
+      sources: ["manual"],
+      source_counts: { manual: 1 },
+      appearances: Math.max(1, entry.historical_precision_score ?? 1),
+      appearance_dates: [String(entry.observed_at).slice(0, 10)].filter(Boolean),
+      persistence_state: entry.historical_precision_label === "validated" ? "persistent" : "emerging",
+      stars: entry.stars ?? 0,
+      star_delta_daily: 0,
+      star_delta_weekly: 0,
+      star_delta_source: "unavailable",
+      forks: entry.forks ?? 0,
+      issues: entry.issues ?? 0,
+      PR: entry.PR ?? 0,
+      tags,
+      description: entry.description ?? entry.project_brief_cn ?? entry.repo_full_name,
+      metrics_source: "unavailable",
+      metrics_trust_score: 0.5,
+      data_trust: "medium",
+      star_delta_available: false,
+      trust_flags: [],
+      raw_signals: [],
+    },
+    score: {
+      total_score: scoreValue,
+      components: [],
+      verdict: scoreValue >= 75 ? "high" : scoreValue >= 50 ? "watch" : "low",
+      confidence: entry.historical_precision_label === "validated" ? "high" : "medium",
+      trust_score: 0.5,
+      data_trust: "medium",
+      paradigm: (entry.ecosystems ?? [])[0] ?? "observer",
+      anti_noise_flags: [],
+      risks: [],
+      next_actions: [entry.watch_next_cn ?? "keep observing observer candidate"],
+      rules_only: true,
+    },
+    project_class: "context_only",
+    objective_score: scoreValue,
+    preference_boost: 0,
+    base_final_rank: scoreValue,
+    final_rank: scoreValue,
+    matched_interest_topics: [],
+    project_brief_cn: entry.project_brief_cn ?? entry.description ?? entry.repo_full_name,
+    why_today_cn: entry.why_now_cn ?? entry.long_tail_reason ?? "observer candidate backfill",
+    enhancement_source: "template_fallback",
+    summary_source: entry.summary_source ?? "template_fallback",
+    position_qualification: entry.position_qualification ?? "keep-observing",
+    position_rationale_cn: entry.position_rationale_cn,
+    judge_score_delta: entry.judge_score_delta ?? 0,
+    judge_source: entry.judge_source ?? "template_fallback",
+    direction_matches: entry.ecosystems ?? [],
+    appearance_reason_codes: ["observer_inventory_backfill"],
+    appearance_explanation_cn: "该项目来自新兴潜力候选池补充，用于提升项目库搜索覆盖面，不伪装成主榜正式曝光位。",
+    exposure_bucket: "historical_context",
+    head_project: false,
+    head_saturation_state: "normal",
+  };
+}
+
+function readTodayPulseProjects(report: DailyReport): DailyRankedProject[] {
+  const todayPulseProjects = Array.isArray(report.today_pulse_projects) ? report.today_pulse_projects : [];
+  const todayStarProjects = Array.isArray(report.today_star_projects) ? report.today_star_projects : [];
+  return todayPulseProjects.length > 0 ? todayPulseProjects : todayStarProjects;
+}
+
+function readMissionProjects(report: DailyReport): DailyRankedProject[] {
+  const missionProjects = Array.isArray(report.mission_match_projects) ? report.mission_match_projects : [];
+  return missionProjects.length > 0 ? missionProjects : readTodayPulseProjects(report);
+}
+
+function readExploreRibbonProjects(report: DailyReport): DailyRankedProject[] {
+  return Array.isArray(report.explore_ribbon_projects) ? report.explore_ribbon_projects : [];
+}
+
 function distinctInterestTopics(topics: UserInterestTopicName[] | undefined): UserInterestTopicName[] {
   return [...new Set((topics ?? []).map((topic) => topic.trim()).filter((topic): topic is UserInterestTopicName => topic.length > 0))];
 }
@@ -226,15 +346,32 @@ function personalizeDailyReportForRequest(report: DailyReport, requestInterestTo
   const interestTopics = distinctInterestTopics(requestInterestTopics);
   if (interestTopics.length === 0) return report;
 
-  const todayStarProjects = report.today_star_projects.map((project) => personalizeRankedProject(project, interestTopics)).sort(comparePersonalizedProjects);
+  const todayStarProjects = readTodayPulseProjects(report).map((project) => personalizeRankedProject(project, interestTopics)).sort(comparePersonalizedProjects);
   const contextOnlyProjects = report.context_only_projects.map((project) => personalizeRankedProject(project, interestTopics)).sort(comparePersonalizedProjects);
 
   return {
     ...report,
     personalized_relevance_applicable: report.personalized_relevance_applicable || interestTopics.length > 0,
     today_star_projects: todayStarProjects,
+    today_pulse_projects: todayStarProjects,
+    mission_match_projects: readMissionProjects(report).map((project) => personalizeRankedProject(project, interestTopics)).sort(comparePersonalizedProjects),
     context_only_projects: contextOnlyProjects,
   };
+}
+
+function buildExtendedProjectInventory(
+  report: DailyReport,
+  requestInterestTopics: UserInterestTopicName[] | undefined,
+  surfacedProjects: DailyRankedProject[],
+): DailyRankedProject[] {
+  const surfacedKeys = new Set(surfacedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
+  const interestTopics = distinctInterestTopics(requestInterestTopics);
+
+  return (Array.isArray(report.all_projects) ? report.all_projects : [])
+    .filter((project) => !surfacedKeys.has(project.project.repo_full_name.toLowerCase()))
+    .map((project) => buildCatalogInventoryProject(project))
+    .map((project) => personalizeRankedProject(project, interestTopics))
+    .sort(comparePersonalizedProjects);
 }
 
 function buildRunSnapshot(
@@ -619,7 +756,7 @@ function buildDailyCurrentPreview(date: string, snapshot: RunSnapshot | null): D
     generated_at: snapshot.daily_report.generated_at,
     top_level_state: topLevelState,
     enhancement_status: snapshot.daily_report.enhancement_status,
-    top_decision_count: snapshot.daily_report.today_star_projects.length,
+    top_decision_count: readTodayPulseProjects(snapshot.daily_report).length,
     source_active_count: sourceStatus.filter((entry) => entry.status === "active").length,
     failed_count: sourceStatus.filter((entry) => entry.status === "failed").length,
     empty_count: sourceStatus.filter((entry) => entry.status === "empty").length,
@@ -706,6 +843,18 @@ function summarizeSourceHealth(snapshot: RunSnapshot | null): string {
   if (!snapshot?.run_summary) return "health-context-missing";
   const { source_status } = snapshot.run_summary;
   return `active=${source_status.filter((item) => item.status === "active").length}, empty=${source_status.filter((item) => item.status === "empty").length}, failed=${source_status.filter((item) => item.status === "failed").length}`;
+}
+
+function readObserverIncubatingDirections(
+  artifact: RunSnapshot["observer_artifact"] | ObserverViewModel["artifact"] | null,
+) {
+  return Array.isArray(artifact?.incubating_directions) ? artifact.incubating_directions : [];
+}
+
+function readObserverPromotionCandidates(
+  artifact: RunSnapshot["observer_artifact"] | ObserverViewModel["artifact"] | null,
+) {
+  return Array.isArray(artifact?.promotion_candidates) ? artifact.promotion_candidates : [];
 }
 
 function buildOverviewStateEntries(snapshot: RunSnapshot | null, stale: boolean) {
@@ -1044,7 +1193,7 @@ export function buildOverviewView(
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
     run_snapshot: snapshot,
-    top_decisions: snapshot?.daily_report.today_star_projects ?? [],
+    top_decisions: snapshot ? readTodayPulseProjects(snapshot.daily_report) : [],
     risks_and_actions: risksAndActions,
     weekly_entry: weeklyAnchor
       ? { label: "Open Weekly", view: "weekly", anchor_date: weeklyAnchor }
@@ -1064,6 +1213,10 @@ function buildFailedProjectsView(
     state,
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
     route_frame: {} as RouteFrameModel,
+    today_pulse_projects: [],
+    mission_match_projects: [],
+    explore_ribbon_projects: [],
+    historical_context_projects: [],
     projects: [],
     selected_project: null,
   };
@@ -1118,7 +1271,26 @@ export function buildProjectsView(
 
   const { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date, options);
   resolved.context.generated_at = snapshot?.daily_report.generated_at ?? null;
-  const projects = snapshot ? [...snapshot.daily_report.today_star_projects, ...snapshot.daily_report.context_only_projects] : [];
+  const todayPulseProjects = snapshot ? readTodayPulseProjects(snapshot.daily_report) : [];
+  const missionMatchProjects = snapshot ? readMissionProjects(snapshot.daily_report) : [];
+  const exploreRibbonProjects = snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [];
+  const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...(snapshot ? snapshot.daily_report.context_only_projects : [])];
+  const observerInventoryProjects = snapshot?.observer_artifact
+    ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry))
+    : [];
+  const catalogInventoryProjects = snapshot
+    ? buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedProjects)
+    : [];
+  const historicalContextProjects = [...(snapshot ? snapshot.daily_report.context_only_projects : []), ...catalogInventoryProjects, ...observerInventoryProjects].filter(
+    (project, index, all) =>
+      all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
+  );
+  const projects = snapshot
+    ? [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...historicalContextProjects].filter(
+        (project, index, all) =>
+          all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
+      )
+    : [];
   const state = buildProjectsState(snapshot, resolved.context.stale, projects);
   const selected = snapshot ? findSelectedProject(projects, selectedProject) : null;
 
@@ -1136,6 +1308,10 @@ export function buildProjectsView(
     state,
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
+    today_pulse_projects: todayPulseProjects,
+    mission_match_projects: missionMatchProjects,
+    explore_ribbon_projects: exploreRibbonProjects,
+    historical_context_projects: historicalContextProjects,
     projects,
     selected_project: buildSelectedProjectView(selected, binding, resolved.context.selected_date),
   };
@@ -1285,7 +1461,9 @@ export function buildObserverView(dateOrLatest: string, options?: { requestInter
       generatedAt: artifact?.generated_at ?? null,
       enhancementStatus: inferObserverEnhancementStatus(artifact?.llm_diagnostics),
       githubStatus: "github-search",
-      sourceHealth: artifact ? `ecosystems=${Object.keys(artifact.ecosystem_counts).length}, candidates=${artifact.candidate_count}` : "missing",
+      sourceHealth: artifact
+        ? `ecosystems=${Object.keys(artifact.ecosystem_counts).length}, candidates=${artifact.candidate_count}, incubating=${readObserverIncubatingDirections(artifact).length}, promotions=${readObserverPromotionCandidates(artifact).length}`
+        : "missing",
       notes: observerNotes,
     }),
     state,

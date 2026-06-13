@@ -32,7 +32,7 @@
     "visual-console:web": "tsx app/server.ts",
     "start:prod:web": "node dist/app/server.js",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run",
+    "test": "vitest run src/__tests__",
     "lint": "npm run typecheck"
   },
   "dependencies": {

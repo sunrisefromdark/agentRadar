@@ -172,6 +172,12 @@ function summarizeDailyPreviewState(
   return "ready";
 }
 
+function readPreviewTopDecisionCount(report: DailyReport): number {
+  const todayPulseProjects = Array.isArray(report.today_pulse_projects) ? report.today_pulse_projects : [];
+  const todayStarProjects = Array.isArray(report.today_star_projects) ? report.today_star_projects : [];
+  return todayPulseProjects.length > 0 ? todayPulseProjects.length : todayStarProjects.length;
+}
+
 function summarizeWeeklyPreviewState(
   weekly: ReadResult<string>,
   audit: ReadResult<WeeklyAuditReport>,
@@ -217,7 +223,7 @@ export function getDailyNavigatorPreview(date: string): DailyTimeNavigatorPrevie
       generated_at: daily.status === "ok" ? daily.value.generated_at : null,
       top_level_state: summarizeDailyPreviewState(daily, runSummary, verify),
       enhancement_status: daily.status === "ok" ? daily.value.enhancement_status : null,
-      top_decision_count: daily.status === "ok" ? daily.value.today_star_projects.length : 0,
+      top_decision_count: daily.status === "ok" ? readPreviewTopDecisionCount(daily.value) : 0,
       source_active_count: sourceStatus.filter((entry) => entry.status === "active").length,
       failed_count: sourceStatus.filter((entry) => entry.status === "failed").length,
       empty_count: sourceStatus.filter((entry) => entry.status === "empty").length,

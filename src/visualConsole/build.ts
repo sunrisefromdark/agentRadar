@@ -1,6 +1,7 @@
 import { knowledgeCardSlug } from "../action/knowledgeCard.ts";
 import { buildProjectBriefFromScoredProject } from "../action/projectBriefs.ts";
-import type { DailyReport, KnowledgeCard, ScoredProject, UserInterestTopicName, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
+import { DIRECTION_CATALOG } from "../signal/directionCatalog.ts";
+import type { DailyReport, KnowledgeCard, RawSignal, ScoredProject, UserInterestTopicName, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
 import { resolveDailyContext, resolveDailyTimeWindow, resolveNearestWeeklyAnchor, resolveWeeklyContext, resolveWeeklyTimeWindow } from "./context.ts";
 import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
@@ -10,6 +11,7 @@ import {
   getGithubEnrichmentAudit,
   getKbCard,
   getKbIndex,
+  getMissionScoutArtifact,
   getObserverArtifact,
   getRunSummary,
   getVerifyDailyResult,
@@ -149,6 +151,7 @@ function summarizeObserverNotes(notes: string[]): string[] {
 }
 
 type DailyRankedProject = DailyReport["today_star_projects"][number];
+const DIRECTION_LABELS = new Map(DIRECTION_CATALOG.map((direction) => [direction.direction_key, direction.display_name_cn] as const));
 
 function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProject {
   const leadEvidence = project.score.components.flatMap((component) => component.evidence).find(Boolean);
@@ -254,6 +257,128 @@ function buildObserverInventoryProject(
   };
 }
 
+function repoFullNameFromGithubUrl(repoUrl: string): string | null {
+  const match = /^https?:\/\/github\.com\/([^/\s]+)\/([^/\s#?]+)/i.exec(repoUrl.trim());
+  if (!match) return null;
+  return `${match[1]}/${match[2].replace(/\.git$/i, "")}`;
+}
+
+function directionMatchesFromSignal(signal: RawSignal): string[] {
+  return [
+    ...new Set(
+      signal.tags
+        .map((tag) => /^mission-direction:(.+)$/i.exec(tag)?.[1] ?? (DIRECTION_LABELS.has(tag) ? tag : null))
+        .filter((tag): tag is string => Boolean(tag)),
+    ),
+  ];
+}
+
+function buildMissionScoutInventoryProject(signal: RawSignal): DailyRankedProject | null {
+  const repoFullName = repoFullNameFromGithubUrl(signal.repo_url);
+  if (!repoFullName) return null;
+
+  const directionMatches = directionMatchesFromSignal(signal);
+  if (directionMatches.length === 0) return null;
+
+  const displayName = DIRECTION_LABELS.get(directionMatches[0] ?? "") ?? "垂直需求方向";
+  const scoreValue = Math.min(69, Math.max(35, 42 + Math.log10(Math.max(1, Number(signal.stars ?? 0))) * 8));
+
+  return {
+    project: {
+      project_name: signal.project_name || repoFullName.split("/")[1] || repoFullName,
+      repo_url: signal.repo_url,
+      repo_full_name: repoFullName,
+      first_seen: signal.timestamp.slice(0, 10),
+      last_seen: signal.timestamp.slice(0, 10),
+      sources: [signal.source],
+      source_counts: { [signal.source]: 1 },
+      appearances: 1,
+      appearance_dates: [signal.timestamp.slice(0, 10)],
+      persistence_state: "emerging",
+      stars: Number(signal.stars ?? 0),
+      star_delta_daily: Number(signal.star_delta ?? 0),
+      star_delta_weekly: 0,
+      star_delta_source: signal.star_delta_source ?? "unavailable",
+      forks: Number(signal.forks ?? 0),
+      issues: Number(signal.issues ?? 0),
+      PR: Number(signal.PR ?? 0),
+      tags: [...new Set([...signal.tags, "mission-scout-candidate", "pending-confirmation"])],
+      description: signal.description ?? signal.project_name,
+      metrics_source: signal.metrics_source ?? "unavailable",
+      metrics_trust_score: signal.metrics_trust_score ?? 0.5,
+      data_trust: signal.metrics_source && signal.metrics_source !== "unavailable" ? "medium" : "unverified",
+      star_delta_available: typeof signal.star_delta === "number",
+      trust_flags: ["pending_score_confirmation"],
+      raw_signals: [signal],
+    },
+    score: {
+      total_score: Number(scoreValue.toFixed(2)),
+      components: [],
+      verdict: "watch",
+      confidence: "medium",
+      trust_score: signal.metrics_trust_score ?? 0.5,
+      data_trust: signal.metrics_source && signal.metrics_source !== "unavailable" ? "medium" : "unverified",
+      paradigm: "Agent System",
+      anti_noise_flags: [],
+      risks: ["mission scout 候选尚未进入完整评分链路"],
+      next_actions: [`继续补证「${displayName}」方向的仓库质量、活跃度和真实使用场景。`],
+      rules_only: true,
+    },
+    project_class: "pending_confirmation",
+    objective_score: Number(scoreValue.toFixed(2)),
+    preference_boost: 0,
+    base_final_rank: Number(scoreValue.toFixed(2)),
+    final_rank: Number(scoreValue.toFixed(2)),
+    matched_interest_topics: directionMatches,
+    project_brief_cn: signal.description ?? signal.project_name,
+    why_today_cn: `它来自 mission scout 对「${displayName}」方向的候选发现，适合作为待确认观察对象。`,
+    enhancement_source: "template_fallback",
+    summary_source: "template_fallback",
+    position_qualification: "keep-observing",
+    judge_score_delta: 0,
+    judge_source: "template_fallback",
+    direction_matches: directionMatches,
+    appearance_reason_codes: ["mission_scout_candidate"],
+    appearance_explanation_cn: `该项目来自「${displayName}」方向搜索候选，进入探索补位而非正式主榜。`,
+    exposure_bucket: "explore_ribbon",
+    head_project: false,
+    head_saturation_state: "normal",
+  };
+}
+
+function buildMissionScoutInventory(
+  date: string,
+  surfacedProjects: DailyRankedProject[],
+  prioritizedProjects: DailyRankedProject[] = [],
+): DailyRankedProject[] {
+  const artifact = getMissionScoutArtifact(date);
+  if (artifact.status !== "ok") return [];
+
+  const surfacedKeys = new Set(surfacedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
+  const prioritizedKeys = new Set(prioritizedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
+  const perDirectionCount = new Map<string, number>();
+  const projects: DailyRankedProject[] = [];
+
+  for (const signal of artifact.value.raw_signals ?? []) {
+    const candidate = buildMissionScoutInventoryProject(signal);
+    if (!candidate) continue;
+
+    const repoKey = candidate.project.repo_full_name.toLowerCase();
+    if (surfacedKeys.has(repoKey)) continue;
+
+    const primaryDirection = candidate.direction_matches?.[0] ?? "unknown";
+    const currentCount = perDirectionCount.get(primaryDirection) ?? 0;
+    const prioritized = prioritizedKeys.has(repoKey);
+    if (!prioritized && currentCount >= 8) continue;
+
+    surfacedKeys.add(repoKey);
+    perDirectionCount.set(primaryDirection, currentCount + 1);
+    projects.push(candidate);
+  }
+
+  return projects.sort(comparePersonalizedProjects);
+}
+
 function readTodayPulseProjects(report: DailyReport): DailyRankedProject[] {
   const todayPulseProjects = Array.isArray(report.today_pulse_projects) ? report.today_pulse_projects : [];
   const todayStarProjects = Array.isArray(report.today_star_projects) ? report.today_star_projects : [];
@@ -262,7 +387,7 @@ function readTodayPulseProjects(report: DailyReport): DailyRankedProject[] {
 
 function readMissionProjects(report: DailyReport): DailyRankedProject[] {
   const missionProjects = Array.isArray(report.mission_match_projects) ? report.mission_match_projects : [];
-  return missionProjects.length > 0 ? missionProjects : readTodayPulseProjects(report);
+  return missionProjects;
 }
 
 function readExploreRibbonProjects(report: DailyReport): DailyRankedProject[] {
@@ -1274,19 +1399,24 @@ export function buildProjectsView(
   const todayPulseProjects = snapshot ? readTodayPulseProjects(snapshot.daily_report) : [];
   const missionMatchProjects = snapshot ? readMissionProjects(snapshot.daily_report) : [];
   const exploreRibbonProjects = snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [];
-  const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...(snapshot ? snapshot.daily_report.context_only_projects : [])];
+  const contextOnlyProjects = snapshot ? snapshot.daily_report.context_only_projects : [];
+  const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects];
+  const missionScoutInventoryProjects = snapshot
+    ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects, contextOnlyProjects)
+    : [];
+  const surfacedWithScoutProjects = [...surfacedProjects, ...missionScoutInventoryProjects];
   const observerInventoryProjects = snapshot?.observer_artifact
     ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry))
     : [];
   const catalogInventoryProjects = snapshot
-    ? buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedProjects)
+    ? buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects)
     : [];
-  const historicalContextProjects = [...(snapshot ? snapshot.daily_report.context_only_projects : []), ...catalogInventoryProjects, ...observerInventoryProjects].filter(
+  const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects, ...observerInventoryProjects].filter(
     (project, index, all) =>
       all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
   );
   const projects = snapshot
-    ? [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...historicalContextProjects].filter(
+    ? [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...missionScoutInventoryProjects, ...historicalContextProjects].filter(
         (project, index, all) =>
           all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
       )
@@ -1310,7 +1440,10 @@ export function buildProjectsView(
     route_frame: {} as RouteFrameModel,
     today_pulse_projects: todayPulseProjects,
     mission_match_projects: missionMatchProjects,
-    explore_ribbon_projects: exploreRibbonProjects,
+    explore_ribbon_projects: [...exploreRibbonProjects, ...missionScoutInventoryProjects].filter(
+      (project, index, all) =>
+        all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
+    ),
     historical_context_projects: historicalContextProjects,
     projects,
     selected_project: buildSelectedProjectView(selected, binding, resolved.context.selected_date),

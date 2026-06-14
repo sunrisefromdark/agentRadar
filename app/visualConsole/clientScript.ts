@@ -155,6 +155,17 @@ export function renderClientScriptSource(): string {
 
         const scrollKey = "visual-console-scroll-target";
         const routes = new Set(["/overview", "/projects", "/weekly", "/run-health", "/observer", "/kb"]);
+        const reactRuntimeRoutes = new Set(["overview", "weekly", "run-health", "observer"]);
+        const reactImportMapId = "visual-console-react-import-map";
+        const reactMountScriptId = "visual-console-react-mount-script";
+        const reactMountScriptSrc = "/app-client/mount.js";
+        const reactImportMap = {
+          imports: {
+            react: "https://esm.sh/react@19.2.0",
+            "react/jsx-runtime": "https://esm.sh/react@19.2.0/jsx-runtime",
+            "react-dom/client": "https://esm.sh/react-dom@19.2.0/client?external=react",
+          },
+        };
         const workspaceSections = ["signals", "decisions", "watchlist", "sources"];
         const workspaceRailSections = ["decisions", "watchlist", "sources"];
         const hydrationPayloadConfigs = [
@@ -333,6 +344,56 @@ export function renderClientScriptSource(): string {
             return;
           }
           window.clearTimeout(handle);
+        };
+        const snapshotNeedsReactRuntime = (snapshot) => reactRuntimeRoutes.has(snapshot?.bodyRoute || "");
+        const ensureReactImportMap = () => {
+          if (document.getElementById(reactImportMapId) || document.querySelector("script[type='importmap']")) return;
+          const script = document.createElement("script");
+          script.id = reactImportMapId;
+          script.type = "importmap";
+          script.textContent = JSON.stringify(reactImportMap);
+          document.head.appendChild(script);
+        };
+        const ensureReactRuntime = () => {
+          if (typeof window.__mountVisualConsoleApps === "function") return Promise.resolve(true);
+          if (window.__visualConsoleReactRuntimePromise) return window.__visualConsoleReactRuntimePromise;
+
+          ensureReactImportMap();
+          window.__visualConsoleReactRuntimePromise = new Promise((resolve) => {
+            const timeout = window.setTimeout(() => {
+              resolve(typeof window.__mountVisualConsoleApps === "function");
+            }, 4000);
+            const finish = () => {
+              window.clearTimeout(timeout);
+              requestAnimationFrame(() => {
+                resolve(typeof window.__mountVisualConsoleApps === "function");
+              });
+            };
+            const existingScript =
+              document.getElementById(reactMountScriptId) ||
+              document.querySelector('script[type="module"][src="/app-client/mount.js"]');
+            if (existingScript instanceof HTMLScriptElement) {
+              existingScript.addEventListener("load", finish, { once: true });
+              existingScript.addEventListener("error", () => {
+                window.clearTimeout(timeout);
+                resolve(false);
+              }, { once: true });
+              if (typeof window.__mountVisualConsoleApps === "function") finish();
+              return;
+            }
+
+            const script = document.createElement("script");
+            script.id = reactMountScriptId;
+            script.type = "module";
+            script.src = reactMountScriptSrc;
+            script.addEventListener("load", finish, { once: true });
+            script.addEventListener("error", () => {
+              window.clearTimeout(timeout);
+              resolve(false);
+            }, { once: true });
+            document.body.appendChild(script);
+          });
+          return window.__visualConsoleReactRuntimePromise;
         };
         const trimRoutePrefetchCache = () => {
           while (routePrefetchCache.size > routePrefetchMaxEntries) {
@@ -1160,10 +1221,11 @@ export function renderClientScriptSource(): string {
         const bindProjectsWorkbench = () => {
           const root = document.querySelector("[data-projects-workbench='true']");
           if (!(root instanceof HTMLElement)) return;
-          if (root.dataset.projectsWorkbenchBound === "true") {
+          if (root.dataset.projectsWorkbenchBound === "true" && typeof root.__projectsWorkbenchApply === "function") {
             root.__projectsWorkbenchApply?.();
             return;
           }
+          delete root.dataset.projectsWorkbenchBound;
 
           root.dataset.projectsWorkbenchBound = "true";
           const search = root.querySelector("[data-projects-search='true']");
@@ -1668,6 +1730,9 @@ export function renderClientScriptSource(): string {
           const nextDoc = prefetched.snapshot;
           if (mode !== "detail" || !nextDoc || nextDoc.route !== "projects-detail") {
             await primeClientOnlyPayloads(nextDoc);
+          }
+          if (snapshotNeedsReactRuntime(nextDoc)) {
+            await ensureReactRuntime();
           }
           const applied =
             mode === "detail"

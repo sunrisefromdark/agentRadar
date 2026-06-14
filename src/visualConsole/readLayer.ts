@@ -6,6 +6,7 @@ import type {
   EcosystemObserverArtifact,
   GitHubEnrichmentAuditEntry,
   KnowledgeCard,
+  RawSignal,
   VerifyDailyResult,
   WeeklyAuditReport,
   WeeklyJudgmentReport,
@@ -156,6 +157,11 @@ export function getGithubEnrichment(repoKey: string): ReadResult<Record<string, 
 export function getObserverArtifact(date: string): ReadResult<EcosystemObserverArtifact> {
   const filepath = path.join("data", "observer", "ecosystem-focus", `${date}.json`);
   return validateDateInput(date, filepath) ?? readJsonStrict<EcosystemObserverArtifact>(filepath);
+}
+
+export function getMissionScoutArtifact(date: string): ReadResult<{ raw_signals?: RawSignal[] }> {
+  const filepath = path.join("data", "discovery", "mission-scout", `${date}.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<{ raw_signals?: RawSignal[] }>(filepath);
 }
 
 function summarizeDailyPreviewState(

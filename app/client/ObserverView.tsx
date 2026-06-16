@@ -594,6 +594,30 @@ function lowerJoined(values: Array<string | null | undefined>): string {
     .join(" ");
 }
 
+function tokenizeSearchText(value: string): string[] {
+  return value
+    .trim()
+    .toLowerCase()
+    .split(/[\s,.;:!?()[\]{}"'`/\\_-]+/)
+    .filter(Boolean);
+}
+
+function denseObserverMatch(value: string, normalizedQuery: string): boolean {
+  const normalizedValue = value.trim().toLowerCase();
+  if (!normalizedValue) return false;
+  if (normalizedValue === normalizedQuery || normalizedValue.startsWith(normalizedQuery) || normalizedValue.includes(normalizedQuery)) return true;
+
+  const queryTokens = tokenizeSearchText(normalizedQuery);
+  const valueTokens = tokenizeSearchText(normalizedValue);
+  if (queryTokens.length === 0) return false;
+  if (queryTokens.every((token) => valueTokens.includes(token))) return true;
+  if (queryTokens.length === 1) {
+    const [token] = queryTokens;
+    return valueTokens.some((candidate) => candidate.startsWith(token) || candidate.includes(token));
+  }
+  return false;
+}
+
 function repoNameSearchVariants(repoFullName: string): string[] {
   const trimmed = repoFullName.trim();
   const [owner, repo] = trimmed.split("/", 2);
@@ -608,7 +632,10 @@ function pedigreeCompanyTokens(entry: ObserverEntry): string[] {
 }
 
 function scoreObserverEntryMatch(entry: ObserverEntry, normalizedQuery: string): number {
-  const repoVariants = repoNameSearchVariants(entry.repoFullName);
+  const safeRepoFullName = typeof entry.repoFullName === "string" ? entry.repoFullName : "";
+  if (!safeRepoFullName.trim()) return -1;
+
+  const repoVariants = repoNameSearchVariants(safeRepoFullName);
   const repoNameText = lowerJoined(repoVariants);
   const organizationText = lowerJoined([
     ...repoVariants,
@@ -634,11 +661,11 @@ function scoreObserverEntryMatch(entry: ObserverEntry, normalizedQuery: string):
     entry.searchText,
   ]);
 
-  if (repoVariants.some((value) => value.toLowerCase() === normalizedQuery)) return 600;
-  if (repoNameText.includes(normalizedQuery)) return 520;
-  if (organizationText.includes(normalizedQuery)) return 380;
-  if (thematicText.includes(normalizedQuery)) return 240;
-  if (narrativeText.includes(normalizedQuery)) return 120;
+  if (repoVariants.some((value) => value.toLowerCase() === normalizedQuery)) return 900;
+  if (denseObserverMatch(repoNameText, normalizedQuery)) return 760;
+  if (denseObserverMatch(organizationText, normalizedQuery)) return 520;
+  if (denseObserverMatch(thematicText, normalizedQuery)) return 340;
+  if (denseObserverMatch(narrativeText, normalizedQuery)) return 160;
   return -1;
 }
 

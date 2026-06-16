@@ -1,0 +1,2335 @@
+{
+  "date": "2026-06-13",
+  "generated_at": "2026-06-16T10:21:13.157Z",
+  "provider": "deepseek",
+  "entries": [
+    {
+      "repo_full_name": "1850298154/memory_agent_hub",
+      "project_brief_cn": "Memory Agent Hub 收集多种 AI Agent 实现，涵盖 swarm、多智能体协作、记忆、进化、强化学习等方向，面向 2026 年 Agent 年。",
+      "why_today_cn": "内容聚合项目，概念广泛但缺乏独特技术贡献，需观察实际功能构建而非仅收集。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:29.638Z"
+    },
+    {
+      "repo_full_name": "434media/bizdev-agent",
+      "project_brief_cn": "AI销售自动化工具，集成Apollo.io，将手动客户研究转化为智能线索生成与个性化外展流程。",
+      "why_today_cn": "销售线索候选，需验证Apollo集成稳定性和生成质量，继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "aasmaagh/social-media-automation",
+      "project_brief_cn": "社交媒体自动化解决方案，使用Node.js、Playwright、Redis和n8n，通过AI驱动的内容生成、排程和发布，提升营销效率。",
+      "why_today_cn": "作为营销内容代理候选，结合多种工具实现自动化，但需进一步验证其实际产出和扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "addyosmani/agent-skills",
+      "project_brief_cn": "Agent Skills 是一个生产级 AI 编码 Agent 技能集合，提供可直接复用的技能模板和工作流。用户可快速集成到开发环境中，提升编码智能体的能力边界。",
+      "why_today_cn": "作为技能库项目，其星数增长迅速。候选观察其技能模式的标准化程度和社区采纳情况，以及是否形成可规模化的技能生态系统。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "Adiscon/adiscon-client-doc",
+      "project_brief_cn": "Adiscon客户产品（WinSyslog等）的集中文档仓库，含手册、版本信息与配置指南。",
+      "why_today_cn": "候选观察中：非典型客服Agent项目，待确认其与智能客服的关联性，适合作为候选继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "adlaiponderous700/claude-skill-cinematic-prompt",
+      "project_brief_cn": "从参考图像和项目简报生成电影级视频提示词，用于Higgsfield AI视频制作，辅助营销内容创作。",
+      "why_today_cn": "候选项目聚焦AI视频提示词生成，创意方向明确，但需补证其在营销场景中的实际应用效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "agent-sandbox/agent-sandbox",
+      "project_brief_cn": "企业级沙箱平台，兼容E2B，为AI代理提供代码执行、浏览器使用等安全环境，支持Kubernetes。",
+      "why_today_cn": "待确认候选。功能较成熟且星数较高，但需观察企业实际部署案例。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "ALAGENT-HKU/x2strategy",
+      "project_brief_cn": "从量化金融研究论文中提取结构化策略规范，作为GitHub Copilot和Claude Code的Agent技能，辅助金融分析与策略开发。",
+      "why_today_cn": "金融分析方向候选，论文到策略的自动化转化有潜力，但需验证对非英文论文的支持和策略可靠性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "alex-duria/bull.sh",
+      "project_brief_cn": "命令行投资研究代理，集成RAG技术，帮助用户快速获取SEC财报等金融信息。",
+      "why_today_cn": "轻量CLI工具候选，功能简洁但待确认，值得观察是否扩展为完整平台。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "alex-jb/customer-support-agent",
+      "project_brief_cn": "实现消息分流、自动草拟回复并加入人工审核队列的客服智能体，遵循一人公司七层架构。",
+      "why_today_cn": "候选观察中：设计理念新颖但星数少，待验证在单人公司的实际落地效果，值得关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "alfredcs/dova",
+      "project_brief_cn": "企业级多智能体研究自动化系统，聚合Web、ArXiv、GitHub等来源知识。",
+      "why_today_cn": "候选观察，知识聚合能力有亮点，但星数少且功能完备性待考察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "alibaba/anolisa",
+      "project_brief_cn": "阿里巴巴开源的Agentic操作系统，用于编排多智能体角色和工具调用，构建可重复执行的工作流，适用于浏览器、桌面及行业流程自动化场景。",
+      "why_today_cn": "今日星数增长，作为阿里系Agent编排平台候选，值得继续观察其生态扩展与实际落地能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:25.321Z"
+    },
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "project_brief_cn": "阿里巴巴开源的代码审查工具，结合确定性流水线和 LLM Agent，提供精确行级评论和内置规则集。",
+      "why_today_cn": "作为候选观察，专注代码审查场景，虽有 Agent 能力，但通用性待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "alirezarezvani/claude-skills",
+      "project_brief_cn": "为Claude Code等编码代理提供的337个技能和插件集合，覆盖工程、营销、产品、合规、金融等多领域，提升代理能力。",
+      "why_today_cn": "作为候选待确认项目，其技能库丰富但需验证与金融投研方向的精准匹配度和实际效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "allenai/OLMo-core",
+      "project_brief_cn": "OLMo-core是Allen AI为OLMo生态系统提供的PyTorch构建块，包括模型组件、训练基础设施等，支持研究人员构建和实验开放语言模型。",
+      "why_today_cn": "作为候选，该项目是OLMo开放模型的核心基础，但组件化程度与集成文档尚需完善，适合关注开放LLM研发的团队保持观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "allenai/olmo-eval",
+      "project_brief_cn": "olmo-eval是Allen AI用于评估OLMo模型和其他语言模型的评测工具，支持比较模型效果、回放失败样本和回归验收。",
+      "why_today_cn": "作为候选，项目功能描述不足，当前代码库活跃度低，需观察其后续更新和在OLMo生态中的角色，适合关注开放LLM评测工具的团队。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "amitse/uiacli",
+      "project_brief_cn": "基于Windows UI自动化的命令行工具，让AI代理能通过无障碍API操控任何Windows桌面应用，实现计算机使用代理功能。",
+      "why_today_cn": "填补Windows桌面自动化空白，项目早期（2星），待验证其稳定性和实用性，值得作为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "anhb1/sales-outreach-automation-langgraph",
+      "project_brief_cn": "基于LangGraph的销售拓客自动化系统，可跨平台分析线索并生成个性化接触策略与材料，适合B2B销售团队使用。",
+      "why_today_cn": "候选观察中：项目完整但星数较低，需验证在真实场景的部署稳定性，值得持续关注其更新与社区反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "anomalyco/opencode",
+      "project_brief_cn": "开源AI编码助手，能理解仓库上下文生成补丁、配合测试回归，并支持代码分析与修改，适用于日常开发。",
+      "why_today_cn": "作为AI编码代理候选，凭借高星数值得观察；尚未确认广泛采用，需持续跟踪社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "anthropics/knowledge-work-plugins",
+      "project_brief_cn": "为Claude Cowork设计的插件集，面向知识工作者，增强检索、知识调用和上下文复用。",
+      "why_today_cn": "待确认候选：日增长267星，但具体插件功能和效果待查。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "anthropics/skills",
+      "project_brief_cn": "Anthropic 的代理技能公共仓库，提供现成的工具和工作流模板，帮助开发者快速集成到自己的AI代理中。",
+      "why_today_cn": "该项目因今日收获183 star而活跃，但作为历史补充观察，需确认其模板是否满足实际开发需求。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "apple/container",
+      "project_brief_cn": "Apple容器是一款在Mac上使用轻量级虚拟机创建和运行Linux容器的工具。它用Swift编写，针对Apple芯片优化，支持模型接入外部工具和接口。",
+      "why_today_cn": "Apple官方发布的容器工具，候选值得关注：它可能成为Mac上运行AI代理及工具连接的标准基础设施，生态潜力大。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:23.343Z"
+    },
+    {
+      "repo_full_name": "Atum246/keelead",
+      "project_brief_cn": "开源AI线索生成引擎，集成62个数据源，支持聊天界面、邮箱验证、公司调研及MCP服务器。",
+      "why_today_cn": "候选项目，多数据源与MCP集成有潜力，但实际效果和市场反馈尚待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "auto-use/Auto-Use",
+      "project_brief_cn": "Auto-Use 是端到端代理，可自动化操作系统、浏览器、网络搜索和代码编写，支持桌面与浏览器自动化。",
+      "why_today_cn": "待确认候选。功能覆盖全面，星数初具规模，但需验证多平台稳定性及真实场景表现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "Autoplay-AI/Autoplay-AI-SDK",
+      "project_brief_cn": "构建主动式、视觉化的客户支持代理SDK，帮助开发者快速部署智能客服。",
+      "why_today_cn": "客服代理方向候选，需补证实际部署案例和效果，适合继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "avelino/awesome-go",
+      "project_brief_cn": "Awesome Go 是一个精选的 Go 语言框架、库和软件资源列表，帮助开发者快速发现和学习高质量的 Go 生态工具。",
+      "why_today_cn": "作为资源汇总，可能为Agent开发提供Go生态线索，但其自身非Agent项目，待确认价值。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "awesome-selfhosted/awesome-selfhosted",
+      "project_brief_cn": "自托管服务的精选列表，收录大量可自行部署的自由软件网络服务和Web应用。",
+      "why_today_cn": "作为候选值得观察，因其资源丰富但作为项目库需要确认持续维护性和质量把控。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "aws/aws-cdk-rfcs",
+      "project_brief_cn": "AWS CDK RFCs是AWS CDK的RFC流程仓库，用于讨论和设计基础设施即代码的增强，间接支撑代理部署的底层能力。",
+      "why_today_cn": "作为候选项目，它影响代理依赖的云基础设施，但本身非工具，需观察其RFC对代理生态的具体贡献。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "aws/karpenter-provider-aws",
+      "project_brief_cn": "Karpenter是AWS开源的Kubernetes节点自动扩缩容工具，专为灵活、高性能和简化运维设计。它根据工作负载需求自动创建和移除节点，减少资源浪费。",
+      "why_today_cn": "作为候选观察，Karpenter在AWS生态中持续演进，但当前版本功能与成熟度待更多社区验证，适合关注其与原生K8s调度器的对比实践。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "awslabs/aidlc-workflows",
+      "project_brief_cn": "AWS 开源的多代理编排平台，用于定义和执行 AI 驱动的自适应工作流，支持将多个 agent 角色与工具编排成可重复执行的任务流程。",
+      "why_today_cn": "来自 AWS 实验室，star 数高且日增显著，但项目仍处早期候选阶段，需观察其实用性与社区反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:35.468Z"
+    },
+    {
+      "repo_full_name": "awslabs/cli-agent-orchestrator",
+      "project_brief_cn": "命令行AI代理编排工具，在终端中读写文件、执行命令并串联工具操作。",
+      "why_today_cn": "待确认候选：信息不足，仅703星，需进一步了解能力边界。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "awslabs/llrt",
+      "project_brief_cn": "LLRT是AWS实验性的轻量级JavaScript运行时，专为Serverless应用优化启动速度和冷启动性能，适合快速执行函数或代理工作流。",
+      "why_today_cn": "作为候选项目，LLRT由AWS实验室孵化，在Serverless代理场景有潜力，但功能待验证，值得持续观察其实际应用效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "awslabs/mcp",
+      "project_brief_cn": "AWS官方的MCP服务器集合，用于暴露工具能力，支持模型与AWS服务交互。",
+      "why_today_cn": "待确认候选：AWS背书但项目初期，功能和生态待观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "Awurama-22/instagram-reels-scraper",
+      "project_brief_cn": "高性能Instagram Reels数据抓取工具，将公开数据转化为结构化数据集，支持分析和营销决策。",
+      "why_today_cn": "候选项目满足社交媒体数据需求，但合规性和数据准确性仍待确认，需继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "Ayushsotiya/Ecommerce_clothing",
+      "project_brief_cn": "基于LangChain、LangGraph和Gemini AI的智能电商平台，支持对话式购物、实时议价和自动化商品上架。",
+      "why_today_cn": "集成了多种AI技术，但项目处于早期，实际效果和用户体验未知，作为候选需持续跟踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "badhope/Data-Agent",
+      "project_brief_cn": "基于CrewAI的多智能体数据助手，提供分析、知识查询等API与CLI，支持文档处理与自动化。",
+      "why_today_cn": "候选观察，多智能体数据处理框架，但星数少且生态待成熟。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "basilsajeev987/AI-Hedge-Fund-OS",
+      "project_brief_cn": "AI-Hedge-Fund-OS是一个机构级AI量化研究与交易系统，基于FastAPI和Next.js，集成多代理AI、量化分析、投资组合优化和实时市场情报，辅助金融决策。",
+      "why_today_cn": "定位专业级量化交易系统，候选阶段需验证其多代理AI和实时市场情报功能的实际效果，适合保持关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:46.292Z"
+    },
+    {
+      "repo_full_name": "berkayturanci/keel",
+      "project_brief_cn": "项目无关的issue到完成工作流骨架，将编码代理转化为任务所有者，支持CI和合并队列。",
+      "why_today_cn": "目标清晰但仅3星，成熟度低，候选观察其工作流引擎的实际可用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "bettyguo/computer_use_agent",
+      "project_brief_cn": "基于本地VLM的开源浏览器代理，采用AT树优先路由，内嵌拒绝机制，提供诚实基准测试。",
+      "why_today_cn": "待确认候选。创新路由策略，但星数极低，需进一步验证效果及社区采纳情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "Bigdata-com/bigdata-cookbook",
+      "project_brief_cn": "使用Bigdata API和RAG进行端到端金融文本分析，支持主题筛选、风险跟踪和自动化报告生成。",
+      "why_today_cn": "金融分析方向候选，处理规模文本能力突出，但需验证对实时市场数据的整合能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "blacklettertimeoff432/be-my-butler",
+      "project_brief_cn": "编排多个代理执行Claude Code工作流，具备跨模型验证，实现可靠的AI代码自动化。",
+      "why_today_cn": "跨模型验证提升代码生成可信度，减少错误，候选关注其与多种LLM的兼容性和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "boldsoftware/shelley",
+      "project_brief_cn": "Shelley 是一个编码代理，专注于辅助开发者编写代码，提供智能建议和自动化操作。",
+      "why_today_cn": "497 星表明社区关注度较高，但功能描述简洁，具体能力不明确，需进一步验证，列为候选。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:12.439Z"
+    },
+    {
+      "repo_full_name": "brokermr810/QuantDinger",
+      "project_brief_cn": "AI量化交易平台，支持加密货币、股票和外汇的回测与实盘交易，集成市场数据和多代理研究。",
+      "why_today_cn": "作为候选待确认项目，其多资产量化交易功能有潜力，但需进一步验证其代理研究和交易执行的可靠性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "browser-use/browser-use",
+      "project_brief_cn": "Browser Use 是一个让 AI Agent 能够自动化操作浏览器的工具，支持网页导航、填写表单和抓取数据。适用于需要在线交互的自动化任务。",
+      "why_today_cn": "作为浏览器自动化 Agent 工具，星数高且增长快。候选观察其在复杂网页交互中的稳定性和浏览器兼容性，以及是否成为 MCP 服务标准实现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "BuyWhere/buywhere-mcp",
+      "project_brief_cn": "基于MCP协议的跨区域商品搜索与比价工具，支持新加坡、东南亚及美国市场，为AI代理提供电商产品目录查询。",
+      "why_today_cn": "作为候选项目，其MCP服务可用于电商代理，但功能边界、用户群和成熟度尚待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "ByteDance-Seed/cryofm",
+      "project_brief_cn": "CryoFM是字节跳动Seed团队的开源基础模型，专用于冷冻电镜密度图，助力结构生物学研究中的数据分析。",
+      "why_today_cn": "作为候选项目，它是行业特定模型，与通用代理关联度低，但可能在科学代理方向有潜力，需进一步评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "bytedance/deer-flow",
+      "project_brief_cn": "Deer Flow 是一个开源的长时序 SuperAgent 框架，支持研究、编码和创作。通过沙箱、记忆、工具和子 Agent 处理分钟到小时级任务。",
+      "why_today_cn": "作为字节跳动出品的 Agent 框架，具备多 Agent 和记忆能力。候选观察其长任务处理效率和社区生态建设，以及是否进入主流 Agent 部署方案。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "Cashed-gravity8670/qyclaw",
+      "project_brief_cn": "多租户AI代理平台，支持隔离执行、分层内存管理和沙箱工具处理，面向企业工作流。",
+      "why_today_cn": "描述偏硬件（抓娃娃机），与AI关联弱，star少，候选观察其真正用途和进展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "CelestoAI/sdk",
+      "project_brief_cn": "Celesto 为AI代理提供安全隔离的云端计算机，支持代理在沙箱中执行浏览、编码等操作，确保安全可控。",
+      "why_today_cn": "待确认候选。项目为代理安全执行环境提供新方案，但星数低且功能较基础，需观察社区反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "changw98ic/codepatchbay",
+      "project_brief_cn": "本地运行的任务交接器，支持Codex和Claude Code之间的计划、执行、验证和审查。",
+      "why_today_cn": "专注本地交接，2星但方向明确，候选观察其与主流工具的兼容性和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "charliee1w/consolidation-memory",
+      "project_brief_cn": "Consolidation-Memory 为 AI 代理提供本地优先的持久记忆，基于 FAISS 和 SQLite 实现跨会话的存储、回忆和知识整合，提供 MCP 服务器，适用于 Claude Code、Cursor 等编码代理。",
+      "why_today_cn": "候选项目；专注本地记忆和知识整合，若跨会话效果显著，可为代理持久化提供可选方案，需关注其与主流代理的兼容性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "ChatPayStack/AI-Agent",
+      "project_brief_cn": "基于Telegram的电商代理平台，用户可浏览商品、提问和管理购物车，后端使用Redis队列和可扩展worker处理消息。",
+      "why_today_cn": "将购物代理嵌入流行聊天应用有实用性，但项目尚处早期，功能完整性和稳定性待验证，候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "CheezeGtM/guest-post-backlinks-tool",
+      "project_brief_cn": "通过自动化客座博客发布生成高质量外链，提升网站SEO和在线影响力。",
+      "why_today_cn": "候选项目定位SEO外链自动化，概念清晰，但尚未有实际案例证明其效果，需进一步验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "ChenVoid/Awesome-GUI-Agent",
+      "project_brief_cn": "GUI代理的精选资源列表，涵盖计算机使用、移动设备使用、浏览器使用和游戏代理等领域。",
+      "why_today_cn": "聚合类项目，便于跟踪领域进展，但3星且需持续维护，作为候选观察内容更新和相关工具趋势。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "chethanad5372/TradingAgents",
+      "project_brief_cn": "构建AI交易代理，用于市场研究、策略测试和决策支持，采用清晰的多代理框架进行金融分析与投资建议。",
+      "why_today_cn": "作为金融投研代理候选方向的多智能体框架，功能初步但方向明确，待确认交易策略的实际表现，值得关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "chipolataarmybase650/numcraft",
+      "project_brief_cn": "多代理LangGraph工作流，从自然语言生成安全的NC G代码，支持CNC工艺规划、刀具选择和路径优化。",
+      "why_today_cn": "将LLM引入精密制造领域，多代理协作处理复杂工艺，候选观察其在真实CNC场景下的可靠性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "chopratejas/headroom",
+      "project_brief_cn": "工具输出压缩库，在 LLM 前压缩日志、文件等，减少 60-95% token 而不影响回答质量，提供库/代理/MCP 服务。",
+      "why_today_cn": "日增 436 星表现亮眼，作为 token 优化基础设施候选，待确认其压缩效果在复杂 agent 工作流中的稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "cipher813/alpha-engine",
+      "project_brief_cn": "多智能体金融实验平台，集成ML预测、风险控制和回测器，在AWS上运行，用于算法交易研究。",
+      "why_today_cn": "候选项目面向量化金融，功能全面，但仍在实验阶段，需观察其实际交易表现和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "ClicShopping/ClicShopping",
+      "project_brief_cn": "开源的AI电商平台，支持B2B/B2C双模式，集成GPT、Claude等大模型，提供智能购物体验。",
+      "why_today_cn": "候选观察项，功能丰富的开源方案，但AI集成深度和社区活跃度需继续关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "coasty-ai/open-cowork",
+      "project_brief_cn": "Open-Cowork 是 Claude Co-Work 的开源替代，支持计算机使用代理实现浏览器自动化、桌面控制和代理工作流，由 Claude Fable 5/Claude Mythos 5 构建。",
+      "why_today_cn": "候选项目；提供计算机使用代理的开源方案，若功能接近原版，可填补替代品空缺，但项目活跃度待观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "commerce-agentic/agentic-commerce-benchmarks",
+      "project_brief_cn": "开放数据集，收录ChatGPT、Gemini等主流AI代理对购物推荐的匿名化结果，可用于基准研究和对比分析。",
+      "why_today_cn": "缺乏跨代理比较数据是当前痛点，该项目提供宝贵资源，但数据量和更新频率待观察，候选身份提醒谨慎依赖。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "commerce-agentic/agentic-commerce-spec",
+      "project_brief_cn": "一个开放规范，定义AI驱动商务的评分方法论、一致性级别和参考数据集，帮助评估购物代理对商品的可见性。",
+      "why_today_cn": "标准化是代理生态成熟的关键，该项目提出规范但尚未广泛应用，作为候选值得关注其社区采纳进展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "continuedev/continue",
+      "project_brief_cn": "Continue是一个开源的终端AI助手/Agent Shell，能帮你在命令行中读写文件、执行命令并串联工具操作，主要用于本地终端环境下的自动化任务。",
+      "why_today_cn": "作为候选项目值得关注：开源、星数高且持续增长，已有VS Code和JetBrains插件，但实际Agent能力需进一步验证，属于待确认观察阶段。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:33.309Z"
+    },
+    {
+      "repo_full_name": "cossistantcom/cossistant",
+      "project_brief_cn": "开源客户支持平台，提供完全可定制的AI支持代理，专为SaaS开发者和初创公司设计。",
+      "why_today_cn": "作为候选待确认项目，其开源AI客服平台有潜力，但需进一步验证其定制灵活性和实际部署效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "crewAIInc/crewAI",
+      "project_brief_cn": "CrewAI 是一个编排角色扮演、自主 AI Agent 的框架，支持角色分工和协作。用户可定义多个 Agent 角色，协同完成复杂任务。",
+      "why_today_cn": "作为多 Agent 协作框架，星数增长快。候选观察其角色编排的灵活性和性能，以及在企业级场景中的落地情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "daintreehq/daintree",
+      "project_brief_cn": "一个AI编程代理编排环境，支持Claude、Gemini和Codex，通过Git工作树管理会话，集成终端、上下文注入和工作流自动化。",
+      "why_today_cn": "候选项目值得继续观察，因为其多代理编排理念新颖，但功能尚在早期，需验证稳定性和用户体验。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "danilo1003/agent-team-orchestrator",
+      "project_brief_cn": "多智能体团队编排工具，通过文档驱动的工作流和标准化交接合约协调代理。",
+      "why_today_cn": "集成Hermes等框架但仅2星，候选观察其编排能力和企业级功能是否完善。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "DanMcInerney/architect-loop",
+      "project_brief_cn": "跨供应商 agent 循环工具，用 Claude 作为架构师、GPT 作为构建者，以仓库为记忆，实现多模型协作编码。",
+      "why_today_cn": "星数尚小但研究方向新颖，作为跨模型协作候选，待确认其在实际项目中的可靠性与可复用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "DeadWaveWave/opencove",
+      "project_brief_cn": "无限画布工作空间，集成 Claude Code、Codex 终端、任务和笔记，代理可在画布上协作完成研究和任务。",
+      "why_today_cn": "候选观察：1434星表明有一定关注，但目前功能围绕\"画布\"概念，实际代理协作效果需进一步观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "DefaultHQ/build-support-agent-skill",
+      "project_brief_cn": "基于DaanBot风格的客服代理技能构建剧本，聚焦RAG与交互流程设计，帮助快速搭建支持代理。",
+      "why_today_cn": "候选技能包，流程可复用性强，但需更多社区验证和实际案例补充。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "DekaPrayoga/AurixAgent",
+      "project_brief_cn": "终端中的自主多代理AI工作空间，拥有40+工具和280+技能，可编码、研究并执行真实任务，含验证码识别和浏览器控制。",
+      "why_today_cn": "功能丰富的多代理系统候选，但星数极少且未成熟，需观察其跨平台执行能力和用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:23.182Z"
+    },
+    {
+      "repo_full_name": "DemonDamon/AgenticX-DeepResearch",
+      "project_brief_cn": "基于多智能体协作的深度研究助理，自动进行网络搜索与知识发现，生成综合研究报告。",
+      "why_today_cn": "候选项目，多智能体深度研究概念有探索价值，但星数少且功能待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "DigitalPlatDev/FreeDomain",
+      "project_brief_cn": "FreeDomain 提供免费域名服务，让用户无需付费即可获得域名，适用于开发测试和个人项目。",
+      "why_today_cn": "与 AI Agent 无直接关联，虽星数高但用途可能偏离，待确认是否用于Agent的域名基础设施。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "dipankar/apollo-io-cli",
+      "project_brief_cn": "专为人类和AI代理设计的Apollo.io API命令行工具，支持销售线索获取与CRM操作。",
+      "why_today_cn": "候选工具，Agent-first设计好，但功能局限于Apollo.io生态，适用面待评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "Diptadeep-21/AI-REPRESENTATION-OPTIMIZER",
+      "project_brief_cn": "Merchanta AI通过语义分析、买家意图模拟和元数据诊断，帮助商家理解AI购物代理如何看待和推荐其产品，并给出AI可见性评分。",
+      "why_today_cn": "随着AI购物代理兴起，商家需要优化产品在代理中的排名；该项目聚焦此方向，目前仅2星，值得观察其实际效果和采纳情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "Divyansh487/TradingAgents-CN",
+      "project_brief_cn": "中文交易决策框架，集成大模型支持A股、港股和美股市场，简化量化交易分析。",
+      "why_today_cn": "中文投研框架候选，需验证实际交易效果，继续观察用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "duanyytop/agents-radar",
+      "project_brief_cn": "每日AI生态摘要工具，聚合10个信息源（GitHub、ArXiv等），自动生成中英文双语报告。",
+      "why_today_cn": "当日仅增1 star，作为候选，待确认其信息聚合的准确性和报告价值。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "duelHunter/whatsapp-agent-support",
+      "project_brief_cn": "基于AI的WhatsApp客服支持平台，集成RAG、多租户SaaS架构和Supabase认证。",
+      "why_today_cn": "候选观察中：场景具体但星数低，需补充实际部署案例和性能数据，适合持续追踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "DuhanJishnu/support-ai",
+      "project_brief_cn": "多智能体客服平台AssistFlow，旨在处理用户请求并提升支持效率。",
+      "why_today_cn": "候选观察中：描述有限且星数低，需补充具体实现和性能表现，适合继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "dungnotnull/phishing-immune-agent",
+      "project_brief_cn": "AI驱动的钓鱼检测平台，在隔离沙箱中用浏览器自动化、计算机视觉等分析可疑URL，抵御钓鱼攻击。",
+      "why_today_cn": "待确认候选。安全领域有差异化定位，但星数极少，需验证检测能力及用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "DuqueOM/ML-MLOps-Production-Template",
+      "project_brief_cn": "生产级ML模板，内含32个反模式编码、多云K8s及代理规则（AUTO/CONSULT/STOP），适用于Windsurf、Claude Code和Cursor。",
+      "why_today_cn": "待确认候选，针对MLOps领域的代理工作流模板，但星数极低且缺乏社区验证，需进一步观察实际应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:23.182Z"
+    },
+    {
+      "repo_full_name": "earendil-works/pi",
+      "project_brief_cn": "一个AI代理工具包，提供编码代理CLI、统一LLM API、TUI/Web UI库、Slack机器人和vLLM部署，帮助开发者构建和运行AI代理工作流。",
+      "why_today_cn": "作为候选待确认项目，其多功能编码代理工具集成度值得继续观察，但需进一步验证实际效果和社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "EimanTahir027/100-AI-Agents-independent-projects",
+      "project_brief_cn": "AI代理项目合集，从个人生产力代理到业务代理（运营、营销、HR、法律、金融），涵盖内容生成、摘要和数据分析。",
+      "why_today_cn": "作为金融分析代理候选，内容广泛但多为项目集合，需进一步确认具体代理的质量和可用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "elder-plinius/CL4R1T4S",
+      "project_brief_cn": "CL4R1T4S收集并泄露多家AI系统提示词，帮助开发者了解底层指令以进行提示工程和安全研究，适用于透明性分析与红队测试。",
+      "why_today_cn": "该项目持续更新大量系统提示词，吸引社区广泛关注，作为候选值得观察其对AI透明性的实际推动和后续争议。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:31.017Z"
+    },
+    {
+      "repo_full_name": "EleutherAI/bergson",
+      "project_brief_cn": "Bergson 是数据归因工具，用于分析神经网络训练数据对模型输出的影响，帮助开发者理解模型记忆行为并优化 RAG 系统的检索与知识调用。",
+      "why_today_cn": "作为 EleutherAI 出品的数据归因实验项目，虽未有成熟应用，但其方法可能改善 RAG 系统的可解释性，值得候选观察其后续发展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:09.454Z"
+    },
+    {
+      "repo_full_name": "Elfredaaroused655/claude-skills",
+      "project_brief_cn": "提供205个生产就绪的Claude Code技能和插件，覆盖工程、DevOps、营销和合规等任务，提升编码工具能力。",
+      "why_today_cn": "技能整合广度大，但实际质量和使用场景待确认，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "eracle/OpenOutreach",
+      "project_brief_cn": "LinkedIn自动化工具，用户描述产品和目标市场后，AI自动寻找潜在客户线索，用于销售外拓。",
+      "why_today_cn": "作为候选待确认项目，其LinkedIn自动化外拓功能有应用场景，但需确认与营销内容代理方向的契合度和使用合规性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "ericosiu/ai-marketing-skills",
+      "project_brief_cn": "一套开源的AI营销技能集合，涵盖增长实验、销售管道、内容运营、外拓、SEO和财务自动化，帮助营销团队提升效率。",
+      "why_today_cn": "作为候选待确认项目，其营销自动化技能集成度较高，但需进一步验证实际应用效果和社区支持。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "Ermias855/Intelligent_Customer_Agents",
+      "project_brief_cn": "多通道消息平台上的AI客服智能体，集成Dialogflow、ElevenLabs等，实现实时支持与意图分类。",
+      "why_today_cn": "候选观察中：技术栈丰富但星数不高，需确认多通道集成效果与实时分析能力，值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "ethanplusai/harvey",
+      "project_brief_cn": "基于Claude Code的自主销售代理，自动发现线索、撰写邮件、发送营销、处理回复并预约会议。",
+      "why_today_cn": "销售自动化候选，依赖Claude Max订阅，待确认独立性和扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "eve0415/cella",
+      "project_brief_cn": "Cella 是一个 Rust 编写的终端原生效容器 CLI，支持端口转发、SSH 代理和凭证转发，无需 VS Code，适配 AI 代理时代。",
+      "why_today_cn": "作为 devcontainer CLI 的高性能替代，Cella 与 AI 代理集成紧密，但仅 2 星，功能待验证，列为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:12.439Z"
+    },
+    {
+      "repo_full_name": "f/prompts.chat",
+      "project_brief_cn": "一个社区驱动的提示词分享平台，支持发现、收藏和分享ChatGPT等LLM的提示词，提供开源自托管版本用于组织内部协作。",
+      "why_today_cn": "作为提示词资源集合仍在活跃更新，但如果要成为正式项目，需验证其使用场景和用户价值是否足够独特。继续观察其社区增长和功能演进。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:03.371Z"
+    },
+    {
+      "repo_full_name": "Faiz07yo/digital-marketing-pro",
+      "project_brief_cn": "数字化营销一站式工具集，整合SEO、自动化、内容发布、CRM同步和多客户机构管理，帮助团队提效。",
+      "why_today_cn": "功能覆盖广，但集成深度和实际效果待验证，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "farion1231/cc-switch",
+      "project_brief_cn": "跨平台桌面AI助手，集成Claude Code、Codex等多种终端AI，支持本地文件操作与命令执行，实现开发与桌面操作统一入口。",
+      "why_today_cn": "日增469星且破10万星，多模型集成能力亮眼，但作为候选需观察其生态持续性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "firecrawl/firecrawl",
+      "project_brief_cn": "提供API用于大规模搜索、抓取网页并转换为Markdown，支持AI数据处理和RAG知识库构建。",
+      "why_today_cn": "待确认候选：作为AI抓取基础设施，热度持续，但功能细节需进一步验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "flutter/flutter",
+      "project_brief_cn": "Flutter 是 Google 的跨平台 UI 开发框架，支持从单一代码库构建移动、Web 和桌面应用，强调快速开发与原生性能。",
+      "why_today_cn": "虽非 AI 原生项目，但作为跨平台框架可能成为 Agent 界面的基础设施，其AI生态待确认，作为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "Fxsin/Scientra-Copilot",
+      "project_brief_cn": "将研究论文转化为可搜索知识生态，支持PDF导入、知识提取、研究图谱构建和AI代理交互。",
+      "why_today_cn": "候选项目面向文献管理，概念好但星数少，需观察用户采纳情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "get-zeked/perplexity-super-skills",
+      "project_brief_cn": "整合Perplexity与Claude Code能力的12项超级技能集，覆盖AI代理、开发、营销、销售、金融、法务、项目管理、运营、研究、内容、安全和Token效率等领域。",
+      "why_today_cn": "作为营销内容与增长运营代理方向的候选，技能覆盖面广，但需进一步验证实际应用效果与集成稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "getaero-io/gtm-eng-skills",
+      "project_brief_cn": "面向Claude Code的10个GTM AI技能，包括邮件富化、目标市场构建、信号发现、职位变更检测和外呼自动化。",
+      "why_today_cn": "销售拓客方向候选，集成了28+数据提供商，但作为候选需评估输出线索的准确性和数据合规性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "Git0HubPerson/Telegram-Members-Adder",
+      "project_brief_cn": "自动向Telegram群组或频道添加目标成员的工具，帮助社群运营者节省时间、提升互动增长，适用于营销推广。",
+      "why_today_cn": "Telegram私域增长需求旺盛，但工具正规性及抗封能力待确认，作为候选需关注其合规与稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "Global-Support-Standard/global-support-standard",
+      "project_brief_cn": "电商客户支持开放协议，通过标准化接口暴露订单、退货、发货与支持策略，让AI代理实现完全自助服务。",
+      "why_today_cn": "候选协议项目，标准化思路新颖，但尚未看到实际采用案例，值得观察生态发展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "gojue/moling",
+      "project_brief_cn": "基于计算机使用和浏览器使用的MCP服务器，本地部署、无依赖的办公AI助手，可操控桌面和浏览器。",
+      "why_today_cn": "335星相对活跃，定位明确，但尚属早期，待确认其在真实办公场景中的稳定性和功能完整性，作为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "google-deepmind/mujoco",
+      "project_brief_cn": "MuJoCo 是一个通用物理模拟器，专注于多关节动力学与接触仿真，广泛用于机器人学和物理交互场景的模拟与训练。",
+      "why_today_cn": "作为 DeepMind 旗下的物理引擎，在机器人模拟领域影响力大，但尚未明确 Agent 应用，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "google-gemini/gemini-cli",
+      "project_brief_cn": "Gemini CLI 是一个终端 AI 助手，将 Gemini 能力带到命令行。支持文件读写、命令执行和工具调用，方便开发者直接在终端中与 AI 交互。",
+      "why_today_cn": "作为谷歌官方 CLI Agent，具备 MCP 客户端功能。候选观察其终端任务执行效率和与 Gemini 服务的集成深度，以及是否成为开发者常用工具。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "google/android-cuttlefish",
+      "project_brief_cn": "Cuttlefish是Google支持的Android虚拟设备管理工具，提供主机端支持包，用于管理和运行Android模拟实例。",
+      "why_today_cn": "作为候选项目，它可用于代理测试Android环境，但工具与代理集成度不明确，需评估其实际应用场景。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "google/fonts",
+      "project_brief_cn": "Google Fonts 库提供大量开源字体文件，并附带公共问题跟踪器，用于字体的分发和社区维护。",
+      "why_today_cn": "设计资源项目，暂无Agent相关功能，仅作为广泛使用的开源字体库保持候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "google/skills",
+      "project_brief_cn": "Google产品与技术的Agent技能集合，提供现成技能和流程模版，帮助开发者快速集成Google服务。",
+      "why_today_cn": "Google官方项目，但内容为资源包而非独立Agent，作为候选需确认其实际使用频率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "google/tunix",
+      "project_brief_cn": "Tunix是Google开源的一个轻量级大语言模型后训练库，支持微调、对齐等训练后优化步骤，旨在简化模型定制流程。",
+      "why_today_cn": "候选观察：来自Google的LLM后训练工具，技术潜力大但尚在早期，社区贡献和文档完善度需持续跟踪，适合关注轻量化训练方案时留备选。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "GoogleCloudPlatform/knowledge-catalog",
+      "project_brief_cn": "Google Cloud知识目录工具和示例，帮助用户组织资料检索、知识调用与上下文复用。",
+      "why_today_cn": "作为候选值得观察，源于Google生态但独立项目活跃度待确认，集成价值需评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "GorvGoyl/Clone-Wars",
+      "project_brief_cn": "Clone-Wars收录了100多个知名网站（如Airbnb、Netflix等）的开源克隆项目，每个项目附带源码、演示链接和技术栈，适合学习和参考。",
+      "why_today_cn": "作为候选，该项目集合了众多克隆项目，但质量参差不齐，部分项目可能过时，适合开发者在做类似项目时保持观察和筛选。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "goww7/yassir-oss",
+      "project_brief_cn": "开源AI研究代理，专注于清真金融和符合伊斯兰教法的投资分析，帮助用户进行金融研究和合规投资决策。",
+      "why_today_cn": "作为金融分析代理候选，领域垂直但功能尚需验证，值得关注其实际分析能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "Grail-Computer/Nickelium",
+      "project_brief_cn": "用Rust完全构建的Agent优先浏览器，不依赖CDP、Chrome或browser-use，可直接供AI代理使用。",
+      "why_today_cn": "技术路线独特，直接从底层构建，但仅2星，尚处早期，需观察其成熟度和社区采纳情况，列为候选。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "haoyiyin/basjoo",
+      "project_brief_cn": "基于FastAPI和Next.js的开源AI客服平台，集成RAG知识库、多提供商LLM代理和可嵌入聊天组件。",
+      "why_today_cn": "客服方向候选，技术栈现代，但有待确认在并发高负载下的稳定性和插件生态。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "henry-yim-software/Real-Time-AI-Voice-Agent-SaaS",
+      "project_brief_cn": "基于NVIDIA PersonaPlex架构的实时AI语音代理Sarah，专为电商客服提供低延迟、全双工自然对话体验。",
+      "why_today_cn": "电商语音客服方向前景好，但依赖NVIDIA架构且stars有限，作为候选需验证生产级表现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "hiyouga/LlamaFactory",
+      "project_brief_cn": "百种大模型统一高效微调框架，ACL 2024背书，支持LoRA、QLoRA等，帮助开发者快速适配和优化模型。",
+      "why_today_cn": "当日star增长平稳，无实时热点，作为微调领域标准工具，长期跟踪其生态发展。候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "HKUDS/CLI-Anything",
+      "project_brief_cn": "终端AI助手，可在命令行中读写文件、执行命令并串联工具操作，支持浏览器和桌面环境控制，帮助用户通过自然语言驱动终端。",
+      "why_today_cn": "作为候选项目值得观察，因其GitHub超4万星热度高，且致力于让所有软件原生支持AI代理，是终端代理方向的前沿探索。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:27.163Z"
+    },
+    {
+      "repo_full_name": "HKUDS/LightRAG",
+      "project_brief_cn": "LightRAG 是一个轻量级检索增强生成框架，帮助用户快速实现文档检索与语义搜索，提升知识调用效率。",
+      "why_today_cn": "作为候选值得观察，因其在RAG领域的创新设计，但实际效果和社区反馈待进一步确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "HKUDS/Vibe-Trading",
+      "project_brief_cn": "个人交易 agent 框架，整合市场信息、算法交易与多智能体协作，支持行情研究、策略回测和决策支持。",
+      "why_today_cn": "日增 261 星，作为金融 agent 候选，待确认其交易策略的实证效果与实时数据接入的可靠性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "HKUDS/ViMax",
+      "project_brief_cn": "智能体式视频生成框架，整合导演、编剧、制片和视频生成功能，一站式完成视频创作。",
+      "why_today_cn": "创新视频生成Agent候选，但来自学术团队，落地规模待验证；高星数值得关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "huabeitech/agent-desk",
+      "project_brief_cn": "开源AI客服系统，支持多LLM代理、RAG知识库和即用即付计费，提供人性化操作界面。",
+      "why_today_cn": "客服方向候选，功能较完整，但作为候选需观察其在多语言场景和复杂工单处理上的表现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "huggingface/lerobot",
+      "project_brief_cn": "LeRobot 是 Hugging Face 推出的机器人端到端学习框架，旨在让 AI 机器人技术更易用。",
+      "why_today_cn": "作为候选观察，虽获 44 星增长，但项目侧重机器人学习，与常规 Agent 或有差距，需后续验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "huggingface/transformers",
+      "project_brief_cn": "业界标准Transformers模型库，封装数千预训练模型，支持文本、视觉、多模态的推理与训练，是AI开发核心底座。",
+      "why_today_cn": "日增5星但根基深厚，作为基础设施候选，观察其在Agent生态中的扩展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "huggingface/trl",
+      "project_brief_cn": "trl（Transformer Reinforcement Learning）是Hugging Face提供的库，支持使用强化学习训练Transformer语言模型，常用于RLHF等对齐方法。",
+      "why_today_cn": "候选观察：trl在LLM对齐领域有重要潜力，但当前版本与框架集成成熟度待验证，适合关注RLHF实践时作为备选工具持续跟踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "ibahgat/oh-my-iflow",
+      "project_brief_cn": "多代理智能命令行工作流，内置支持Python、Rust、Go和Shell语言，提升终端生产效率。",
+      "why_today_cn": "简化多语言开发流程，多代理编排提高命令行效能，候选关注其多语言支持和实际采用情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "iFurySt/aifi",
+      "project_brief_cn": "AI驱动的金融研究智能工作空间，帮助用户整合投资信息、生成洞察，支持决策研究自动化。",
+      "why_today_cn": "项目聚焦AI+金融研究，待确认候选值得继续观察，需补证具体功能和用户规模。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "iliaal/whetstone",
+      "project_brief_cn": "AI开发工具集，提供19个代理、22个命令、30个技能，支持代码审查、研究和自动化。",
+      "why_today_cn": "功能丰富但star仅23，候选观察其技能质量和实际开发体验。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "infinitywings/rka",
+      "project_brief_cn": "研究知识代理，提供MCP服务器、REST API和React仪表板，用于AI辅助研究编排。",
+      "why_today_cn": "候选项目架构清晰，但星数12，需观察社区反馈和功能完善度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "iptv-org/iptv",
+      "project_brief_cn": "iptv-org收集了全球可公开访问的IPTV频道列表，以M3U播放列表形式提供，用户可直接在播放器中观看来自世界各地的电视直播。",
+      "why_today_cn": "候选观察：项目持续更新频道源，但稳定性与合法性存在风险，适合作为娱乐或测试源，不适合生产环境，需关注社区维护状况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "irfanbob26/AI-Chatbot",
+      "project_brief_cn": "基于Python、NLP和Flask构建的AI聊天机器人，通过意图识别和动态响应自动化客户支持查询，适用于客服场景。",
+      "why_today_cn": "作为客服代理方向的候选项目，尽管功能尚未完全验证，但技术栈规范，值得持续观察其实际效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "itechmeat/open-second-brain",
+      "project_brief_cn": "Open Second Brain 是一个为 Hermes Agent 设计的本地优先记忆系统，驻留在 Obsidian 中记录项目上下文，通过夜间梦境将反复修正转化为可信偏好，已适配 Claude Code、Codex 和 OpenClaw。",
+      "why_today_cn": "候选项目；提供记忆持久化机制，若证明能减少重复修正，有潜力提升编码代理的连续性，需观察其记忆准确性和扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "itmisx/deepx-code",
+      "project_brief_cn": "深度定制于DeepSeek的编码代理，支持模型路由、CodeGraph代码图谱、OCR截图识别和自动上下文压缩，帮助用户高效编码并节省Token。",
+      "why_today_cn": "作为DeepSeek生态的coding agent候选，功能专精但社区尚未广泛验证，值得观察其实际效果和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:23.182Z"
+    },
+    {
+      "repo_full_name": "itohnobue/research-agent-claude-code",
+      "project_brief_cn": "为Claude Code设计的研究智能体，可处理50+结果并搜索领域知识，提升代码开发效率。",
+      "why_today_cn": "候选观察，与Claude Code结合有潜力，但项目早期需更多验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "itohnobue/research-agent-opencode",
+      "project_brief_cn": "为Open Code打造的研究智能体，支持每次请求处理50+结果，搜索领域知识数据。",
+      "why_today_cn": "候选观察，处理能力有特色，但星数低且开源生态尚小。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "ivankuznetsov/hive",
+      "project_brief_cn": "Hive 是一个代理编排工具，将编码代理从构思到合并 PR 的过程分为九个可检查阶段，每一步生成 markdown 制品，支持手动干预。",
+      "why_today_cn": "工作流设计有价值，但星数 20、用户反馈有限，需更多实际使用验证其效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:29.638Z"
+    },
+    {
+      "repo_full_name": "jammsen/docker-coding-agent-sandbox",
+      "project_brief_cn": "这是一个为编码代理加固的 Docker 沙箱环境，支持 Docker Compose，通过强化配置隔离代理运行，适用于需要安全执行编码任务的场景。",
+      "why_today_cn": "候选项目；提供代理运行的安全隔离方案，若安全性和易用性平衡得当，可能成为编码代理的标准沙箱，需观察其社区采用情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "jawwad-ali/ai-customer-support-agent",
+      "project_brief_cn": "通过OpenAI Agents SDK和FastAPI构建的AI客服代理，支持Gmail、WhatsApp和网页渠道，具备语义搜索功能。",
+      "why_today_cn": "多通道集成AI客服概念可行，但实际部署效果和稳定性待验证，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "JeffBrines/openfpa",
+      "project_brief_cn": "为AI编码代理打造的财务规划与分析工具套件，集成已验证的财务模型、公司记忆和研究循环，以改进预测。",
+      "why_today_cn": "作为金融投研代理候选方向的工具，专为AI编码代理设计，待确认其预测准确性和实用性，值得观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "JKHeadley/instar",
+      "project_brief_cn": "Instar 为 Claude Code 代理提供持久化能力，支持调度、会话、记忆及 Telegram 交互，实现长期自主运行。",
+      "why_today_cn": "填补 Claude Code 持久化空白，66 星有潜力，但项目早期，调度和记忆稳定性待确认，暂为候选。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:12.439Z"
+    },
+    {
+      "repo_full_name": "joce004/AI-Chatbot",
+      "project_brief_cn": "基于Python的智能AI聊天机器人，通过简单Web界面自动化客服并提升用户交互体验。",
+      "why_today_cn": "候选观察中：功能基础但星数少，待补充更多实际案例和文档，适合作为候选持续关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "josephfung/curia",
+      "project_brief_cn": "开源CEO数字办公室，涵盖沟通、日程、研究等，采用治理优先的多代理架构。",
+      "why_today_cn": "候选项目定位独特，但星数仅5，需观察功能落地和社区参与。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "josephsenior/Grinta-Coding-Agent",
+      "project_brief_cn": "本地优先的自主编码代理，可端到端规划、执行、验证并完成软件任务，支持MCP协议。",
+      "why_today_cn": "新兴的本地优先编码代理候选，功能完整但星数有限，需观察其自主任务完成能力和扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:23.182Z"
+    },
+    {
+      "repo_full_name": "jrr996shujin-png/kol-ops-suite",
+      "project_brief_cn": "AI驱动的影响力营销运营套件，支持KOL筛选、触达、评估、简报、内容质检、直播监控和复盘，9项技能通过自然语言调用。",
+      "why_today_cn": "作为营销内容代理候选，功能链条完整，但依赖OpenClaw平台，需验证实际集成效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "kernel/claude-managed-agents-kernel",
+      "project_brief_cn": "结合Claude托管代理与Kernel云浏览器的配方手册，实现并行计算机使用代理群，保障API密钥安全。",
+      "why_today_cn": "待确认候选。面向Claude用户提供示范方案，但星数低且实用价值待评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "kernel/ts-stagehand-google-cua-agent",
+      "project_brief_cn": "基于TypeScript的Kernel应用，演示通过Stagehand和Google Gemini 2.5模型实现计算机使用代理（CUA）能力用于浏览器自动化。",
+      "why_today_cn": "结合Stagehand和Gemini最新模型，但仅3星且为演示项目，待验证其通用性和实际部署价值，列为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "khanhthanhdev/infi",
+      "project_brief_cn": "个人AI投研代理，从多渠道获取数据源并生成带有来源链接的分析报告，辅助股票与投资组合研究。",
+      "why_today_cn": "候选项目，数据源集成方式有亮点，但报告质量与金融合规待进一步观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "kukuhtw/toko_kopi",
+      "project_brief_cn": "面向咖啡店的AI代理电商平台，实现订单自动化、客户服务和忠诚度管理，支持多门店运营。",
+      "why_today_cn": "作为候选项目，专注细分垂直领域，但语言局限为印尼语，适用性和推广情况待考察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "KyaniteLabs/tastecheck",
+      "project_brief_cn": "TasteCheck 为 AI 编码代理提供 15 项前端技能，通过审查或审计将设计系统落地为 token，验证排版、OKLCH 颜色、状态、表单、图表、无障碍和反垃圾输出，提升代理前端质量。",
+      "why_today_cn": "候选项目；作为编码代理的前端技能包，若验证有效可解决代理输出混乱问题，值得持续观察其社区反馈和更新频率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "langchain-ai/deepagents",
+      "project_brief_cn": "LangChain出品的Agent框架，提供电池齐全的开发工具，支持构建复杂多步骤AI代理，适用于自动化工作流。",
+      "why_today_cn": "日增100星，背靠LangChain生态，但作为新项目待验证社区采纳度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "langchain-ai/langchain",
+      "project_brief_cn": "LangChain 是一个 Agent 工程平台，帮助开发者构建基于大语言模型的应用。核心能力包括链式调用、工具集成和智能体编排，支持多种语言模型和外部数据源连接。",
+      "why_today_cn": "作为 Agent 开发的基础框架，LangChain 持续更新组件和生态集成。候选观察其在新 Agent 模式下的演进，尤其是对多智能体和工具的扩展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "langchain-ai/open-swe",
+      "project_brief_cn": "开源异步编码Agent，通过理解仓库上下文自动生成补丁并执行测试回归，提升代码修复效率。",
+      "why_today_cn": "LangChain旗下项目，但星数较低，作为编码Agent候选需进一步观察其实际效果和社区反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "langflow-ai/langflow",
+      "project_brief_cn": "可视化多智能体编排平台，通过拖拽式界面构建和部署 AI 工作流，支持 400+ 集成与自定义代码。",
+      "why_today_cn": "星数近 15 万但增速平缓，作为成熟编排框架候选，待确认其在 agent 场景下与 n8n 等竞品的差异化优势。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "langfuse/langfuse",
+      "project_brief_cn": "开源LLM工程平台，提供可观测性、指标、评估、提示管理、实验沙盒和数据集。集成OpenTelemetry、LangChain、OpenAI SDK等，帮助开发者调试、评测和监控LLM应用。",
+      "why_today_cn": "日增星99+，社区活跃度高；作为LLM可观测性和评测领域的候选项目，值得持续观察其功能演进和生态集成进展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:20:59.052Z"
+    },
+    {
+      "repo_full_name": "langgenius/dify",
+      "project_brief_cn": "生产级AI应用开发平台，支持低代码构建RAG、Agent工作流，集成多模型，帮助开发者快速部署智能助手。",
+      "why_today_cn": "当日增长63星，虽未进本次实时源，但作为成熟平台，用户活跃，可持续观察其新特性。候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "LeadMagic/gtm-skills",
+      "project_brief_cn": "汇集205个生产级GTM代理技能，覆盖销售、外联、RevOps、PLG、客户成功等25类，支持MCP集成。",
+      "why_today_cn": "销售自动化技能库内容全面，但此为技能集合而非完整项目，作为候选需观察实际落地案例。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "leeguooooo/iphone-use",
+      "project_brief_cn": "iPhone-Use 让 AI 代理通过 macOS iPhone 镜像控制真实 iPhone，支持低延迟 WebRTC 视频、类原生触摸、HTTP API 和 MCP，基于 Rust 构建。",
+      "why_today_cn": "候选项目；聚焦 iPhone 代理控制的独特场景，若控制精度和延迟表现优秀，可开辟移动代理新方向，需观察其设备兼容性和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "leonleiwang/ShopMind-AI",
+      "project_brief_cn": "AI原生对话式电商平台，基于LangGraph、MCP和RAG多代理协作，将购物从搜索转为对话。",
+      "why_today_cn": "候选待确认，技术架构先进，但stars仅2，项目仍早期，功能和实际效果需验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "lfnovo/open-notebook",
+      "project_brief_cn": "开源Notebook LM实现，支持自托管，提供灵活的笔记、知识管理和AI辅助学习功能。",
+      "why_today_cn": "待确认候选：日增长191星，但项目成熟度和实际体验待评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "limecloud/lime",
+      "project_brief_cn": "面向中文创作者的AI内容工作台，集成写作、研究、提示词库、知识库和多模型工作流。",
+      "why_today_cn": "候选项目针对性强且星数较高，但功能复杂性待观察，需确认稳定使用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "limuran117-coder/Scenic-Area-Marketing-CN",
+      "project_brief_cn": "AI驱动的景区全渠道营销运营系统，融合数据驱动、知识管理和流程自动化，协助景区提升线上影响力。",
+      "why_today_cn": "针对景区垂直场景，但实际数据和用户反馈待补充，作为候选值得观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "linny006/agent-eval-harness",
+      "project_brief_cn": "Agent Eval Harness 是一个开源实时基准测试工具，用于对比不同 AI 编码代理在真实 GitHub Issue 上的表现，数据自动更新。",
+      "why_today_cn": "评估工具对代理生态重要，但项目仅 2 星、非常早期，需关注后续数据质量和社区贡献。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:29.638Z"
+    },
+    {
+      "repo_full_name": "linroger/DeepResearchForecast",
+      "project_brief_cn": "一键式深研预测工具：输入提示词后自动搜索网络、构建知识图谱、运行多代理人口模拟，生成预测报告。",
+      "why_today_cn": "候选观察：自动化推理链路新颖，但项目早期（5星），预测准确性和实用性待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "llm-jp/awesome-japanese-llm",
+      "project_brief_cn": "日语大模型资源列表，整理模型、工具、论文，帮助开发者快速了解日语LLM生态。",
+      "why_today_cn": "当日无增长，但作为日语LLM入口，随日语模型发展可能升温。候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "LMCache/LMCache",
+      "project_brief_cn": "LMCache 提供最快的 KV 缓存层，用于加速 LLM 推理，支持多种硬件和框架。",
+      "why_today_cn": "作为候选观察，项目为 AI 基础设施，但非直接 Agent 工具，其 Agent 潜力有待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "LOWERTOP/Shadowrocket-First",
+      "project_brief_cn": "Shadowrocket配色与配置项目，帮助用户个性化代理工具界面并优化配置流程。",
+      "why_today_cn": "作为候选值得观察，因其在代理工具定制化方面的探索，但适用范围有限需进一步观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "madderangelfoodcake950/OpenMOSS",
+      "project_brief_cn": "构建和管理自组织多代理系统，用于OpenClaw平台，提升复杂工作流的自动化和协调能力。",
+      "why_today_cn": "探索代理自组织协作，涉及音频/机器人多模态扩展，候选评估其系统复杂度与实际效能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "mahmut433/awesome-ai-gtm",
+      "project_brief_cn": "AI代理和工具资源列表，帮助构建从构思到客户成功的Go-to-Market漏斗，涵盖营销、销售和自动化。",
+      "why_today_cn": "作为销售拓客代理候选，资源聚合性强，但本身非可运行代理，需持续观察其推荐质量。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "majiayu000/spellbook",
+      "project_brief_cn": "跨运行时AI代理技能库，为Claude Code、Codex等提供可复用的编码、审查等技能。",
+      "why_today_cn": "210星且跨运行时设计有亮点，但功能细节尚不明确，候选观察其技能覆盖度和兼容性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "markoblogo/AGENTS.md_generator",
+      "project_brief_cn": "安全默认的Python CLI与MCP服务器，生成、检查并更新AGENTS.md等AI文档，支持差分更新和可选LLM增强，帮助AI编码代理理解项目意图。",
+      "why_today_cn": "聚焦AI代理文档标准化和精准更新，解决LLM上下文丢失痛点，候选观察其在实际开发流程中的采纳率和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "mason-cao/multi-agent-customer-intelligence-dashboard",
+      "project_brief_cn": "一站式多智能体客户智能仪表盘，集成合成工作区生成、特征工程、流失评分、情感分析、推荐与安全查询功能。",
+      "why_today_cn": "候选项目，全栈8智能体设计思路完整，适合持续观察其在客服分析场景的实际表现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "mastra-ai/mastra",
+      "project_brief_cn": "基于 TypeScript 的 AI 应用和 agent 构建框架，提供工作流、评估、语音等工具，适合现代全栈开发。",
+      "why_today_cn": "日增 46 星，作为新晋框架候选，待确认其与 LangChain 等竞品相比的独特性及社区采纳速度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "mayooear/ai-company-researcher",
+      "project_brief_cn": "基于LangGraph和Firecrawl的AI代理，自动化公司调研和潜在客户挖掘，帮助销售团队快速获取目标客户信息。",
+      "why_today_cn": "销售拓客方向候选，自动化调研流程清晰，但需确认在不同行业数据源上的准确性和可扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "maziyarpanahi/openmed",
+      "project_brief_cn": "开源医疗AI平台，支持本地部署，提供NLP、PII检测、多模型接入等功能，帮助开发者快速构建医疗相关的智能应用。",
+      "why_today_cn": "当日star增长约46，社区关注度提升，但未命中实时新鲜源，作为候选观察其医疗场景落地进展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "Mdirman/Notion-AI-CRM-Agents",
+      "project_brief_cn": "在Notion中集成AI代理，自动执行线索评分、调研和优先级排序，帮助销售团队更高效地管理CRM工作流。",
+      "why_today_cn": "结合Notion与AI自动化CRM管理，场景新颖，但实际效果和可靠性待确认，作为候选值得观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "mem0ai/mem0",
+      "project_brief_cn": "为AI Agent提供通用记忆层，支持长期上下文维护，帮助应用在对话中保持知识连贯，提升智能交互体验。",
+      "why_today_cn": "日增数据不可得，但5.8万星表明关注度高，作为记忆组件候选需评估实际集成效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "mem0ai/memory-benchmarks",
+      "project_brief_cn": "面向记忆增强LLM系统的开源评测套件，帮助开发者比较模型/代理性能、复现失败用例并做回归验证。",
+      "why_today_cn": "作为候选观察：来自mem0ai的新项目，尚处起步阶段（46星），但切入记忆评测稀缺方向，值得跟踪后续迭代。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:15.518Z"
+    },
+    {
+      "repo_full_name": "Merit-Systems/agentcash-gtm-agent",
+      "project_brief_cn": "GTM智能体模板，提供销售线索探索、丰富与外联功能，基于按次付费API调用。",
+      "why_today_cn": "候选模板，按次付费模式有商业可行性，但API覆盖范围和集成深度仍需观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "meyz664K/auto-re-agent",
+      "project_brief_cn": "自动化二进制分析工具，通过LLM代理与Ghidra协同，实现可扩展的逆向工程工作流。",
+      "why_today_cn": "候选项目结合AI和逆向工程有潜力，但星数少，项目尚早，待验证实用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "microsoft/AI-Engineering-Coach",
+      "project_brief_cn": "AI Engineering Coach 是微软推出的项目，旨在通过智能指导帮助开发者更好地进行工程化AI开发，提升效率。",
+      "why_today_cn": "微软在Agent工程领域的布局，但具体功能和实现细节尚待披露，目前作为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "microsoft/PowerToys",
+      "project_brief_cn": "微软开发的 Windows 系统增强工具集，提供高级粘贴、窗口管理、颜色选取、批量重命名等功能，让用户通过自定义操作提升日常工作效率。",
+      "why_today_cn": "工具集功能丰富且持续更新，今日新增 86 星，增速健康，但作为辅助工具类项目，需观察其与 AI 工作流代理的集成深度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:11.283Z"
+    },
+    {
+      "repo_full_name": "microsoft/qlib",
+      "project_brief_cn": "微软开源的AI量化投资平台，支持多种机器学习范式，用于量化研究、建模和生产部署，帮助金融从业者开发交易策略。",
+      "why_today_cn": "作为候选待确认项目，其AI量化平台定位清晰，但需确认其代理功能是否足够独立和先进。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "microsoft/vscode",
+      "project_brief_cn": "流行的开源代码编辑器，支持扩展、调试和AI编程助手，是开发者核心IDE。",
+      "why_today_cn": "待确认候选：成熟项目，但作为代理工具整合待观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:49.991Z"
+    },
+    {
+      "repo_full_name": "minamagdyyyy/agentic-marketing",
+      "project_brief_cn": "为Claude Code提供模块化营销技能，支持战略规划、渠道执行和营销自动化，打造全栈营销工作流。",
+      "why_today_cn": "填补营销领域代理技能空白，crm集成和Playwright自动化值得观察，候选验证实际营销场景适配性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "MiniMax-AI/MSA",
+      "project_brief_cn": "MSA 是 MiniMax AI 的一个项目，具体功能尚不明确，可能涉及多智能体或模型服务架构。",
+      "why_today_cn": "来自 MiniMax AI 且近期星数增长，但描述和代码信息不足，需要更多证据来确认其Agent能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "mistralai/mistral-finetune",
+      "project_brief_cn": "Mistral Finetune是Mistral AI提供的模型微调工具，帮助用户串联代理执行或流程自动化链路，适应特定任务需求。",
+      "why_today_cn": "作为候选项目，Mistral官方出品有潜力，但当前描述模糊，微调功能与代理的集成尚待明确，需持续关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "modelcontextprotocol/inspector",
+      "project_brief_cn": "MCP 服务器的可视化测试工具，帮助开发者调试、查看 MCP 暴露的工具能力及交互过程，常用于协议开发与集成场景。",
+      "why_today_cn": "作为 MCP 生态的关键辅助工具，日增 14 星显示社区关注度持续上升，待确认其在实际开发中的广泛采用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:05.617Z"
+    },
+    {
+      "repo_full_name": "modelcontextprotocol/typescript-sdk",
+      "project_brief_cn": "Model Context Protocol 的官方 TypeScript SDK，用于构建 MCP 服务器和客户端。",
+      "why_today_cn": "作为候选观察，MCP 生态重要组件，但 SDK 本身非用户直接使用的 Agent，需进一步观察其应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "morganlinton/AgenticCommerceAgent",
+      "project_brief_cn": "一个简单的购物代理，追踪商品价格并触发警报，帮助用户智能监控目标商品降价。",
+      "why_today_cn": "价格监控场景清晰，但功能过于简单且stars少，作为候选需关注后续迭代与用户价值。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "music-assistant/server",
+      "project_brief_cn": "Music Assistant 是一个开源媒体库管理器，可连接流媒体服务和各类智能音箱。服务器需在常开设备上运行，如 Raspberry Pi、NAS 或 Intel NUC。",
+      "why_today_cn": "作为候选观察，其 star 增长活跃（+65），但核心定位偏媒体管理，是否转化为通用 Agent 待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "n8n-io/n8n",
+      "project_brief_cn": "公平代码工作流自动化平台，支持可视化构建与 AI 能力，可自托管或云端，拥有 400+ 集成用于任务自动化。",
+      "why_today_cn": "星数 19 万但增量一般，作为成熟平台候选，待确认其 AI agent 原生能力是否领先于 Langflow 等后起之秀。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "nanocoai/nanoclaw",
+      "project_brief_cn": "轻量级OpenClaw替代品，容器化运行保障安全，集成WhatsApp等消息应用，具备记忆和任务调度功能。",
+      "why_today_cn": "当日获35 star，但无实时来源信号，作为候选观察，需验证其与主流消息平台的兼容性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "ndpvt-web/ai-sales-agent-simulator",
+      "project_brief_cn": "AI销售代理模拟器，通过构建客户心理数字孪生和蒙特卡洛模拟优化销售策略，含邮件和通话模拟。",
+      "why_today_cn": "候选项目，蒙特卡洛模拟用于销售策略新颖，但实际业务效果和用户采用情况待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:13.068Z"
+    },
+    {
+      "repo_full_name": "nearai/ironclaw",
+      "project_brief_cn": "专注隐私、安全和可扩展性的代理操作系统，提供模型接入、路由和部署等基础设施能力。",
+      "why_today_cn": "当日新增46 star，但未命中实时新鲜来源，作为历史参考，待确认是否有突破性功能更新。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "netease-youdao/LobsterAI",
+      "project_brief_cn": "网易有道推出的全场景AI代理，24/7工作，统一多模型接入与服务，辅助用户完成各类任务。",
+      "why_today_cn": "今日无实时动态，作为候选，待确认其覆盖的自动化场景和用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "nexscope-ai/eCommerce-Skills",
+      "project_brief_cn": "为AI代理提供电商技能集合，包括产品研究、营销自动化、供应链优化等，支持Amazon、Shopify等多平台。",
+      "why_today_cn": "候选观察中，star数较高且功能全面，但尚无用户评价和实际案例，需进一步验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "NForce-ai/SDRbot",
+      "project_brief_cn": "开源、终端原生的RevOps代理，自动执行CRM任务、客户研究和销售流程，使用自有API密钥，完全本地且免费。",
+      "why_today_cn": "销售拓客方向候选，本地优先有隐私优势，但需确认与主流CRM的兼容性和自动化深度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:44.280Z"
+    },
+    {
+      "repo_full_name": "Nijamudin/automated-business-analysis-workflow",
+      "project_brief_cn": "自动化商业分析工作流，抓取网站数据，提取关键信息并生成AI驱动的Google文档和PDF报告。",
+      "why_today_cn": "作为销售拓客代理候选方向的分析工作流，提供数据采集与报告生成，但自动化效果和适用范围待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "Nithinsanjeev/marketing",
+      "project_brief_cn": "营销工具包与社交媒体管理面板，提供营销自动化、SEO工具和数据分析功能，帮助中小企业提升业务增长。",
+      "why_today_cn": "作为营销增长代理候选方向的项目，提供自动化与SEO能力，待确认完整性和实用性，值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "nomad-prime/hoosh",
+      "project_brief_cn": "Hoosh 是一款高度可配置的免费开源编码代理，支持灵活定制，帮助开发者自动化编码任务。",
+      "why_today_cn": "作为开源候选，其可配置性是亮点，但用户规模小，需进一步验证稳定性和实际效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:17.776Z"
+    },
+    {
+      "repo_full_name": "NorceTech/commerce-agent-sdk",
+      "project_brief_cn": "Norce Commerce的开源Agent SDK，提供后端和可嵌入UI组件，用于构建对话式购物助手，包含参考实现。",
+      "why_today_cn": "面向开发者的SDK有助于降低购物代理开发门槛，但依赖Norce平台，独立性和通用性待验证，候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "noxwei/LibraryOfBabel",
+      "project_brief_cn": "将个人数字图书馆（EPUB和有声书）转化为可搜索知识库，AI 研究代理可即时查询数千本书籍。",
+      "why_today_cn": "候选观察：知识检索方向明确，但仅2星，实际处理能力和准确性尚未经过大规模验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "NPC-Worldwide/npcpy",
+      "project_brief_cn": "用于 NLP、多模态 LLM、代理、机器学习、知识图谱等研发的 Python 库，提供多语言和工具支持。",
+      "why_today_cn": "候选观察：1387 星，但作为通用库，其代理相关功能边界模糊，需评估其在实际研究中的独特价值。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "NVIDIA/SkillSpector",
+      "project_brief_cn": "NVIDIA 开源的 AI 技能安全扫描器，可检测智能体技能中的漏洞、恶意模式和安全风险，保障 agent 安全运行。",
+      "why_today_cn": "每日星增 159，作为安全工具候选值得观察，待确认其扫描能力与主流 agent 框架的集成成熟度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "nvikou/Ai-support-chat-react-fastapi",
+      "project_brief_cn": "基于React和FastAPI的AI客服聊天方案，可自动化70-80%工单，实时响应，引用来源并给出置信度，复杂问题转人工。",
+      "why_today_cn": "作为客服代理候选，声称的高自动化率需在实践中验证，候选阶段适合继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "oasis-surveys/oasis-platform",
+      "project_brief_cn": "自托管开源AI调查访谈平台，支持语音/文本对话智能体、半结构化访谈、多LLM和RAG知识库。",
+      "why_today_cn": "候选观察，研究者工具定位明确，但星数14处于早期阶段。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "ObaidQadri/RD-Agent",
+      "project_brief_cn": "一款用于简化研究和开发工作流程的自动化工具，支持数据驱动、深度学习和量化交易研究。",
+      "why_today_cn": "金融投研自动化方向有价值，但项目描述笼统、demo待确认，作为候选需验证真实功能与社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "obra/superpowers",
+      "project_brief_cn": "Superpowers 是一个 Agent 技能框架和软件开发方法论，提供可组合的技能模块。帮助开发者快速构建 AI Agent，并强调实际可用的工程实践。",
+      "why_today_cn": "作为方法论型项目，星数极高。候选观察其技能定义方式和推广效果，以及是否被主流 IDE 采纳为 Agent 技能标准。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "oldestlivingboy/reliableagents",
+      "project_brief_cn": "代理浏览器和计算机使用相关指南，包含对现有工具的性能基准测试，帮助理解和评估代理能力。",
+      "why_today_cn": "提供有价值的基准和指南，但项目仅4星且非工具本身，作为候选观察其在代理社区的影响力和更新频率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "oliver-kriska/claude-elixir-phoenix",
+      "project_brief_cn": "专为 Elixir/Phoenix/LiveView 打造的 Claude Code 插件，集成20个专业代理、Iron Laws 执行和 Tidewave MCP，支持并行研究、自动验证和四代理审计。",
+      "why_today_cn": "待确认：为 Elixir 生态提供专业化 AI 编码辅助，但其实际效果和社区采用度仍需观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "ollama/ollama",
+      "project_brief_cn": "本地运行多种大模型的开源工具，支持DeepSeek、Qwen等模型的快速部署与交互，适合个人开发者离线使用AI。",
+      "why_today_cn": "日增29星虽放缓，但作为基础设施项目，稳定性强，待观察新版本功能更新。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "open-compass/opencompass",
+      "project_brief_cn": "大模型评测平台，提供基准测试、对比分析、失败案例回溯等功能，帮助开发者评估和选择模型。",
+      "why_today_cn": "当日无实时信号，但作为评测工具，对模型选型有长期参考价值。候选观察新评测集加入。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "open-webui/open-webui",
+      "project_brief_cn": "Open WebUI 提供用户友好的AI界面，支持Ollama、OpenAI等API，方便用户管理模型和工具连接。",
+      "why_today_cn": "作为候选值得观察，因其广泛支持多种API且社区活跃，但功能成熟度和稳定性需持续跟踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "opena2a-org/ai-browserguard",
+      "project_brief_cn": "Chrome扩展，检测并控制浏览器中的AI代理，可识别Playwright等自动化工具，增强浏览器安全。",
+      "why_today_cn": "待确认候选。安全监控方向有独特性，但星数低且检测准确性待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "openJiuwen-ai/deepsearch",
+      "project_brief_cn": "知识增强的深度搜索与研究框架，具备行业领先的分块级引用和可追溯推理能力。",
+      "why_today_cn": "候选项目，分块引用技术有潜力，但星数63仍属早期，待社区验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:54.274Z"
+    },
+    {
+      "repo_full_name": "optimus-a1/agent-wiki-hub",
+      "project_brief_cn": "开源代理知识库，整合金融、海关、编码、研究等多领域工作流，适用于AI代理和RAG系统。",
+      "why_today_cn": "作为金融投研代理候选方向的知识库，覆盖多领域但深度待验证，需确认金融工作流的专业性和可靠性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "p-e-w/heretic",
+      "project_brief_cn": "Heretic 是一款自动化工具，用于去除语言模型中的审查限制，帮助用户更自由地使用AI模型。",
+      "why_today_cn": "作为候选值得观察，因其在去审查领域的创新性，但功能边界和实用性尚待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "PaddlePaddle/PaddleOCR",
+      "project_brief_cn": "OCR工具包，支持文档解析、翻译、PDF提取等，可集成RAG系统，帮助用户从图像和文档中提取文字信息。",
+      "why_today_cn": "当日无明显增长，但用户基数大且持续维护，作为OCR领域成熟方案，候选观察新功能更新。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "philberthandson333/codex-skill-ai-agent-workflow",
+      "project_brief_cn": "通过可复用技能、模板和最佳实践，标准化AI代理工作流，支持团队范围内的复用和持续迭代。",
+      "why_today_cn": "提供技能标准化框架，促进AI代理工作流复用，候选关注其模板生态扩展和团队协作效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "phuryn/pm-skills",
+      "project_brief_cn": "100+ 产品管理 agent 技能及插件的市场，覆盖发现、战略、执行、发布和增长全流程，便于扩展 agent 能力。",
+      "why_today_cn": "日增 257 星，作为技能市场候选，待确认其技能质量与 Claude Code 等生态的兼容性和实用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:58.863Z"
+    },
+    {
+      "repo_full_name": "plannotator/effective-html",
+      "project_brief_cn": "为AI代理提供预制的HTML生成及架构图技能包，帮助代理快速生成简洁优雅的网页和设计图。",
+      "why_today_cn": "待确认候选：提供代理标准化技能模板，可简化工作流搭建。但需验证其独立价值和社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:37.354Z"
+    },
+    {
+      "repo_full_name": "Poi5eN/Nexus",
+      "project_brief_cn": "Nexus是一个开源的多角色AI代理编排平台，集成主管代理与旅行、研究、法律、金融等专业代理，通过Web、Slack等界面提供服务，帮助用户协调多种任务。",
+      "why_today_cn": "作为金融投研方向的候选项目，其多代理协作架构具有潜力，但功能完整性和实际表现尚待确认，值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:46.292Z"
+    },
+    {
+      "repo_full_name": "public-apis/public-apis",
+      "project_brief_cn": "公共API集合列表，汇集了各类免费API资源，方便开发者快速查找和集成外部服务。",
+      "why_today_cn": "作为候选值得观察，因其持续更新且覆盖面广，但作为工具集成层需验证实际可用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "pwrdrvr/PwrAgent",
+      "project_brief_cn": "PwrAgent 是桌面端编码代理，通过 Telegram、Discord、Slack 等聊天平台远程驱动，支持 Codex 兼容。",
+      "why_today_cn": "多平台远程控制编码代理是创新点，但仅 22 星且功能待稳定，作为候选持续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:12.439Z"
+    },
+    {
+      "repo_full_name": "pydantic/monty",
+      "project_brief_cn": "基于Rust开发的轻量安全Python解释器，专为AI代理执行Python代码设计，提供沙箱隔离与高效执行能力，适用于大模型安全运行代码场景。",
+      "why_today_cn": "作为pydantic生态新项目，因Rust实现的安全执行器特性受到关注，但实际应用案例和成熟度待确认，值得观察其与AI代理的集成进展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:13.156Z"
+    },
+    {
+      "repo_full_name": "pydantic/pydantic",
+      "project_brief_cn": "Pydantic 是一个基于 Python 类型提示的数据验证库，常用于 API 请求解析、配置管理及 AI 数据管道中的数据清洗。",
+      "why_today_cn": "作为 AI 项目中广泛依赖的验证工具，其稳定性直接影响上游 Agent 性能，当前缺乏关键能力线索，列为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:18:02.694Z"
+    },
+    {
+      "repo_full_name": "pydantic/pydantic-ai",
+      "project_brief_cn": "Pydantic风格的AI Agent框架，封装模型接入和开发框架，用于构建可靠AI应用和智能体。",
+      "why_today_cn": "日增37星，作为Agent框架候选值得关注；但其稳定性和生态成熟度仍待观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "pydantic/pydantic-settings",
+      "project_brief_cn": "Pydantic Settings是基于Pydantic的配置管理库，帮助用户通过类型安全的方式管理代理的环境变量和配置参数。",
+      "why_today_cn": "作为候选项目，它为代理配置提供标准方案，但与代理直接关联度待验证，需观察其被代理项目采用的情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "qhkm/zeptoclaw",
+      "project_brief_cn": "一个本地优先的个人AI助手基础设施，用Rust实现，集成了工具、记忆、通道和沙箱自治能力。用户可通过统一接口调用多模型，构建自动化工作流。",
+      "why_today_cn": "当日无显著增长，但作为轻量级AI基础设施，其设计思路值得持续观察。待确认其后续发展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "quysto/QUYQUY-Database-Automation-Coffee",
+      "project_brief_cn": "咖啡店管理系统，管理员工、销售、库存和营收报表，支持经理和员工不同角色操作。",
+      "why_today_cn": "垂直场景明确，但项目为课程作业性质，作为候选需确认是否持续维护及推广价值。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "QwenLM/qwen-code",
+      "project_brief_cn": "阿里Qwen团队开源终端AI编码Agent，支持代码仓库分析与本地终端操作，提升开发者效率。",
+      "why_today_cn": "日增数据不可得，但2.5万星暗示潜力，待验证功能完整性与稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "raviMakes/ai-helpdesk",
+      "project_brief_cn": "AI驱动的客服平台，融合RAG、知识库管理、工单系统和智能转接，旨在提升客户支持效率。",
+      "why_today_cn": "候选项目整合了多项关键功能，但尚未有成熟案例或用户验证，值得持续观察其实际效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "Rayyan-Oumlil/CustoFlow",
+      "project_brief_cn": "基于Google ADK和Gemini的多智能体客服系统，可自动化80%的查询，响应时间低于10秒，适用于客户支持场景。",
+      "why_today_cn": "作为候选项目展示了多智能体客服的快速响应能力，但仍在待确认阶段，需进一步验证生产级性能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "Riganito/Witty-AI",
+      "project_brief_cn": "AI销售代理，优化从勘探到线索触达的每一步，自动化外呼、邮件等任务，让销售团队专注成交。",
+      "why_today_cn": "作为销售拓客代理候选项目，提供自动化销售流程，但具体性能和效果未公开验证，需进一步确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "riverfr/link-building-automation-tool",
+      "project_brief_cn": "自动化外链构建工具，涵盖从发现到索引的全流程，为SEO专家和代理机构设计。",
+      "why_today_cn": "候选项目瞄准SEO外链自动化，功能设计较完整，但需补证其在真实环境中的可靠性和效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "robzilla1738/harness-terminal",
+      "project_brief_cn": "Harness Terminal 是原生 macOS 终端，GPU 渲染、脚本化且代理感知，能在编码代理需要时通知用户，保持会话持续运行。",
+      "why_today_cn": "候选项目创新地将终端与代理感知结合，已有一定星数，但需观察能否成为主流开发工具。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:17.776Z"
+    },
+    {
+      "repo_full_name": "ronitg1/alpha-terminal",
+      "project_brief_cn": "散户投资者研究仪表板，通过AI代理面板评估股票，并带有实盘期权回测器，仅生成信号，不执行交易。",
+      "why_today_cn": "作为金融投研代理候选项目，提供股票评分与回测功能，但功能范围有限且仍在早期阶段，值得持续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "rudraofficial09052003/lead-generation-workflow-automation",
+      "project_brief_cn": "自动化线索生成工作流，集成CRM、邮件营销和n8n，帮助营销团队更高效地捕获和管理潜在客户。",
+      "why_today_cn": "候选项目覆盖了线索生成全链路，但尚未验证其规模化和稳定性，适合持续跟踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:43.188Z"
+    },
+    {
+      "repo_full_name": "run-llama/liteparse",
+      "project_brief_cn": "LiteParse是一个开源文档解析工具，能够快速从PDF、图片等文件中提取文本和结构化数据，便于后续处理或集成到自动化工作流中。",
+      "why_today_cn": "作为候选项目，其日增星数达117，显示社区关注度快速上升；解析能力可支撑代理工作流自动化，值得持续观察其实际应用效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:13.777Z"
+    },
+    {
+      "repo_full_name": "run-llama/llama_index",
+      "project_brief_cn": "领先的文档Agent和OCR平台，通过索引构建与查询实现知识管理，支持多步骤推理和Agent构建。",
+      "why_today_cn": "日增28星稳健，生态成熟，但作为老牌项目，候选观察新特性创新性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "ryunzz/sb_hacks",
+      "project_brief_cn": "语音控制的浏览器自动化系统，用户通过语音命令驱动Gemini CUA，利用Playwright在无头模式下执行浏览器操作。",
+      "why_today_cn": "融合语音和CUA交互新颖，但仅3星且为hackathon项目，待确认其稳定性和扩展性，作为候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "sahil87/fab-kit",
+      "project_brief_cn": "Fab-Kit 是一种结构化、规范驱动的开发工作流工具，帮助 AI 编码代理（如 Claude Code、Cursor）按照清晰规范生成代码，提升协作与一致性。",
+      "why_today_cn": "作为候选项目，其结构化规范方法有潜力改善 AI 编码工作流，但用户和星数有限，值得继续观察其实际采用情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:17.776Z"
+    },
+    {
+      "repo_full_name": "sandhere01/meta-ads-automation-ai",
+      "project_brief_cn": "利用DALL·E 3生成图片并通过Meta API自动发布广告，实现营销素材生成与投放自动化。",
+      "why_today_cn": "广告自动化候选项目，需进一步验证实际效果与平台兼容性，适合继续跟踪。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "Saurabh22111998/Hollywood-Quality-UGC-Ad-Generator",
+      "project_brief_cn": "通过AI自动化从单张产品照片生成好莱坞级视频广告，帮助营销人员快速制作高质量UGC风格广告，提升品牌营销效果。",
+      "why_today_cn": "该项目瞄准营销视频创作痛点，但尚处早期、功能待验证，作为候选值得持续观察其实际生成效果与用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "serenakeyitan/awesome-ai-shopping-agents",
+      "project_brief_cn": "AI购物代理的精选列表，收录相关项目、平台策略及代理电商生态资源。",
+      "why_today_cn": "资源列表候选，本身非工具，待确认后续更新频率和社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:50.880Z"
+    },
+    {
+      "repo_full_name": "shimo4228/contemplative-agent",
+      "project_brief_cn": "运行六阶段知识循环（AKC）的 CLI 代理，每一步升级需人工审批，全程在本地9B模型上运行，不开发危险能力。",
+      "why_today_cn": "候选观察：强调安全可控的自主知识处理，但仅4星且尚未看到实际应用案例。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "Shivam00980/Telegram-Automation-Toolkit",
+      "project_brief_cn": "提供43+工具的Telegram营销自动化套件，支持成员管理、数据抓取和直接消息发送，简化推广流程。",
+      "why_today_cn": "工具数量多，但安全性和合规性待确认，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "Shopify/ucp-cli",
+      "project_brief_cn": "基于通用商业协议（UCP）的AI代理购物技能，为代理提供标准化的电商交互能力。",
+      "why_today_cn": "待确认候选，作为Shopify官方项目有潜力，但目前仅提供CLI工具，生态和应用场景需观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "shwetaskumar/Sales-Lead-Scraper",
+      "project_brief_cn": "自动从公开网页和领英信号发现、丰富并筛选高意向B2B销售线索的智能爬虫管道，帮助销售团队高效获取潜在客户。",
+      "why_today_cn": "自动化B2B线索获取方向有潜力，但功能完整性和稳定性尚待验证，作为候选值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "Significant-Gravitas/AutoGPT",
+      "project_brief_cn": "AutoGPT 是一个开源自主 Agent 项目，旨在让每个人都能使用和构建 AI。用户可定义目标，Agent 自动分解任务并调用工具完成。",
+      "why_today_cn": "作为自主 Agent 先驱，社区活跃。候选观察其在长期任务规划和工具调用方面的改进，以及是否推出新的稳定版本。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:49.220Z"
+    },
+    {
+      "repo_full_name": "simonesiega/get-agents",
+      "project_brief_cn": "AI代理和技能浏览与一键安装CLI工具，支持网页浏览和命令安装。",
+      "why_today_cn": "概念便捷但3星，功能实现和代理库丰富度未知，候选观察其安装体验和生态。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "sinclarespeaking143/openclaw-superagent",
+      "project_brief_cn": "构建完整的OpenClaw AI代理，集成记忆、自愈、语音、自动化和内置诊断，支持低代码企业级消息通信。",
+      "why_today_cn": "打造企业级多模态代理，自愈和低代码特性值得跟进，候选验证其在安全与集成方面的成熟度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:28.549Z"
+    },
+    {
+      "repo_full_name": "sipeed/picoclaw",
+      "project_brief_cn": "超小体积AI助手运行时，适用于边缘设备，自动化繁琐任务，维护长期上下文和工作流。",
+      "why_today_cn": "无明显star增长，作为候选观察，需确认在资源受限环境下的实际性能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "SissNonn/clawtbot",
+      "project_brief_cn": "使用AI代理自动化社交媒体任务，协调工作流进行内容管理与排程，基于FastAPI和Celery构建。",
+      "why_today_cn": "候选项目值得关注，但星数仅2，功能简单，需观察后续开发进度和用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "SkyBlue997/enableMacosAI",
+      "project_brief_cn": "一键为国行 Mac 开启完整 Apple 智能，包括端侧和私有云端计算。",
+      "why_today_cn": "作为候选观察，星数增长迅猛（+126），但功能局限在 macOS 开启 AI，是否为通用 Agent 待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:56.388Z"
+    },
+    {
+      "repo_full_name": "skyzh/tiny-llm",
+      "project_brief_cn": "一个轻量级LLM教程项目，从零实现和部署小模型，适合想深入理解大模型原理的学习者。",
+      "why_today_cn": "无当日星标，但作为经典学习项目，对理解LLM有持续价值。候选观察，等待新动态。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:40.052Z"
+    },
+    {
+      "repo_full_name": "Snailclimb/JavaGuide",
+      "project_brief_cn": "Java面试与后端通用指南，覆盖计算机基础、数据库、分布式、高并发及AI应用开发，帮助开发者系统学习。",
+      "why_today_cn": "近期星数增长较快，但属于面试知识库而非直接Agent工具，候选待确认其Agent生态关联。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "sourcegraph/smoke-tests",
+      "project_brief_cn": "Sourcegraph 的冒烟测试仓库，用于验证代码修改后基本功能是否正常，可辅助开发代理自动运行测试。",
+      "why_today_cn": "关联 Sourcegraph 生态但规模极小，功能聚焦测试验证，尚未展示为独立 Agent 工具的潜力，待确认中。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:18:02.694Z"
+    },
+    {
+      "repo_full_name": "sourcegraph/src-auth-perms-sync",
+      "project_brief_cn": "Sourcegraph Auth Perms Sync是一个权限同步工具，从认证提供者同步用户权限至Sourcegraph，可被代理用于管理代码访问控制。",
+      "why_today_cn": "作为候选项目，它提供工具集成起点，但在代理工作流中实用性待验证，需关注其与代理框架的整合案例。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "stoa-hq/stoa",
+      "project_brief_cn": "开源的AI原生电商引擎，基于Go构建，支持Svelte店面、管理面板、REST API及MCP协议，让AI代理自主购物。",
+      "why_today_cn": "Agent电商基础设施定位稀缺，但项目极早期（4星），作为候选需观察其社区采用与扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:06.397Z"
+    },
+    {
+      "repo_full_name": "sushilk1991/mastisk",
+      "project_brief_cn": "个人知识维基系统，配备24/7研究代理，结合 Claude、Ollama、iCloud 和 PWA，支持持续知识积累与查询。",
+      "why_today_cn": "候选观察：将多个 LLM 和云服务结合，但功能简单、星数仅3，尚未验证实际可用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "susomejias/rembric",
+      "project_brief_cn": "Rembric 为 AI 编码代理提供持久化记忆层，基于 MCP 协议、仅追加写入，自托管，一个 Docker 镜像加一个 SQLite 文件即可部署。",
+      "why_today_cn": "代理记忆是当前热点，但 rembric 星数少、成熟度低，需观察社区采用和稳定性后再做判断。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:29.638Z"
+    },
+    {
+      "repo_full_name": "TapPay/tappay-agentic-commerce",
+      "project_brief_cn": "端到端的TapPay购物和结账技能，整合钱包就绪、商家选择、浏览器执行、支付字段处理和状态恢复为连续合约。",
+      "why_today_cn": "解决代理购物中结账流程断裂问题，但依赖TapPay生态，通用性待观察，候选状态表明需更多验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "tensorflow/tensorflow",
+      "project_brief_cn": "开源机器学习框架，支持深度学习、神经网络等，用于构建和部署ML模型，广泛应用于研究和生产。",
+      "why_today_cn": "虽为成熟框架，但作为Agent基础设施候选需评估其与Agent系统的集成热度；日增2星，长期观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "the-open-agent/openagent",
+      "project_brief_cn": "OpenAgent 是下一代个人 AI 助手，集成了 LLM、RAG 和代理循环，支持计算机使用、浏览器使用和编码代理，提供在线演示。",
+      "why_today_cn": "候选项目；功能全面的个人代理框架，若在多项任务中表现一致，有较大应用潜力，但 5000+ Star 需验证实际效果和可持续性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "thuanhd2/auto-devs",
+      "project_brief_cn": "Auto-Devs 通过 CLI 和 AI 编码代理自动化开发工作流，帮助开发者减少重复任务，提升效率。",
+      "why_today_cn": "候选项目聚焦开发自动化，方向有价值但星数较少，需观察社区反馈和功能成熟度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:03:17.776Z"
+    },
+    {
+      "repo_full_name": "THUDM/slime",
+      "project_brief_cn": "Slime 是清华大学推出的 LLM 后训练框架，专注于强化学习扩展（RL Scaling），帮助开发者高效进行模型微调与强化学习训练。",
+      "why_today_cn": "作为后训练框架候选，Slime 日增星 27 颗，社区关注度上升，待确认其 RL Scaling 效果与生产适用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:21:07.669Z"
+    },
+    {
+      "repo_full_name": "TirupMehta/trace-guard",
+      "project_brief_cn": "HTTP/HTTPS请求拦截器，自动注入行为遥测脚本，用于检测和阻止包括视觉语言模型驱动的智能代理在内的机器人访问。",
+      "why_today_cn": "针对智能代理的防御工具，思路新颖，但项目仅5星且无更新，待确认实际效果和后续发展，暂作候选标记。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:13.703Z"
+    },
+    {
+      "repo_full_name": "Tomsonx232/smb-sales-boost-skill",
+      "project_brief_cn": "Claude技能，用于B2B线索生成——搜索、筛选并导出新注册的美国中小企业数据，适用于冷外联和销售开发。",
+      "why_today_cn": "作为销售拓客代理候选技能，提供特定地区中小企业线索，但依赖外部API且数据范围有限，值得继续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:27.130Z"
+    },
+    {
+      "repo_full_name": "TonyWang-hub/mcp-cn-commerce",
+      "project_brief_cn": "连接中国主流电商平台（抖音、京东、淘宝等）经营数据的MCP服务器，让AI代理读取商家业务数据。",
+      "why_today_cn": "候选观察中，MCP连接器覆盖平台广，但数据授权、稳定性和实际落地效果需进一步评估。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "torvalds/linux",
+      "project_brief_cn": "Linux内核源代码官方仓库，为操作系统、云计算、AI基础设施提供底层内核支持与性能优化。",
+      "why_today_cn": "今日新增35星，持续受开发者关注；虽为核心基础设施，但作为agent平台候选仍待确认其在该领域的具体应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:11.871Z"
+    },
+    {
+      "repo_full_name": "Toufumind/mind-agency",
+      "project_brief_cn": "多智能体协作平台，通过将任务拆解给多个AI代理共同完成，适合复杂工作流场景。",
+      "why_today_cn": "概念新颖但star仅25，社区活跃度待观察，候选观察其能否形成实际协作生态。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:21.715Z"
+    },
+    {
+      "repo_full_name": "tw93/Kami",
+      "project_brief_cn": "Kami是一个文档处理工具，帮助用户将优质内容转化为可复用的接入层，简化代理对文档类工具的调用和整合。",
+      "why_today_cn": "作为候选项目，Kami在文档处理方向有潜在价值，但具体代理集成能力待确认，需观察其社区发展和稳定性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:59.425Z"
+    },
+    {
+      "repo_full_name": "twbs/bootstrap",
+      "project_brief_cn": "Bootstrap 是最流行的前端框架，提供 HTML/CSS/JS 组件和工具，用于快速构建响应式、移动优先的网页界面。",
+      "why_today_cn": "作为经典前端框架，在 Agent 前端渲染上可能有用，但其Agent相关能力尚未明确，保持候选观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:51.875Z"
+    },
+    {
+      "repo_full_name": "umarqadri345/awesome-lark-bots",
+      "project_brief_cn": "为飞书开发的开源AI机器人，支持头脑风暴、项目规划、内容创作和社交监控等自动化任务，运行在安全聊天界面中。",
+      "why_today_cn": "飞书平台AI自动化有市场，但功能和性能数据待补充，作为候选值得观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:20.057Z"
+    },
+    {
+      "repo_full_name": "unnat05/CARTA",
+      "project_brief_cn": "Carta是AI个人购物助手，帮助用户在多个印度电商平台搜索、比较商品并省钱，专注于印度市场。",
+      "why_today_cn": "针对印度电商聚合比较有明确场景，但当前仅6星，功能覆盖和用户体验需进一步评估，作为候选注意。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:09.043Z"
+    },
+    {
+      "repo_full_name": "Veeksha29/ai-lead-qualifier",
+      "project_brief_cn": "AI驱动的线索评估系统，通过理解意图、提出关键问题并结构化线索，无需硬编码流程，帮助销售团队高效筛选潜在客户。",
+      "why_today_cn": "作为销售拓客代理候选，智能线索评估概念有潜力，但实际效果待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:59.413Z"
+    },
+    {
+      "repo_full_name": "vegedon/open-computer-use",
+      "project_brief_cn": "Open Computer Use 让 AI 代理控制计算机，支持浏览器、终端和桌面交互，实现自主任务自动化，适合开发者使用，集成 Gemini 和 Anthropic API。",
+      "why_today_cn": "候选项目；提供多接口计算机控制代理框架，若任务成功率可观，有潜力成为通用自动化工具，需观察其稳定性和扩展性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:05:58.482Z"
+    },
+    {
+      "repo_full_name": "vercel/ai",
+      "project_brief_cn": "TypeScript AI工具包，由Next.js团队打造，提供开源库以构建AI应用和Agent，支持多模型。",
+      "why_today_cn": "日增37星，作为Agent基础设施候选热度高；但竞争激烈，需持续观察其生态采用情况。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:44.261Z"
+    },
+    {
+      "repo_full_name": "vercel/next.js",
+      "project_brief_cn": "Next.js 是基于 React 的全栈框架，支持服务端渲染和静态站点生成。它帮助开发者快速构建高性能 Web 应用，提供文件路由、API 路由等内置功能。",
+      "why_today_cn": "作为 Web 开发领域核心框架，技术演进方向（如 AI 集成）值得观察，但当前在 Agent 生态中的角色尚待确认。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:21.123Z"
+    },
+    {
+      "repo_full_name": "vercel/turborepo",
+      "project_brief_cn": "Turborepo 是一个基于 Rust 的高性能构建系统，专为 JavaScript 和 TypeScript 单仓（monorepo）优化，帮助开发者加快构建速度并简化工作流。",
+      "why_today_cn": "作为 Vercel 的核心开源项目，Turborepo 在 AI 代理的编码工作流中有集成潜力，值得候选观察其在代理场景的适用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:23.506Z"
+    },
+    {
+      "repo_full_name": "victorRT3868/shopping-agent-ai",
+      "project_brief_cn": "一个AI购物代理，能够跨电商平台比价并生成智能购买报告，帮助用户做出更明智的购物决策。",
+      "why_today_cn": "作为候选待确认项目，其电商比价和报告生成功能有潜力，但需更多证据确认其稳定性和实用性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:11:37.289Z"
+    },
+    {
+      "repo_full_name": "warwickwood-cell/gengeo-agent-registry",
+      "project_brief_cn": "机器可读的商家验证基础设施，为AI购物代理提供信任验证，支持Shopify等平台集成。",
+      "why_today_cn": "作为候选项目，解决电商代理信任问题，但注册表内容和采用率尚不明确，需持续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:07:01.191Z"
+    },
+    {
+      "repo_full_name": "Wide-Moat/open-computer-use",
+      "project_brief_cn": "MCP服务器，为任意LLM提供独立计算机环境，包括浏览器、终端、代码执行和文档处理，支持自托管。",
+      "why_today_cn": "待确认候选。模块化设计且星数增长快，但作为MCP服务需观察与主流模型集成效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:05.613Z"
+    },
+    {
+      "repo_full_name": "xai-org/plugin-marketplace",
+      "project_brief_cn": "xAI 官方插件市场，提供金融交易研究 agent，帮助用户进行行情研究、策略回测和组合决策支持。",
+      "why_today_cn": "作为 xAI 生态的关键组件，日增 41 星显示社区关注度迅速上升，值得作为候选持续观察其功能完善度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:21.422Z"
+    },
+    {
+      "repo_full_name": "XiaomiMiMo/MiMo-Code",
+      "project_brief_cn": "小米开源的AI编程助手，围绕代码仓库进行智能分析与修改，支持读仓库、改代码、跑测试及协助审PR，提升开发效率。",
+      "why_today_cn": "日增467星表现活跃，作为AI编程助手新星，待进一步验证其实际代码处理能力与用户反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:16:06.556Z"
+    },
+    {
+      "repo_full_name": "xjanex160/customer-support-agent",
+      "project_brief_cn": "基于LLM的客服智能体，使用FastAPI、Postgres和Redis实现智能路由分发，提升响应效率。",
+      "why_today_cn": "候选观察中：架构清晰但星数少，待确认其智能路由效果与可扩展性，适合持续跟踪其迭代质量。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:12:36.114Z"
+    },
+    {
+      "repo_full_name": "XXXaber/Deepagent-research-context-engineering",
+      "project_brief_cn": "利用多代理系统和LangChain加速研究，专注上下文工程，支持数据挖掘和知识图谱。",
+      "why_today_cn": "候选项目多代理研究工具有创意，但星数少，需验证效果。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:34.624Z"
+    },
+    {
+      "repo_full_name": "YusufB5/ASCILINE",
+      "project_brief_cn": "ASCILINE是一个高性能实时ASCII视频渲染引擎，通过WebSocket传输二进制编码帧，在HTML5 Canvas上实现超低延迟、30FPS的ASCII视频播放。",
+      "why_today_cn": "候选观察：技术实现有创意，但项目仍较新，社区贡献和性能指标待验证，适合对实时视频渲染感兴趣的技术爱好者持续关注。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:35.862Z"
+    },
+    {
+      "repo_full_name": "zeroclaw-labs/zeroclaw",
+      "project_brief_cn": "快速、小巧的全自主AI个人助手基础设施，跨平台部署，支持任意模型交换，统一多模型接入。",
+      "why_today_cn": "无当日新鲜来源数据，作为候选，待确认其是否实现真正的自主性以及社区活跃度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    },
+    {
+      "repo_full_name": "zfy465914233/scholar-agent",
+      "project_brief_cn": "面向 LLM 的知识代理，支持在线研究、本地知识积累，并逐步增强智能，已适配 MCP 协议。",
+      "why_today_cn": "候选观察：8星，知识积累+ MCP 思路有潜力，但仍在早期，需看其学习效果和协议兼容性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:06:46.972Z"
+    },
+    {
+      "repo_full_name": "zhukunpenglinyutong/desktop-cc-gui",
+      "project_brief_cn": "CC GUI客户端，专为开发者打造的VibeCoding平台，提供代码生成与辅助开发界面。",
+      "why_today_cn": "作为候选值得观察，因其在AI编码领域的探索，但功能完整性和用户体验待验证。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:17:44.133Z"
+    },
+    {
+      "repo_full_name": "ZhuLinsen/alphaevo",
+      "project_brief_cn": "自进化的股票策略研究代理，通过回测和自我进化优化量化交易策略，辅助金融分析与投资决策。",
+      "why_today_cn": "作为金融投研代理方向的候选项目，待确认其功能完整性和实际效果，值得持续观察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-16T10:15:32.590Z"
+    }
+  ]
+}

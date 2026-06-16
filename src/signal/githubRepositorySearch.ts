@@ -21,6 +21,10 @@ interface GitHubSearchResponse {
 }
 
 export const MISSION_GITHUB_PER_DIRECTION_LIMIT = PROJECT_SEARCH_CONSTANTS.directionRawHitsMin;
+const MISSION_GITHUB_PER_DIRECTION_LIMIT_OVERRIDES: Record<string, number> = {
+  "finance-investment-research-agent": 48,
+};
+
 const DIRECTION_GITHUB_QUERIES: Record<string, string> = {
   "coding-agent": "coding agent OR code agent OR ai coding",
   "browser-computer-use": "browser agent OR computer use agent OR web automation agent",
@@ -41,10 +45,33 @@ const DIRECTION_GITHUB_QUERIES: Record<string, string> = {
 };
 
 const DIRECTION_GITHUB_EXTRA_QUERIES: Record<string, string[]> = {
+  "research-knowledge-agent": [
+    "deep research agent OR literature review agent OR scientific research agent",
+    "research workflow agent OR paper reading agent OR citation research agent",
+    "knowledge work agent OR notebook research agent OR evidence synthesis agent",
+    "RAG research assistant OR document research agent OR academic agent",
+  ],
+  "workflow-automation-agent": [
+    "productivity agent OR office automation agent OR workplace automation agent",
+    "email agent OR meeting agent OR calendar agent OR scheduling agent",
+    "document workflow agent OR spreadsheet agent OR slides agent",
+    "knowledge work automation OR backoffice automation agent OR operations copilot",
+  ],
+  "finance-investment-research-agent": [
+    "stock analysis agent OR portfolio research agent OR investment agent",
+    "quant trading agent OR algorithmic trading agent OR ai trading",
+    "financial research agent OR financial analysis agent OR finance ai",
+    "stock market agent OR AI hedge fund OR market research agent",
+    "A-share stock analysis OR US stock analysis OR stock screener agent",
+  ],
   "industrial-field-ops-agent": [
     "field service agent OR manufacturing agent OR maintenance automation",
   ],
 };
+
+export function missionGithubPerDirectionLimit(direction: DirectionCatalogEntry): number {
+  return MISSION_GITHUB_PER_DIRECTION_LIMIT_OVERRIDES[direction.direction_key] ?? MISSION_GITHUB_PER_DIRECTION_LIMIT;
+}
 
 function sleep(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -107,10 +134,11 @@ async function fetchDirectionSignalsFromGitHub(
   const seen = new Set<string>();
   const signals: RawSignal[] = [];
   const templates = directionGithubSearchTemplates(direction);
+  const directionLimit = missionGithubPerDirectionLimit(direction);
   let attemptedQueryCount = 0;
 
   for (const template of templates) {
-    if (signals.length >= MISSION_GITHUB_PER_DIRECTION_LIMIT) break;
+    if (signals.length >= directionLimit) break;
     attemptedQueryCount += 1;
     const url = new URL("https://api.github.com/search/repositories");
     url.searchParams.set("q", `${template} in:name,description,topics stars:>1`);
@@ -131,7 +159,7 @@ async function fetchDirectionSignalsFromGitHub(
       if (!key || seen.has(key)) continue;
       seen.add(key);
       signals.push(signal);
-      if (signals.length >= MISSION_GITHUB_PER_DIRECTION_LIMIT) break;
+      if (signals.length >= directionLimit) break;
     }
   }
 

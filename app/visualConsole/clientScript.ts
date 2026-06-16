@@ -36,7 +36,7 @@ export function normalizeProjectSearchText(value: string): string {
 
 function tokenizeProjectSearchText(value: string): string[] {
   return normalizeProjectSearchText(value)
-    .split(/[\s,.;:!?()[\]{}"'`]+/)
+    .split(/[\s,/\\|+&=<>~*#@%^$.;:!?()[\]{}"'`_-]+/)
     .filter(Boolean);
 }
 
@@ -69,32 +69,32 @@ export function rankProjectSearchMatch(card: Pick<ProjectsWorkbenchCardRecord, "
   if (!normalizedQuery) return 0;
 
   const queryTokens = tokenizeProjectSearchText(normalizedQuery);
-  return (
-    scoreProjectSearchField(card.searchName, normalizedQuery, queryTokens, {
-      exact: 1600,
-      prefix: 1300,
-      substring: 1050,
-      tokenExact: 320,
-      tokenPrefix: 240,
-      tokenSubstring: 170,
-    }) +
-    scoreProjectSearchField(card.searchDescription, normalizedQuery, queryTokens, {
-      exact: 520,
-      prefix: 420,
-      substring: 320,
-      tokenExact: 140,
-      tokenPrefix: 100,
-      tokenSubstring: 70,
-    }) +
-    scoreProjectSearchField(card.searchMeta, normalizedQuery, queryTokens, {
-      exact: 260,
-      prefix: 200,
-      substring: 150,
-      tokenExact: 90,
-      tokenPrefix: 60,
-      tokenSubstring: 45,
-    })
-  );
+  const nameScore = scoreProjectSearchField(card.searchName, normalizedQuery, queryTokens, {
+    exact: 1600,
+    prefix: 1300,
+    substring: 1050,
+    tokenExact: 320,
+    tokenPrefix: 240,
+    tokenSubstring: 170,
+  });
+  const descriptionScore = scoreProjectSearchField(card.searchDescription, normalizedQuery, queryTokens, {
+    exact: 520,
+    prefix: 420,
+    substring: 320,
+    tokenExact: 140,
+    tokenPrefix: 100,
+    tokenSubstring: 70,
+  });
+  const metaScore = scoreProjectSearchField(card.searchMeta, normalizedQuery, queryTokens, {
+    exact: 260,
+    prefix: 200,
+    substring: 150,
+    tokenExact: 90,
+    tokenPrefix: 60,
+    tokenSubstring: 45,
+  });
+
+  return nameScore + descriptionScore + metaScore;
 }
 
 export function filterAndSortProjectCards<T extends ProjectsWorkbenchCardRecord>(cards: T[], state: ProjectsWorkbenchState): T[] {

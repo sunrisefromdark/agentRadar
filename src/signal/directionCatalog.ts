@@ -71,6 +71,59 @@ export const DIRECTION_CATALOG: DirectionCatalogEntry[] = [
   makeDirection("industrial-field-ops-agent", "vertical-ops", "工业 / 现场运维代理", "workflow-intelligence", "scout-daily", "industrial field ops agent"),
 ];
 
+const workflowAutomationDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "workflow-automation-agent");
+if (workflowAutomationDirection) {
+  workflowAutomationDirection.required_terms = [
+    ...workflowAutomationDirection.required_terms,
+    "productivity",
+    "office",
+    "email",
+    "meeting",
+    "calendar",
+    "spreadsheet",
+    "document",
+  ];
+  workflowAutomationDirection.evidence_objects = [
+    ...workflowAutomationDirection.evidence_objects,
+    "email",
+    "meeting",
+    "calendar",
+    "document",
+    "spreadsheet",
+  ];
+  workflowAutomationDirection.query_packs = [
+    ...workflowAutomationDirection.query_packs,
+    { lane_type: "user-speak", templates: ["office productivity agent", "办公提效 agent"] },
+    { lane_type: "adjacent-software", templates: ["email calendar workflow agent", "document spreadsheet automation"] },
+  ];
+}
+
+const researchKnowledgeDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "research-knowledge-agent");
+if (researchKnowledgeDirection) {
+  researchKnowledgeDirection.required_terms = [
+    ...researchKnowledgeDirection.required_terms,
+    "science",
+    "paper",
+    "literature",
+    "citation",
+    "research",
+    "knowledge",
+  ];
+  researchKnowledgeDirection.evidence_objects = [
+    ...researchKnowledgeDirection.evidence_objects,
+    "paper",
+    "literature",
+    "citation",
+    "notebook",
+    "knowledge",
+  ];
+  researchKnowledgeDirection.query_packs = [
+    ...researchKnowledgeDirection.query_packs,
+    { lane_type: "user-speak", templates: ["scientific research agent", "paper research agent"] },
+    { lane_type: "adjacent-software", templates: ["literature review agent", "knowledge work agent"] },
+  ];
+}
+
 export function getDirectionByKey(directionKey: string): DirectionCatalogEntry | undefined {
   return DIRECTION_CATALOG.find((item) => item.direction_key === directionKey);
 }

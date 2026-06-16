@@ -12,6 +12,7 @@ import {
   getKbCard,
   getKbIndex,
   getMissionScoutArtifact,
+  getMissionScoutEnhancementArtifact,
   getObserverArtifact,
   getRunSummary,
   getVerifyDailyResult,
@@ -50,6 +51,11 @@ type DerivedCacheEntry<T> = {
 
 type RunSnapshotResult = { snapshot: RunSnapshot | null; auditNotes: string[]; githubStatus: string };
 type WeeklySnapshotResult = { snapshot: WeeklySnapshot | null; notes: string[] };
+type MissionScoutEnhancementEntry = {
+  repo_full_name: string;
+  project_brief_cn: string;
+  why_today_cn: string;
+};
 
 const runSnapshotCache = new Map<string, DerivedCacheEntry<RunSnapshotResult>>();
 const weeklySnapshotCache = new Map<string, DerivedCacheEntry<WeeklySnapshotResult>>();
@@ -152,6 +158,41 @@ function summarizeObserverNotes(notes: string[]): string[] {
 
 type DailyRankedProject = DailyReport["today_star_projects"][number];
 const DIRECTION_LABELS = new Map(DIRECTION_CATALOG.map((direction) => [direction.direction_key, direction.display_name_cn] as const));
+const DIRECTION_BY_KEY = new Map(DIRECTION_CATALOG.map((direction) => [direction.direction_key, direction] as const));
+const DEFAULT_MISSION_SCOUT_INVENTORY_LIMIT = 8;
+const REGULATED_SPECIALIST_MISSION_SCOUT_INVENTORY_LIMIT = 16;
+const MISSION_SCOUT_INVENTORY_LIMIT_OVERRIDES = new Map<string, number>([
+  ["finance-investment-research-agent", 24],
+]);
+
+function missionScoutInventoryLimit(directionKey: string): number {
+  const override = MISSION_SCOUT_INVENTORY_LIMIT_OVERRIDES.get(directionKey);
+  if (typeof override === "number") return override;
+
+  const direction = DIRECTION_BY_KEY.get(directionKey);
+  if (direction?.boundary_mode === "regulated-specialist") return REGULATED_SPECIALIST_MISSION_SCOUT_INVENTORY_LIMIT;
+  return DEFAULT_MISSION_SCOUT_INVENTORY_LIMIT;
+}
+
+const SEARCHABLE_DIRECTION_INFERENCE_RULES: Array<{ directionKey: string; pattern: RegExp }> = [
+  {
+    directionKey: "research-knowledge-agent",
+    pattern: /\b(research|knowledge work|knowledge-worker|literature|paper|papers|citation|scientific|science|academic|notebook|rag|retrieval|document research)\b/i,
+  },
+  {
+    directionKey: "workflow-automation-agent",
+    pattern: /\b(productivity|office|office-automation|office ai|email|meeting|calendar|schedule|scheduling|document-processing|document workflow|spreadsheet|excel|slides|presentation|backoffice|operations copilot)\b/i,
+  },
+  {
+    directionKey: "finance-investment-research-agent",
+    pattern: /\b(finance|financial|investment|trading|stock|stocks|quant|portfolio|market)\b/i,
+  },
+];
+
+function inferDirectionMatchesFromSearchableText(values: Array<string | null | undefined>): string[] {
+  const searchable = values.map((value) => String(value ?? "")).join(" ");
+  return SEARCHABLE_DIRECTION_INFERENCE_RULES.filter((rule) => rule.pattern.test(searchable)).map((rule) => rule.directionKey);
+}
 
 function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProject {
   const leadEvidence = project.score.components.flatMap((component) => component.evidence).find(Boolean);
@@ -162,6 +203,14 @@ function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProjec
     project.project.description ||
     `${project.project.project_name} stayed in the extended project inventory for broader search coverage.`;
 
+  const inferredDirectionMatches = inferDirectionMatchesFromSearchableText([
+    project.project.repo_full_name,
+    project.project.project_name,
+    project.project.description,
+    ...project.project.tags,
+    ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
+  ]);
+
   return {
     ...project,
     project_class: "context_only",
@@ -169,7 +218,7 @@ function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProjec
     preference_boost: 0,
     base_final_rank: project.score.total_score,
     final_rank: project.score.total_score,
-    matched_interest_topics: [],
+    matched_interest_topics: inferredDirectionMatches,
     project_brief_cn: brief,
     why_today_cn: whyToday,
     enhancement_source: "template_fallback",
@@ -177,7 +226,7 @@ function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProjec
     position_qualification: "keep-observing",
     judge_score_delta: 0,
     judge_source: "template_fallback",
-    direction_matches: [],
+    direction_matches: inferredDirectionMatches,
     appearance_reason_codes: ["catalog_inventory_backfill"],
     appearance_explanation_cn: "该项目来自扩展项目池补充，用于提升项目库检索覆盖面，不伪装成今日正式曝光位。",
     exposure_bucket: "historical_context",
@@ -192,6 +241,19 @@ function buildObserverInventoryProject(
   const scoreValue = Number(entry.observer_score ?? entry.base_observer_score ?? 0);
   const repoKey = entry.repo_full_name.split("/")[1] ?? entry.repo_full_name;
   const tags = [...new Set([...(entry.labels ?? []), ...(entry.ecosystems ?? []), ...(entry.matched_by.keywords ?? []), ...(entry.matched_by.topic_hints ?? [])])];
+  const inferredDirectionMatches = [
+    ...new Set([
+      ...(entry.ecosystems ?? []),
+      ...inferDirectionMatchesFromSearchableText([
+        entry.repo_full_name,
+        entry.description,
+        entry.project_brief_cn,
+        entry.why_now_cn,
+        ...(entry.labels ?? []),
+        ...(entry.matched_by.keywords ?? []),
+      ]),
+    ]),
+  ];
 
   return {
     project: {
@@ -239,7 +301,7 @@ function buildObserverInventoryProject(
     preference_boost: 0,
     base_final_rank: scoreValue,
     final_rank: scoreValue,
-    matched_interest_topics: [],
+    matched_interest_topics: inferredDirectionMatches,
     project_brief_cn: entry.project_brief_cn ?? entry.description ?? entry.repo_full_name,
     why_today_cn: entry.why_now_cn ?? entry.long_tail_reason ?? "observer candidate backfill",
     enhancement_source: "template_fallback",
@@ -248,7 +310,7 @@ function buildObserverInventoryProject(
     position_rationale_cn: entry.position_rationale_cn,
     judge_score_delta: entry.judge_score_delta ?? 0,
     judge_source: entry.judge_source ?? "template_fallback",
-    direction_matches: entry.ecosystems ?? [],
+    direction_matches: inferredDirectionMatches,
     appearance_reason_codes: ["observer_inventory_backfill"],
     appearance_explanation_cn: "该项目来自新兴潜力候选池补充，用于提升项目库搜索覆盖面，不伪装成主榜正式曝光位。",
     exposure_bucket: "historical_context",
@@ -273,7 +335,38 @@ function directionMatchesFromSignal(signal: RawSignal): string[] {
   ];
 }
 
-function buildMissionScoutInventoryProject(signal: RawSignal): DailyRankedProject | null {
+function readMissionScoutEnhancements(date: string): Map<string, MissionScoutEnhancementEntry> {
+  const artifact = getMissionScoutEnhancementArtifact(date);
+  if (artifact.status !== "ok") return new Map();
+  return new Map(
+    (artifact.value.entries ?? [])
+      .filter((entry) => entry.project_brief_cn?.trim() && entry.why_today_cn?.trim())
+      .map((entry) => [entry.repo_full_name.toLowerCase(), entry] as const),
+  );
+}
+
+function applyProjectEnhancements(
+  projects: DailyRankedProject[],
+  enhancements: Map<string, MissionScoutEnhancementEntry>,
+): DailyRankedProject[] {
+  if (enhancements.size === 0) return projects;
+  return projects.map((project) => {
+    const enhancement = enhancements.get(project.project.repo_full_name.toLowerCase());
+    if (!enhancement) return project;
+    return {
+      ...project,
+      project_brief_cn: enhancement.project_brief_cn,
+      why_today_cn: enhancement.why_today_cn,
+      enhancement_source: "agent",
+      summary_source: "agent",
+    };
+  });
+}
+
+function buildMissionScoutInventoryProject(
+  signal: RawSignal,
+  enhancements: Map<string, MissionScoutEnhancementEntry> = new Map(),
+): DailyRankedProject | null {
   const repoFullName = repoFullNameFromGithubUrl(signal.repo_url);
   if (!repoFullName) return null;
 
@@ -282,6 +375,8 @@ function buildMissionScoutInventoryProject(signal: RawSignal): DailyRankedProjec
 
   const displayName = DIRECTION_LABELS.get(directionMatches[0] ?? "") ?? "垂直需求方向";
   const scoreValue = Math.min(69, Math.max(35, 42 + Math.log10(Math.max(1, Number(signal.stars ?? 0))) * 8));
+  const enhancement = enhancements.get(repoFullName.toLowerCase());
+  const enhanced = Boolean(enhancement);
 
   return {
     project: {
@@ -330,10 +425,12 @@ function buildMissionScoutInventoryProject(signal: RawSignal): DailyRankedProjec
     base_final_rank: Number(scoreValue.toFixed(2)),
     final_rank: Number(scoreValue.toFixed(2)),
     matched_interest_topics: directionMatches,
-    project_brief_cn: signal.description ?? signal.project_name,
-    why_today_cn: `它来自 mission scout 对「${displayName}」方向的候选发现，适合作为待确认观察对象。`,
-    enhancement_source: "template_fallback",
-    summary_source: "template_fallback",
+    project_brief_cn: enhancement?.project_brief_cn ?? signal.description ?? signal.project_name,
+    enhancement_source: enhanced ? "agent" : "template_fallback",
+    summary_source: enhanced ? "agent" : "template_fallback",
+    why_today_cn:
+      enhancement?.why_today_cn ??
+      `该项目来自 mission scout 对「${displayName}」方向的候选发现，仍需补证但适合继续观察。`,
     position_qualification: "keep-observing",
     judge_score_delta: 0,
     judge_source: "template_fallback",
@@ -353,6 +450,7 @@ function buildMissionScoutInventory(
 ): DailyRankedProject[] {
   const artifact = getMissionScoutArtifact(date);
   if (artifact.status !== "ok") return [];
+  const enhancements = readMissionScoutEnhancements(date);
 
   const surfacedKeys = new Set(surfacedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
   const prioritizedKeys = new Set(prioritizedProjects.map((project) => project.project.repo_full_name.toLowerCase()));
@@ -360,7 +458,7 @@ function buildMissionScoutInventory(
   const projects: DailyRankedProject[] = [];
 
   for (const signal of artifact.value.raw_signals ?? []) {
-    const candidate = buildMissionScoutInventoryProject(signal);
+    const candidate = buildMissionScoutInventoryProject(signal, enhancements);
     if (!candidate) continue;
 
     const repoKey = candidate.project.repo_full_name.toLowerCase();
@@ -369,7 +467,7 @@ function buildMissionScoutInventory(
     const primaryDirection = candidate.direction_matches?.[0] ?? "unknown";
     const currentCount = perDirectionCount.get(primaryDirection) ?? 0;
     const prioritized = prioritizedKeys.has(repoKey);
-    if (!prioritized && currentCount >= 8) continue;
+    if (!prioritized && currentCount >= missionScoutInventoryLimit(primaryDirection)) continue;
 
     surfacedKeys.add(repoKey);
     perDirectionCount.set(primaryDirection, currentCount + 1);
@@ -1396,20 +1494,25 @@ export function buildProjectsView(
 
   const { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date, options);
   resolved.context.generated_at = snapshot?.daily_report.generated_at ?? null;
-  const todayPulseProjects = snapshot ? readTodayPulseProjects(snapshot.daily_report) : [];
-  const missionMatchProjects = snapshot ? readMissionProjects(snapshot.daily_report) : [];
-  const exploreRibbonProjects = snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [];
-  const contextOnlyProjects = snapshot ? snapshot.daily_report.context_only_projects : [];
+  const projectEnhancements = readMissionScoutEnhancements(resolved.context.selected_date);
+  const todayPulseProjects = applyProjectEnhancements(snapshot ? readTodayPulseProjects(snapshot.daily_report) : [], projectEnhancements);
+  const missionMatchProjects = applyProjectEnhancements(snapshot ? readMissionProjects(snapshot.daily_report) : [], projectEnhancements);
+  const exploreRibbonProjects = applyProjectEnhancements(snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [], projectEnhancements);
+  const contextOnlyProjects = applyProjectEnhancements(snapshot ? snapshot.daily_report.context_only_projects : [], projectEnhancements);
   const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects];
   const missionScoutInventoryProjects = snapshot
     ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects, contextOnlyProjects)
     : [];
   const surfacedWithScoutProjects = [...surfacedProjects, ...missionScoutInventoryProjects];
-  const observerInventoryProjects = snapshot?.observer_artifact
-    ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry))
-    : [];
+  const observerInventoryProjects = applyProjectEnhancements(
+    snapshot?.observer_artifact ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry)) : [],
+    projectEnhancements,
+  );
   const catalogInventoryProjects = snapshot
-    ? buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects)
+    ? applyProjectEnhancements(
+        buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects),
+        projectEnhancements,
+      )
     : [];
   const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects, ...observerInventoryProjects].filter(
     (project, index, all) =>

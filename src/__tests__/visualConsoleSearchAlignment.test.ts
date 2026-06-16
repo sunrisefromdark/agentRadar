@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { filterObserverEntries, type ObserverEntry } from "../../app/client/ObserverView.tsx";
 import { filterRunHealthNarratives, type NarrativeItem } from "../../app/client/RunHealth.tsx";
-import { rankProjectSearchMatch } from "../../app/visualConsole/clientScript.ts";
+import { filterAndSortProjectCards, rankProjectSearchMatch } from "../../app/visualConsole/clientScript.ts";
 import { renderProjectsWorkbenchPage } from "../../app/visualConsole/ossProjectsPage.ts";
 import { buildProjectsView } from "../visualConsole/build.ts";
 import type { ProjectsViewModel } from "../visualConsole/types.ts";
@@ -166,6 +166,39 @@ describe("visual console search alignment", () => {
     }
   });
 
+  it("keeps observer search exact repo queries tight instead of returning unrelated narrative matches", () => {
+    const entries = [
+      makeObserverEntry({
+        key: "chopratejas/headroom",
+        repoFullName: "chopratejas/headroom",
+        repoUrl: "https://github.com/chopratejas/headroom",
+        whyItMatters: "Context optimization layer for LLM applications.",
+        whyNow: "Fresh activity.",
+        ecosystems: ["research-knowledge-agent"],
+        labels: ["ecosystem:research-knowledge-agent"],
+        keywords: ["context-optimization"],
+        topics: ["rag"],
+        searchText: "Headroom context optimization layer for LLM apps.",
+      }),
+      makeObserverEntry({
+        key: "moltis-org/moltis",
+        repoFullName: "moltis-org/moltis",
+        repoUrl: "https://github.com/moltis-org/moltis",
+        whyItMatters: "AI workspace for teams.",
+        whyNow: "Fresh activity.",
+        ecosystems: ["workflow-automation-agent"],
+        labels: ["ecosystem:workflow-automation-agent"],
+        keywords: ["workspace"],
+        topics: ["operations"],
+        searchText: "Workflow automation workspace for operations teams.",
+      }),
+    ];
+
+    const results = filterObserverEntries(entries, "Headroom");
+    expect(results).toHaveLength(1);
+    expect(results[0]?.repoFullName.toLowerCase()).toBe("chopratejas/headroom");
+  });
+
   it("matches project workbench cards by name, description, metadata, and aliases", () => {
     const card = {
       searchName: "bytedance/UI-TARS-desktop",
@@ -188,6 +221,87 @@ describe("visual console search alignment", () => {
     for (const query of ["电商", "导购", "购物", "shopping-commerce-agent", "ecommerce"]) {
       expect(rankProjectSearchMatch(card, query), query).toBeGreaterThan(0);
     }
+  });
+
+  it("matches finance demand cards by Chinese stock and investment aliases", () => {
+    const card = {
+      searchName: "ZhuLinsen/daily_stock_analysis",
+      searchDescription: "LLM-powered stock analysis for A/H/US markets.",
+      searchMeta: "finance-investment-research-agent finance investment stock stocks trading quant \u80a1\u7968 \u6295\u7814 \u91d1\u878d \u91cf\u5316 \u4ea4\u6613",
+    };
+
+    for (const query of ["\u80a1\u7968", "\u6295\u7814", "\u91d1\u878d", "\u91cf\u5316", "\u4ea4\u6613", "finance-investment-research-agent", "stock"]) {
+      expect(rankProjectSearchMatch(card, query), query).toBeGreaterThan(0);
+    }
+  });
+
+  it("matches research and office-productivity cards by user-facing Chinese aliases", () => {
+    const researchCard = {
+      searchName: "google-deepmind/science-skills",
+      searchDescription: "Scientific workflow and literature-grounded research agent skills.",
+      searchMeta: "research-knowledge-agent research knowledge science paper literature citation notebook 科研 研究 文献 论文 知识工作",
+    };
+    const productivityCard = {
+      searchName: "microsoft/markitdown",
+      searchDescription: "Document workflow automation for office files.",
+      searchMeta: "workflow-automation-agent productivity office document spreadsheet slides email meeting calendar 办公提效 效率 自动化 文档 表格 幻灯片 邮件 会议 日历",
+    };
+
+    for (const query of ["科研", "研究", "文献", "论文", "知识工作", "research-knowledge-agent"]) {
+      expect(rankProjectSearchMatch(researchCard, query), query).toBeGreaterThan(0);
+    }
+    for (const query of ["办公提效", "效率", "自动化", "文档", "表格", "幻灯片", "邮件", "会议", "日历", "workflow-automation-agent"]) {
+      expect(rankProjectSearchMatch(productivityCard, query), query).toBeGreaterThan(0);
+    }
+  });
+
+  it("prioritizes exact repo-name matches like Headroom in project search", () => {
+    const headroomCard = {
+      searchName: "chopratejas/headroom",
+      searchDescription: "Context optimization layer for LLM applications.",
+      searchMeta: "headroom context optimization mcp server rag",
+    };
+    const unrelatedCard = {
+      searchName: "moltis-org/moltis",
+      searchDescription: "AI workspace for teams.",
+      searchMeta: "workflow collaboration operations",
+    };
+
+    expect(rankProjectSearchMatch(headroomCard, "Headroom")).toBeGreaterThan(0);
+    expect(rankProjectSearchMatch(unrelatedCard, "Headroom")).toBe(0);
+  });
+
+  it("filters project workbench cards without breaking on repo separators", () => {
+    const headroomCard = {
+      searchName: "chopratejas/headroom",
+      searchDescription: "Context optimization layer for LLM applications.",
+      searchMeta: "headroom context optimization mcp server rag",
+      score: 50,
+      growth: 0,
+      order: 1,
+      paradigm: "Agent System",
+      persistence: "context_only",
+    };
+    const unrelatedCard = {
+      searchName: "moltis-org/moltis",
+      searchDescription: "AI workspace for teams.",
+      searchMeta: "workflow collaboration operations",
+      score: 99,
+      growth: 99,
+      order: 0,
+      paradigm: "Agent System",
+      persistence: "emerging",
+    };
+
+    const results = filterAndSortProjectCards([unrelatedCard, headroomCard], {
+      search: "Headroom",
+      sort: "score",
+      paradigm: "all",
+      persistence: "all",
+    });
+
+    expect(results).toHaveLength(1);
+    expect(results[0]?.searchName).toBe("chopratejas/headroom");
   });
 
   it("renders project search metadata with repo, tags, directions, raw signals, and bilingual company aliases", () => {
@@ -229,6 +343,91 @@ describe("visual console search alignment", () => {
     }
   });
 
+  it("renders finance direction aliases so Chinese stock searches can find investment projects", () => {
+    const financeProject = makeProject({
+      project: {
+        ...makeProject().project,
+        project_name: "daily_stock_analysis",
+        repo_full_name: "ZhuLinsen/daily_stock_analysis",
+        repo_url: "https://github.com/ZhuLinsen/daily_stock_analysis",
+        tags: ["mission-direction:finance-investment-research-agent", "finance-investment-research-agent", "stock", "quant"],
+        description: "LLM-powered stock analysis system for A/H/US markets.",
+      },
+      matched_interest_topics: ["finance-investment-research-agent"],
+      direction_matches: ["finance-investment-research-agent"],
+      project_brief_cn: "LLM-powered stock analysis for A/H/US markets.",
+      why_today_cn: "finance investment research agent candidate.",
+    });
+    const html = renderProjectsWorkbenchPage(makeProjectsModel(financeProject), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
+
+    for (const value of ["\u80a1\u7968", "\u6295\u7814", "\u91d1\u878d", "\u91cf\u5316", "\u4ea4\u6613", "finance-investment-research-agent"]) {
+      expect(html.toLowerCase(), value).toContain(value.toLowerCase());
+    }
+  });
+
+  it("renders Chinese fallback summaries for finance projects when upstream briefs are English", () => {
+    const financeProject = makeProject({
+      project: {
+        ...makeProject().project,
+        project_name: "daily_stock_analysis",
+        repo_full_name: "ZhuLinsen/daily_stock_analysis",
+        repo_url: "https://github.com/ZhuLinsen/daily_stock_analysis",
+        tags: ["mission-direction:finance-investment-research-agent", "finance-investment-research-agent", "stock", "quant"],
+        description: "LLM-powered stock analysis system for A/H/US markets.",
+      },
+      matched_interest_topics: ["finance-investment-research-agent"],
+      direction_matches: ["finance-investment-research-agent"],
+      project_brief_cn: "LLM-powered stock analysis for A/H/US markets.",
+      appearance_explanation_cn: undefined,
+      why_today_cn: "finance investment research agent candidate.",
+    });
+    const html = renderProjectsWorkbenchPage(makeProjectsModel(financeProject), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
+
+    expect(html).toContain("金融投研/股票分析相关项目");
+    expect(html).not.toContain('<p class="project-row-brief">LLM-powered stock analysis for A/H/US markets.</p>');
+  });
+
+  it("renders research and office-productivity aliases into project search metadata", () => {
+    const researchProject = makeProject({
+      project: {
+        ...makeProject().project,
+        project_name: "science-skills",
+        repo_full_name: "google-deepmind/science-skills",
+        repo_url: "https://github.com/google-deepmind/science-skills",
+        tags: ["mission-direction:research-knowledge-agent", "research-knowledge-agent", "science", "paper", "citation"],
+        description: "Scientific workflow skills for research and literature-grounded discovery.",
+      },
+      matched_interest_topics: ["research-knowledge-agent"],
+      direction_matches: ["research-knowledge-agent"],
+      project_brief_cn: "scientific research and literature workflows",
+      why_today_cn: "research knowledge agent candidate",
+    });
+    const productivityProject = makeProject({
+      project: {
+        ...makeProject().project,
+        project_name: "markitdown",
+        repo_full_name: "microsoft/markitdown",
+        repo_url: "https://github.com/microsoft/markitdown",
+        tags: ["mission-direction:workflow-automation-agent", "workflow-automation-agent", "document", "spreadsheet", "office"],
+        description: "Document workflow automation for office files and productivity tasks.",
+      },
+      matched_interest_topics: ["workflow-automation-agent"],
+      direction_matches: ["workflow-automation-agent"],
+      project_brief_cn: "office productivity automation",
+      why_today_cn: "workflow automation agent candidate",
+    });
+
+    const researchHtml = renderProjectsWorkbenchPage(makeProjectsModel(researchProject), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
+    const productivityHtml = renderProjectsWorkbenchPage(makeProjectsModel(productivityProject), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
+
+    for (const value of ["科研", "研究", "文献", "论文", "知识工作", "research-knowledge-agent"]) {
+      expect(researchHtml.toLowerCase(), value).toContain(value.toLowerCase());
+    }
+    for (const value of ["办公提效", "效率", "自动化", "文档", "表格", "幻灯片", "邮件", "会议", "日历", "workflow-automation-agent"]) {
+      expect(productivityHtml.toLowerCase(), value).toContain(value.toLowerCase());
+    }
+  });
+
   it("surfaces mission scout commerce candidates in the project workbench inventory", () => {
     const model = buildProjectsView("2026-06-12");
     const commerce = model.projects.find((project) => project.project.repo_full_name.toLowerCase() === "tonywang-hub/mcp-cn-commerce");
@@ -237,6 +436,27 @@ describe("visual console search alignment", () => {
     expect(commerce?.project_class).toBe("pending_confirmation");
     expect(commerce?.exposure_bucket).toBe("explore_ribbon");
     expect(commerce?.direction_matches).toContain("shopping-commerce-agent");
+  });
+
+  it("surfaces expanded finance mission-scout inventory beyond the default per-direction cap", () => {
+    const model = buildProjectsView("2026-06-13");
+    const financeCandidates = model.projects.filter(
+      (project) =>
+        project.project_class === "pending_confirmation" &&
+        project.exposure_bucket === "explore_ribbon" &&
+        project.direction_matches?.includes("finance-investment-research-agent"),
+    );
+
+    expect(financeCandidates.length).toBeGreaterThan(8);
+    expect(financeCandidates.some((project) => project.project.repo_full_name.toLowerCase() === "zhulinsen/alphaevo")).toBe(true);
+  });
+
+  it("keeps Headroom searchable inside the project library inventory", () => {
+    const model = buildProjectsView("latest");
+    const headroom = model.projects.find((project) => project.project.repo_full_name.toLowerCase() === "chopratejas/headroom");
+
+    expect(headroom).toBeTruthy();
+    expect(headroom?.project_class).toBe("context_only");
   });
 
   it("matches run health narratives by expanded project, company, direction, and signal text", () => {

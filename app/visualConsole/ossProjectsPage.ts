@@ -37,11 +37,45 @@ function formatProjectMetricValue(value: number): string {
   return Number.isInteger(value) ? String(value) : value.toFixed(2).replace(/\.?0+$/, "");
 }
 
+function containsChineseText(value: string | null | undefined): boolean {
+  return /[\u3400-\u9fff]/.test(String(value ?? ""));
+}
+
+function firstChineseText(...values: Array<string | null | undefined>): string | null {
+  return values.find((value) => containsChineseText(value)) ?? null;
+}
+
+function localizedProjectFallbackIntro(project: ProjectsViewModel["projects"][number]): string {
+  const directionValues = [
+    ...(project.direction_matches ?? []),
+    ...(project.matched_interest_topics ?? []),
+    ...project.project.tags,
+    project.project.description,
+    project.project.repo_full_name,
+  ].join(" ");
+  const name = project.project.repo_full_name || project.project.project_name;
+
+  if (/\bfinance-investment-research-agent\b|\b(finance|financial|investment|investing|trading|stock|stocks|a-stock|us-stock|quant|portfolio|market)\b/i.test(directionValues)) {
+    return `${name} 是一个金融投研/股票分析相关项目，适合继续观察其数据接入、分析流程和自动化能力。`;
+  }
+  if (/\bresearch-knowledge-agent\b|\b(research|knowledge|rag|retrieval|literature|paper|papers|notebook|citation|scientific|science|academic)\b/i.test(directionValues)) {
+    return `${name} 是一个科研与知识工作相关项目，适合继续观察其文献处理、检索和研究辅助能力。`;
+  }
+  if (/\bworkflow-automation-agent\b|\b(productivity|workflow|automation|office|email|meeting|calendar|document|spreadsheet|excel|slides|presentation|operations)\b/i.test(directionValues)) {
+    return `${name} 是一个办公提效与工作流自动化相关项目，适合继续观察其文档、协作和流程执行能力。`;
+  }
+  if (/\bshopping-commerce-agent\b|\b(e-?commerce|commerce|shopping|shopify|taobao|pinduoduo|jd)\b/i.test(directionValues)) {
+    return `${name} 是一个电商与导购场景相关项目，适合继续观察其商品、交易和商家经营支持能力。`;
+  }
+
+  return `${name} 是一个值得继续跟踪的 AI 项目，当前可从仓库活跃度、应用场景和后续迭代中判断价值。`;
+}
+
 function projectIntroduction(project: ProjectsViewModel["projects"][number], lang: UiLang): string {
   if (lang === "en") {
     return project.project.description || project.project_brief_cn || "A project worth continued tracking.";
   }
-  return project.project_brief_cn || project.appearance_explanation_cn || project.project.description || "暂无摘要。";
+  return firstChineseText(project.project_brief_cn, project.appearance_explanation_cn, project.why_today_cn) ?? localizedProjectFallbackIntro(project);
 }
 
 function projectSelectionReason(project: ProjectsViewModel["projects"][number], lang: UiLang): string {
@@ -100,11 +134,23 @@ const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
 
 const DIRECTION_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
   [/\bshopping-commerce-agent\b|\b(e-?commerce|commerce|shopping|shopify|tiktok-shop|taobao|pinduoduo|jd)\b/i, ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
-  [/\bfinance-investment-research-agent\b|\b(finance|investment|trading|stock|quant)\b/i, ["股票", "投研", "金融", "量化", "交易"]],
+  [/\bfinance-investment-research-agent\b|\b(finance|financial|investment|investing|trading|stock|stocks|a-stock|us-stock|quant|portfolio|market)\b/i, ["股票", "投研", "金融", "量化", "交易"]],
+  [/\bresearch-knowledge-agent\b|\b(research|knowledge|rag|retrieval|literature|paper|papers|notebook|citation|scientific|science|academic|document research)\b/i, ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
+  [/\bworkflow-automation-agent\b|\b(productivity|workflow|automation|office|email|meeting|calendar|schedule|document|documents|spreadsheet|excel|slides|presentation|backoffice|operations)\b/i, ["办公提效", "效率", "自动化", "工作流", "邮件", "会议", "日历", "文档", "表格", "幻灯片"]],
   [/\bcustomer-support-agent\b|\b(customer-support|helpdesk|service-desk)\b/i, ["客服", "服务台", "工单"]],
   [/\bsales-prospecting-agent\b|\b(sales|prospecting|lead)\b/i, ["销售", "拓客", "线索"]],
   [/\bmarketing-content-ops-agent\b|\b(marketing|content|growth)\b/i, ["营销", "内容运营", "增长"]],
 ];
+
+const DIRECTION_KEYWORD_ALIASES = new Map<string, string[]>([
+  ["shopping-commerce-agent", ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
+  ["finance-investment-research-agent", ["股票", "投研", "金融", "量化", "交易"]],
+  ["research-knowledge-agent", ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
+  ["workflow-automation-agent", ["办公提效", "效率", "自动化", "工作流", "邮件", "会议", "日历", "文档", "表格", "幻灯片"]],
+  ["customer-support-agent", ["客服", "服务台", "工单"]],
+  ["sales-prospecting-agent", ["销售", "拓客", "线索"]],
+  ["marketing-content-ops-agent", ["营销", "内容运营", "增长"]],
+]);
 
 function uniqueProjectSearchStrings(values: Array<string | null | undefined>): string[] {
   return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
@@ -125,6 +171,17 @@ function directionSearchAliases(values: Array<string | null | undefined>): strin
   for (const [pattern, candidates] of DIRECTION_SEARCH_ALIASES) {
     if (pattern.test(haystack)) aliases.push(...candidates);
   }
+  return uniqueProjectSearchStrings(aliases);
+}
+
+function directionKeyAliases(values: Array<string | null | undefined>): string[] {
+  const aliases: string[] = [];
+  values
+    .map((value) => String(value ?? "").trim())
+    .filter(Boolean)
+    .forEach((value) => {
+      DIRECTION_KEYWORD_ALIASES.get(value)?.forEach((alias) => aliases.push(alias));
+    });
   return uniqueProjectSearchStrings(aliases);
 }
 
@@ -251,6 +308,7 @@ function projectSearchText(project: ProjectsViewModel["projects"][number], lang:
       ...(project.direction_matches ?? []),
       ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
     ]),
+    ...directionKeyAliases([...(project.matched_interest_topics ?? []), ...(project.direction_matches ?? [])]),
   ]
     .filter(Boolean)
     .join(" ")

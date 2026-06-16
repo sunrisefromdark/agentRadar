@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { DIRECTION_CATALOG, PROJECT_SEARCH_CONSTANTS } from "../signal/directionCatalog.ts";
-import { MISSION_GITHUB_PER_DIRECTION_LIMIT, directionGithubSearchTemplates } from "../signal/githubRepositorySearch.ts";
+import { MISSION_GITHUB_PER_DIRECTION_LIMIT, directionGithubSearchTemplates, missionGithubPerDirectionLimit } from "../signal/githubRepositorySearch.ts";
 import { runMissionDeepDiscovery } from "../signal/missionDeepDiscovery.ts";
 import { runMissionScoutDiscovery, type MissionScoutSearchResult } from "../signal/missionScoutDiscovery.ts";
 import type { DirectionCatalogEntry, ScoredProject } from "../types.ts";
@@ -125,6 +125,32 @@ describe("project search system redesign behavior", () => {
       }
     }
     expect(MISSION_GITHUB_PER_DIRECTION_LIMIT).toBeGreaterThanOrEqual(PROJECT_SEARCH_CONSTANTS.directionRawHitsMin);
+  });
+
+  it("expands finance live GitHub search beyond generic finance-agent phrasing", () => {
+    const direction = DIRECTION_CATALOG.find((item) => item.direction_key === "finance-investment-research-agent")!;
+    const templates = directionGithubSearchTemplates(direction).join("\n");
+
+    expect(missionGithubPerDirectionLimit(direction)).toBeGreaterThan(MISSION_GITHUB_PER_DIRECTION_LIMIT);
+    expect(templates).toContain("stock analysis agent");
+    expect(templates).toContain("portfolio research agent");
+    expect(templates).toContain("quant trading agent");
+    expect(templates).toContain("AI hedge fund");
+    expect(templates).toContain("A-share stock analysis");
+  });
+
+  it("expands research and workflow live GitHub search around science and office productivity user language", () => {
+    const researchDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "research-knowledge-agent")!;
+    const workflowDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "workflow-automation-agent")!;
+    const researchTemplates = directionGithubSearchTemplates(researchDirection).join("\n");
+    const workflowTemplates = directionGithubSearchTemplates(workflowDirection).join("\n");
+
+    expect(researchTemplates).toContain("scientific research agent");
+    expect(researchTemplates).toContain("paper research agent");
+    expect(researchTemplates).toContain("literature review agent");
+    expect(workflowTemplates).toContain("office productivity agent");
+    expect(workflowTemplates).toContain("email calendar workflow agent");
+    expect(workflowTemplates).toContain("document spreadsheet automation");
   });
 
   it("keeps mission matches out of the task section when a direction never reached matched", async () => {

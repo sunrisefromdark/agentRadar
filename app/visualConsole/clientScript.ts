@@ -1,145 +1,53 @@
-export type ProjectsWorkbenchSortMode = "score" | "growth";
+import {
+  filterAndSortProjectCards,
+  CJK_QUERY_NOISE_PATTERNS,
+  DIRECT_SEARCH_QUALITY_SAMPLE_SIZE,
+  extractMeaningfulProjectSearchCjkTerms,
+  GENERIC_DIRECT_SEARCH_TOKENS,
+  directSearchLooksNaturalLanguage,
+  informativeDirectSearchTerms,
+  directSearchTokenRecordCount,
+  isCommonDirectSearchToken,
+  normalizeProjectSearchText,
+  paginateProjectCards,
+  projectSearchRecordContainsTerm,
+  projectSearchTextHasCjk,
+  rankProjectSearchMatch,
+  scoreProjectSearchField,
+  shouldUseDirectProjectSearch,
+  tokenizeProjectSearchText,
+  type ProjectsWorkbenchCardRecord,
+  type ProjectsWorkbenchPagination,
+  type ProjectsWorkbenchSortMode,
+  type ProjectsWorkbenchState,
+} from "../../src/search/projectSearchKernel.ts";
+import {
+  FUZZY_SEARCH_DEBOUNCE_MS,
+  FUZZY_SEARCH_MIN_CHINESE_CHARS,
+  FUZZY_SEARCH_MIN_ENGLISH_CHARS,
+} from "../../src/search/fuzzyQueryTypes.ts";
 
-export interface ProjectsWorkbenchState {
-  search: string;
-  sort: ProjectsWorkbenchSortMode;
-  paradigm: string;
-  persistence: string;
-  page?: number;
-  pageSize?: number;
-}
-
-export interface ProjectsWorkbenchCardRecord {
-  searchName: string;
-  searchDescription: string;
-  searchMeta: string;
-  score: number;
-  growth: number;
-  order: number;
-  paradigm: string;
-  persistence: string;
-}
-
-export interface ProjectsWorkbenchPagination<T> {
-  items: T[];
-  currentPage: number;
-  pageCount: number;
-  pageSize: number;
-  totalCount: number;
-  startIndex: number;
-  endIndex: number;
-}
-
-export function normalizeProjectSearchText(value: string): string {
-  return value.trim().toLowerCase().replace(/\s+/g, " ");
-}
-
-function tokenizeProjectSearchText(value: string): string[] {
-  return normalizeProjectSearchText(value)
-    .split(/[\s,/\\|+&=<>~*#@%^$.;:!?()[\]{}"'`_-]+/)
-    .filter(Boolean);
-}
-
-function scoreProjectSearchField(
-  value: string,
-  query: string,
-  queryTokens: string[],
-  weights: { exact: number; prefix: number; substring: number; tokenExact: number; tokenPrefix: number; tokenSubstring: number },
-): number {
-  const normalizedValue = normalizeProjectSearchText(value);
-  if (!normalizedValue) return 0;
-
-  let score = 0;
-  if (normalizedValue === query) score += weights.exact;
-  else if (normalizedValue.startsWith(query)) score += weights.prefix;
-  else if (normalizedValue.includes(query)) score += weights.substring;
-
-  const valueTokens = tokenizeProjectSearchText(normalizedValue);
-  queryTokens.forEach((token) => {
-    if (valueTokens.includes(token)) score += weights.tokenExact;
-    else if (valueTokens.some((candidate) => candidate.startsWith(token))) score += weights.tokenPrefix;
-    else if (valueTokens.some((candidate) => candidate.includes(token))) score += weights.tokenSubstring;
-  });
-
-  return score;
-}
-
-export function rankProjectSearchMatch(card: Pick<ProjectsWorkbenchCardRecord, "searchName" | "searchDescription" | "searchMeta">, query: string): number {
-  const normalizedQuery = normalizeProjectSearchText(query);
-  if (!normalizedQuery) return 0;
-
-  const queryTokens = tokenizeProjectSearchText(normalizedQuery);
-  const nameScore = scoreProjectSearchField(card.searchName, normalizedQuery, queryTokens, {
-    exact: 1600,
-    prefix: 1300,
-    substring: 1050,
-    tokenExact: 320,
-    tokenPrefix: 240,
-    tokenSubstring: 170,
-  });
-  const descriptionScore = scoreProjectSearchField(card.searchDescription, normalizedQuery, queryTokens, {
-    exact: 520,
-    prefix: 420,
-    substring: 320,
-    tokenExact: 140,
-    tokenPrefix: 100,
-    tokenSubstring: 70,
-  });
-  const metaScore = scoreProjectSearchField(card.searchMeta, normalizedQuery, queryTokens, {
-    exact: 260,
-    prefix: 200,
-    substring: 150,
-    tokenExact: 90,
-    tokenPrefix: 60,
-    tokenSubstring: 45,
-  });
-
-  return nameScore + descriptionScore + metaScore;
-}
-
-export function filterAndSortProjectCards<T extends ProjectsWorkbenchCardRecord>(cards: T[], state: ProjectsWorkbenchState): T[] {
-  const normalizedSearch = normalizeProjectSearchText(state.search);
-
-  return cards
-    .filter((card) => {
-      const relevance = normalizedSearch ? rankProjectSearchMatch(card, normalizedSearch) : 0;
-      const matchesSearch = !normalizedSearch || relevance > 0;
-      const matchesParadigm = state.paradigm === "all" || card.paradigm === state.paradigm;
-      const matchesPersistence = state.persistence === "all" || card.persistence === state.persistence;
-      return matchesSearch && matchesParadigm && matchesPersistence;
-    })
-    .sort((left, right) => {
-      if (normalizedSearch) {
-        const leftRelevance = rankProjectSearchMatch(left, normalizedSearch);
-        const rightRelevance = rankProjectSearchMatch(right, normalizedSearch);
-        if (rightRelevance !== leftRelevance) return rightRelevance - leftRelevance;
-      }
-      const leftValue = state.sort === "growth" ? left.growth : left.score;
-      const rightValue = state.sort === "growth" ? right.growth : right.score;
-      if (rightValue !== leftValue) return rightValue - leftValue;
-      return left.order - right.order;
-    })
-    .map((card) => card);
-}
-
-export function paginateProjectCards<T>(cards: T[], page: number, pageSize: number): ProjectsWorkbenchPagination<T> {
-  const safePageSize = Math.max(1, Math.floor(pageSize) || 1);
-  const totalCount = cards.length;
-  const pageCount = Math.max(1, Math.ceil(totalCount / safePageSize));
-  const currentPage = Math.min(Math.max(1, Math.floor(page) || 1), pageCount);
-  const startIndex = totalCount === 0 ? 0 : (currentPage - 1) * safePageSize;
-  const endIndex = totalCount === 0 ? 0 : Math.min(startIndex + safePageSize, totalCount);
-
-  return {
-    items: cards.slice(startIndex, endIndex),
-    currentPage,
-    pageCount,
-    pageSize: safePageSize,
-    totalCount,
-    startIndex,
-    endIndex,
-  };
-}
+export {
+  filterAndSortProjectCards,
+  CJK_QUERY_NOISE_PATTERNS,
+  DIRECT_SEARCH_QUALITY_SAMPLE_SIZE,
+  extractMeaningfulProjectSearchCjkTerms,
+  GENERIC_DIRECT_SEARCH_TOKENS,
+  directSearchLooksNaturalLanguage,
+  informativeDirectSearchTerms,
+  directSearchTokenRecordCount,
+  isCommonDirectSearchToken,
+  normalizeProjectSearchText,
+  paginateProjectCards,
+  projectSearchRecordContainsTerm,
+  projectSearchTextHasCjk,
+  rankProjectSearchMatch,
+  shouldUseDirectProjectSearch,
+  type ProjectsWorkbenchCardRecord,
+  type ProjectsWorkbenchPagination,
+  type ProjectsWorkbenchSortMode,
+  type ProjectsWorkbenchState,
+};
 
 export function renderClientScriptSource(): string {
   return `
@@ -148,10 +56,33 @@ export function renderClientScriptSource(): string {
         window.__visualConsoleClientBound = true;
         const normalizeProjectSearchText = ${normalizeProjectSearchText.toString()};
         const tokenizeProjectSearchText = ${tokenizeProjectSearchText.toString()};
+        const projectSearchTextHasCjk = ${projectSearchTextHasCjk.toString()};
+        const extractMeaningfulProjectSearchCjkTerms = ${extractMeaningfulProjectSearchCjkTerms.toString()};
+        const projectSearchRecordContainsTerm = ${projectSearchRecordContainsTerm.toString()};
         const scoreProjectSearchField = ${scoreProjectSearchField.toString()};
         const rankProjectSearchMatch = ${rankProjectSearchMatch.toString()};
+        const shouldUseDirectProjectSearch = ${shouldUseDirectProjectSearch.toString()};
+        const directSearchLooksNaturalLanguage = ${directSearchLooksNaturalLanguage.toString()};
+        const informativeDirectSearchTerms = ${informativeDirectSearchTerms.toString()};
+        const directSearchTokenRecordCount = ${directSearchTokenRecordCount.toString()};
+        const isCommonDirectSearchToken = ${isCommonDirectSearchToken.toString()};
+        const DIRECT_SEARCH_QUALITY_SAMPLE_SIZE = ${DIRECT_SEARCH_QUALITY_SAMPLE_SIZE};
+        const GENERIC_DIRECT_SEARCH_TOKENS = new Set(${JSON.stringify(Array.from(GENERIC_DIRECT_SEARCH_TOKENS))});
+        const CJK_QUERY_NOISE_PATTERNS = ${JSON.stringify(CJK_QUERY_NOISE_PATTERNS)};
         const filterAndSortProjectCards = ${filterAndSortProjectCards.toString()};
         const paginateProjectCards = ${paginateProjectCards.toString()};
+        const fuzzySearchDebounceMs = ${FUZZY_SEARCH_DEBOUNCE_MS};
+        const fuzzySearchMinChineseChars = ${FUZZY_SEARCH_MIN_CHINESE_CHARS};
+        const fuzzySearchMinEnglishChars = ${FUZZY_SEARCH_MIN_ENGLISH_CHARS};
+        const FUZZY_SEARCH_MIN_CHINESE_CHARS = fuzzySearchMinChineseChars;
+        const FUZZY_SEARCH_MIN_ENGLISH_CHARS = fuzzySearchMinEnglishChars;
+        const queryMeetsFuzzyTriggerThreshold = (rawQuery) => {
+          const normalized = normalizeProjectSearchText(rawQuery);
+          if (!normalized) return false;
+          const cjkCount = Array.from(normalized).filter((char) => /[\\u3400-\\u9fff]/u.test(char)).length;
+          if (cjkCount > 0) return cjkCount >= FUZZY_SEARCH_MIN_CHINESE_CHARS;
+          return normalized.replace(/\\s+/g, "").length >= FUZZY_SEARCH_MIN_ENGLISH_CHARS;
+        };
 
         const scrollKey = "visual-console-scroll-target";
         const routes = new Set(["/overview", "/projects", "/weekly", "/run-health", "/observer", "/kb"]);
@@ -1243,6 +1174,11 @@ export function renderClientScriptSource(): string {
           const nextPageButtons = Array.from(document.querySelectorAll("[data-projects-page-next='true']")).filter((node) => node instanceof HTMLButtonElement);
           const pageStatusNodes = Array.from(document.querySelectorAll("[data-projects-page-status='true']")).filter((node) => node instanceof HTMLElement);
           const pageSummaryNodes = Array.from(document.querySelectorAll("[data-projects-page-summary='true']")).filter((node) => node instanceof HTMLElement);
+          const fuzzyStatus = root.querySelector("[data-projects-fuzzy-status='true']");
+          const fuzzyLabel = root.querySelector("[data-projects-fuzzy-label='true']");
+          const fuzzyTitle = root.querySelector("[data-projects-fuzzy-title='true']");
+          const fuzzyMessage = root.querySelector("[data-projects-fuzzy-message='true']");
+          const fuzzyOptions = root.querySelector("[data-projects-fuzzy-options='true']");
 
           if (!(search instanceof HTMLInputElement)) return;
 
@@ -1258,6 +1194,10 @@ export function renderClientScriptSource(): string {
                 })()
               : [];
           let rotatorIndex = 0;
+          let fuzzyTimer = null;
+          let fuzzyAbortController = null;
+          let fuzzySequence = 0;
+          let fuzzyState = { status: "idle", key: "", response: null };
 
           const state = {
             search: search.value,
@@ -1266,6 +1206,219 @@ export function renderClientScriptSource(): string {
             persistence: "all",
             page: 1,
             pageSize: Math.max(1, Number(root.getAttribute("data-projects-page-size") || "15") || 15),
+          };
+
+          const currentProjectsLang = () => (document.documentElement.lang || document.body?.getAttribute("data-lang") || "").toLowerCase().startsWith("en") ? "en" : "zh";
+          const currentProjectsDate = () => new URL(window.location.href).searchParams.get("date") || "latest";
+          const buildFuzzyRequestKey = () =>
+            JSON.stringify({
+              q: normalizeProjectSearchText(state.search),
+              sort: state.sort,
+              paradigm: state.paradigm,
+              persistence: state.persistence,
+              date: currentProjectsDate(),
+              lang: currentProjectsLang(),
+            });
+          const projectCardRecords = () =>
+            Array.from(document.querySelectorAll("[data-project-card='true']"))
+              .filter((card) => card instanceof HTMLElement)
+              .map((card) => ({
+                element: card,
+                searchName: [
+                  card.dataset.projectName || "",
+                  card.querySelector("[data-project-card-link='true']")?.textContent || "",
+                ]
+                  .filter(Boolean)
+                  .join(" "),
+                searchDescription: card.querySelector(".project-row-brief")?.textContent || "",
+                searchMeta: card.dataset.projectSearch || "",
+                score: Number(card.dataset.projectScore || "0"),
+                growth: Number(card.dataset.projectGrowth || "0"),
+                order: Number(card.dataset.projectOrder || "0"),
+                paradigm: card.dataset.projectParadigm || "",
+                persistence: card.dataset.projectPersistence || "",
+              }));
+          const fuzzyStatusCopy = (response) => {
+            if (!response) return { label: "扩展搜索", title: "", message: "" };
+            if (response.source === "llm_expanded") {
+              return {
+                label: "扩展搜索",
+                title: "已扩展项目库搜索",
+                message: response.explanation_cn || "已按相关关键词扩展项目库搜索。",
+              };
+            }
+            if (response.source === "regulated_keyword_search") {
+              return {
+                label: "边界提示",
+                title: "敏感领域项目搜索",
+                message: response.boundary_message_cn || response.explanation_cn || "仅按站内 AI Agent 项目检索，不提供真实专业建议。",
+              };
+            }
+            if (response.source === "needs_clarification") {
+              return {
+                label: "澄清搜索",
+                title: "需要选择更具体的方向",
+                message: response.explanation_cn || "请选择一个可执行的搜索改写。",
+              };
+            }
+            if (response.source === "llm_failed_fallback") {
+              return {
+                label: "降级搜索",
+                title: "扩展搜索暂不可用",
+                message: response.explanation_cn || "先展示当前热门项目。",
+              };
+            }
+            return {
+              label: "热门项目",
+              title: "展示当前热门项目",
+              message: response.explanation_cn || "按当前热门项目展示。",
+            };
+          };
+          const renderFuzzyStatus = () => {
+            if (!(fuzzyStatus instanceof HTMLElement)) return;
+            const showLoading = fuzzyState.status === "loading";
+            const showError = fuzzyState.status === "error";
+            const response = fuzzyState.status === "ready" ? fuzzyState.response : null;
+            const shouldShow = showLoading || showError || Boolean(response && response.source !== "direct_search");
+            fuzzyStatus.hidden = !shouldShow;
+            if (!shouldShow) {
+              if (fuzzyOptions instanceof HTMLElement) {
+                fuzzyOptions.hidden = true;
+                fuzzyOptions.innerHTML = "";
+              }
+              return;
+            }
+
+            const copy = showLoading
+              ? { label: "扩展搜索", title: "正在扩展项目库搜索", message: "正在解释这个查询并匹配站内项目库。" }
+              : showError
+                ? { label: "降级搜索", title: "扩展搜索暂不可用", message: "先展示当前热门项目。" }
+                : fuzzyStatusCopy(response);
+            if (fuzzyLabel instanceof HTMLElement) fuzzyLabel.textContent = copy.label;
+            if (fuzzyTitle instanceof HTMLElement) fuzzyTitle.textContent = copy.title;
+            if (fuzzyMessage instanceof HTMLElement) fuzzyMessage.textContent = copy.message;
+
+            if (fuzzyOptions instanceof HTMLElement) {
+              const options = response && response.source === "needs_clarification" && Array.isArray(response.clarification_options)
+                ? response.clarification_options
+                : [];
+              fuzzyOptions.hidden = options.length === 0;
+              fuzzyOptions.innerHTML = "";
+              options.forEach((option) => {
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "filter-chip";
+                button.dataset.fuzzyOptionQuery = option.query || "";
+                button.textContent = option.label_cn || option.query || "";
+                fuzzyOptions.appendChild(button);
+              });
+            }
+          };
+          const clearFuzzyTimer = () => {
+            if (fuzzyTimer !== null) {
+              window.clearTimeout(fuzzyTimer);
+              fuzzyTimer = null;
+            }
+          };
+          const abortFuzzyRequest = () => {
+            if (fuzzyAbortController) {
+              fuzzyAbortController.abort();
+              fuzzyAbortController = null;
+            }
+          };
+          const resetFuzzyState = () => {
+            clearFuzzyTimer();
+            abortFuzzyRequest();
+            fuzzySequence += 1;
+            fuzzyState = { status: "idle", key: "", response: null };
+            renderFuzzyStatus();
+          };
+          const applyFuzzyProjectIds = (records, response) => {
+            const ids = Array.isArray(response?.project_ids) ? response.project_ids : [];
+            const order = new Map(ids.map((id, index) => [String(id || "").toLowerCase(), index]));
+            return records
+              .filter((record) => order.has((record.element.dataset.projectName || "").toLowerCase()))
+              .sort((left, right) => (order.get((left.element.dataset.projectName || "").toLowerCase()) ?? 0) - (order.get((right.element.dataset.projectName || "").toLowerCase()) ?? 0));
+          };
+          const hotProjectCards = (records) =>
+            filterAndSortProjectCards(records, {
+              ...state,
+              search: "",
+            });
+          const startFuzzySearch = async (key) => {
+            clearFuzzyTimer();
+            abortFuzzyRequest();
+            const sequence = fuzzySequence + 1;
+            fuzzySequence = sequence;
+            const controller = new AbortController();
+            fuzzyAbortController = controller;
+            fuzzyState = { status: "loading", key, response: null };
+            renderFuzzyStatus();
+
+            try {
+              const response = await fetch("/api/projects/fuzzy-search", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                cache: "no-store",
+                signal: controller.signal,
+                body: JSON.stringify({
+                  raw_query: state.search,
+                  date: currentProjectsDate(),
+                  lang: currentProjectsLang(),
+                  filters: {
+                    paradigm: state.paradigm,
+                    persistence: state.persistence,
+                  },
+                  sort: state.sort,
+                  page_context: {
+                    page: state.page,
+                    page_size: state.pageSize,
+                    path: window.location.pathname,
+                  },
+                }),
+              });
+              if (!response.ok) throw new Error("fuzzy-search-failed");
+              const payload = await response.json();
+              if (sequence !== fuzzySequence || key !== buildFuzzyRequestKey()) return;
+              fuzzyAbortController = null;
+              fuzzyState = { status: "ready", key, response: payload };
+              apply({ fuzzyTrigger: "none" });
+            } catch (error) {
+              if (error && error.name === "AbortError") return;
+              if (sequence !== fuzzySequence || key !== buildFuzzyRequestKey()) return;
+              fuzzyAbortController = null;
+              fuzzyState = { status: "error", key, response: null };
+              apply({ fuzzyTrigger: "none" });
+            }
+          };
+          const syncFuzzySearch = (_directResultCount, trigger = "debounced") => {
+            const key = buildFuzzyRequestKey();
+            if (fuzzyState.key === key && (fuzzyState.status === "loading" || fuzzyState.status === "ready" || fuzzyState.status === "error")) {
+              renderFuzzyStatus();
+              return;
+            }
+          const cards = projectCardRecords();
+          const directCards = filterAndSortProjectCards(cards, state);
+          const shouldTriggerFuzzy = shouldUseDirectProjectSearch(cards, state.search, directCards) === false;
+          const canTrigger = shouldTriggerFuzzy && queryMeetsFuzzyTriggerThreshold(state.search);
+            if (!canTrigger) {
+              if (fuzzyState.status !== "idle") resetFuzzyState();
+              else renderFuzzyStatus();
+              return;
+            }
+            clearFuzzyTimer();
+            abortFuzzyRequest();
+            fuzzySequence += 1;
+            fuzzyState = { status: "idle", key, response: null };
+            renderFuzzyStatus();
+            if (trigger === "none") return;
+            if (trigger === "immediate") {
+              void startFuzzySearch(key);
+              return;
+            }
+            fuzzyTimer = window.setTimeout(() => {
+              void startFuzzySearch(key);
+            }, fuzzySearchDebounceMs);
           };
 
           const setOptionState = (options, activeValue, attrName) => {
@@ -1310,38 +1463,31 @@ export function renderClientScriptSource(): string {
             window.history.replaceState(window.history.state ?? {}, "", nextUrl.toString());
           };
 
-          const apply = () => {
-            const cards = Array.from(document.querySelectorAll("[data-project-card='true']")).filter((card) => card instanceof HTMLElement);
+          const apply = (options = {}) => {
+            const cards = projectCardRecords();
             const lane = document.querySelector("[data-projects-lane='true']");
             const count = document.querySelector("[data-projects-count='true']");
             const emptyState = document.querySelector("[data-projects-empty='true']");
             if (!(lane instanceof HTMLElement)) return;
 
-            const filteredCards = filterAndSortProjectCards(
-              cards.map((card) => ({
-                element: card,
-                searchName: [
-                  card.dataset.projectName || "",
-                  card.querySelector("[data-project-card-link='true']")?.textContent || "",
-                ]
-                  .filter(Boolean)
-                  .join(" "),
-                searchDescription: card.querySelector(".project-row-brief")?.textContent || "",
-                searchMeta: card.dataset.projectSearch || "",
-                score: Number(card.dataset.projectScore || "0"),
-                growth: Number(card.dataset.projectGrowth || "0"),
-                order: Number(card.dataset.projectOrder || "0"),
-                paradigm: card.dataset.projectParadigm || "",
-                persistence: card.dataset.projectPersistence || "",
-              })),
-              state,
-            );
+            const directCards = filterAndSortProjectCards(cards, state);
+            const currentFuzzyKey = buildFuzzyRequestKey();
+            const useFuzzyResponse = fuzzyState.status === "ready" && fuzzyState.key === currentFuzzyKey;
+            const useFuzzyFallback = fuzzyState.status === "error" && fuzzyState.key === currentFuzzyKey;
+            const filteredCards =
+              useFuzzyResponse && fuzzyState.response?.source === "needs_clarification"
+                ? []
+                : useFuzzyResponse
+                  ? applyFuzzyProjectIds(cards, fuzzyState.response)
+                  : useFuzzyFallback
+                    ? hotProjectCards(cards)
+                    : directCards;
             const page = paginateProjectCards(filteredCards, state.page, state.pageSize);
             const visibleCards = page.items;
             state.page = page.currentPage;
 
             cards.forEach((card) => {
-              card.hidden = true;
+              card.element.hidden = true;
             });
             visibleCards.forEach((card) => {
               card.element.hidden = false;
@@ -1383,6 +1529,8 @@ export function renderClientScriptSource(): string {
             syncSortDropdown();
             setOptionState(paradigmOptions, state.paradigm, "data-projects-paradigm-option");
             setOptionState(persistenceOptions, state.persistence, "data-projects-persistence-option");
+            syncFuzzySearch(directCards.length, options.fuzzyTrigger || "debounced");
+            renderFuzzyStatus();
             scheduleProjectDetailPrefetch();
           };
           root.__projectsWorkbenchApply = apply;
@@ -1398,6 +1546,19 @@ export function renderClientScriptSource(): string {
           };
 
           search.addEventListener("input", () => {
+            state.search = search.value;
+            state.page = 1;
+            apply();
+            syncSearchRotator();
+          });
+          search.addEventListener("keydown", (event) => {
+            if (event.key !== "Enter") return;
+            state.search = search.value;
+            state.page = 1;
+            apply({ fuzzyTrigger: "immediate" });
+            syncSearchRotator();
+          });
+          search.addEventListener("search", () => {
             state.search = search.value;
             state.page = 1;
             apply();
@@ -1419,7 +1580,7 @@ export function renderClientScriptSource(): string {
               search.value = nextValue;
               state.search = nextValue;
               state.page = 1;
-              apply();
+              apply({ fuzzyTrigger: "immediate" });
               syncSearchRotator();
             });
           });
@@ -1428,6 +1589,7 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-option") || "score";
               state.page = 1;
+              resetFuzzyState();
               apply();
             });
           });
@@ -1442,6 +1604,7 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-value") || "score";
               state.page = 1;
+              resetFuzzyState();
               setSortDropdownOpen(false);
               apply();
             });
@@ -1459,6 +1622,7 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.paradigm = option.getAttribute("data-projects-paradigm-option") || "all";
               state.page = 1;
+              resetFuzzyState();
               apply();
             });
           });
@@ -1466,9 +1630,26 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.persistence = option.getAttribute("data-projects-persistence-option") || "all";
               state.page = 1;
+              resetFuzzyState();
               apply();
             });
           });
+          if (fuzzyOptions instanceof HTMLElement) {
+            fuzzyOptions.addEventListener("click", (event) => {
+              const target = event.target;
+              if (!(target instanceof Element)) return;
+              const option = target.closest("[data-fuzzy-option-query]");
+              if (!(option instanceof HTMLElement)) return;
+              const nextValue = option.dataset.fuzzyOptionQuery || "";
+              if (!nextValue) return;
+              search.value = nextValue;
+              state.search = nextValue;
+              state.page = 1;
+              resetFuzzyState();
+              apply({ fuzzyTrigger: "immediate" });
+              syncSearchRotator();
+            });
+          }
           previousPageButtons.forEach((button) => {
             button.addEventListener("click", () => {
               if (button.disabled) return;
@@ -1487,7 +1668,7 @@ export function renderClientScriptSource(): string {
           });
 
           syncSearchRotator();
-          apply();
+          apply({ fuzzyTrigger: state.search ? "immediate" : "debounced" });
         };
         const restoreScrollIfNeeded = () => {
           const payload = readScroll();

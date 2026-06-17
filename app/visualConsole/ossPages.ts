@@ -1807,7 +1807,7 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
     ecosystemsLabel: uiText(lang, "命中生态", "Matched Ecosystems"),
     labelsLabel: uiText(lang, "观察标签", "Watch Labels"),
     summarySourceLabel: uiText(lang, "摘要来源", "Summary Source"),
-    judgeSourceLabel: uiText(lang, "瑁佸喅鏉ユ簮", "Judgment Source"),
+    judgeSourceLabel: uiText(lang, "判断来源", "Judgment Source"),
     observedAtLabel: uiText(lang, "观察时间", "Observed At"),
     judgeDeltaLabel: uiText(lang, "判断增量", "Judgment Delta"),
     notes: model.banner.notes,

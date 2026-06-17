@@ -8,6 +8,7 @@
     "prepare": "node scripts/setupGitHooks.mjs",
     "build": "node scripts/buildProduction.mjs",
     "clean": "node scripts/buildProduction.mjs --clean",
+    "check:mojibake": "node scripts/checkMojibake.mjs",
     "code-review:preflight": "tsx scripts/codeReviewPreflight.ts",
     "design-review:preflight": "tsx scripts/designReviewPreflight.ts",
     "exec-plan:review:preflight": "tsx scripts/execPlanReviewPreflight.ts",

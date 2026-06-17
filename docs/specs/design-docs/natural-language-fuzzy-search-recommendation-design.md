@@ -1,565 +1,707 @@
-# 设计文档：自然语言模糊搜索与推荐入口
+# 设计文档：自然语言模糊搜索与 LLM 查询扩展
 
 ## 文档状态
 
-- 版本：`v0.1-framework`
-- 状态：`Proposed for Review`
+- 版本：`v0.2-zero-result-llm-routing`
+- 状态：`Approved`
+- 批准备注：`2026-06-16 design review 收口；需求文档已处于 READY，且本文已冻结 direct gate、zero-result LLM routing、敏感领域关键词搜索、LLM 输出契约、服务响应契约、澄清选项、缓存/审计、降级与测试口径，可直接进入 ExecPlan。`
 - 设计输入：
   - [自然语言模糊搜索与推荐需求分析.md](../product-specs/自然语言模糊搜索与推荐需求分析.md#L1)
-  - [architecture-constraints.md](../constraints/architecture-constraints.md#L1)
-  - [llm-classification.md](../services/llm-classification.md#L1)
-  - [daily-report-freshness-readability-design.md](daily-report-freshness-readability-design.md#L1)
   - [project-search-system-redesign-design.md](project-search-system-redesign-design.md#L1)
-- 目标：在不引入第二套事实源、不重算分数、不扩大到开放域问答的前提下，新增一个 `rules-first` 的自然语言意图推荐入口，让用户可以用模糊表达拿到可解释、可审计、可降级的项目或趋势推荐。
-
-## 严格需求 Review 回执
-
-本轮需求文档 review 后，已补强三个会影响设计边界的位置：
-
-1. 文档顶部状态从 `Draft for Review` 调整为 `READY`，与底部冻结状态一致。
-2. `需求 6` 从“推荐结果来自 `daily / weekly / observer / kb`”收紧为“一等推荐结果只能来自 `daily projects + weekly trends`，`observer / KB` 只能作为辅助证据或下钻支撑”。
-3. `当前缺口` 明确为设计阶段门禁：V1 查询意图词典、近域口语白名单、高冲突判定规则未冻结前，不得进入 ExecPlan。
+  - [architecture-boundaries.md](architecture-boundaries.md#L1)
+  - [llm-classification.md](../services/llm-classification.md#L1)
+- 目标：把项目库搜索设计为 `原始搜索优先；零结果再触发 LLM；LLM 只产出查询解释和扩展计划；最终结果仍由项目库索引检索`。
+- 取代口径：本设计废弃上一版 `rules-first, llm-optional` 的意图词典主导方案，不再要求用代码预置敏感条件决定是否触发 LLM。
 
 ## 一句话设计
 
-把搜索入口扩展成“请求解释卡 + 主结果轨 + 可选次结果轨”的受控推荐体验：系统先告诉用户它把这句话理解成什么，再只从现有 `daily projects` 和 `weekly trends` 中组织结果，并为每条结果给出可追溯匹配理由。
+先让当前项目库搜索按原逻辑跑完；只要有结果，就结束。只有原始查询没有任何结果时，才把查询交给 LLM，让它判断这句话是无意义、泛探索、关键词/任务/属性型查询、敏感领域关键词查询还是歧义请求，再由系统执行对应的项目库检索或热门回退。
 
 ## 设计 Thesis
 
-本次不是把精确搜索改成“更聪明的关键词匹配”，而是新增一个独立的 `intent recommendation` 产品原语。
+这次不是“让搜索框更会联想”，而是把搜索失败后的第二步变成一个受控的 LLM 查询解释器。
 
-用户的核心问题不是“我输错词了”，而是“我不知道该用什么系统词”。因此设计重点不是扩大同义词，而是建立一套可见的解释机制：
+核心边界有四条：
 
-1. 我怎么理解你的话。
-2. 我按哪个对象范围推荐：项目还是趋势。
-3. 我为什么选这些结果。
-4. 如果不能推荐，是因为无结果、解释冲突，还是超出产品范围。
+1. `direct search gate` 是最高优先级：当前项目库能搜到，就不问 LLM。
+2. LLM 负责常识语义分类和查询扩展建议，不负责生成项目答案。
+3. 敏感领域交给 LLM 从整句抽取关键词，但不判断用户是否在请求站外建议；系统只把关键词用于站内项目库搜索。
+4. 无意义查询和泛探索查询不要硬扩展，只展示热门项目或默认项目流。
 
-这个入口必须比聊天回答更窄，比精确搜索更会承接意图，并且始终保持 artifact-first。
+## 当前实现基线
 
-## 用户心智与产品表面
+当前项目库搜索主要由以下代码提供：
 
-用户应能在一次使用后学会一句话：
+- `app/visualConsole/clientScript.ts`
+  - `rankProjectSearchMatch`
+  - `filterAndSortProjectCards`
+  - `paginateProjectCards`
+- `app/visualConsole/ossProjectsPage.ts`
+  - `projectSearchText`
+  - `companySearchAliases`
+  - `directionSearchAliases`
+  - `data-project-search`
+- `src/__tests__/visualConsoleSearchAlignment.test.ts`
+  - 守护公司别名、方向别名、repo、tags、raw signal 等字段能被搜索命中。
 
-> 系统会先解释它怎么理解我的模糊请求，再从今天项目或本周趋势里推荐有证据的结果。
+本设计必须保留这些已有行为。新增能力应抽出同等口径的 shared search kernel，而不是让前端 direct gate 和后端 LLM 扩展检索各跑一套不一致逻辑。
 
-V1 产品表面固定为四个区域：
-
-1. `请求解释卡`
-   - 显示对象范围、时间语义、推荐标准、过滤条件、口语映射。
-2. `主结果轨`
-   - 显示系统本次选择的主解释结果。
-3. `次结果轨`
-   - 仅在存在轻度双重解释时出现，默认折叠，不与主结果混排。
-4. `失败 / 澄清卡`
-   - 用于无结果、需澄清、超域、artifact 不可用。
-
-禁止：
-
-- 只显示结果、不显示解释。
-- 把项目和趋势混成一个无标签列表。
-- 把 `observer / KB` 条目伪装成主结果。
-- 用 LLM 自由文本回答替代 artifact 结果。
-
-## 范围
-
-### 包含
-
-- V1 查询意图词典。
-- V1 近域口语 / 比喻白名单。
-- 项目推荐与趋势推荐的对象范围选择规则。
-- 轻度冲突主解释优先、高冲突澄清的门槛。
-- 推荐结果的响应结构、字段契约和用户可见解释。
-- `rules-only` 下的基础可用路径。
-- visual-console 与 visual-console:web 的只读消费语义。
-
-### 不包含
-
-- 不改写 exact search 的命中逻辑。
-- 不新建 scoring 分数、热度值、趋势事实或用户兴趣分。
-- 不引入外部实时搜索结果作为推荐真相。
-- 不把 `interest profile` 纳入 V1 排序加权。
-- 不把入口扩张成开放域问答、金融查询或聊天助手。
-- 不要求 V1 持久化用户查询历史。
-
-## 核心产品原语
-
-### 1. `QueryInterpretation`
-
-对用户请求的结构化解释。它是推荐入口的第一结果，而不是内部调试字段。
-
-固定包含：
-
-- `mode`
-- `primary_object_scope`
-- `secondary_object_scope`
-- `time_window`
-- `ranking_intent`
-- `filters`
-- `oral_mapping`
-- `domain_boundary`
-- `confidence_state`
-- `explanation_cn`
-
-### 2. `ResultRail`
-
-按对象范围分组的结果轨。
-
-V1 只允许两类：
-
-- `daily_project`
-- `weekly_trend`
-
-主结果轨最多展示：
-
-- 项目推荐：`6` 条
-- 趋势推荐：`4` 条
-
-次结果轨最多展示 `3` 条，并必须显示“也可按另一种语义理解”。
-
-### 3. `Source-bound Match Reason`
-
-每条推荐结果至少有 `1` 条与本次请求相关、且可追溯到现有 artifact 字段的理由。
-
-若只能生成模板理由但无法绑定到字段，结果仍可展示，但必须标记：
-
-- `explanation_quality = "degraded"`
-
-### 4. `RecommendationFailure`
-
-失败不是一个空列表，而是四类固定状态：
-
-- `no_match`
-- `needs_clarification`
-- `out_of_scope`
-- `artifact_unavailable`
-
-## V1 查询意图词典
-
-V1 必须覆盖以下意图。词典外请求不得被自由扩张解释，只能进入保守降级、澄清或 exact search。
-
-| intent_key | 触发表达 | 主对象范围 | 时间语义 | 排序 / 过滤语义 |
-| --- | --- | --- | --- | --- |
-| `hot_projects` | `最热`、`最火`、`热门`、`最近火` | `daily_project` | `latest_available` | 使用现有 daily 排序，不新增热度分 |
-| `worth_watching_projects` | `值得看`、`值得追`、`值得关注` | `daily_project` | `latest_available` | 使用现有 final_rank / total_score |
-| `topic_projects` | `MCP 项目`、`memory 项目`、`coding agent 项目` 等主题 + 项目表达 | `daily_project` | `latest_available` | 先主题过滤，再按现有排序 |
-| `low_risk_hot_projects` | `风险低`、`稳一点`、`高置信` + 热度表达 | `daily_project` | `latest_available` | 过滤明显风险项，不新增风险分 |
-| `persistent_projects` | `持续出现`、`一直在出现`、`不是单日冒头` | `daily_project` | `recent` | 使用 `persistence_state / appearances` |
-| `weekly_trends` | `本周趋势`、`形成趋势`、`趋势方向`、`一周内` | `weekly_trend` | `this_week` | 使用 weekly 既有趋势顺序 |
-| `topic_weekly_trends` | 主题 + `趋势 / 方向 / 本周` | `weekly_trend` | `this_week` | 主题过滤 weekly trend |
-
-V1 首批主题识别只允许从既有字段中匹配：
-
-- `tags`
-- `description`
-- `score.paradigm`
-- `matched_interest_topics`
-- weekly `trend_key / trend_name_cn / trend_summary_cn`
-
-## 近域口语白名单
-
-白名单先于 LLM 生效。白名单外表达不得由 LLM 或 embedding 自由扩张为站内语义。
-
-| whitelist_key | 允许表达 | 站内解释 | 限制 |
-| --- | --- | --- | --- |
-| `oral_stock_as_project` | `股票`、`标的` | 值得优先关注的 AI Agent 生态项目候选 | 仅在没有真实金融限定词时生效 |
-| `oral_leader` | `龙头`、`头部` | 当前更值得优先看的项目或趋势 | 不等于市场占有率结论 |
-| `oral_homework` | `抄作业`、`值得抄作业` | 值得参考其做法或方向的项目 / 趋势 | 必须显示这是站内比喻解释 |
-| `oral_watchlist` | `值得追`、`值得蹲` | 值得继续关注的候选 | 不等于投资建议 |
-
-真实金融超域词拥有更高优先级，命中即进入 `out_of_scope`：
-
-- `A 股`
-- `美股`
-- `港股`
-- `股价`
-- `股票代码`
-- `财报`
-- `证券`
-- `大盘`
-- `板块`
-- `涨跌幅`
-- `加密资产`
-- `币价`
-- `token 价格`
-
-示例：
-
-- `我想看看最热的股票有什么`：可按 `oral_stock_as_project` 映射为站内项目标的。
-- `美股最近最热的股票是什么`：必须进入 `out_of_scope`。
-
-## 解释状态机
+## 查询状态机
 
 ```text
-Raw Query
-  -> Normalize
-  -> Domain Boundary Check
-  -> Oral Whitelist Mapping
-  -> Intent Dictionary Match
-  -> Object Scope Selection
-  -> Conflict Policy
-  -> Candidate Retrieval
-  -> Result Projection
+User Query
+  -> Normalize Query
+  -> Run Existing Project Search
+  -> Has Results?
+      -> yes: Direct Results, no LLM
+      -> no:
+          -> Build LLM Interpretation Request
+          -> Validate LLM JSON
+          -> Route by semantic_class
+          -> Execute Expanded Search or Hot Fallback or Clarification
+          -> Render Results from Project Index Only
 ```
 
-### 1. Normalize
+### 1. Normalize Query
 
-最小标准化：
+标准化只做低风险处理：
 
-- 全角 / 半角统一
+- trim
 - 大小写统一
-- 常见空格折叠
-- 中英文主题词保留原文
+- 空格折叠
+- 全角/半角等价处理
+- 保留中英文原词
 
-### 2. Domain Boundary Check
+禁止在该阶段做语义改写、敏感词判断或同义词扩展。
 
-若命中真实金融超域词，直接输出 `out_of_scope`。
+### 2. Direct Search Gate
 
-除非用户明确写出“不是问真实股票 / 只看 AI Agent 项目”，否则超域词优先于白名单映射。
+Direct gate 必须调用与项目库 UI 一致的搜索函数。
 
-### 3. Oral Whitelist Mapping
+输入：
 
-只处理白名单表内表达。
+- 原始查询
+- 当前项目集合
+- 当前筛选条件
+- 当前排序方式
 
-输出必须在解释卡中显示：
+输出：
 
-- 原始表达
-- 映射后的站内语义
-- 边界提示
+- `direct_result_count`
+- `direct_results`
 
-### 4. Intent Dictionary Match
+规则：
 
-规则词典必须覆盖本设计列出的 V1 intent。
+- `direct_result_count > 0`：直接展示结果，不触发 LLM。
+- `direct_result_count === 0`：进入 LLM 语义路由。
 
-LLM 可提供结构化补充，但不得：
+### 3. LLM Interpretation
 
-- 生成词典外 intent。
-- 覆盖超域判断。
-- 绕过白名单限制。
-- 直接生成推荐结果。
+LLM 只接收必要上下文：
 
-### 5. Object Scope Selection
+- 原始查询
+- 当前项目库的可搜索字段摘要
+- 当前可用方向名和方向中文别名摘要
+- 当前结果范围说明
+- direct gate 已确认 `direct_result_count=0`
 
-主对象范围选择规则固定如下：
+LLM 不接收完整项目详情列表，不输出最终项目列表。
 
-| 条件 | primary_object_scope | secondary_object_scope |
+### 4. Route by Semantic Class
+
+LLM 主分类固定为以下 7 类：
+
+| semantic_class | 含义 | 结果策略 |
 | --- | --- | --- |
-| 明确出现 `项目 / repo / 仓库 / 标的 / 股票` 且无趋势强指示 | `daily_project` | 可为空 |
-| 明确出现 `趋势 / 方向 / 赛道 / 本周 / 一周 / weekly` | `weekly_trend` | 可为空 |
-| 只有 `最热 / 值得看 / 最近有什么` 等泛请求 | `daily_project` | `weekly_trend` 可选 |
-| 项目和趋势都可解释，但只有一方更强 | 更强的一方 | 另一方可作为次结果轨 |
-| 项目和趋势强冲突且无法稳定判定 | 无 | 无，进入 `needs_clarification` |
-
-### 6. 高冲突门槛
-
-实现不得用“感觉有歧义”来决定澄清。V1 高冲突固定为：
-
-- `project_marker_count >= 2`
-- `trend_marker_count >= 2`
-- 两者差值 `<= 1`
-- 且没有明确主语短语位于 `看 / 推荐 / 找 / 有哪些` 之后
-
-若不满足以上全部条件，默认采用主解释优先，并在解释卡中说明取舍。
-
-## 候选池与排序
-
-### Daily Project 候选池
-
-主候选池：
-
-- `DailyReport.today_star_projects`
-
-兼容候选池：
-
-- 当旧 artifact 缺少 `today_star_projects` 时，可从 `high_score_projects / anomaly_projects / new_projects` 投影为 `daily_project`，但解释卡必须标记 `artifact_compatibility = "legacy_degraded"`。
-
-禁止作为主推荐结果：
-
-- `context_only_projects`
-- `observer.entries`
-- `KB latest`
-
-除非用户显式请求“历史补充 / 背景”，否则 `context_only_projects` 不进入 V1 推荐主结果。
-
-排序规则：
-
-1. 优先使用 `final_rank`。
-2. 无 `final_rank` 时使用 `score.total_score`。
-3. 同分时按 `repo_url` 字典序稳定排序。
-
-过滤规则：
-
-- 主题过滤：只基于 tags、description、paradigm、matched_interest_topics。
-- 风险过滤：`risk_review_required=true`、高风险 `risks` 或明显 `anti_noise_flags` 的项目不得进入 `low_risk_hot_projects` 主结果。
-- 持续性过滤：优先 `persistence_state != "single-spike"` 或 `appearances >= 2`。
-
-### Weekly Trend 候选池
-
-主候选池：
-
-- `WeeklyReport.core_trend_cards`
-
-观察候选池：
-
-- `WeeklyReport.weak_signal_cards`
-
-`weak_signal_cards` 只能在以下情况出现：
-
-- 用户请求包含 `弱信号 / 观察 / 冒头`。
-- 主候选池无结果，且解释卡明确标记“仅作为观察中信号”。
-
-排序规则：
-
-1. 保留 weekly artifact 原顺序。
-2. 同一趋势内 supporting projects 保留 artifact 原顺序。
-3. 不新增趋势强度分。
+| `low_semantic` | 混乱、玩笑、无实际检索意图 | 保留原查询，展示热门项目；不扩展 |
+| `open_discovery` | 泛探索，例如“最近有什么值得看” | 展示热门项目或默认项目流；可附简短解释 |
+| `topic_keyword` | 有明确领域、技术、公司、项目名词 | 执行扩展查询 |
+| `task_use_case` | 描述任务/场景，例如客服工单、导购、数据分析 | 执行扩展查询 |
+| `attribute_filter` | 带风险、热度、持续性、新鲜度等属性 | 执行扩展查询 + 可执行过滤 |
+| `regulated_keyword_search` | 涉及股票、医疗、法律、金融、安全等敏感领域 | 执行关键词扩展查询 + 展示项目搜索边界提示 |
+| `ambiguous` | 多个解释冲突，扩展可能误导 | 展示澄清选项，不直接执行搜索 |
 
 ## 输出契约
 
 ```ts
-type RecommendationMode =
-  | "intent_recommendation"
-  | "exact_search_passthrough"
-  | "needs_clarification"
-  | "out_of_scope";
+type FuzzySearchSemanticClass =
+  | "low_semantic"
+  | "open_discovery"
+  | "topic_keyword"
+  | "task_use_case"
+  | "attribute_filter"
+  | "regulated_keyword_search"
+  | "ambiguous";
 
-type RecommendationObjectScope = "daily_project" | "weekly_trend";
-type RecommendationTimeWindow = "today" | "recent" | "this_week" | "latest_available";
-type RecommendationConfidenceState = "stable" | "low_confidence" | "high_conflict";
+type FuzzySearchDecision =
+  | "direct_passthrough"
+  | "hot_only"
+  | "expand_query"
+  | "needs_clarification";
 
-interface QueryInterpretation {
-  mode: RecommendationMode;
-  primary_object_scope?: RecommendationObjectScope;
-  secondary_object_scope?: RecommendationObjectScope;
-  time_window: RecommendationTimeWindow;
-  ranking_intent: string;
-  filters: string[];
-  oral_mapping?: {
-    whitelist_key: string;
-    raw_phrase: string;
-    mapped_meaning_cn: string;
-  };
-  domain_boundary: "in_scope" | "near_domain_mapped" | "out_of_scope";
-  confidence_state: RecommendationConfidenceState;
-  explanation_cn: string;
+type FuzzySearchResultMode = "projects" | "hot_projects" | "none";
+
+interface ExtractedQueryTerm {
+  term: string;
+  normalized_term: string;
+  type: "domain" | "technology" | "task" | "attribute" | "company" | "project" | "object" | "other";
+  confidence: number;
+  reason_cn: string;
 }
 
-interface RecommendationResultItem {
-  object_type: RecommendationObjectScope;
-  source_artifact: "daily_report" | "weekly_report";
-  source_ref: string;
-  title: string;
-  time_context: string;
-  rank_basis: "final_rank" | "total_score" | "weekly_order" | "legacy_degraded";
-  match_reasons: string[];
-  evidence_refs: string[];
-  explanation_quality: "source_bound" | "degraded";
-  detail_link?: string;
-}
-
-interface RecommendationResultRail {
-  scope: RecommendationObjectScope;
-  rail_role: "primary" | "secondary";
-  title_cn: string;
-  items: RecommendationResultItem[];
-}
-
-interface RecommendationFailure {
-  reason: "no_match" | "needs_clarification" | "out_of_scope" | "artifact_unavailable";
-  message_cn: string;
-  next_actions: string[];
-}
-
-interface NaturalLanguageRecommendationResponse {
+interface ExpandedProjectQuery {
   query: string;
-  interpretation: QueryInterpretation;
-  rails: RecommendationResultRail[];
-  failure?: RecommendationFailure;
+  required_terms: string[];
+  optional_terms: string[];
+  boost_terms: string[];
+  exclude_terms: string[];
+  target_fields: Array<"name" | "description" | "tags" | "direction" | "reason" | "metadata">;
+  why_cn: string;
+}
+
+interface FuzzySearchFilters {
+  time_window: "latest" | "recent" | "this_week" | "unspecified";
+  risk_preference: "lower_risk" | "any" | "unspecified";
+  freshness_preference: "newer" | "persistent" | "any" | "unspecified";
+  sort_preference: "existing_rank" | "score" | "growth" | "unspecified";
+}
+
+interface FuzzySearchBoundary {
+  is_sensitive_domain: boolean;
+  sensitive_domain?: "finance" | "medical" | "legal" | "security" | "other";
+  reason_cn?: string;
+  user_message_cn?: string;
+}
+
+interface FuzzySearchClarificationOption {
+  label_cn: string;
+  query: string;
+  semantic_hint: Exclude<FuzzySearchSemanticClass, "ambiguous">;
+  why_cn: string;
+}
+
+interface LlmFuzzyQueryInterpretation {
+  schema_version: "project_fuzzy_query.v1";
+  raw_query: string;
+  semantic_class: FuzzySearchSemanticClass;
+  decision: Exclude<FuzzySearchDecision, "direct_passthrough">;
+  result_mode: FuzzySearchResultMode;
+  confidence: number;
+  extracted_terms: ExtractedQueryTerm[];
+  expanded_queries: ExpandedProjectQuery[];
+  filters: FuzzySearchFilters;
+  boundary: FuzzySearchBoundary;
+  clarification_options: FuzzySearchClarificationOption[];
+  explanation_cn: string;
+  fallback: {
+    if_expanded_search_empty: "show_hot_projects" | "show_no_match" | "ask_clarification";
+    preserve_original_query: boolean;
+  };
 }
 ```
 
-## 用户可见文案契约
+服务端返回给前端的响应契约固定为：
 
-### 请求解释卡
+```ts
+type FuzzySearchSource =
+  | "direct_search"
+  | "llm_expanded"
+  | "regulated_keyword_search"
+  | "hot_only"
+  | "needs_clarification"
+  | "llm_failed_fallback";
 
-必须使用类似结构：
+interface FuzzyProjectSearchDiagnostics {
+  direct_result_count: number;
+  llm_triggered: boolean;
+  cache_status: "hit" | "miss" | "bypass";
+  interpretation_schema_version?: "project_fuzzy_query.v1";
+  semantic_class?: FuzzySearchSemanticClass;
+  decision: FuzzySearchDecision;
+  expanded_query_count: number;
+  expanded_result_count: number;
+  unsupported_filters: string[];
+  fallback_reason?: "llm_unconfigured" | "llm_timeout" | "invalid_json" | "schema_invalid" | "expanded_empty" | "endpoint_error";
+}
+
+interface FuzzyProjectSearchResponse {
+  schema_version: "project_fuzzy_search_response.v1";
+  raw_query: string;
+  normalized_query: string;
+  source: FuzzySearchSource;
+  result_mode: FuzzySearchResultMode;
+  project_ids: string[];
+  explanation_cn?: string;
+  boundary_message_cn?: string;
+  clarification_options: FuzzySearchClarificationOption[];
+  diagnostics: FuzzyProjectSearchDiagnostics;
+}
+```
+
+响应规则：
+
+- `direct_search` 响应必须满足 `llm_triggered=false`，不返回 `explanation_cn`，只返回当前 direct result 的 `project_ids`。
+- `llm_expanded` 响应必须只返回本地项目库检索得到的 `project_ids`，不得返回 LLM 生成的项目名。
+- `regulated_keyword_search` 响应必须满足 `diagnostics.semantic_class="regulated_keyword_search"`，只返回本地项目库检索得到的 `project_ids`，并返回 `boundary_message_cn`，说明结果只是项目搜索结果，不提供真实专业建议。
+- `hot_only` / `llm_failed_fallback` 响应返回当前默认热门项目流的 `project_ids`，并保留原始查询。
+- `needs_clarification` 响应必须返回空 `project_ids`，并返回 2-3 个 `clarification_options`；这些选项必须是可重新执行的查询改写，不是自由文本追问。
+- `diagnostics` 是验收和审计契约的一部分；实现不得只把它写入临时 console log。
+
+### 合法性规则
+
+- `low_semantic` 必须满足：
+  - `decision="hot_only"`
+  - `result_mode="hot_projects"`
+  - `expanded_queries=[]`
+  - `clarification_options=[]`
+  - `fallback.preserve_original_query=true`
+- `open_discovery` 必须满足：
+  - `decision="hot_only"`
+  - `result_mode="hot_projects"`
+  - `expanded_queries=[]`
+  - `clarification_options=[]`
+- `topic_keyword`、`task_use_case`、`attribute_filter`、`regulated_keyword_search` 必须满足：
+  - `decision="expand_query"`
+  - `expanded_queries.length >= 1`
+  - `clarification_options=[]`
+- `regulated_keyword_search` 还必须满足：
+  - `boundary.is_sensitive_domain=true`
+  - `boundary.sensitive_domain` 不为空
+  - `boundary.user_message_cn` 不为空，且必须说明“仅按站内 AI Agent 项目检索，不提供真实专业建议”
+- `ambiguous` 必须满足：
+  - `decision="needs_clarification"`
+  - `result_mode="none"`
+  - `expanded_queries=[]`
+  - `clarification_options.length` 为 `2` 或 `3`
+  - 每个 `clarification_options[].query` 必须能作为新查询重新走 direct search gate。
+
+## LLM Prompt
+
+### 主 Prompt
 
 ```text
-已按「当前可用结果中的热门项目推荐」理解你的请求。
-对象范围：项目
-时间语义：当前可用结果
-推荐标准：沿用 daily artifact 既有排序，不新增热度分
-口语映射：已将“股票”按站内“项目标的”理解，不提供真实证券推荐
+You are the query interpreter for an AI Agent project library.
+
+The current project-library exact search has already run for the user's raw query and returned zero results.
+Your job is to classify the query and produce a structured search plan for the local project index.
+
+Hard rules:
+1. Return exactly one JSON object. Do not use markdown fences. Do not add prose before or after JSON.
+2. Do not invent projects, repositories, facts, scores, rankings, market data, medical/legal/security advice, or external search results.
+3. You only interpret the user's query. The application will execute any expanded query against its local project index.
+4. If the query is chaotic, joking, meaningless, or has no actionable retrieval intent, do not create expansion terms. Use semantic_class="low_semantic", decision="hot_only".
+5. If the query is broad discovery such as "最近有什么值得看" or "给我看新东西", do not create narrow expansion terms. Use semantic_class="open_discovery", decision="hot_only".
+6. If the query contains meaningful nouns, tasks, domains, technologies, companies, or attributes, extract them and create expanded local-search queries.
+7. Sensitive or regulated domains override the general keyword rule. If the query mentions finance, stocks, investment, medical, diagnosis, treatment, legal, security, exploit, or similar high-risk domains, do not decide whether the user wants professional advice. Extract searchable domain/task/object keywords from the whole query, use semantic_class="regulated_keyword_search", decision="expand_query", and include a short boundary note.
+8. Existing direct-search hits are not your concern; direct search already returned zero. Do not recommend "exact search passthrough".
+9. Prefer Chinese in user-facing explanations. Keep terms in their original language when useful.
+10. Confidence must be between 0 and 1. If confidence is below 0.45 and expansion could mislead, choose semantic_class="ambiguous".
+11. If semantic_class="ambiguous", return 2 or 3 clarification_options. Each option must contain a concrete query rewrite that the application can execute as a new search.
+
+Product scope:
+- The product is an AI Agent / intelligent software project radar.
+- Results can only come from local project-library artifacts.
+- In-scope examples: agent projects, AI workflows, coding agents, browser/computer-use agents, MCP/tools/connectors, memory/RAG systems, customer support agents, ecommerce/guide agents, finance research agents as software projects.
+- Do not answer real stock picks, medical diagnosis or treatment, legal advice, cyber attack instructions, live prices, or news claims. If the query contains those words, extract searchable project-library keywords instead.
+
+Available local-search fields:
+{{search_fields_summary}}
+
+Known direction aliases and examples:
+{{direction_alias_summary}}
+
+Return JSON schema:
+{
+  "schema_version": "project_fuzzy_query.v1",
+  "raw_query": string,
+  "semantic_class": "low_semantic" | "open_discovery" | "topic_keyword" | "task_use_case" | "attribute_filter" | "regulated_keyword_search" | "ambiguous",
+  "decision": "hot_only" | "expand_query" | "needs_clarification",
+  "result_mode": "projects" | "hot_projects" | "none",
+  "confidence": number,
+  "extracted_terms": [
+    {
+      "term": string,
+      "normalized_term": string,
+      "type": "domain" | "technology" | "task" | "attribute" | "company" | "project" | "object" | "other",
+      "confidence": number,
+      "reason_cn": string
+    }
+  ],
+  "expanded_queries": [
+    {
+      "query": string,
+      "required_terms": string[],
+      "optional_terms": string[],
+      "boost_terms": string[],
+      "exclude_terms": string[],
+      "target_fields": ["name" | "description" | "tags" | "direction" | "reason" | "metadata"],
+      "why_cn": string
+    }
+  ],
+  "filters": {
+    "time_window": "latest" | "recent" | "this_week" | "unspecified",
+    "risk_preference": "lower_risk" | "any" | "unspecified",
+    "freshness_preference": "newer" | "persistent" | "any" | "unspecified",
+    "sort_preference": "existing_rank" | "score" | "growth" | "unspecified"
+  },
+  "boundary": {
+    "is_sensitive_domain": boolean,
+    "sensitive_domain": "finance" | "medical" | "legal" | "security" | "other" | null,
+    "reason_cn": string | null,
+    "user_message_cn": string | null
+  },
+  "clarification_options": [
+    {
+      "label_cn": string,
+      "query": string,
+      "semantic_hint": "low_semantic" | "open_discovery" | "topic_keyword" | "task_use_case" | "attribute_filter" | "regulated_keyword_search",
+      "why_cn": string
+    }
+  ],
+  "explanation_cn": string,
+  "fallback": {
+    "if_expanded_search_empty": "show_hot_projects" | "show_no_match" | "ask_clarification",
+    "preserve_original_query": boolean
+  }
+}
+
+Examples:
+
+User query: "这怎么哈哈了"
+Expected:
+{
+  "schema_version": "project_fuzzy_query.v1",
+  "raw_query": "这怎么哈哈了",
+  "semantic_class": "low_semantic",
+  "decision": "hot_only",
+  "result_mode": "hot_projects",
+  "confidence": 0.82,
+  "extracted_terms": [],
+  "expanded_queries": [],
+  "filters": {
+    "time_window": "unspecified",
+    "risk_preference": "unspecified",
+    "freshness_preference": "unspecified",
+    "sort_preference": "existing_rank"
+  },
+  "boundary": {
+    "is_sensitive_domain": false,
+    "sensitive_domain": null,
+    "reason_cn": null,
+    "user_message_cn": null
+  },
+  "clarification_options": [],
+  "explanation_cn": "这句话没有明确项目、方向或任务检索意图，保留原查询并展示当前热门项目。",
+  "fallback": {
+    "if_expanded_search_empty": "show_hot_projects",
+    "preserve_original_query": true
+  }
+}
+
+User query: "股票研究 agent"
+Expected:
+{
+  "schema_version": "project_fuzzy_query.v1",
+  "raw_query": "股票研究 agent",
+  "semantic_class": "regulated_keyword_search",
+  "decision": "expand_query",
+  "result_mode": "projects",
+  "confidence": 0.84,
+  "extracted_terms": [
+    { "term": "股票研究", "normalized_term": "finance investment research", "type": "domain", "confidence": 0.86, "reason_cn": "用户在寻找金融/股票研究方向的 agent 项目" },
+    { "term": "agent", "normalized_term": "agent", "type": "object", "confidence": 0.95, "reason_cn": "限定为 AI Agent 项目或工具" }
+  ],
+  "expanded_queries": [
+    {
+      "query": "finance investment research agent stock trading quant",
+      "required_terms": ["agent"],
+      "optional_terms": ["finance", "investment", "research", "stock", "trading", "quant", "股票", "投研", "金融", "量化"],
+      "boost_terms": ["finance-investment-research-agent"],
+      "exclude_terms": [],
+      "target_fields": ["description", "tags", "direction", "metadata"],
+      "why_cn": "把“股票研究”扩展为站内金融投研 agent 方向词。"
+    }
+  ],
+  "filters": {
+    "time_window": "latest",
+    "risk_preference": "unspecified",
+    "freshness_preference": "any",
+    "sort_preference": "existing_rank"
+  },
+  "boundary": {
+    "is_sensitive_domain": true,
+    "sensitive_domain": "finance",
+    "reason_cn": "这是站内金融投研 agent 项目搜索，不是股票投资建议。",
+    "user_message_cn": "仅按 AI Agent 项目方向检索，不提供真实股票买卖建议。"
+  },
+  "clarification_options": [],
+  "explanation_cn": "已按“金融/股票研究方向的 AI Agent 项目”理解，并扩展到金融、投研、量化、交易等站内方向词。",
+  "fallback": {
+    "if_expanded_search_empty": "show_hot_projects",
+    "preserve_original_query": true
+  }
+}
+
+User query: "美股今天买什么"
+Expected:
+{
+  "schema_version": "project_fuzzy_query.v1",
+  "raw_query": "美股今天买什么",
+  "semantic_class": "regulated_keyword_search",
+  "decision": "expand_query",
+  "result_mode": "projects",
+  "confidence": 0.9,
+  "extracted_terms": [
+    { "term": "美股", "normalized_term": "us stocks finance investment research", "type": "domain", "confidence": 0.95, "reason_cn": "可转为金融/股票研究方向项目关键词" },
+    { "term": "买什么", "normalized_term": "investment decision support research", "type": "task", "confidence": 0.78, "reason_cn": "可转为投研、决策辅助、研究助手等站内项目关键词" }
+  ],
+  "expanded_queries": [
+    {
+      "query": "finance investment research stock market analysis agent decision support",
+      "required_terms": [],
+      "optional_terms": ["finance", "investment", "research", "stock", "market", "analysis", "agent", "金融", "投研", "股票", "美股"],
+      "boost_terms": ["finance-investment-research-agent"],
+      "exclude_terms": [],
+      "target_fields": ["description", "tags", "direction", "metadata"],
+      "why_cn": "按金融/股票研究和投资决策辅助方向检索站内 AI Agent 项目。"
+    }
+  ],
+  "filters": {
+    "time_window": "unspecified",
+    "risk_preference": "unspecified",
+    "freshness_preference": "unspecified",
+    "sort_preference": "unspecified"
+  },
+  "boundary": {
+    "is_sensitive_domain": true,
+    "sensitive_domain": "finance",
+    "reason_cn": "这是敏感金融领域关键词搜索，只用于检索站内 AI Agent 项目。",
+    "user_message_cn": "仅按站内金融/投研 Agent 项目检索，不提供真实股票买卖建议。"
+  },
+  "clarification_options": [],
+  "explanation_cn": "已按金融、股票研究、投研和决策辅助等关键词检索站内 AI Agent 项目。",
+  "fallback": {
+    "if_expanded_search_empty": "show_hot_projects",
+    "preserve_original_query": true
+  }
+}
+
+Now classify this query:
+{{raw_query}}
 ```
 
-### 项目结果理由
+### 修复 Prompt
 
-项目理由优先从以下字段生成：
+当 LLM 返回非法 JSON、缺字段、枚举越界或违反合法性规则时，允许最多一次修复调用。
 
-- `project_brief_cn`
-- `why_today_cn`
-- `score.paradigm`
-- `project.persistence_state`
-- `project.appearances`
-- `score.confidence`
-- `score.risks`
-- `matched_interest_topics`
+```text
+The previous response did not match the required JSON schema or routing rules.
+Repair it from scratch. Do not preserve invalid fields.
 
-### 趋势结果理由
+Return exactly one JSON object and nothing else.
+Do not use markdown fences.
 
-趋势理由优先从以下字段生成：
+Original user query:
+{{raw_query}}
 
-- `trend_name_cn`
-- `trend_summary_cn`
-- `evidence_summary_cn`
-- `worth_following_next_week`
-- supporting projects 的 `why_this_week_cn`
+Validation error:
+{{validation_error}}
 
-## LLM 边界
+Previous response:
+{{previous_response}}
 
-V1 采用 `rules-first, llm-optional`。
+Required routing rules:
+- low_semantic/open_discovery => decision hot_only, result_mode hot_projects, expanded_queries empty.
+- topic_keyword/task_use_case/attribute_filter/regulated_keyword_search => decision expand_query, result_mode projects, expanded_queries non-empty.
+- regulated_keyword_search => boundary.is_sensitive_domain true, boundary.sensitive_domain non-null, boundary.user_message_cn non-empty.
+- ambiguous => decision needs_clarification, result_mode none, expanded_queries empty, clarification_options length 2 or 3.
+- Never invent projects or final results.
 
-LLM 允许：
+Required schema is project_fuzzy_query.v1.
+```
 
-- 将用户表达转成结构化候选解释。
-- 补充用户可读解释措辞。
-- 在 rules 已命中时补充 filters。
-
-LLM 禁止：
-
-- 直接决定最终对象范围。
-- 生成白名单外口语映射。
-- 把超域请求改写成站内请求。
-- 生成不存在的项目或趋势。
-- 改写 `final_rank / total_score / weekly order`。
-- 在 `llm.enabled=false` 时成为必需路径。
-
-LLM 输出非法、超时或低置信时，系统必须回退规则解释；不能静默退化成自由文本回答。
-
-## visual-console / web 集成边界
-
-V1 推荐入口是只读消费层：
-
-- 读取 `data/reports/*.daily.json`
-- 读取 `data/reports/*.weekly.json` 或 weekly markdown 解析结果
-- 可读取 KB 作为下钻链接或解释补充
-- 可读取 observer 作为辅助证据提示，但不作为主结果
+## 服务与模块设计
 
 建议新增模块：
 
-- `src/recommendation/types.ts`
-- `src/recommendation/intentDictionary.ts`
-- `src/recommendation/oralWhitelist.ts`
-- `src/recommendation/conflictPolicy.ts`
-- `src/recommendation/resultProjector.ts`
-- `src/recommendation/recommendationService.ts`
+- `src/search/projectSearchKernel.ts`
+  - 抽出 `normalizeProjectSearchText`、tokenize、rank、filter/sort 的共享实现。
+  - 前端和后端必须消费同一逻辑，避免 direct gate 漂移。
+- `src/search/projectSearchIndex.ts`
+  - 从 `ProjectsViewModel` 或 daily artifact 投影项目搜索索引。
+- `src/search/fuzzyQueryTypes.ts`
+  - 冻结 LLM 输出契约和路由枚举。
+- `src/search/fuzzyQueryPrompt.ts`
+  - 维护主 prompt、修复 prompt、上下文压缩函数。
+- `src/search/fuzzyQueryInterpreter.ts`
+  - 调用 LLM、解析 JSON、校验 schema、执行一次修复。
+- `src/search/fuzzyProjectSearchService.ts`
+  - 编排 direct gate、LLM 路由、扩展检索、热门回退与诊断。
 
-推荐入口不应写入 `data/`，除非后续另立查询审计设计。
+前端集成建议：
 
-## 失败与降级
+- `app/visualConsole/clientScript.ts`
+  - 保留本地 direct search。
+  - 当本地 direct result 为 0 且输入稳定后，请求服务端 fuzzy endpoint。
+  - 服务返回扩展后的项目 id/order 或 hot-only 指令。
+- `app/server.ts`
+  - 新增只读 endpoint，例如 `POST /api/projects/fuzzy-search`。
+  - endpoint 只读取当前 date 的项目库数据，不写入 artifact。
 
-### `no_match`
+## 触发与缓存
 
-条件：
+### 触发条件
 
-- 解释稳定，但候选池过滤后为空。
+必须同时满足：
 
-用户语义：
+- 查询非空。
+- 当前 direct search 结果数为 0。
+- 查询长度达到最小阈值：中文不少于 2 个字符，英文不少于 3 个字符。
+- 用户停止输入超过 debounce 时间，或用户按 Enter。
 
-- “我理解了你的请求，但当前 artifact 中没有满足条件的结果。”
+V1 默认：
 
-禁止：
+- debounce：`600ms`
+- 单查询超时：`5000ms`
+- 修复调用：最多 `1` 次
 
-- 直接显示“没有搜索结果”。
-- 用 `context_only / observer / KB` 自动补齐主结果。
+### 缓存键
+
+```text
+date + normalized_query + lang + active_filters + fuzzy_schema_version
+```
+
+缓存内容：
+
+- LLM 原始输出
+- 校验后的 interpretation
+- 扩展查询列表
+- 最终执行策略
+- 结果命中数
+- 失败原因
+
+缓存只用于查询解释，不缓存不存在于项目库的最终项目事实。
+
+## 结果投影策略
+
+### `expand_query`
+
+1. 对每个 `expanded_queries[].query` 执行项目库搜索。
+2. 合并结果并去重。
+3. 默认保留扩展查询合并后的相关性顺序；仅当 `sort_preference` 明确为 `score` 或 `growth` 时再按现有分数/增长排序。
+4. 如果 `boost_terms` 命中，可只作为同分排序微调或解释，不得新建 LLM 分数。
+5. 如果结果为空，按 `fallback.if_expanded_search_empty` 回退。
+
+### 过滤与排序边界
+
+`FuzzySearchFilters` 只表达用户查询里的可执行偏好，不能创建新事实或新分数。
+
+V1 可执行映射：
+
+| filter | 可执行值 | 执行字段 | 边界 |
+| --- | --- | --- | --- |
+| `time_window` | `latest` / `recent` / `this_week` | 当前 Projects view 的 `context.selected_date`、项目 `first_seen` / `last_seen` / `appearance_dates` | 字段缺失时不硬过滤，记录 `unsupported_filters` |
+| `risk_preference` | `lower_risk` | `score.risks`、`score.anti_noise_flags`、`score.confidence` | 只排除明显高风险或低置信项目，不生成风险分 |
+| `freshness_preference` | `newer` / `persistent` | `project.first_seen`、`project.persistence_state`、`project.appearances` | `persistent` 优先多日出现或非 single-spike；字段缺失时保持原排序 |
+| `sort_preference` | `existing_rank` / `score` / `growth` | 现有 `final_rank` / `score.total_score` / star delta growth | 不允许新增 LLM sort score |
+
+如果 LLM 返回无法用现有字段执行的过滤偏好，系统必须：
+
+1. 忽略该过滤偏好。
+2. 在 `diagnostics.unsupported_filters` 中记录字段名。
+3. 继续使用可执行的扩展查询和现有排序。
+4. 不得让 LLM 再生成替代项目或替代排序解释。
+
+### `hot_only`
+
+1. 保留搜索框中的原始查询。
+2. 不把原查询当过滤条件继续隐藏卡片。
+3. 展示默认热门项目流，优先使用当前 Projects 页面默认排序。
+4. 对 `low_semantic` 不显示“扩展关键词”；对 `open_discovery` 可显示“按当前热门项目展示”。
+
+### `regulated_keyword_search`
+
+1. 从查询句中抽取敏感领域、任务、对象和技术关键词。
+2. 执行扩展项目库搜索，不因为用户句子像专业建议请求而拒绝搜索。
+3. 展示紧凑边界提示，说明结果只是站内 AI Agent 项目检索，不提供医疗、投资、法律或安全建议。
+4. 不展示 LLM 生成的专业建议、行动步骤或事实答案。
 
 ### `needs_clarification`
 
-条件：
+1. 展示 2-3 个澄清选项。
+2. 选项不应是 LLM 自由文本问题，而应是可执行的查询改写。
+3. 用户选择后重新走 direct search gate。
 
-- 满足高冲突门槛。
+## UI 语义
 
-用户语义：
+### 必须展示
 
-- “这句话可能是在要项目，也可能是在要趋势，需要你先选一个。”
+- direct results：不展示 LLM 解释。
+- expanded results：展示简短解释，例如“已按：客服工单、helpdesk、customer support 扩展搜索”。
+- hot-only low semantic：不羞辱用户，不提示“无意义”，只提示“未识别到明确方向，先展示热门项目”。
+- regulated keyword search：每次在 LLM 路径返回敏感领域关键词搜索时，都展示紧凑边界，例如“仅按站内 AI Agent 项目检索，不提供医疗/投资/法律/安全建议”；V1 不依赖用户历史或折叠状态。
 
-下一动作固定为：
+### 禁止展示
 
-- `看项目推荐`
-- `看趋势推荐`
+- LLM 原始长文本。
+- LLM 生成的项目答案。
+- 大段“我是如何工作的”说明。
+- 对 direct results 展示“AI 已优化搜索”，因为这条路径没有触发 LLM。
 
-### `out_of_scope`
+## 失败与降级
 
-条件：
-
-- 命中真实金融或其他站外领域强词。
-
-用户语义：
-
-- “本产品不覆盖真实证券或行情，只能推荐 AI Agent 生态内的项目和趋势。”
-
-下一动作固定为：
-
-- `改看站内热门项目`
-- `改看本周 Agent 趋势`
-
-### `artifact_unavailable`
-
-条件：
-
-- 对应 daily / weekly artifact 不存在、解析失败或 schema 不满足最低字段。
-
-用户语义：
-
-- “当前缺少可审计 artifact，不能生成可信推荐。”
-
-禁止：
-
-- 调用 LLM 直接补答案。
+| 失败点 | 降级策略 |
+| --- | --- |
+| LLM 未配置 | direct search 保持；zero-result 展示热门项目和降级状态 |
+| LLM 超时 | 取消本次解释；展示热门项目；记录 `llm_timeout` |
+| JSON 解析失败 | 一次 repair；仍失败则展示热门项目 |
+| schema 校验失败 | 一次 repair；仍失败则展示热门项目 |
+| expanded search 无结果 | 按 fallback 展示热门项目或无结果解释 |
+| endpoint 失败 | 前端保留当前 zero-result 状态并显示热门项目入口 |
 
 ## 可测试性
 
 ### 单元测试
 
-- 白名单内 `股票 / 标的 / 龙头 / 抄作业` 能被映射，并显示映射解释。
-- `美股 / A 股 / 股价 / 财报` 等超域词优先进入 `out_of_scope`。
-- 白名单外近义词不得自由映射。
-- 泛热度请求默认 `daily_project` 主解释。
-- 明确 `趋势 / 本周 / 方向` 请求进入 `weekly_trend`。
-- 高冲突门槛只在满足四个条件时触发澄清。
-- `llm.enabled=false` 时 V1 intent 仍可运行。
-- 排序只使用 `final_rank / total_score / weekly_order`，不新增分数。
+- direct search 有结果时不会调用 LLM。
+- direct search 无结果时会调用 LLM。
+- `low_semantic` 不允许扩展查询。
+- `open_discovery` 展示 hot-only。
+- `topic_keyword` 能提取关键词并执行扩展搜索。
+- `task_use_case` 能把任务句映射到相关方向词。
+- `regulated_keyword_search` 会从敏感领域查询中抽取关键词并执行扩展搜索，但不输出真实专业建议。
+- LLM 非法 JSON 会触发一次 repair。
+- repair 后仍非法会降级到 hot-only。
 
 ### 集成测试
 
-- 使用 daily fixture 输入“最近最热的都有什么”，返回请求解释卡和项目主结果轨。
-- 使用 weekly fixture 输入“本周形成趋势的 MCP 方向”，返回趋势主结果轨。
-- 输入“我想看看最热的股票有什么”，返回站内项目推荐并显示口语映射。
-- 输入“美股最近最热的股票是什么”，返回 `out_of_scope`，不返回站内结果。
-- 项目和趋势轻度歧义时返回主轨 + 次轨；高冲突时只返回澄清卡。
-- `observer` 与 `KB` fixture 存在时，不能直接混入主结果。
+- 输入已有词 `电商`，结果非空且 LLM 调用数为 0。
+- 输入原本无结果的“帮客服处理工单的 agent”，LLM 返回 `task_use_case` 后命中客服/工单方向项目。
+- 输入“这怎么哈哈了”，保留原查询并显示热门项目。
+- 输入“医疗诊断 agent 项目”，返回站内项目扩展并显示边界提示。
+- 输入“给我诊断这个病”，返回 `regulated_keyword_search` 扩展检索结果并显示边界提示。
+- 输入“最近有什么值得看”，返回热门项目。
 
 ### 回归测试
 
-- exact search 原行为不受影响。
-- daily / weekly report schema 不因推荐入口被删除或重命名。
-- visual-console 与 visual-console:web 仍可在无 LLM key 环境启动。
-- 旧 artifact 缺字段时进入 `legacy_degraded` 或 `artifact_unavailable`，不伪造完整推荐。
+- `src/__tests__/visualConsoleSearchAlignment.test.ts` 中已有别名命中行为保持不变。
+- visual console 不配置 LLM key 仍能启动和直接搜索。
+- 项目排序没有新增 LLM score 字段。
 
 ## 实施就绪判断
 
-本框架已经冻结：
+本设计已经冻结以下关键技术口径：
 
-- V1 产品表面：请求解释卡、主结果轨、次结果轨、失败 / 澄清卡。
-- V1 一等结果范围：`daily_project` 与 `weekly_trend`。
-- V1 口语白名单和超域优先级。
-- V1 查询意图词典。
-- 项目 / 趋势对象范围选择规则。
-- 高冲突澄清门槛。
-- 主结果数量上限。
-- 候选池来源与排序依据。
-- 输出 TypeScript 契约。
-- `rules-only` 与 LLM 边界。
-- 失败语义与测试策略。
+- direct search gate 优先级最高。
+- zero-result 才触发 LLM。
+- LLM 分类枚举为 7 类。
+- LLM 输出 JSON schema。
+- 前端消费的 fuzzy search response schema。
+- 主 prompt 和 repair prompt。
+- 扩展查询、敏感领域关键词搜索、热门回退、澄清响应的路由策略。
+- `ambiguous` 的 2-3 个可执行澄清改写契约。
+- `attribute_filter` 的可执行字段映射与 unsupported filter 诊断。
+- 缓存键、审计诊断字段、超时、repair 次数和 LLM 不可用降级。
+- LLM 不生成项目事实或最终排序。
 
-因此下一步可以对本设计做正式 design review；通过后即可拆 ExecPlan，而不需要实现阶段重新决定产品边界。
+因此下一阶段可以直接进入 ExecPlan，而不需要实现者重新做产品级发散。

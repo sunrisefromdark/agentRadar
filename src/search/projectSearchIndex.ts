@@ -41,10 +41,22 @@ const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
 const DIRECTION_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
   [/\bshopping-commerce-agent\b|\b(e-?commerce|commerce|shopping|shopify|tiktok-shop|taobao|pinduoduo|jd)\b/i, ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
   [/\bfinance-investment-research-agent\b|\b(finance|investment|trading|stock|quant)\b/i, ["股票", "投研", "金融", "量化", "交易"]],
+  [/\bresearch-knowledge-agent\b|\b(research|knowledge|rag|retrieval|literature|paper|papers|notebook|citation|scientific|science|academic|document research)\b/i, ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
+  [/\bworkflow-automation-agent\b|\b(productivity|workflow|automation|office|email|meeting|calendar|schedule|document|documents|spreadsheet|excel|slides|presentation|backoffice|operations)\b/i, ["办公提效", "效率", "自动化", "工作流", "邮件", "会议", "日历", "文档", "表格", "幻灯片"]],
   [/\bcustomer-support-agent\b|\b(customer-support|helpdesk|service-desk)\b/i, ["客服", "服务台", "工单"]],
   [/\bsales-prospecting-agent\b|\b(sales|prospecting|lead)\b/i, ["销售", "拓客", "线索"]],
   [/\bmarketing-content-ops-agent\b|\b(marketing|content|growth)\b/i, ["营销", "内容运营", "增长"]],
 ];
+
+const DIRECTION_KEYWORD_ALIASES = new Map<string, string[]>([
+  ["shopping-commerce-agent", ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
+  ["finance-investment-research-agent", ["股票", "投研", "金融", "量化", "交易"]],
+  ["research-knowledge-agent", ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
+  ["workflow-automation-agent", ["办公提效", "效率", "自动化", "工作流", "邮件", "会议", "日历", "文档", "表格", "幻灯片"]],
+  ["customer-support-agent", ["客服", "服务台", "工单"]],
+  ["sales-prospecting-agent", ["销售", "拓客", "线索"]],
+  ["marketing-content-ops-agent", ["营销", "内容运营", "增长"]],
+]);
 
 function uniqueProjectSearchStrings(values: Array<string | null | undefined>): string[] {
   return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
@@ -65,6 +77,17 @@ export function directionSearchAliases(values: Array<string | null | undefined>)
   for (const [pattern, candidates] of DIRECTION_SEARCH_ALIASES) {
     if (pattern.test(haystack)) aliases.push(...candidates);
   }
+  return uniqueProjectSearchStrings(aliases);
+}
+
+export function directionKeyAliases(values: Array<string | null | undefined>): string[] {
+  const aliases: string[] = [];
+  values
+    .map((value) => String(value ?? "").trim())
+    .filter(Boolean)
+    .forEach((value) => {
+      DIRECTION_KEYWORD_ALIASES.get(value)?.forEach((alias) => aliases.push(alias));
+    });
   return uniqueProjectSearchStrings(aliases);
 }
 
@@ -139,6 +162,7 @@ export function buildProjectSearchText(project: ProjectsViewModel["projects"][nu
       ...(project.direction_matches ?? []),
       ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
     ]),
+    ...directionKeyAliases([...(project.matched_interest_topics ?? []), ...(project.direction_matches ?? [])]),
   ]
     .filter(Boolean)
     .join(" ")

@@ -1,5 +1,6 @@
 ﻿import fs from "node:fs";
 import path from "node:path";
+import { buildProjectSearchText } from "../../src/search/projectSearchIndex.ts";
 import type { ScoredProject } from "../../src/types.ts";
 import { readCachedJsonFile } from "../../src/visualConsole/fileCache.ts";
 import type { ProjectsViewModel } from "../../src/visualConsole/types.ts";
@@ -209,54 +210,6 @@ function deriveProjectSearchSuggestions(projects: ProjectsViewModel["projects"])
   return finalizeSearchSuggestions(ranked, PROJECT_SEARCH_FALLBACK_SUGGESTIONS);
 }
 
-function projectSearchText(project: ProjectsViewModel["projects"][number], lang: UiLang): string {
-  const repoOwner = project.project.repo_full_name.split("/")[0] ?? "";
-  return [
-    project.project.repo_full_name,
-    project.project.project_name,
-    repoOwner,
-    project.project.repo_url,
-    project.project.description,
-    projectIntroduction(project, lang),
-    projectSelectionReason(project, lang),
-    project.appearance_explanation_cn,
-    project.project_brief_cn,
-    project.why_today_cn,
-    project.position_rationale_cn,
-    project.exposure_bucket,
-    project.score.paradigm,
-    project.project.persistence_state,
-    ...project.project.tags,
-    ...project.project.sources,
-    ...project.project.raw_signals.flatMap((signal) => [signal.project_name, signal.repo_url, signal.description ?? "", signal.source, ...signal.tags]),
-    ...project.matched_interest_topics,
-    ...(project.direction_matches ?? []),
-    ...companySearchAliases([
-      project.project.repo_full_name,
-      project.project.project_name,
-      repoOwner,
-      project.project.description,
-      project.project_brief_cn,
-      project.why_today_cn,
-      ...project.project.tags,
-    ]),
-    ...directionSearchAliases([
-      project.project.repo_full_name,
-      project.project.project_name,
-      project.project.description,
-      project.project_brief_cn,
-      project.why_today_cn,
-      ...project.project.tags,
-      ...project.matched_interest_topics,
-      ...(project.direction_matches ?? []),
-      ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
-    ]),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-}
-
 function projectBucketKey(project: ProjectsViewModel["projects"][number]): ProjectBucketKey {
   if (project.exposure_bucket === "today_pulse") return "today_pulse";
   if (project.exposure_bucket === "mission_match") return "mission_match";
@@ -395,9 +348,10 @@ function renderSparkline(project: ProjectsViewModel["projects"][number], lang: U
   `;
 }
 
-function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang): string {
+function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang, initialQuery = ""): string {
   const suggestionTerms = searchSuggestions.length > 0 ? searchSuggestions : PROJECT_SEARCH_FALLBACK_SUGGESTIONS;
   void suggestionTerms;
+  const safeInitialQuery = initialQuery.trim().slice(0, 200);
   return `
     <div class="projects-search-block">
       <div class="projects-search-shell">
@@ -412,7 +366,7 @@ function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang): s
           type="search"
           data-projects-search="true"
           placeholder="${escapeHtml(uiText(lang, "搜索项目、仓库、公司名或方向词", "Search projects, repos, companies, or directions"))}"
-          value=""
+          value="${escapeHtml(safeInitialQuery)}"
           autocomplete="off"
         />
         <div class="sort-wrapper projects-sort-dropdown" data-projects-sort-dropdown="true">
@@ -438,7 +392,7 @@ function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang): s
   `;
 }
 
-function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], lang: UiLang): string {
+function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], lang: UiLang, initialQuery = ""): string {
   const paradigms = ["Agent System", "Runtime", "Tool"];
   const persistenceStates = Array.from(new Set(projects.map((project) => project.project.persistence_state)));
   const searchSuggestions = deriveProjectSearchSuggestions(projects);
@@ -446,7 +400,7 @@ function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], la
   return `
     <section class="projects-filter-strip projects-command-deck" aria-label="${escapeHtml(uiText(lang, "项目过滤", "Project Filters"))}" data-projects-workbench="true" data-projects-page-size="15">
       <div class="projects-command-row">
-        ${renderProjectsSearchShell(searchSuggestions, lang)}
+        ${renderProjectsSearchShell(searchSuggestions, lang, initialQuery)}
       </div>
       <div class="projects-filter-groups">
         <div class="filter-group">
@@ -463,6 +417,14 @@ function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], la
             ${persistenceStates.map((state) => `<button type="button" class="filter-chip" data-projects-persistence-option="${escapeHtml(state)}" aria-pressed="false">${escapeHtml(localizePersistence(state, lang))}</button>`).join("")}
           </div>
         </div>
+      </div>
+      <div class="status-banner status-degraded" data-projects-fuzzy-status="true" hidden>
+        <div class="status-banner-head">
+          <span class="context-label" data-projects-fuzzy-label="true">${escapeHtml(uiText(lang, "扩展搜索", "Expanded Search"))}</span>
+          <strong data-projects-fuzzy-title="true"></strong>
+        </div>
+        <p data-projects-fuzzy-message="true"></p>
+        <div class="filter-chip-row" data-projects-fuzzy-options="true" hidden></div>
       </div>
       <div class="projects-extension-note">
         <span class="context-label">${escapeHtml(uiText(lang, "扩展入口", "Extension Ready"))}</span>
@@ -525,7 +487,7 @@ function renderProjectsListV3(projects: ProjectsViewModel["projects"], model: Pr
               class="project-row research-card projects-scan-row projects-scan-card${isSelected ? " is-selected" : ""}"
               data-project-card="true"
               data-project-name="${escapeHtml(project.project.repo_full_name)}"
-              data-project-search="${escapeHtml(projectSearchText(project, lang))}"
+              data-project-search="${escapeHtml(buildProjectSearchText(project, lang))}"
               data-project-paradigm="${escapeHtml(paradigmFamily)}"
               data-project-persistence="${escapeHtml(project.project.persistence_state)}"
               data-project-score="${escapeHtml(String(scoreValue))}"
@@ -765,6 +727,7 @@ export function buildProjectsLocalDetailPayload(model: ProjectsViewModel, reques
 export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl: URL, lang: UiLang, _theme: UiTheme): string {
   const ui = copy(lang);
   const hasDetail = Boolean(model.selected_project || requestUrl.searchParams.get("project"));
+  const initialQuery = requestUrl.searchParams.get("q") || "";
   const dockHtml = hasDetail
     ? renderDockSurface("projects-dossier-dock", renderProjectDetailV4(model.selected_project, requestUrl, lang), {
         ariaLabel: uiText(lang, "详情面板", "Detail Surface"),
@@ -775,7 +738,7 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
   return renderProjectsRoute({
     heroHtml: renderProjectsHeroStage(lang),
     hasDetail,
-    filterHtml: renderProjectsFilterStripV3(model.projects, lang),
+    filterHtml: renderProjectsFilterStripV3(model.projects, lang, initialQuery),
     stageTopHtml: `
       <div class="section-head weekly-matrix-shell-head projects-stage-head projects-stage-head-pagination-only">
         <div class="projects-stage-meta">

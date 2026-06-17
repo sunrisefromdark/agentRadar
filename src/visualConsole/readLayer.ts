@@ -12,6 +12,7 @@ import type {
   WeeklyJudgmentReport,
   WeeklyReport,
 } from "../types.ts";
+import type { MissionScoutEnhancementArtifact } from "../signal/missionScoutEnhancement.ts";
 import { getFilesystemStateSignature, readCachedDirectoryEntries, readCachedJsonFile, readCachedTextFile } from "./fileCache.ts";
 import { parseWeeklyMarkdown } from "./weeklyMarkdown.ts";
 import type { DailyTimeNavigatorPreview, ReadResult, TopLevelViewStatus, WeeklyTimeNavigatorPreview } from "./types.ts";
@@ -162,6 +163,11 @@ export function getObserverArtifact(date: string): ReadResult<EcosystemObserverA
 export function getMissionScoutArtifact(date: string): ReadResult<{ raw_signals?: RawSignal[] }> {
   const filepath = path.join("data", "discovery", "mission-scout", `${date}.json`);
   return validateDateInput(date, filepath) ?? readJsonStrict<{ raw_signals?: RawSignal[] }>(filepath);
+}
+
+export function getMissionScoutEnhancementArtifact(date: string): ReadResult<MissionScoutEnhancementArtifact> {
+  const filepath = path.join("data", "discovery", "mission-scout-enhancements", `${date}.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<MissionScoutEnhancementArtifact>(filepath);
 }
 
 function summarizeDailyPreviewState(

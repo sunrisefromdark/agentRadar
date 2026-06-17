@@ -810,7 +810,37 @@ describe("fuzzy project search service", () => {
     expect(second.diagnostics.cache_status).toBe("hit");
     expect(calls).toBe(1);
   });
-});
+
+  it("does not cache llm timeouts so later requests can retry", async () => {
+    const cache: FuzzySearchCache = new Map();
+    let calls = 0;
+
+    const first = await searchFuzzyProjects({
+      request: { raw_query: "教育行业有什么 agent", date: "2026-06-12", lang: "zh" },
+      view: makeView(),
+      llm: disabledLlm,
+      cache,
+      interpreter: async () => {
+        calls += 1;
+        return { status: "fallback", fallbackReason: "llm_timeout", repaired: false };
+      },
+    });
+    const second = await searchFuzzyProjects({
+      request: { raw_query: "教育行业有什么 agent", date: "2026-06-12", lang: "zh" },
+      view: makeView(),
+      llm: disabledLlm,
+      cache,
+      interpreter: async () => {
+        calls += 1;
+        return { status: "ok", interpretation: interpretation(), rawOutput: "retry raw", repaired: false };
+      },
+    });
+
+    expect(first.diagnostics.cache_status).toBe("miss");
+    expect(second.diagnostics.cache_status).toBe("miss");
+    expect(calls).toBe(2);
+  });
+  });
 
 describe("fuzzy project endpoint", () => {
   it("returns stable 4xx JSON for malformed requests", async () => {

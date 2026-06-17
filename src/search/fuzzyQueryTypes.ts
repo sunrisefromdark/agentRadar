@@ -5,7 +5,7 @@ export const FUZZY_SEARCH_RESPONSE_SCHEMA_VERSION = "project_fuzzy_search_respon
 export const FUZZY_SEARCH_MIN_CHINESE_CHARS = 2;
 export const FUZZY_SEARCH_MIN_ENGLISH_CHARS = 3;
 export const FUZZY_SEARCH_DEBOUNCE_MS = 600;
-export const FUZZY_SEARCH_LLM_TIMEOUT_MS = 5000;
+export const FUZZY_SEARCH_LLM_TIMEOUT_MS = 12000;
 export const FUZZY_SEARCH_MAX_REPAIR_CALLS = 1;
 
 export const FUZZY_SEARCH_SEMANTIC_CLASSES = [

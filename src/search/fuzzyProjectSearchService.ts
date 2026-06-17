@@ -668,7 +668,9 @@ export async function searchFuzzyProjects(input: SearchFuzzyProjectsInput): Prom
           directionAliasSummary: buildDirectionAliasSummary(),
           ...input.interpreterOptions,
         });
-  if (!cached) input.cache?.set(cacheKey, cacheEntryFromResult(interpretationResult));
+  if (!cached && !(interpretationResult.status === "fallback" && interpretationResult.fallbackReason === "llm_timeout")) {
+    input.cache?.set(cacheKey, cacheEntryFromResult(interpretationResult));
+  }
 
   if (interpretationResult.status === "fallback") {
     return responseFromFallback(request, normalizedQuery, records, direct.length, interpretationResult.fallbackReason, cached ? "hit" : "miss");

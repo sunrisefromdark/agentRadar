@@ -1,5 +1,12 @@
 # 服务 Spec：Normalization
 
+## External discovery matching boundary
+
+- External discovery may perform project/topic matching for secondary evidence.
+- That project/topic matching must not replace primary canonical normalization from `RawSignal` into `NormalizedProject`.
+- Low-confidence name matches remain pending or audit-only and must not enter the main daily board as confirmed primary projects.
+- Topic observations require stable `topic_key` values before weekly consumption.
+
 ## 职责
 
 Normalization 层负责把多个 RawSignal 合并为项目级视图，并保留来源证据。

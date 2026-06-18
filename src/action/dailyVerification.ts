@@ -1,5 +1,9 @@
+import fs from "node:fs";
 import path from "node:path";
 import { readJsonFile } from "../storage/files.ts";
+import { externalAggregatePath } from "../externalDiscovery/paths.ts";
+import { assertPublicSafeAggregate } from "../externalDiscovery/redaction.ts";
+import type { DailyExternalAggregate, ExternalProviderStatus } from "../externalDiscovery/types.ts";
 import type {
   DailyReport,
   DailyRunSummary,
@@ -20,6 +24,28 @@ function githubAuditPath(date: string): string {
 
 function dailyReportPath(date: string): string {
   return path.join("data", "reports", `${date}.daily.json`);
+}
+
+interface JsonReadResult<T> {
+  exists: boolean;
+  value: T | null;
+  error?: string;
+}
+
+function readOptionalJsonFile<T>(filepath: string): JsonReadResult<T> {
+  if (!fs.existsSync(filepath)) return { exists: false, value: null };
+  try {
+    return {
+      exists: true,
+      value: JSON.parse(fs.readFileSync(filepath, "utf-8")) as T,
+    };
+  } catch (error) {
+    return {
+      exists: true,
+      value: null,
+      error: error instanceof Error ? error.message : "json_parse_error",
+    };
+  }
 }
 
 function aggregateStatus(checks: VerificationCheck[]): VerifyDailyResult["status"] {
@@ -433,6 +459,180 @@ function projectSearchContractChecks(summary: DailyRunSummary, report: DailyRepo
   ];
 }
 
+function effectiveExternalStatus(
+  summary: DailyRunSummary,
+  report: DailyReport | null,
+  aggregate: DailyExternalAggregate | null,
+): ExternalProviderStatus | undefined {
+  return (
+    summary.external_discovery?.status ??
+    report?.external_discovery?.external_layer_status?.status ??
+    aggregate?.status
+  );
+}
+
+function externalStatusCheck(status: ExternalProviderStatus | undefined): VerificationCheck {
+  if (!status) {
+    return buildCheck("external_discovery_status", "warn", "external discovery audit is not recorded");
+  }
+  if (status === "skipped" || status === "failed") {
+    return buildCheck("external_discovery_status", "warn", `external layer status=${status}`);
+  }
+  if (status === "partial") {
+    return buildCheck("external_discovery_status", "warn", "external layer status=partial");
+  }
+  return buildCheck("external_discovery_status", "pass", "external layer status=ok");
+}
+
+function externalDailyAuditCheck(summary: DailyRunSummary, report: DailyReport | null): VerificationCheck {
+  const reportStatus = report?.external_discovery?.external_layer_status?.status;
+  const summaryStatus = summary.external_discovery?.status;
+  const claimsUsed = reportStatus === "ok" || reportStatus === "partial" || summaryStatus === "ok" || summaryStatus === "partial";
+  if (!claimsUsed) {
+    return buildCheck("external_daily_audit_present", "pass", "external layer did not claim accepted usage");
+  }
+
+  const audit = report?.external_discovery?.external_audit_summary;
+  const auditPresent =
+    Boolean(audit) &&
+    audit?.public_safe === true &&
+    audit?.contains_raw_text === false &&
+    audit?.contains_profile_urls === false &&
+    typeof audit?.redaction_policy_version === "string" &&
+    audit.redaction_policy_version.trim().length > 0;
+
+  return buildCheck(
+    "external_daily_audit_present",
+    auditPresent ? "pass" : "fail",
+    auditPresent ? "daily external audit summary is present" : "daily report claims external layer usage but audit summary is missing or incomplete",
+  );
+}
+
+function externalPublicAggregateCheck(
+  aggregateRead: JsonReadResult<DailyExternalAggregate>,
+  status: ExternalProviderStatus | undefined,
+): VerificationCheck {
+  if (!aggregateRead.exists) {
+    const missingStatus = status === "ok" || status === "partial" ? "fail" : "warn";
+    return buildCheck(
+      "external_public_aggregate_safe",
+      missingStatus,
+      "public external aggregate is missing",
+    );
+  }
+  if (aggregateRead.error || !aggregateRead.value) {
+    return buildCheck(
+      "external_public_aggregate_safe",
+      "fail",
+      `public external aggregate could not be read: ${aggregateRead.error ?? "unknown"}`,
+    );
+  }
+
+  const publicSafe = assertPublicSafeAggregate(aggregateRead.value);
+  return buildCheck(
+    "external_public_aggregate_safe",
+    publicSafe.ok ? "pass" : "fail",
+    publicSafe.ok
+      ? "public external aggregate passed redaction checks"
+      : publicSafe.errors.join("; "),
+  );
+}
+
+const EXTERNAL_SCORE_COMPONENT_NAMES = new Set([
+  "external_discovery",
+  "external-discovery",
+  "external:evidence",
+  "agent-reach",
+  "x_twitter",
+  "reddit",
+  "hacker_news",
+  "official_web",
+  "official_blog",
+]);
+const EXTERNAL_EVIDENCE_ID_PATTERN = /^(external[-_:]evidence|external[-_:]discovery|agent-reach):/i;
+const EXTERNAL_DIRECTION_LABEL_EVIDENCE_PATTERN = /^(direction[-_:]label|external[-_:]direction[-_:]label):/i;
+
+function isExternalScoreComponentName(value: unknown): boolean {
+  return typeof value === "string" && EXTERNAL_SCORE_COMPONENT_NAMES.has(value.toLowerCase());
+}
+
+function isExternalEvidenceId(value: unknown): boolean {
+  return (
+    typeof value === "string" &&
+    (EXTERNAL_EVIDENCE_ID_PATTERN.test(value) || EXTERNAL_DIRECTION_LABEL_EVIDENCE_PATTERN.test(value))
+  );
+}
+
+function isExternalRawSignalSource(value: unknown): boolean {
+  return typeof value === "string" && EXTERNAL_SCORE_COMPONENT_NAMES.has(value.toLowerCase());
+}
+
+function projectContainsExternalPrimaryLeak(project: unknown): boolean {
+  if (typeof project !== "object" || project === null) return false;
+  const value = project as {
+    score?: {
+      components?: Array<{
+        name?: unknown;
+        evidence?: unknown;
+      }>;
+    };
+    project?: {
+      raw_signals?: Array<{ source?: unknown }>;
+    };
+  };
+
+  const components = Array.isArray(value.score?.components) ? value.score.components : [];
+  const componentLeak = components.some((component) => {
+    const nameLeak = isExternalScoreComponentName(component.name);
+    const evidence = Array.isArray(component.evidence) ? component.evidence : [];
+    const evidenceLeak = evidence.some(isExternalEvidenceId);
+    return nameLeak || evidenceLeak;
+  });
+  if (componentLeak) return true;
+
+  const rawSignals = Array.isArray(value.project?.raw_signals) ? value.project.raw_signals : [];
+  return rawSignals.some((signal) => isExternalRawSignalSource(signal.source));
+}
+
+function externalPrimaryContaminationCheck(report: DailyReport | null): VerificationCheck {
+  if (!report) {
+    return buildCheck("external_primary_contamination", "warn", "daily report missing; cannot inspect primary outputs");
+  }
+
+  const primaryProjectArrays = [
+    report.today_star_projects,
+    report.today_pulse_projects,
+    report.mission_match_projects,
+    report.global_hot_projects,
+    report.demand_relevant_projects,
+    report.new_projects,
+    report.high_score_projects,
+    report.all_projects,
+  ].filter(Array.isArray);
+  const leaked = primaryProjectArrays.flat().some(projectContainsExternalPrimaryLeak);
+  return buildCheck(
+    "external_primary_contamination",
+    leaked ? "fail" : "pass",
+    leaked
+      ? "external evidence or source leaked into primary project score/output arrays"
+      : "external evidence stayed out of primary score/output arrays",
+  );
+}
+
+function externalDiscoveryChecks(
+  summary: DailyRunSummary,
+  report: DailyReport | null,
+  aggregateRead: JsonReadResult<DailyExternalAggregate>,
+): VerificationCheck[] {
+  const status = effectiveExternalStatus(summary, report, aggregateRead.value);
+  return [
+    externalStatusCheck(status),
+    externalDailyAuditCheck(summary, report),
+    externalPublicAggregateCheck(aggregateRead, status),
+    externalPrimaryContaminationCheck(report),
+  ];
+}
+
 function defaultDiagnostics(): NonNullable<DailyRunSummary["diagnostics"]> {
   return {
     anomaly_share: 0,
@@ -492,7 +692,12 @@ function normalizeSummaryDiagnostics(summary: DailyRunSummary): DailyRunSummary 
   };
 }
 
-function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAuditEntry[], report: DailyReport | null): VerificationCheck[] {
+function buildChecks(
+  summary: DailyRunSummary,
+  githubAudit: GitHubEnrichmentAuditEntry[],
+  report: DailyReport | null,
+  externalAggregate: JsonReadResult<DailyExternalAggregate>,
+): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
     ...sourceChecks(summary),
@@ -500,6 +705,7 @@ function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAudi
     ...llmChecks(summary),
     ...freshnessChecks(summary),
     ...projectSearchContractChecks(summary, report),
+    ...externalDiscoveryChecks(summary, report, externalAggregate),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
@@ -514,16 +720,18 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const runSummaryPath = summaryPath(date);
   const githubEnrichmentPath = githubAuditPath(date);
   const reportPath = dailyReportPath(date);
+  const aggregatePath = externalAggregatePath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
   const report = readJsonFile<DailyReport | null>(reportPath, null);
+  const externalAggregate = readOptionalJsonFile<DailyExternalAggregate>(aggregatePath);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
   }
 
   const normalizedSummary = normalizeSummaryDiagnostics(summary);
-  const checks = buildChecks(normalizedSummary, githubAudit, report);
+  const checks = buildChecks(normalizedSummary, githubAudit, report, externalAggregate);
   return {
     date,
     status: aggregateStatus(checks),

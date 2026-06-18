@@ -1,5 +1,12 @@
 # 结构测试规范
 
+## External discovery structure guards
+
+- Structure tests must verify public-safe aggregate requirements.
+- Structure tests must verify GitHub Actions workflow path rules for public aggregate upload and local-only raw input.
+- Structure tests must verify `data/raw/external-discovery` stays ignored except sanitized fixtures.
+- Structure tests must verify spec sync for OSS public artifact boundaries.
+
 ## 目标
 
 结构测试不是功能测试，而是检查 Spec、目录和关键契约是否还在。它的作用是让 Agent 和人类都能快速发现 Harness 漂移。

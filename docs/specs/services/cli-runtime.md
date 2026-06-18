@@ -1,5 +1,12 @@
 # 服务 Spec：CLI Runtime
 
+## External discovery CLI matrix
+
+- `run-daily` accepts `--external-discovery-input <path>` and `--no-external-discovery`.
+- `recover-daily` reads no external raw input by default, but accepts explicit `--external-discovery-input <path>`.
+- `run-weekly` must reject `--external-discovery-input` and consume only seven public daily aggregates.
+- `verify-daily` must reject `--external-discovery-input`; `--no-external-discovery` disables external checks without touching provider raw input.
+
 ## 职责
 
 CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加载、日志与重试策略，以及“哪些命令会写工件、哪些命令只做浏览或探针”。

@@ -1,5 +1,12 @@
 # 架构约束
 
+## External discovery OSS boundary
+
+- OSS external discovery has no login state, no account settings, no cookies, no sessions, and no OAuth data.
+- OSS external discovery must not read or expose platform API credentials.
+- AgentReach is consumed as a local artifact provider and must not become an in-repo crawler.
+- Public artifacts must be sanitized aggregates or sanitized fixtures only.
+
 ## P0：必须满足
 
 - 评分必须可解释，每个非零组件必须有 evidence。

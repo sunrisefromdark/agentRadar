@@ -1,5 +1,12 @@
 # 系统级 Spec
 
+## External discovery OSS boundary
+
+- AgentReach external discovery is a secondary evidence layer for the OSS local console.
+- It consumes sanitized local/public artifacts only and must not become a primary ranking or scoring source.
+- Public weekly and daily outputs may expose external discovery summaries, counts, stable evidence IDs, provider status, and audit state.
+- Raw platform text, login state, cookies, sessions, OAuth data, account settings, and platform API credentials are outside the OSS boundary.
+
 ## 文档状态
 
 - 版本：`v0.2`

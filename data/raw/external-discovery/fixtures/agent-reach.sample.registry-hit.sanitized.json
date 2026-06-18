@@ -1,0 +1,50 @@
+{
+  "provider": "agent-reach",
+  "schema_version": "agent-reach.external-discovery.v1",
+  "provider_run_id": "agent-reach-registry-hit-fixture-2026-06-13",
+  "generated_at": "2026-06-13T00:00:00.000Z",
+  "query": {
+    "terms": [
+      "research lab agent workflow"
+    ]
+  },
+  "platforms": [
+    "official_web"
+  ],
+  "status": "ok",
+  "items": [
+    {
+      "raw_ref": "fixture:registry-hit:official-web",
+      "platform": "official_web",
+      "raw_event_kind": "official_release",
+      "derived_signal_kinds": [
+        "evidence"
+      ],
+      "observed_at": "2026-06-13T09:00:00.000Z",
+      "url": "https://example.com/research-lab/agent-workflow",
+      "title": "Research lab agent workflow release",
+      "direction_labels": [
+        "research-agent",
+        "academic-writing-agent"
+      ],
+      "actor": {
+        "display_name": "Example Research Lab",
+        "type_hint": "institution",
+        "tier_hint": "proven"
+      },
+      "target": {
+        "name": "Example Research Lab Workflow",
+        "url": "https://example.com/research-lab/agent-workflow"
+      },
+      "metrics": {
+        "comments": 1
+      },
+      "tags": [
+        "research-workflow"
+      ]
+    }
+  ],
+  "diagnostics": {
+    "warnings": []
+  }
+}

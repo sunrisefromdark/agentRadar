@@ -105,6 +105,37 @@ function renderAuditConclusion(judgment?: WeeklyJudgmentReport): string[] {
   ];
 }
 
+function renderExternalDiscoveryWeeklySection(report: WeeklyReport): string[] {
+  const window = report.external_discovery_window;
+  if (!window) return [];
+  const observations = report.weekly_direction_observations ?? [];
+  const projectEvidence = report.external_project_evidence_summaries ?? [];
+  const crossPlatform = report.external_cross_platform_confirmations ?? [];
+  const directionLabelCounts =
+    Object.entries(report.direction_label_counts ?? {})
+      .filter(([, count]) => typeof count === "number" && count > 0)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([label, count]) => `${label}=${count}`)
+      .join(", ") || "none";
+  return [
+    "## External Discovery",
+    "",
+    `- status: ${window.status}${window.status_reason ? ` (${window.status_reason})` : ""}`,
+    `- usable_day_count: ${window.usable_day_count}/7`,
+    `- missing_day_count: ${window.missing_day_count}`,
+    `- failed_day_count: ${window.failed_day_count}`,
+    `- direction_label_counts: ${directionLabelCounts}`,
+    `- weekly_direction_observations: ${observations.length}`,
+    ...observations.slice(0, 5).map((observation) =>
+      `  - ${observation.topic_key}: direction_labels=${observation.direction_labels.join(",") || "none"} gates=${observation.satisfied_gates.join(",")} evidence=${observation.evidence_ids.join(",")}`,
+    ),
+    `- external_project_evidence_summaries: ${projectEvidence.length}`,
+    `- external_cross_platform_confirmations: ${crossPlatform.length}`,
+    "- note: external discovery is secondary evidence only, not primary-source confirmation.",
+    "",
+  ];
+}
+
 function renderEnhancedWeeklyReport(report: WeeklyReport, judgment?: WeeklyJudgmentReport): string {
   const personalizedSection = report.personalized_weekly_focus_applicable
     ? [
@@ -149,6 +180,7 @@ function renderEnhancedWeeklyReport(report: WeeklyReport, judgment?: WeeklyJudgm
     ...(report.weak_signal_cards.length > 0
       ? report.weak_signal_cards.flatMap((card) => [...renderWeakSignalCard(card), ""])
       : ["- 当前没有额外待观察趋势。", ""]),
+    ...renderExternalDiscoveryWeeklySection(report),
     "## Agent审计结论",
     "",
     `- executive_summary_cn: ${judgment?.executive_summary_cn ?? report.overall_summary_cn}`,

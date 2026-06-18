@@ -1,0 +1,52 @@
+{
+  "provider": "agent-reach",
+  "schema_version": "agent-reach.external-discovery.v1",
+  "provider_run_id": "agent-reach-project-evidence-fixture-2026-06-13",
+  "generated_at": "2026-06-13T00:00:00.000Z",
+  "query": {
+    "terms": [
+      "research agent benchmark workflow"
+    ]
+  },
+  "platforms": [
+    "official_blog"
+  ],
+  "status": "ok",
+  "items": [
+    {
+      "raw_ref": "fixture:project-evidence:official-blog",
+      "platform": "official_blog",
+      "raw_event_kind": "blog_post",
+      "derived_signal_kinds": [
+        "evidence"
+      ],
+      "source_published_at": "2026-06-12T10:00:00.000Z",
+      "observed_at": "2026-06-13T00:00:00.000Z",
+      "url": "https://example.com/research-agent-benchmark-workflow",
+      "title": "Research agent benchmark workflow",
+      "direction_labels": [
+        "research-agent",
+        "research-data-analysis-agent"
+      ],
+      "actor": {
+        "display_name": "Example Research Lab",
+        "type_hint": "institution",
+        "tier_hint": "proven"
+      },
+      "target": {
+        "name": "Example Project",
+        "repo_url": "https://github.com/example/project"
+      },
+      "metrics": {
+        "comments": 2
+      },
+      "tags": [
+        "benchmark",
+        "research-workflow"
+      ]
+    }
+  ],
+  "diagnostics": {
+    "warnings": []
+  }
+}

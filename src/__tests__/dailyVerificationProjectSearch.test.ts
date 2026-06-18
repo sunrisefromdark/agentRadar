@@ -3,7 +3,7 @@ import os from "node:os";
 import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 import { buildVerifyDailyResult } from "../action/dailyVerification.ts";
-import type { DailyReport, DailyRunSummary } from "../types.ts";
+import type { DailyExternalDiscoverySection, DailyReport, DailyRunSummary } from "../types.ts";
 
 const roots: string[] = [];
 const originalCwd = process.cwd();
@@ -84,6 +84,37 @@ function makeSummary(): DailyRunSummary {
   };
 }
 
+function makeExternalDiscovery(): DailyExternalDiscoverySection {
+  return {
+    external_layer_status: {
+      provider: "agent-reach",
+      status: "skipped",
+      status_reason: "not_configured",
+      source_input_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      event_count: 0,
+      accepted_event_count: 0,
+      rejected_event_count: 0,
+    },
+    external_observation_candidates: [],
+    external_project_evidence_summaries: [],
+    external_direction_signal_summary: {
+      evidence_count: 0,
+      candidate_count: 0,
+      topic_keys: [],
+    },
+    direction_label_counts: {},
+    external_audit_summary: {
+      public_safe: true,
+      redaction_policy_version: "external-discovery-redaction.v1",
+      contains_raw_text: false,
+      contains_profile_urls: false,
+      rejected_event_count: 0,
+      rejected_reason_counts: {},
+      warnings: ["external_aggregate_not_provided"],
+    },
+  };
+}
+
 function makeReport(): DailyReport {
   return {
     date: "2026-06-12",
@@ -113,6 +144,7 @@ function makeReport(): DailyReport {
     global_hot_projects: [],
     demand_relevant_projects: [],
     searched_direction_statuses: [],
+    external_discovery: makeExternalDiscovery(),
   } as DailyReport;
 }
 

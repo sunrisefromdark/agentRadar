@@ -340,6 +340,12 @@ To avoid exposing secrets, configuration, and private attack surfaces, the OSS e
 
 In other words, the repository's OSS edition is a no-login, read-only browsing, data-workflow-capable public edition.
 
+### AgentReach external discovery raw input boundary
+
+AgentReach external discovery raw input lives under `data/raw/external-discovery/` and is not committed or uploaded by default; the public repository only keeps sanitized fixtures and public-safe aggregate artifacts such as `data/external-discovery/*.aggregate.json`.
+
+The external discovery pipeline must not save, read, or expose login state, cookies, sessions, OAuth data, account settings, or platform API credentials. See [data/README.md](./data/README.md) for the data boundary.
+
 ### Hosted-product note
 
 - The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)

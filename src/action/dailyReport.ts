@@ -3,6 +3,7 @@ import type {
   DailyFreshnessSource,
   DailyMainBoardMode,
   DailyOverallStatus,
+  DailyExternalDiscoverySection,
   DailyProjectClass,
   DailyReport,
   DailyReportProjectDetail,
@@ -17,6 +18,7 @@ import type {
   ScoredProject,
   UserInterestTopicName,
 } from "../types.ts";
+import type { DailyExternalAggregate, ObservationCandidate } from "../externalDiscovery/types.ts";
 import { callStructuredEnhancement, isEnhancementEnabled } from "./enhancementLlm.ts";
 import { warmMissingProjectDescriptions } from "./descriptionBackfill.ts";
 import { buildProjectBriefFromScoredProject, validateProjectBriefSpecificity } from "./projectBriefs.ts";
@@ -44,6 +46,91 @@ function formatScore(value: number): string {
 
 function distinct<T>(items: T[]): T[] {
   return [...new Set(items)];
+}
+
+function countRejectedReasons(aggregate: DailyExternalAggregate): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const event of aggregate.audit.rejected_events) {
+    counts[event.reason_code] = (counts[event.reason_code] ?? 0) + 1;
+  }
+  return counts;
+}
+
+function defaultExternalDiscoverySection(): DailyExternalDiscoverySection {
+  return {
+    external_layer_status: {
+      provider: "agent-reach",
+      status: "skipped",
+      status_reason: "not_configured",
+      source_input_hash: "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+      event_count: 0,
+      accepted_event_count: 0,
+      rejected_event_count: 0,
+    },
+    external_observation_candidates: [],
+    external_project_evidence_summaries: [],
+    external_direction_signal_summary: {
+      evidence_count: 0,
+      candidate_count: 0,
+      topic_keys: [],
+    },
+    direction_label_counts: {},
+    external_audit_summary: {
+      public_safe: true,
+      redaction_policy_version: "external-discovery-redaction.v1",
+      contains_raw_text: false,
+      contains_profile_urls: false,
+      rejected_event_count: 0,
+      rejected_reason_counts: {},
+      warnings: ["external_aggregate_not_provided"],
+    },
+  };
+}
+
+function isDailyExternalObservationCandidate(candidate: ObservationCandidate): boolean {
+  return candidate.scope === "project" && candidate.can_enter_daily;
+}
+
+function buildExternalDiscoverySection(
+  aggregate: DailyExternalAggregate | undefined,
+): DailyExternalDiscoverySection {
+  if (!aggregate) return defaultExternalDiscoverySection();
+
+  const directionCandidates = aggregate.observation_candidates.filter((candidate) => candidate.scope === "direction");
+  const topicKeys = distinct(
+    directionCandidates
+      .map((candidate) => candidate.topic_key ?? candidate.target_key.replace(/^topic:/, ""))
+      .filter((value) => value.trim().length > 0),
+  );
+
+  return {
+    external_layer_status: {
+      provider: aggregate.provider,
+      status: aggregate.status,
+      ...(aggregate.status_reason ? { status_reason: aggregate.status_reason } : {}),
+      source_input_hash: aggregate.source_input_hash,
+      event_count: aggregate.event_count,
+      accepted_event_count: aggregate.accepted_event_count,
+      rejected_event_count: aggregate.rejected_event_count,
+    },
+    external_observation_candidates: aggregate.observation_candidates.filter(isDailyExternalObservationCandidate),
+    external_project_evidence_summaries: [...aggregate.project_evidence],
+    external_direction_signal_summary: {
+      evidence_count: aggregate.direction_evidence.length,
+      candidate_count: directionCandidates.length,
+      topic_keys: topicKeys,
+    },
+    direction_label_counts: { ...aggregate.direction_label_counts },
+    external_audit_summary: {
+      public_safe: true,
+      redaction_policy_version: aggregate.redaction_policy_version,
+      contains_raw_text: false,
+      contains_profile_urls: false,
+      rejected_event_count: aggregate.rejected_event_count,
+      rejected_reason_counts: countRejectedReasons(aggregate),
+      warnings: [...aggregate.audit.warnings],
+    },
+  };
 }
 
 function readPositiveIntEnv(name: string, fallback: number): number {
@@ -454,6 +541,7 @@ export function buildDailyReport(
     generatedAt: string;
     freshnessSources?: DailyFreshnessSource[];
     rawSignals?: RawSignal[];
+    externalAggregate?: DailyExternalAggregate;
   },
 ): DailyReport {
   const freshnessSources = opts.freshnessSources ?? [];
@@ -509,6 +597,7 @@ export function buildDailyReport(
     high_score_projects: highScoreProjects,
     anomaly_projects: anomalyProjects,
     all_projects: scored,
+    external_discovery: buildExternalDiscoverySection(opts.externalAggregate),
   };
 }
 
@@ -1248,6 +1337,7 @@ export async function buildEnhancedDailyReport(
     generatedAt: string;
     freshnessSources?: DailyFreshnessSource[];
     rawSignals?: RawSignal[];
+    externalAggregate?: DailyExternalAggregate;
   },
 ): Promise<DailyReport> {
   await warmMissingProjectDescriptions(scored);
@@ -1357,6 +1447,51 @@ function renderLlmDiagnostics(report: DailyReport): string[] {
   ];
 }
 
+function renderExternalDiscoverySection(report: DailyReport): string[] {
+  const section = report.external_discovery;
+  if (!section) return [];
+
+  const status = section.external_layer_status;
+  const audit = section.external_audit_summary;
+  const candidates = section.external_observation_candidates;
+  const projectEvidence = section.external_project_evidence_summaries;
+  const directionSummary = section.external_direction_signal_summary;
+  const directionLabelCounts =
+    Object.entries(section.direction_label_counts)
+      .filter(([, count]) => typeof count === "number" && count > 0)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([label, count]) => `${label}=${count}`)
+      .join(", ") || "none";
+
+  return [
+    "## External Discovery",
+    "",
+    "- role: secondary signal only",
+    `- provider: ${status.provider}`,
+    `- status: ${status.status}`,
+    ...(status.status_reason ? [`- status_reason: ${status.status_reason}`] : []),
+    `- source_input_hash: ${status.source_input_hash}`,
+    `- events: accepted=${status.accepted_event_count}; rejected=${status.rejected_event_count}; total=${status.event_count}`,
+    `- public_safe: ${audit.public_safe ? "true" : "false"}`,
+    `- redaction_policy_version: ${audit.redaction_policy_version}`,
+    `- contains_raw_text: ${audit.contains_raw_text ? "true" : "false"}`,
+    `- contains_profile_urls: ${audit.contains_profile_urls ? "true" : "false"}`,
+    `- project_evidence_count: ${projectEvidence.length}`,
+    `- daily_candidate_count: ${candidates.length}`,
+    `- direction_candidate_count: ${directionSummary.candidate_count}`,
+    `- direction_topic_keys: ${directionSummary.topic_keys.join(", ") || "none"}`,
+    `- direction_label_counts: ${directionLabelCounts}`,
+    ...(candidates.length > 0
+      ? candidates.map(
+          (candidate) =>
+            `- candidate ${candidate.candidate_id}: ${candidate.display_name}; qualification=${candidate.qualification}; primary=false`,
+        )
+      : ["- candidates: none"]),
+    ...(audit.warnings.length > 0 ? [`- warnings: ${audit.warnings.join(", ")}`] : []),
+    "",
+  ];
+}
+
 export function renderDailyReport(report: DailyReport): string {
   const freshnessLines =
     report.freshness_sources.length > 0 ? report.freshness_sources.map(sourceLine) : ["- 暂无可用的新鲜度输入，默认降级为过期视图"];
@@ -1389,6 +1524,7 @@ export function renderDailyReport(report: DailyReport): string {
     "",
     ...renderLlmDiagnostics(report),
     "",
+    ...renderExternalDiscoverySection(report),
     "## 候选池概览",
     "",
     `- main_board_mode: ${report.main_board_mode}`,

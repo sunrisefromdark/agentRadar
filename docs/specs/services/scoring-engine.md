@@ -1,5 +1,12 @@
 # 服务 Spec：Scoring Engine
 
+## External discovery scoring boundary
+
+- External discovery must not change `ScoreBreakdown.total_score`.
+- External discovery must not change `discussion_score`.
+- External discovery must not add a new `ScoreComponentName`.
+- External evidence may appear only as secondary output or verification audit, never as primary-source multi-source confirmation.
+
 ## 文档状态
 
 - 版本：`v0.2`

@@ -16,6 +16,7 @@ import type {
   WeeklyEvidenceProject,
   WeeklyEvidenceAxis,
   WeeklyEvidenceMatrix,
+  WeeklyExternalDiscoveryArtifacts,
   WeeklyJudgmentReport,
   WeeklyReport,
   WeeklySemanticInputBundle,
@@ -44,6 +45,44 @@ type WindowDay = {
   scored: ScoredProject[];
   daily: DailyReport;
 };
+
+type WeeklyArtifactsExternalTarget = {
+  report: WeeklyReport;
+  audit: WeeklyAuditReport;
+  judgment: WeeklyJudgmentReport;
+  semanticInput: WeeklySemanticInputBundle;
+};
+
+function attachWeeklyExternalDiscoveryArtifacts(
+  artifacts: WeeklyArtifactsExternalTarget,
+  externalDiscovery?: WeeklyExternalDiscoveryArtifacts,
+): void {
+  if (!externalDiscovery) return;
+  artifacts.report.external_discovery_window = externalDiscovery.external_discovery_window;
+  artifacts.report.direction_label_counts = externalDiscovery.direction_label_counts;
+  artifacts.report.weekly_direction_observations = externalDiscovery.weekly_direction_observations;
+  artifacts.report.external_project_evidence_summaries = externalDiscovery.external_project_evidence_summaries;
+  artifacts.report.external_cross_platform_confirmations = externalDiscovery.external_cross_platform_confirmations;
+
+  artifacts.judgment.external_discovery_window = externalDiscovery.external_discovery_window;
+  artifacts.judgment.direction_label_counts = externalDiscovery.direction_label_counts;
+  artifacts.judgment.weekly_direction_observations = externalDiscovery.weekly_direction_observations;
+  artifacts.judgment.external_project_evidence_summaries = externalDiscovery.external_project_evidence_summaries;
+  artifacts.judgment.external_cross_platform_confirmations = externalDiscovery.external_cross_platform_confirmations;
+
+  artifacts.audit.external_discovery_window = externalDiscovery.external_discovery_window;
+  artifacts.audit.direction_label_counts = externalDiscovery.direction_label_counts;
+  artifacts.audit.weekly_direction_observations = externalDiscovery.weekly_direction_observations;
+  artifacts.audit.external_project_evidence_summaries = externalDiscovery.external_project_evidence_summaries;
+  artifacts.audit.external_cross_platform_confirmations = externalDiscovery.external_cross_platform_confirmations;
+  artifacts.audit.direction_gate_audit = externalDiscovery.direction_gate_audit;
+
+  artifacts.semanticInput.external_discovery_window = externalDiscovery.external_discovery_window;
+  artifacts.semanticInput.direction_label_counts = externalDiscovery.direction_label_counts;
+  artifacts.semanticInput.weekly_direction_observations = externalDiscovery.weekly_direction_observations;
+  artifacts.semanticInput.external_project_evidence_summaries = externalDiscovery.external_project_evidence_summaries;
+  artifacts.semanticInput.external_cross_platform_confirmations = externalDiscovery.external_cross_platform_confirmations;
+}
 
 type VisibleProject = ScoredProject & DailyReportProjectDetail;
 
@@ -1123,7 +1162,11 @@ function buildWeeklyTrendAgentReviewDraft(raw: unknown): WeeklyTrendAgentReview 
   };
 }
 
-export function buildWeeklyArtifacts(days: WindowDay[], config: AppConfig): {
+export function buildWeeklyArtifacts(
+  days: WindowDay[],
+  config: AppConfig,
+  options: { externalDiscovery?: WeeklyExternalDiscoveryArtifacts } = {},
+): {
   report: WeeklyReport;
   audit: WeeklyAuditReport;
   judgment: WeeklyJudgmentReport;
@@ -1165,7 +1208,7 @@ export function buildWeeklyArtifacts(days: WindowDay[], config: AppConfig): {
     agent_mode: compatibility.report.enhancement_status,
   };
 
-  return {
+  const artifacts = {
     report: compatibility.report,
     audit: compatibility.audit,
     judgment,
@@ -1177,6 +1220,8 @@ export function buildWeeklyArtifacts(days: WindowDay[], config: AppConfig): {
     evidenceClusters,
     weeklyFocusProjects: compatibility.weeklyFocusProjects,
   };
+  attachWeeklyExternalDiscoveryArtifacts(artifacts, options.externalDiscovery);
+  return artifacts;
 }
 
 type WeeklyArtifacts = ReturnType<typeof buildWeeklyArtifacts>;
@@ -1868,7 +1913,11 @@ function applyWeeklyEnhancement(
   return { enhancementStatus, rejectedOutputs };
 }
 
-export async function buildWeeklyArtifactsWithEnhancement(days: WindowDay[], config: AppConfig): Promise<{
+export async function buildWeeklyArtifactsWithEnhancement(
+  days: WindowDay[],
+  config: AppConfig,
+  options: { externalDiscovery?: WeeklyExternalDiscoveryArtifacts } = {},
+): Promise<{
   report: WeeklyReport;
   audit: WeeklyAuditReport;
   judgment: WeeklyJudgmentReport;
@@ -1881,7 +1930,7 @@ export async function buildWeeklyArtifactsWithEnhancement(days: WindowDay[], con
   weeklyFocusProjects: WeeklySemanticInputProject[];
 }> {
   await warmMissingProjectDescriptions(days.flatMap((day) => day.scored));
-  const artifacts = buildWeeklyArtifacts(days, config);
+  const artifacts = buildWeeklyArtifacts(days, config, options);
   if (!isEnhancementEnabled(config)) return artifacts;
 
   const draftRaw = await callStructuredEnhancement<unknown>(
@@ -1919,11 +1968,14 @@ export async function buildWeeklyArtifactsWithEnhancement(days: WindowDay[], con
     artifacts.weeklyFocusProjects = compatibility.weeklyFocusProjects;
     artifacts.semanticInput.weekly_focus_projects = compatibility.weeklyFocusProjects;
     artifacts.semanticInput.agent_mode = compatibility.report.enhancement_status;
+    attachWeeklyExternalDiscoveryArtifacts(artifacts, options.externalDiscovery);
     await applyWeeklyNarrativeEnhancement(artifacts, config);
+    attachWeeklyExternalDiscoveryArtifacts(artifacts, options.externalDiscovery);
     return artifacts;
   }
 
   await applyWeeklyNarrativeEnhancement(artifacts, config, draftRaw);
+  attachWeeklyExternalDiscoveryArtifacts(artifacts, options.externalDiscovery);
   return artifacts;
 }
 

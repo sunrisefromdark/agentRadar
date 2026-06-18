@@ -1,5 +1,12 @@
 # 失败恢复
 
+## External discovery failure recovery
+
+- default missing input is `skipped` and must not block primary daily or weekly output.
+- explicit input that is missing, unreadable, invalid JSON, or schema-invalid is `failed`.
+- Weekly partial external aggregate windows must still allow weekly output while recording skipped and failed days.
+- `verify-daily` fails unsafe public aggregate, missing audit for claimed external use, and external score contamination.
+
 ## 分级
 
 | 等级 | 示例 | 处理 |

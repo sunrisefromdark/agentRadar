@@ -1,5 +1,12 @@
 # 服务 Spec：Signal Ingestion
 
+## External discovery OSS boundary
+
+- AgentReach is a local JSON artifact provider, not a platform crawler or platform API client.
+- AgentReach external discovery must not write RawSignal and must not extend `RawSignal.source`.
+- Raw external input under `data/raw/external-discovery/` is local-only by default; public examples must be sanitized fixtures.
+- Provider status uses `ok`, `skipped`, `partial`, or `failed`; default missing input is `skipped`, while explicit invalid input is `failed`.
+
 ## 文档状态
 
 - 版本：`v0.2`

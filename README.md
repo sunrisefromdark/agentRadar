@@ -340,6 +340,12 @@ corepack pnpm test
 
 换句话说，仓库里的开源版是一个无登录、只读浏览、可运行数据工作流的公开版本。
 
+### AgentReach 外部发现原始输入边界
+
+AgentReach 外部发现原始输入位于 `data/raw/external-discovery/`，默认不提交、不上传；公开仓库只保留 sanitized fixture 和 `data/external-discovery/*.aggregate.json` 这类 public-safe 聚合产物。
+
+外部发现链路不保存、不读取、不暴露登录态数据、cookie、session、OAuth 数据、账号设置或平台 API 凭据。更多数据边界见 [data/README.md](./data/README.md)。
+
 ### 托管版说明
 
 - 在线托管版位于 [`app.agentradar.top`](https://app.agentradar.top/)

@@ -130,6 +130,8 @@ jobs:
             data/normalized/${{ steps.options.outputs.target_date }}.json
             data/scores/${{ steps.options.outputs.target_date }}.json
             data/classifications/${{ steps.options.outputs.target_date }}.json
+            data/external-discovery/${{ steps.options.outputs.target_date }}.aggregate.json
+            data/external-discovery/latest.aggregate.json
             data/raw/github/${{ steps.options.outputs.target_date }}.enrichment.json
             data/raw/github-stars/${{ steps.options.outputs.target_date }}.json
             data/raw/github-stars/tracked-repos.json

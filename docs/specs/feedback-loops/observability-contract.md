@@ -1,5 +1,12 @@
 # 可观测性契约
 
+## External discovery observability
+
+- External discovery observability must include provider status and status reason.
+- Public aggregates must retain `source_input_hash` for auditability without publishing raw input.
+- registry miss and rejected events must be visible in audit summaries.
+- Weekly external windows must report usable day count, skipped day count, failed day count, and direction gate audit state.
+
 ## 观测信号
 
 | 信号 | 用途 |

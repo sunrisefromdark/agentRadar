@@ -2,6 +2,7 @@ import type {
   DailyReport,
   DailyRunSummary,
   DailyRunSummaryDiagnostics,
+  DailyRunSummaryExternalDiscovery,
   LlmRunDiagnostics,
   DailyRunSummaryQuality,
   DailyRunSummarySourceStatus,
@@ -15,6 +16,7 @@ import type {
   StarDeltaSource,
 } from "../types.ts";
 import type { GitHubStarDeltaSummary } from "../signal/githubMetrics.ts";
+import type { DailyExternalAggregate } from "../externalDiscovery/types.ts";
 
 const FRESHNESS_SOURCE_DISPLAY_NAMES: Record<string, string> = {
   "agents-radar": "agents-radar 历史上下文",
@@ -26,6 +28,37 @@ const FRESHNESS_SOURCE_DISPLAY_NAMES: Record<string, string> = {
 
 function displayFreshnessSourceName(source: string): string {
   return FRESHNESS_SOURCE_DISPLAY_NAMES[source] ?? source;
+}
+
+function countExternalRejectedReasons(aggregate: DailyExternalAggregate): Record<string, number> {
+  const counts: Record<string, number> = {};
+  for (const event of aggregate.audit.rejected_events) {
+    counts[event.reason_code] = (counts[event.reason_code] ?? 0) + 1;
+  }
+  return counts;
+}
+
+function buildRunSummaryExternalDiscovery(input: {
+  aggregate: DailyExternalAggregate;
+  aggregatePath?: string;
+}): DailyRunSummaryExternalDiscovery {
+  const registryWarnings = input.aggregate.audit.warnings.filter((warning) => warning.startsWith("registry_"));
+  return {
+    provider: input.aggregate.provider,
+    status: input.aggregate.status,
+    ...(input.aggregate.status_reason ? { status_reason: input.aggregate.status_reason } : {}),
+    ...(input.aggregatePath ? { aggregate_path: input.aggregatePath } : {}),
+    source_input_hash: input.aggregate.source_input_hash,
+    event_count: input.aggregate.event_count,
+    accepted_event_count: input.aggregate.accepted_event_count,
+    rejected_event_count: input.aggregate.rejected_event_count,
+    rejected_reason_counts: countExternalRejectedReasons(input.aggregate),
+    direction_label_counts: { ...input.aggregate.direction_label_counts },
+    public_safe: true,
+    redaction_policy_version: input.aggregate.redaction_policy_version,
+    registry_warnings: registryWarnings,
+    warnings: [...input.aggregate.audit.warnings],
+  };
 }
 
 type SummaryRuleContext = {
@@ -614,6 +647,10 @@ export function buildDailyRunSummary(
       rolling_7d_qualified_non_head_count: number;
       rolling_30d_direction_qualified_counts: Record<string, number>;
     };
+    externalDiscovery?: {
+      aggregate: DailyExternalAggregate;
+      aggregatePath?: string;
+    };
   },
 ): DailyRunSummary {
   const counts = buildSummaryCounts(raw, scored, report);
@@ -686,6 +723,9 @@ export function buildDailyRunSummary(
       rolling_30d_direction_qualified_counts: opts.missionInventoryAudit.rolling_30d_direction_qualified_counts,
     };
   }
+  if (opts.externalDiscovery) {
+    summary.external_discovery = buildRunSummaryExternalDiscovery(opts.externalDiscovery);
+  }
   return summary;
 }
 
@@ -751,6 +791,39 @@ function renderFreshnessSources(summary: DailyRunSummary): string[] {
     const status = source.status_summary_cn ?? "暂无可读状态";
     return `- ${displayFreshnessSourceName(source.source)}${role}: ${source.freshness_state} | effective_date=${source.effective_date ?? "unknown"} | realtime=${source.from_realtime_run ? "true" : "false"} | ${status}`;
   });
+}
+
+function renderExternalDiscoverySummary(summary: DailyRunSummary): string[] {
+  const external = summary.external_discovery;
+  if (!external) {
+    return ["- status: not_recorded", "- role: secondary signal only"];
+  }
+
+  const rejectedReasons = Object.entries(external.rejected_reason_counts)
+    .map(([reason, count]) => `${reason}=${count}`)
+    .join(", ") || "none";
+  const directionLabelCounts =
+    Object.entries(external.direction_label_counts)
+      .filter(([, count]) => typeof count === "number" && count > 0)
+      .sort(([left], [right]) => left.localeCompare(right))
+      .map(([label, count]) => `${label}=${count}`)
+      .join(", ") || "none";
+
+  return [
+    "- role: secondary signal only",
+    `- provider: ${external.provider}`,
+    `- status: ${external.status}`,
+    ...(external.status_reason ? [`- status_reason: ${external.status_reason}`] : []),
+    ...(external.aggregate_path ? [`- aggregate_path: ${external.aggregate_path}`] : []),
+    `- source_input_hash: ${external.source_input_hash}`,
+    `- events: accepted=${external.accepted_event_count}; rejected=${external.rejected_event_count}; total=${external.event_count}`,
+    `- direction_label_counts: ${directionLabelCounts}`,
+    `- public_safe: ${external.public_safe ? "true" : "false"}`,
+    `- redaction_policy_version: ${external.redaction_policy_version}`,
+    `- rejected_reason_counts: ${rejectedReasons}`,
+    `- registry_warnings: ${external.registry_warnings.join(", ") || "none"}`,
+    `- warnings: ${external.warnings.join(", ") || "none"}`,
+  ];
 }
 
 function renderLlmDiagnostics(summary: DailyRunSummary): string[] {
@@ -901,6 +974,10 @@ export function renderDailyRunSummary(summary: DailyRunSummary): string {
     ...summary.source_status.map(
       (source) => `- ${source.source}: ${statusLabel(source.status)} | enabled=${source.enabled} | items=${source.item_count} | projects=${source.distinct_projects}`,
     ),
+    "",
+    "## External Discovery",
+    "",
+    ...renderExternalDiscoverySummary(summary),
     "",
     "## Mission Discovery",
     "",

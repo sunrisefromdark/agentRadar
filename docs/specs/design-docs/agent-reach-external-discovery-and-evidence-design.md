@@ -17,10 +17,11 @@ V1 结论如下：
 1. Agent-Reach 是外部信号 provider，`agent-trend-radar` 只消费它已经生成的结构化 JSON / artifact，不直接爬取 X / Twitter、Reddit、Hacker News 或官方网页。
 2. Agent-Reach 输出进入独立的 external discovery 层，生成事件级 `ExternalSignalEvent` 和按日 `DailyExternalAggregate`，不直接写入现有 `RawSignal[]`。
 3. 外部层只服务两类目标：发现 GitHub 尚未兴起的新观察候选，以及为已有项目补充“谁在讨论、讨论是否持续、是否跨平台”的次级证据。
-4. 外部层不得改变现有主 score 公式，不得把社媒热度计入主源多源确认，也不得单独制造高置信主结论。
-5. daily 可以展示项目级外部观察候选和已有项目补证摘要；weekly 可以消费最近 7 日按日 aggregate，用于方向级观察和趋势强化说明。
-6. 外部层缺失、失败、部分失败时，daily / weekly 主产物必须继续生成，并在 run-summary / verify 中以 skipped / partial / failed 明确审计。
-7. 设计落点建议优先固定 artifact contract、schema、adapter、aggregate 与审计字段的边界，再讨论 daily / weekly 展示层；具体执行顺序、阶段拆分和验证命令留给后续 exec-plan。
+4. AgentReach V1 external discovery 必须支持 label-driven focus policy；research / office 方向以 `direction_labels` 表达。
+5. 外部层不得改变现有主 score 公式，不得把社媒热度计入主源多源确认，也不得单独制造高置信主结论。
+6. daily 可以展示项目级外部观察候选和已有项目补证摘要；weekly 可以消费最近 7 日按日 aggregate，用于方向级观察和趋势强化说明。
+7. 外部层缺失、失败、部分失败时，daily / weekly 主产物必须继续生成，并在 run-summary / verify 中以 skipped / partial / failed 明确审计。
+8. 设计落点建议优先固定 artifact contract、schema、adapter、aggregate 与审计字段的边界，再讨论 daily / weekly 展示层；具体执行顺序、阶段拆分和验证命令留给后续 exec-plan。
 
 ## 1. 背景与设计原则
 
@@ -199,11 +200,14 @@ interface AgentReachProviderItem {
     topic_hint?: string;
   };
   metrics?: Record<string, number>;
+  direction_labels?: string[];
   tags?: string[];
 }
 ```
 
 该 artifact 是 provider 边界，不是系统内部事实边界。Adapter 必须把其中的自由文本、平台名、actor hint、target hint 校验并转换为 canonical `ExternalSignalEvent`；不能把 `provider_tier_hint` 原样当作 tier、repo 绑定或跨平台确认事实。若 provider 只提供一个时间字段，adapter 必须明确映射为 `observed_at`，不得伪装成 `source_published_at`。Provider item 的 `url` 与 `raw_ref` 至少应存在一个，以便转换后的 canonical event 仍可追溯。
+
+`direction_labels` 是 provider 可以提交的稳定方向标签，用于 external layer 的偏好适配、聚合、展示和审计。`tags` 是普通辅助标签，可保留技术能力、形态和自由分类；`direction_labels` 是稳定方向语义，必须经 adapter canonicalization 后才能进入 canonical event / aggregate。
 
 ### 3.3 Provider 状态
 
@@ -264,6 +268,46 @@ OSS V1 必须冻结以下公开边界：
 - Public aggregate 只能保留摘要、计数、稳定 evidence id、`source_input_hash`、平台枚举、状态、reason code 与可审计警告；不得保留 raw social text、完整原文、profile URL、未脱敏 handle 或可反推出私有查询的 raw ref。
 - `content_text`、provider raw `text`、`actor.platform_profile_url`、provider `actor.profile_url` 等字段可以存在于 local raw / local canonical 处理边界，但不得进入公开可提交的 aggregate。
 - 公开 artifact 必须能通过 public-safe / redaction 验证；验证失败时不得提交，也不得被 daily / weekly 当作可消费 external layer。
+
+### 3.7 AgentReach Focus Policy & Direction Labels
+
+AgentReach 应优先关注科研相关 Agent 和办公相关 Agent，包括但不限于通用办公提效的个人助手，以及行业专用办公 Agent。这些新方向必须结构化为稳定 `direction_labels`；AgentReach 的关注偏好、topic grouping、weekly observation 与后续展示应基于这些标签适配。
+
+`direction_labels` 是 external discovery layer 的稳定方向语义，用于偏好适配、聚合、展示和审计；它不是 `target_type`、不是 `RawSignal.source`、不是 score component。
+
+V1 第一批 priority direction labels 固定为：
+
+```text
+research-agent
+literature-review-agent
+research-data-analysis-agent
+academic-writing-agent
+office-agent
+personal-assistant-agent
+office-productivity-agent
+document-agent
+spreadsheet-agent
+meeting-agent
+workflow-automation-agent
+vertical-office-agent
+legal-agent
+finance-agent
+sales-crm-agent
+hr-agent
+healthcare-admin-agent
+education-agent
+enterprise-ops-agent
+```
+
+分层语义：
+
+- `direction_labels`：稳定方向标签，用于 external layer 的偏好适配、聚合、展示和审计。
+- `tags`：普通辅助标签，可包含技术能力、交互形态、场景词或 provider 侧补充分类。
+- `topic_hint` / `topic_key`：服务 topic canonicalization，用于把 topic / direction 事件绑定到稳定 topic 语义。
+
+暂不把 `agent-runtime`、`agent-memory`、`mcp`、`browser-agent` 这类技术能力词纳入 direction labels；它们可作为普通 `tags` 保留，或在未来另行设计能力维度。
+
+Adapter 必须 canonicalize provider 提供的 `direction_labels`：只接受稳定白名单标签或可确定映射到白名单的同义标签；非法 label 被丢弃并写入 audit warning。External-only direction labels cannot modify primary score, discussion_score, primary-source confirmation, or create high-confidence primary conclusions.
 
 ## 4. 数据模型
 
@@ -335,6 +379,7 @@ interface ExternalSignalEvent {
     replies?: number;
   };
 
+  direction_labels: string[];
   tags: string[];
   raw_ref?: string;
   notes: string[];
@@ -349,6 +394,7 @@ interface ExternalSignalEvent {
 - `source_published_at` 表示平台原文发布时间；`observed_at` 表示 AgentReach 观测时间；`ingested_at` 表示本系统接收时间，三者不得混写。
 - `event_url` 与 `raw_ref` 至少存在一个；公开 URL 不可用时必须保留可追溯的 provider raw reference。
 - `target.target_type=topic` 时允许没有 `repo_url` / `paper_url`，但必须有 `topic_key`，且只能进入方向级观察路径。
+- `direction_labels` 只表达 external discovery layer 的稳定方向语义，不能作为 `target_type`、主源来源或 score component 使用。
 - `effective_tier=core/proven/watch` 只能来自维护名单命中，即 `tier_basis=registry`；`provider_tier_hint` 只能进入审计或待维护提示，不能产生 core / proven / watch，也不得参与头部讨论统计。
 - `metrics` 是互动强度证据，不是项目质量事实。
 
@@ -363,6 +409,7 @@ interface ExternalEvidence {
   scope: "project" | "direction";
   target_key: string;
   derived_signal_kinds: ExternalSignalKind[];
+  direction_labels: string[];
   platforms: ExternalPlatform[];
   actor_tiers: Partial<Record<ExternalActorTier, number>>;
   actor_types: Partial<Record<ExternalActorType, number>>;
@@ -397,6 +444,7 @@ interface ObservationCandidate {
   repo_url?: string;
   paper_url?: string;
   topic_key?: string;
+  direction_labels: string[];
   binding_confidence: "high" | "medium" | "low" | "unbound";
   evidence_ids: string[];
   evidence_summary_cn: string;
@@ -439,6 +487,7 @@ interface DailyExternalAggregate {
   rejected_event_count: number;
   platform_counts: Partial<Record<ExternalPlatform, number>>;
   derived_signal_kind_counts: Partial<Record<ExternalSignalKind, number>>;
+  direction_label_counts: Record<string, number>;
 
   project_evidence: ExternalEvidence[];
   direction_evidence: ExternalEvidence[];
@@ -548,6 +597,10 @@ V1 `topic_key` canonicalization 固定按以下优先级执行：
 3. AgentReach provider 提供明确 `topic_hint` 时，adapter 可将其规范化为小写 kebab-case `topic_key`，并保留原始 hint 作为 evidence note。
 4. 无法得到稳定 `topic_key` 的方向事件不得进入 weekly direction observation，只能 rejected 或保留为 raw audit evidence。
 
+`topic_key` 继续服务 topic canonicalization；`direction_labels` 服务方向归类和偏好适配。两者可以同时存在，但不得互相替代：`topic_key` 回答“这个讨论属于哪个可聚合 topic”，`direction_labels` 回答“这个讨论属于哪些稳定关注方向”。
+
+V1 direction label canonicalization 固定按第 3.7 节 priority labels 执行。topic / direction 事件若没有稳定 `topic_key`，不得进入 weekly direction observation；topic / direction 事件若没有有效 `direction_labels`，可以保留 daily audit / observation，但不得作为 label-driven weekly direction observation。
+
 方向级候选进入 weekly 前，V1 必须按固定收敛规则判断，不得由实现阶段临时决定。
 
 收敛条件定义：
@@ -646,9 +699,12 @@ interface ExternalEntityRegistryEntry {
 - `distinct_actor_count`
 - `platform_counts`
 - `derived_signal_kind_counts`
+- `direction_label_counts`
 - `project_evidence`
 - `direction_evidence`
 - `observation_candidates`
+
+`direction_label_counts` 按 canonical `direction_labels` 展开计数，用于 daily 展示、weekly group / display / observation 和 audit。该字段只表达 external layer 的方向关注分布，不表达项目质量或主趋势置信度。
 
 ### 8.3 Weekly 7 日窗口
 
@@ -662,6 +718,9 @@ Weekly 窗口计算：
 - `top_tier_actor_count`：core / proven / watch actor 数量及分布。
 - `cross_platform=true`：同一 target 在至少两个 V1 平台独立出现。
 - `persistence=true`：同一 target 在多个日期出现。
+- `direction_label_counts`：7 日窗口内按 canonical direction label 汇总的外部方向分布。
+
+Weekly 可以按 `direction_labels` 聚合趋势观察、分组和展示，但不得降低第 6.2 节固定的 4 选 2 direction gate；label 本身不能作为主趋势证据。
 
 ### 8.4 强度解释
 
@@ -704,6 +763,7 @@ interface DailyExternalDiscoverySection {
     candidate_count: number;
     evidence_count: number;
     top_topic_keys: string[];
+    direction_label_counts: Record<string, number>;
     note_cn: string;
   };
   external_audit_summary: {
@@ -720,7 +780,7 @@ interface DailyExternalDiscoverySection {
 
 - `external_observation_candidates` 只放 `scope=project` 且 `can_enter_daily=true` 的外部观察候选；这些候选不得进入 `today_star_projects`。
 - `external_project_evidence_summaries` 只放已匹配现有项目的补证摘要，用于项目卡片或 daily 外部补证区块。
-- `external_direction_signal_summary` 只做方向级概览，daily 不生成方向级主结论。
+- `external_direction_signal_summary` 只做方向级概览，daily 可展示 label summary / label counts，但不生成方向级主结论。
 - 当 provider status 为 `skipped` 或 `failed` 时，列表字段为空数组，`external_layer_status.status_reason` 必须说明原因。
 
 ### 9.3 对项目分组的影响
@@ -774,6 +834,7 @@ interface WeeklyExternalDiscoveryWindowSection {
   };
   weekly_direction_observations: ObservationCandidate[];
   external_project_evidence_summaries: ExternalEvidence[];
+  direction_label_counts: Record<string, number>;
   external_cross_platform_confirmations: Array<{
     target_key: string;
     scope: "project" | "direction";
@@ -794,6 +855,7 @@ interface WeeklyExternalDiscoveryWindowSection {
 
 - `weekly_direction_observations` 只包含满足第 6.2 节 V1 收敛门槛的 `scope=direction` 候选。
 - `external_project_evidence_summaries` 只为 weekly 已有项目 / evidence cluster 提供补证，不创建高置信项目结论。
+- `direction_label_counts` 用于 group / display / observation，不能单独作为趋势成立证据。
 - `external_cross_platform_confirmations` 只表达跨平台外部讨论确认，不等同于主源多源确认。
 - `external_layer_window_status` 必须保留每个 daily aggregate 的状态，窗口内部分缺失时仍可生成 weekly，但必须标注 usable day count。
 
@@ -839,8 +901,15 @@ Daily / weekly / run-summary 应至少能追溯：
 - rejected events 数量与原因。
 - unsupported platform 数量。
 - unbound target 数量。
+- invalid / dropped direction label 数量。
 - registry miss 数量。
 - partial / failed reason。
+
+Label 相关降级必须遵循：
+
+- 非法 `direction_labels` 被丢弃并写入 warning，不得原样进入 aggregate。
+- 缺少 `direction_labels` 不应导致 daily 主产物失败；该事件可保留 daily audit / observation，但不能作为 label-driven weekly direction observation。
+- label 过散、同义词过多或无法 canonicalize 时，应以 audit / warning 暴露，而不是静默生成大量弱方向。
 
 ### 11.4 Verify 语义
 
@@ -873,6 +942,8 @@ data/external-discovery/latest.aggregate.json
 - provider raw input 可追溯，不能被 aggregate 覆盖，也不能被默认公开提交。
 - canonical sanitized events 与 aggregate 至少保留 `schema_version`、`provider_run_id` 或 `source_input_hash` 中的一种稳定追溯字段；公开 artifact 必须优先使用 `source_input_hash` 追溯 local raw input。
 - public aggregate 必须包含 `public_safe=true`、`redaction_policy_version`、`contains_raw_text=false`、`contains_profile_urls=false` 与 `source_input_hash`。
+- public aggregate 可以保留 sanitized `direction_labels` 与 `direction_label_counts`，用于公开展示外部方向分布。
+- 不得因为 label 展示而引入 raw social text、provider raw `text`、profile URL、未脱敏 handle、cookie / token / session / OAuth、私有 query 或私有 diagnostics。
 - raw input 不得被 GitHub Actions 默认上传或提交；如需要提交 fixture，文件名或 metadata 必须显式标记 sanitized fixture，并通过结构测试。
 - dry-run 不得写入上述持久化目录；只能报告 planned writes。
 - 如果未来引入 entity registry，registry 应作为独立 artifact 维护，不得塞进每日 aggregate。
@@ -893,6 +964,8 @@ data/external-discovery/latest.aggregate.json
 | `DailyRunSummarySourceStatus` / run-summary | 应新增或映射 external secondary layer 状态、计数、失败原因 | 不得把外部层标为 freshness-driving primary source |
 | `dailyVerification` | 应检查结构合法性、审计一致性和越权使用 | 不得因外部层 skipped / failed 直接判定主 daily 失败 |
 | `storage/files.ts` 数据目录 | 后续实现若新增目录，应同步 `DATA_DIRS`、README 和结构测试 | 不得只在代码里新增目录而不更新 specs |
+
+`direction_labels` 只属于 external discovery layer：不扩展 `RawSignal.source`，不新增 score component，不改变 `discussion_score`，不参与主源多源确认，也不得作为高置信主结论的依据。
 
 外部层允许影响“观察优先级”或“待补证排序”，但只能通过单独字段表达，例如：
 
@@ -944,12 +1017,16 @@ interface ExternalPriorityHint {
 
 - schema 测试：合法 / 非法 `ExternalSignalEvent`。
 - adapter 测试：AgentReach provider output -> canonical events。
+- direction label 测试：白名单 canonicalization、非法 `direction_labels` 丢弃并写入 warning、缺少 label 不导致 daily 主产物失败。
 - aggregate 测试：按日聚合、平台计数、tier 计数、跨平台确认、持续性。
+- direction label aggregate 测试：`direction_label_counts` 按 canonical label 统计，public aggregate 只保留 sanitized labels / counts。
 - matching 测试：repo URL 精确匹配、低置信名称匹配、方向级 unbound topic。
 - daily 测试：外部层 ok / skipped / partial / failed 不破坏 daily。
 - weekly 测试：7 日窗口消费 direction observation。
+- weekly label grouping 测试：label-based group / display / observation 不绕过第 6.2 节 4 选 2 direction gate。
 - direction gate 测试：方向级观察必须满足至少 2 个收敛条件才进入 weekly。
 - status 测试：默认输入缺失为 skipped，显式输入缺失 / 不可解析为 failed。
+- score non-contamination 测试：`direction_labels` 不进入 `RawSignal.source`、主 score、`discussion_score`、主源多源确认或高置信主结论。
 - structure test：新增 source / artifact / spec 同步检查。
 - verify-daily 测试：外部层缺失 warn、结构非法 fail、主链路不被外部失败拖垮。
 - public-safe / redaction 测试：public aggregate 不得包含 `content_text`、provider raw `text`、`profile_url`、cookie、session、token、password、OAuth、未脱敏 handle 或私有 diagnostics。
@@ -982,6 +1059,7 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 | 需求 5：支持跨平台确认语义 | `4.2`、`8`、`10` | `platforms`、`platform_counts`、`cross_platform` 与 weekly 趋势强化表达 |
 | 需求 6：允许观察候选但不能制造高置信主结论 | `4.3`、`6`、`9`、`10`、`13` | `cannot_be_primary_conclusion=true`，方向级和项目级候选均受主源确认边界约束 |
 | 需求 7：支持项目级与方向级对象 | `4.1`、`4.2`、`4.3`、`6` | `target_type`、`scope`、`topic_key` 与 `binding_confidence` 区分项目级匹配和方向级观察 |
+| 需求 7.1：外部方向必须有稳定 direction labels | `3.7`、`4`、`6.2`、`8`、`9`、`10`、`13` | `direction_labels` 支撑 AgentReach focus policy、方向聚合、展示和审计，但不进入 `RawSignal` / score / 主结论 |
 | 需求 8：外部层失效时可降级 | `3.3`、`11`、`12`、`13` | `ok / skipped / partial / failed` 状态、审计字段、verify warn / fail 边界 |
 | 验收 1：外部层正式参与判断但不与主源同级 | `2`、`9`、`10`、`13` | daily / weekly 可展示和消费外部层，但主链路和主 score 不被覆盖 |
 | 验收 2：系统能更早发现新候选 | `4.3`、`6.1`、`9` | 外部 project candidate 可进入观察候选或 pending confirmation，而不是主结论 |
@@ -989,6 +1067,7 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 | 验收 4：系统能表达讨论强度是否持续 | `4.2`、`4.4`、`8` | mention、distinct actor、active day、platform count 与 weekly 7 日窗口口径 |
 | 验收 5：weekly 能使用外部层强化趋势判断 | `6.2`、`8.3`、`10` | direction observation、weak signal / observing trend、cross-platform 与 persistence 支持 weekly |
 | 验收 6：外部层失效时可降级 | `3.3`、`11`、`13` | 主 daily / weekly 继续，外部层状态和审计明确表达 |
+| 验收 7：科研 / 办公方向能以稳定标签聚合和展示 | `3.7`、`4`、`8`、`9`、`10`、`13` | `direction_label_counts` 与 label-based observation 让 research / office 方向可见，同时不影响主 score / 主结论 |
 
 ## 16. Open Questions
 
@@ -997,9 +1076,10 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 1. 未来是否需要支持 AgentReach HTTP API、CLI direct invocation 或远程 latest artifact 拉取？这些模式不属于 V1，若启用应另行设计 provider contract、认证、失败语义和测试 fixture。
 2. entity registry 的长期维护责任、审核节奏和 tier 升降级流程如何设计？V1 允许空 registry 启动，未命中作者归为 `ordinary / unknown`。
 3. 是否需要在 V1 之后建立独立 external topic registry？V1 已固定使用现有 user interest topics / weekly trend keys / provider topic hint 的优先级。
-4. daily Markdown 的视觉呈现是否需要把 `external_discovery` 区块放在主榜前、主榜后还是附录？V1 JSON contract 已固定为独立 external discovery section。
-5. 如果 AgentReach 输出官方网页 / 博客页并包含 GitHub repo 链接，该事件是否可以同时作为 `official_blog` 补证和项目级 discovery？设计倾向允许，但必须保留单一 event source，并用 `raw_event_kind` 与 `derived_signal_kinds` 明确原始事件类型和多派生语义的关系。
-6. 是否需要在 V1 之后增加 env / config 文件层面的默认输入路径配置？V1 runtime contract 已固定 `--no-external-discovery` 与 `--external-discovery-input <path>` 两个 CLI flag。
+4. 是否需要未来建立 external direction label registry？V1 先固定 priority labels + adapter canonicalization，不引入独立 registry。
+5. daily Markdown 的视觉呈现是否需要把 `external_discovery` 区块放在主榜前、主榜后还是附录？V1 JSON contract 已固定为独立 external discovery section。
+6. 如果 AgentReach 输出官方网页 / 博客页并包含 GitHub repo 链接，该事件是否可以同时作为 `official_blog` 补证和项目级 discovery？设计倾向允许，但必须保留单一 event source，并用 `raw_event_kind` 与 `derived_signal_kinds` 明确原始事件类型和多派生语义的关系。
+7. 是否需要在 V1 之后增加 env / config 文件层面的默认输入路径配置？V1 runtime contract 已固定 `--no-external-discovery` 与 `--external-discovery-input <path>` 两个 CLI flag。
 
 ## 17. 明确非目标
 
@@ -1034,6 +1114,8 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 是否保留事件级 `ExternalSignalEvent`、证据级 `ExternalEvidence`、按日 `DailyExternalAggregate` 和候选级 `ObservationCandidate` 的边界。
 - 是否明确 V1 平台白名单，并拒绝 GitHub、视频、播客、微信公众号和长内容平台进入正式链路。
 - 是否区分项目级匹配与方向级观察，且方向级观察不能伪装成项目级结论。
+- 是否区分 `direction_labels`、`tags`、`topic_hint` / `topic_key`，避免把方向标签、辅助标签和 topic canonicalization 混用。
+- 是否冻结 research / office priority labels，并明确技术能力词默认只作为普通 `tags`。
 - 是否明确方向级观察进入 weekly 必须满足 4 个收敛条件中的至少 2 个。
 - 是否要求 `effective_tier=core/proven/watch` 只能来自维护名单，而不是 `provider_tier_hint` 或临时主观判断，且 `provider_tier_hint` 不参与头部讨论统计。
 - 是否明确 entity registry 可空启动，空 registry 不产生 top-tier 统计。
@@ -1043,6 +1125,7 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 是否定义 skipped / partial / failed 的降级和审计语义。
 - 是否定义 public aggregate 必须包含 `public_safe=true`、`redaction_policy_version`、`contains_raw_text=false`、`contains_profile_urls=false` 与 `source_input_hash`。
 - 是否定义 public-safe / redaction 验证：public aggregate 不得包含 `content_text`、provider raw `text`、`profile_url`、cookie、session、token、password、OAuth、未脱敏 handle 或私有 diagnostics。
+- 是否明确 label 不影响主 score、`discussion_score`、主源多源确认或主结论。
 - 是否禁止外部层直接改变主 score、`discussion_score`、主源多源确认或高置信主结论。
 - 是否提供 Requirement / Acceptance Traceability，把冻结需求和验收项映射到设计章节。
 - 是否列出后续 specs、README、`data/README.md`、`.gitignore`、GitHub Actions、验证脚本、产物目录的同步清单，但未在本轮创建 exec-plan。

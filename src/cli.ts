@@ -50,6 +50,22 @@ import type { RunAgentTaskWorkflowInput, TaskExecutionReceipt } from "./agentMem
 import { renderVisualConsole } from "./visualConsole/index.ts";
 import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./visualConsole/readLayer.ts";
 import { planWeeklySync } from "./weeklyCadence.ts";
+import { loadAgentReachProviderArtifact, type AgentReachProviderResult } from "./externalDiscovery/agentReachProvider.ts";
+import {
+  buildDailyExternalAggregate,
+  writeDailyExternalAggregate,
+  type WriteDailyExternalAggregateResult,
+} from "./externalDiscovery/aggregate.ts";
+import { externalRawInputPath } from "./externalDiscovery/paths.ts";
+import { loadExternalEntityRegistry, enrichExternalActorWithRegistry } from "./externalDiscovery/entityRegistry.ts";
+import { buildDailyExternalEvidence } from "./externalDiscovery/dailyEvidence.ts";
+import {
+  buildWeeklyExternalDiscoveryArtifacts,
+  readWeeklyExternalDiscoveryWindow,
+} from "./externalDiscovery/weeklyWindow.ts";
+import type {
+  DailyExternalAggregate,
+} from "./externalDiscovery/types.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -63,13 +79,16 @@ import {
   writeRoutingManifest,
 } from "./agentMemory/index.ts";
 
-interface CliOptions {
+export interface CliOptions {
   date: string;
   dryRun: boolean;
   backfillMissingDays?: boolean;
   enrichGithub: boolean;
   includeAgentsRadar: boolean;
   includeTrendshift: boolean;
+  externalDiscoveryEnabled: boolean;
+  externalDiscoveryInputPath?: string;
+  externalDiscoveryInputExplicit: boolean;
   configPath: string;
   view?: "overview" | "projects" | "weekly" | "run-health" | "observer" | "knowledge-base" | "kb";
   project?: string;
@@ -82,6 +101,24 @@ interface CliOptions {
 }
 
 type FlagHandler = (opts: CliOptions, argv: string[], index: number) => number;
+
+export type ExternalDiscoveryCliDisabledStatusReason = "disabled_by_flag";
+
+export interface ExternalDiscoveryCliMode {
+  enabled: boolean;
+  readsExternalRawInput: boolean;
+  generatesDailyAggregate: boolean;
+  allowsExternalDiscoveryInput: boolean;
+  externalDiscoveryInputExplicit: boolean;
+  externalDiscoveryInputPath?: string;
+  disabledStatusReason?: ExternalDiscoveryCliDisabledStatusReason;
+}
+
+function readRequiredFlagValue(flag: string, argv: string[], index: number): string {
+  const value = argv[index + 1];
+  if (!value || value.startsWith("--")) throw new Error(`${flag} requires a path`);
+  return value;
+}
 
 const FLAG_HANDLERS: Record<string, FlagHandler> = {
   "--dry-run": (opts, _argv, index) => {
@@ -103,6 +140,15 @@ const FLAG_HANDLERS: Record<string, FlagHandler> = {
   "--no-trendshift": (opts, _argv, index) => {
     opts.includeTrendshift = false;
     return index;
+  },
+  "--no-external-discovery": (opts, _argv, index) => {
+    opts.externalDiscoveryEnabled = false;
+    return index;
+  },
+  "--external-discovery-input": (opts, argv, index) => {
+    opts.externalDiscoveryInputPath = readRequiredFlagValue("--external-discovery-input", argv, index);
+    opts.externalDiscoveryInputExplicit = true;
+    return index + 1;
   },
   "--record-agent-memory": (opts, _argv, index) => {
     opts.recordAgentMemory = true;
@@ -152,7 +198,7 @@ const FLAG_HANDLERS: Record<string, FlagHandler> = {
   },
 };
 
-function parseArgs(argv: string[]): { command: string; opts: CliOptions } {
+export function parseArgs(argv: string[]): { command: string; opts: CliOptions } {
   const command = argv[2] ?? "run-daily";
   const opts: CliOptions = {
     date: toLocalDateStr(new Date()),
@@ -161,6 +207,8 @@ function parseArgs(argv: string[]): { command: string; opts: CliOptions } {
     enrichGithub: true,
     includeAgentsRadar: true,
     includeTrendshift: true,
+    externalDiscoveryEnabled: true,
+    externalDiscoveryInputExplicit: false,
     configPath: "config.yaml",
     view: "overview",
     recordAgentMemory: false,
@@ -179,6 +227,158 @@ function parseArgs(argv: string[]): { command: string; opts: CliOptions } {
   if (opts.anchorDate) assertValidDateOnlyOrLatest(opts.anchorDate, "--anchor-date");
 
   return { command, opts };
+}
+
+function baseExternalDiscoveryCliMode(opts: CliOptions, allowsExternalDiscoveryInput: boolean): ExternalDiscoveryCliMode {
+  return {
+    enabled: opts.externalDiscoveryEnabled,
+    readsExternalRawInput: false,
+    generatesDailyAggregate: false,
+    allowsExternalDiscoveryInput,
+    externalDiscoveryInputExplicit: opts.externalDiscoveryInputExplicit,
+    ...(opts.externalDiscoveryInputPath ? { externalDiscoveryInputPath: opts.externalDiscoveryInputPath } : {}),
+    ...(!opts.externalDiscoveryEnabled ? { disabledStatusReason: "disabled_by_flag" as const } : {}),
+  };
+}
+
+export function resolveExternalDiscoveryCliMode(command: string, opts: CliOptions): ExternalDiscoveryCliMode {
+  const allowsExternalDiscoveryInput = command === "run-daily" || command === "recover-daily";
+  const mode = baseExternalDiscoveryCliMode(opts, allowsExternalDiscoveryInput);
+  if (!opts.externalDiscoveryEnabled) return mode;
+
+  if (command === "run-daily") {
+    return {
+      ...mode,
+      readsExternalRawInput: true,
+      generatesDailyAggregate: true,
+    };
+  }
+
+  if (command === "recover-daily" && opts.externalDiscoveryInputExplicit) {
+    return {
+      ...mode,
+      readsExternalRawInput: true,
+      generatesDailyAggregate: true,
+    };
+  }
+
+  return mode;
+}
+
+export function validateExternalDiscoveryCliMatrix(command: string, opts: CliOptions): void {
+  if (opts.externalDiscoveryInputExplicit && (command === "run-weekly" || command === "verify-daily")) {
+    throw new Error(`${command} does not accept --external-discovery-input`);
+  }
+}
+
+interface DailyExternalDiscoveryRuntime {
+  aggregate: DailyExternalAggregate;
+  aggregatePath?: string;
+  writeResult?: WriteDailyExternalAggregateResult;
+}
+
+function skippedAgentReachProviderResult(input: {
+  date: string;
+  sourceInputRef: string;
+  statusReason: string;
+}): AgentReachProviderResult {
+  return {
+    provider: "agent-reach",
+    schema_version: "agent-reach.external-discovery.v1",
+    source_input_ref: input.sourceInputRef,
+    events: [],
+    rejected_events: [],
+    status: "skipped",
+    status_reason: input.statusReason,
+    warnings: [],
+  };
+}
+
+function externalTopicContext(config: AppConfig, scored: ScoredProject[]) {
+  return {
+    userInterestTopics: config.sources.userInterestProfile?.topics.map((topic) => topic.name) ?? [],
+    weeklyTrendKeys: DIRECTION_CATALOG.map((direction) => direction.direction_key),
+    paradigmLabels: scored.map((item) => item.score.paradigm).filter((value) => value.trim().length > 0),
+  };
+}
+
+function enrichExternalEventsWithRegistry(providerResult: AgentReachProviderResult): {
+  providerResult: AgentReachProviderResult;
+  warnings: string[];
+} {
+  const registry = loadExternalEntityRegistry();
+  const warningSet = new Set<string>(registry.warnings);
+  for (const rejected of registry.rejected_entries) {
+    warningSet.add(rejected.reason_code);
+  }
+
+  const events = providerResult.events.map((event) => {
+    const enriched = enrichExternalActorWithRegistry(event.actor, registry.entries);
+    for (const warning of enriched.warnings) warningSet.add(warning);
+    return {
+      ...event,
+      actor: enriched.actor,
+    };
+  });
+
+  return {
+    providerResult: {
+      ...providerResult,
+      events,
+    },
+    warnings: [...warningSet],
+  };
+}
+
+function buildDailyExternalDiscoveryRuntime(input: {
+  command: "run-daily" | "recover-daily";
+  opts: CliOptions;
+  config: AppConfig;
+  generatedAt: string;
+  dryRun: boolean;
+  projects: NormalizedProject[];
+  scored: ScoredProject[];
+}): DailyExternalDiscoveryRuntime {
+  const mode = resolveExternalDiscoveryCliMode(input.command, input.opts);
+  const sourceInputRef = mode.externalDiscoveryInputPath ?? externalRawInputPath(input.opts.date);
+  const providerResult = mode.enabled && mode.generatesDailyAggregate
+    ? loadAgentReachProviderArtifact({
+        date: input.opts.date,
+        ...(mode.externalDiscoveryInputPath ? { inputPath: mode.externalDiscoveryInputPath } : {}),
+      })
+    : skippedAgentReachProviderResult({
+        date: input.opts.date,
+        sourceInputRef,
+        statusReason: mode.disabledStatusReason ?? "not_requested_for_command",
+      });
+
+  const { providerResult: enrichedProviderResult, warnings: registryWarnings } =
+    enrichExternalEventsWithRegistry(providerResult);
+  const evidence = buildDailyExternalEvidence({
+    events: enrichedProviderResult.events,
+    projects: input.projects,
+    topicContext: externalTopicContext(input.config, input.scored),
+  });
+  const aggregate = buildDailyExternalAggregate({
+    date: input.opts.date,
+    generatedAt: input.generatedAt,
+    providerResult: enrichedProviderResult,
+    projectEvidence: evidence.projectEvidence,
+    directionEvidence: evidence.directionEvidence,
+    observationCandidates: evidence.observationCandidates,
+    warnings: [...registryWarnings, ...evidence.warnings],
+  });
+
+  if (!mode.enabled || !mode.generatesDailyAggregate) {
+    return { aggregate };
+  }
+
+  const writeResult = writeDailyExternalAggregate(aggregate, { dryRun: input.dryRun });
+  return {
+    aggregate,
+    aggregatePath: writeResult.aggregate_path,
+    writeResult,
+  };
 }
 
 function scorePath(date: string): string {
@@ -658,6 +858,16 @@ export async function runDaily(opts: CliOptions): Promise<void> {
   writeJsonFile(scorePath(opts.date), scored, dryRun);
   writeJsonFile(path.join("data", "scores", "latest.json"), scored, dryRun);
 
+  const externalDiscovery = buildDailyExternalDiscoveryRuntime({
+    command: "run-daily",
+    opts,
+    config,
+    generatedAt,
+    dryRun,
+    projects: normalized,
+    scored,
+  });
+
   const promotedGapStates = applyObserverPromotions(
     gapPressure.direction_states,
     observer.artifact.incubating_directions,
@@ -680,6 +890,7 @@ export async function runDaily(opts: CliOptions): Promise<void> {
     date: opts.date,
     generatedAt,
     freshnessSources: collection.freshnessSources,
+    externalAggregate: externalDiscovery.aggregate,
   });
   reportWithFreshness = applyProjectSearchDailySections(
     reportWithFreshness,
@@ -762,6 +973,10 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       })),
     },
     missionInventoryAudit,
+    externalDiscovery: {
+      aggregate: externalDiscovery.aggregate,
+      ...(externalDiscovery.aggregatePath ? { aggregatePath: externalDiscovery.aggregatePath } : {}),
+    },
   });
   writeJsonFile(runSummaryJsonPath(opts.date), runSummary, dryRun);
   writeJsonFile(path.join("data", "reports", "latest.run-summary.json"), runSummary, dryRun);
@@ -801,6 +1016,7 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       runSummaryMarkdownPath(opts.date),
       path.join("data", "reports", "latest.run-summary.json"),
       path.join("data", "reports", "latest.run-summary.md"),
+      ...(externalDiscovery.writeResult?.planned_writes ?? []),
     ],
     result: "success",
     resultReason: "none",
@@ -887,6 +1103,15 @@ export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
   const normalized = recoverNormalizedProjects(raw, opts.date, dryRun);
   const { classificationArtifacts, classifications } = await recoverClassificationArtifacts(normalized, config, opts.date, dryRun);
   const scored = recoverScoredProjects(normalized, config, classifications, opts.date, dryRun);
+  const externalDiscovery = buildDailyExternalDiscoveryRuntime({
+    command: "recover-daily",
+    opts,
+    config,
+    generatedAt,
+    dryRun,
+    projects: normalized,
+    scored,
+  });
 
   const freshnessSources = inferFreshnessSourcesFromRaw(raw, opts.date);
   const report = await buildEnhancedDailyReport(scored, config, {
@@ -894,6 +1119,7 @@ export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
     generatedAt,
     freshnessSources,
     rawSignals: raw,
+    externalAggregate: externalDiscovery.aggregate,
   });
   writeJsonFile(dailyReportJsonPath(opts.date), report, dryRun);
   writeTextFile(dailyReportMarkdownPath(opts.date), renderDailyReport(report), dryRun);
@@ -903,6 +1129,10 @@ export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
     generatedAt,
     dryRun,
     classificationsCount: classificationArtifacts.length,
+    externalDiscovery: {
+      aggregate: externalDiscovery.aggregate,
+      ...(externalDiscovery.aggregatePath ? { aggregatePath: externalDiscovery.aggregatePath } : {}),
+    },
   });
   writeJsonFile(runSummaryJsonPath(opts.date), runSummary, dryRun);
   writeTextFile(runSummaryMarkdownPath(opts.date), renderDailyRunSummary(runSummary), dryRun);
@@ -986,7 +1216,13 @@ export async function runWeekly(opts: CliOptions): Promise<void> {
   }
 
   const days = windowState.days;
-  const artifacts = await buildWeeklyArtifactsWithEnhancement(days, config);
+  const externalMode = resolveExternalDiscoveryCliMode("run-weekly", opts);
+  const externalWindow = readWeeklyExternalDiscoveryWindow(opts.date, {
+    disabled: !externalMode.enabled,
+    disabledReason: externalMode.disabledStatusReason,
+  });
+  const externalDiscovery = buildWeeklyExternalDiscoveryArtifacts(externalWindow);
+  const artifacts = await buildWeeklyArtifactsWithEnhancement(days, config, { externalDiscovery });
 
   writeJsonFile(path.join("data", "reports", `${opts.date}.weekly.json`), artifacts.report, dryRun);
   writeJsonFile(path.join("data", "reports", `${opts.date}.weekly.judgment.json`), artifacts.judgment, dryRun);
@@ -1015,6 +1251,8 @@ export async function runWeekly(opts: CliOptions): Promise<void> {
     days: days.length,
     established_trends: artifacts.judgment.established_trends.length,
     observing_trends: artifacts.judgment.observing_trends.length,
+    external_discovery_status: externalWindow.status,
+    external_discovery_usable_days: externalWindow.usable_day_count,
     dryRun,
   });
   recordCliAgentMemoryTask(logger, opts, {
@@ -1200,6 +1438,7 @@ async function main(): Promise<void> {
       `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, or visual-console.`,
     );
   }
+  validateExternalDiscoveryCliMatrix(command, opts);
   await runner(opts);
 }
 

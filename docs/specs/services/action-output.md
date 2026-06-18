@@ -1,5 +1,12 @@
 # 服务 Spec：Action Output
 
+## External discovery output boundary
+
+- Daily reports may expose `external_discovery` as a secondary section.
+- Weekly reports may expose `weekly_direction_observations` only after the direction gate passes.
+- Run summaries may expose external provider status, aggregate path, and public-safe audit state.
+- `verify-daily` must warn on skipped/failed external layers and fail on unsafe public aggregate or score contamination.
+
 ## 文档状态
 
 - 版本：`v0.2`

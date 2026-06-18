@@ -1,3 +1,12 @@
+import type {
+  DailyExternalAggregate,
+  ExternalDirectionLabel,
+  ExternalEvidence,
+  ExternalPlatform,
+  ExternalProviderStatus,
+  ObservationCandidate,
+} from "./externalDiscovery/types.ts";
+
 export type SignalSource =
   | "agents-radar"
   | "trendshift"
@@ -176,6 +185,118 @@ export interface DailyReportProjectDetail {
 }
 
 export interface DailyExposureProject extends ScoredProject, DailyReportProjectDetail {}
+
+export interface DailyExternalLayerStatus {
+  provider: DailyExternalAggregate["provider"];
+  status: ExternalProviderStatus;
+  status_reason?: string;
+  source_input_hash: string;
+  event_count: number;
+  accepted_event_count: number;
+  rejected_event_count: number;
+}
+
+export interface DailyExternalAuditSummary {
+  public_safe: true;
+  redaction_policy_version: string;
+  contains_raw_text: false;
+  contains_profile_urls: false;
+  rejected_event_count: number;
+  rejected_reason_counts: Record<string, number>;
+  warnings: string[];
+}
+
+export interface DailyExternalDirectionSignalSummary {
+  evidence_count: number;
+  candidate_count: number;
+  topic_keys: string[];
+}
+
+export interface DailyExternalDiscoverySection {
+  external_layer_status: DailyExternalLayerStatus;
+  external_observation_candidates: ObservationCandidate[];
+  external_project_evidence_summaries: ExternalEvidence[];
+  external_direction_signal_summary: DailyExternalDirectionSignalSummary;
+  direction_label_counts: Partial<Record<ExternalDirectionLabel, number>>;
+  external_audit_summary: DailyExternalAuditSummary;
+}
+
+export type WeeklyExternalDirectionGate =
+  | "cross_platform_confirmation"
+  | "multi_actor_confirmation"
+  | "multi_day_persistence"
+  | "registry_tier_participation";
+
+export interface WeeklyExternalDiscoveryDayStatus {
+  date: string;
+  aggregate_path: string;
+  status: ExternalProviderStatus;
+  status_reason?: string;
+  usable: boolean;
+  source_input_hash?: string;
+  event_count: number;
+  accepted_event_count: number;
+  rejected_event_count: number;
+  public_safe?: true;
+}
+
+export interface WeeklyExternalDirectionGateAudit {
+  topic_key: string;
+  display_name?: string;
+  satisfied_gates: WeeklyExternalDirectionGate[];
+  gate_count: number;
+  evidence_ids: string[];
+  reason: "accepted" | "insufficient_gate_count";
+  cannot_be_primary_conclusion: true;
+}
+
+export interface WeeklyExternalDiscoveryWindow {
+  provider: DailyExternalAggregate["provider"];
+  window_start: string;
+  window_end: string;
+  status: ExternalProviderStatus;
+  status_reason?: string;
+  day_statuses: WeeklyExternalDiscoveryDayStatus[];
+  usable_day_count: number;
+  missing_day_count: number;
+  failed_day_count: number;
+  skipped_day_count: number;
+  aggregate_paths: string[];
+  aggregates: DailyExternalAggregate[];
+}
+
+export interface WeeklyDirectionObservation {
+  topic_key: string;
+  display_name: string;
+  direction_labels: ExternalDirectionLabel[];
+  evidence_ids: string[];
+  satisfied_gates: WeeklyExternalDirectionGate[];
+  gate_count: number;
+  platforms: ExternalPlatform[];
+  active_day_count: number;
+  distinct_actor_count: number;
+  registry_tier_actor_count: number;
+  cannot_be_primary_conclusion: true;
+  evidence_summary_cn: string;
+  caveats: string[];
+}
+
+export interface WeeklyExternalCrossPlatformConfirmation {
+  topic_key: string;
+  platforms: ExternalPlatform[];
+  evidence_ids: string[];
+  not_primary_source_confirmation: true;
+  cannot_be_primary_conclusion: true;
+}
+
+export interface WeeklyExternalDiscoveryArtifacts {
+  external_discovery_window: WeeklyExternalDiscoveryWindow;
+  direction_label_counts: Partial<Record<ExternalDirectionLabel, number>>;
+  weekly_direction_observations: WeeklyDirectionObservation[];
+  external_project_evidence_summaries: ExternalEvidence[];
+  external_cross_platform_confirmations: WeeklyExternalCrossPlatformConfirmation[];
+  direction_gate_audit: WeeklyExternalDirectionGateAudit[];
+}
 // design compatibility aliases:
 // today_pulse_projects: Array<DailyExposureProject>;
 // mission_match_projects: Array<DailyExposureProject>;
@@ -278,6 +399,7 @@ export interface DailyReport {
   high_score_projects: ScoredProject[];
   anomaly_projects: ScoredProject[];
   all_projects: ScoredProject[];
+  external_discovery: DailyExternalDiscoverySection;
 }
 
 export interface DailySemanticInputProject {
@@ -422,6 +544,11 @@ export interface WeeklySemanticInputBundle {
   weekly_focus_projects: WeeklySemanticInputProject[];
   user_interest_profile: NonNullable<import("./config.ts").SourceConfig["userInterestProfile"]>;
   agent_mode: EnhancementStatus;
+  external_discovery_window?: WeeklyExternalDiscoveryWindow;
+  direction_label_counts?: Partial<Record<ExternalDirectionLabel, number>>;
+  weekly_direction_observations?: WeeklyDirectionObservation[];
+  external_project_evidence_summaries?: ExternalEvidence[];
+  external_cross_platform_confirmations?: WeeklyExternalCrossPlatformConfirmation[];
 }
 
 export interface WeeklySupportProject extends DailyReportProjectDetail {
@@ -543,12 +670,23 @@ export interface WeeklyReport {
   personalized_weekly_focus: PersonalizedWeeklyFocus[];
   weak_signal_cards: WeakSignalCard[];
   enhancement_audit: EnhancementAudit;
+  external_discovery_window?: WeeklyExternalDiscoveryWindow;
+  direction_label_counts?: Partial<Record<ExternalDirectionLabel, number>>;
+  weekly_direction_observations?: WeeklyDirectionObservation[];
+  external_project_evidence_summaries?: ExternalEvidence[];
+  external_cross_platform_confirmations?: WeeklyExternalCrossPlatformConfirmation[];
 }
 
 export interface WeeklyAuditReport {
   enhancement_status: EnhancementStatus;
   personalized_weekly_focus: PersonalizedWeeklyFocus[];
   rejected_outputs: RejectedOutput[];
+  external_discovery_window?: WeeklyExternalDiscoveryWindow;
+  direction_label_counts?: Partial<Record<ExternalDirectionLabel, number>>;
+  weekly_direction_observations?: WeeklyDirectionObservation[];
+  external_project_evidence_summaries?: ExternalEvidence[];
+  external_cross_platform_confirmations?: WeeklyExternalCrossPlatformConfirmation[];
+  direction_gate_audit?: WeeklyExternalDirectionGateAudit[];
 }
 
 export interface WeeklyJudgmentRuleMaterials {
@@ -572,6 +710,11 @@ export interface WeeklyJudgmentReport {
   audit_conclusion: WeeklyAuditConclusion;
   evidence_matrix?: WeeklyEvidenceMatrix;
   enhancement_audit: EnhancementAudit;
+  external_discovery_window?: WeeklyExternalDiscoveryWindow;
+  direction_label_counts?: Partial<Record<ExternalDirectionLabel, number>>;
+  weekly_direction_observations?: WeeklyDirectionObservation[];
+  external_project_evidence_summaries?: ExternalEvidence[];
+  external_cross_platform_confirmations?: WeeklyExternalCrossPlatformConfirmation[];
 }
 
 export interface DailyRunSummarySourceStatus {
@@ -764,6 +907,23 @@ export interface DailyRunSummaryTopProject {
   risks: string[];
 }
 
+export interface DailyRunSummaryExternalDiscovery {
+  provider: DailyExternalAggregate["provider"];
+  status: ExternalProviderStatus;
+  status_reason?: string;
+  aggregate_path?: string;
+  source_input_hash: string;
+  event_count: number;
+  accepted_event_count: number;
+  rejected_event_count: number;
+  rejected_reason_counts: Record<string, number>;
+  direction_label_counts: Partial<Record<ExternalDirectionLabel, number>>;
+  public_safe: true;
+  redaction_policy_version: string;
+  registry_warnings: string[];
+  warnings: string[];
+}
+
 export interface DailyRunSummary {
   date: string;
   generated_at: string;
@@ -840,6 +1000,7 @@ export interface DailyRunSummary {
       | "source_notes"
     >
   >;
+  external_discovery?: DailyRunSummaryExternalDiscovery;
   watchouts: string[];
   next_focus: string[];
   recommended_actions: string[];

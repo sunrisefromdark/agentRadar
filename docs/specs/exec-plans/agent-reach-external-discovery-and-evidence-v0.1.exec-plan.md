@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`Phase 10 Completed`
 - 设计来源：
   - `docs/specs/product-specs/外部发现与补证信号层需求分析.md`
   - `docs/specs/design-docs/agent-reach-external-discovery-and-evidence-design.md`
@@ -24,6 +24,8 @@
 
 在不改变现有主源链路、主评分公式和 OSS 无登录边界的前提下，引入 AgentReach 本地 JSON artifact 消费层，生成可审计、可脱敏、可降级的 external discovery & evidence aggregate，并让 daily、weekly、run-summary 和 verify 能以次级信号语义消费它。
 
+Post-Phase 9 scope update：AgentReach external discovery 必须支持 label-driven focus policy。科研相关 Agent、通用办公提效 Agent、个人办公助手和行业专用办公 Agent 方向必须先沉淀为稳定 `direction_labels`，再用于偏好适配、聚合、weekly observation 和展示；这些 label 仍只属于 external secondary evidence layer。
+
 ## 架构落点
 
 ### 新增模块
@@ -33,6 +35,9 @@
   - 冻结 `ExternalPlatform = "x_twitter" | "reddit" | "hacker_news" | "official_web" | "official_blog"`。
   - 冻结 `ExternalTargetType = "project" | "paper" | "product" | "topic"`；`direction` 只能作为 `scope` / consumption 语义，不得作为 target type。
   - 冻结 `derived_signal_kinds: ExternalSignalKind[]`，允许同一事件同时具备 `discovery` 与 `evidence`。
+  - Phase 10 新增冻结 `ExternalDirectionLabel` closed union，完全以设计文档 3.7 的 priority labels 为准。
+  - `ExternalSignalEvent.direction_labels`、`ExternalEvidence.direction_labels`、`ObservationCandidate.direction_labels` 必须为 canonical `ExternalDirectionLabel[]`，缺省时使用空数组。
+  - `DailyExternalAggregate.direction_label_counts` 必须统计 public-safe label counts。
   - 定义 `ObservationCandidate`，并固定 `cannot_be_primary_conclusion: true`。
   - 只承接 external layer，不扩展 `RawSignal.source`。
 
@@ -52,6 +57,8 @@
   - 默认输入缺失返回 `skipped`；显式输入缺失、不可读或 JSON 不可解析返回 `failed`。
   - `url` 与 `raw_ref` 至少存在一个；`source_published_at`、`observed_at`、`ingested_at` 不得混写。
   - `provider_tier_hint` 只能进入审计，不得产生 `effective_tier=core/proven/watch`。
+  - Phase 10 起读取可选 `AgentReachProviderItem.direction_labels?: string[]`，仅接受白名单或明确同义映射后的稳定 label。
+  - 非法 direction label 必须丢弃并写入 audit warning，不得导致缺少 label 的合法 item 失败。
 
 - `src/externalDiscovery/entityRegistry.ts`
   - 读取 `data/external-discovery/entity-registry.json`，registry 可空启动。
@@ -66,10 +73,13 @@
   - 低置信名称匹配默认不进入 daily 主展示，只能作为 rejected、audit evidence 或低置信观察候选。
   - `topic_key` canonicalization 固定优先级：现有 `userInterestProfile.topics[].name`、现有 weekly trend key / paradigm label、provider `topic_hint` 的小写 kebab-case。
   - 无稳定 `topic_key` 的 topic event 不得进入 weekly direction observation。
+  - Phase 10 起实现 direction label canonicalization；`tags` 保留普通辅助标签，`direction_labels` 才是稳定方向语义。
+  - `agent-runtime`、`agent-memory`、`mcp`、`browser-agent` 等技术能力词默认不得进入 `direction_labels`。
 
 - `src/externalDiscovery/aggregate.ts`
   - 把 in-memory canonical events 聚合为 `DailyExternalAggregate`。
   - 固定 `public_safe=true`、`contains_raw_text=false`、`contains_profile_urls=false`、`redaction_policy_version` 和 `source_input_hash`。
+  - Phase 10 起写入 `direction_label_counts: Record<ExternalDirectionLabel, number>`，只保留 sanitized label 与 counts。
   - 只写 public aggregate 与 latest 指针；V1 不写 public `events.jsonl`。
   - 拒绝把 `content_text`、provider raw `text`、`profile_url`、未脱敏 handle 或 private diagnostics 写入 public aggregate。
 
@@ -172,25 +182,26 @@
 
 ## 当前状态
 
-- 需求分析：`Approved`
-- 设计文档：`Approved`
-- 实施：`Not Started`
-- 验证：`Not Started`
+- 实施：`Phase 10 Completed`
+- 验证：`Phase 10 Completed`
+- 复审修订：Phase 0-9 已补齐真实 daily topic -> direction evidence 链路，并收紧 weekly multi-actor gate 的 public aggregate 去重语义。
+- Post-Phase 9 scope update：上游需求 / 设计新增的 research / office `direction_labels` 已通过 Phase 10 落地；可进入总体验收、人工代码审核、提交与 PR。
 
 ## 阶段进度
 
 | 阶段 | 状态 | 目标 | 完成标志 |
 | --- | --- | --- | --- |
-| Phase 0：执行前对齐 | `Pending` | 固定文件边界、fixture 规则、preflight-sync 和测试入口 | 结构测试先失败，且实现前 preflight-sync 已完成并记录结果 |
-| Phase 1：类型、路径与 redaction 基座 | `Pending` | 建立 frozen enum、类型、路径和 public-safe 验证 | redaction / path / type 单测通过 |
-| Phase 2：AgentReach 本地 artifact adapter | `Pending` | 只消费本地 JSON artifact，输出 canonical event/audit/status | adapter 单测覆盖 provider schema 与 ok / skipped / partial / failed |
-| Phase 3：entity registry、matching 与 topic canonicalization | `Pending` | 落地 tier 维护、项目匹配与方向 topic 归一 | registry / matching / topic 测试通过 |
-| Phase 4：aggregate 与 public artifact 写入 | `Pending` | 生成 public daily aggregate 和 latest 指针，不落盘 public events JSONL | aggregate 不含 raw social text 且 public-safe 测试通过 |
-| Phase 5：CLI command matrix | `Pending` | 落地 `run-daily`、`recover-daily`、`run-weekly`、`verify-daily` flags 语义 | CLI 单测覆盖 flags、fail-fast、dry-run |
-| Phase 6：daily / run-summary / verify 输出 | `Pending` | daily 展示、run-summary 审计、verify warn/fail 与污染检测 | action output 与 verification 测试通过 |
-| Phase 7：weekly 7 日窗口消费 | `Pending` | weekly 只读 `DailyExternalAggregate[]`，direction gate 4 选 2 | weekly 与 direction gate 测试通过 |
-| Phase 8：OSS 文档、gitignore、workflow、spec 同步 | `Pending` | 公共 artifact 策略在文档、spec 和自动化中一致 | structure test 与人工 diff review 通过 |
-| Phase 9：总体验收 | `Pending` | typecheck、test、preflight 和关键 CLI dry-run 全部通过 | 验证记录更新到本计划 |
+| Phase 0：执行前对齐 | `Completed` | 固定文件边界、fixture 规则、preflight-sync 和测试入口 | 结构测试先失败；preflight-sync 已指向当前 ExecPlan 并刷新 receipt；结构测试、typecheck、全量测试通过 |
+| Phase 1：类型、路径与 redaction 基座 | `Completed` | 建立 frozen enum、类型、路径和 public-safe 验证 | redaction / path / type 单测通过；typecheck 与全量测试通过 |
+| Phase 2：AgentReach 本地 artifact adapter | `Completed` | 只消费本地 JSON artifact，输出 canonical event/audit/status | adapter 单测覆盖 provider schema 与 ok / skipped / partial / failed；typecheck 与全量测试通过 |
+| Phase 3：entity registry、matching 与 topic canonicalization | `Completed` | 落地 tier 维护、项目匹配与方向 topic 归一 | registry / matching / topic 测试通过；typecheck 与前序 external discovery 护栏通过 |
+| Phase 4：aggregate 与 public artifact 写入 | `Completed` | 生成 public daily aggregate 和 latest 指针，不落盘 public events JSONL | aggregate / redaction / typecheck 通过；dry-run 不写盘，V1 不生成 public events JSONL |
+| Phase 5：CLI command matrix | `Completed` | 落地 `run-daily`、`recover-daily`、`run-weekly`、`verify-daily` flags 语义 | CLI 单测覆盖 flags、fail-fast、dry-run、resolver contract、missing path 与 flag conflict；typecheck 与 externalDiscovery 回归通过 |
+| Phase 6：daily / run-summary / verify 输出 | `Completed` | daily 展示、run-summary 审计、verify warn/fail 与污染检测 | action output、verification、CLI 回归、typecheck 与 diff check 通过 |
+| Phase 7：weekly 7 日窗口消费 | `Completed` | weekly 只读 `DailyExternalAggregate[]`，direction gate 4 选 2 | weekly 与 direction gate 测试、typecheck、externalDiscovery 回归、全量测试与 diff check 通过 |
+| Phase 8：OSS 文档、gitignore、workflow、spec 同步 | `Completed` | 公共 artifact 策略在文档、spec 和自动化中一致 | structure test、typecheck、diff check 与 preflight 通过 |
+| Phase 9：总体验收 | `Completed` | typecheck、test、preflight 和关键 CLI dry-run 全部通过 | 全量测试、typecheck、preflight、CLI dry-run、fail-fast 与 diff review 均已记录 |
+| Phase 10：Research / Office Direction Labels | `Completed` | 将上游新增 research / office focus 固化为 stable `direction_labels` | type / adapter / matching / aggregate / daily / weekly / verify / structure 测试覆盖 label canonicalization、counts、display 与 non-contamination；externalDiscovery、typecheck、全量测试通过 |
 
 ## 实施阶段
 
@@ -402,26 +413,35 @@
    - `observation_candidates`
    - `audit.rejected_events`
    - `audit.warnings`
-3. Aggregate 不得包含：
+3. `source_input_hash` 在 missing-input 场景必须固定处理：
+   - 当 adapter 已有真实 `source_input_hash` 时，aggregate 必须原样沿用该 hash。
+   - 当默认输入缺失导致 `status="skipped"`、`status_reason="input_missing"`，或显式输入缺失 / 不可读导致还没有可读取 raw bytes 时，aggregate 仍必须包含 `source_input_hash`，但不得伪造 raw artifact hash。
+   - missing-input 下的 `source_input_hash` 必须是稳定 absence marker：对公开元数据 `{ provider, date, source_input_ref, status, status_reason }` 做 `stableSourceInputHash(JSON.stringify(...))`，格式保持 `sha256:<hex>`。
+   - aggregate 必须在 `audit.warnings` 增加稳定 warning，例如 `source_input_hash_absence_marker`，说明该 hash 只表示“该日期该路径缺失输入”的可审计状态，不表示存在可追溯 raw input 文件。
+   - missing-input aggregate 的 `event_count`、`accepted_event_count`、`rejected_event_count` 必须为 `0`，`project_evidence`、`direction_evidence`、`observation_candidates` 必须为空数组。
+   - 显式输入 JSON parse error 已读取 raw bytes 时，必须使用真实 raw bytes hash，不得使用 absence marker。
+4. Aggregate 不得包含：
    - raw social text
    - full provider text
    - profile URL
    - cookie/token/session/password/OAuth
    - private diagnostics
-4. V1 artifact 策略：
+5. V1 artifact 策略：
    - 只写 `data/external-discovery/YYYY-MM-DD.aggregate.json`。
    - 只写 `data/external-discovery/latest.aggregate.json`。
    - 不写 `data/external-discovery/YYYY-MM-DD.events.jsonl`。
    - 如果未来需要 canonical events JSONL，必须另开设计或 exec-plan 修订。
-5. 在 `src/storage/files.ts` 增加 `data/external-discovery` 到 `DATA_DIRS`。
-6. 在 daily integration 中只写 public aggregate 和 latest 指针，不写 raw input。
-7. 写测试覆盖：
+6. 在 `src/storage/files.ts` 增加 `data/external-discovery` 到 `DATA_DIRS`。
+7. 在 daily integration 中只写 public aggregate 和 latest 指针，不写 raw input。
+8. 写测试覆盖：
    - public aggregate 通过 redaction check。
    - aggregate 包含 `source_input_hash`，但不包含 raw input 原文。
+   - 默认输入缺失生成 skipped aggregate 时，`source_input_hash` 使用稳定 absence marker，`audit.warnings` 包含 `source_input_hash_absence_marker`，且不声称存在 raw input hash。
+   - 显式输入缺失 / 不可读且没有 raw bytes 时，`source_input_hash` 使用稳定 absence marker；JSON parse error 已有 raw bytes 时使用真实 raw bytes hash。
    - aggregate 不生成 events JSONL。
    - dry-run 只报告 planned writes，不创建 aggregate/latest 文件。
    - actor tier counts 使用 `effective_tier`，不使用 `provider_tier_hint`。
-8. 运行：
+9. 运行：
    - `pnpm test -- externalDiscoveryAggregate.test.ts`
    - `pnpm test -- externalDiscoveryRedaction.test.ts`
    - `pnpm typecheck`
@@ -460,6 +480,10 @@
 9. 运行：
    - `pnpm test -- externalDiscoveryCli.test.ts`
    - `pnpm typecheck`
+10. Phase 5 完成记录：
+   - Files changed：`src/cli.ts`、`src/__tests__/externalDiscoveryCli.test.ts`。
+   - Verification：`.\node_modules\.bin\vitest.cmd run externalDiscoveryCli.test.ts`、`.\node_modules\.bin\tsc.cmd --noEmit`、`.\node_modules\.bin\vitest.cmd run externalDiscovery`、`git diff --check`。
+   - Result：CLI flags、fail-fast guard、dry-run matrix、resolver contract、missing path 与 flag conflict 测试通过；未接入 provider、aggregate、daily / weekly / verify 业务写入。
 
 ### Phase 6：daily / run-summary / verify 输出
 
@@ -504,6 +528,10 @@
    - `pnpm test -- externalDiscoveryActionOutput.test.ts`
    - `pnpm test -- externalDiscoveryVerification.test.ts`
    - `pnpm typecheck`
+9. Phase 6 完成记录：
+   - Files changed：`src/types.ts`、`src/cli.ts`、`src/action/dailyReport.ts`、`src/action/runSummary.ts`、`src/action/dailyVerification.ts`、`src/externalDiscovery/types.ts`、`src/__tests__/externalDiscoveryActionOutput.test.ts`、`src/__tests__/externalDiscoveryVerification.test.ts`、`src/__tests__/externalDiscoveryTypeContract.test.ts`。
+   - Verification：`.\node_modules\.bin\vitest.cmd run externalDiscovery`、`.\node_modules\.bin\vitest.cmd run externalDiscoveryCli.test.ts`、`.\node_modules\.bin\vitest.cmd run dailyVerificationProjectSearch.test.ts projectSearchExposurePlanner.test.ts runSummaryObserver.test.ts`、`.\node_modules\.bin\tsc.cmd --noEmit`、`git diff --check`。
+   - Result：daily report 输出 secondary external section；run-summary 记录 external audit；`verify-daily` 对 skipped/failed warn，对 public aggregate redaction、daily audit 缺失和主榜/score 污染 fail；`run-daily` / `recover-daily` 仅消费本地 AgentReach JSON artifact，不调用平台 API，不写 `RawSignal[]`，不改变主 score。
 
 ### Phase 7：weekly 7 日窗口消费
 
@@ -588,15 +616,16 @@
 3. 运行 exec-plan review preflight：
    - `pnpm exec-plan:review:preflight`
 4. 运行关键 CLI dry-run：
-   - `pnpm run-daily -- --date 2026-06-13 --dry-run --no-external-discovery`
-   - `pnpm run-daily -- --date 2026-06-13 --dry-run --external-discovery-input data/raw/external-discovery/fixtures/sanitized-agent-reach.sample.json`
+   - run-daily 验收使用 `--no-github --no-agents-radar --no-trendshift` 和临时 local config，避免 unrelated GitHub realtime / LLM / upstream source 网络链路影响 AgentReach CLI matrix 验证。
+   - `pnpm run-daily -- --config <phase9-local-config> --date 2026-06-13 --dry-run --no-github --no-agents-radar --no-trendshift --no-external-discovery`
+   - `pnpm run-daily -- --config <phase9-local-config> --date 2026-06-13 --dry-run --no-github --no-agents-radar --no-trendshift --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json`
    - `pnpm recover-daily -- --date 2026-06-13 --dry-run --no-external-discovery`
    - `pnpm run-weekly -- --date 2026-06-13 --dry-run --no-external-discovery`
    - `pnpm verify-daily -- --date 2026-06-13 --dry-run --no-external-discovery`
 5. 运行 fail-fast CLI 检查：
-   - `pnpm run-weekly -- --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/sanitized-agent-reach.sample.json`
+   - `pnpm run-weekly -- --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json`
    - 预期：非零退出，不写 weekly artifact。
-   - `pnpm verify-daily -- --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/sanitized-agent-reach.sample.json`
+   - `pnpm verify-daily -- --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json`
    - 预期：非零退出，不写 verify artifact。
 6. 检查 git diff：
    - 不得出现 provider raw artifact 被提交。
@@ -604,6 +633,68 @@
    - 不得出现主 score 公式改动。
    - 不得出现 `RawSignal.source` 新增 external provider。
    - 不得出现 public `events.jsonl` 默认产物。
+
+### Phase 10：Research / Office Direction Labels
+
+Phase 10 是上游需求 / 设计在 Phase 9 后新增的 scope update，不回写 Phase 0-9 的历史完成记录。Phase 10 完成前，不进入总体验收后的人工代码审核、提交与 PR 阶段。
+
+1. 在 `src/externalDiscovery/types.ts` 冻结 `ExternalDirectionLabel` closed union：
+
+   ```ts
+   type ExternalDirectionLabel =
+     | "research-agent"
+     | "literature-review-agent"
+     | "research-data-analysis-agent"
+     | "academic-writing-agent"
+     | "office-agent"
+     | "personal-assistant-agent"
+     | "office-productivity-agent"
+     | "document-agent"
+     | "spreadsheet-agent"
+     | "meeting-agent"
+     | "workflow-automation-agent"
+     | "vertical-office-agent"
+     | "legal-agent"
+     | "finance-agent"
+     | "sales-crm-agent"
+     | "hr-agent"
+     | "healthcare-admin-agent"
+     | "education-agent"
+     | "enterprise-ops-agent";
+   ```
+
+2. 扩展冻结类型契约：
+   - `AgentReachProviderItem.direction_labels?: string[]`。
+   - `ExternalSignalEvent.direction_labels: ExternalDirectionLabel[]`。
+   - `ExternalEvidence.direction_labels: ExternalDirectionLabel[]`。
+   - `ObservationCandidate.direction_labels: ExternalDirectionLabel[]`。
+   - `DailyExternalAggregate.direction_label_counts: Record<ExternalDirectionLabel, number>`。
+   - daily / weekly 输出增加 `direction_label_counts` 或等价的 label summary。
+3. 更新 adapter 与 canonicalization：
+   - Provider `direction_labels` 只接受白名单值或明确同义映射后的 canonical label。
+   - 非法 label 必须丢弃并写入 audit warning，例如 `invalid_direction_label` / `dropped_direction_label`。
+   - 缺少有效 `direction_labels` 不得导致合法 item 进入 `failed`；该 item 可保留在 daily audit / observation。
+   - `tags` 是普通辅助标签；`direction_labels` 是稳定方向语义。
+   - `agent-runtime`、`agent-memory`、`mcp`、`browser-agent` 默认不得进入 `direction_labels`，只可作为普通 `tags`。
+4. 更新 matching / aggregate：
+   - `topic_key` 继续服务 topic canonicalization；`direction_labels` 服务方向归类和偏好适配。
+   - topic / direction event 没有稳定 `topic_key` 时，仍不得进入 weekly direction observation。
+   - 没有有效 `direction_labels` 的事件，不得作为 label-driven weekly direction observation。
+   - daily aggregate 必须统计 `direction_label_counts`，且 public aggregate 只保留 sanitized labels / counts，不得引入 raw social text、profile URL、未脱敏 handle 或 private diagnostics。
+5. 更新 daily / weekly / verify：
+   - daily 可展示 label summary / counts，但不生成方向级主结论。
+   - weekly 可按 label group / display / observation，但不得降低原 4 选 2 direction gate。
+   - `direction_labels` 不得进入 `RawSignal.source`、主 score、`discussion_score`、主源多源确认或高置信主结论。
+   - 非法 label、label 过散或无法 canonicalize 的情况必须通过 audit / warning 暴露。
+6. 更新测试：
+   - `externalDiscoveryTypeContract.test.ts` 覆盖 `ExternalDirectionLabel` closed union、模型字段、score non-contamination。
+   - `externalDiscoveryAdapter.test.ts` 覆盖 provider `direction_labels` schema、非法 label warning、缺少 label 不导致 failed。
+   - `externalDiscoveryMatching.test.ts` 覆盖 label canonicalization、`tags` 与 `direction_labels` 分层、技术能力词不默认进 direction labels。
+   - `externalDiscoveryAggregate.test.ts` 覆盖 `direction_label_counts` 统计、public aggregate 只保留 sanitized labels / counts。
+   - `externalDiscoveryActionOutput.test.ts` 覆盖 daily label summary / counts 可见但不生成方向级主结论。
+   - `externalDiscoveryWeekly.test.ts` 覆盖 weekly label grouping / display 不绕过 4 选 2 gate。
+   - `externalDiscoveryVerification.test.ts` 覆盖 label 不污染主 score、`discussion_score`、主源确认或主结论。
+   - `externalDiscoveryStructure.test.ts` 覆盖 spec / README / fixture policy 对 direction labels 保持一致。
 
 ## 验收标准
 
@@ -625,23 +716,28 @@
 16. V1 不默认落盘 public canonical events JSONL。
 17. Phase 8 列出的 specs、README、`data/README.md`、`.gitignore` 与 workflows 全部同步。
 18. 实现前 preflight-sync 已完成并记录结果，不再悬空。
+19. `ExternalDirectionLabel` 与设计 3.7 的 19 个 priority labels 完全一致，不新增、不删减、不把技术能力词默认纳入 direction labels。
+20. Provider `direction_labels` 可被 canonicalize；非法 label 被丢弃并写入 warning，缺少 label 不导致合法 item failed。
+21. Public aggregate 包含 `direction_label_counts`，且只保留 sanitized labels / counts。
+22. Daily / weekly 可基于 label 做 summary、group、display 或 observation，但不得绕过 weekly 4 选 2 gate。
+23. `direction_labels` 不进入 `RawSignal.source`、主 score、`discussion_score`、主源多源确认或高置信主结论。
 
 ## 验证矩阵
 
 | 文件位置或类型 | 验证内容 | 验证方式或命令 | 对应 Spec | 通过标准 |
 | --- | --- | --- | --- | --- |
-| `src/externalDiscovery/types.ts` | frozen enum / target / derived signal contract | `pnpm test -- externalDiscoveryTypeContract.test.ts` | 设计 4.1、18 | 平台、target、derived signal 与设计一致 |
+| `src/externalDiscovery/types.ts` | frozen enum / target / derived signal / `ExternalDirectionLabel` contract | `pnpm test -- externalDiscoveryTypeContract.test.ts` | 设计 3.7、4.1、18 | 平台、target、derived signal、direction labels 与设计一致；不污染 score / RawSignal |
 | `src/externalDiscovery/redaction.ts` | public-safe / redaction 规则 | `pnpm test -- externalDiscoveryRedaction.test.ts` | 设计 3.6、11、12、14 | 禁止字段全部 fail，sanitized aggregate pass |
-| `src/externalDiscovery/agentReachProvider.ts` | 本地 JSON adapter 状态机与 provider schema | `pnpm test -- externalDiscoveryAdapter.test.ts` | 设计 3.2、3.3、3.4 | ok/skipped/partial/failed 全覆盖 |
+| `src/externalDiscovery/agentReachProvider.ts` | 本地 JSON adapter 状态机、provider schema 与 `direction_labels` 读取 | `pnpm test -- externalDiscoveryAdapter.test.ts` | 设计 3.2、3.3、3.4、3.7 | ok/skipped/partial/failed 全覆盖；非法 label warning；缺少 label 不 failed |
 | `src/externalDiscovery/entityRegistry.ts` | registry 空启动与 tier 维护 | `pnpm test -- externalDiscoveryEntityRegistry.test.ts` | 需求 3、设计 7 | 空 registry 不阻塞，provider hint 不产生 top-tier |
-| `src/externalDiscovery/matching.ts` | repo matching 与 topic canonicalization | `pnpm test -- externalDiscoveryMatching.test.ts` | 需求 7、设计 6 | repo 精确匹配、topic_key、低置信降级全覆盖 |
-| `src/externalDiscovery/aggregate.ts` | public daily aggregate contract | `pnpm test -- externalDiscoveryAggregate.test.ts` | 设计 4、8、12 | aggregate 字段齐全、无 raw text、不写 events JSONL |
+| `src/externalDiscovery/matching.ts` | repo matching、topic canonicalization 与 label canonicalization | `pnpm test -- externalDiscoveryMatching.test.ts` | 需求 7、7.1、设计 3.7、6 | repo 精确匹配、topic_key、低置信降级、tags / direction_labels 分层、技术能力词排除全覆盖 |
+| `src/externalDiscovery/aggregate.ts` | public daily aggregate contract 与 `direction_label_counts` | `pnpm test -- externalDiscoveryAggregate.test.ts` | 设计 4、8、12 | aggregate 字段齐全、无 raw text、不写 events JSONL，只保留 sanitized labels / counts |
 | `src/cli.ts` | CLI command matrix | `pnpm test -- externalDiscoveryCli.test.ts` | 设计 3.5 | 四个命令 flag 语义一致 |
-| `src/action/dailyReport.ts`、`src/action/runSummary.ts` | daily 与 run-summary external section | `pnpm test -- externalDiscoveryActionOutput.test.ts` | 设计 9、11 | 输出 secondary layer 审计，不污染主榜单 |
-| `src/action/dailyVerification.ts` | verify warn/fail 与 contamination 检测 | `pnpm test -- externalDiscoveryVerification.test.ts` | 设计 11.4、13 | skipped/failed warn，redaction/score contamination fail |
-| `src/action/weeklyEnhancement.ts`、`src/externalDiscovery/weeklyWindow.ts` | weekly 7 日 aggregate window | `pnpm test -- externalDiscoveryWeekly.test.ts` | 设计 10 | weekly 不读 raw input |
+| `src/action/dailyReport.ts`、`src/action/runSummary.ts` | daily 与 run-summary external section / label summary | `pnpm test -- externalDiscoveryActionOutput.test.ts` | 设计 9、11 | 输出 secondary layer 审计和 label counts，不污染主榜单，不生成方向级主结论 |
+| `src/action/dailyVerification.ts` | verify warn/fail 与 contamination 检测 | `pnpm test -- externalDiscoveryVerification.test.ts` | 设计 11.4、13 | skipped/failed warn，redaction/score/label contamination fail |
+| `src/action/weeklyEnhancement.ts`、`src/externalDiscovery/weeklyWindow.ts` | weekly 7 日 aggregate window 与 label grouping | `pnpm test -- externalDiscoveryWeekly.test.ts` | 设计 10 | weekly 不读 raw input；label grouping/display 不绕过 4 选 2 gate |
 | `src/externalDiscovery/weeklyWindow.ts` | direction gate 4 选 2 | `pnpm test -- externalDiscoveryDirectionGate.test.ts` | 需求 7、设计 6.2 | 未达 2 个条件不得进入 weekly direction observation |
-| README / data README / gitignore / workflows / specs | OSS public artifact 与 spec 同步 | `pnpm test -- externalDiscoveryStructure.test.ts` | 设计 3.6、12、14 | raw input 不默认 commit/upload，spec 同步项齐全 |
+| README / data README / gitignore / workflows / specs | OSS public artifact、spec 同步与 direction label policy | `pnpm test -- externalDiscoveryStructure.test.ts` | 设计 3.6、3.7、12、14 | raw input 不默认 commit/upload，spec 同步项齐全，fixture / README label policy 一致 |
 | 全仓 | 类型与回归 | `pnpm typecheck`、`pnpm test` | 全设计 | 全部通过 |
 
 ## 回滚策略
@@ -654,16 +750,112 @@
 
 ## 当前残余风险
 
-- 当前仓库测试目录较薄，Phase 0 必须先补结构测试，否则后续容易漏掉 workflow / data README / gitignore 同步。
-- 现有 `scripts/execPlanPreflight.ts` 仍绑定旧的 `github-star-delta-trust-v0.1.exec-plan.md`；本计划已要求实现前必须完成 preflight-sync 并记录结果，未完成前不得开始生产代码实现。
+- Phase 8 已补 OSS 文档、`data/README.md`、GitHub Actions public aggregate 上传路径和相关 specs 同步；Phase 9 已完成总体验收，但上游新增的 research / office `direction_labels` 仍需先通过 Phase 10 落地。
+- `scripts/execPlanPreflight.ts` 已指向当前 `agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md` 并刷新 receipt；后续生产代码实现前必须保持 preflight check 通过。
 - README 当前仍描述托管版登录能力；实现阶段需要精确区分 hosted app 与 OSS local console，避免把 hosted 登录说明误删。
+- Phase 10 已完成；后续进入总体验收后的人工代码审核、提交与 PR 阶段时，仍需守住 direction label 不污染主评分链路的边界。
 
 ## 下一阶段入口
 
-进入实现前，先完成 ExecPlan Review。审核通过后，从 Phase 0 开始执行，并在每个 Phase 完成后更新本计划的阶段状态与验证记录。
+Phase 9 与 Phase 10 已完成。下一阶段可以进入总体验收后的人工代码审核、提交与 PR 阶段；后续仍不得扩大 AgentReach v0.1 到直接平台采集、登录态处理或主评分链路。
 
 ## 验证记录
 
 | 日期 | 命令 | 结果 | 备注 |
 | --- | --- | --- | --- |
-| 2026-06-13 | 未运行 | `Not Started` | 本轮修订 exec-plan 初稿；未改实现代码 |
+| 2026-06-13 | `corepack pnpm test -- externalDiscoveryStructure.test.ts` | `Failed as expected` | Phase 0 先写结构测试；失败点为 `.gitignore`、`data/README.md`、README OSS external discovery 边界未同步 |
+| 2026-06-13 | `corepack pnpm run code-implementation:preflight -- --write` | `Passed` | 刷新 receipt，绑定当前 AgentReach ExecPlan |
+| 2026-06-13 | `corepack pnpm run code-implementation:preflight -- --check` | `Passed` | preflight-sync check 通过 |
+| 2026-06-13 | `corepack pnpm test -- externalDiscoveryStructure.test.ts` | `Passed` | 5 tests passed；raw external input 不在默认 upload path，`.gitignore` / README / data README / sync list 对齐 |
+| 2026-06-13 | `corepack pnpm typecheck` | `Passed` | `tsc --noEmit` 通过 |
+| 2026-06-13 | `corepack pnpm test` | `Passed` | 4 test files / 21 tests passed |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryTypeContract.test.ts` | `Failed as expected` | Phase 1 先写 type/path contract 测试；失败点为 `src/externalDiscovery/types.ts` 与 `paths.ts` 尚不存在 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryRedaction.test.ts` | `Failed as expected` | Phase 1 先写 redaction 测试；失败点为 `src/externalDiscovery/redaction.ts` 尚不存在 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryTypeContract.test.ts` | `Passed` | 6 tests passed；frozen enum、direction scope、RawSignal / score component 不污染、path contract 通过 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryRedaction.test.ts` | `Passed` | 14 tests passed；public-safe 必填字段、forbidden raw fields、profile URL variants、敏感字样与 stable hash 通过 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryStructure.test.ts` | `Passed` | 5 tests passed；Phase 0 OSS artifact 护栏仍通过 |
+| 2026-06-14 | `corepack pnpm typecheck` | `Passed` | `tsc --noEmit` 通过 |
+| 2026-06-14 | `corepack pnpm test` | `Passed` | 6 test files / 41 tests passed |
+| 2026-06-14 | `corepack pnpm run code-implementation:preflight -- --write` | `Passed` | Phase 1 更新 ExecPlan 后刷新 receipt |
+| 2026-06-14 | `corepack pnpm run code-implementation:preflight -- --check` | `Passed` | preflight-sync check 通过 |
+| 2026-06-14 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryAdapter.test.ts` | `Failed as expected` | Phase 2 先写 adapter schema/status 测试；失败点为 `src/externalDiscovery/agentReachProvider.ts` 尚不存在 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryAdapter.test.ts` | `Passed` | 18 tests passed；覆盖 ok、默认缺失 skipped、显式缺失/parse/schema failed、非法 item partial、provider hint 不产生 effective tier、无网络/env credential 读取 |
+| 2026-06-14 | `corepack pnpm typecheck` | `Passed` | `tsc --noEmit` 通过 |
+| 2026-06-14 | `corepack pnpm test` | `Passed` | 7 test files / 59 tests passed |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryRedaction.test.ts` | `Failed as expected` | Phase 3 前置 redaction 回归测试；失败点为标点前缀未脱敏 handle 未被识别 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryEntityRegistry.test.ts` | `Failed as expected` | Phase 3 先写 registry 测试；失败点为 `src/externalDiscovery/entityRegistry.ts` 尚不存在 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryMatching.test.ts` | `Failed as expected` | Phase 3 先写 matching/topic 测试；失败点为 `src/externalDiscovery/matching.ts` 尚不存在 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryEntityRegistry.test.ts externalDiscoveryMatching.test.ts externalDiscoveryRedaction.test.ts` | `Passed` | 3 test files / 30 tests passed；registry 空启动、miss、tier 命中、unsafe registry 拒绝、public-safe、repo 精确匹配、low-confidence name 降级、topic_key 生成与 direction candidate 边界通过 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryTypeContract.test.ts` | `Passed` | 6 tests passed；Phase 1 type/path contract 仍通过 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryAdapter.test.ts` | `Passed` | 18 tests passed；Phase 2 adapter 状态机仍通过 |
+| 2026-06-14 | `corepack pnpm test -- externalDiscoveryStructure.test.ts` | `Passed` | 5 tests passed；OSS artifact 结构护栏仍通过 |
+| 2026-06-14 | `corepack pnpm typecheck` | `Passed` | `tsc --noEmit` 通过 |
+| 2026-06-14 | `corepack pnpm test` | `Passed` | 9 test files / 75 tests passed |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryAggregate.test.ts externalDiscoveryRedaction.test.ts` | `Passed` | 2 test files / 25 tests passed；Phase 4 aggregate public-safe、absence marker、no events JSONL、dry-run 写入边界通过 |
+| 2026-06-14 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | 7 test files / 71 tests passed；externalDiscovery 前序护栏与 aggregate 回归通过 |
+| 2026-06-14 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 4 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryCli.test.ts` | `Failed as expected` | Phase 5 先写 CLI matrix 测试；失败点为 `parseArgs` 未导出且 resolver / fail-fast guard 尚不存在 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryCli.test.ts` | `Passed` | 1 test file / 20 tests passed；覆盖四命令 flags、fail-fast、dry-run、resolver contract、missing path 与 flag conflict |
+| 2026-06-14 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | 8 test files / 91 tests passed；Phase 0-5 external discovery 护栏回归通过 |
+| 2026-06-14 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 5 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryActionOutput.test.ts` | `Failed as expected` | Phase 6 先写 daily / run-summary 输出测试；失败点为 `DailyReport.external_discovery` 与 `DailyRunSummary.external_discovery` 尚未接线 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryVerification.test.ts` | `Failed as expected` | Phase 6 先写 verify 检测测试；失败点为 external status / public aggregate / audit / contamination checks 尚不存在 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryActionOutput.test.ts` | `Passed` | 1 test file / 3 tests passed；daily secondary section 与 run-summary external audit 输出通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryVerification.test.ts` | `Passed` | 1 test file / 4 tests passed；skipped warn、public aggregate unsafe fail、audit missing fail、score contamination fail 通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryTypeContract.test.ts` | `Passed` | 1 test file / 7 tests passed；public aggregate `public_safe=true` 与 `source_input_hash` 必填契约通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | 10 test files / 99 tests passed；Phase 0-6 external discovery 护栏回归通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryCli.test.ts` | `Passed` | 1 test file / 20 tests passed；CLI command matrix 回归通过 |
+| 2026-06-14 | `.\node_modules\.bin\vitest.cmd run dailyVerificationProjectSearch.test.ts projectSearchExposurePlanner.test.ts runSummaryObserver.test.ts` | `Passed` | 3 test files / 6 tests passed；daily verification、project-search 和 run-summary 兼容回归通过 |
+| 2026-06-14 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-14 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 6 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-14 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryWeekly.test.ts externalDiscoveryDirectionGate.test.ts` | `Failed as expected` | Phase 7 先写 weekly window / direction gate 测试；失败点为 `src/externalDiscovery/weeklyWindow.ts` 尚不存在 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryWeekly.test.ts externalDiscoveryDirectionGate.test.ts` | `Passed` | 2 test files / 7 tests passed；覆盖 7 日 public aggregate window、缺失/失败降级、direction gate 4 选 2、provider tier hint 不计 registry gate、weekly Markdown secondary section |
+| 2026-06-15 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | 12 test files / 106 tests passed；Phase 0-7 external discovery 回归通过 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run` | `Passed` | 30 test files / 172 tests passed |
+| 2026-06-15 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 7 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryStructure.test.ts` | `Failed as expected` | Phase 8 先扩展结构测试；失败点为 daily workflow public aggregate upload、`data/README.md` events JSONL 边界、spec sync 缺口 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryStructure.test.ts` | `Passed` | 1 test file / 6 tests passed；覆盖 README、data README、`.gitignore`、workflow path 与 Phase 8 spec sync |
+| 2026-06-15 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-15 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 8 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryVerification.test.ts` | `Passed` | 1 test file / 5 tests passed；收紧 external contamination 检测，避免普通 primary-source `external-*` 文本误伤 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run src\__tests__` | `Passed` | 30 test files / 174 tests passed |
+| 2026-06-15 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过 |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanReviewPreflight.ts` | `Passed` | exec-plan review skill and receipt verified |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts run-daily --config <phase9-local-config> --date 2026-06-13 --dry-run --no-github --no-agents-radar --no-trendshift --no-external-discovery` | `Passed` | local-only dry-run 返回 0；external layer disabled；未写入 data diff |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts run-daily --config <phase9-local-config> --date 2026-06-13 --dry-run --no-github --no-agents-radar --no-trendshift --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json` | `Passed` | sanitized fixture 显式输入 dry-run 返回 0；未写入 data diff |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts recover-daily --config <phase9-local-config> --date 2026-06-13 --dry-run --no-external-discovery` | `Passed` | recovery dry-run 返回 0；external disabled |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts run-weekly --config <phase9-local-config> --date 2026-06-13 --dry-run --no-external-discovery` | `Passed` | weekly dry-run 返回 0；external_discovery_status=skipped |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts verify-daily --config <phase9-local-config> --date 2026-06-13 --dry-run --no-external-discovery` | `Passed` | verify-daily 返回 0；总体 status=warn，external skipped/missing aggregate 为 warn，primary contamination pass |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts run-weekly --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json` | `Failed as expected` | fail-fast：runner 前拒绝 run-weekly 显式 provider raw input |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd src\cli.ts verify-daily --date 2026-06-13 --external-discovery-input data/raw/external-discovery/fixtures/agent-reach.sample.sanitized.json` | `Failed as expected` | fail-fast：runner 前拒绝 verify-daily 显式 provider raw input |
+| 2026-06-15 | `git diff --check` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Phase 9 更新 ExecPlan 后刷新 implementation preflight receipt |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-16 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | Phase 10 direction labels regression: 13 test files / 119 tests passed |
+| 2026-06-16 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck passed after direction label model/output wiring |
+| 2026-06-16 | `.\node_modules\.bin\vitest.cmd run` | `Passed` | Full test suite passed: 31 test files / 185 tests |
+| 2026-06-16 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Refreshed implementation preflight receipt after Phase 10 ExecPlan completion |
+| 2026-06-16 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |
+| 2026-06-16 | `git diff --check` | `Passed` | No whitespace errors; Windows CRLF warnings only |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscoveryDailyEvidence.test.ts` | `Passed` | Post-review 修补 provider `topic_hint` 经 topic context canonicalization 后再进入 weekly topic；2 tests passed |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run externalDiscovery` | `Passed` | 13 test files / 111 tests passed；external discovery 回归通过 |
+| 2026-06-15 | `.\node_modules\.bin\tsc.cmd --noEmit` | `Passed` | TypeScript typecheck 通过；覆盖 internal `target.topic_hint` 类型补充 |
+| 2026-06-15 | `.\node_modules\.bin\vitest.cmd run` | `Passed` | 31 test files / 177 tests passed |
+| 2026-06-15 | `git diff --name-status main -- data/raw/github-stars/2026-06-13.json data/raw/github-stars/latest.json` | `Passed` | 无输出；已移除无关 GitHub stars raw artifact diff |
+| 2026-06-15 | `git diff --check main` | `Passed` | 无 whitespace error；仅 Windows CRLF 提示 |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --write` | `Passed` | Post-review 修补后刷新 implementation preflight receipt |
+| 2026-06-15 | `.\node_modules\.bin\tsx.cmd scripts\execPlanPreflight.ts --check` | `Passed` | implementation preflight receipt verified |

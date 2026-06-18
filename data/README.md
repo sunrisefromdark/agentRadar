@@ -16,8 +16,27 @@ These files are part of the project deliverable. They let readers inspect histor
 ## What is not version-controlled
 
 - `data/upstream/`
+- `data/raw/external-discovery/`
 
 `data/upstream/` is reserved for optional local scratch checkouts or caches, such as an explicit self-hosted `agents-radar` mirror. It is ignored by Git and is not part of the public artifact history.
+
+## AgentReach external raw input boundary
+
+`data/raw/external-discovery/` is reserved for AgentReach external discovery raw input and is local-only by default. It must not be committed or uploaded by default. The only public exception is an explicitly sanitized fixture, and that fixture must not contain raw social text, unsanitized handles, profile URLs, cookies, tokens, sessions, OAuth data, passwords, or private diagnostics.
+
+## External discovery public artifacts
+
+Public external discovery output belongs under `data/external-discovery/*.aggregate.json`. A public aggregate may keep summaries, counts, stable evidence IDs, platform enums, audit status, and `source_input_hash`, but it must not preserve provider raw text or profile URLs.
+
+V1 does not publish public canonical `*.events.jsonl` files by default. If a future replayable events file is introduced, it must be explicitly public-safe and must not contain provider raw social text.
+
+Every public aggregate must declare:
+
+- `public_safe=true`
+- `redaction_policy_version`
+- `contains_raw_text=false`
+- `contains_profile_urls=false`
+- `source_input_hash`
 
 ## Automation behavior
 

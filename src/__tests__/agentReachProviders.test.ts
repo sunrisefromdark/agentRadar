@@ -494,6 +494,36 @@ describe("AgentReach external import provider", () => {
     });
   });
 
+  it("marks malformed live provider responses as failed input instead of transport unavailable", async () => {
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/json" },
+      body: "not json",
+    }));
+
+    const result = await hackerNewsProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://hn.algolia.com/api/v1/search"],
+            query_limit: 1,
+          },
+        },
+        transport,
+      ),
+    );
+
+    expect(result.status).toBe("failed");
+    expect(result.coverage.hacker_news).toEqual({
+      status: "failed",
+      reason: "provider_response_invalid",
+      warnings: ["live_parse_failed:input_invalid"],
+    });
+    expect(result.warnings).toEqual(["live_parse_failed:input_invalid"]);
+    expect(result.warnings).not.toContain("live_fetch_failed:unavailable");
+  });
+
   it("rejects a low-risk provider item that declares another provider platform", () => {
     const rssPath = writeImportArtifact({
       items: [

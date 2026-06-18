@@ -271,6 +271,51 @@ describe("AgentReach producer CLI", () => {
     ).toThrow(/cannot combine input_path and live/);
   });
 
+  it("fails fast for non-public or secret-bearing live URLs", () => {
+    const cases = [
+      "file:///tmp/rss.xml",
+      "https://user:pass@example.com/rss.xml",
+      "https://example.com/rss.xml?token=secret",
+      "https://example.com/rss.xml?oauth=secret",
+      "https://example.com/rss.xml?session=secret",
+    ];
+
+    for (const url of cases) {
+      const dir = makeTempDir();
+      const configPath = path.join(dir, "agentreach.config.json");
+      fs.writeFileSync(
+        configPath,
+        JSON.stringify({
+          providers: {
+            "rss-blog": {
+              live: {
+                enabled: true,
+                urls: [url],
+              },
+            },
+          },
+        }),
+        "utf-8",
+      );
+
+      expect(() =>
+        runAgentReachDiscover(
+          parseAgentReachDiscoverArgs([
+            "node",
+            "src/agentReach/cli.ts",
+            "--date",
+            "2026-06-18",
+            "--providers",
+            "rss-blog",
+            "--config",
+            configPath,
+            "--dry-run",
+          ]),
+        ),
+      ).toThrow(/provider live.urls must be public-safe/);
+    }
+  });
+
   it("dry-runs explicitly enabled live RSS config through an injected transport and prints coverage summary", async () => {
     const dir = makeTempDir();
     const configPath = path.join(dir, "agentreach.config.json");

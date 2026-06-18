@@ -69,10 +69,13 @@ export async function runLiveProvider(input: {
   const timeoutMs = positiveInteger(liveConfig.timeout_ms, 5000);
   const maxResponseBytes = positiveInteger(liveConfig.max_response_bytes, 512_000);
   const rawItems: unknown[] = [];
-  const warnings: string[] = [];
+  const fetchWarnings: string[] = [];
+  const parseWarnings: string[] = [];
   let failedFetchCount = 0;
+  let failedParseCount = 0;
 
   for (const url of urls) {
+    let body: string;
     try {
       const response = await input.context.transport.request({
         provider_id: input.providerId,
@@ -82,18 +85,46 @@ export async function runLiveProvider(input: {
         timeout_ms: timeoutMs,
         max_response_bytes: maxResponseBytes,
       });
+      body = response.body;
+    } catch (error) {
+      failedFetchCount += 1;
+      const safeError = toSafeAgentReachProviderError(error, input.providerId);
+      fetchWarnings.push(`live_fetch_failed:${safeError.code}`);
+      continue;
+    }
+
+    try {
       rawItems.push(
         ...input.parseResponse({
           url,
-          body: response.body,
+          body,
           context: input.context,
         }),
       );
     } catch (error) {
-      failedFetchCount += 1;
+      failedParseCount += 1;
       const safeError = toSafeAgentReachProviderError(error, input.providerId);
-      warnings.push(`live_fetch_failed:${safeError.code}`);
+      parseWarnings.push(`live_parse_failed:${safeError.code}`);
     }
+  }
+
+  const warnings = [...fetchWarnings, ...parseWarnings];
+
+  if (rawItems.length === 0 && failedParseCount > 0) {
+    return {
+      provider_id: input.providerId,
+      status: "failed",
+      items: [],
+      coverage: {
+        [input.defaultPlatform]: {
+          status: "failed",
+          reason: "provider_response_invalid",
+          warnings,
+        },
+      },
+      warnings,
+      rejected_items: [],
+    };
   }
 
   if (rawItems.length === 0 && failedFetchCount > 0) {
@@ -118,7 +149,9 @@ export async function runLiveProvider(input: {
     rawItems,
     defaultPlatform: input.defaultPlatform,
   });
-  if (failedFetchCount === 0) return result;
+  if (failedFetchCount === 0 && failedParseCount === 0) return result;
+  const reason =
+    failedParseCount > 0 ? "provider_response_partial" : "provider_transport_partial";
 
   return {
     ...result,
@@ -127,7 +160,7 @@ export async function runLiveProvider(input: {
       ...result.coverage,
       [input.defaultPlatform]: {
         status: result.coverage[input.defaultPlatform]?.status === "failed" ? "failed" : "partial",
-        reason: "provider_transport_partial",
+        reason,
         warnings,
       },
     },

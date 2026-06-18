@@ -3,6 +3,7 @@ import path from "node:path";
 
 import { assertValidDateOnly } from "../dateInput.ts";
 import { externalRawInputPath } from "../externalDiscovery/paths.ts";
+import { containsForbiddenPublicArtifactText } from "../externalDiscovery/redaction.ts";
 import { writeAgentReachArtifact } from "./artifactWriter.ts";
 import { runAgentReachProviders } from "./orchestrator.ts";
 import {
@@ -93,6 +94,49 @@ function stringArray(value: unknown, label: string): string[] {
   return value;
 }
 
+const FORBIDDEN_LIVE_URL_QUERY_KEYS = new Set([
+  "apikey",
+  "accesstoken",
+  "authorization",
+  "auth",
+  "cookie",
+  "key",
+  "oauth",
+  "pass",
+  "password",
+  "secret",
+  "session",
+  "sessionid",
+  "token",
+]);
+
+function assertPublicSafeLiveUrl(value: string, providerId: AgentReachProviderId): string {
+  let parsed: URL;
+  try {
+    parsed = new URL(value);
+  } catch {
+    throw new Error(`provider live.urls must be public-safe: ${providerId}`);
+  }
+
+  if (
+    (parsed.protocol !== "http:" && parsed.protocol !== "https:") ||
+    parsed.username !== "" ||
+    parsed.password !== "" ||
+    containsForbiddenPublicArtifactText(value)
+  ) {
+    throw new Error(`provider live.urls must be public-safe: ${providerId}`);
+  }
+
+  for (const key of parsed.searchParams.keys()) {
+    const normalizedKey = key.toLowerCase().replace(/[-_]/g, "");
+    if (FORBIDDEN_LIVE_URL_QUERY_KEYS.has(normalizedKey)) {
+      throw new Error(`provider live.urls must be public-safe: ${providerId}`);
+    }
+  }
+
+  return value;
+}
+
 function positiveInteger(value: unknown, label: string): number {
   if (typeof value !== "number" || !Number.isInteger(value) || value <= 0) {
     throw new Error(`${label} must be a positive integer`);
@@ -117,7 +161,9 @@ function parseLiveConfig(
   const enabled = rawLive.enabled === true;
   const urls = rawLive.urls === undefined
     ? undefined
-    : stringArray(rawLive.urls, `provider live.urls: ${providerId}`);
+    : stringArray(rawLive.urls, `provider live.urls: ${providerId}`).map((url) =>
+        assertPublicSafeLiveUrl(url, providerId),
+      );
   if (enabled && (!urls || urls.length === 0)) {
     throw new Error(`provider live.urls must be a non-empty string[]: ${providerId}`);
   }

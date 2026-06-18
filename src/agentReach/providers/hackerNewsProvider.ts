@@ -42,7 +42,18 @@ function hackerNewsItemUrl(hit: Record<string, unknown>, objectId: string): stri
 }
 
 function parseHackerNewsHits(body: string, observedAt: string): unknown[] {
-  const parsed = JSON.parse(body) as unknown;
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(body) as unknown;
+  } catch (error) {
+    throw new AgentReachProviderError({
+      providerId: "hacker-news",
+      code: "input_invalid",
+      retryable: false,
+      safeMessage: "hacker-news response JSON is invalid",
+      cause: error,
+    });
+  }
   if (!isRecord(parsed) || !Array.isArray(parsed.hits)) {
     throw new AgentReachProviderError({
       providerId: "hacker-news",

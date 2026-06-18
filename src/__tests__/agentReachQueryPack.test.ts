@@ -36,4 +36,22 @@ describe("AgentReach query pack", () => {
     expect(labels.has("finance-agent")).toBe(true);
     expect(labels.has("enterprise-ops-agent")).toBe(true);
   });
+
+  it.each([
+    ["document agent", ["document-agent", "office-agent"]],
+    ["spreadsheet agent", ["spreadsheet-agent", "office-agent"]],
+    ["meeting agent", ["meeting-agent", "office-agent"]],
+    ["legal agent", ["legal-agent", "vertical-office-agent", "office-agent"]],
+    ["finance agent", ["finance-agent", "vertical-office-agent", "office-agent"]],
+    ["sales crm agent", ["sales-crm-agent", "vertical-office-agent", "office-agent"]],
+    ["hr agent", ["hr-agent", "vertical-office-agent", "office-agent"]],
+    ["enterprise operations agent", ["enterprise-ops-agent", "vertical-office-agent"]],
+    ["healthcare admin agent", ["healthcare-admin-agent", "vertical-office-agent"]],
+    ["education agent", ["education-agent", "vertical-office-agent"]],
+  ] as const)("maps %s only to its specific direction and parent labels", (term, expectedLabels) => {
+    const matches = AGENT_REACH_QUERY_PACK.filter((query) => query.terms.includes(term));
+
+    expect(matches).toHaveLength(1);
+    expect(matches[0]?.direction_labels).toEqual(expectedLabels);
+  });
 });

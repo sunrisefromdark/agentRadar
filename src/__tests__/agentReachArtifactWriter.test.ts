@@ -92,6 +92,34 @@ describe("AgentReach artifact writer", () => {
     expect(fs.existsSync(outputPath)).toBe(false);
   });
 
+  it("keeps the v1 schema version when query contains quality policy metadata", () => {
+    const result = writeAgentReachArtifact({
+      date: "2026-06-18",
+      outputPath: path.join(makeTempDir(), "2026-06-18.agent-reach.json"),
+      dryRun: true,
+      providerRunId: "agentreach-2026-06-18",
+      generatedAt: "2026-06-18T00:00:00.000Z",
+      query: {
+        terms: ["research agent"],
+        quality_policy: {
+          lookback_days: 180,
+          max_items_per_query: 20,
+          max_items_per_provider: 50,
+          max_items_total: 100,
+        },
+      },
+      platforms: [],
+      status: "ok",
+      diagnostics: { warnings: [] },
+      items: [],
+      coverage: createCompleteCoverage({ activePlatforms: [], reservedPlatforms: [] }),
+    });
+
+    expect(result.artifact.schema_version).toBe(
+      "agent-reach.external-discovery.v1",
+    );
+  });
+
   it("fails before writing when coverage contains private text", () => {
     const outputPath = path.join(makeTempDir(), "2026-06-18.agent-reach.json");
 

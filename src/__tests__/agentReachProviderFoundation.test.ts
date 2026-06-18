@@ -6,6 +6,7 @@ import {
   type AgentReachProducerProvider,
   type AgentReachProviderContext,
 } from "../agentReach/types.ts";
+import { AGENT_REACH_DEFAULT_QUALITY_POLICY } from "../agentReach/qualityPolicy.ts";
 import {
   AgentReachProviderError,
   toSafeAgentReachProviderError,
@@ -49,6 +50,7 @@ describe("AgentReach provider foundation", () => {
       generated_at: "2026-06-18T00:00:00.000Z",
       query_pack: [],
       provider_config: { input_path: "fixtures/hacker-news.json" },
+      quality_policy: AGENT_REACH_DEFAULT_QUALITY_POLICY,
       transport: {
         async request() {
           throw new Error("transport must not be used by this test provider");

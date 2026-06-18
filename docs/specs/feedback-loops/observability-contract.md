@@ -10,8 +10,26 @@
 - Weekly external windows must aggregate coverage status counts.
 - `not_configured`, `manual_import_only`, `unavailable`, and `partial` are coverage states, not no-signal conclusions.
 - Producer orchestrator warnings use `provider_failed:<provider_id>:<safe_code>` and must not include raw exception text, filesystem paths, response bodies, cookie, session, OAuth, token, account settings, or platform API credentials.
+- Consumer adapter validation must reject public-unsafe `diagnostics.warnings` before they can enter daily aggregate audit output.
 - Live provider observability is opt-in only: `live.enabled=true` with an allowlist URL may produce public-safe coverage summary and typed `timeout` / `http` / `unavailable` / `response_too_large` states. The default remains disabled and must not call live transport.
 - X / Twitter API and Reddit API observability is reserved for future V2 high-risk provider design; current manual-import-only coverage must not be rendered as no discussion.
+
+## AgentReach quality observability
+
+AgentReach producer artifacts expose `AgentReachQualityPolicy` inside the
+artifact query, including `lookback_days`, `max_items_per_query`,
+`max_items_per_provider`, and `max_items_total`. Query enrichment follows an
+atomic query entry rule to keep direction-label diagnostics explainable.
+
+Quality diagnostics are public-safe count strings only:
+`quality_filtered_irrelevant`, `quality_filtered_invalid_timestamp`,
+`quality_deduplicated`, and `quality_truncated`. These diagnostics explain why
+output was bounded or filtered, but they do not include URLs, config paths,
+response bodies, tokens, cookies, sessions, OAuth data, or raw provider text.
+When a live provider succeeds but has zero relevant results, coverage remains ok
+and the warning count carries the explanation.
+
+Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
 ## 观测信号
 

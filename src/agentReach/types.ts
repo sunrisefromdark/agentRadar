@@ -113,11 +113,21 @@ export interface AgentReachProviderConfig {
   };
 }
 
+export interface AgentReachQualityPolicy {
+  lookback_days: number;
+  max_items_per_query: number;
+  max_items_per_provider: number;
+  max_items_total: number;
+}
+
+export type AgentReachQualityPolicyInput = Partial<AgentReachQualityPolicy>;
+
 export interface AgentReachProviderContext {
   date: string;
   generated_at: string;
   query_pack: readonly AgentReachQueryEntry[];
   provider_config: AgentReachProviderConfig;
+  quality_policy: AgentReachQualityPolicy;
   transport: AgentReachTransport;
 }
 

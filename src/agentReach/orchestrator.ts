@@ -5,6 +5,10 @@ import {
 } from "./coverageAudit.ts";
 import { toSafeAgentReachProviderError } from "./providerErrors.ts";
 import { selectAgentReachProviders } from "./providerRegistry.ts";
+import {
+  applyAgentReachProviderQuality,
+  finalizeAgentReachProducerItems,
+} from "./quality.ts";
 import type { AgentReachQueryEntry } from "./queryPack.ts";
 import type { AgentReachTransport } from "./transport.ts";
 import type {
@@ -15,6 +19,7 @@ import type {
   AgentReachProviderId,
   AgentReachProviderResult,
   AgentReachProviderRunStatus,
+  AgentReachQualityPolicy,
 } from "./types.ts";
 
 export interface RunAgentReachProvidersInput {
@@ -24,6 +29,7 @@ export interface RunAgentReachProvidersInput {
   generated_at: string;
   query_pack: readonly AgentReachQueryEntry[];
   provider_configs: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>>;
+  quality_policy: AgentReachQualityPolicy;
   transport: AgentReachTransport;
 }
 
@@ -134,6 +140,7 @@ export async function runAgentReachProviders(
         generated_at: input.generated_at,
         query_pack: input.query_pack,
         provider_config: input.provider_configs[provider.provider_id] ?? {},
+        quality_policy: input.quality_policy,
         transport: input.transport,
       });
       if (result.provider_id !== provider.provider_id) {
@@ -142,6 +149,21 @@ export async function runAgentReachProviders(
     } catch (error) {
       result = failedProviderResult(provider, error);
     }
+
+    const quality = applyAgentReachProviderQuality({
+      providerId: provider.provider_id,
+      items: result.items,
+      queryPack: input.query_pack,
+      generatedAt: input.generated_at,
+      policy: input.quality_policy,
+      liveEnabled:
+        input.provider_configs[provider.provider_id]?.live?.enabled === true,
+    });
+    result = {
+      ...result,
+      items: quality.items,
+      warnings: [...result.warnings, ...quality.warnings],
+    };
 
     providerResults.push(result);
     items.push(...result.items);
@@ -161,6 +183,11 @@ export async function runAgentReachProviders(
     reservedPlatforms,
     providerCoverage,
   });
+  const finalQuality = finalizeAgentReachProducerItems({
+    items,
+    maxItemsTotal: input.quality_policy.max_items_total,
+  });
+  const finalWarnings = [...warnings, ...finalQuality.warnings];
 
   return {
     selected_provider_ids: selectedProviders.map((provider) => provider.provider_id),
@@ -170,9 +197,9 @@ export async function runAgentReachProviders(
       rejectedItemCount: rejectedItems.length,
     }),
     provider_results: providerResults,
-    items,
+    items: finalQuality.items,
     coverage,
-    warnings,
+    warnings: finalWarnings,
     rejected_items: rejectedItems,
   };
 }

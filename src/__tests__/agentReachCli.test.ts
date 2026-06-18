@@ -233,6 +233,154 @@ describe("AgentReach producer CLI", () => {
     expect(fs.existsSync(outputPath)).toBe(false);
   });
 
+  it("loads and exposes a public-safe quality policy", async () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        quality: {
+          lookback_days: 30,
+          max_items_per_query: 5,
+          max_items_per_provider: 10,
+          max_items_total: 25,
+        },
+        providers: {},
+      }),
+      "utf-8",
+    );
+
+    const result = await runAgentReachDiscover(
+      parseAgentReachDiscoverArgs([
+        "node",
+        "src/agentReach/cli.ts",
+        "--date",
+        "2026-06-18",
+        "--providers",
+        "x_twitter",
+        "--config",
+        configPath,
+        "--dry-run",
+      ]),
+    );
+
+    expect(result.artifact.query).toEqual(
+      expect.objectContaining({
+        quality_policy: {
+          lookback_days: 30,
+          max_items_per_query: 5,
+          max_items_per_provider: 10,
+          max_items_total: 25,
+        },
+      }),
+    );
+    expect(JSON.stringify(result.artifact)).not.toContain(configPath);
+  });
+
+  it("loads quality-only config without requiring providers", async () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        quality: {
+          lookback_days: 45,
+          max_items_per_query: 4,
+          max_items_per_provider: 8,
+          max_items_total: 16,
+        },
+      }),
+      "utf-8",
+    );
+
+    const result = await runAgentReachDiscover(
+      parseAgentReachDiscoverArgs([
+        "node",
+        "src/agentReach/cli.ts",
+        "--date",
+        "2026-06-18",
+        "--providers",
+        "x_twitter",
+        "--config",
+        configPath,
+        "--dry-run",
+      ]),
+    );
+
+    expect(result.artifact.query).toEqual(
+      expect.objectContaining({
+        quality_policy: {
+          lookback_days: 45,
+          max_items_per_query: 4,
+          max_items_per_provider: 8,
+          max_items_total: 16,
+        },
+      }),
+    );
+  });
+
+  it("uses default quality policy without config", async () => {
+    const result = await runAgentReachDiscover(
+      parseAgentReachDiscoverArgs([
+        "node",
+        "src/agentReach/cli.ts",
+        "--date",
+        "2026-06-18",
+        "--providers",
+        "x_twitter",
+        "--dry-run",
+      ]),
+    );
+
+    expect(result.artifact.query).toEqual(
+      expect.objectContaining({
+        quality_policy: {
+          lookback_days: 180,
+          max_items_per_query: 20,
+          max_items_per_provider: 50,
+          max_items_total: 100,
+        },
+      }),
+    );
+  });
+
+  it("fails before writing for invalid quality config", () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    const outputPath = path.join(dir, "2026-06-18.agent-reach.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        quality: {
+          max_items_per_query: 20,
+          max_items_per_provider: 10,
+          max_items_total: 100,
+        },
+        providers: {},
+      }),
+      "utf-8",
+    );
+
+    expect(() =>
+      runAgentReachDiscover(
+        parseAgentReachDiscoverArgs([
+          "node",
+          "src/agentReach/cli.ts",
+          "--date",
+          "2026-06-18",
+          "--providers",
+          "x_twitter",
+          "--config",
+          configPath,
+          "--output",
+          outputPath,
+          "--dry-run",
+        ]),
+      ),
+    ).toThrow(/max_items_per_query/);
+    expect(fs.existsSync(outputPath)).toBe(false);
+  });
+
   it("fails fast when a provider config mixes local input and live fetch", async () => {
     const dir = makeTempDir();
     const rssPath = path.join(dir, "rss-blog.json");
@@ -338,7 +486,7 @@ describe("AgentReach producer CLI", () => {
       status: 200,
       headers: { "content-type": "application/rss+xml" },
       body: `<rss><channel><item>
-        <title>Live RSS Agent</title>
+        <title>Research agent RSS launch</title>
         <link>https://example.com/blog/live-rss-agent</link>
         <pubDate>Thu, 18 Jun 2026 10:00:00 GMT</pubDate>
       </item></channel></rss>`,
@@ -362,11 +510,166 @@ describe("AgentReach producer CLI", () => {
     );
 
     expect(result.dry_run).toBe(true);
-    expect(result.artifact.items[0]?.title).toBe("Live RSS Agent");
+    expect(result.artifact.items[0]?.title).toBe("Research agent RSS launch");
     expect(result.artifact.coverage.official_blog.status).toBe("ok");
     expect(result.coverage_summary).toContain("official_blog=ok");
     expect(JSON.stringify(result.artifact)).not.toContain(configPath);
     expect(fs.existsSync(outputPath)).toBe(false);
+  });
+
+  it("dry-runs bounded live Hacker News artifacts deterministically", async () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    const outputPath = path.join(dir, "2026-06-18.agent-reach.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        quality: {
+          lookback_days: 30,
+          max_items_per_query: 2,
+          max_items_per_provider: 2,
+          max_items_total: 2,
+        },
+        providers: {
+          "hacker-news": {
+            live: {
+              enabled: true,
+              urls: ["https://hn.algolia.com/api/v1/search"],
+              query_limit: 1,
+            },
+          },
+        },
+      }),
+      "utf-8",
+    );
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        hits: [
+          {
+            objectID: "1",
+            title: "Research agent one",
+            url: "https://example.com/research-agent-one?utm_source=hn",
+            created_at: "2026-06-17T00:00:00.000Z",
+            points: 10,
+            num_comments: 1,
+          },
+          {
+            objectID: "2",
+            title: "Research agent two",
+            url: "https://example.com/research-agent-two",
+            created_at: "2026-06-16T00:00:00.000Z",
+            points: 5,
+            num_comments: 3,
+          },
+          {
+            objectID: "3",
+            title: "Research agent three",
+            url: "https://example.com/research-agent-three",
+            created_at: "2026-06-15T00:00:00.000Z",
+          },
+        ],
+      }),
+    }));
+    const opts = {
+      ...parseAgentReachDiscoverArgs([
+        "node",
+        "src/agentReach/cli.ts",
+        "--date",
+        "2026-06-18",
+        "--providers",
+        "hacker-news",
+        "--config",
+        configPath,
+        "--output",
+        outputPath,
+        "--dry-run",
+      ]),
+      generatedAt: "2026-06-18T00:00:00.000Z",
+    };
+
+    const first = await runAgentReachDiscover(opts, { transport });
+    const second = await runAgentReachDiscover(opts, { transport });
+
+    expect(first.artifact.query).toEqual(
+      expect.objectContaining({
+        quality_policy: {
+          lookback_days: 30,
+          max_items_per_query: 2,
+          max_items_per_provider: 2,
+          max_items_total: 2,
+        },
+      }),
+    );
+    expect(first.artifact.items.length).toBeLessThanOrEqual(2);
+    expect(JSON.stringify(first.artifact.items)).toBe(
+      JSON.stringify(second.artifact.items),
+    );
+    expect(JSON.stringify(first.artifact.diagnostics.warnings)).not.toMatch(
+      /https?:|config|response body|token|cookie|session|oauth/i,
+    );
+    expect(first.dry_run).toBe(true);
+    expect(fs.existsSync(outputPath)).toBe(false);
+  });
+
+  it("keeps successful live discovery ok when quality removes every relevant item", async () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        providers: {
+          "hacker-news": {
+            live: {
+              enabled: true,
+              urls: ["https://hn.algolia.com/api/v1/search"],
+              query_limit: 1,
+            },
+          },
+        },
+      }),
+      "utf-8",
+    );
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        hits: [
+          {
+            objectID: "generic",
+            title: "A new AI agent",
+            url: "https://example.com/new-ai-agent",
+            created_at: "2026-06-17T00:00:00.000Z",
+          },
+        ],
+      }),
+    }));
+
+    const result = await runAgentReachDiscover(
+      {
+        ...parseAgentReachDiscoverArgs([
+          "node",
+          "src/agentReach/cli.ts",
+          "--date",
+          "2026-06-18",
+          "--providers",
+          "hacker-news",
+          "--config",
+          configPath,
+          "--dry-run",
+        ]),
+        generatedAt: "2026-06-18T00:00:00.000Z",
+      },
+      { transport },
+    );
+
+    expect(result.artifact.status).toBe("ok");
+    expect(result.artifact.coverage.hacker_news.status).toBe("ok");
+    expect(result.artifact.items).toEqual([]);
+    expect(result.artifact.diagnostics.warnings).toContain(
+      "quality_filtered_irrelevant:hacker-news:1",
+    );
   });
 
   it("marks the artifact failed when the only active provider has no usable items", async () => {

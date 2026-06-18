@@ -10,7 +10,7 @@
 
 ## Implementation Checkpoint
 
-截至 2026-06-18，已落地：
+截至 2026-06-19，已落地：
 
 - `src/agentReach/` producer 模块、独立 `agentreach:discover` package script 和完整 coverage artifact writer。
 - `external-import`、`rss-blog`、`official-web`、`hacker-news` 的本地 sanitized JSON / fixture adapter。
@@ -19,10 +19,13 @@
 - public-safe runtime guards：完整 coverage、items、query、diagnostics 写入前校验。
 - PR1 foundation 已收口为统一 `AgentReachProducerProvider` / `ProviderContext`，`providerRegistry.ts` 固定 provider 顺序，`orchestrator.ts` 隔离 provider 失败并聚合 artifact-ready run summary，`transport.ts` 提供默认 disabled transport 与 fake/in-memory transport 测试入口。
 - `AgentReachProviderError` 安全错误分类覆盖 `configuration_invalid`、`input_missing`、`input_invalid`、`timeout`、`http`、`unavailable`、`response_too_large`、`unexpected`；公开 diagnostics 只暴露 safe code，不暴露 path、response body、cookie、session、OAuth、token 或账号配置。
+- 在线 RSS / Atom fetch、allowlist official page fetch、Hacker News API fetch 已通过 `live.enabled=true` 显式 opt-in 接入；默认 transport 仍禁用。
+- Query pack 中 document、spreadsheet、meeting、legal、finance、sales-crm、HR、healthcare-admin、education 与 enterprise-ops 已拆为原子 entry，避免命中一个 term 时串入同组其他方向标签。
+- Consumer adapter 会在消费前拒绝含敏感文本的 `diagnostics.warnings`，避免私有 warning 原样进入 public aggregate。
 
 尚未纳入本 checkpoint：
 
-- 在线 RSS / Atom fetch、official sitemap fetch、Hacker News API fetch。
+- official sitemap 扩展与标准化 XML / HTML fixture pack。
 - X / Twitter 官方 API provider、Reddit API provider。
 - 大规模 crawler、登录态、cookie、session、OAuth 或平台账号配置。
 
@@ -200,9 +203,11 @@ Artifact 顶层 `status` 只表达 provider artifact / producer run 是否可消
    - office agent / personal assistant / document / spreadsheet / meeting / workflow automation
    - vertical office: legal / finance / sales-crm / hr / healthcare-admin / education / enterprise-ops
 3. 每个 query entry 必须绑定 `ExternalDirectionLabel[]`，不得只写 `tags`。
+   - 一个 entry 只能代表一个可独立命中的具体方向；共享父标签可以附加，但不得把 sibling direction labels 放入同一 entry。
 4. 单测覆盖：
    - 所有 query labels 在 `ExternalDirectionLabel` 白名单内。
    - `tags` 与 `direction_labels` 分层清晰。
+   - document / spreadsheet / meeting 与各 vertical-office term 只映射到自身具体标签和共享父标签。
    - 无效 label 不进入 artifact writer。
 
 ### Phase 3：Provider interface 与 external import
@@ -331,6 +336,28 @@ pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-bl
 5. CLI dry-run 输出 public-safe coverage summary；artifact 不包含 config path、account settings、cookie、session、OAuth、token、response body。
 6. `run-daily` 继续不自动启动 producer；未来如需集成，只能新增显式 `run-daily --external-discovery-generate --agentreach-config <path>`。
 7. V2 high-risk provider 不在本阶段实现：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计和测试 fixture。
+
+## PR3 Discovery Quality Policy
+
+PR3 adds `AgentReachQualityPolicy` to the artifact `query` object while keeping
+schema version `agent-reach.external-discovery.v1`. The quality fields are
+`lookback_days`, `max_items_per_query`, `max_items_per_provider`, and
+`max_items_total`; default values are 180 / 20 / 50 / 100 and validation requires
+`max_items_per_query <= max_items_per_provider <= max_items_total`.
+
+The query pack must use an atomic query entry for every independently matchable
+direction. Live relevance enrichment must not add sibling direction labels from
+one match. Live-only quality warnings use public-safe count formats including
+`quality_filtered_irrelevant`, `quality_filtered_invalid_timestamp`,
+`quality_deduplicated`, and `quality_truncated`.
+
+Provider output is deduplicated and capped by `max_items_per_provider`; final
+producer output is deduplicated and capped by `max_items_total`. A successful
+live request with zero relevant results keeps coverage remains ok; quality
+filtering and truncation do not add rejected items or downgrade provider
+coverage.
+
+Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
 ## 验收标准
 

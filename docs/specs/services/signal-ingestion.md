@@ -2,7 +2,7 @@
 
 ## External discovery OSS boundary
 
-- AgentReach is a local JSON artifact provider, not a platform crawler or platform API client.
+- The main signal pipeline consumes AgentReach as a local JSON artifact provider. A separate opt-in producer may fetch explicitly allowlisted low-risk public RSS, official pages, or Hacker News search results, but the consumer is not a platform crawler or platform API client.
 - AgentReach external discovery must not write RawSignal and must not extend `RawSignal.source`.
 - Raw external input under `data/raw/external-discovery/` is local-only by default; public examples must be sanitized fixtures.
 - Provider status uses `ok`, `skipped`, `partial`, or `failed`; default missing input is `skipped`, while explicit invalid input is `failed`.

@@ -9,6 +9,10 @@ import { runAgentReachProviders } from "./orchestrator.ts";
 import {
   AGENT_REACH_PROVIDER_REGISTRY,
 } from "./providerRegistry.ts";
+import {
+  AGENT_REACH_DEFAULT_QUALITY_POLICY,
+  resolveAgentReachQualityPolicy,
+} from "./qualityPolicy.ts";
 import { AGENT_REACH_QUERY_PACK } from "./queryPack.ts";
 import {
   createDisabledAgentReachTransport,
@@ -20,9 +24,12 @@ import {
   type AgentReachArtifactWriteResult,
   type AgentReachProviderConfig,
   type AgentReachProviderId,
+  type AgentReachQualityPolicy,
+  type AgentReachQualityPolicyInput,
 } from "./types.ts";
 
 interface AgentReachConfig {
+  quality_policy: AgentReachQualityPolicy;
   providers?: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>>;
 }
 
@@ -187,11 +194,35 @@ function parseLiveConfig(
   };
 }
 
+function parseQualityPolicy(rawQuality: unknown): AgentReachQualityPolicy {
+  if (rawQuality === undefined) {
+    return AGENT_REACH_DEFAULT_QUALITY_POLICY;
+  }
+  if (!isRecord(rawQuality)) {
+    throw new Error("AgentReach config quality must be an object");
+  }
+  const input: AgentReachQualityPolicyInput = {};
+  for (const key of [
+    "lookback_days",
+    "max_items_per_query",
+    "max_items_per_provider",
+    "max_items_total",
+  ] as const) {
+    if (rawQuality[key] !== undefined) input[key] = rawQuality[key] as number;
+  }
+  return resolveAgentReachQualityPolicy(input);
+}
+
 function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig {
-  if (!configPath) return {};
+  if (!configPath) {
+    return { quality_policy: AGENT_REACH_DEFAULT_QUALITY_POLICY };
+  }
   const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as unknown;
   if (!isRecord(parsed)) throw new Error("AgentReach config must be an object");
-  if (parsed.providers === undefined) return {};
+  const qualityPolicy = parseQualityPolicy(parsed.quality);
+  if (parsed.providers === undefined) {
+    return { quality_policy: qualityPolicy };
+  }
   if (!isRecord(parsed.providers)) {
     throw new Error("AgentReach config providers must be an object");
   }
@@ -218,7 +249,7 @@ function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig 
       ...(live ? { live } : {}),
     };
   }
-  return { providers };
+  return { quality_policy: qualityPolicy, providers };
 }
 
 export function parseAgentReachDiscoverArgs(argv: string[]): AgentReachDiscoverOptions {
@@ -303,6 +334,7 @@ async function runAgentReachDiscoverWithConfig(
     generated_at: generatedAt,
     query_pack: AGENT_REACH_QUERY_PACK,
     provider_configs: providerConfigs,
+    quality_policy: config.quality_policy,
     transport,
   });
   const outputPath = opts.outputPath ?? externalRawInputPath(opts.date);
@@ -317,6 +349,7 @@ async function runAgentReachDiscoverWithConfig(
     query: {
       terms: AGENT_REACH_QUERY_PACK.flatMap((query) => query.terms),
       providers: opts.providers,
+      quality_policy: config.quality_policy,
       ...(opts.configPath ? { config_loaded: true } : {}),
     },
     platforms,

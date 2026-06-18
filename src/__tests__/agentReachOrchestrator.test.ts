@@ -1,7 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { runAgentReachProviders } from "../agentReach/orchestrator.ts";
+import {
+  runAgentReachProviders,
+  type RunAgentReachProvidersInput,
+} from "../agentReach/orchestrator.ts";
 import { selectAgentReachProviders } from "../agentReach/providerRegistry.ts";
+import { AGENT_REACH_DEFAULT_QUALITY_POLICY } from "../agentReach/qualityPolicy.ts";
+import { AGENT_REACH_QUERY_PACK } from "../agentReach/queryPack.ts";
 import { createDisabledAgentReachTransport } from "../agentReach/transport.ts";
 import type {
   AgentReachProducerProvider,
@@ -42,15 +47,18 @@ function fakeProvider(input: {
 function orchestratorInput(
   providers: AgentReachProducerProvider[],
   selectedProviderIds: AgentReachProviderId[],
-) {
+  overrides: Partial<RunAgentReachProvidersInput> = {},
+): RunAgentReachProvidersInput {
   return {
     selected_provider_ids: selectedProviderIds,
     providers,
     date: "2026-06-18",
     generated_at: "2026-06-18T00:00:00.000Z",
-    query_pack: [],
+    query_pack: AGENT_REACH_QUERY_PACK,
     provider_configs: {},
+    quality_policy: AGENT_REACH_DEFAULT_QUALITY_POLICY,
     transport: createDisabledAgentReachTransport(),
+    ...overrides,
   };
 }
 
@@ -300,5 +308,256 @@ describe("AgentReach orchestrator", () => {
     expect(summary.coverage.x_twitter.status).toBe("manual_import_only");
     expect(summary.coverage.reddit.status).toBe("manual_import_only");
     expect(summary.coverage.hacker_news.status).toBe("not_configured");
+  });
+
+  it("filters irrelevant and stale live provider items without degrading coverage", async () => {
+    const hackerNews = fakeProvider({
+      id: "hacker-news",
+      platforms: ["hacker_news"],
+      run: async () =>
+        result("hacker-news", {
+          items: [
+            {
+              raw_ref: "hn:irrelevant",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2026-06-17T00:00:00.000Z",
+              title: "A new AI agent",
+            },
+            {
+              raw_ref: "hn:stale",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2025-12-19T00:00:00.000Z",
+              title: "Research agent old",
+            },
+            {
+              raw_ref: "hn:relevant",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2026-06-17T00:00:00.000Z",
+              title: "Research agent current",
+            },
+          ],
+          coverage: { hacker_news: { status: "ok" } },
+        }),
+    });
+
+    const summary = await runAgentReachProviders(
+      orchestratorInput([hackerNews], ["hacker-news"], {
+        provider_configs: {
+          "hacker-news": {
+            live: {
+              enabled: true,
+              urls: ["https://hn.algolia.com/api/v1/search"],
+            },
+          },
+        },
+        quality_policy: {
+          lookback_days: 180,
+          max_items_per_query: 2,
+          max_items_per_provider: 2,
+          max_items_total: 3,
+        },
+      }),
+    );
+
+    expect(summary.items.map((item) => item.raw_ref)).toEqual(["hn:relevant"]);
+    expect(summary.warnings).toEqual(
+      expect.arrayContaining([
+        "quality_filtered_irrelevant:hacker-news:1",
+        "quality_filtered_stale:hacker-news:1",
+      ]),
+    );
+    expect(summary.status).toBe("ok");
+    expect(summary.coverage.hacker_news.status).toBe("ok");
+  });
+
+  it("does not freshness-filter local or manual provider imports", async () => {
+    const externalImport = fakeProvider({
+      id: "external-import",
+      platforms: ["official_blog"],
+      run: async () =>
+        result("external-import", {
+          items: [
+            {
+              raw_ref: "manual:old-but-explicit",
+              platform: "official_blog",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2020-01-01T00:00:00.000Z",
+              title: "Old but explicitly imported item",
+            },
+          ],
+          coverage: { official_blog: { status: "ok" } },
+        }),
+    });
+
+    const localSummary = await runAgentReachProviders(
+      orchestratorInput([externalImport], ["external-import"], {
+        quality_policy: {
+          lookback_days: 1,
+          max_items_per_query: 2,
+          max_items_per_provider: 2,
+          max_items_total: 3,
+        },
+      }),
+    );
+
+    expect(localSummary.items.map((item) => item.raw_ref)).toEqual([
+      "manual:old-but-explicit",
+    ]);
+    expect(
+      localSummary.warnings.some((warning) =>
+        warning.startsWith("quality_filtered_stale"),
+      ),
+    ).toBe(false);
+  });
+
+  it("applies provider limits without changing provider status or coverage", async () => {
+    const hackerNews = fakeProvider({
+      id: "hacker-news",
+      platforms: ["hacker_news"],
+      run: async () =>
+        result("hacker-news", {
+          items: ["1", "2", "3"].map((id) => ({
+            raw_ref: `hn:${id}`,
+            platform: "hacker_news" as const,
+            observed_at: "2026-06-18T00:00:00.000Z",
+            source_published_at: `2026-06-1${id}T00:00:00.000Z`,
+            title: `Research agent ${id}`,
+          })),
+          coverage: { hacker_news: { status: "ok" } },
+        }),
+    });
+
+    const truncatedSummary = await runAgentReachProviders(
+      orchestratorInput([hackerNews], ["hacker-news"], {
+        provider_configs: {
+          "hacker-news": {
+            live: {
+              enabled: true,
+              urls: ["https://hn.algolia.com/api/v1/search"],
+            },
+          },
+        },
+        quality_policy: {
+          lookback_days: 180,
+          max_items_per_query: 2,
+          max_items_per_provider: 2,
+          max_items_total: 3,
+        },
+      }),
+    );
+
+    expect(truncatedSummary.status).toBe("ok");
+    expect(truncatedSummary.coverage.hacker_news.status).toBe("ok");
+    expect(truncatedSummary.items).toHaveLength(2);
+    expect(truncatedSummary.warnings).toContain(
+      "quality_truncated:hacker-news:1",
+    );
+  });
+
+  it("applies the final global producer item limit", async () => {
+    const rss = fakeProvider({
+      id: "rss-blog",
+      platforms: ["official_blog"],
+      run: async () =>
+        result("rss-blog", {
+          items: ["1", "2"].map((id) => ({
+            raw_ref: `rss:${id}`,
+            platform: "official_blog" as const,
+            observed_at: "2026-06-18T00:00:00.000Z",
+            title: `RSS item ${id}`,
+          })),
+          coverage: { official_blog: { status: "ok" } },
+        }),
+    });
+    const officialWeb = fakeProvider({
+      id: "official-web",
+      platforms: ["official_web"],
+      run: async () =>
+        result("official-web", {
+          items: ["1", "2"].map((id) => ({
+            raw_ref: `web:${id}`,
+            platform: "official_web" as const,
+            observed_at: "2026-06-18T00:00:00.000Z",
+            title: `Web item ${id}`,
+          })),
+          coverage: { official_web: { status: "ok" } },
+        }),
+    });
+
+    const globalSummary = await runAgentReachProviders(
+      orchestratorInput([rss, officialWeb], ["rss-blog", "official-web"], {
+        quality_policy: {
+          lookback_days: 180,
+          max_items_per_query: 10,
+          max_items_per_provider: 10,
+          max_items_total: 3,
+        },
+      }),
+    );
+
+    expect(globalSummary.items).toHaveLength(3);
+    expect(globalSummary.warnings).toContain("quality_truncated:producer:1");
+  });
+
+  it("keeps quality output deterministic across identical runs", async () => {
+    const hackerNews = fakeProvider({
+      id: "hacker-news",
+      platforms: ["hacker_news"],
+      run: async () =>
+        result("hacker-news", {
+          items: [
+            {
+              raw_ref: "hn:duplicate",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2026-06-17T00:00:00.000Z",
+              title: "Research agent duplicate",
+            },
+            {
+              raw_ref: "hn:duplicate",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2026-06-17T00:00:00.000Z",
+              title: "Research agent duplicate copy",
+              tags: ["research"],
+            },
+            {
+              raw_ref: "hn:another",
+              platform: "hacker_news",
+              observed_at: "2026-06-18T00:00:00.000Z",
+              source_published_at: "2026-06-16T00:00:00.000Z",
+              title: "Research agent another",
+            },
+          ],
+          coverage: { hacker_news: { status: "ok" } },
+        }),
+    });
+    const input = orchestratorInput([hackerNews], ["hacker-news"], {
+      provider_configs: {
+        "hacker-news": {
+          live: {
+            enabled: true,
+            urls: ["https://hn.algolia.com/api/v1/search"],
+          },
+        },
+      },
+      quality_policy: {
+        lookback_days: 180,
+        max_items_per_query: 2,
+        max_items_per_provider: 2,
+        max_items_total: 3,
+      },
+    });
+
+    const firstRun = await runAgentReachProviders(input);
+    const secondRun = await runAgentReachProviders(input);
+
+    expect(JSON.stringify(secondRun.items)).toBe(JSON.stringify(firstRun.items));
+    expect(JSON.stringify(secondRun.warnings)).toBe(
+      JSON.stringify(firstRun.warnings),
+    );
   });
 });

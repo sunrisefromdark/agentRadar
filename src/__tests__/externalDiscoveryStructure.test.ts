@@ -291,6 +291,65 @@ describe("external discovery OSS artifact structure", () => {
       expect(text).toContain("X / Twitter API");
       expect(text).toContain("Reddit API");
     }
+
+    expect(producerExecPlan).toContain(
+      "在线 RSS / Atom fetch、allowlist official page fetch、Hacker News API fetch",
+    );
+    expect(producerExecPlan).not.toContain(
+      "- 在线 RSS / Atom fetch、official sitemap fetch、Hacker News API fetch。",
+    );
+  });
+
+  it("documents AgentReach discovery quality policy and bounded output semantics", () => {
+    const design = readText(
+      "docs",
+      "specs",
+      "design-docs",
+      "agent-reach-external-discovery-and-evidence-design.md",
+    );
+    const producerExecPlan = readText(
+      "docs",
+      "specs",
+      "exec-plans",
+      "agent-reach-artifact-producer-v0.1.exec-plan.md",
+    );
+    const cliRuntime = readText("docs", "specs", "services", "cli-runtime.md");
+    const observability = readText(
+      "docs",
+      "specs",
+      "feedback-loops",
+      "observability-contract.md",
+    );
+    const recovery = readText(
+      "docs",
+      "specs",
+      "feedback-loops",
+      "failure-recovery-loop.md",
+    );
+    const zhReadme = readText("README.md");
+    const enReadme = readText("README.en.md");
+
+    for (const text of [
+      design,
+      producerExecPlan,
+      cliRuntime,
+      observability,
+      recovery,
+      zhReadme,
+      enReadme,
+    ]) {
+      expect(text).toContain("AgentReachQualityPolicy");
+      expect(text).toContain("lookback_days");
+      expect(text).toContain("max_items_per_query");
+      expect(text).toContain("max_items_per_provider");
+      expect(text).toContain("max_items_total");
+      expect(text).toContain("atomic query entry");
+      expect(text).toContain("quality_filtered_irrelevant");
+      expect(text).toContain("quality_filtered_invalid_timestamp");
+      expect(text).toContain("quality_deduplicated");
+      expect(text).toContain("zero relevant results");
+      expect(text).toContain("coverage remains ok");
+    }
   });
 
   it("keeps sanitized AgentReach fixture aligned with direction label policy", () => {

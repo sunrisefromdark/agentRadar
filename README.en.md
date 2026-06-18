@@ -356,6 +356,17 @@ The current producer reads local sanitized JSON inputs and emits an `agent-reach
 
 Low-risk live providers are explicit opt-in only: `rss-blog`, `official-web`, and `hacker-news` use live transport only when config sets `live.enabled=true` and an allowlist URL. The default remains non-networked. `input_path` and live fetch are mutually exclusive, and config paths, cookies, sessions, OAuth, tokens, account settings, and response bodies must not enter the artifact. `run-daily` still consumes an existing artifact by default; future generation would require an explicit flag such as `run-daily --external-discovery-generate --agentreach-config <path>`. X / Twitter API and Reddit API remain future V2 high-risk provider designs.
 
+AgentReach live discovery is bounded by `AgentReachQualityPolicy` in the artifact
+query. The policy records `lookback_days`, `max_items_per_query`,
+`max_items_per_provider`, and `max_items_total`. Relevance uses an atomic query
+entry rule, so one match cannot add sibling direction labels. Public diagnostics
+use count-only warnings such as `quality_filtered_irrelevant`,
+`quality_filtered_invalid_timestamp`, `quality_deduplicated`, and
+`quality_truncated`. A successful live request with zero relevant results keeps
+coverage remains ok.
+
+Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
+
 ### Hosted-product note
 
 - The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)

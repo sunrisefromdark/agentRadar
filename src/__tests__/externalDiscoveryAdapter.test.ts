@@ -153,6 +153,22 @@ describe("AgentReach local provider adapter", () => {
     expect(JSON.stringify(result)).not.toContain("profile/example-team");
   });
 
+  it("continues consuming legacy v1 artifacts whose query omits quality policy", () => {
+    const inputPath = writeJsonArtifact(
+      makeArtifact({
+        query: { terms: ["research agent"] },
+      }),
+    );
+
+    const legacyConsumerResult = loadAgentReachProviderArtifact({
+      date: "2026-06-14",
+      inputPath,
+    });
+
+    expect(legacyConsumerResult.status).toBe("ok");
+    expect(legacyConsumerResult.events).toHaveLength(1);
+  });
+
   it("canonicalizes provider direction labels and warns when invalid labels are dropped", () => {
     const inputPath = writeJsonArtifact(
       makeArtifact({
@@ -308,6 +324,27 @@ describe("AgentReach local provider adapter", () => {
     expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
     expect(result.rejected_events[0]?.reason_detail).toContain("coverage");
     expect(JSON.stringify(result)).not.toContain("OAuth token expired");
+  });
+
+  it("returns failed for public-unsafe diagnostics without leaking warning text", () => {
+    const inputPath = writeJsonArtifact(
+      makeArtifact({
+        diagnostics: {
+          warnings: ["OAuth token expired for private provider account"],
+        },
+      }),
+    );
+
+    const result = loadAgentReachProviderArtifact({ date: "2026-06-14", inputPath });
+
+    expect(result.status).toBe("failed");
+    expect(result.status_reason).toBe("schema_invalid");
+    expect(result.events).toEqual([]);
+    expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
+    expect(result.rejected_events[0]?.reason_detail).toContain("diagnostics.warnings");
+    expect(JSON.stringify(result)).not.toContain(
+      "OAuth token expired for private provider account",
+    );
   });
 
   it.each([

@@ -1172,6 +1172,31 @@ Daily / weekly 集成仍保持手动边界：`run-daily` 不默认启动 produce
 
 V2 high-risk provider 仍不在 PR2 / C 范围：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计，凭据只读本地 secret / env，且不得写入 public artifact。
 
+## 16.7 PR3 Discovery Quality Policy
+
+AgentReach PR3 adds `AgentReachQualityPolicy` to the public-safe artifact `query`
+metadata while keeping `agent-reach.external-discovery.v1` unchanged. The policy
+fields are `lookback_days`, `max_items_per_query`, `max_items_per_provider`, and
+`max_items_total`; defaults are 180 / 20 / 50 / 100, with the ordering constraint
+`max_items_per_query <= max_items_per_provider <= max_items_total`.
+
+Live provider output uses an atomic query entry policy: one independently
+matchable direction per query entry, with only shared parent labels attached.
+Sibling direction labels must not be expanded from a single match. Relevance and
+freshness filtering apply only when `live.enabled=true`; local/manual imports are
+not freshness-filtered. Invalid explicit timestamps are counted as
+`quality_filtered_invalid_timestamp`; irrelevant live hits are counted as
+`quality_filtered_irrelevant`; duplicate removal is counted as
+`quality_deduplicated`.
+
+All providers still receive provider-level deduplication and
+`max_items_per_provider`; the final producer list receives global deduplication
+and `max_items_total`. Quality filtering, deduplication, and truncation are
+diagnostic operations only: zero relevant results are valid for a successful live
+request, and coverage remains ok when the upstream request succeeded.
+
+Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
+
 ## 17. Open Questions
 
 以下问题不改写冻结需求，也不阻塞 V1 进入 exec-plan；V1 默认决策已在正文冻结，以下仅作为后续产品优化或未来扩展问题保留。

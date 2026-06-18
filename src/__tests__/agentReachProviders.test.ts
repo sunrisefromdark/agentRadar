@@ -23,6 +23,7 @@ import {
 } from "../agentReach/providers/rssBlogProvider.ts";
 import { xTwitterProvider } from "../agentReach/providers/xTwitterProvider.ts";
 import { AGENT_REACH_QUERY_PACK } from "../agentReach/queryPack.ts";
+import { AGENT_REACH_DEFAULT_QUALITY_POLICY } from "../agentReach/qualityPolicy.ts";
 import {
   createDisabledAgentReachTransport,
   createInMemoryAgentReachTransport,
@@ -33,6 +34,7 @@ import type {
   AgentReachProviderConfig,
   AgentReachProviderContext,
   AgentReachProviderId,
+  AgentReachQualityPolicy,
 } from "../agentReach/types.ts";
 
 const tempDirs: string[] = [];
@@ -52,6 +54,7 @@ function writeImportArtifact(value: unknown): string {
 function providerContext(
   input?: string | AgentReachProviderConfig,
   transport: AgentReachTransport = createDisabledAgentReachTransport(),
+  qualityPolicy: AgentReachQualityPolicy = AGENT_REACH_DEFAULT_QUALITY_POLICY,
 ): AgentReachProviderContext {
   const providerConfig =
     typeof input === "string"
@@ -62,6 +65,7 @@ function providerContext(
     generated_at: "2026-06-18T00:00:00.000Z",
     query_pack: AGENT_REACH_QUERY_PACK,
     provider_config: providerConfig,
+    quality_policy: qualityPolicy,
     transport,
   };
 }
@@ -471,11 +475,17 @@ describe("AgentReach external import provider", () => {
           },
         },
         transport,
+        {
+          lookback_days: 180,
+          max_items_per_query: 5,
+          max_items_per_provider: 10,
+          max_items_total: 25,
+        },
       ),
     );
 
     expect(seenUrls).toEqual([
-      "https://hn.algolia.com/api/v1/search?query=research%20agent&tags=story",
+      "https://hn.algolia.com/api/v1/search?query=research%20agent&tags=story&hitsPerPage=5",
     ]);
     expect(result.status).toBe("ok");
     expect(result.coverage.hacker_news?.status).toBe("ok");
@@ -492,6 +502,53 @@ describe("AgentReach external import provider", () => {
         comments: 7,
       },
     });
+  });
+
+  it("caps parsed Hacker News hits per query even when upstream ignores hitsPerPage", async () => {
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        hits: [
+          {
+            objectID: "1",
+            title: "Research agent first",
+            url: "https://example.com/research-agent-1",
+          },
+          {
+            objectID: "2",
+            title: "Research agent second",
+            url: "https://example.com/research-agent-2",
+          },
+          {
+            objectID: "3",
+            title: "Research agent third",
+            url: "https://example.com/research-agent-3",
+          },
+        ],
+      }),
+    }));
+
+    const result = await hackerNewsProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://hn.algolia.com/api/v1/search"],
+            query_limit: 1,
+          },
+        },
+        transport,
+        {
+          lookback_days: 180,
+          max_items_per_query: 2,
+          max_items_per_provider: 10,
+          max_items_total: 25,
+        },
+      ),
+    );
+
+    expect(result.items.map((item) => item.raw_ref)).toEqual(["hn:1", "hn:2"]);
   });
 
   it("marks malformed live provider responses as failed input instead of transport unavailable", async () => {

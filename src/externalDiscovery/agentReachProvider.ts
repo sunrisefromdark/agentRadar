@@ -217,6 +217,8 @@ function validateArtifact(value: unknown): {
     errors.push("diagnostics.warnings is required");
   } else if (!diagnostics.warnings.every((item) => typeof item === "string")) {
     errors.push("diagnostics.warnings must be string[]");
+  } else if (containsForbiddenPublicArtifactText(diagnostics.warnings)) {
+    errors.push("diagnostics.warnings are not public-safe");
   }
 
   errors.push(...parsedCoverage.errors);

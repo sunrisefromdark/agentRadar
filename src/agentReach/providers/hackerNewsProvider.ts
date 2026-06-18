@@ -41,7 +41,11 @@ function hackerNewsItemUrl(hit: Record<string, unknown>, objectId: string): stri
   );
 }
 
-function parseHackerNewsHits(body: string, observedAt: string): unknown[] {
+function parseHackerNewsHits(
+  body: string,
+  observedAt: string,
+  maxHits: number,
+): unknown[] {
   let parsed: unknown;
   try {
     parsed = JSON.parse(body) as unknown;
@@ -94,13 +98,17 @@ function parseHackerNewsHits(body: string, observedAt: string): unknown[] {
           : {}),
       },
     ];
-  });
+  }).slice(0, maxHits);
 }
 
-function hackerNewsSearchUrls(baseUrl: string, terms: string[]): string[] {
+function hackerNewsSearchUrls(
+  baseUrl: string,
+  terms: string[],
+  hitsPerPage: number,
+): string[] {
   return terms.map((term) => {
     const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}query=${encodeURIComponent(term)}&tags=story`;
+    return `${baseUrl}${separator}query=${encodeURIComponent(term)}&tags=story&hitsPerPage=${hitsPerPage}`;
   });
 }
 
@@ -122,6 +130,7 @@ export const hackerNewsProvider: AgentReachProducerProvider = {
       }
       const queryLimit = context.provider_config.live.query_limit ?? 3;
       const terms = context.query_pack.flatMap((entry) => entry.terms).slice(0, queryLimit);
+      const maxHitsPerQuery = context.quality_policy.max_items_per_query;
       return runLiveProvider({
         context: {
           ...context,
@@ -129,14 +138,18 @@ export const hackerNewsProvider: AgentReachProducerProvider = {
             ...context.provider_config,
             live: {
               ...context.provider_config.live,
-              urls: hackerNewsSearchUrls(baseUrl, terms),
+              urls: hackerNewsSearchUrls(baseUrl, terms, maxHitsPerQuery),
             },
           },
         },
         providerId: "hacker-news",
         defaultPlatform: "hacker_news",
         parseResponse(input) {
-          return parseHackerNewsHits(input.body, input.context.generated_at);
+          return parseHackerNewsHits(
+            input.body,
+            input.context.generated_at,
+            maxHitsPerQuery,
+          );
         },
       });
     }

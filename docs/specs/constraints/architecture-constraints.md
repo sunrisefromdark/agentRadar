@@ -4,7 +4,7 @@
 
 - OSS external discovery has no login state, no account settings, no cookies, no sessions, and no OAuth data.
 - OSS external discovery must not read or expose platform API credentials.
-- AgentReach is consumed as a local artifact provider and must not become an in-repo crawler.
+- The main consumer consumes AgentReach through a local artifact boundary. The separate opt-in producer may fetch explicitly allowlisted low-risk public sources, but it must not become a general-purpose or recursive crawler.
 - Public artifacts must be sanitized aggregates or sanitized fixtures only.
 
 ## P0：必须满足

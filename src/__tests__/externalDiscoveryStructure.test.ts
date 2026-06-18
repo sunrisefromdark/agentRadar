@@ -267,6 +267,32 @@ describe("external discovery OSS artifact structure", () => {
     expect(producerCli).not.toContain("function runProvider");
   });
 
+  it("documents AgentReach live provider opt-in and high-risk provider boundaries", () => {
+    const design = readText(
+      "docs",
+      "specs",
+      "design-docs",
+      "agent-reach-external-discovery-and-evidence-design.md",
+    );
+    const producerExecPlan = readText(
+      "docs",
+      "specs",
+      "exec-plans",
+      "agent-reach-artifact-producer-v0.1.exec-plan.md",
+    );
+    const cliRuntime = readText("docs", "specs", "services", "cli-runtime.md");
+
+    for (const text of [design, producerExecPlan, cliRuntime]) {
+      expect(text).toContain("live.enabled");
+      expect(text).toContain("allowlist URL");
+      expect(text).toContain("createFetchAgentReachTransport");
+      expect(text).toContain("default remains disabled");
+      expect(text).toContain("run-daily --external-discovery-generate");
+      expect(text).toContain("X / Twitter API");
+      expect(text).toContain("Reddit API");
+    }
+  });
+
   it("keeps sanitized AgentReach fixture aligned with direction label policy", () => {
     const fixture = JSON.parse(
       readText(

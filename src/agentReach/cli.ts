@@ -9,7 +9,11 @@ import {
   AGENT_REACH_PROVIDER_REGISTRY,
 } from "./providerRegistry.ts";
 import { AGENT_REACH_QUERY_PACK } from "./queryPack.ts";
-import { createDisabledAgentReachTransport } from "./transport.ts";
+import {
+  createDisabledAgentReachTransport,
+  createFetchAgentReachTransport,
+  type AgentReachTransport,
+} from "./transport.ts";
 import {
   AGENT_REACH_PROVIDER_IDS,
   type AgentReachArtifactWriteResult,
@@ -19,6 +23,10 @@ import {
 
 interface AgentReachConfig {
   providers?: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>>;
+}
+
+export interface RunAgentReachDiscoverDependencies {
+  transport?: AgentReachTransport;
 }
 
 export interface AgentReachDiscoverOptions {
@@ -72,6 +80,67 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+const LIVE_CONFIG_PROVIDER_IDS = new Set<AgentReachProviderId>([
+  "rss-blog",
+  "official-web",
+  "hacker-news",
+]);
+
+function stringArray(value: unknown, label: string): string[] {
+  if (!Array.isArray(value) || !value.every((item) => typeof item === "string")) {
+    throw new Error(`${label} must be string[]`);
+  }
+  return value;
+}
+
+function positiveInteger(value: unknown, label: string): number {
+  if (typeof value !== "number" || !Number.isInteger(value) || value <= 0) {
+    throw new Error(`${label} must be a positive integer`);
+  }
+  return value;
+}
+
+function parseLiveConfig(
+  providerId: AgentReachProviderId,
+  rawLive: unknown,
+): AgentReachProviderConfig["live"] | undefined {
+  if (rawLive === undefined) return undefined;
+  if (!LIVE_CONFIG_PROVIDER_IDS.has(providerId)) {
+    throw new Error(`provider live config is not supported: ${providerId}`);
+  }
+  if (!isRecord(rawLive)) {
+    throw new Error(`provider live config must be an object: ${providerId}`);
+  }
+  if (rawLive.enabled !== undefined && typeof rawLive.enabled !== "boolean") {
+    throw new Error(`provider live.enabled must be a boolean: ${providerId}`);
+  }
+  const enabled = rawLive.enabled === true;
+  const urls = rawLive.urls === undefined
+    ? undefined
+    : stringArray(rawLive.urls, `provider live.urls: ${providerId}`);
+  if (enabled && (!urls || urls.length === 0)) {
+    throw new Error(`provider live.urls must be a non-empty string[]: ${providerId}`);
+  }
+  return {
+    ...(rawLive.enabled !== undefined ? { enabled } : {}),
+    ...(urls ? { urls } : {}),
+    ...(rawLive.timeout_ms !== undefined
+      ? { timeout_ms: positiveInteger(rawLive.timeout_ms, `provider live.timeout_ms: ${providerId}`) }
+      : {}),
+    ...(rawLive.max_response_bytes !== undefined
+      ? {
+          max_response_bytes: positiveInteger(
+            rawLive.max_response_bytes,
+            `provider live.max_response_bytes: ${providerId}`,
+          ),
+        }
+      : {}),
+    ...(rawLive.query_limit !== undefined
+      ? { query_limit: positiveInteger(rawLive.query_limit, `provider live.query_limit: ${providerId}`) }
+      : {}),
+  };
+}
+
 function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig {
   if (!configPath) return {};
   const parsed = JSON.parse(fs.readFileSync(configPath, "utf-8")) as unknown;
@@ -92,10 +161,15 @@ function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig 
     if (rawConfig.input_path !== undefined && typeof rawConfig.input_path !== "string") {
       throw new Error(`provider input_path must be a string: ${providerId}`);
     }
+    const live = parseLiveConfig(providerId, rawConfig.live);
+    if (typeof rawConfig.input_path === "string" && live?.enabled === true) {
+      throw new Error(`provider cannot combine input_path and live: ${providerId}`);
+    }
     providers[providerId] = {
       ...(typeof rawConfig.input_path === "string"
         ? { input_path: path.resolve(path.dirname(configPath), rawConfig.input_path) }
         : {}),
+      ...(live ? { live } : {}),
     };
   }
   return { providers };
@@ -154,6 +228,7 @@ export function parseAgentReachDiscoverArgs(argv: string[]): AgentReachDiscoverO
 async function runAgentReachDiscoverWithConfig(
   opts: AgentReachDiscoverOptions,
   config: AgentReachConfig,
+  dependencies: RunAgentReachDiscoverDependencies = {},
 ): Promise<AgentReachArtifactWriteResult> {
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
   const providerConfigs: Partial<
@@ -167,6 +242,13 @@ async function runAgentReachDiscoverWithConfig(
       input_path: opts.externalImportPath,
     };
   }
+  const hasLiveProviderConfig = opts.providers.some(
+    (providerId) => providerConfigs[providerId]?.live?.enabled === true,
+  );
+  const transport = dependencies.transport ??
+    (hasLiveProviderConfig
+      ? createFetchAgentReachTransport()
+      : createDisabledAgentReachTransport());
 
   const summary = await runAgentReachProviders({
     selected_provider_ids: opts.providers,
@@ -175,7 +257,7 @@ async function runAgentReachDiscoverWithConfig(
     generated_at: generatedAt,
     query_pack: AGENT_REACH_QUERY_PACK,
     provider_configs: providerConfigs,
-    transport: createDisabledAgentReachTransport(),
+    transport,
   });
   const outputPath = opts.outputPath ?? externalRawInputPath(opts.date);
   const platforms = Array.from(new Set(summary.items.map((item) => item.platform)));
@@ -201,10 +283,11 @@ async function runAgentReachDiscoverWithConfig(
 
 export function runAgentReachDiscover(
   opts: AgentReachDiscoverOptions,
+  dependencies: RunAgentReachDiscoverDependencies = {},
 ): Promise<AgentReachArtifactWriteResult> {
   assertValidDateOnly(opts.date, "--date");
   const config = loadAgentReachConfig(opts.configPath);
-  return runAgentReachDiscoverWithConfig(opts, config);
+  return runAgentReachDiscoverWithConfig(opts, config, dependencies);
 }
 
 function isMainModule(): boolean {

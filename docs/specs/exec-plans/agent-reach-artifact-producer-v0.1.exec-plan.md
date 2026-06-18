@@ -322,6 +322,16 @@ pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-bl
 3. 检查 `git status --short`，确认没有 production raw artifact 被误写入提交候选。
 4. 运行 `corepack pnpm run code-implementation:preflight -- --check` 只验证旧 consumer preflight receipt；producer plan 是否同步以 structure test 为准。
 
+### Phase 9：PR2 / C 低风险 live provider 与配置体验
+
+1. `transport.ts` 新增 `createFetchAgentReachTransport`，但 default remains disabled；没有显式 live 配置时 CLI 继续使用 `createDisabledAgentReachTransport`，不得调用 `fetch`。
+2. `rss-blog`、`official-web`、`hacker-news` 支持 `live.enabled=true` 和 allowlist URL；测试必须通过 fake/in-memory transport，不依赖真实网络。
+3. `input_path` 与 `live.enabled=true` 互斥；非法 `urls`、`timeout_ms`、`max_response_bytes`、`query_limit` fail-fast 且不写 artifact。
+4. RSS / Atom 解析 title、link、published / updated；official web 只提取配置页面的 title、canonical URL、meta description；Hacker News 只使用配置 search endpoint。
+5. CLI dry-run 输出 public-safe coverage summary；artifact 不包含 config path、account settings、cookie、session、OAuth、token、response body。
+6. `run-daily` 继续不自动启动 producer；未来如需集成，只能新增显式 `run-daily --external-discovery-generate --agentreach-config <path>`。
+7. V2 high-risk provider 不在本阶段实现：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计和测试 fixture。
+
 ## 验收标准
 
 1. `pnpm agentreach:discover -- --date <date> --dry-run` 返回 planned artifact summary，且不写盘。

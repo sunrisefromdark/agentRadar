@@ -10,6 +10,8 @@
 - Invalid producer config fails before writing; public-unsafe items, coverage, query data, or diagnostics must never be written.
 - A platform coverage gap is recoverable by configuring a sanitized local input and rerunning `agentreach:discover`; it must not be described as no discussion.
 - Provider runtime failures are isolated by `orchestrator.ts`. Safe coverage reasons include `provider_execution_failed` and `provider_transport_unavailable`; raw provider errors are converted to `AgentReachProviderError` safe codes before they enter diagnostics.
+- Live provider failures are recoverable by fixing the provider allowlist URL, timeout, byte budget, or local network condition and rerunning `agentreach:discover`. Invalid `live.enabled` config fails before writing; transport failures are expressed as typed coverage states without response bodies.
+- X / Twitter API and Reddit API failures are not part of the current recovery loop because those providers remain V2 high-risk opt-in designs.
 
 ## 分级
 

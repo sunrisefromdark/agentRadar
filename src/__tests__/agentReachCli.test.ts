@@ -5,6 +5,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { parseAgentReachDiscoverArgs, runAgentReachDiscover } from "../agentReach/cli.ts";
+import { createInMemoryAgentReachTransport } from "../agentReach/transport.ts";
 
 const tempDirs: string[] = [];
 
@@ -228,6 +229,97 @@ describe("AgentReach producer CLI", () => {
         config_loaded: true,
       }),
     );
+    expect(JSON.stringify(result.artifact)).not.toContain(configPath);
+    expect(fs.existsSync(outputPath)).toBe(false);
+  });
+
+  it("fails fast when a provider config mixes local input and live fetch", async () => {
+    const dir = makeTempDir();
+    const rssPath = path.join(dir, "rss-blog.json");
+    const configPath = path.join(dir, "agentreach.config.json");
+    fs.writeFileSync(rssPath, JSON.stringify({ items: [] }), "utf-8");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        providers: {
+          "rss-blog": {
+            input_path: rssPath,
+            live: {
+              enabled: true,
+              urls: ["https://example.com/rss.xml"],
+            },
+          },
+        },
+      }),
+      "utf-8",
+    );
+
+    expect(() =>
+      runAgentReachDiscover(
+        parseAgentReachDiscoverArgs([
+          "node",
+          "src/agentReach/cli.ts",
+          "--date",
+          "2026-06-18",
+          "--providers",
+          "rss-blog",
+          "--config",
+          configPath,
+          "--dry-run",
+        ]),
+      ),
+    ).toThrow(/cannot combine input_path and live/);
+  });
+
+  it("dry-runs explicitly enabled live RSS config through an injected transport and prints coverage summary", async () => {
+    const dir = makeTempDir();
+    const configPath = path.join(dir, "agentreach.config.json");
+    const outputPath = path.join(dir, "2026-06-18.agent-reach.json");
+    fs.writeFileSync(
+      configPath,
+      JSON.stringify({
+        providers: {
+          "rss-blog": {
+            live: {
+              enabled: true,
+              urls: ["https://example.com/rss.xml"],
+            },
+          },
+        },
+      }),
+      "utf-8",
+    );
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/rss+xml" },
+      body: `<rss><channel><item>
+        <title>Live RSS Agent</title>
+        <link>https://example.com/blog/live-rss-agent</link>
+        <pubDate>Thu, 18 Jun 2026 10:00:00 GMT</pubDate>
+      </item></channel></rss>`,
+    }));
+
+    const result = await runAgentReachDiscover(
+      parseAgentReachDiscoverArgs([
+        "node",
+        "src/agentReach/cli.ts",
+        "--date",
+        "2026-06-18",
+        "--providers",
+        "rss-blog",
+        "--config",
+        configPath,
+        "--output",
+        outputPath,
+        "--dry-run",
+      ]),
+      { transport },
+    );
+
+    expect(result.dry_run).toBe(true);
+    expect(result.artifact.items[0]?.title).toBe("Live RSS Agent");
+    expect(result.artifact.coverage.official_blog.status).toBe("ok");
+    expect(result.coverage_summary).toContain("official_blog=ok");
     expect(JSON.stringify(result.artifact)).not.toContain(configPath);
     expect(fs.existsSync(outputPath)).toBe(false);
   });

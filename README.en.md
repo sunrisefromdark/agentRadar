@@ -354,6 +354,8 @@ corepack pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-impo
 
 The current producer reads local sanitized JSON inputs and emits an `agent-reach.external-discovery.v1` artifact. X / Twitter and Reddit remain `manual_import_only`; no login-state, OAuth, or default platform crawling is performed. Every produced artifact records complete coverage, and `not_configured`, `manual_import_only`, or `partial` must not be interpreted as “no external signal.”
 
+Low-risk live providers are explicit opt-in only: `rss-blog`, `official-web`, and `hacker-news` use live transport only when config sets `live.enabled=true` and an allowlist URL. The default remains non-networked. `input_path` and live fetch are mutually exclusive, and config paths, cookies, sessions, OAuth, tokens, account settings, and response bodies must not enter the artifact. `run-daily` still consumes an existing artifact by default; future generation would require an explicit flag such as `run-daily --external-discovery-generate --agentreach-config <path>`. X / Twitter API and Reddit API remain future V2 high-risk provider designs.
+
 ### Hosted-product note
 
 - The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)

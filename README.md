@@ -354,6 +354,8 @@ corepack pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-impo
 
 当前 producer 读取本地 sanitized JSON 输入并输出 `agent-reach.external-discovery.v1` artifact。X / Twitter 与 Reddit 只保留 `manual_import_only` 入口，不执行登录态、OAuth 或默认平台抓取。每次输出都会记录完整 coverage；`not_configured`、`manual_import_only` 或 `partial` 不等于“没有外部信号”。
 
+低风险 live provider 必须显式 opt-in：只有配置 `live.enabled=true` 和 allowlist URL 的 `rss-blog`、`official-web`、`hacker-news` 才会使用 live transport；默认仍不联网。`input_path` 与 live fetch 互斥，config path、cookie、session、OAuth、token、账号设置和 response body 都不会写入 artifact。`run-daily` 默认仍只消费已有 artifact；未来若需要自动生成，必须使用类似 `run-daily --external-discovery-generate --agentreach-config <path>` 的显式入口。X / Twitter API 与 Reddit API 仍属于后续 V2 高风险 provider 设计。
+
 ### 托管版说明
 
 - 在线托管版位于 [`app.agentradar.top`](https://app.agentradar.top/)

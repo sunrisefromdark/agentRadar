@@ -23,9 +23,14 @@ import {
 } from "../agentReach/providers/rssBlogProvider.ts";
 import { xTwitterProvider } from "../agentReach/providers/xTwitterProvider.ts";
 import { AGENT_REACH_QUERY_PACK } from "../agentReach/queryPack.ts";
-import { createDisabledAgentReachTransport } from "../agentReach/transport.ts";
+import {
+  createDisabledAgentReachTransport,
+  createInMemoryAgentReachTransport,
+  type AgentReachTransport,
+} from "../agentReach/transport.ts";
 import type {
   AgentReachProducerProvider,
+  AgentReachProviderConfig,
   AgentReachProviderContext,
   AgentReachProviderId,
 } from "../agentReach/types.ts";
@@ -44,15 +49,20 @@ function writeImportArtifact(value: unknown): string {
   return filePath;
 }
 
-function providerContext(inputPath?: string): AgentReachProviderContext {
+function providerContext(
+  input?: string | AgentReachProviderConfig,
+  transport: AgentReachTransport = createDisabledAgentReachTransport(),
+): AgentReachProviderContext {
+  const providerConfig =
+    typeof input === "string"
+      ? { input_path: input }
+      : input ?? {};
   return {
     date: "2026-06-18",
     generated_at: "2026-06-18T00:00:00.000Z",
     query_pack: AGENT_REACH_QUERY_PACK,
-    provider_config: {
-      ...(inputPath ? { input_path: inputPath } : {}),
-    },
-    transport: createDisabledAgentReachTransport(),
+    provider_config: providerConfig,
+    transport,
   };
 }
 
@@ -321,6 +331,167 @@ describe("AgentReach external import provider", () => {
     expect(loadRssBlogProvider({ inputPath: rssPath }).items[0]?.platform).toBe("official_blog");
     expect(loadOfficialWebProvider({ inputPath: officialWebPath }).items[0]?.platform).toBe("official_web");
     expect(loadHackerNewsProvider({ inputPath: hackerNewsPath }).items[0]?.platform).toBe("hacker_news");
+  });
+
+  it("fetches configured RSS and Atom feeds through injected transport only when live config is enabled", async () => {
+    const seenUrls: string[] = [];
+    const transport = createInMemoryAgentReachTransport((request) => {
+      seenUrls.push(request.url);
+      if (request.url.endsWith("/rss.xml")) {
+        return {
+          status: 200,
+          headers: { "content-type": "application/rss+xml" },
+          body: `<?xml version="1.0"?>
+            <rss><channel><item>
+              <title>Research agent RSS launch</title>
+              <link>https://example.com/blog/rss-launch</link>
+              <pubDate>Thu, 18 Jun 2026 10:00:00 GMT</pubDate>
+              <description>Public summary that is parsed but not stored as raw body.</description>
+            </item></channel></rss>`,
+        };
+      }
+      return {
+        status: 200,
+        headers: { "content-type": "application/atom+xml" },
+        body: `<?xml version="1.0"?>
+          <feed><entry>
+            <title>Office agent Atom launch</title>
+            <link href="https://example.com/blog/atom-launch" />
+            <updated>2026-06-18T11:00:00.000Z</updated>
+            <summary>Public Atom summary.</summary>
+          </entry></feed>`,
+      };
+    });
+
+    const result = await rssBlogProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://example.com/rss.xml", "https://example.com/atom.xml"],
+            timeout_ms: 1234,
+            max_response_bytes: 4096,
+          },
+        },
+        transport,
+      ),
+    );
+
+    expect(seenUrls).toEqual(["https://example.com/rss.xml", "https://example.com/atom.xml"]);
+    expect(result.status).toBe("ok");
+    expect(result.coverage.official_blog?.status).toBe("ok");
+    expect(result.items.map((item) => item.title)).toEqual([
+      "Research agent RSS launch",
+      "Office agent Atom launch",
+    ]);
+    expect(result.items.map((item) => item.url)).toEqual([
+      "https://example.com/blog/rss-launch",
+      "https://example.com/blog/atom-launch",
+    ]);
+    expect(result.items[0]).toMatchObject({
+      platform: "official_blog",
+      raw_event_kind: "blog_post",
+      derived_signal_kinds: ["discovery"],
+      source_published_at: "2026-06-18T10:00:00.000Z",
+    });
+  });
+
+  it("fetches only configured official pages and extracts public title and canonical URL", async () => {
+    const transport = createInMemoryAgentReachTransport((request) => ({
+      status: 200,
+      headers: { "content-type": "text/html" },
+      body: `<!doctype html>
+        <html>
+          <head>
+            <title>Example Agents</title>
+            <link rel="canonical" href="https://example.com/agents" />
+            <meta name="description" content="Public product page summary" />
+          </head>
+          <body><main>Example Agents landing page</main></body>
+        </html>`,
+    }));
+
+    const result = await officialWebProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://example.com/agents?ref=allowlist"],
+          },
+        },
+        transport,
+      ),
+    );
+
+    expect(result.status).toBe("ok");
+    expect(result.coverage.official_web?.status).toBe("ok");
+    expect(result.items).toHaveLength(1);
+    expect(result.items[0]).toMatchObject({
+      platform: "official_web",
+      raw_event_kind: "official_release",
+      url: "https://example.com/agents",
+      title: "Example Agents",
+      target: {
+        url: "https://example.com/agents",
+        topic_hint: "Public product page summary",
+      },
+    });
+  });
+
+  it("queries configured Hacker News search endpoint with query-pack terms through injected transport", async () => {
+    const seenUrls: string[] = [];
+    const transport = createInMemoryAgentReachTransport((request) => {
+      seenUrls.push(request.url);
+      return {
+        status: 200,
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          hits: [
+            {
+              objectID: "4242",
+              title: "Research agent discussion",
+              url: "https://example.com/research-agent",
+              created_at: "2026-06-18T09:00:00.000Z",
+              author: "hn-user",
+              points: 42,
+              num_comments: 7,
+            },
+          ],
+        }),
+      };
+    });
+
+    const result = await hackerNewsProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://hn.algolia.com/api/v1/search"],
+            query_limit: 1,
+          },
+        },
+        transport,
+      ),
+    );
+
+    expect(seenUrls).toEqual([
+      "https://hn.algolia.com/api/v1/search?query=research%20agent&tags=story",
+    ]);
+    expect(result.status).toBe("ok");
+    expect(result.coverage.hacker_news?.status).toBe("ok");
+    expect(result.items[0]).toMatchObject({
+      platform: "hacker_news",
+      raw_ref: "hn:4242",
+      raw_event_kind: "discussion",
+      derived_signal_kinds: ["discovery"],
+      url: "https://example.com/research-agent",
+      title: "Research agent discussion",
+      actor: { display_name: "hn-user" },
+      metrics: {
+        points: 42,
+        comments: 7,
+      },
+    });
   });
 
   it("rejects a low-risk provider item that declares another provider platform", () => {

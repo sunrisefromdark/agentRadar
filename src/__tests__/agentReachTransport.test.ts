@@ -3,6 +3,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import {
   createAgentReachTransportError,
   createDisabledAgentReachTransport,
+  createFetchAgentReachTransport,
   createInMemoryAgentReachTransport,
   type AgentReachTransportRequest,
 } from "../agentReach/transport.ts";
@@ -123,5 +124,27 @@ describe("AgentReach transport", () => {
       retryable: true,
       message: "provider transport is unavailable",
     });
+  });
+
+  it("uses global fetch only when the explicit live transport is constructed", async () => {
+    const fetchSpy = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response("live body", {
+        status: 200,
+        headers: { "content-type": "text/plain" },
+      }),
+    );
+    const transport = createFetchAgentReachTransport();
+
+    const result = await transport.request(request({ url: "https://example.com/feed.xml" }));
+
+    expect(fetchSpy).toHaveBeenCalledOnce();
+    expect(fetchSpy).toHaveBeenCalledWith(
+      "https://example.com/feed.xml",
+      expect.objectContaining({
+        method: "GET",
+        headers: {},
+      }),
+    );
+    expect(result.body).toBe("live body");
   });
 });

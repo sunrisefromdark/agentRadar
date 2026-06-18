@@ -92,6 +92,7 @@ export interface AgentReachProviderArtifact {
 export interface AgentReachArtifactWriteResult {
   output_path: string;
   dry_run: boolean;
+  coverage_summary: string;
   artifact: AgentReachProviderArtifact;
 }
 
@@ -103,6 +104,13 @@ export interface AgentReachRejectedProviderItem {
 
 export interface AgentReachProviderConfig {
   input_path?: string;
+  live?: {
+    enabled?: boolean;
+    urls?: string[];
+    timeout_ms?: number;
+    max_response_bytes?: number;
+    query_limit?: number;
+  };
 }
 
 export interface AgentReachProviderContext {

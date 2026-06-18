@@ -1157,6 +1157,21 @@ V1.5 不实现 X / Twitter 深度搜索、Reddit OAuth 搜索、账号态采集�
 
 V2 若要接入 X / Twitter API、Reddit API、scoped crawler、authority registry 或 actor graph，必须另行设计 opt-in provider、凭据边界、quota / backoff、审计字段和测试 fixture。`provider_tier_hint` 仍不能直接升级为 `registry_tier` 或 `effective_tier=core/proven/watch`；头部判断必须来自可维护的 registry。
 
+### 16.6 PR2 / C Live Provider 与配置体验边界
+
+PR2 允许低风险 provider 在明确配置后执行公开网络读取，但 default remains disabled：没有 `live.enabled=true` 的 provider 仍使用 `createDisabledAgentReachTransport`，不得调用 `fetch`。只有 `rss-blog`、`official-web`、`hacker-news` 可以配置 live mode；每个 live provider 必须通过 allowlist URL 运行，并使用 `createFetchAgentReachTransport` 或测试注入的 fake/in-memory transport。
+
+配置边界：
+
+- `input_path` 与 `live.enabled=true` 互斥；本地 sanitized JSON 输入和 live fetch 不得在同一 provider run 中混用。
+- `live.urls` 是 provider 的 allowlist URL；RSS / Atom 可配置 feed URL，official web 只读取配置页面，Hacker News 只使用配置 search endpoint。
+- `timeout_ms`、`max_response_bytes`、`query_limit` 必须是正整数；非法配置 fail-fast，且不写 artifact。
+- dry-run 输出可包含 public-safe coverage summary，但 artifact 仍不得包含 config path、account settings、cookie、session、OAuth、token 或 response body。
+
+Daily / weekly 集成仍保持手动边界：`run-daily` 不默认启动 producer。若未来需要自动生成，只能新增显式 `run-daily --external-discovery-generate --agentreach-config <path>`；weekly 永远只读 daily aggregate，不直接启动 producer。
+
+V2 high-risk provider 仍不在 PR2 / C 范围：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计，凭据只读本地 secret / env，且不得写入 public artifact。
+
 ## 17. Open Questions
 
 以下问题不改写冻结需求，也不阻塞 V1 进入 exec-plan；V1 默认决策已在正文冻结，以下仅作为后续产品优化或未来扩展问题保留。

@@ -122,3 +122,41 @@ export function createDisabledAgentReachTransport(): AgentReachTransport {
     },
   };
 }
+
+function isAbortError(error: unknown): boolean {
+  return (
+    error instanceof Error &&
+    (error.name === "AbortError" || error.message.toLowerCase().includes("abort"))
+  );
+}
+
+export function createFetchAgentReachTransport(): AgentReachTransport {
+  return {
+    async request(request) {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), request.timeout_ms);
+      try {
+        const response = await fetch(request.url, {
+          method: request.method,
+          headers: request.headers,
+          signal: controller.signal,
+        });
+        const headers = Object.fromEntries(response.headers.entries());
+        return validateTransportResponse(request, {
+          status: response.status,
+          headers,
+          body: await response.text(),
+        });
+      } catch (error) {
+        if (error instanceof AgentReachProviderError) throw error;
+        throw createAgentReachTransportError({
+          providerId: request.provider_id,
+          code: isAbortError(error) ? "timeout" : "unavailable",
+          cause: error,
+        });
+      } finally {
+        clearTimeout(timeout);
+      }
+    },
+  };
+}

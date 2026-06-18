@@ -26,6 +26,8 @@ These files are part of the project deliverable. They let readers inspect histor
 
 The opt-in `agentreach:discover` producer writes dated artifacts to `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json`. Its local provider config may reference sanitized JSON inputs for `external-import`, `rss-blog`, `official-web`, and `hacker-news`; config paths and account settings must not be copied into the artifact. X / Twitter and Reddit are manual-import-only boundaries.
 
+Low-risk live provider config is also local-only and explicit: `live.enabled=true` plus an allowlist URL may be used for RSS / Atom, official page, or Hacker News public search discovery. `input_path` and live config are mutually exclusive for one provider run. The produced artifact may retain public URLs and coverage states, but must not retain config paths, cookies, sessions, OAuth, tokens, account settings, private diagnostics, or response bodies.
+
 ## External discovery public artifacts
 
 Public external discovery output belongs under `data/external-discovery/*.aggregate.json`. A public aggregate may keep summaries, counts, stable evidence IDs, platform enums, audit status, and `source_input_hash`, but it must not preserve provider raw text or profile URLs.

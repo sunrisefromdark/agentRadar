@@ -10,6 +10,8 @@
 - Weekly external windows must aggregate coverage status counts.
 - `not_configured`, `manual_import_only`, `unavailable`, and `partial` are coverage states, not no-signal conclusions.
 - Producer orchestrator warnings use `provider_failed:<provider_id>:<safe_code>` and must not include raw exception text, filesystem paths, response bodies, cookie, session, OAuth, token, account settings, or platform API credentials.
+- Live provider observability is opt-in only: `live.enabled=true` with an allowlist URL may produce public-safe coverage summary and typed `timeout` / `http` / `unavailable` / `response_too_large` states. The default remains disabled and must not call live transport.
+- X / Twitter API and Reddit API observability is reserved for future V2 high-risk provider design; current manual-import-only coverage must not be rendered as no discussion.
 
 ## 观测信号
 

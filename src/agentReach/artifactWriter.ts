@@ -72,6 +72,12 @@ function assertPublicSafeArtifact(artifact: AgentReachProviderArtifact): void {
   }
 }
 
+export function formatAgentReachCoverageSummary(coverage: AgentReachCoverage): string {
+  return EXTERNAL_PLATFORMS.map(
+    (platform) => `${platform}=${coverage[platform].status}`,
+  ).join(", ");
+}
+
 export function writeAgentReachArtifact(
   input: WriteAgentReachArtifactInput,
 ): AgentReachArtifactWriteResult {
@@ -98,6 +104,7 @@ export function writeAgentReachArtifact(
   return {
     output_path: input.outputPath,
     dry_run: input.dryRun === true,
+    coverage_summary: formatAgentReachCoverageSummary(artifact.coverage),
     artifact,
   };
 }

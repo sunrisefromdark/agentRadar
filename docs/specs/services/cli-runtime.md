@@ -5,6 +5,11 @@
 - `agentreach:discover` is an independent package script backed by `src/agentReach/cli.ts`; it is not a command registered in `src/cli.ts`.
 - `agentreach:discover` accepts `--date`, `--providers`, `--output`, `--dry-run`, `--external-import`, and `--config`.
 - `--config` points to local JSON provider input declarations; its path and account settings must not enter the produced artifact.
+- `--config` may also declare low-risk live provider input with `live.enabled=true` and an allowlist URL. The default remains disabled: without explicit live config, `agentreach:discover` uses disabled transport and does not call `fetch`.
+- Live RSS / Atom, official page, and Hacker News search use `createFetchAgentReachTransport` only after explicit opt-in; tests use fake/in-memory transport and must not depend on real network.
+- `input_path` and `live.enabled=true` are mutually exclusive for one provider run. Invalid live config fails before writing an artifact.
+- `run-daily` still does not start producer. A future integration would require an explicit flag such as `run-daily --external-discovery-generate --agentreach-config <path>`; weekly continues to read daily aggregates only.
+- X / Twitter API and Reddit API remain V2 high-risk provider candidates, not default OSS behavior.
 - X / Twitter and Reddit remain reserved `manual_import_only` providers and must not trigger default crawling.
 - `agentreach:discover` creates a safe `ProviderContext`, selects providers from `providerRegistry.ts`, and delegates provider execution and aggregation to the orchestrator.
 - The producer CLI must not contain provider-specific execution branches, provider result merging, coverage aggregation, or status calculation.

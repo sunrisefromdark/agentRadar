@@ -346,6 +346,14 @@ AgentReach external discovery raw input lives under `data/raw/external-discovery
 
 The external discovery pipeline must not save, read, or expose login state, cookies, sessions, OAuth data, account settings, or platform API credentials. See [data/README.md](./data/README.md) for the data boundary.
 
+The repository includes an independent, opt-in AgentReach artifact producer. `run-daily` never starts it automatically:
+
+```bash
+corepack pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-blog,official-web,hacker-news --dry-run
+```
+
+The current producer reads local sanitized JSON inputs and emits an `agent-reach.external-discovery.v1` artifact. X / Twitter and Reddit remain `manual_import_only`; no login-state, OAuth, or default platform crawling is performed. Every produced artifact records complete coverage, and `not_configured`, `manual_import_only`, or `partial` must not be interpreted as “no external signal.”
+
 ### Hosted-product note
 
 - The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)

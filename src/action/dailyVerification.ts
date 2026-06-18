@@ -3,7 +3,12 @@ import path from "node:path";
 import { readJsonFile } from "../storage/files.ts";
 import { externalAggregatePath } from "../externalDiscovery/paths.ts";
 import { assertPublicSafeAggregate } from "../externalDiscovery/redaction.ts";
-import type { DailyExternalAggregate, ExternalProviderStatus } from "../externalDiscovery/types.ts";
+import {
+  EXTERNAL_PLATFORMS,
+  type DailyExternalAggregate,
+  type ExternalDiscoveryCoverage,
+  type ExternalProviderStatus,
+} from "../externalDiscovery/types.ts";
 import type {
   DailyReport,
   DailyRunSummary,
@@ -538,6 +543,36 @@ function externalPublicAggregateCheck(
   );
 }
 
+function externalCoverageCheck(
+  summary: DailyRunSummary,
+  report: DailyReport | null,
+  aggregate: DailyExternalAggregate | null,
+): VerificationCheck {
+  const coverage: ExternalDiscoveryCoverage | undefined =
+    aggregate?.audit.coverage ??
+    report?.external_discovery?.external_audit_summary?.coverage ??
+    summary.external_discovery?.coverage;
+  if (!coverage) {
+    return buildCheck(
+      "external_coverage_recorded",
+      "warn",
+      "external coverage is not recorded; legacy artifact remains readable but absence is not evidence of no signal",
+    );
+  }
+
+  const missingPlatforms = EXTERNAL_PLATFORMS.filter((platform) => !coverage[platform]);
+  const detail = EXTERNAL_PLATFORMS
+    .map((platform) => `${platform}=${coverage[platform]?.status ?? "missing"}`)
+    .join(",");
+  return buildCheck(
+    "external_coverage_recorded",
+    missingPlatforms.length === 0 ? "pass" : "warn",
+    missingPlatforms.length === 0
+      ? detail
+      : `${detail}; missing_platforms=${missingPlatforms.join(",")}; missing coverage is not evidence of no signal`,
+  );
+}
+
 const EXTERNAL_SCORE_COMPONENT_NAMES = new Set([
   "external_discovery",
   "external-discovery",
@@ -629,6 +664,7 @@ function externalDiscoveryChecks(
     externalStatusCheck(status),
     externalDailyAuditCheck(summary, report),
     externalPublicAggregateCheck(aggregateRead, status),
+    externalCoverageCheck(summary, report, aggregateRead.value),
     externalPrimaryContaminationCheck(report),
   ];
 }

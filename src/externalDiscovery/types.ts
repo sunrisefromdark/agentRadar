@@ -11,6 +11,24 @@ export type ExternalPlatform = (typeof EXTERNAL_PLATFORMS)[number];
 export const EXTERNAL_PROVIDER_STATUSES = ["ok", "skipped", "partial", "failed"] as const;
 export type ExternalProviderStatus = (typeof EXTERNAL_PROVIDER_STATUSES)[number];
 
+export const EXTERNAL_COVERAGE_STATUSES = [
+  "ok",
+  "partial",
+  "not_configured",
+  "manual_import_only",
+  "unavailable",
+  "failed",
+] as const;
+export type ExternalCoverageStatus = (typeof EXTERNAL_COVERAGE_STATUSES)[number];
+
+export interface ExternalPlatformCoverage {
+  status: ExternalCoverageStatus;
+  reason?: string;
+  warnings?: string[];
+}
+
+export type ExternalDiscoveryCoverage = Partial<Record<ExternalPlatform, ExternalPlatformCoverage>>;
+
 export const EXTERNAL_SIGNAL_KINDS = ["discovery", "evidence"] as const;
 export type ExternalSignalKind = (typeof EXTERNAL_SIGNAL_KINDS)[number];
 
@@ -201,6 +219,7 @@ export interface DailyExternalAggregate {
   direction_evidence: ExternalEvidence[];
   observation_candidates: ObservationCandidate[];
   audit: {
+    coverage?: ExternalDiscoveryCoverage;
     rejected_events: Array<{
       raw_ref?: string;
       reason_code: string;

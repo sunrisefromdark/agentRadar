@@ -4,6 +4,7 @@ import { buildDailyRunSummary, renderDailyRunSummary } from "../action/runSummar
 import type { AppConfig } from "../config.ts";
 import type {
   DailyExternalAggregate,
+  ExternalDiscoveryCoverage,
   ExternalEvidence,
   ObservationCandidate,
 } from "../externalDiscovery/types.ts";
@@ -100,6 +101,31 @@ function makeAggregate(overrides: Partial<DailyExternalAggregate> = {}): DailyEx
   };
 }
 
+function makeCoverage(): ExternalDiscoveryCoverage {
+  return {
+    x_twitter: {
+      status: "manual_import_only",
+      reason: "reserved_provider_not_configured",
+    },
+    reddit: {
+      status: "manual_import_only",
+      reason: "reserved_provider_not_configured",
+    },
+    hacker_news: {
+      status: "not_configured",
+      reason: "provider_not_selected",
+    },
+    official_web: {
+      status: "partial",
+      reason: "sitemap_unavailable",
+      warnings: ["official_web_partial"],
+    },
+    official_blog: {
+      status: "ok",
+    },
+  };
+}
+
 describe("external discovery daily and run-summary outputs", () => {
   it("renders skipped external layer as an empty secondary section", () => {
     const aggregate = makeAggregate({
@@ -163,11 +189,13 @@ describe("external discovery daily and run-summary outputs", () => {
   });
 
   it("records external discovery as a secondary run-summary audit", () => {
+    const coverage = makeCoverage();
     const aggregate = makeAggregate({
       direction_label_counts: { "personal-assistant-agent": 1 },
       project_evidence: [makeEvidence()],
       observation_candidates: [makeCandidate()],
       audit: {
+        coverage,
         rejected_events: [{ reason_code: "unsupported_platform", reason_detail: "platform rejected" }],
         warnings: ["registry_empty", "registry_miss"],
       },
@@ -193,6 +221,8 @@ describe("external discovery daily and run-summary outputs", () => {
 
     expect(summary.external_discovery?.provider).toBe("agent-reach");
     expect(summary.external_discovery?.status).toBe("ok");
+    expect(report.external_discovery.external_audit_summary.coverage).toEqual(coverage);
+    expect(summary.external_discovery?.coverage).toEqual(coverage);
     expect(summary.external_discovery?.aggregate_path).toBe("data/external-discovery/2026-06-14.aggregate.json");
     expect(summary.external_discovery?.source_input_hash).toBe(aggregate.source_input_hash);
     expect(summary.external_discovery?.rejected_reason_counts).toEqual({ unsupported_platform: 1 });
@@ -201,5 +231,11 @@ describe("external discovery daily and run-summary outputs", () => {
     expect(renderDailyRunSummary(summary)).toContain("External Discovery");
     expect(renderDailyRunSummary(summary)).toContain("secondary");
     expect(renderDailyRunSummary(summary)).toContain("direction_label_counts: personal-assistant-agent=1");
+    expect(renderDailyReport(report)).toContain(
+      "coverage: x_twitter=manual_import_only, reddit=manual_import_only, hacker_news=not_configured, official_web=partial, official_blog=ok",
+    );
+    expect(renderDailyRunSummary(summary)).toContain(
+      "coverage: x_twitter=manual_import_only, reddit=manual_import_only, hacker_news=not_configured, official_web=partial, official_blog=ok",
+    );
   });
 });

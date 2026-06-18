@@ -1,4 +1,5 @@
 import type { ScoredProject, WeeklyEvidenceMatrix, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
+import { EXTERNAL_COVERAGE_STATUSES, EXTERNAL_PLATFORMS } from "../externalDiscovery/types.ts";
 import { renderCoreTrendCard, renderWeakSignalCard } from "./weeklyEnhancement.ts";
 
 function countByParadigm(items: ScoredProject[]): Array<[string, number]> {
@@ -105,6 +106,18 @@ function renderAuditConclusion(judgment?: WeeklyJudgmentReport): string[] {
   ];
 }
 
+function renderCoverageStatusCounts(window: NonNullable<WeeklyReport["external_discovery_window"]>): string {
+  const segments = EXTERNAL_PLATFORMS.flatMap((platform) => {
+    const counts = window.coverage_status_counts[platform];
+    if (!counts) return [];
+    const statusCounts = EXTERNAL_COVERAGE_STATUSES
+      .filter((status) => typeof counts[status] === "number" && counts[status]! > 0)
+      .map((status) => `${status}=${counts[status]}`);
+    return statusCounts.length > 0 ? [`${platform}(${statusCounts.join("|")})`] : [];
+  });
+  return segments.join(", ") || "none";
+}
+
 function renderExternalDiscoveryWeeklySection(report: WeeklyReport): string[] {
   const window = report.external_discovery_window;
   if (!window) return [];
@@ -125,6 +138,7 @@ function renderExternalDiscoveryWeeklySection(report: WeeklyReport): string[] {
     `- missing_day_count: ${window.missing_day_count}`,
     `- failed_day_count: ${window.failed_day_count}`,
     `- direction_label_counts: ${directionLabelCounts}`,
+    `- coverage_status_counts: ${renderCoverageStatusCounts(window)}`,
     `- weekly_direction_observations: ${observations.length}`,
     ...observations.slice(0, 5).map((observation) =>
       `  - ${observation.topic_key}: direction_labels=${observation.direction_labels.join(",") || "none"} gates=${observation.satisfied_gates.join(",")} evidence=${observation.evidence_ids.join(",")}`,

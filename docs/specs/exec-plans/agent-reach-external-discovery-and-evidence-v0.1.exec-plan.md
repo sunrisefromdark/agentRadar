@@ -754,10 +754,12 @@ Phase 10 是上游需求 / 设计在 Phase 9 后新增的 scope update，不回�
 - `scripts/execPlanPreflight.ts` 已指向当前 `agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md` 并刷新 receipt；后续生产代码实现前必须保持 preflight check 通过。
 - README 当前仍描述托管版登录能力；实现阶段需要精确区分 hosted app 与 OSS local console，避免把 hosted 登录说明误删。
 - Phase 10 已完成；后续进入总体验收后的人工代码审核、提交与 PR 阶段时，仍需守住 direction label 不污染主评分链路的边界。
+- 本 v0.1 exec-plan 的完成范围是 AgentReach artifact consumer backend；它不包含 AgentReach 搜索 / 采集 / artifact producer。
+- 后续若实现本仓库内 opt-in AgentReach artifact producer，应由 `docs/specs/exec-plans/agent-reach-artifact-producer-v0.1.exec-plan.md` 承接，并继续通过 `agent-reach.external-discovery.v1` artifact 与本 consumer 隔离。
 
 ## 下一阶段入口
 
-Phase 9 与 Phase 10 已完成。下一阶段可以进入总体验收后的人工代码审核、提交与 PR 阶段；后续仍不得扩大 AgentReach v0.1 到直接平台采集、登录态处理或主评分链路。
+Phase 9 与 Phase 10 已完成。下一阶段可以进入总体验收后的人工代码审核、提交与 PR 阶段；若继续开发 AgentReach 前半段，应启动独立 producer exec-plan，而不是扩大本 v0.1 consumer 到直接平台采集、登录态处理或主评分链路。
 
 ## 验证记录
 

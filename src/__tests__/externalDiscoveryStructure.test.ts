@@ -158,6 +158,115 @@ describe("external discovery OSS artifact structure", () => {
     }
   });
 
+  it("keeps AgentReach producer isolated behind its own CLI and module root", () => {
+    const packageJson = JSON.parse(readText("package.json")) as {
+      scripts?: Record<string, string>;
+    };
+    const mainCli = readText("src", "cli.ts");
+    const producerCli = readText("src", "agentReach", "cli.ts");
+
+    expect(packageJson.scripts?.["agentreach:discover"]).toBe("tsx src/agentReach/cli.ts");
+    expect(fs.existsSync(path.join(repoRoot, "src", "agentReach"))).toBe(true);
+    expect(fs.existsSync(path.join(repoRoot, "src", "externalDiscovery"))).toBe(true);
+    for (const modulePath of [
+      ["src", "agentReach", "normalizer.ts"],
+      ["src", "agentReach", "sanitizer.ts"],
+      ["src", "agentReach", "coverageAudit.ts"],
+      ["src", "agentReach", "artifactWriter.ts"],
+      ["src", "agentReach", "providers", "externalImportProvider.ts"],
+      ["src", "agentReach", "providers", "rssBlogProvider.ts"],
+      ["src", "agentReach", "providers", "officialWebProvider.ts"],
+      ["src", "agentReach", "providers", "hackerNewsProvider.ts"],
+      ["src", "agentReach", "providers", "xTwitterProvider.ts"],
+      ["src", "agentReach", "providers", "redditProvider.ts"],
+    ]) {
+      expect(fs.existsSync(path.join(repoRoot, ...modulePath))).toBe(true);
+    }
+    expect(mainCli).not.toContain("agentreach:discover");
+    expect(producerCli).toContain("writeAgentReachArtifact");
+    expect(producerCli).toContain("external-import");
+  });
+
+  it("keeps AgentReach producer docs aligned with opt-in provider boundaries", () => {
+    const design = readText(
+      "docs",
+      "specs",
+      "design-docs",
+      "agent-reach-external-discovery-and-evidence-design.md",
+    );
+    const producerExecPlan = readText(
+      "docs",
+      "specs",
+      "exec-plans",
+      "agent-reach-artifact-producer-v0.1.exec-plan.md",
+    );
+
+    for (const text of [design, producerExecPlan]) {
+      expect(text).toContain("src/agentReach/");
+      expect(text).toContain("external-import");
+      expect(text).toContain("rss-blog");
+      expect(text).toContain("official-web");
+      expect(text).toContain("hacker-news");
+      expect(text).toContain("xTwitterProvider");
+      expect(text).toContain("redditProvider");
+      expect(text).toContain("not_configured");
+      expect(text).toContain("manual_import_only");
+      expect(text).toContain("coverage");
+      expect(text).toContain("cookie");
+      expect(text).toContain("OAuth");
+    }
+  });
+
+  it("documents AgentReach provider foundation ownership boundaries", () => {
+    const design = readText(
+      "docs",
+      "specs",
+      "design-docs",
+      "agent-reach-external-discovery-and-evidence-design.md",
+    );
+    const producerExecPlan = readText(
+      "docs",
+      "specs",
+      "exec-plans",
+      "agent-reach-artifact-producer-v0.1.exec-plan.md",
+    );
+    const cliRuntime = readText("docs", "specs", "services", "cli-runtime.md");
+    const observability = readText(
+      "docs",
+      "specs",
+      "feedback-loops",
+      "observability-contract.md",
+    );
+    const recovery = readText(
+      "docs",
+      "specs",
+      "feedback-loops",
+      "failure-recovery-loop.md",
+    );
+    const producerCli = readText("src", "agentReach", "cli.ts");
+
+    for (const text of [design, producerExecPlan]) {
+      expect(text).toContain("AgentReachProducerProvider");
+      expect(text).toContain("ProviderContext");
+      expect(text).toContain("AgentReachProviderError");
+      expect(text).toContain("providerRegistry.ts");
+      expect(text).toContain("orchestrator.ts");
+      expect(text).toContain("transport.ts");
+      expect(text).toContain("createDisabledAgentReachTransport");
+      expect(text).toContain("fake/in-memory transport");
+      expect(text).toContain("timeout");
+      expect(text).toContain("response_too_large");
+    }
+
+    expect(cliRuntime).toContain("orchestrator");
+    expect(cliRuntime).toContain("provider-specific");
+    expect(observability).toContain("provider_failed:<provider_id>:<safe_code>");
+    expect(recovery).toContain("provider_execution_failed");
+    expect(producerCli).toContain("runAgentReachProviders");
+    expect(producerCli).not.toContain("function computeStatus");
+    expect(producerCli).not.toContain("function runProvider");
+  });
+
   it("keeps sanitized AgentReach fixture aligned with direction label policy", () => {
     const fixture = JSON.parse(
       readText(

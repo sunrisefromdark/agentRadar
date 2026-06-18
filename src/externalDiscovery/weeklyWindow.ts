@@ -2,15 +2,17 @@ import fs from "node:fs";
 
 import { externalAggregatePath } from "./paths.ts";
 import { assertPublicSafeAggregate } from "./redaction.ts";
-import type {
-  DailyExternalAggregate,
-  ExternalDirectionLabel,
-  ExternalEvidence,
-  ExternalPlatform,
-  ObservationCandidate,
+import {
+  EXTERNAL_PLATFORMS,
+  type DailyExternalAggregate,
+  type ExternalDirectionLabel,
+  type ExternalEvidence,
+  type ExternalPlatform,
+  type ObservationCandidate,
 } from "./types.ts";
 import type {
   WeeklyDirectionObservation,
+  WeeklyExternalCoverageStatusCounts,
   WeeklyExternalCrossPlatformConfirmation,
   WeeklyExternalDirectionGate,
   WeeklyExternalDirectionGateAudit,
@@ -131,6 +133,24 @@ function aggregateDayStatus(
   };
 }
 
+function coverageStatusCounts(
+  aggregates: DailyExternalAggregate[],
+): WeeklyExternalCoverageStatusCounts {
+  const counts: WeeklyExternalCoverageStatusCounts = {};
+  for (const aggregate of aggregates) {
+    const coverage = aggregate.audit.coverage;
+    if (!coverage) continue;
+    for (const platform of EXTERNAL_PLATFORMS) {
+      const status = coverage[platform]?.status;
+      if (!status) continue;
+      const platformCounts = counts[platform] ?? {};
+      platformCounts[status] = (platformCounts[status] ?? 0) + 1;
+      counts[platform] = platformCounts;
+    }
+  }
+  return counts;
+}
+
 function windowStatus(
   dayStatuses: WeeklyExternalDiscoveryDayStatus[],
   disabled: boolean,
@@ -198,6 +218,7 @@ export function readWeeklyExternalDiscoveryWindow(
       skipped_day_count: dayStatuses.length,
       aggregate_paths: dayStatuses.map((day) => day.aggregate_path),
       aggregates: [],
+      coverage_status_counts: {},
     };
   }
 
@@ -228,6 +249,7 @@ export function readWeeklyExternalDiscoveryWindow(
     skipped_day_count: dayStatuses.filter((day) => day.status === "skipped").length,
     aggregate_paths: aggregatePaths,
     aggregates,
+    coverage_status_counts: coverageStatusCounts(aggregates),
   };
 }
 

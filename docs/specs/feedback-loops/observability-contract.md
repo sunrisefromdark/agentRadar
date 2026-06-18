@@ -6,6 +6,10 @@
 - Public aggregates must retain `source_input_hash` for auditability without publishing raw input.
 - registry miss and rejected events must be visible in audit summaries.
 - Weekly external windows must report usable day count, skipped day count, failed day count, and direction gate audit state.
+- Producer artifacts and daily/run-summary outputs must expose per-platform coverage status.
+- Weekly external windows must aggregate coverage status counts.
+- `not_configured`, `manual_import_only`, `unavailable`, and `partial` are coverage states, not no-signal conclusions.
+- Producer orchestrator warnings use `provider_failed:<provider_id>:<safe_code>` and must not include raw exception text, filesystem paths, response bodies, cookie, session, OAuth, token, account settings, or platform API credentials.
 
 ## 观测信号
 

@@ -1,9 +1,10 @@
 import fs from "node:fs";
 
 import { externalRawInputPath } from "./paths.ts";
-import { stableSourceInputHash } from "./redaction.ts";
+import { containsForbiddenPublicArtifactText, stableSourceInputHash } from "./redaction.ts";
 import {
   EXTERNAL_ACTOR_TYPES,
+  EXTERNAL_COVERAGE_STATUSES,
   EXTERNAL_DIRECTION_LABELS,
   EXTERNAL_PLATFORMS,
   EXTERNAL_PROVIDER_STATUSES,
@@ -11,8 +12,11 @@ import {
   EXTERNAL_RAW_EVENT_KINDS,
   EXTERNAL_SIGNAL_KINDS,
   type ExternalActorType,
+  type ExternalCoverageStatus,
+  type ExternalDiscoveryCoverage,
   type ExternalDirectionLabel,
   type ExternalPlatform,
+  type ExternalPlatformCoverage,
   type ExternalProviderStatus,
   type ExternalProviderTierHint,
   type ExternalRawEventKind,
@@ -41,6 +45,7 @@ export interface AgentReachProviderResult {
   status: ExternalProviderStatus;
   status_reason: string;
   warnings: string[];
+  coverage?: ExternalDiscoveryCoverage;
 }
 
 export interface LoadAgentReachProviderArtifactOptions {
@@ -60,6 +65,7 @@ interface AgentReachProviderArtifact {
   diagnostics: {
     warnings: string[];
   };
+  coverage?: ExternalDiscoveryCoverage;
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -119,6 +125,13 @@ function isProviderStatus(value: unknown): value is ExternalProviderStatus {
   return (
     typeof value === "string" &&
     EXTERNAL_PROVIDER_STATUSES.includes(value as ExternalProviderStatus)
+  );
+}
+
+function isCoverageStatus(value: unknown): value is ExternalCoverageStatus {
+  return (
+    typeof value === "string" &&
+    EXTERNAL_COVERAGE_STATUSES.includes(value as ExternalCoverageStatus)
   );
 }
 
@@ -182,6 +195,7 @@ function validateArtifact(value: unknown): {
 } {
   const errors: string[] = [];
   if (!isRecord(value)) return { errors: ["artifact must be an object"] };
+  const parsedCoverage = parseCoverage(value.coverage);
 
   if (value.provider !== "agent-reach") errors.push('provider must be "agent-reach"');
   if (value.schema_version !== PROVIDER_SCHEMA_VERSION) {
@@ -205,8 +219,61 @@ function validateArtifact(value: unknown): {
     errors.push("diagnostics.warnings must be string[]");
   }
 
+  errors.push(...parsedCoverage.errors);
+
   if (errors.length > 0) return { errors };
-  return { artifact: value as unknown as AgentReachProviderArtifact, errors };
+  const artifact = value as unknown as AgentReachProviderArtifact;
+  if (parsedCoverage.coverage) artifact.coverage = parsedCoverage.coverage;
+  return { artifact, errors };
+}
+
+function parseCoverage(value: unknown): {
+  coverage?: ExternalDiscoveryCoverage;
+  errors: string[];
+} {
+  if (value === undefined) return { errors: [] };
+  const errors: string[] = [];
+  if (!isRecord(value)) return { errors: ["coverage must be an object"] };
+  if (containsForbiddenPublicArtifactText(value)) {
+    return { errors: ["coverage is not public-safe"] };
+  }
+
+  const coverage: ExternalDiscoveryCoverage = {};
+  for (const [platform, rawCoverage] of Object.entries(value)) {
+    if (!isExternalPlatform(platform)) {
+      errors.push(`coverage.${platform} is not a V1 external platform`);
+      continue;
+    }
+    if (!isRecord(rawCoverage)) {
+      errors.push(`coverage.${platform} must be an object`);
+      continue;
+    }
+    if (!isCoverageStatus(rawCoverage.status)) {
+      errors.push(`coverage.${platform}.status is invalid`);
+      continue;
+    }
+
+    const platformCoverage: ExternalPlatformCoverage = {
+      status: rawCoverage.status,
+    };
+    if (rawCoverage.reason !== undefined) {
+      if (!isNonEmptyString(rawCoverage.reason)) {
+        errors.push(`coverage.${platform}.reason must be a non-empty string`);
+      } else {
+        platformCoverage.reason = rawCoverage.reason;
+      }
+    }
+    if (rawCoverage.warnings !== undefined) {
+      if (!isStringArray(rawCoverage.warnings)) {
+        errors.push(`coverage.${platform}.warnings must be string[]`);
+      } else {
+        platformCoverage.warnings = [...rawCoverage.warnings];
+      }
+    }
+    coverage[platform] = platformCoverage;
+  }
+
+  return { coverage, errors };
 }
 
 function rawRefFromItem(item: unknown): string | undefined {
@@ -428,6 +495,7 @@ export function loadAgentReachProviderArtifact(
       status: artifact.status,
       status_reason: `provider_status_${artifact.status}`,
       warnings: artifact.diagnostics.warnings,
+      ...(artifact.coverage ? { coverage: artifact.coverage } : {}),
     };
   }
 
@@ -458,5 +526,6 @@ export function loadAgentReachProviderArtifact(
     status,
     status_reason: rejectedEvents.length > 0 ? "partial_events_rejected" : artifact.status,
     warnings: [...artifact.diagnostics.warnings, ...itemWarnings],
+    ...(artifact.coverage ? { coverage: artifact.coverage } : {}),
   };
 }

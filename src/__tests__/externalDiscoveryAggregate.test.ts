@@ -13,7 +13,7 @@ import {
 } from "../externalDiscovery/aggregate.ts";
 import { matchExternalEventToProjects } from "../externalDiscovery/matching.ts";
 import { assertPublicSafeAggregate, stableSourceInputHash } from "../externalDiscovery/redaction.ts";
-import type { ExternalSignalEvent } from "../externalDiscovery/types.ts";
+import type { ExternalDiscoveryCoverage, ExternalSignalEvent } from "../externalDiscovery/types.ts";
 import type { NormalizedProject } from "../types.ts";
 
 const tempDirs: string[] = [];
@@ -79,6 +79,31 @@ function makeProviderResult(
   };
 }
 
+function makeCoverage(): ExternalDiscoveryCoverage {
+  return {
+    x_twitter: {
+      status: "manual_import_only",
+      reason: "reserved_provider_not_configured",
+    },
+    reddit: {
+      status: "manual_import_only",
+      reason: "reserved_provider_not_configured",
+    },
+    hacker_news: {
+      status: "not_configured",
+      reason: "provider_not_selected",
+    },
+    official_web: {
+      status: "partial",
+      reason: "sitemap_unavailable",
+      warnings: ["official_web_partial"],
+    },
+    official_blog: {
+      status: "ok",
+    },
+  };
+}
+
 afterEach(() => {
   while (tempDirs.length > 0) {
     const dir = tempDirs.pop();
@@ -134,11 +159,43 @@ describe("external discovery daily aggregate", () => {
     expect(aggregate.project_evidence[0]?.direction_labels).toEqual(["research-agent", "office-agent"]);
     expect(aggregate.project_evidence[0]?.actor_tiers).toEqual({ ordinary: 1 });
     expect(aggregate.project_evidence[0]?.actor_tiers.core).toBeUndefined();
+    expect(aggregate.audit.coverage).toBeUndefined();
     expect(aggregate).not.toHaveProperty("source_input_ref");
     expect(assertPublicSafeAggregate(aggregate).ok).toBe(true);
     expect(JSON.stringify(aggregate)).not.toContain("raw social text");
     expect(JSON.stringify(aggregate)).not.toContain("@example_team");
     expect(JSON.stringify(aggregate)).not.toContain("profile/example-team");
+  });
+
+  it("carries public-safe producer coverage into the daily aggregate audit", () => {
+    const coverage = makeCoverage();
+
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-14",
+      generatedAt: "2026-06-14T01:00:00.000Z",
+      providerResult: makeProviderResult({ coverage }),
+    });
+
+    expect(aggregate.audit.coverage).toEqual(coverage);
+    expect(aggregate.audit.coverage?.official_web?.status).toBe("partial");
+    expect(assertPublicSafeAggregate(aggregate).ok).toBe(true);
+  });
+
+  it("rejects public-unsafe coverage before returning an aggregate", () => {
+    expect(() =>
+      buildDailyExternalAggregate({
+        date: "2026-06-14",
+        providerResult: makeProviderResult({
+          coverage: {
+            ...makeCoverage(),
+            official_blog: {
+              status: "failed",
+              reason: "OAuth token expired",
+            },
+          },
+        }),
+      }),
+    ).toThrow(/public-safe/);
   });
 
   it("uses a stable absence marker hash for missing default input", () => {

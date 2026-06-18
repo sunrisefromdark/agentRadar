@@ -6,6 +6,10 @@
 - explicit input that is missing, unreadable, invalid JSON, or schema-invalid is `failed`.
 - Weekly partial external aggregate windows must still allow weekly output while recording skipped and failed days.
 - `verify-daily` fails unsafe public aggregate, missing audit for claimed external use, and external score contamination.
+- Legacy artifacts without coverage remain readable but `verify-daily` records a warning.
+- Invalid producer config fails before writing; public-unsafe items, coverage, query data, or diagnostics must never be written.
+- A platform coverage gap is recoverable by configuring a sanitized local input and rerunning `agentreach:discover`; it must not be described as no discussion.
+- Provider runtime failures are isolated by `orchestrator.ts`. Safe coverage reasons include `provider_execution_failed` and `provider_transport_unavailable`; raw provider errors are converted to `AgentReachProviderError` safe codes before they enter diagnostics.
 
 ## 分级
 

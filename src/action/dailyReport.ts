@@ -18,7 +18,12 @@ import type {
   ScoredProject,
   UserInterestTopicName,
 } from "../types.ts";
-import type { DailyExternalAggregate, ObservationCandidate } from "../externalDiscovery/types.ts";
+import {
+  EXTERNAL_PLATFORMS,
+  type DailyExternalAggregate,
+  type ExternalDiscoveryCoverage,
+  type ObservationCandidate,
+} from "../externalDiscovery/types.ts";
 import { callStructuredEnhancement, isEnhancementEnabled } from "./enhancementLlm.ts";
 import { warmMissingProjectDescriptions } from "./descriptionBackfill.ts";
 import { buildProjectBriefFromScoredProject, validateProjectBriefSpecificity } from "./projectBriefs.ts";
@@ -54,6 +59,28 @@ function countRejectedReasons(aggregate: DailyExternalAggregate): Record<string,
     counts[event.reason_code] = (counts[event.reason_code] ?? 0) + 1;
   }
   return counts;
+}
+
+function copyExternalCoverage(
+  coverage: ExternalDiscoveryCoverage | undefined,
+): ExternalDiscoveryCoverage | undefined {
+  if (!coverage) return undefined;
+  const copy: ExternalDiscoveryCoverage = {};
+  for (const platform of EXTERNAL_PLATFORMS) {
+    const item = coverage[platform];
+    if (!item) continue;
+    copy[platform] = {
+      status: item.status,
+      ...(item.reason ? { reason: item.reason } : {}),
+      ...(item.warnings ? { warnings: [...item.warnings] } : {}),
+    };
+  }
+  return copy;
+}
+
+function formatExternalCoverage(coverage: ExternalDiscoveryCoverage | undefined): string {
+  if (!coverage) return "not_recorded";
+  return EXTERNAL_PLATFORMS.map((platform) => `${platform}=${coverage[platform]?.status ?? "not_recorded"}`).join(", ");
 }
 
 function defaultExternalDiscoverySection(): DailyExternalDiscoverySection {
@@ -126,6 +153,7 @@ function buildExternalDiscoverySection(
       redaction_policy_version: aggregate.redaction_policy_version,
       contains_raw_text: false,
       contains_profile_urls: false,
+      ...(aggregate.audit.coverage ? { coverage: copyExternalCoverage(aggregate.audit.coverage) } : {}),
       rejected_event_count: aggregate.rejected_event_count,
       rejected_reason_counts: countRejectedReasons(aggregate),
       warnings: [...aggregate.audit.warnings],
@@ -1476,6 +1504,7 @@ function renderExternalDiscoverySection(report: DailyReport): string[] {
     `- redaction_policy_version: ${audit.redaction_policy_version}`,
     `- contains_raw_text: ${audit.contains_raw_text ? "true" : "false"}`,
     `- contains_profile_urls: ${audit.contains_profile_urls ? "true" : "false"}`,
+    `- coverage: ${formatExternalCoverage(audit.coverage)}`,
     `- project_evidence_count: ${projectEvidence.length}`,
     `- daily_candidate_count: ${candidates.length}`,
     `- direction_candidate_count: ${directionSummary.candidate_count}`,

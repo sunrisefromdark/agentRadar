@@ -346,6 +346,14 @@ AgentReach 外部发现原始输入位于 `data/raw/external-discovery/`，默�
 
 外部发现链路不保存、不读取、不暴露登录态数据、cookie、session、OAuth 数据、账号设置或平台 API 凭据。更多数据边界见 [data/README.md](./data/README.md)。
 
+本仓库提供独立、opt-in 的 AgentReach artifact producer，不会由 `run-daily` 默认启动：
+
+```bash
+corepack pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-blog,official-web,hacker-news --dry-run
+```
+
+当前 producer 读取本地 sanitized JSON 输入并输出 `agent-reach.external-discovery.v1` artifact。X / Twitter 与 Reddit 只保留 `manual_import_only` 入口，不执行登录态、OAuth 或默认平台抓取。每次输出都会记录完整 coverage；`not_configured`、`manual_import_only` 或 `partial` 不等于“没有外部信号”。
+
 ### 托管版说明
 
 - 在线托管版位于 [`app.agentradar.top`](https://app.agentradar.top/)

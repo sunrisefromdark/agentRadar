@@ -1,5 +1,7 @@
 import type {
   DailyExternalAggregate,
+  ExternalCoverageStatus,
+  ExternalDiscoveryCoverage,
   ExternalDirectionLabel,
   ExternalEvidence,
   ExternalPlatform,
@@ -201,6 +203,7 @@ export interface DailyExternalAuditSummary {
   redaction_policy_version: string;
   contains_raw_text: false;
   contains_profile_urls: false;
+  coverage?: ExternalDiscoveryCoverage;
   rejected_event_count: number;
   rejected_reason_counts: Record<string, number>;
   warnings: string[];
@@ -240,6 +243,10 @@ export interface WeeklyExternalDiscoveryDayStatus {
   public_safe?: true;
 }
 
+export type WeeklyExternalCoverageStatusCounts = Partial<
+  Record<ExternalPlatform, Partial<Record<ExternalCoverageStatus, number>>>
+>;
+
 export interface WeeklyExternalDirectionGateAudit {
   topic_key: string;
   display_name?: string;
@@ -263,6 +270,7 @@ export interface WeeklyExternalDiscoveryWindow {
   skipped_day_count: number;
   aggregate_paths: string[];
   aggregates: DailyExternalAggregate[];
+  coverage_status_counts: WeeklyExternalCoverageStatusCounts;
 }
 
 export interface WeeklyDirectionObservation {
@@ -918,6 +926,7 @@ export interface DailyRunSummaryExternalDiscovery {
   rejected_event_count: number;
   rejected_reason_counts: Record<string, number>;
   direction_label_counts: Partial<Record<ExternalDirectionLabel, number>>;
+  coverage?: ExternalDiscoveryCoverage;
   public_safe: true;
   redaction_policy_version: string;
   registry_warnings: string[];

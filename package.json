@@ -16,6 +16,7 @@
     "testing-skill:preflight": "tsx scripts/testingSkillPreflight.ts",
     "exec-plan:preflight": "tsx scripts/execPlanPreflight.ts --check",
     "skills:preflight": "tsx scripts/skillsPreflight.ts",
+    "agentreach:discover": "tsx src/agentReach/cli.ts",
     "run-daily": "tsx src/cli.ts run-daily",
     "recover-daily": "tsx src/cli.ts recover-daily",
     "automation:daily": "bash scripts/automationDailyPipeline.sh",

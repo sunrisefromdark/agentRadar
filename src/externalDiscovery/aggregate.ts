@@ -5,7 +5,9 @@ import { assertPublicSafeAggregate, stableSourceInputHash } from "./redaction.ts
 import type {
   DailyExternalAggregate,
   ExternalEvidence,
+  ExternalDiscoveryCoverage,
   ExternalPlatform,
+  ExternalPlatformCoverage,
   ExternalSignalEvent,
   ExternalSignalKind,
   ObservationCandidate,
@@ -105,6 +107,20 @@ function sanitizeCandidate(candidate: ObservationCandidate): ObservationCandidat
   };
 }
 
+function sanitizeCoverage(coverage: ExternalDiscoveryCoverage): ExternalDiscoveryCoverage {
+  const sanitized: ExternalDiscoveryCoverage = {};
+  for (const [platform, platformCoverage] of Object.entries(coverage) as Array<
+    [ExternalPlatform, ExternalPlatformCoverage]
+  >) {
+    sanitized[platform] = {
+      status: platformCoverage.status,
+      ...(platformCoverage.reason ? { reason: platformCoverage.reason } : {}),
+      ...(platformCoverage.warnings ? { warnings: [...platformCoverage.warnings] } : {}),
+    };
+  }
+  return sanitized;
+}
+
 export function buildSourceInputAbsenceMarkerHash(input: {
   provider: AgentReachProviderResult["provider"];
   date: string;
@@ -171,6 +187,7 @@ export function buildDailyExternalAggregate(
     direction_evidence: (input.directionEvidence ?? []).map(sanitizeEvidence),
     observation_candidates: (input.observationCandidates ?? []).map(sanitizeCandidate),
     audit: {
+      ...(providerResult.coverage ? { coverage: sanitizeCoverage(providerResult.coverage) } : {}),
       rejected_events: providerResult.rejected_events.map((event) => ({ ...event })),
       warnings: uniqueStrings([
         ...providerResult.warnings,

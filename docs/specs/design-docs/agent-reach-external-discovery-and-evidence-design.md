@@ -6,7 +6,7 @@
 - 对应需求：`docs/specs/product-specs/外部发现与补证信号层需求分析.md`
 - 需求状态：`Frozen for Design`
 - 设计范围：外部发现与补证信号层，即 `external discovery & evidence layer`
-- 非目标：本设计不修改代码、不创建或更新 exec-plan、不扩大已冻结需求边界
+- 非目标：V1 consumer 设计本体不修改代码、不扩大已冻结需求边界；本文末尾的 post-v1 producer addendum 只为后续独立 exec-plan 提供边界
 
 ## 0. 本轮设计结论
 
@@ -22,6 +22,7 @@ V1 结论如下：
 6. daily 可以展示项目级外部观察候选和已有项目补证摘要；weekly 可以消费最近 7 日按日 aggregate，用于方向级观察和趋势强化说明。
 7. 外部层缺失、失败、部分失败时，daily / weekly 主产物必须继续生成，并在 run-summary / verify 中以 skipped / partial / failed 明确审计。
 8. 设计落点建议优先固定 artifact contract、schema、adapter、aggregate 与审计字段的边界，再讨论 daily / weekly 展示层；具体执行顺序、阶段拆分和验证命令留给后续 exec-plan。
+9. V1 完成后若在本仓库内新增 AgentReach artifact producer，必须作为 opt-in producer 独立设计：producer 负责发现、归一、脱敏、coverage audit 和写入 `agent-reach.external-discovery.v1` artifact；consumer 仍只负责读取、聚合、报告和校验。
 
 ## 1. 背景与设计原则
 
@@ -139,10 +140,9 @@ V1 冻结为读取 AgentReach 生成的本地 JSON artifact。该 artifact 默�
 
 ```text
 data/raw/external-discovery/YYYY-MM-DD.agent-reach.json
-data/raw/external-discovery/latest.agent-reach.json
 ```
 
-该输入属于外部层 raw artifact，不是现有 `data/raw/YYYY-MM-DD.json` 主 raw signal 文件的替代品。HTTP API provider、AgentReach CLI direct invocation、远程拉取 latest artifact 均属于未来扩展，不属于 V1 exec-plan 范围。
+该输入属于外部层 raw artifact，不是现有 `data/raw/YYYY-MM-DD.json` 主 raw signal 文件的替代品。Daily 默认只读按日期命名的 artifact；若用户维护 `latest.agent-reach.json` 或其他别名，只能通过显式 `--external-discovery-input <path>` 消费。HTTP API provider、外部 AgentReach CLI direct invocation、远程拉取 latest artifact 均属于未来扩展，不属于 V1 consumer exec-plan 范围；本仓库内 V1.5 producer CLI 由第 16 节单独约束。
 
 V1 启用与输入发现规则：
 
@@ -158,23 +158,32 @@ Provider 输入 artifact 应至少包含以下设计级 contract；其中 `Exter
 
 ```ts
 interface AgentReachProviderArtifact {
-  schema_version: "agent-reach.external-discovery.v1";
   provider: "agent-reach";
-  provider_run_id?: string;
+  schema_version: "agent-reach.external-discovery.v1";
+  provider_run_id: string;
   generated_at: string;
-  coverage_window: {
-    start: string;
-    end: string;
-  };
+  query: unknown;
   platforms: ExternalPlatform[];
   status: ExternalProviderStatus;
   items: AgentReachProviderItem[];
-  diagnostics?: {
-    query_count?: number;
-    rate_limited_platforms?: ExternalPlatform[];
-    partial_platforms?: ExternalPlatform[];
+  diagnostics: {
     warnings: string[];
   };
+  coverage?: Partial<Record<ExternalPlatform, AgentReachPlatformCoverage>>;
+}
+
+type AgentReachCoverageStatus =
+  | "ok"
+  | "partial"
+  | "not_configured"
+  | "manual_import_only"
+  | "unavailable"
+  | "failed";
+
+interface AgentReachPlatformCoverage {
+  status: AgentReachCoverageStatus;
+  reason?: string;
+  warnings?: string[];
 }
 
 interface AgentReachProviderItem {
@@ -204,6 +213,8 @@ interface AgentReachProviderItem {
   tags?: string[];
 }
 ```
+
+上述 contract 以当前 V1 consumer adapter 为准：`provider_run_id`、`query` 与 `diagnostics.warnings` 是必需字段；`coverage_window` 不是 V1 consumer 必需字段。V1.5 producer 必须写入完整 `coverage`，覆盖全部 V1 平台白名单；V1 consumer adapter 必须继续兼容缺少 `coverage` 的旧 sanitized fixtures。
 
 该 artifact 是 provider 边界，不是系统内部事实边界。Adapter 必须把其中的自由文本、平台名、actor hint、target hint 校验并转换为 canonical `ExternalSignalEvent`；不能把 `provider_tier_hint` 原样当作 tier、repo 绑定或跨平台确认事实。若 provider 只提供一个时间字段，adapter 必须明确映射为 `observed_at`，不得伪装成 `source_published_at`。Provider item 的 `url` 与 `raw_ref` 至少应存在一个，以便转换后的 canonical event 仍可追溯。
 
@@ -1054,26 +1065,103 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 | --- | --- | --- |
 | 需求 1：区分外部发现信号与外部补证信号 | `4.1`、`4.2`、`4.3`、`9`、`10` | `derived_signal_kinds` 支持 discovery / evidence 多派生语义，`ObservationCandidate` 与 `ExternalEvidence` 分别承接发现和补证 |
 | 需求 2：外部层参与 daily / weekly 但不替代主源 | `2`、`9`、`10`、`13` | 外部层只作为 secondary layer 被 daily / weekly 消费，不写入主 `RawSignal[]` 或主 score |
-| 需求 3：支持“谁在讨论”的权威性判断 | `4.1`、`7`、`8` | actor type、registry tier、effective tier 与 tier 统计分离，provider tier hint 不产生正式头部判断，也不参与头部讨论统计 |
-| 需求 4：支持讨论强度与持续性 | `4.2`、`4.4`、`8` | 事件级采集、按日 `DailyExternalAggregate`、weekly 7 日窗口、active day / actor / platform 统计 |
-| 需求 5：支持跨平台确认语义 | `4.2`、`8`、`10` | `platforms`、`platform_counts`、`cross_platform` 与 weekly 趋势强化表达 |
+| 需求 3：支持“谁在讨论”的权威性判断 | `4.1`、`7`、`8`、`16` | actor type、registry tier、effective tier 与 tier 统计分离，provider tier hint 不产生正式头部判断，也不参与头部讨论统计；V1.5 producer 只能输出 actor hint，不直接生成 registry tier |
+| 需求 4：支持讨论强度与持续性 | `4.2`、`4.4`、`8`、`16` | 事件级采集、按日 `DailyExternalAggregate`、weekly 7 日窗口、active day / actor / platform 统计；coverage audit 区分未覆盖与无信号 |
+| 需求 5：支持跨平台确认语义 | `4.2`、`8`、`10`、`16` | `platforms`、`platform_counts`、`cross_platform` 与 weekly 趋势强化表达；V1.5 producer 必须表达各平台覆盖状态 |
 | 需求 6：允许观察候选但不能制造高置信主结论 | `4.3`、`6`、`9`、`10`、`13` | `cannot_be_primary_conclusion=true`，方向级和项目级候选均受主源确认边界约束 |
 | 需求 7：支持项目级与方向级对象 | `4.1`、`4.2`、`4.3`、`6` | `target_type`、`scope`、`topic_key` 与 `binding_confidence` 区分项目级匹配和方向级观察 |
 | 需求 7.1：外部方向必须有稳定 direction labels | `3.7`、`4`、`6.2`、`8`、`9`、`10`、`13` | `direction_labels` 支撑 AgentReach focus policy、方向聚合、展示和审计，但不进入 `RawSignal` / score / 主结论 |
-| 需求 8：外部层失效时可降级 | `3.3`、`11`、`12`、`13` | `ok / skipped / partial / failed` 状态、审计字段、verify warn / fail 边界 |
+| 需求 8：外部层失效时可降级 | `3.3`、`11`、`12`、`13`、`16` | `ok / skipped / partial / failed` 状态、审计字段、verify warn / fail 边界；V1.5 producer 以 per-platform coverage 表达 `not_configured`、`manual_import_only`、`unavailable` 等缺口 |
 | 验收 1：外部层正式参与判断但不与主源同级 | `2`、`9`、`10`、`13` | daily / weekly 可展示和消费外部层，但主链路和主 score 不被覆盖 |
 | 验收 2：系统能更早发现新候选 | `4.3`、`6.1`、`9` | 外部 project candidate 可进入观察候选或 pending confirmation，而不是主结论 |
-| 验收 3：系统能表达“谁在讨论” | `4.1`、`7`、`8` | actor type、registry tier、effective tier、actor tier count 与摘要字段共同表达 |
-| 验收 4：系统能表达讨论强度是否持续 | `4.2`、`4.4`、`8` | mention、distinct actor、active day、platform count 与 weekly 7 日窗口口径 |
-| 验收 5：weekly 能使用外部层强化趋势判断 | `6.2`、`8.3`、`10` | direction observation、weak signal / observing trend、cross-platform 与 persistence 支持 weekly |
-| 验收 6：外部层失效时可降级 | `3.3`、`11`、`13` | 主 daily / weekly 继续，外部层状态和审计明确表达 |
+| 验收 3：系统能表达“谁在讨论” | `4.1`、`7`、`8`、`16` | actor type、registry tier、effective tier、actor tier count 与摘要字段共同表达；producer 只提供 actor hint，不直接写 registry tier |
+| 验收 4：系统能表达讨论强度是否持续 | `4.2`、`4.4`、`8`、`16` | mention、distinct actor、active day、platform count 与 weekly 7 日窗口口径；coverage audit 区分未覆盖与无信号 |
+| 验收 5：weekly 能使用外部层强化趋势判断 | `6.2`、`8.3`、`10`、`16` | direction observation、weak signal / observing trend、cross-platform 与 persistence 支持 weekly；producer coverage 让 weekly 能解释窗口覆盖不足 |
+| 验收 6：外部层失效时可降级 | `3.3`、`11`、`13`、`16` | 主 daily / weekly 继续，外部层状态和审计明确表达；coverage 缺口不得被解释为无讨论 |
 | 验收 7：科研 / 办公方向能以稳定标签聚合和展示 | `3.7`、`4`、`8`、`9`、`10`、`13` | `direction_label_counts` 与 label-based observation 让 research / office 方向可见，同时不影响主 score / 主结论 |
 
-## 16. Open Questions
+## 16. Post-v1 / V1.5 AgentReach Artifact Producer
+
+本节是 V1 consumer 完成后的设计附录，用于承接下一阶段独立 exec-plan。它不改变 V1 已冻结的 consumer 边界：`agent-trend-radar` 的 daily / weekly / verify 仍只消费本地 `agent-reach.external-discovery.v1` artifact，不直接把平台采集接入主链路。
+
+### 16.1 Producer / Consumer 隔离
+
+V1.5 建议在本仓库内新增 opt-in AgentReach artifact producer。Producer 只负责生成本地 raw input artifact，consumer 继续通过现有 adapter、aggregate、daily、weekly 和 verify 链路消费该 artifact。
+
+- Producer 不写 `RawSignal[]`，不新增主 score component，不改变 `discussion_score`。
+- Producer 不保存、不读取、不暴露 cookie、session、OAuth、账号配置、平台 API 凭据或私有 diagnostics。
+- Producer 输出必须先经过脱敏与 public-safe 检查，才可作为 sanitized fixture 或 public aggregate 的输入。
+- Producer 与 consumer 的唯一稳定边界是 `agent-reach.external-discovery.v1` JSON；不得通过内存对象、数据库表或主 raw source 绕开 artifact contract。
+
+### 16.2 建议模块边界
+
+V1.5 producer 默认作为独立模块放在 `src/agentReach/`，与 `src/externalDiscovery/` consumer 分离：
+
+```text
+src/agentReach/
+  queryPack/       # 方向词、平台查询模板和 research / office focus policy
+  providers/       # external import、RSS / blog、official web、HN 等 provider adapter
+  normalizer/      # provider raw result -> AgentReach provider item
+  sanitizer/       # 删除 raw social text、profile URL、未脱敏 handle 和私有诊断
+  coverageAudit/   # 记录每个平台的 coverage status 与 reason
+  artifactWriter/  # 写 data/raw/external-discovery/YYYY-MM-DD.agent-reach.json
+```
+
+`src/externalDiscovery/` 不承担搜索、抓取或平台 API 调用责任。若 producer 未来拆成独立 repo 或服务，consumer 侧 contract 不应因此变化。
+
+PR1 Provider Foundation 固定 producer 内部职责边界如下：
+
+- `types.ts` 定义统一 `AgentReachProducerProvider`、`ProviderContext`、`AgentReachProviderResult`、provider mode、provider run status 和 artifact-ready run summary。
+- `providerErrors.ts` 定义 `AgentReachProviderError` 与安全错误分类：`configuration_invalid`、`input_missing`、`input_invalid`、`timeout`、`http`、`unavailable`、`response_too_large`、`unexpected`。公开 diagnostics 只能使用 safe code / safe message，不得泄露 path、response body、cookie、session、OAuth、token 或账号配置。
+- `providerRegistry.ts` 是 producer provider 顺序的单一来源；orchestrator 必须按 registry 稳定顺序执行用户选择的 providers。
+- `orchestrator.ts` 负责 provider 执行、单 provider 失败隔离、items / warnings / rejected items / coverage 聚合、`ok` / `partial` / `failed` 顶层状态计算和完整 coverage 补齐。
+- `transport.ts` 提供可注入 transport contract、`createDisabledAgentReachTransport` 默认禁用实现，以及 fake/in-memory transport 测试入口。PR1 不执行真实网络请求；RSS / Official Web / Hacker News 仍只消费配置的本地 sanitized JSON / fixture input。
+- `cli.ts` 只负责参数解析、配置加载、registry/context 创建、调用 orchestrator、artifact writer 和输出；不得保留 provider-specific 执行分支、coverage 聚合或 status 计算逻辑。
+
+### 16.3 Provider 范围与 coverage status
+
+V1.5 active provider 只建议包含低风险来源：
+
+| Provider | V1.5 默认状态 | 说明 |
+| --- | --- | --- |
+| `externalImportProvider` | active | 接受第三方 / 手工生成的 sanitized item，用于覆盖 X / Reddit 等暂不内置来源 |
+| `rssBlogProvider` | active | 读取公开 RSS / Atom / release feed |
+| `officialWebProvider` | active, small scope | 仅支持 allowlist / sitemap / 官方页面小范围发现，不做无限 crawler |
+| `hackerNewsProvider` | active | 只使用公开可访问的 HN 搜索或输入，不需要账号态 |
+| `xTwitterProvider` | interface only | 默认 `not_configured` 或 `manual_import_only`，不内置抓取 |
+| `redditProvider` | interface only | 默认 `not_configured` 或 `manual_import_only`，不处理 OAuth |
+
+V1.5 producer artifact 必须新增 public-safe coverage 口径，并覆盖 V1 平台白名单中的全部平台：`x_twitter`、`reddit`、`hacker_news`、`official_web`、`official_blog`。每个平台必须表达以下状态之一：`ok`、`partial`、`not_configured`、`manual_import_only`、`unavailable`、`failed`。Daily / weekly 报告应能表达“本次外部覆盖不完整”，避免把未配置平台误读为没有讨论信号。
+
+Artifact 顶层 `status` 只表达 provider artifact / producer run 是否可消费；per-platform coverage status 只表达平台覆盖范围。`not_configured` 与 `manual_import_only` 不应自动把顶层 `status` 降级为 `partial` 或 `failed`。V1.5 exec-plan 必须同步更新 `AgentReachProviderArtifact` contract、adapter 容错、fixture 和结构测试；旧 V1 sanitized fixtures 缺少 coverage 时仍应继续可读。
+
+### 16.4 CLI 与产物路径
+
+V1.5 planned CLI 建议为：
+
+```bash
+pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-blog,official-web,hacker-news
+```
+
+默认输出仍是：
+
+```text
+data/raw/external-discovery/YYYY-MM-DD.agent-reach.json
+```
+
+该命令必须是 opt-in，不得由 `run-daily` 默认触发。`run-daily --external-discovery-input <path>` 仍只表达“消费已有 artifact”，不得暗示会启动 producer、调用平台 API 或读取登录态。
+
+### 16.5 安全与后续深覆盖
+
+V1.5 不实现 X / Twitter 深度搜索、Reddit OAuth 搜索、账号态采集、大规模网页 crawler 或绕平台限制的采集。它只通过 import、RSS、官方小范围页面和 HN 等低风险路径覆盖产品目标，并用 coverage audit 表达缺口。
+
+V2 若要接入 X / Twitter API、Reddit API、scoped crawler、authority registry 或 actor graph，必须另行设计 opt-in provider、凭据边界、quota / backoff、审计字段和测试 fixture。`provider_tier_hint` 仍不能直接升级为 `registry_tier` 或 `effective_tier=core/proven/watch`；头部判断必须来自可维护的 registry。
+
+## 17. Open Questions
 
 以下问题不改写冻结需求，也不阻塞 V1 进入 exec-plan；V1 默认决策已在正文冻结，以下仅作为后续产品优化或未来扩展问题保留。
 
-1. 未来是否需要支持 AgentReach HTTP API、CLI direct invocation 或远程 latest artifact 拉取？这些模式不属于 V1，若启用应另行设计 provider contract、认证、失败语义和测试 fixture。
+1. 未来是否需要支持 AgentReach HTTP API、外部 AgentReach CLI direct invocation 或远程 latest artifact 拉取？这些模式不属于 V1 / V1.5 本仓库内 producer CLI，若启用应另行设计 provider contract、认证、失败语义和测试 fixture。
 2. entity registry 的长期维护责任、审核节奏和 tier 升降级流程如何设计？V1 允许空 registry 启动，未命中作者归为 `ordinary / unknown`。
 3. 是否需要在 V1 之后建立独立 external topic registry？V1 已固定使用现有 user interest topics / weekly trend keys / provider topic hint 的优先级。
 4. 是否需要未来建立 external direction label registry？V1 先固定 priority labels + adapter canonicalization，不引入独立 registry。
@@ -1081,9 +1169,9 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 6. 如果 AgentReach 输出官方网页 / 博客页并包含 GitHub repo 链接，该事件是否可以同时作为 `official_blog` 补证和项目级 discovery？设计倾向允许，但必须保留单一 event source，并用 `raw_event_kind` 与 `derived_signal_kinds` 明确原始事件类型和多派生语义的关系。
 7. 是否需要在 V1 之后增加 env / config 文件层面的默认输入路径配置？V1 runtime contract 已固定 `--no-external-discovery` 与 `--external-discovery-input <path>` 两个 CLI flag。
 
-## 17. 明确非目标
+## 18. 明确非目标
 
-- 不实现 X / Twitter、Reddit、Hacker News、官方网页 / 博客的直接爬虫。
+- V1 consumer 不实现 X / Twitter、Reddit、Hacker News、官方网页 / 博客的直接爬虫；V1.5 producer 只能在独立 exec-plan 中规划低风险 opt-in provider。
 - 不接入 YouTube、Bilibili、播客、微信公众号或长内容平台。
 - 不把 GitHub 纳入外部层平台。
 - 不在 OSS 版保存、读取或暴露登录态数据、cookie、session、OAuth、账号配置、平台 API 凭据或私有 provider diagnostics。
@@ -1091,9 +1179,9 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 不改变现有主 score 公式。
 - 不新增未同步 spec / config / tests 的 score component。
 - 不让 LLM 直接决定外部层是否构成主趋势。
-- 不创建或更新 exec-plan，直到设计获得明确批准。
+- 不把 producer 追写为 v0.1 consumer 的未完成阶段；producer 必须由新的 exec-plan 承接。
 
-## 18. 设计自检清单
+## 19. 设计自检清单
 
 后续 review 本设计或基于本设计创建 exec-plan 前，应逐项确认：
 

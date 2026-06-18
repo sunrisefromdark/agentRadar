@@ -2,6 +2,13 @@
 
 ## External discovery CLI matrix
 
+- `agentreach:discover` is an independent package script backed by `src/agentReach/cli.ts`; it is not a command registered in `src/cli.ts`.
+- `agentreach:discover` accepts `--date`, `--providers`, `--output`, `--dry-run`, `--external-import`, and `--config`.
+- `--config` points to local JSON provider input declarations; its path and account settings must not enter the produced artifact.
+- X / Twitter and Reddit remain reserved `manual_import_only` providers and must not trigger default crawling.
+- `agentreach:discover` creates a safe `ProviderContext`, selects providers from `providerRegistry.ts`, and delegates provider execution and aggregation to the orchestrator.
+- The producer CLI must not contain provider-specific execution branches, provider result merging, coverage aggregation, or status calculation.
+- PR1 uses `createDisabledAgentReachTransport` by default; real RSS/Atom, sitemap, Hacker News API, X, and Reddit network fetches remain out of scope.
 - `run-daily` accepts `--external-discovery-input <path>` and `--no-external-discovery`.
 - `recover-daily` reads no external raw input by default, but accepts explicit `--external-discovery-input <path>`.
 - `run-weekly` must reject `--external-discovery-input` and consume only seven public daily aggregates.
@@ -17,6 +24,7 @@ CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加�
 
 | 命令 / 脚本入口 | 作用 |
 | --- | --- |
+| `agentreach:discover` | opt-in 生成本地 public-safe AgentReach raw artifact，不接入主 CLI 或主 score |
 | `run-daily` | 采集、归一化、分类、评分并生成 daily 相关工件 |
 | `recover-daily` | 基于已缓存 raw 数据恢复 daily 工件 |
 | `score` | 对指定日期或指定输入进行分类 + 评分 |

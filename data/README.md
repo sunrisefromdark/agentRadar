@@ -24,6 +24,8 @@ These files are part of the project deliverable. They let readers inspect histor
 
 `data/raw/external-discovery/` is reserved for AgentReach external discovery raw input and is local-only by default. It must not be committed or uploaded by default. The only public exception is an explicitly sanitized fixture, and that fixture must not contain raw social text, unsanitized handles, profile URLs, cookies, tokens, sessions, OAuth data, passwords, or private diagnostics.
 
+The opt-in `agentreach:discover` producer writes dated artifacts to `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json`. Its local provider config may reference sanitized JSON inputs for `external-import`, `rss-blog`, `official-web`, and `hacker-news`; config paths and account settings must not be copied into the artifact. X / Twitter and Reddit are manual-import-only boundaries.
+
 ## External discovery public artifacts
 
 Public external discovery output belongs under `data/external-discovery/*.aggregate.json`. A public aggregate may keep summaries, counts, stable evidence IDs, platform enums, audit status, and `source_input_hash`, but it must not preserve provider raw text or profile URLs.
@@ -37,6 +39,8 @@ Every public aggregate must declare:
 - `contains_raw_text=false`
 - `contains_profile_urls=false`
 - `source_input_hash`
+
+When producer coverage is available, public aggregates may also retain the public-safe platform coverage summary. Missing or partial coverage must never be rendered as evidence that no discussion exists.
 
 ## Automation behavior
 

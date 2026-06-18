@@ -57,6 +57,28 @@ function makeArtifact(overrides: Record<string, unknown> = {}): Record<string, u
     diagnostics: {
       warnings: [],
     },
+    coverage: {
+      x_twitter: {
+        status: "manual_import_only",
+        reason: "reserved_provider_not_configured",
+      },
+      reddit: {
+        status: "manual_import_only",
+        reason: "reserved_provider_not_configured",
+      },
+      hacker_news: {
+        status: "not_configured",
+        reason: "provider_not_selected",
+      },
+      official_web: {
+        status: "partial",
+        reason: "sitemap_unavailable",
+        warnings: ["official_web_partial"],
+      },
+      official_blog: {
+        status: "ok",
+      },
+    },
     ...overrides,
   };
 }
@@ -83,6 +105,28 @@ describe("AgentReach local provider adapter", () => {
     expect(result.source_input_hash).toMatch(/^sha256:[a-f0-9]{64}$/);
     expect(result.events).toHaveLength(1);
     expect(result.rejected_events).toEqual([]);
+    expect(result.coverage).toEqual({
+      x_twitter: {
+        status: "manual_import_only",
+        reason: "reserved_provider_not_configured",
+      },
+      reddit: {
+        status: "manual_import_only",
+        reason: "reserved_provider_not_configured",
+      },
+      hacker_news: {
+        status: "not_configured",
+        reason: "provider_not_selected",
+      },
+      official_web: {
+        status: "partial",
+        reason: "sitemap_unavailable",
+        warnings: ["official_web_partial"],
+      },
+      official_blog: {
+        status: "ok",
+      },
+    });
 
     const event = result.events[0];
     expect(event.provider).toBe("agent-reach");
@@ -230,6 +274,40 @@ describe("AgentReach local provider adapter", () => {
     expect(result.status).toBe("failed");
     expect(result.status_reason).toBe("json_parse_error");
     expect(JSON.stringify(result)).not.toContain("token=secret");
+  });
+
+  it("returns failed for public-unsafe coverage without leaking sensitive coverage text", () => {
+    const inputPath = writeJsonArtifact(
+      makeArtifact({
+        coverage: {
+          x_twitter: {
+            status: "failed",
+            reason: "OAuth token expired",
+          },
+          reddit: {
+            status: "manual_import_only",
+          },
+          hacker_news: {
+            status: "not_configured",
+          },
+          official_web: {
+            status: "not_configured",
+          },
+          official_blog: {
+            status: "ok",
+          },
+        },
+      }),
+    );
+
+    const result = loadAgentReachProviderArtifact({ date: "2026-06-14", inputPath });
+
+    expect(result.status).toBe("failed");
+    expect(result.status_reason).toBe("schema_invalid");
+    expect(result.events).toEqual([]);
+    expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
+    expect(result.rejected_events[0]?.reason_detail).toContain("coverage");
+    expect(JSON.stringify(result)).not.toContain("OAuth token expired");
   });
 
   it.each([

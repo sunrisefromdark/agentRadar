@@ -8,7 +8,11 @@ import {
   readWeeklyExternalDiscoveryWindow,
 } from "../externalDiscovery/weeklyWindow.ts";
 import { renderWeeklyReport } from "../action/weeklyReport.ts";
-import type { DailyExternalAggregate, ExternalEvidence } from "../externalDiscovery/types.ts";
+import type {
+  DailyExternalAggregate,
+  ExternalDiscoveryCoverage,
+  ExternalEvidence,
+} from "../externalDiscovery/types.ts";
 import type { WeeklyReport } from "../types.ts";
 
 const tempDirs: string[] = [];
@@ -71,6 +75,16 @@ function makeAggregate(overrides: Partial<DailyExternalAggregate> = {}): DailyEx
       warnings: [],
     },
     ...overrides,
+  };
+}
+
+function makeCoverage(): ExternalDiscoveryCoverage {
+  return {
+    x_twitter: { status: "manual_import_only", reason: "reserved_provider_not_configured" },
+    reddit: { status: "manual_import_only", reason: "reserved_provider_not_configured" },
+    hacker_news: { status: "not_configured", reason: "provider_not_selected" },
+    official_web: { status: "partial", reason: "sitemap_unavailable" },
+    official_blog: { status: "ok" },
   };
 }
 
@@ -185,6 +199,11 @@ describe("external discovery weekly aggregate window", () => {
       dir,
       makeAggregate({
         project_evidence: [makeProjectEvidence()],
+        audit: {
+          coverage: makeCoverage(),
+          rejected_events: [],
+          warnings: [],
+        },
       }),
     );
     const window = readWeeklyExternalDiscoveryWindow("2026-06-14", {
@@ -209,8 +228,18 @@ describe("external discovery weekly aggregate window", () => {
 
     const markdown = renderWeeklyReport(report);
 
+    expect(window.coverage_status_counts).toEqual({
+      x_twitter: { manual_import_only: 1 },
+      reddit: { manual_import_only: 1 },
+      hacker_news: { not_configured: 1 },
+      official_web: { partial: 1 },
+      official_blog: { ok: 1 },
+    });
     expect(markdown).toContain("## External Discovery");
     expect(markdown).toContain("external discovery is secondary evidence only");
+    expect(markdown).toContain(
+      "coverage_status_counts: x_twitter(manual_import_only=1), reddit(manual_import_only=1), hacker_news(not_configured=1), official_web(partial=1), official_blog(ok=1)",
+    );
     expect(markdown).toContain("external_project_evidence_summaries: 1");
     expect(markdown).not.toContain("content_text");
     expect(markdown).not.toContain("profile_url");

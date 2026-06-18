@@ -15,7 +15,10 @@ import type {
   DailyOverallStatus,
   ScoreComponent,
 } from "../types.ts";
-import type { DailyExternalAggregate } from "../externalDiscovery/types.ts";
+import type {
+  DailyExternalAggregate,
+  ExternalDiscoveryCoverage,
+} from "../externalDiscovery/types.ts";
 
 const roots: string[] = [];
 const originalCwd = process.cwd();
@@ -241,6 +244,16 @@ function makeAggregate(overrides: Partial<DailyExternalAggregate> = {}): DailyEx
   };
 }
 
+function makeCoverage(): ExternalDiscoveryCoverage {
+  return {
+    x_twitter: { status: "manual_import_only" },
+    reddit: { status: "manual_import_only" },
+    hacker_news: { status: "not_configured" },
+    official_web: { status: "partial" },
+    official_blog: { status: "ok" },
+  };
+}
+
 function writeDailyArtifacts(root: string, summary: DailyRunSummary, report: DailyReport, aggregate: unknown): void {
   writeJson(path.join(root, "data", "reports", `${date}.run-summary.json`), summary);
   writeJson(path.join(root, "data", "reports", `${date}.daily.json`), report);
@@ -284,6 +297,45 @@ describe("external discovery verify-daily checks", () => {
     expect(checkStatus(result, "external_discovery_status")).toBe("warn");
     expect(checkStatus(result, "external_public_aggregate_safe")).toBe("pass");
     expect(checkStatus(result, "external_primary_contamination")).toBe("pass");
+  });
+
+  it("warns for legacy aggregates without coverage and passes complete coverage", () => {
+    const root = setupWorkspace();
+    writeDailyArtifacts(root, makeSummary(), makeReport(), makeAggregate());
+
+    const legacyResult = buildVerifyDailyResult(date);
+
+    expect(checkStatus(legacyResult, "external_coverage_recorded")).toBe("warn");
+
+    const coverage = makeCoverage();
+    writeDailyArtifacts(
+      root,
+      makeSummary({
+        external_discovery: {
+          ...makeSummary().external_discovery!,
+          coverage,
+        },
+      }),
+      makeReport({
+        external_discovery: makeExternalSection({
+          external_audit_summary: makeExternalAuditSummary({ coverage }),
+        }),
+      }),
+      makeAggregate({
+        audit: {
+          coverage,
+          rejected_events: [],
+          warnings: [],
+        },
+      }),
+    );
+
+    const coveredResult = buildVerifyDailyResult(date);
+
+    expect(checkStatus(coveredResult, "external_coverage_recorded")).toBe("pass");
+    expect(
+      coveredResult.checks.find((check) => check.name === "external_coverage_recorded")?.detail,
+    ).toContain("official_blog=ok");
   });
 
   it("fails when the public aggregate contains raw or sensitive fields", () => {

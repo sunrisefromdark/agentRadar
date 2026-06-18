@@ -16,7 +16,11 @@ import type {
   StarDeltaSource,
 } from "../types.ts";
 import type { GitHubStarDeltaSummary } from "../signal/githubMetrics.ts";
-import type { DailyExternalAggregate } from "../externalDiscovery/types.ts";
+import {
+  EXTERNAL_PLATFORMS,
+  type DailyExternalAggregate,
+  type ExternalDiscoveryCoverage,
+} from "../externalDiscovery/types.ts";
 
 const FRESHNESS_SOURCE_DISPLAY_NAMES: Record<string, string> = {
   "agents-radar": "agents-radar 历史上下文",
@@ -38,6 +42,28 @@ function countExternalRejectedReasons(aggregate: DailyExternalAggregate): Record
   return counts;
 }
 
+function copyExternalCoverage(
+  coverage: ExternalDiscoveryCoverage | undefined,
+): ExternalDiscoveryCoverage | undefined {
+  if (!coverage) return undefined;
+  const copy: ExternalDiscoveryCoverage = {};
+  for (const platform of EXTERNAL_PLATFORMS) {
+    const item = coverage[platform];
+    if (!item) continue;
+    copy[platform] = {
+      status: item.status,
+      ...(item.reason ? { reason: item.reason } : {}),
+      ...(item.warnings ? { warnings: [...item.warnings] } : {}),
+    };
+  }
+  return copy;
+}
+
+function formatExternalCoverage(coverage: ExternalDiscoveryCoverage | undefined): string {
+  if (!coverage) return "not_recorded";
+  return EXTERNAL_PLATFORMS.map((platform) => `${platform}=${coverage[platform]?.status ?? "not_recorded"}`).join(", ");
+}
+
 function buildRunSummaryExternalDiscovery(input: {
   aggregate: DailyExternalAggregate;
   aggregatePath?: string;
@@ -54,6 +80,7 @@ function buildRunSummaryExternalDiscovery(input: {
     rejected_event_count: input.aggregate.rejected_event_count,
     rejected_reason_counts: countExternalRejectedReasons(input.aggregate),
     direction_label_counts: { ...input.aggregate.direction_label_counts },
+    ...(input.aggregate.audit.coverage ? { coverage: copyExternalCoverage(input.aggregate.audit.coverage) } : {}),
     public_safe: true,
     redaction_policy_version: input.aggregate.redaction_policy_version,
     registry_warnings: registryWarnings,
@@ -818,6 +845,7 @@ function renderExternalDiscoverySummary(summary: DailyRunSummary): string[] {
     `- source_input_hash: ${external.source_input_hash}`,
     `- events: accepted=${external.accepted_event_count}; rejected=${external.rejected_event_count}; total=${external.event_count}`,
     `- direction_label_counts: ${directionLabelCounts}`,
+    `- coverage: ${formatExternalCoverage(external.coverage)}`,
     `- public_safe: ${external.public_safe ? "true" : "false"}`,
     `- redaction_policy_version: ${external.redaction_policy_version}`,
     `- rejected_reason_counts: ${rejectedReasons}`,

@@ -1,4 +1,7 @@
-import type { AgentReachProducerProvider } from "../types.ts";
+import type {
+  AgentReachProducerProvider,
+  AgentReachSearchJob,
+} from "../types.ts";
 import { AgentReachProviderError } from "../providerErrors.ts";
 import { runLiveProvider } from "./liveProvider.ts";
 import { loadLocalJsonProvider, runLocalJsonProvider } from "./localJsonProvider.ts";
@@ -44,7 +47,7 @@ function hackerNewsItemUrl(hit: Record<string, unknown>, objectId: string): stri
 function parseHackerNewsHits(
   body: string,
   observedAt: string,
-  maxHits: number,
+  job: AgentReachSearchJob,
 ): unknown[] {
   let parsed: unknown;
   try {
@@ -78,6 +81,8 @@ function parseHackerNewsHits(
         raw_event_kind: "discussion",
         derived_signal_kinds: ["discovery"],
         observed_at: observedAt,
+        direction_labels: job.direction_labels,
+        tags: job.tags,
         ...(toIsoDate(optionalString(hit.created_at)) ? {
           source_published_at: toIsoDate(optionalString(hit.created_at)),
         } : {}),
@@ -98,17 +103,36 @@ function parseHackerNewsHits(
           : {}),
       },
     ];
-  }).slice(0, maxHits);
+  }).slice(0, job.max_items);
 }
 
-function hackerNewsSearchUrls(
+function legacySearchJobs(
+  context: Parameters<AgentReachProducerProvider["run"]>[0],
+): AgentReachSearchJob[] {
+  const queryLimit = context.provider_config.live?.query_limit ?? 3;
+  return context.query_pack.flatMap((entry) =>
+    entry.terms.map((term) => ({
+      job_id: `hacker-news:${entry.id}:${term}`,
+      provider_id: "hacker-news" as const,
+      query_entry_id: entry.id,
+      term,
+      direction_labels: [...entry.direction_labels],
+      tags: [...(entry.tags ?? [])],
+      max_items: context.quality_policy.max_items_per_query,
+    })),
+  ).slice(0, queryLimit);
+}
+
+function hackerNewsSearchRequests(
   baseUrl: string,
-  terms: string[],
-  hitsPerPage: number,
-): string[] {
-  return terms.map((term) => {
+  jobs: readonly AgentReachSearchJob[],
+): Array<{ url: string; job: AgentReachSearchJob }> {
+  return jobs.map((job) => {
     const separator = baseUrl.includes("?") ? "&" : "?";
-    return `${baseUrl}${separator}query=${encodeURIComponent(term)}&tags=story&hitsPerPage=${hitsPerPage}`;
+    return {
+      url: `${baseUrl}${separator}query=${encodeURIComponent(job.term)}&tags=story&hitsPerPage=${job.max_items}`,
+      job,
+    };
   });
 }
 
@@ -128,9 +152,13 @@ export const hackerNewsProvider: AgentReachProducerProvider = {
           safeMessage: "hacker-news live search url is required",
         });
       }
-      const queryLimit = context.provider_config.live.query_limit ?? 3;
-      const terms = context.query_pack.flatMap((entry) => entry.terms).slice(0, queryLimit);
-      const maxHitsPerQuery = context.quality_policy.max_items_per_query;
+      const searchRequests = hackerNewsSearchRequests(
+        baseUrl,
+        context.search_jobs.length > 0 ? context.search_jobs : legacySearchJobs(context),
+      );
+      const jobsByUrl = new Map(
+        searchRequests.map((request) => [request.url, request.job]),
+      );
       return runLiveProvider({
         context: {
           ...context,
@@ -138,7 +166,7 @@ export const hackerNewsProvider: AgentReachProducerProvider = {
             ...context.provider_config,
             live: {
               ...context.provider_config.live,
-              urls: hackerNewsSearchUrls(baseUrl, terms, maxHitsPerQuery),
+              urls: searchRequests.map((request) => request.url),
             },
           },
         },
@@ -148,7 +176,15 @@ export const hackerNewsProvider: AgentReachProducerProvider = {
           return parseHackerNewsHits(
             input.body,
             input.context.generated_at,
-            maxHitsPerQuery,
+            jobsByUrl.get(input.url) ?? {
+              job_id: "hacker-news:fallback:query",
+              provider_id: "hacker-news",
+              query_entry_id: "fallback",
+              term: input.url,
+              direction_labels: [],
+              tags: [],
+              max_items: input.context.quality_policy.max_items_per_query,
+            },
           );
         },
       });

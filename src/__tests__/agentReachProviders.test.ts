@@ -35,6 +35,7 @@ import type {
   AgentReachProviderContext,
   AgentReachProviderId,
   AgentReachQualityPolicy,
+  AgentReachSearchJob,
 } from "../agentReach/types.ts";
 
 const tempDirs: string[] = [];
@@ -55,6 +56,7 @@ function providerContext(
   input?: string | AgentReachProviderConfig,
   transport: AgentReachTransport = createDisabledAgentReachTransport(),
   qualityPolicy: AgentReachQualityPolicy = AGENT_REACH_DEFAULT_QUALITY_POLICY,
+  searchJobs: readonly AgentReachSearchJob[] = [],
 ): AgentReachProviderContext {
   const providerConfig =
     typeof input === "string"
@@ -64,11 +66,11 @@ function providerContext(
     date: "2026-06-18",
     generated_at: "2026-06-18T00:00:00.000Z",
     query_pack: AGENT_REACH_QUERY_PACK,
-    search_jobs: [],
+    search_jobs: searchJobs,
     search_plan_summary: {
-      job_count: 0,
-      provider_count: 0,
-      query_entry_count: 0,
+      job_count: searchJobs.length,
+      provider_count: new Set(searchJobs.map((job) => job.provider_id)).size,
+      query_entry_count: new Set(searchJobs.map((job) => job.query_entry_id)).size,
       reserved_provider_count: 0,
       max_items_per_query: qualityPolicy.max_items_per_query,
       provider_job_counts: {},
@@ -451,7 +453,7 @@ describe("AgentReach external import provider", () => {
     });
   });
 
-  it("queries configured Hacker News search endpoint with query-pack terms through injected transport", async () => {
+  it("queries configured Hacker News search endpoint with planner search jobs through injected transport", async () => {
     const seenUrls: string[] = [];
     const transport = createInMemoryAgentReachTransport((request) => {
       seenUrls.push(request.url);
@@ -490,11 +492,22 @@ describe("AgentReach external import provider", () => {
           max_items_per_provider: 10,
           max_items_total: 25,
         },
+        [
+          {
+            job_id: "hacker-news:literature-review-agent:paper-reading-agent",
+            provider_id: "hacker-news",
+            query_entry_id: "literature-review-agent",
+            term: "paper reading agent",
+            direction_labels: ["literature-review-agent", "research-agent"],
+            tags: ["research", "papers"],
+            max_items: 5,
+          },
+        ],
       ),
     );
 
     expect(seenUrls).toEqual([
-      "https://hn.algolia.com/api/v1/search?query=research%20agent&tags=story&hitsPerPage=5",
+      "https://hn.algolia.com/api/v1/search?query=paper%20reading%20agent&tags=story&hitsPerPage=5",
     ]);
     expect(result.status).toBe("ok");
     expect(result.coverage.hacker_news?.status).toBe("ok");

@@ -512,6 +512,20 @@ describe("AgentReach producer CLI", () => {
     expect(result.dry_run).toBe(true);
     expect(result.artifact.items[0]?.title).toBe("Research agent RSS launch");
     expect(result.artifact.coverage.official_blog.status).toBe("ok");
+    expect(result.artifact.query).toEqual(
+      expect.objectContaining({
+        search_plan_summary: {
+          job_count: 27,
+          provider_count: 1,
+          query_entry_count: 17,
+          reserved_provider_count: 0,
+          max_items_per_query: 20,
+          provider_job_counts: {
+            "rss-blog": 27,
+          },
+        },
+      }),
+    );
     expect(result.coverage_summary).toContain("official_blog=ok");
     expect(JSON.stringify(result.artifact)).not.toContain(configPath);
     expect(fs.existsSync(outputPath)).toBe(false);

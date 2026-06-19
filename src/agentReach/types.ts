@@ -154,6 +154,8 @@ export interface AgentReachProviderContext {
   date: string;
   generated_at: string;
   query_pack: readonly AgentReachQueryEntry[];
+  search_jobs: readonly AgentReachSearchJob[];
+  search_plan_summary: AgentReachSearchPlanSummary;
   provider_config: AgentReachProviderConfig;
   quality_policy: AgentReachQualityPolicy;
   transport: AgentReachTransport;
@@ -181,6 +183,7 @@ export type AgentReachProducerStatus = Exclude<ExternalProviderStatus, "skipped"
 export interface AgentReachProducerRunSummary {
   selected_provider_ids: AgentReachProviderId[];
   status: AgentReachProducerStatus;
+  search_plan_summary: AgentReachSearchPlanSummary;
   provider_results: AgentReachProviderResult[];
   items: AgentReachProviderItem[];
   coverage: AgentReachCoverage;

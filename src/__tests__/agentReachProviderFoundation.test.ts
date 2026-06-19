@@ -49,6 +49,15 @@ describe("AgentReach provider foundation", () => {
       date: "2026-06-18",
       generated_at: "2026-06-18T00:00:00.000Z",
       query_pack: [],
+      search_jobs: [],
+      search_plan_summary: {
+        job_count: 0,
+        provider_count: 0,
+        query_entry_count: 0,
+        reserved_provider_count: 0,
+        max_items_per_query: AGENT_REACH_DEFAULT_QUALITY_POLICY.max_items_per_query,
+        provider_job_counts: {},
+      },
       provider_config: { input_path: "fixtures/hacker-news.json" },
       quality_policy: AGENT_REACH_DEFAULT_QUALITY_POLICY,
       transport: {

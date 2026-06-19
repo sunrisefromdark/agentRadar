@@ -10,6 +10,7 @@ import { AGENT_REACH_QUERY_PACK } from "../agentReach/queryPack.ts";
 import { createDisabledAgentReachTransport } from "../agentReach/transport.ts";
 import type {
   AgentReachProducerProvider,
+  AgentReachProviderContext,
   AgentReachProviderId,
   AgentReachProviderResult,
 } from "../agentReach/types.ts";
@@ -86,6 +87,68 @@ describe("AgentReach provider registry", () => {
 });
 
 describe("AgentReach orchestrator", () => {
+  it("passes provider-scoped search jobs and a run-level plan summary", async () => {
+    const seenContexts: Partial<Record<AgentReachProviderId, AgentReachProviderContext>> = {};
+    const rss = fakeProvider({
+      id: "rss-blog",
+      platforms: ["official_blog"],
+      run: async (context) => {
+        seenContexts["rss-blog"] = context;
+        return result("rss-blog", {
+          coverage: { official_blog: { status: "ok" } },
+        });
+      },
+    });
+    const hackerNews = fakeProvider({
+      id: "hacker-news",
+      platforms: ["hacker_news"],
+      run: async (context) => {
+        seenContexts["hacker-news"] = context;
+        return result("hacker-news", {
+          coverage: { hacker_news: { status: "ok" } },
+        });
+      },
+    });
+
+    const summary = await runAgentReachProviders(
+      orchestratorInput([rss, hackerNews], ["hacker-news", "rss-blog"], {
+        query_pack: AGENT_REACH_QUERY_PACK.slice(0, 2),
+        provider_configs: {
+          "hacker-news": {
+            live: {
+              query_limit: 1,
+            },
+          },
+        },
+      }),
+    );
+
+    expect(seenContexts["rss-blog"]?.search_jobs.map((job) => job.provider_id)).toEqual([
+      "rss-blog",
+      "rss-blog",
+      "rss-blog",
+      "rss-blog",
+      "rss-blog",
+      "rss-blog",
+    ]);
+    expect(seenContexts["hacker-news"]?.search_jobs.map((job) => job.term)).toEqual([
+      "research agent",
+      "ai research assistant",
+      "scientific agent",
+    ]);
+    expect(summary.search_plan_summary).toEqual({
+      job_count: 9,
+      provider_count: 2,
+      query_entry_count: 2,
+      reserved_provider_count: 0,
+      max_items_per_query: AGENT_REACH_DEFAULT_QUALITY_POLICY.max_items_per_query,
+      provider_job_counts: {
+        "rss-blog": 6,
+        "hacker-news": 3,
+      },
+    });
+  });
+
   it("runs selected providers sequentially in registry order", async () => {
     const calls: string[] = [];
     const rss = fakeProvider({

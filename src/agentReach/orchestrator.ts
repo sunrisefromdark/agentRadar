@@ -10,12 +10,13 @@ import {
   finalizeAgentReachProducerItems,
 } from "./quality.ts";
 import type { AgentReachQueryEntry } from "./queryPack.ts";
+import { planAgentReachSearchJobs } from "./searchPlanner.ts";
 import type { AgentReachTransport } from "./transport.ts";
 import type {
   AgentReachCoverage,
   AgentReachProducerProvider,
   AgentReachProducerRunSummary,
-  AgentReachProviderConfig,
+  AgentReachProviderConfigMap,
   AgentReachProviderId,
   AgentReachProviderResult,
   AgentReachProviderRunStatus,
@@ -28,7 +29,7 @@ export interface RunAgentReachProvidersInput {
   date: string;
   generated_at: string;
   query_pack: readonly AgentReachQueryEntry[];
-  provider_configs: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>>;
+  provider_configs: AgentReachProviderConfigMap;
   quality_policy: AgentReachQualityPolicy;
   transport: AgentReachTransport;
 }
@@ -126,6 +127,13 @@ export async function runAgentReachProviders(
     input.providers,
     input.selected_provider_ids,
   );
+  const searchPlan = planAgentReachSearchJobs({
+    providers: input.providers,
+    selected_provider_ids: input.selected_provider_ids,
+    query_pack: input.query_pack,
+    provider_configs: input.provider_configs,
+    quality_policy: input.quality_policy,
+  });
   const providerResults: AgentReachProviderResult[] = [];
   const items: AgentReachProducerRunSummary["items"] = [];
   const warnings: string[] = [];
@@ -139,6 +147,10 @@ export async function runAgentReachProviders(
         date: input.date,
         generated_at: input.generated_at,
         query_pack: input.query_pack,
+        search_jobs: searchPlan.jobs.filter(
+          (job) => job.provider_id === provider.provider_id,
+        ),
+        search_plan_summary: searchPlan.summary,
         provider_config: input.provider_configs[provider.provider_id] ?? {},
         quality_policy: input.quality_policy,
         transport: input.transport,
@@ -196,6 +208,7 @@ export async function runAgentReachProviders(
       providerResults,
       rejectedItemCount: rejectedItems.length,
     }),
+    search_plan_summary: searchPlan.summary,
     provider_results: providerResults,
     items: finalQuality.items,
     coverage,

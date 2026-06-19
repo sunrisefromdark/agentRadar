@@ -23,6 +23,7 @@ import {
   AGENT_REACH_PROVIDER_IDS,
   type AgentReachArtifactWriteResult,
   type AgentReachProviderConfig,
+  type AgentReachProviderConfigMap,
   type AgentReachProviderId,
   type AgentReachQualityPolicy,
   type AgentReachQualityPolicyInput,
@@ -30,7 +31,7 @@ import {
 
 interface AgentReachConfig {
   quality_policy: AgentReachQualityPolicy;
-  providers?: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>>;
+  providers?: AgentReachProviderConfigMap;
 }
 
 export interface RunAgentReachDiscoverDependencies {
@@ -227,7 +228,7 @@ function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig 
     throw new Error("AgentReach config providers must be an object");
   }
 
-  const providers: Partial<Record<AgentReachProviderId, AgentReachProviderConfig>> = {};
+  const providers: AgentReachProviderConfigMap = {};
   for (const [providerId, rawConfig] of Object.entries(parsed.providers)) {
     if (!isProviderId(providerId) || !isConfigurableProviderId(providerId)) {
       throw new Error(`unknown configured provider: ${providerId}`);
@@ -308,9 +309,7 @@ async function runAgentReachDiscoverWithConfig(
   dependencies: RunAgentReachDiscoverDependencies = {},
 ): Promise<AgentReachArtifactWriteResult> {
   const generatedAt = opts.generatedAt ?? new Date().toISOString();
-  const providerConfigs: Partial<
-    Record<AgentReachProviderId, AgentReachProviderConfig>
-  > = {
+  const providerConfigs: AgentReachProviderConfigMap = {
     ...(config.providers ?? {}),
   };
   if (opts.externalImportPath) {
@@ -350,6 +349,7 @@ async function runAgentReachDiscoverWithConfig(
       terms: AGENT_REACH_QUERY_PACK.flatMap((query) => query.terms),
       providers: opts.providers,
       quality_policy: config.quality_policy,
+      search_plan_summary: summary.search_plan_summary,
       ...(opts.configPath ? { config_loaded: true } : {}),
     },
     platforms,

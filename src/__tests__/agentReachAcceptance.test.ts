@@ -289,6 +289,35 @@ describe("AgentReach producer acceptance baseline", () => {
     });
   });
 
+  it("fails malformed artifacts without required Hacker News coverage", () => {
+    const malformed = artifact();
+    delete (malformed.coverage as Partial<typeof malformed.coverage>)
+      .hacker_news;
+
+    expect(evaluateAgentReachArtifact(malformed)).toMatchObject({
+      outcome: "fail",
+      required_platform_status: "failed",
+      reasons: ["required_platform_missing:hacker_news"],
+    });
+  });
+
+  it("warns when accepted items are missing source published time", () => {
+    const item = artifact().items[0];
+    if (!item) throw new Error("acceptance fixture item is missing");
+
+    expect(
+      evaluateAgentReachArtifact(
+        artifact({
+          items: [{ ...item, source_published_at: undefined }],
+        }),
+      ),
+    ).toMatchObject({
+      outcome: "warn",
+      missing_source_published_at_count: 1,
+      reasons: ["missing_source_published_at"],
+    });
+  });
+
   it("fails unsafe artifacts and returns safe producer failure reports", () => {
     expect(
       evaluateAgentReachArtifact(

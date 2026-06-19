@@ -83,6 +83,11 @@ export function failedAgentReachAcceptanceReport(): AgentReachAcceptanceReport {
 export function evaluateAgentReachArtifact(
   artifact: AgentReachProviderArtifact,
 ): AgentReachAcceptanceReport {
+  const items = Array.isArray(artifact.items) ? artifact.items : [];
+  const coverage = artifact.coverage ?? {};
+  const diagnosticsWarnings = Array.isArray(artifact.diagnostics?.warnings)
+    ? artifact.diagnostics.warnings
+    : [];
   let missingTitleCount = 0;
   let missingTraceCount = 0;
   let missingDirectionLabelsCount = 0;
@@ -95,7 +100,7 @@ export function evaluateAgentReachArtifact(
     Record<AgentReachCoverageStatus, number>
   > = {};
 
-  for (const item of artifact.items) {
+  for (const item of items) {
     const hasTitle =
       typeof item.title === "string" && item.title.trim().length > 0;
     const hasTrace = Boolean(item.url || item.raw_ref);
@@ -116,16 +121,20 @@ export function evaluateAgentReachArtifact(
     if (identity) identities.add(identity);
   }
 
-  for (const coverage of Object.values(artifact.coverage)) {
-    increment(
-      coverageStatusCounts as Record<string, number>,
-      coverage.status,
-    );
+  for (const platformCoverage of Object.values(coverage)) {
+    if (platformCoverage?.status) {
+      increment(
+        coverageStatusCounts as Record<string, number>,
+        platformCoverage.status,
+      );
+    }
   }
 
   const reasons: string[] = [];
   let outcome: AgentReachAcceptanceOutcome = "pass";
-  const requiredPlatformStatus = artifact.coverage.hacker_news.status;
+  const requiredPlatformCoverage = coverage.hacker_news;
+  const requiredPlatformStatus: AgentReachCoverageStatus =
+    requiredPlatformCoverage?.status ?? "failed";
 
   if (artifact.status === "failed") {
     outcome = "fail";
@@ -135,7 +144,10 @@ export function evaluateAgentReachArtifact(
     reasons.push(`producer_status:${artifact.status}`);
   }
 
-  if (requiredPlatformStatus === "partial") {
+  if (!requiredPlatformCoverage) {
+    outcome = "fail";
+    reasons.push("required_platform_missing:hacker_news");
+  } else if (requiredPlatformStatus === "partial") {
     if (outcome === "pass") outcome = "warn";
     reasons.push("required_platform_status:partial");
   } else if (requiredPlatformStatus !== "ok") {
@@ -145,7 +157,7 @@ export function evaluateAgentReachArtifact(
 
   const hackerNewsSearchAttempted =
     requiredPlatformStatus === "ok" || requiredPlatformStatus === "partial";
-  if (artifact.items.length === 0 && hackerNewsSearchAttempted) {
+  if (items.length === 0 && hackerNewsSearchAttempted) {
     if (outcome === "pass") outcome = "warn";
     reasons.push("zero_relevant_results");
   }
@@ -159,6 +171,11 @@ export function evaluateAgentReachArtifact(
     reasons.push("incomplete_item_fields");
   }
 
+  if (missingSourcePublishedAtCount > 0) {
+    if (outcome === "pass") outcome = "warn";
+    reasons.push("missing_source_published_at");
+  }
+
   if (duplicateIdentityCount > 0) {
     if (outcome === "pass") outcome = "warn";
     reasons.push("duplicate_item_identity");
@@ -166,9 +183,9 @@ export function evaluateAgentReachArtifact(
 
   const publicSafetyViolation =
     containsForbiddenPublicArtifactText(artifact.query) ||
-    containsForbiddenPublicArtifactText(artifact.items) ||
-    containsForbiddenPublicArtifactText(artifact.coverage) ||
-    containsForbiddenPublicArtifactText(artifact.diagnostics.warnings);
+    containsForbiddenPublicArtifactText(items) ||
+    containsForbiddenPublicArtifactText(coverage) ||
+    containsForbiddenPublicArtifactText(diagnosticsWarnings);
   if (publicSafetyViolation) {
     outcome = "fail";
     reasons.push("public_safety_violation");
@@ -178,7 +195,7 @@ export function evaluateAgentReachArtifact(
     schema_version: AGENT_REACH_ACCEPTANCE_SCHEMA_VERSION,
     outcome,
     producer_status: artifact.status,
-    item_count: artifact.items.length,
+    item_count: items.length,
     usable_item_count: usableItemCount,
     missing_title_count: missingTitleCount,
     missing_trace_count: missingTraceCount,
@@ -192,7 +209,7 @@ export function evaluateAgentReachArtifact(
     coverage_status_counts: sortedRecord(coverageStatusCounts),
     required_platform: "hacker_news",
     required_platform_status: requiredPlatformStatus,
-    warning_count: artifact.diagnostics.warnings.length,
+    warning_count: diagnosticsWarnings.length,
     reasons,
   };
 }

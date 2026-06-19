@@ -52,6 +52,7 @@ function writeResult(input?: {
           raw_ref: "hn:smoke",
           platform: "hacker_news",
           observed_at: "2026-06-19T12:00:00.000Z",
+          source_published_at: "2026-06-18T12:00:00.000Z",
           url: "https://example.com/research-agent",
           title: "Research agent",
           direction_labels: ["research-agent"],

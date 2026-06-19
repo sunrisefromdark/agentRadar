@@ -113,6 +113,34 @@ export interface AgentReachProviderConfig {
   };
 }
 
+export type AgentReachProviderConfigMap = Partial<
+  Record<AgentReachProviderId, AgentReachProviderConfig>
+>;
+
+export interface AgentReachSearchJob {
+  job_id: string;
+  provider_id: AgentReachProviderId;
+  query_entry_id: string;
+  term: string;
+  direction_labels: ExternalDirectionLabel[];
+  tags: string[];
+  max_items: number;
+}
+
+export interface AgentReachSearchPlanSummary {
+  job_count: number;
+  provider_count: number;
+  query_entry_count: number;
+  reserved_provider_count: number;
+  max_items_per_query: number;
+  provider_job_counts: Partial<Record<AgentReachProviderId, number>>;
+}
+
+export interface AgentReachSearchPlan {
+  jobs: AgentReachSearchJob[];
+  summary: AgentReachSearchPlanSummary;
+}
+
 export interface AgentReachQualityPolicy {
   lookback_days: number;
   max_items_per_query: number;

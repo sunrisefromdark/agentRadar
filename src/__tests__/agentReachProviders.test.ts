@@ -453,6 +453,77 @@ describe("AgentReach external import provider", () => {
     });
   });
 
+  it("expands official-web urlset sitemaps into same-host pages matched by search jobs", async () => {
+    const seenUrls: string[] = [];
+    const transport = createInMemoryAgentReachTransport((request) => {
+      seenUrls.push(request.url);
+      if (request.url === "https://example.com/sitemap.xml") {
+        return {
+          status: 200,
+          headers: { "content-type": "application/xml" },
+          body: `<?xml version="1.0"?>
+            <urlset>
+              <url><loc>https://example.com/agents/paper-reading-agent</loc></url>
+              <url><loc>https://example.com/company/about</loc></url>
+              <url><loc>https://other.example.com/agents/paper-reading-agent</loc></url>
+            </urlset>`,
+        };
+      }
+      return {
+        status: 200,
+        headers: { "content-type": "text/html" },
+        body: `<!doctype html>
+          <html>
+            <head>
+              <title>Paper Reading Agent</title>
+              <link rel="canonical" href="https://example.com/agents/paper-reading-agent" />
+              <meta name="description" content="Official paper reading agent product page" />
+            </head>
+            <body><main>Paper Reading Agent</main></body>
+          </html>`,
+      };
+    });
+
+    const result = await officialWebProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://example.com/sitemap.xml"],
+          },
+        },
+        transport,
+        AGENT_REACH_DEFAULT_QUALITY_POLICY,
+        [
+          {
+            job_id: "official-web:literature-review-agent:paper-reading-agent",
+            provider_id: "official-web",
+            query_entry_id: "literature-review-agent",
+            term: "paper reading agent",
+            direction_labels: ["literature-review-agent", "research-agent"],
+            tags: ["research", "papers"],
+            max_items: 1,
+          },
+        ],
+      ),
+    );
+
+    expect(seenUrls).toEqual([
+      "https://example.com/sitemap.xml",
+      "https://example.com/agents/paper-reading-agent",
+    ]);
+    expect(result.status).toBe("ok");
+    expect(result.items).toHaveLength(1);
+    expect(result.items[0]).toMatchObject({
+      platform: "official_web",
+      raw_event_kind: "official_release",
+      url: "https://example.com/agents/paper-reading-agent",
+      title: "Paper Reading Agent",
+      direction_labels: ["literature-review-agent", "research-agent"],
+      tags: ["research", "papers"],
+    });
+  });
+
   it("queries configured Hacker News search endpoint with planner search jobs through injected transport", async () => {
     const seenUrls: string[] = [];
     const transport = createInMemoryAgentReachTransport((request) => {

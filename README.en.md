@@ -367,6 +367,14 @@ coverage remains ok.
 
 Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
+Use the Hacker News-only smoke command to validate the live producer without writing a raw artifact:
+
+```powershell
+corepack pnpm agentreach:smoke -- --date YYYY-MM-DD --config <path>
+```
+
+The command is fixed to `hacker-news`, rejects provider overrides, and always runs through producer dry-run. `hacker_news=not_configured`, `unavailable`, or `failed` is a failure; `zero_relevant_results` is only a warning after an HN search was actually attempted. `agent-reach.acceptance.v1` is stdout-only operational output, not a daily, weekly, or run-summary artifact, and it does not expose config paths, response bodies, or raw exceptions.
+
 ### Hosted-product note
 
 - The hosted site lives at [`app.agentradar.top`](https://app.agentradar.top/)

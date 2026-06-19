@@ -366,6 +366,14 @@ zero relevant results，coverage remains ok。
 
 Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
+可通过 Hacker News 专用 smoke 命令验证 live producer，而不写 raw artifact：
+
+```powershell
+corepack pnpm agentreach:smoke -- --date YYYY-MM-DD --config <path>
+```
+
+该命令固定使用 `hacker-news`，拒绝 provider 覆盖，并始终通过 producer dry-run 运行。`hacker_news=not_configured`、`unavailable` 或 `failed` 会判定为失败；只有已经执行 HN 搜索但没有相关结果时，才输出 `zero_relevant_results` warning。`agent-reach.acceptance.v1` 只输出到 stdout，不进入 daily / weekly / run-summary artifact，也不会保存 config path、response body 或原始异常。
+
 ### 托管版说明
 
 - 在线托管版位于 [`app.agentradar.top`](https://app.agentradar.top/)

@@ -1197,6 +1197,14 @@ request, and coverage remains ok when the upstream request succeeded.
 
 Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
+## 16.8 PR6 Producer Acceptance Baseline
+
+PR6 在搜索质量继续调整前冻结一套确定性 producer acceptance baseline。现有 consumer fixtures 继续验证 adapter、aggregate、daily 与 weekly 语义；新增 producer fixtures 只验证 query relevance、时间过滤、去重、稳定 direction labels、coverage 和 artifact consumer compatibility。
+
+`agentreach:smoke` 固定为 Hacker News 专用显式探针，要求本地 config，拒绝 provider override，并始终调用 producer dry-run。`hacker_news=not_configured`、`unavailable` 或 `failed` 必须失败，不能被解释为 zero signal；只有 HN coverage 为 `ok` 或 `partial` 且 items 为空时，才表达 `zero_relevant_results` warning。
+
+`agent-reach.acceptance.v1` 是 stdout-only operational report，不落盘、不进入 external discovery adapter，也不扩展 daily、weekly 或 run-summary contract。它只证明当前配置下 producer 能否产生结构可用、public-safe 的外部观察，不代表项目成熟度、actor authority、持续性、跨平台确认或行业趋势结论。
+
 ## 17. Open Questions
 
 以下问题不改写冻结需求，也不阻塞 V1 进入 exec-plan；V1 默认决策已在正文冻结，以下仅作为后续产品优化或未来扩展问题保留。

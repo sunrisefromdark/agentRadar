@@ -359,6 +359,17 @@ coverage.
 
 Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
+## PR6 Acceptance Baseline and Live Smoke
+
+- deterministic synthetic fixtures cover research agent, literature review agent, office agent, spreadsheet agent, and workflow automation agent;
+- fixtures freeze accepted, irrelevant, stale, and duplicate quality outcomes;
+- one in-memory Hacker News response traverses provider, quality, artifact writer, and the existing consumer adapter;
+- `agentreach:smoke` requires explicit config, is fixed to Hacker News, rejects provider overrides, and always runs producer dry-run;
+- the stdout-only `agent-reach.acceptance.v1` report emits counts and safe reason codes without persisting a new public artifact;
+- HN `not_configured`, `unavailable`, and `failed` are failures; zero relevant results are a warning only after an HN search was attempted;
+- no automated test performs a real network request;
+- PR6 does not tune query quality, add providers, modify `RawSignal`, or change scoring.
+
 ## 验收标准
 
 1. `pnpm agentreach:discover -- --date <date> --dry-run` 返回 planned artifact summary，且不写盘。

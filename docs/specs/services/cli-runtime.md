@@ -42,6 +42,16 @@ successful request and coverage remains ok.
 
 Quality keywords: AgentReachQualityPolicy; lookback_days; max_items_per_query; max_items_per_provider; max_items_total; atomic query entry; quality_filtered_irrelevant; quality_filtered_invalid_timestamp; quality_deduplicated; zero relevant results; coverage remains ok.
 
+## AgentReach acceptance smoke
+
+- `corepack pnpm agentreach:smoke -- --date YYYY-MM-DD --config <path>` is a manually invoked Hacker News producer acceptance probe.
+- The command requires explicit config, is fixed to `hacker-news`, and rejects `--providers`; X / Twitter and Reddit remain `manual_import_only`.
+- The command always calls the producer with `dryRun: true`. It may perform explicitly configured public network reads but must not write `data/raw/external-discovery/<date>.agent-reach.json`.
+- Output is an stdout-only `agent-reach.acceptance.v1` operational summary containing status, item counts, direction-label counts, coverage counts, and safe reason codes. It is not a daily, weekly, run-summary, or external-discovery artifact contract.
+- `hacker_news=not_configured`, `unavailable`, or `failed` produces `fail`. `zero_relevant_results` is only emitted when HN coverage is `ok` or `partial`, proving a search was attempted.
+- Exit code is `0` for `pass` and `warn`, and `1` for `fail`.
+- Automated tests use sanitized fixtures and in-memory transport. Real network smoke is never a CI requirement.
+
 ## 职责
 
 CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加载、日志与重试策略，以及“哪些命令会写工件、哪些命令只做浏览或探针”。
@@ -53,6 +63,7 @@ CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加�
 | 命令 / 脚本入口 | 作用 |
 | --- | --- |
 | `agentreach:discover` | opt-in 生成本地 public-safe AgentReach raw artifact，不接入主 CLI 或主 score |
+| `agentreach:smoke` | HN-only producer dry-run 验收探针，仅输出 public-safe stdout summary |
 | `run-daily` | 采集、归一化、分类、评分并生成 daily 相关工件 |
 | `recover-daily` | 基于已缓存 raw 数据恢复 daily 工件 |
 | `score` | 对指定日期或指定输入进行分类 + 评分 |

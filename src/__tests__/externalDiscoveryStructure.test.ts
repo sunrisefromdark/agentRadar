@@ -377,4 +377,78 @@ describe("external discovery OSS artifact structure", () => {
       expect(item.tags).toEqual(expect.arrayContaining(["agent-workflow"]));
     }
   });
+
+  it("keeps AgentReach acceptance smoke isolated, HN-only, and documented", () => {
+    const packageJson = JSON.parse(readText("package.json")) as {
+      scripts?: Record<string, string>;
+    };
+    const acceptance = readText("src", "agentReach", "acceptance.ts");
+    const smokeCli = readText("src", "agentReach", "acceptanceCli.ts");
+    const acceptanceTest = readText(
+      "src",
+      "__tests__",
+      "agentReachAcceptance.test.ts",
+    );
+    const qualityFixture = readText(
+      "data",
+      "raw",
+      "external-discovery",
+      "fixtures",
+      "agent-reach.quality-baseline.sanitized.json",
+    );
+    const hackerNewsFixture = readText(
+      "data",
+      "raw",
+      "external-discovery",
+      "fixtures",
+      "agent-reach.hacker-news-response.sanitized.json",
+    );
+    const docs = [
+      readText("README.md"),
+      readText("README.en.md"),
+      readText("data", "README.md"),
+      readText("docs", "specs", "system-spec.md"),
+      readText("docs", "specs", "services", "cli-runtime.md"),
+      readText(
+        "docs",
+        "specs",
+        "design-docs",
+        "agent-reach-external-discovery-and-evidence-design.md",
+      ),
+      readText(
+        "docs",
+        "specs",
+        "exec-plans",
+        "agent-reach-artifact-producer-v0.1.exec-plan.md",
+      ),
+    ];
+
+    expect(packageJson.scripts?.["agentreach:smoke"]).toBe(
+      "tsx src/agentReach/acceptanceCli.ts",
+    );
+    expect(smokeCli).toContain('providers: ["hacker-news"]');
+    expect(smokeCli).toContain("dryRun: true");
+    expect(smokeCli).not.toContain('"reddit"');
+    expect(smokeCli).not.toContain('"x_twitter"');
+    expect(acceptance).toContain("required_platform_status");
+    expect(acceptance).toContain("zero_relevant_results");
+    expect(acceptanceTest).toContain("createInMemoryAgentReachTransport");
+    expect(acceptanceTest).not.toContain("createFetchAgentReachTransport");
+
+    for (const source of [acceptance, smokeCli]) {
+      expect(source).not.toContain("RawSignal");
+      expect(source).not.toContain("ScoreBreakdown");
+      expect(source).not.toContain("discussion_score");
+    }
+    for (const fixture of [qualityFixture, hackerNewsFixture]) {
+      expect(fixture).not.toMatch(
+        /cookie|token|session|password|OAuth|profile_url|content_text/i,
+      );
+    }
+    for (const text of docs) {
+      expect(text).toContain("agentreach:smoke");
+      expect(text).toContain("hacker-news");
+      expect(text).toContain("dry-run");
+    }
+  });
 });

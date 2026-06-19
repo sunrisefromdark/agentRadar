@@ -1,0 +1,31 @@
+{
+  "hits": [
+    {
+      "objectID": "fixture-hn-1",
+      "title": "Research agent discussion",
+      "url": "https://example.com/research-agent-discussion",
+      "created_at": "2026-06-18T09:00:00.000Z",
+      "author": "synthetic-actor",
+      "points": 24,
+      "num_comments": 6
+    },
+    {
+      "objectID": "fixture-hn-irrelevant",
+      "title": "Database storage benchmark",
+      "url": "https://example.com/storage-benchmark",
+      "created_at": "2026-06-18T08:00:00.000Z",
+      "author": "synthetic-actor",
+      "points": 8,
+      "num_comments": 2
+    },
+    {
+      "objectID": "fixture-hn-stale",
+      "title": "Research agent archive",
+      "url": "https://example.com/research-agent-archive",
+      "created_at": "2025-01-01T00:00:00.000Z",
+      "author": "synthetic-actor",
+      "points": 12,
+      "num_comments": 3
+    }
+  ]
+}

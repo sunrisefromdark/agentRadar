@@ -6,6 +6,8 @@
 - It consumes sanitized local/public artifacts only and must not become a primary ranking or scoring source.
 - Public weekly and daily outputs may expose external discovery summaries, counts, stable evidence IDs, provider status, and audit state.
 - Raw platform text, login state, cookies, sessions, OAuth data, account settings, and platform API credentials are outside the OSS boundary.
+- `agentreach:smoke` is an explicit `hacker-news`-only, producer dry-run acceptance probe. It writes no raw artifact, rejects provider overrides, and emits only an stdout `agent-reach.acceptance.v1` operational summary.
+- HN `not_configured`, `unavailable`, and `failed` are not “zero results”; `zero_relevant_results` is valid only after HN coverage proves a search was attempted.
 
 ## 文档状态
 
@@ -54,6 +56,7 @@
 | weekly loop | `run-weekly` | 读取 canonical 7 日窗口并输出 weekly 工件 | 活跃 |
 | weekly sync | `sync-weekly` | 在缺口修复后补齐 weekly 工件 | 活跃 |
 | verification | `verify-daily` | 校验 daily 输出完整性与健康度 | 活跃 |
+| AgentReach smoke | `agentreach:smoke` | 以 dry-run 验证显式配置的 Hacker News producer，不写 raw artifact | 活跃 |
 | enrichment | `capture-github-stars` | 写入 tracked repo star 快照 | 活跃 |
 | knowledge refresh | `build-kb` | 刷新知识库工件 | 活跃 |
 | receipt ingress | `record-agent-task` | 把开发任务写入 agent-memory canonical receipt | 活跃 |

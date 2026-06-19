@@ -1,4 +1,7 @@
-import type { AgentReachProducerProvider } from "../types.ts";
+import type {
+  AgentReachProducerProvider,
+  AgentReachSearchJob,
+} from "../types.ts";
 import { runLiveProvider } from "./liveProvider.ts";
 import { loadLocalJsonProvider, runLocalJsonProvider } from "./localJsonProvider.ts";
 
@@ -48,7 +51,70 @@ function blocks(input: string, tag: string): string[] {
   );
 }
 
-function parseFeedItems(input: { url: string; body: string; observedAt: string }): unknown[] {
+function termSlug(term: string): string {
+  return term
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "");
+}
+
+function jobForFeedItem(
+  item: { title?: string; url?: string },
+  jobs: readonly AgentReachSearchJob[],
+): AgentReachSearchJob | undefined {
+  const haystack = `${item.title ?? ""} ${item.url ?? ""}`.toLowerCase();
+  return jobs.find((job) => {
+    const slug = termSlug(job.term);
+    if (slug && haystack.includes(slug)) return true;
+    return job.term
+      .toLowerCase()
+      .split(/\s+/)
+      .filter((part) => part.length > 2)
+      .every((part) => haystack.includes(part));
+  });
+}
+
+function withSearchJobHints(
+  item: Record<string, unknown>,
+  job: AgentReachSearchJob | undefined,
+): Record<string, unknown> {
+  if (!job) return item;
+  return {
+    ...item,
+    direction_labels: job.direction_labels,
+    tags: job.tags,
+  };
+}
+
+function applyFeedJobFilter(
+  items: Record<string, unknown>[],
+  jobs: readonly AgentReachSearchJob[],
+): Record<string, unknown>[] {
+  if (jobs.length === 0) return items;
+  const acceptedPerJob = new Map<string, number>();
+  return items.flatMap((item) => {
+    const job = jobForFeedItem(
+      {
+        title: typeof item.title === "string" ? item.title : undefined,
+        url: typeof item.url === "string" ? item.url : undefined,
+      },
+      jobs,
+    );
+    if (!job) return [];
+    const accepted = acceptedPerJob.get(job.job_id) ?? 0;
+    if (accepted >= job.max_items) return [];
+    acceptedPerJob.set(job.job_id, accepted + 1);
+    return [withSearchJobHints(item, job)];
+  });
+}
+
+function parseFeedItems(input: {
+  url: string;
+  body: string;
+  observedAt: string;
+  jobs: readonly AgentReachSearchJob[];
+}): unknown[] {
   const rssItems = blocks(input.body, "item").map((item, index) => {
     const link = tagText(item, "link");
     return {
@@ -77,7 +143,7 @@ function parseFeedItems(input: { url: string; body: string; observedAt: string }
       ...(tagText(entry, "title") ? { title: tagText(entry, "title") } : {}),
     };
   });
-  return [...rssItems, ...atomItems];
+  return applyFeedJobFilter([...rssItems, ...atomItems], input.jobs);
 }
 
 export const rssBlogProvider: AgentReachProducerProvider = {
@@ -96,6 +162,7 @@ export const rssBlogProvider: AgentReachProducerProvider = {
             url: input.url,
             body: input.body,
             observedAt: input.context.generated_at,
+            jobs: input.context.search_jobs,
           });
         },
       });

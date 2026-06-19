@@ -411,6 +411,59 @@ describe("AgentReach external import provider", () => {
     });
   });
 
+  it("filters RSS live items by planner search jobs and carries classification hints", async () => {
+    const transport = createInMemoryAgentReachTransport(() => ({
+      status: 200,
+      headers: { "content-type": "application/rss+xml" },
+      body: `<?xml version="1.0"?>
+        <rss><channel>
+          <item>
+            <title>Paper Reading Agent launch</title>
+            <link>https://example.com/blog/paper-reading-agent</link>
+            <pubDate>Thu, 18 Jun 2026 10:00:00 GMT</pubDate>
+          </item>
+          <item>
+            <title>Company update</title>
+            <link>https://example.com/blog/company-update</link>
+            <pubDate>Thu, 18 Jun 2026 11:00:00 GMT</pubDate>
+          </item>
+        </channel></rss>`,
+    }));
+
+    const result = await rssBlogProvider.run(
+      providerContext(
+        {
+          live: {
+            enabled: true,
+            urls: ["https://example.com/rss.xml"],
+          },
+        },
+        transport,
+        AGENT_REACH_DEFAULT_QUALITY_POLICY,
+        [
+          {
+            job_id: "rss-blog:literature-review-agent:paper-reading-agent",
+            provider_id: "rss-blog",
+            query_entry_id: "literature-review-agent",
+            term: "paper reading agent",
+            direction_labels: ["literature-review-agent", "research-agent"],
+            tags: ["research", "papers"],
+            max_items: 1,
+          },
+        ],
+      ),
+    );
+
+    expect(result.status).toBe("ok");
+    expect(result.items.map((item) => item.title)).toEqual([
+      "Paper Reading Agent launch",
+    ]);
+    expect(result.items[0]).toMatchObject({
+      direction_labels: ["literature-review-agent", "research-agent"],
+      tags: ["research", "papers"],
+    });
+  });
+
   it("fetches only configured official pages and extracts public title and canonical URL", async () => {
     const transport = createInMemoryAgentReachTransport((request) => ({
       status: 200,

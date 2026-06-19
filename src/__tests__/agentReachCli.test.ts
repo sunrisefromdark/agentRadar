@@ -682,7 +682,7 @@ describe("AgentReach producer CLI", () => {
     expect(result.artifact.coverage.hacker_news.status).toBe("ok");
     expect(result.artifact.items).toEqual([]);
     expect(result.artifact.diagnostics.warnings).toContain(
-      "quality_filtered_irrelevant:hacker-news:1",
+      "quality_filtered_irrelevant:hacker-news:3",
     );
   });
 

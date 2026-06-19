@@ -40,6 +40,22 @@ describe("external discovery CLI command matrix", () => {
     expect(mode.generatesDailyAggregate).toBe(true);
   });
 
+  it("allows run-daily to request explicit AgentReach generation with a config path", () => {
+    const { command, opts } = parse(
+      "run-daily",
+      "--external-discovery-generate",
+      "--agentreach-config",
+      "config/agentreach.yaml",
+    );
+    const mode = resolveExternalDiscoveryCliMode(command, opts);
+
+    expect(opts.externalDiscoveryGenerate).toBe(true);
+    expect(opts.agentReachConfigPath).toBe("config/agentreach.yaml");
+    expect(mode.agentReachGenerate).toBe(true);
+    expect(mode.readsExternalRawInput).toBe(true);
+    expect(mode.generatesDailyAggregate).toBe(true);
+  });
+
   it("disables run-daily external discovery when requested", () => {
     const { command, opts } = parse("run-daily", "--no-external-discovery");
     const mode = resolveExternalDiscoveryCliMode(command, opts);
@@ -171,6 +187,97 @@ describe("external discovery CLI command matrix", () => {
       /--external-discovery-input requires a path/,
     );
   });
+
+  it("rejects --agentreach-config without a path", () => {
+    expect(() => parse("run-daily", "--agentreach-config")).toThrow(
+      /--agentreach-config requires a path/,
+    );
+  });
+
+  it("rejects run-daily generation without an AgentReach config", () => {
+    const { command, opts } = parse("run-daily", "--external-discovery-generate");
+
+    expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+      /--external-discovery-generate requires --agentreach-config/,
+    );
+  });
+
+  it("rejects an AgentReach config without explicit generation", () => {
+    const { command, opts } = parse("run-daily", "--agentreach-config", "config/agentreach.yaml");
+
+    expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+      /--agentreach-config requires --external-discovery-generate/,
+    );
+  });
+
+  it("rejects generation combined with an explicit external discovery input", () => {
+    const { command, opts } = parse(
+      "run-daily",
+      "--external-discovery-generate",
+      "--agentreach-config",
+      "config/agentreach.yaml",
+      "--external-discovery-input",
+      INPUT_PATH,
+    );
+
+    expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+      /--external-discovery-generate cannot be combined with --external-discovery-input/,
+    );
+  });
+
+  it("rejects generation combined with disabled external discovery", () => {
+    const { command, opts } = parse(
+      "run-daily",
+      "--no-external-discovery",
+      "--external-discovery-generate",
+      "--agentreach-config",
+      "config/agentreach.yaml",
+    );
+
+    expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+      /--external-discovery-generate cannot be combined with --no-external-discovery/,
+    );
+  });
+
+  it("rejects recover-daily generation flags", () => {
+    const { command, opts } = parse(
+      "recover-daily",
+      "--external-discovery-generate",
+      "--agentreach-config",
+      "config/agentreach.yaml",
+    );
+
+    expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+      /recover-daily does not accept --external-discovery-generate/,
+    );
+  });
+
+  it.each(["run-weekly", "verify-daily"])(
+    "rejects %s generation flags",
+    (commandName) => {
+      const { command, opts } = parse(
+        commandName,
+        "--external-discovery-generate",
+        "--agentreach-config",
+        "config/agentreach.yaml",
+      );
+
+      expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+        new RegExp(`${commandName} does not accept --external-discovery-generate`),
+      );
+    },
+  );
+
+  it.each(["recover-daily", "run-weekly", "verify-daily"])(
+    "rejects %s AgentReach config without generation support",
+    (commandName) => {
+      const { command, opts } = parse(commandName, "--agentreach-config", "config/agentreach.yaml");
+
+      expect(() => validateExternalDiscoveryCliMatrix(command, opts)).toThrow(
+        new RegExp(`${commandName} does not accept --agentreach-config`),
+      );
+    },
+  );
 
   it("lets --no-external-discovery take precedence over explicit input for run-daily", () => {
     const { command, opts } = parse(

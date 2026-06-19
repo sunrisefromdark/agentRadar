@@ -1168,7 +1168,7 @@ PR2 允许低风险 provider 在明确配置后执行公开网络读取，但 de
 - `timeout_ms`、`max_response_bytes`、`query_limit` 必须是正整数；非法配置 fail-fast，且不写 artifact。
 - dry-run 输出可包含 public-safe coverage summary，但 artifact 仍不得包含 config path、account settings、cookie、session、OAuth、token 或 response body。
 
-Daily / weekly 集成仍保持手动边界：`run-daily` 不默认启动 producer。若未来需要自动生成，只能新增显式 `run-daily --external-discovery-generate --agentreach-config <path>`；weekly 永远只读 daily aggregate，不直接启动 producer。
+Daily / weekly 集成保持显式边界：`run-daily` 不默认启动 producer；PR5 唯一允许的 daily 生成入口是 `run-daily --external-discovery-generate --agentreach-config <path>`。`run-daily --external-discovery-input <path>` 仍只消费已有 artifact，不启动 producer。generation 与 explicit input 互斥；producer 失败只能让 external discovery 降级为 `failed`，不得中断主 daily 链路；dry-run 只记录 planned generation，不写入或消费 raw artifact。weekly 永远只读 daily aggregate，不直接启动 producer。
 
 V2 high-risk provider 仍不在 PR2 / C 范围：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计，凭据只读本地 secret / env，且不得写入 public artifact。
 

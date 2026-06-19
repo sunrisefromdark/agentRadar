@@ -37,7 +37,7 @@
 
 - Producer 输出路径固定为 `data/raw/external-discovery/YYYY-MM-DD.agent-reach.json`。
 - Producer 不写 `RawSignal[]`，不改主 score、`discussion_score`、primary freshness 或主榜排序。
-- `run-daily` 不得默认启动 producer；用户必须先显式运行 `pnpm agentreach:discover`，再用 `run-daily --external-discovery-input <path>` 消费。
+- `run-daily` 不得默认启动 producer；用户可以先显式运行 `pnpm agentreach:discover` 再用 `run-daily --external-discovery-input <path>` 消费，或通过 PR5 的显式入口 `run-daily --external-discovery-generate --agentreach-config <path>` 在 daily 编排中生成后消费。
 - 不保存、不读取、不暴露 cookie、session、OAuth、token、账号配置、平台 API 凭据或私有 provider diagnostics。
 - 不内置 X / Twitter 深度搜索、Reddit OAuth 搜索、大规模网页 crawler 或绕平台限制的采集。
 - `provider_tier_hint` 只保留为 hint，不得升级成 `registry_tier` 或 `effective_tier=core/proven/watch`。
@@ -334,7 +334,7 @@ pnpm agentreach:discover -- --date YYYY-MM-DD --providers external-import,rss-bl
 3. `input_path` 与 `live.enabled=true` 互斥；非法 `urls`、`timeout_ms`、`max_response_bytes`、`query_limit` fail-fast 且不写 artifact。
 4. RSS / Atom 解析 title、link、published / updated；official web 只提取配置页面的 title、canonical URL、meta description；Hacker News 只使用配置 search endpoint。
 5. CLI dry-run 输出 public-safe coverage summary；artifact 不包含 config path、account settings、cookie、session、OAuth、token、response body。
-6. `run-daily` 继续不自动启动 producer；未来如需集成，只能新增显式 `run-daily --external-discovery-generate --agentreach-config <path>`。
+6. `run-daily` 继续不自动启动 producer；PR5 的 daily 集成只能通过显式 `run-daily --external-discovery-generate --agentreach-config <path>` 触发，且与 `--external-discovery-input <path>` 互斥。
 7. V2 high-risk provider 不在本阶段实现：X / Twitter API、Reddit API、scoped crawler、authority registry 和 actor graph 必须另开设计和测试 fixture。
 
 ## PR3 Discovery Quality Policy

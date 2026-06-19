@@ -8,6 +8,7 @@ import { writeAgentReachArtifact } from "./artifactWriter.ts";
 import { runAgentReachProviders } from "./orchestrator.ts";
 import {
   AGENT_REACH_PROVIDER_REGISTRY,
+  defaultAgentReachProviderIds,
 } from "./providerRegistry.ts";
 import {
   AGENT_REACH_DEFAULT_QUALITY_POLICY,
@@ -256,9 +257,7 @@ function loadAgentReachConfig(configPath: string | undefined): AgentReachConfig 
 export function parseAgentReachDiscoverArgs(argv: string[]): AgentReachDiscoverOptions {
   const opts: AgentReachDiscoverOptions = {
     date: new Date().toISOString().slice(0, 10),
-    providers: AGENT_REACH_PROVIDER_REGISTRY
-      .filter((provider) => provider.default_enabled)
-      .map((provider) => provider.provider_id),
+    providers: defaultAgentReachProviderIds(),
     dryRun: false,
   };
 

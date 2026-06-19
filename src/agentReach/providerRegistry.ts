@@ -18,6 +18,12 @@ export const AGENT_REACH_PROVIDER_REGISTRY: readonly AgentReachProducerProvider[
   redditProvider,
 ];
 
+export function defaultAgentReachProviderIds(): AgentReachProviderId[] {
+  return AGENT_REACH_PROVIDER_REGISTRY
+    .filter((provider) => provider.default_enabled)
+    .map((provider) => provider.provider_id);
+}
+
 export function selectAgentReachProviders(
   registry: readonly AgentReachProducerProvider[],
   selectedProviderIds: readonly AgentReachProviderId[],

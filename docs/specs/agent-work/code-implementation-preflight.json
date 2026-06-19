@@ -3,6 +3,6 @@
   "skill_sha256": "a15bb25d65ff2b12867a3255812d109d0821d6838a89b232392cbfaa70b7a95d",
   "exec_plan_path": "docs/specs/exec-plans/agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md",
   "exec_plan_sha256": "0f98a0c5e414efc08ad14e1b681314d568c14deddcfadf4908264fe6903068ec",
-  "generated_at": "2026-06-18T04:26:23.582Z",
+  "generated_at": "2026-06-19T10:53:29.425Z",
   "acknowledged": true
 }

@@ -8,7 +8,12 @@
 - `--config` may also declare low-risk live provider input with `live.enabled=true` and an allowlist URL. The default remains disabled: without explicit live config, `agentreach:discover` uses disabled transport and does not call `fetch`.
 - Live RSS / Atom, official page, and Hacker News search use `createFetchAgentReachTransport` only after explicit opt-in; tests use fake/in-memory transport and must not depend on real network.
 - `input_path` and `live.enabled=true` are mutually exclusive for one provider run. Invalid live config fails before writing an artifact.
-- `run-daily` still does not start producer. A future integration would require an explicit flag such as `run-daily --external-discovery-generate --agentreach-config <path>`; weekly continues to read daily aggregates only.
+- `run-daily` does not start the AgentReach producer by default. PR5 adds one explicit generation path: `run-daily --external-discovery-generate --agentreach-config <path>`.
+- `run-daily --external-discovery-input <path>` only consumes an existing local raw artifact and must not invoke the producer.
+- `--external-discovery-generate` and `--external-discovery-input <path>` are mutually exclusive; `--agentreach-config <path>` is only valid with generation.
+- AgentReach generation is fail-soft after CLI validation: producer failures become external discovery `failed` status and must not fail the primary daily chain.
+- Producer dry-run validates planned generation but does not write or consume a raw artifact; the external layer records `agentreach_generate_dry_run`.
+- Weekly continues to read daily aggregates only and must never start producer generation directly.
 - X / Twitter API and Reddit API remain V2 high-risk provider candidates, not default OSS behavior.
 - X / Twitter and Reddit remain reserved `manual_import_only` providers and must not trigger default crawling.
 - `agentreach:discover` creates a safe `ProviderContext`, selects providers from `providerRegistry.ts`, and delegates provider execution and aggregation to the orchestrator.

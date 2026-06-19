@@ -5,6 +5,7 @@ import path from "node:path";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { parseAgentReachDiscoverArgs, runAgentReachDiscover } from "../agentReach/cli.ts";
+import { defaultAgentReachProviderIds } from "../agentReach/providerRegistry.ts";
 import { createInMemoryAgentReachTransport } from "../agentReach/transport.ts";
 
 const tempDirs: string[] = [];
@@ -106,6 +107,18 @@ describe("AgentReach producer CLI", () => {
     expect(opts.date).toBe("2026-06-18");
     expect(opts.providers).toEqual(["external-import"]);
     expect(opts.dryRun).toBe(true);
+  });
+
+  it("uses the shared default provider helper when no providers are specified", () => {
+    const opts = parseAgentReachDiscoverArgs([
+      "node",
+      "src/agentReach/cli.ts",
+      "--date",
+      "2026-06-18",
+      "--dry-run",
+    ]);
+
+    expect(opts.providers).toEqual(defaultAgentReachProviderIds());
   });
 
   it("dry-runs reserved providers without writing or crawling", async () => {

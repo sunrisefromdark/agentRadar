@@ -1,6 +1,6 @@
 {
   "date": "2026-06-13",
-  "status": "pass",
+  "status": "warn",
   "summary_path": "data/reports/2026-06-13.run-summary.json",
   "github_audit_path": "data/raw/github/2026-06-13.enrichment.json",
   "checks": [
@@ -22,7 +22,7 @@
     {
       "name": "active_sources_present",
       "status": "pass",
-      "detail": "active_sources=5"
+      "detail": "active_sources=6"
     },
     {
       "name": "enabled_source_failures",
@@ -71,18 +71,18 @@
     },
     {
       "name": "llm_classification_health",
-      "status": "pass",
-      "detail": "cache_hits=262; provider=deepseek; attempts=45; success=45; failures=0"
+      "status": "warn",
+      "detail": "cache_hits=0; provider=deepseek; attempts=0; success=0; failures=0; no classification attempts were recorded"
     },
     {
       "name": "freshness_sources_complete",
       "status": "pass",
-      "detail": "freshness_sources=agents-radar[context],trendshift_live[freshness-driving],github_trending[freshness-driving],watchlist_live_activity[freshness-driving],github_live_star_delta[freshness-driving]"
+      "detail": "freshness_sources=agents-radar[context],trendshift_live[freshness-driving],github_trending[freshness-driving],github_live_star_delta[freshness-driving],watchlist_live_activity[freshness-driving]"
     },
     {
       "name": "fresh_source_project_alignment",
       "status": "pass",
-      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=4; today_fresh_candidate_count=103"
+      "detail": "fresh-driving_today_sources=4; context_today_sources=1; today_star_count=71; today_fresh_candidate_count=103"
     },
     {
       "name": "agents_radar_stale_fallback",
@@ -97,17 +97,17 @@
     {
       "name": "project_search_daily_fields",
       "status": "pass",
-      "detail": "today_pulse=4; mission_match=4; explore_ribbon=0; coverage_atlas=16; gap_ledger=7"
+      "detail": "today_pulse=71; mission_match=0; explore_ribbon=0; coverage_atlas=0; gap_ledger=0"
     },
     {
       "name": "project_cards_have_direction_and_appearance_reason",
-      "status": "pass",
-      "detail": "today_pulse / mission_match / explore_ribbon cards all carry direction and appearance reason"
+      "status": "warn",
+      "detail": "one or more project cards are missing direction_matches or appearance reason fields"
     },
     {
       "name": "mission_quota_and_explore_ribbon_contract",
       "status": "pass",
-      "detail": "mission_match=4; mission_quota=4; explore_ribbon=0; explore_overlap=false"
+      "detail": "mission_match=0; mission_quota=4; explore_ribbon=0; explore_overlap=false"
     },
     {
       "name": "mission_fairness_constraints",
@@ -117,17 +117,17 @@
     {
       "name": "mission_degraded_semantics",
       "status": "pass",
-      "detail": "mission_discovery_status=active"
+      "detail": "mission_degraded_reason_codes=mission_not_run"
     },
     {
       "name": "rolling_inventory_audit_present",
-      "status": "pass",
-      "detail": "catalog_30d=1138; vertical_30d=263; non_head_7d=426"
+      "status": "warn",
+      "detail": "mission inventory audit fields are missing from run-summary"
     },
     {
       "name": "rolling_inventory_targets_met",
-      "status": "pass",
-      "detail": "catalog_30d=1138/300; vertical_30d=263/180; non_head_7d=426/30; underfilled_directions=none"
+      "status": "warn",
+      "detail": "mission inventory audit fields are missing from run-summary"
     },
     {
       "name": "github_audit_written",

@@ -280,6 +280,21 @@ export interface DailyReport {
   all_projects: ScoredProject[];
 }
 
+export interface ProjectLibraryEnhancementEntry {
+  repo_full_name: string;
+  project_brief_cn: string;
+  source: "agent" | "observer";
+  provider: string;
+  generated_at: string;
+}
+
+export interface ProjectLibraryEnhancementArtifact {
+  date: string;
+  generated_at: string;
+  provider: string;
+  entries: ProjectLibraryEnhancementEntry[];
+}
+
 export interface DailySemanticInputProject {
   repo_url: string;
   project_name: string;

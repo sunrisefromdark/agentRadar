@@ -1,0 +1,1568 @@
+{
+  "date": "2026-06-13",
+  "generated_at": "2026-06-19T17:43:18.418Z",
+  "provider": "deepseek",
+  "entries": [
+    {
+      "repo_full_name": "1850298154/memory_agent_hub",
+      "project_brief_cn": "这是一个AI Agent集合仓库，收集了多种智能体实现，包括Swarm多智能体协作、AI编程Agent、记忆系统、自我进化以及基于强化学习的Agent。开发者可以在这里找到各种Agent的示例代码和配置，用于快速搭建自己的智能体应用。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "434media/bizdev-agent",
+      "project_brief_cn": "BizDev Agent 是一个基于 Next.js 和 Vercel AI SDK 构建的 AI 销售自动化工具，能自动完成潜在客户研究和个性化外联，帮助销售和营销团队高效生成高质量线索。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "aasmaagh/social-media-automation",
+      "project_brief_cn": "这是一个社交媒体自动化工具，使用Node.js、Playwright、Redis和n8n构建AI驱动的智能工作流，帮助用户自动生成、定时和发布内容，支持高效规模化运营。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "addyosmani/agent-skills",
+      "project_brief_cn": "Agent Skills 是 Addy Osmani 开源的工程技能库，为 Claude Code、Cursor 等 AI 编码 Agent 提供可复用的专业工作流，帮助开发者高效完成常见编程任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "adlaiponderous700/claude-skill-cinematic-prompt",
+      "project_brief_cn": "它是一个Claude技能，根据参考图片和项目简介生成适合Higgsfield AI的电影级视频提示词，内容创作者用它快速制作营销、广告等视频脚本。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:07.300Z"
+    },
+    {
+      "repo_full_name": "agent-sandbox/agent-sandbox",
+      "project_brief_cn": "Agent-Sandbox 是一个企业级的沙箱环境，专为 AI Agent 设计。它兼容 E2B，能让 Agent 安全地运行不可信的 LLM 生成代码、控制浏览器、操作电脑、部署网站等，主要用于构建和测试具备代码执行、浏览器控制等能力的 AI 助手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "agentscope-ai/QwenPaw",
+      "project_brief_cn": "一个个人AI助手运行时，可以快速安装在自己电脑或云端，支持多聊天应用，方便扩展工具和技能。开发者用它搭建带有持久记忆和自动化能力的智能体，例如让AI自动执行CLI命令、管理文件或协作任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "ALAGENT-HKU/x2strategy",
+      "project_brief_cn": "x2strategy 是一个专门从量化金融研究论文中自动提取结构化交易策略的工具，它作为 AI 编程助手（如 GitHub Copilot 和 Claude Code）的技能插件运行，帮助金融研究员或量化开发者快速将论文中的策略转化为可执行的代码或规范。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "alex-duria/bull.sh",
+      "project_brief_cn": "一个命令行投资研究助手，基于AI分析SEC文件和市场数据，帮助投资者快速获取股票洞察。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:42.087Z"
+    },
+    {
+      "repo_full_name": "alfredcs/dova",
+      "project_brief_cn": "Dova 是一个企业级多代理研究自动化系统，它能从网页、ArXiv、GitHub、HuggingFace 等来源聚合知识，用于深度研究和知识发现。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:36.460Z"
+    },
+    {
+      "repo_full_name": "alibaba/anolisa",
+      "project_brief_cn": "阿里巴巴开源的智能体操作系统层，旨在为Agent提供底层运行环境、工具调用和技能管理能力，类似Agent的Linux内核，用于构建和运行复杂的自主AI代理。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "alibaba/open-code-review",
+      "project_brief_cn": "Alibaba Open Code Review 是阿里巴巴开源的代码审查工具，结合静态分析流水线和 LLM Agent 的混合架构，能自动检测 Java 代码中的 NPE、线程安全、XSS、SQL 注入等问题，并给出行级注释。开发者常用它来提升代码质量、自动化审查流程，尤其适合大型团队或需要严格规范的项目。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "alirezarezvani/claude-skills",
+      "project_brief_cn": "Claude Skills 是一个技能和插件集合，包含 330+ 个技能、70+ 自定义命令和 30+ 智能体，适用于 Claude Code、Codex、Gemini CLI 等编程助手。开发者可将其用于工程、营销、财务、合规等领域的自动化任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:16.649Z"
+    },
+    {
+      "repo_full_name": "amitse/uiacli",
+      "project_brief_cn": "uiacli 是一个让 AI 助手通过 Windows UI Automation 控制桌面应用的开源工具。它填补了 AI agent 在 Windows 桌面自动化方面的空白，使 AI 能像操作浏览器一样操作任何 Windows 程序，常用于文本输入、按钮点击、窗口管理等自动化场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "anhb1/sales-outreach-automation-langgraph",
+      "project_brief_cn": "这是一个基于LangGraph构建的AI销售外联自动化系统。它能够自动分析来自多个平台的潜在客户线索，为每个客户生成个性化的销售策略和沟通材料，帮助销售团队更高效地开展外联工作。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "anomalyco/opencode",
+      "project_brief_cn": "开源的AI编程助手，支持代码生成、调试和任务自动化，开发者常用它来加速软件开发流程。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:32.883Z"
+    },
+    {
+      "repo_full_name": "anthropics/claude-code",
+      "project_brief_cn": "Claude Code 是由 Anthropic 开发的终端编码智能体，能理解整个代码库、执行日常任务、解释复杂代码和处理 Git 工作流，开发者通过自然语言指令即可加速编码。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:42.645Z"
+    },
+    {
+      "repo_full_name": "anthropics/knowledge-work-plugins",
+      "project_brief_cn": "这是一个由Anthropic公司开源的插件仓库，主要面向知识工作者，用于在Claude Cowork（一种协同工作环境）中增强知识管理和工作流程。用户可以安装这些插件来整理资料、辅助研究或自动化日常知识任务。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "anthropics/skills",
+      "project_brief_cn": "Anthropic Skills 是一个公开的 AI 智能体技能仓库，开发者可以发布、共享和复用可组合的技能模块（如质量分析、安全审计），让 Claude 等智能体具备更多专业能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:42.645Z"
+    },
+    {
+      "repo_full_name": "Atum246/keelead",
+      "project_brief_cn": "KeeLead 是一个开源的人工智能销售线索引擎，它通过 ChatGPT 风格的对话界面，让用户轻松地从 62 个数据源查找潜在客户、验证邮箱、研究公司信息，还能作为 MCP 服务器供 AI 代理调用。简单说，它是一个免费的全能销售线索工具，帮你自动挖掘客户。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "auto-use/Auto-Use",
+      "project_brief_cn": "Auto-Use 是一个全能型 AI 代理，能够操控你的操作系统、浏览器、搜索网页和编写代码，实现端到端的自动化任务。大家通常用它来自动化桌面操作、浏览器控制、代码编写等，让一个代理完成各种复杂工作。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "aws/aws-cdk-rfcs",
+      "project_brief_cn": "AWS CDK RFCs是AWS Cloud Development Kit的RFC（请求评论）仓库，用于讨论和记录CDK的新特性、设计变更和社区反馈。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:03.566Z"
+    },
+    {
+      "repo_full_name": "awslabs/aidlc-workflows",
+      "project_brief_cn": "AIDLC Workflows 是 AWS 实验室开源的一个工具，它是一套自适应工作流规则引擎，专门为 AI 编程助手（如 Cursor、Copilot 等）设计，帮助它们在代码生成过程中自动管理任务的顺序、依赖和生命周期，避免 AI 搞乱项目结构。开发者通常用它来让 AI 代理更稳定地完成复杂的多步骤编码任务，比如自动重构代码、跨文件修改或按规范生成项目模板。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "awslabs/cli-agent-orchestrator",
+      "project_brief_cn": "这是一个命令行智能体编排工具，开发者可以用它来协调多个CLI代理协作，自动化执行复杂任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:47.930Z"
+    },
+    {
+      "repo_full_name": "awslabs/mcp",
+      "project_brief_cn": "这是亚马逊云（AWS）官方出品的开源MCP服务器集合。MCP（Model Context Protocol）是让AI模型安全调用外部工具和数据的协议，而这个仓库提供了大量现成的MCP服务器，开发者可以直接用来让AI助手操作AWS云服务、数据库、文件系统等。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Ayushsotiya/Ecommerce_clothing",
+      "project_brief_cn": "基于Agentic AI的服装电商平台，支持对话式购物、实时价格谈判和自动化产品上架。利用LangChain、LangGraph和Gemini AI实现智能导购。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:53.582Z"
+    },
+    {
+      "repo_full_name": "badhope/Data-Agent",
+      "project_brief_cn": "它是基于CrewAI的多智能体数据助手，提供分析（研究员-分析师-写手协作）和知识查询接口。常用于自动化数据分析、文档处理和办公任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:44.508Z"
+    },
+    {
+      "repo_full_name": "basilsajeev987/AI-Hedge-Fund-OS",
+      "project_brief_cn": "这是一个结合了多智能体AI、量化金融分析和实时市场情报的机构级对冲基金操作系统，通常用于自动化的量化研究、交易策略回测和投资组合优化。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "berkayturanci/keel",
+      "project_brief_cn": "将编码Agent转化为工作负责人，提供从问题到完成的项目中立工作流框架，支持多Agent协作。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:28.760Z"
+    },
+    {
+      "repo_full_name": "bettyguo/computer_use_agent",
+      "project_brief_cn": "这是一个开源浏览器代理，能用本地视觉语言模型（VLM）操控网页。它采用AT树优先搜索路径，遇到困难时回退到VLM，并在代码中强制拒绝违规操作。用户通常用它来自动化网页任务（如填写表单、数据抓取），同时保持透明和诚实的基准测试。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Bigdata-com/bigdata-cookbook",
+      "project_brief_cn": "这是一个端到端的金融文本分析工具包，基于 Bigdata API 和 Bigdata-Research-Tools 库，提供现成的 Jupyter Notebook，集成了 RAG（检索增强生成）和生成式 AI 技术，用于主题筛选、风险筛查、趋势追踪和自动报告生成，帮助用户从大量文本中提取洞察。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "blacklettertimeoff432/be-my-butler",
+      "project_brief_cn": "一个多智能体编排工具，用于协调多个AI代理执行Claude Code工作流，并通过跨模型验证确保代码自动化可靠性，适合需要自动化代码生成和审查的场景。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:46.109Z"
+    },
+    {
+      "repo_full_name": "boldsoftware/shelley",
+      "project_brief_cn": "Shelley 是一个编程智能体，专注于帮助开发者自动完成编码任务，比如代码生成、调试和重构。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "brokermr810/QuantDinger",
+      "project_brief_cn": "QuantDinger是一个AI量化交易平台，支持加密货币、股票和外汇的自动交易。人们常用它进行回测策略、执行实盘交易、获取市场数据，并利用多智能体（Multi-Agent）开展投资研究。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "browser-use/browser-use",
+      "project_brief_cn": "Browser Use 是一个让 AI Agent 能像人一样操作浏览器的工具，自动执行网页上的任务，如填写表单、点击按钮、提取数据，适合网页自动化场景。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "BuyWhere/buywhere-mcp",
+      "project_brief_cn": "BuyWhere MCP 是一个基于 Model Context Protocol (MCP) 的跨境商品搜索与比较服务器，专为 AI 智能体设计。它让 AI 代理能够查询和对比来自新加坡、东南亚及美国市场的商品信息，帮助用户找出最优惠的价格。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "bytedance/deer-flow",
+      "project_brief_cn": "字节跳动开源的长期任务SuperAgent编排框架，通过沙箱、记忆、工具和子代理处理耗时数分钟到数小时的复杂研究、编码和创作任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:54.471Z"
+    },
+    {
+      "repo_full_name": "Cashed-gravity8670/qyclaw",
+      "project_brief_cn": "qyclaw 是一个构建多租户 AI Agent 平台的框架，它提供隔离的执行环境、分层内存管理和安全的沙箱工具处理，主要用于企业级工作流自动化。简单来说，你可以用它来搭建支持多个租户的 AI 助手平台，每个租户的数据和工具都是隔离的，适合企业内部部署智能客服、自动化流程等场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "CelestoAI/sdk",
+      "project_brief_cn": "Celesto 为 AI 代理提供安全、隔离的计算机环境，让代理可以执行浏览网页、编写代码等真实任务，确保安全可控。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:36.460Z"
+    },
+    {
+      "repo_full_name": "changw98ic/codepatchbay",
+      "project_brief_cn": "Codepatchbay 是一款本地运行的AI代理交接调试工具，专门用于Codex和Claude Code等编码代理。开发者可以使用它在磁盘上规划、执行、验证和检查每个代理操作步骤的细节，从而透明地追踪代理间的交接过程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "charliee1w/consolidation-memory",
+      "project_brief_cn": "这是一个为AI智能体打造的本地持久记忆工具——它通过FAISS向量搜索、SQLite数据库和任意大语言模型，让AI助手能在多次对话中记住、回忆并整合知识。大家通常用它来让编程助手或自定义MCP客户端拥有跨会话的长期记忆，避免每次从头开始。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "CheezeGtM/guest-post-backlinks-tool",
+      "project_brief_cn": "这是一个通过客座博客自动生成高质量外链的 SEO 工具。网站运营者可用它提升域名权威性和搜索排名，节省手动外链建设的时间。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:14.513Z"
+    },
+    {
+      "repo_full_name": "ChenVoid/Awesome-GUI-Agent",
+      "project_brief_cn": "这是一个GUI Agent相关资源的精选列表，收集了用于控制电脑、手机、浏览器或游戏界面的智能体工具。大家通常用它来快速查找和对比各类桌面/移动端自动化代理的开源项目。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "chethanad5372/TradingAgents",
+      "project_brief_cn": "这是一个构建AI交易智能体的框架，支持市场研究、策略回测和决策辅助，采用多智能体架构，可用于量化交易和金融分析。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:12.005Z"
+    },
+    {
+      "repo_full_name": "chipolataarmybase650/numcraft",
+      "project_brief_cn": "一个将自然语言指令转换为CNC机床G代码的多智能体工具，用于自动化数控加工流程规划、刀具选择和路径优化。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:40.264Z"
+    },
+    {
+      "repo_full_name": "chopratejas/headroom",
+      "project_brief_cn": "Headroom 是一个工具，用于压缩发送给大语言模型（如 ChatGPT、Claude）的输入内容，包括工具输出、日志、文件和 RAG 检索片段。它可以将 token 数量减少 60%-95%，同时保持答案质量不变。作为库、代理或 MCP 服务器，它主要被用于降低 AI 应用的 token 消耗和成本，特别适合使用上下文的场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "cipher813/alpha-engine",
+      "project_brief_cn": "Alpha Engine 是一个面向金融领域的 AI/ML 实验框架，名为 Nous Ergon。它主要用于多智能体研究、机器学习预测、风险控制的交易执行以及 AWS 上的自优化回测。简单说，就是让你在金融交易中轻松搭建和测试 AI 智能体策略。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ClicShopping/ClicShopping",
+      "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你在命令行里读写文件并执行命令，也能在本地终端环境里执行操作。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "coasty-ai/open-cowork",
+      "project_brief_cn": "Open Cowork 是一个开源的桌面和浏览器自动化工具，相当于 Claude Co-Work 的免费替代品。用户可以用它来自动操作浏览器、控制桌面、执行复杂的多步骤任务，比如自动填写表单、抓取网页数据、管理文件等。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "continuedev/continue",
+      "project_brief_cn": "Continue 是一个开源的 AI 编程助手，作为 VS Code 和 JetBrains 的插件，在 IDE 中提供代码补全、解释、重构等功能。它还基于 CLI 支持 CI 中执行 AI 检查（如代码审查），常用于开发提效和自动化代码质量管控。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:29.555Z"
+    },
+    {
+      "repo_full_name": "cossistantcom/cossistant",
+      "project_brief_cn": "开源的可定制AI客服平台，专为开发者/SaaS初创公司设计，提供可配置的AI支持代理，用于自动回答用户问题、处理工单，替代传统客服系统。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "crewAIInc/crewAI",
+      "project_brief_cn": "多AI代理协作编排框架，支持定义角色和任务，让多个自主代理协同工作，共同解决复杂问题，常用于自动化工作流和团队模拟。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:54.471Z"
+    },
+    {
+      "repo_full_name": "daintreehq/daintree",
+      "project_brief_cn": "Daintree 是一个 AI 编程代理的调度环境，可以同时管理 Claude、Gemini 和 Codex 等多个 AI 助手，在 Git 工作树中协作编码，并集成终端、上下文注入和工作流自动化。开发者通常用它来编排多个 AI 编程代理，实现自动化开发工作流。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "danilo1003/agent-team-orchestrator",
+      "project_brief_cn": "这是一个用于编排多智能体团队的工具，通过文档驱动的工作流、定义好的角色边界以及标准化的交接协议，帮助用户管理多个AI智能体之间的协作。大家通常用它来构建复杂的多智能体系统，比如客户服务、自动化任务处理等场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DanMcInerney/architect-loop",
+      "project_brief_cn": "这是一个跨厂商AI代理协作框架，让Claude Fable 5担任架构师、GPT-5.5 Codex担任构建者，仓库本身作为记忆存储，实现一个研究支持的Claude Code技能，用于跨模型的自主编码循环。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DeadWaveWave/opencove",
+      "project_brief_cn": "OpenCove 是一个无限画布工作空间，让 AI 智能体（如 Claude Code、Codex）、终端、任务和笔记在同一个可视画布上协同。大家通常用它来组织 AI 辅助开发、研究资料收集和多智能体任务管理，就像把聊天记录、代码输出和笔记堆在一个超大白板上自由排版。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DekaPrayoga/AurixAgent",
+      "project_brief_cn": "AurixAgent 是一个运行在终端里的自主多智能体 AI 工作空间。它能直接编写代码、进行研究、执行实际任务，集成了 40 多种工具和 280 多项技能，并且支持通过纯视觉模式解决各种验证码，还能打开并完全控制浏览器。大家通常用它来自动化开发流程、执行复杂研究任务，或者构建需要多智能体协作的工作流。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DemonDamon/AgenticX-DeepResearch",
+      "project_brief_cn": "AgenticX-DeepResearch 是一个基于多智能体协作的深度研究助手，能够自主进行网络搜索和知识发现，最终自动生成全面的研究报告。用户通常用它来完成需要深入调研的复杂问题，比如市场分析、学术文献综述或技术趋势报告。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DigitalPlatDev/FreeDomain",
+      "project_brief_cn": "这是一个提供免费域名的平台，任何人都可以在这里获取免费域名，适合个人或小项目搭建网站时使用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:00.232Z"
+    },
+    {
+      "repo_full_name": "dipankar/apollo-io-cli",
+      "project_brief_cn": "它是一个命令行工具，封装了Apollo.io的API，让用户（包括人类和AI智能体）可以通过终端或脚本快速查询和操作Apollo.io的销售线索数据，常用于销售勘探、客户关系管理和营销自动化场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Divyansh487/TradingAgents-CN",
+      "project_brief_cn": "TradingAgents-CN 是一个面向中文投资者的智能交易框架，整合了大语言模型（LLM）来辅助分析A股、港股和美股。用户可以用它来简化交易决策流程，比如获取市场见解、生成交易信号或回测策略。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "duelHunter/whatsapp-agent-support",
+      "project_brief_cn": "这是一个基于AI Agent的WhatsApp客服支持平台，结合RAG（检索增强生成）技术实现智能问答，采用多租户SaaS架构和Supabase身份验证。用户可以在WhatsApp上搭建自动化的客户服务助手，处理常见问题、查询知识库并生成回复。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DuhanJishnu/support-ai",
+      "project_brief_cn": "AssistFlow 是一个用于构建多智能体客服系统的开源平台。开发者可以用它来搭建多个 AI 代理协同工作的客服解决方案，比如让一个代理负责常见问题解答，另一个处理退款，再一个升级复杂问题到人工客服。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "dungnotnull/phishing-immune-agent",
+      "project_brief_cn": "它是一款AI驱动的钓鱼检测平台，利用浏览器自动化、计算机视觉、威胁情报和机器学习，在隔离沙箱中安全分析可疑URL，检测并阻止新一代钓鱼攻击。大家通常用它来保护企业或个人免受复杂钓鱼链接的侵害。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "DuqueOM/ML-MLOps-Production-Template",
+      "project_brief_cn": "这是一个生产级机器学习模板项目，它预置了32种常见的反模式编码规则，支持多云Kubernetes部署，并为Windsurf、Claude Code、Cursor等AI编码助手提供了AUTO/CONSULT/STOP三种代理规则，同时还包含供应链安全措施。大家通常拿它来快速搭建安全、合规的生产ML流水线，避免常见陷阱。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "earendil-works/pi",
+      "project_brief_cn": "AI代理工具包，提供编码代理CLI、统一的LLM API接口、终端和Web UI库、Slack机器人等，方便开发者构建和管理AI代理应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:54.471Z"
+    },
+    {
+      "repo_full_name": "Elfredaaroused655/claude-skills",
+      "project_brief_cn": "该项目提供 205 个可以直接使用的 Claude Code 技能和插件，覆盖编程、运维、营销和合规等任务，帮你快速扩展 Claude 的自动化能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:51.750Z"
+    },
+    {
+      "repo_full_name": "eracle/OpenOutreach",
+      "project_brief_cn": "OpenOutreach 是一个基于 AI 的 LinkedIn 自动化工具。你只要描述你的产品或服务，并定义目标市场，它就能自动找到潜在客户并发送个性化 outreach 消息。通常被销售和营销人员用来批量生成 LinkedIn 上的潜在客户线索，节省手动搜索和联系的时间。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ericosiu/ai-marketing-skills",
+      "project_brief_cn": "这是一个开源的AI营销技能集项目，提供一系列可复用的自动化技能，涵盖增长实验、销售管道、内容运营、外发、SEO和财务自动化。用户可以直接部署这些技能来加速营销和销售流程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ethanplusai/harvey",
+      "project_brief_cn": "Harvey 是一个基于 Claude Code 的自主 AI 销售代理，无需 API 密钥，仅凭 Claude Max 订阅即可运行。它自动寻找潜在客户、编写冷邮件、发送营销活动、处理回复并安排会议，主要用于自动化销售外展流程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "eve0415/cella",
+      "project_brief_cn": "Cella 是一个基于 Rust 编写的轻量级 devcontainer CLI 工具，专门为 AI 编程代理设计。它可以替代 VS Code 的 devcontainer 功能，提供端口转发、SSH 代理和凭据转发等能力，让 AI 代理（如 Claude、Codex、Gemini 等）能够在终端环境中无缝使用开发容器。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "farion1231/cc-switch",
+      "project_brief_cn": "它是一个跨平台桌面全能助手，统一管理Claude Code、Codex、OpenCode等AI编码工具和代理。用户可以用它在一个界面中切换和配置多种AI编程助手。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:04.209Z"
+    },
+    {
+      "repo_full_name": "firecrawl/firecrawl",
+      "project_brief_cn": "它是一款可大规模爬取、搜索和提取网页数据的API工具，能将网页内容转换为适用于LLM的Markdown格式。通常被开发者用来为AI Agent或大模型提供实时网页数据。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:44.508Z"
+    },
+    {
+      "repo_full_name": "flutter/flutter",
+      "project_brief_cn": "Flutter 是 Google 的跨平台 UI 框架，用 Dart 语言快速构建移动、桌面和 Web 应用",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:56.542Z"
+    },
+    {
+      "repo_full_name": "Fxsin/Scientra-Copilot",
+      "project_brief_cn": "Scientra Copilot 是一个将学术论文转化为可搜索知识生态的工具。你可以导入PDF、提取结构化知识、构建研究地图、发现相关工作，并通过AI驱动的智能体与文献互动。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "get-zeked/perplexity-super-skills",
+      "project_brief_cn": "这是一个汇总了12个超级技能的集合仓库，将Perplexity的AI搜索能力与Claude Code的编码执行能力整合在一起，覆盖AI代理、开发、营销、销售、财务、法务、项目管理、运营、研究、内容、安全和代币效率等12个领域。大家通常拿它来快速搭建各种业务场景的AI工作流，比如让Perplexity搜索市场数据后直接让Claude Code生成报告或执行分析。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "getaero-io/gtm-eng-skills",
+      "project_brief_cn": "这是一套为 Claude Code 打造的 AI 技能包，包含 10 个智能体技能，主要用于销售和市场团队的自动化线索挖掘与客户拓展。大家通常用它来自动化完成瀑布式邮箱富化、目标客户画像构建（TAM）、信号发现、换岗检测以及外呼自动化等任务，底层依赖 Deepline CLI 并接入 28+ 数据源。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Git0HubPerson/Telegram-Members-Adder",
+      "project_brief_cn": "这是一个自动化工具，可向 Telegram 群组或频道批量添加目标成员。运营人员用它快速扩充社群，提升活跃度和影响力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:14.513Z"
+    },
+    {
+      "repo_full_name": "github/copilot-cli",
+      "project_brief_cn": "GitHub Copilot的命令行工具，将AI编码助手带到终端。开发者直接在终端中让AI解释命令、生成代码片段或自动化脚本，提升命令行工作效率，支持企业级OAuth和MCP扩展。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "Global-Support-Standard/global-support-standard",
+      "project_brief_cn": "一个开放的电商客户支持协议，通过标准接口暴露订单、退换货、物流和政策信息，使任何AI代理或应用都能提供完整的自助服务，适用于跨平台客户支持自动化。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:46.109Z"
+    },
+    {
+      "repo_full_name": "gojue/moling",
+      "project_brief_cn": "MoLing 是一个基于 MCP（Model Context Protocol）的本地化办公 AI 助手，它可以控制电脑和浏览器，实现自动化操作，比如帮你填写表单、整理文件、管理浏览器标签页等，全程不需联网且无需额外依赖。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "google-gemini/gemini-cli",
+      "project_brief_cn": "Google开源的终端AI代理，将Gemini能力集成到命令行中，支持代码生成、问答等交互，适合开发者在终端中直接调用AI。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:54.471Z"
+    },
+    {
+      "repo_full_name": "google/skills",
+      "project_brief_cn": "它是谷歌推出的官方技能库，帮助开发者为Google产品（如Google Cloud、Assistant等）构建和集成Agent技能。通常用于快速搭建能与Google生态交互的智能助手。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:44.508Z"
+    },
+    {
+      "repo_full_name": "GoogleCloudPlatform/knowledge-catalog",
+      "project_brief_cn": "Google Cloud 的知识目录工具和示例，用于管理和发现知识资产，帮助团队在云环境中组织和搜索知识资源。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "haoyiyin/basjoo",
+      "project_brief_cn": "Basjoo 是一个开源的 AI 客服平台，核心功能包括基于 RAG（检索增强生成）的知识库、支持多种 LLM 提供商的 AI 代理，以及可嵌入网页的聊天插件。企业通常用它来搭建智能客服系统，让客户能够通过聊天窗口获得基于企业私有知识的自动回复。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "HKUDS/CLI-Anything",
+      "project_brief_cn": "让所有软件都能被AI代理通过命令行调用的工具，提供CLI-Hub平台，开发者可以轻松将现有程序包装成Agent可调用的接口，实现软件即服务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "HKUDS/LightRAG",
+      "project_brief_cn": "它是一个轻量级检索增强生成框架，目的是让大模型在回答问题时能快速从外部知识库中检索相关信息，提高答案的准确性和时效性。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:49.701Z"
+    },
+    {
+      "repo_full_name": "HKUDS/nanobot",
+      "project_brief_cn": "Nanobot 是一个轻量级开源 AI Agent，可集成到你的工具、聊天和工作流中，支持记忆和工具调用，帮助自动化日常任务和对话。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "HKUDS/Vibe-Trading",
+      "project_brief_cn": "Vibe-Trading 是一个开源的 AI 交易代理项目，它利用多代理系统和 MCP 协议来辅助用户进行自动化交易和策略回测。大家通常用它来搭建个性化的量化交易助手，执行买卖决策或分析市场数据。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Hmbown/CodeWhale",
+      "project_brief_cn": "CodeWhale 是一个终端下的 AI 编程助手，基于 DeepSeek 和 MiMo 模型，提供智能代码补全、解释和调试功能，专为命令行开发者设计。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "huabeitech/agent-desk",
+      "project_brief_cn": "Agent Desk 是一个开源 AI 客服系统，提供 AI 优先的自动回复与人工坐席切换功能。它集成知识库、实时聊天和工单管理，常用于企业搭建智能帮助台，减少人工客服工作量并提升响应速度。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:29.555Z"
+    },
+    {
+      "repo_full_name": "huggingface/transformers",
+      "project_brief_cn": "Hugging Face Transformers 是业界标准的模型定义框架，支持文本、图像、音频和多模态模型。开发者用它来加载、训练和部署预训练模型，如 BERT、GPT、LLaMA 等。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:16.649Z"
+    },
+    {
+      "repo_full_name": "ibahgat/oh-my-iflow",
+      "project_brief_cn": "oh-my-iflow 是一个智能命令行工作流工具，它利用多智能体自动化技术，帮你用自然语言或简单指令在终端中执行 Python、Rust、Go 和 Shell 等语言的复杂任务。大家通常拿它来编写、运行和自动化跨语言的开发或运维脚本，提升日常工作效率。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "iliaal/whetstone",
+      "project_brief_cn": "Whetstone 是一个 AI 驱动的开发工具包，包含 19 个智能体、22 条命令、30 项技能、1 个钩子和 1 个 MCP 服务器，用于代码审查、研究、设计和流程自动化。开发者通常用它来加速开发工作流，例如自动审查代码、搜索技术方案或优化流程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "infiniflow/ragflow",
+      "project_brief_cn": "RAGFlow 是一个基于深度文档理解的开源 RAG 引擎，专为企业级场景设计。它能够将 PDF、Word、Excel 等非结构化文档与外部知识库连接，提供精准的问答检索服务，常用于构建企业知识助手、文档问答和智能客服系统。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:29.555Z"
+    },
+    {
+      "repo_full_name": "infinitywings/rka",
+      "project_brief_cn": "研究知识代理（RKA）是一个开源平台，用于AI辅助的研究编排。它结合了MCP服务器、REST API和React仪表板，帮助研究人员管理知识工作流程。大家通常用它来自动化文献回顾、知识提取和研究任务协调。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "itechmeat/open-second-brain",
+      "project_brief_cn": "Open Second Brain 是一个本地优先的记忆系统，为 Hermes Agent 提供项目上下文记忆，数据存储在 Obsidian 笔记中。它通过夜间回顾将重复修正转化为偏好，并支持 Claude Code、Codex 等工具的适配。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:16.649Z"
+    },
+    {
+      "repo_full_name": "itmisx/deepx-code",
+      "project_brief_cn": "DeepX Code 是一个为 DeepSeek 模型定制的编码助手（coding agent）。它就像一个增强版的编程小助手，大家通常用它来自动完成编程任务，比如代码生成、重构、调试等。它通过模型路由、代码图谱（CodeGraph）、OCR 截图识别、自动上下文压缩等特色功能，帮助开发者节省 Token（即降低调用 AI 模型的成本），并提升编码效率。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "itohnobue/research-agent-claude-code",
+      "project_brief_cn": "这是一个为 Claude Code 打造的研究助手插件，让 Claude Code 每次请求能处理 50 条以上的搜索结果，并支持搜索特定领域的知识数据。开发者通常用它来增强 Claude Code 的联网研究能力，在编写代码、调研技术方案时能获取更丰富的外部信息。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "itohnobue/research-agent-opencode",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能组织检索和知识调用能力。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手组织检索和知识调用能力。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ivankuznetsov/hive",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能围绕代码仓库做分析与修改。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手围绕代码仓库做分析与修改。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "jammsen/docker-coding-agent-sandbox",
+      "project_brief_cn": "这是一个为编程AI智能体（如Cline、OpenCode等）提供安全隔离的Docker沙箱环境。开发者通常用它来运行不可信的代码生成代理，防止它们在宿主机上执行危险操作。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "jawwad-ali/ai-customer-support-agent",
+      "project_brief_cn": "一个基于OpenAI Agents SDK和FastAPI构建的AI客服系统，支持语义搜索，可接入Gmail、WhatsApp和网页渠道，用于自动化处理客户咨询和工单。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:11.692Z"
+    },
+    {
+      "repo_full_name": "JeffBrines/openfpa",
+      "project_brief_cn": "它是AI编程代理的财务规划与分析工具包，提供经过测试的财务内核、公司记忆和自改进研究循环。常见用法是让Claude Code或Codex等代理使用它来自动生成和优化财务预测。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:04.209Z"
+    },
+    {
+      "repo_full_name": "JKHeadley/instar",
+      "project_brief_cn": "Instar 是一个基于 Claude Code 的持久化 AI 编程助手。它允许你创建一个或多个带独立记忆和会话的 Claude 代理，并通过 Telegram 或定时调度与它们交互。通常开发者用它来自动化编程任务、维护长期项目记录或在会话间保持上下文不丢失。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "josephfung/curia",
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你组织文档检索和语义搜索，也能组织检索和知识调用能力。大家通常会用它来组织文档检索和语义搜索，也会顺手组织检索和知识调用能力。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "josephsenior/Grinta-Coding-Agent",
+      "project_brief_cn": "Grinta 是一款本地优先的自主编码智能体，能够端到端地规划、执行、验证并完成软件任务。开发者可以用它来自动化复杂的编程工作流，从任务分解、代码生成到测试验证全流程无需人工干预。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "jrr996shujin-png/kol-ops-suite",
+      "project_brief_cn": "这是一个专为海外网红营销设计的AI技能套件，提供从红人筛选、建联、评估、简报撰写、内容质检、直播监控到活动复盘的全流程自动化工具。它由9个可串联的技能模块组成，用户只需用自然语言下达指令即可操作，主要面向使用OpenClaw框架的AI Agent。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "kernel/ts-stagehand-google-cua-agent",
+      "project_brief_cn": "这是一个基于 Google Gemini 2.5 模型和 Stagehand 浏览器自动化框架的计算机使用代理（CUA）示例应用，用于演示如何让 AI 像人一样操作网页浏览器。开发者通常把它作为样板，快速搭建能自动浏览网页、填写表单或抓取数据的 AI 助手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "khanhthanhdev/infi",
+      "project_brief_cn": "Infi 是一个个人 AI 投资研究代理，帮助你分析股票和投资组合，每个结论都附带来源，让你真正理解投资而非盲目跟从。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:36.460Z"
+    },
+    {
+      "repo_full_name": "kukuhtw/toko_kopi",
+      "project_brief_cn": "Toko Kopi 是一个 AI 驱动的咖啡店电商平台，可自动化订单处理、客户服务、会员忠诚度管理以及多门店运营。咖啡店主可用它来搭建线上点单、会员系统和多店管理，提升运营效率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:29.555Z"
+    },
+    {
+      "repo_full_name": "KyaniteLabs/tastecheck",
+      "project_brief_cn": "TasteCheck 是一套专为 AI 编程助手（如 Claude Code、Cursor 等）设计的前端技能包，包含 15 个技能。它可以面试或审计你现有的设计系统，并验证排版、OKLCH 颜色、状态、表单、图表、无障碍和反 slop（防模型生成胡话）等方面。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "langchain-ai/deepagents",
+      "project_brief_cn": "DeepAgents是LangChain推出的功能完备的AI代理开发框架，提供内置工具和持久记忆，用于构建复杂多步骤的智能代理应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:07.618Z"
+    },
+    {
+      "repo_full_name": "langchain-ai/langchain",
+      "project_brief_cn": "LangChain 是 LLM 应用开发的核心框架，提供从 RAG 到复杂 Agent 工作流的编排能力，支持工具调用、记忆和多个模型，是构建企业级 AI Agent 的事实标准。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "langchain-ai/open-swe",
+      "project_brief_cn": "Open-SWE 是一个开源异步编码智能体，允许开发者通过自然语言指令自动执行软件工程任务，如代码编写、调试和重构，类似于一个能自主协作的编程助手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "langflow-ai/langflow",
+      "project_brief_cn": "一个可视化工具，用于构建和部署AI智能体和工作流。开发者通过拖拽界面连接大模型、工具和逻辑模块，快速搭建聊天机器人、自动化流程等应用，无需大量编程。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "langfuse/langfuse",
+      "project_brief_cn": "开源的 LLM 工程平台，提供可观测性、评估、提示词管理、在线 playground 和数据集，帮助团队监控和优化大模型应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:47.930Z"
+    },
+    {
+      "repo_full_name": "langgenius/dify",
+      "project_brief_cn": "Dify 是一个生产级 Agentic 工作流开发平台，提供可视化编排界面，让开发者能快速构建集成 RAG、工具调用和多模型支持的 AI 应用，从原型到部署一站式完成。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:50.050Z"
+    },
+    {
+      "repo_full_name": "LeadMagic/gtm-skills",
+      "project_brief_cn": "提供205个预构建的Go-to-Market智能体技能，覆盖销售、外拓、RevOps等场景，可直接用于自动化营销任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:40.264Z"
+    },
+    {
+      "repo_full_name": "leeguooooo/iphone-use",
+      "project_brief_cn": "这是一个让AI代理（或你的浏览器）通过macOS的iPhone镜像功能，远程操控真实物理iPhone的工具。它利用WebRTC低延迟传输视频，实现近乎原生触控的体验，并提供HTTP API和MCP接口。开发者通常用它来构建或测试能操作手机屏幕的AI应用，比如自动化测试、远程协助或AI驱动的手机操作代理。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "lfnovo/open-notebook",
+      "project_brief_cn": "它是Notebook LM的开源替代品，提供更灵活的功能，支持RAG、自托管。大家用它做个人知识笔记、学习助手，可以上传文档、生成摘要并问答。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:44.508Z"
+    },
+    {
+      "repo_full_name": "limecloud/lime",
+      "project_brief_cn": "Lime 是一个专为中文创作者设计的 AI 内容工作台，集成了桌面写作、AI 研究、提示词库、知识库和多模型工作流，让创作者在桌面端一站式管理写作、调研和 AI 工具调用。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "limuran117-coder/Scenic-Area-Marketing-CN",
+      "project_brief_cn": "这是一个专为景区设计的AI全能营销与运营系统，能自动管理抖音、小红书等渠道的内容发布、数据分析和知识整理，帮助景区实现数据驱动的自动化营销。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "linny006/agent-eval-harness",
+      "project_brief_cn": "这是一个实时更新的开源基准测试平台，专门用来对比不同AI编程代理（如Cody、Codex等）在真实GitHub Issue上的表现。开发者可以提交自己的Issue，看哪个AI代理能更好地解决实际问题。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "linroger/DeepResearchForecast",
+      "project_brief_cn": "这是一个智能预测报告生成工具。用户只需输入一个提示词，它就能自动进行网络调研、构建知识图谱，并通过多智能体群体模拟来生成预测报告。简单来说，就是把从调研到预测的全流程自动化，适合需要快速获取深度分析和未来趋势判断的场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "llm-jp/awesome-japanese-llm",
+      "project_brief_cn": "这是一个日语大语言模型资源列表，整理了各种日语LLM、多模态模型和相关研究，方便研究人员选型和使用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:03.566Z"
+    },
+    {
+      "repo_full_name": "LMCache/LMCache",
+      "project_brief_cn": "LMCache 是一个加速大语言模型推理的 KV 缓存层，通过缓存机制提升推理速度。主要配合 vLLM 等框架使用，减少重复计算。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:51.750Z"
+    },
+    {
+      "repo_full_name": "madderangelfoodcake950/OpenMOSS",
+      "project_brief_cn": "OpenMOSS用于构建和管理自组织多智能体系统，旨在提升OpenClaw在复杂工作流中的自动化和协调能力，适合需要动态分配任务和自主协作的机器人或自动化场景。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:46.109Z"
+    },
+    {
+      "repo_full_name": "mahmut433/awesome-ai-gtm",
+      "project_brief_cn": "这是一个 AI 工具和代理的精选列表，专门用于构建高效的市场进入（GTM）流程，覆盖从创意到客户成功的各个环节，包括销售和营销自动化。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:51.750Z"
+    },
+    {
+      "repo_full_name": "majiayu000/spellbook",
+      "project_brief_cn": "Spellbook 是一个跨运行时的技能库，为 Claude Code、Codex 等编码代理和多代理工作流提供可复用的技能（skills）。开发者可以像使用法术书一样，在不同代理框架间共享和调用预定义的编程任务能力，例如代码审查、自动化工作流等。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "markoblogo/AGENTS.md_generator",
+      "project_brief_cn": "AGENTS.md_generator 是一个 Python 命令行工具和 MCP 服务器，用于为 AI 编程助手自动生成、检查和更新 AGENTS.md 和 RUNBOOK.md 等文档。它通过 diff 优先的工作流和基于标记的补丁机制，确保修改安全且可追踪，同时可检测仓库上下文并可选地利用 LLM 增强上下文。开发者通常用它来让 AI 编码智能体（如 Claude Code、Cursor）更好地理解项目结构和规范，提高协作效率。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "mason-cao/multi-agent-customer-intelligence-dashboard",
+      "project_brief_cn": "这个项目是一个全栈的多智能体客户智能看板，集成了8个AI代理（如工作区生成、特征工程、流失评分、情感分析、推荐、安全查询等），用于分析客户数据、预测流失、分析情感并生成洞察。通常用于客户成功团队或数据分析师，帮助快速了解客户行为并制定策略。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "mastra-ai/mastra",
+      "project_brief_cn": "一套用于构建AI应用和智能体的TypeScript框架，由Gatsby团队开发。开发者用它来创建聊天机器人、工作流、评估系统等，支持模型上下文协议（MCP）和多种前端框架。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "Mdirman/Notion-AI-CRM-Agents",
+      "project_brief_cn": "这是一个将AI智能体集成到Notion中的开源CRM工具，能自动完成潜在客户评分、研究与优先级排序。销售或运营人员可以用它直接在Notion里管理销售线索，让AI帮忙判断哪些客户更值得跟进，无需手动筛选。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "mem0ai/mem0",
+      "project_brief_cn": "Mem0是为AI代理提供的通用记忆层服务，让不同代理共享长期记忆，实现持续学习和跨平台记忆同步。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:07.618Z"
+    },
+    {
+      "repo_full_name": "mem0ai/memory-benchmarks",
+      "project_brief_cn": "Memory Benchmarks 是 mem0 团队推出的开源评测套件，专门用来测试和比较各种增强了大语言模型记忆功能的系统（比如记忆存储、检索、上下文的长期保持等）。开发者可以用它来评估不同记忆方案的性能，比如在对话、Agent 或 RAG 场景下，看模型能不能记住并正确使用历史信息。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "meyz664K/auto-re-agent",
+      "project_brief_cn": "auto-re-agent 是一个将大型语言模型（LLM）与 Ghidra 逆向工具结合的项目，旨在自动化二进制分析过程。用户通常用它来协调多个AI代理，实现可扩展且精确的逆向工程工作流。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "microsoft/qlib",
+      "project_brief_cn": "它是微软开源的人工智能量化投资平台，集成了机器学习模型来辅助量化研究，从策略探索到生产部署。大家常用来开发选股、交易策略，并结合自动化研发Agent提高效率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:44.508Z"
+    },
+    {
+      "repo_full_name": "microsoft/vscode",
+      "project_brief_cn": "微软出品的轻量级代码编辑器，支持丰富的插件生态，广泛用于编程开发。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:47.930Z"
+    },
+    {
+      "repo_full_name": "minamagdyyyy/agentic-marketing",
+      "project_brief_cn": "模块化营销Agent技能库，支持战略规划、渠道执行和自动化，在Claude Code中实现全栈营销工作流。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:28.760Z"
+    },
+    {
+      "repo_full_name": "modelcontextprotocol/inspector",
+      "project_brief_cn": "这是一个 MCP 服务器的可视化测试工具，用来调试和检查 MCP 服务器的运行状态和响应。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:55.356Z"
+    },
+    {
+      "repo_full_name": "moltis-org/moltis",
+      "project_brief_cn": "Moltis 是一个用 Rust 编写的自托管个人 AI 助手服务器。它将 LLM、语音、记忆和多平台消息（Telegram、WhatsApp、Discord、Teams）整合到一个单一二进制文件中，支持沙盒执行和 MCP 工具，用户可以在自己的硬件上安全运行。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "MoonshotAI/kimi-cli",
+      "project_brief_cn": "Kimi Code CLI是一个命令行AI代理，具备持久记忆和工具使用能力，能自我进化，常用于编程辅助和自动化任务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:07.618Z"
+    },
+    {
+      "repo_full_name": "n8n-io/n8n",
+      "project_brief_cn": "一个开源的工作流自动化平台，内置AI能力，支持400多种集成。用户通过可视化拖拽或代码的方式，连接各类API、数据库和AI服务，实现业务自动化，可自托管或使用云服务。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "nanocoai/nanoclaw",
+      "project_brief_cn": "NanoClaw是轻量级AI代理框架，运行在容器中保障安全，可连接WhatsApp、Telegram等消息应用，具备记忆和定时任务功能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:07.618Z"
+    },
+    {
+      "repo_full_name": "netease-youdao/LobsterAI",
+      "project_brief_cn": "LobsterAI 是一个网易有道开源的 AI 智能体运行引擎，可以全天候自动执行各种工作场景任务，比如管理日程、处理文档、回复邮件等，用户只需自然语言指令，它就能调用工具、API 帮你完成工作。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "nexscope-ai/eCommerce-Skills",
+      "project_brief_cn": "这是一个为 AI 代理（如 Claude）准备的电商业技能库，包含产品调研、营销自动化、供应链优化和数据分析等功能，帮助卖家在亚马逊、Shopify、Etsy、TikTok Shop 等平台提升运营效率。卖家可以直接调用这些技能让 AI 自动完成商品上架、广告优化、库存管理等任务。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Nijamudin/automated-business-analysis-workflow",
+      "project_brief_cn": "这是一个基于 n8n 构建的自动化业务分析工作流，可以自动抓取网站、提取关键数据，并生成由 AI 驱动的报告（导出为 Google Doc 和 PDF）。大家通常用它来快速完成销售线索挖掘、市场调研或竞品分析等重复性任务，无需手动整理数据。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Nithinsanjeev/marketing",
+      "project_brief_cn": "营销工具包与社交媒体管理面板，提供自动化营销、SEO和邮件营销功能，助力企业增长。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:28.760Z"
+    },
+    {
+      "repo_full_name": "nomad-prime/hoosh",
+      "project_brief_cn": "这是一个开源、免费、高度可配置的编程助手。开发者可以用它来自动化代码编写、调试或重构等任务，类似于一个可以自定义指令的 AI 编码副手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "NorceTech/commerce-agent-sdk",
+      "project_brief_cn": "Norce Commerce Agent SDK 是一个开源后端 + 可嵌入 UI 组件的工具包，用于在电商网站中快速搭建对话式购物助手。它通过 Norce MCP 服务器连接商品查询、购物车管理等功能，帮助开发者实现智能导购体验。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "NousResearch/hermes-agent",
+      "project_brief_cn": "Hermes Agent 是一个可持久化记忆、支持工具调用和技能生态的 AI 智能体运行时，开发者常用来构建能长期记忆上下文、调用外部工具和自主执行任务的个性化助手。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:42.645Z"
+    },
+    {
+      "repo_full_name": "noxwei/LibraryOfBabel",
+      "project_brief_cn": "LibraryOfBabel 是一个个人数字图书馆管理工具，能将你的 EPUB 电子书和有声书处理成可搜索的知识库。通常用来让 AI 研究助手在数千本书中即时检索信息，大幅提升文献综述和研究效率。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "NPC-Worldwide/npcpy",
+      "project_brief_cn": "NPCpy 是一个 Python 库，专为 NLP、多模态大模型、智能体（Agent）、机器学习、知识图谱等研究和开发设计。大家通常拿它来快速搭建和实验各类 AI 模型与智能体应用，尤其适合需要结合知识图谱和多模态数据的研究场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "nullclaw/nullclaw",
+      "project_brief_cn": "nullclaw 是一个用 Zig 编写的 AI 助手基础设施，号称最快、最小、完全自主。它提供运行 AI 智能体的运行时环境，开发者可以用它来构建和部署个人 AI 助手，实现自动化任务。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "NVIDIA/SkillSpector",
+      "project_brief_cn": "SkillSpector 是 NVIDIA 推出的 AI 智能体技能安全扫描工具。开发者用它来检测自定义的 AI agent 技能中是否存在漏洞、恶意模式和安全风险，确保agent行为可控。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "oasis-surveys/oasis-platform",
+      "project_brief_cn": "Oasis Platform 是一个可自托管的开源平台，专为 AI 驱动的调查访谈而设计。它提供语音转语音和文本聊天智能体，支持半结构化访谈指南、多种大语言模型（如 OpenAI、Gemini、Scaleway）、RAG 知识库和 Twilio 电话集成。研究人员通常使用它来部署和管理智能调查，通过 AI 智能体进行自然对话式数据收集，完全控制数据和基础设施。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ObaidQadri/RD-Agent",
+      "project_brief_cn": "研究和开发工作流自动化工具，结合AI和量化交易策略，帮助用户自动执行金融研究、数据分析和报告生成，适用于金融科技和投资领域。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "obra/superpowers",
+      "project_brief_cn": "一套AI Agent技能框架和软件开发方法论，提供即插即用的AI编码技能和工具，帮助开发者快速构建和运行智能代理。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:54.471Z"
+    },
+    {
+      "repo_full_name": "oldestlivingboy/reliableagents",
+      "project_brief_cn": "Reliable Agents 是一个指南项目，帮助理解代理型浏览器和电脑使用。它提供了新工具和现有工具的基准测试，大家通常用它来评估和比较不同代理在浏览器和电脑操作任务上的可靠性。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "oliver-kriska/claude-elixir-phoenix",
+      "project_brief_cn": "这是一个针对 Elixir/Phoenix/LiveView 框架的 Claude Code 插件，提供 20 个专门 agent，用于并行规划特性、自动验证执行、4 代理并行审查代码，并将学习成果转化为可复用的知识。简单说，就是给 Elixir 开发者配备一套 AI 开发工具链，从设计到审查全自动。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "open-compass/opencompass",
+      "project_brief_cn": "OpenCompass是一个大语言模型评测平台，提供标准化的基准测试和评估工具，用于对比不同LLM（如LLaMA、ChatGPT）的性能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:03.566Z"
+    },
+    {
+      "repo_full_name": "opena2a-org/ai-browserguard",
+      "project_brief_cn": "这是一个浏览器扩展防火墙，专门用来检测、监控和控制浏览器中的AI代理（比如使用Playwright、Puppeteer、Selenium、Anthropic Computer Use或OpenAI Operator的自动化脚本）。通常大家用它来保护自己的浏览器不被未经授权的AI代理操控，或者监控哪些AI正在访问你的浏览器。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "openai/codex",
+      "project_brief_cn": "OpenAI Codex 是一个轻量级的终端编码智能体，提供 Python SDK 和运行时，开发者用它来自动化编码任务、管理上下文和执行终端命令。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:42.645Z"
+    },
+    {
+      "repo_full_name": "openclaw/openclaw",
+      "project_brief_cn": "OpenClaw 是一个跨平台个人 AI 助手，支持任意操作系统，用户可私有化部署，通过自然语言交互完成日常任务、管理数据和自动化工作流。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:42.645Z"
+    },
+    {
+      "repo_full_name": "openJiuwen-ai/deepsearch",
+      "project_brief_cn": "openJiuwen DeepSearch 是一个知识增强的深度搜索与研究框架，具备业界领先的块级引用和可追溯推理能力。用户可以用它进行精准的智能搜索和研究，例如自动搜索、整理并总结特定知识领域的资料，并给出带引用的可追溯答案。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "optimus-a1/agent-wiki-hub",
+      "project_brief_cn": "这是一个开源的智能体知识库中心，为AI智能体、Codex和RAG系统提供金融、海关、编程、安全等多个领域的工作流和知识，方便开发者集成到项目中。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:12.005Z"
+    },
+    {
+      "repo_full_name": "PaddlePaddle/PaddleOCR",
+      "project_brief_cn": "PaddleOCR是一款OCR工具库，支持多种语言文字识别、文档解析、版面分析和PDF转Markdown。常用于文档数字化、发票识别和RAG系统的文字提取。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:53.582Z"
+    },
+    {
+      "repo_full_name": "pathwaycom/llm-app",
+      "project_brief_cn": "提供实时 RAG（检索增强生成）框架，轻松构建基于 LLM 的聊天机器人，支持实时数据更新和向量检索。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:47.930Z"
+    },
+    {
+      "repo_full_name": "phuryn/pm-skills",
+      "project_brief_cn": "一个AI技能市场，提供100多种产品管理相关的智能体技能、命令和插件，覆盖从需求发现、策略规划到发布增长的全流程。开发者可以直接调用这些技能来增强AI助手的产品管理能力。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:40:59.884Z"
+    },
+    {
+      "repo_full_name": "Poi5eN/Nexus",
+      "project_brief_cn": "这是一个多代理编排平台。它主要是帮你把任务步骤编排成可重复执行的工作流，也能把任务流程自动化串起来。常见用法是拿它来把多个 agent 角色和工具编排成可重复执行的工作流。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "pwrdrvr/PwrAgent",
+      "project_brief_cn": "PwrAgent 是一款桌面编码代理，它通过 Telegram、Discord、Slack 等即时通讯平台来操控你的电脑写代码。你可以把它想象成一个住在手机里的编程助手，发条消息就能让它在你电脑上自动完成编程任务。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "pydantic/pydantic-ai",
+      "project_brief_cn": "基于Pydantic的AI Agent框架，提供类型安全和数据验证功能，用于构建可靠的LLM驱动应用。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:32.883Z"
+    },
+    {
+      "repo_full_name": "qhkm/zeptoclaw",
+      "project_brief_cn": "这是一个用Rust编写的个人AI助手基础框架，只需一个二进制文件就能集成工具调用、记忆管理、多通道通信、模型供应商切换和沙箱化自主执行等功能，主打快速、小巧、安全且本地优先。通常用来搭建私有的、不依赖云端的智能助手，实现本地文件管理、自动化脚本执行或长期记忆存储等任务。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "quysto/QUYQUY-Database-Automation-Coffee",
+      "project_brief_cn": "这是一个RAG / 知识工具项目。它主要是帮你把任务流程自动化串起来。大家通常会用它来把任务流程自动化串起来。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "QwenLM/qwen-code",
+      "project_brief_cn": "QwenCode 是一个开源的 AI 编程助手，可以直接在终端中运行。它利用 Qwen 模型帮助开发者编写、调试和优化代码，支持对话式交互和代码生成。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:16.649Z"
+    },
+    {
+      "repo_full_name": "raviMakes/ai-helpdesk",
+      "project_brief_cn": "ai-helpdesk 是一个 AI 驱动的客服支持平台，集成了 RAG（检索增强生成）、知识库管理、工单系统和智能转接人工客服功能。通常用于搭建智能客服系统，自动回答客户问题、管理知识文档，并在需要时无缝转接给人工客服。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Rayyan-Oumlil/CustoFlow",
+      "project_brief_cn": "CustoFlow 是一个基于 Google ADK 和 Gemini 2.5 Flash Lite 的多智能体客服系统。它利用多个 AI 智能体协作处理客户咨询，号称能自动解决 80% 以上的常见问题，响应时间在 10 秒以内。该项目是 Kaggle 毕业设计，实现了 11 个以上的 AI 概念。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "riverfr/link-building-automation-tool",
+      "project_brief_cn": "这是一个外链建设自动化工具，帮助 SEO 专业人士和机构自动完成从发现外链机会到提交索引的整个流程。通常用于批量获取高质量反向链接，提升网站域名权威。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "robzilla1738/harness-terminal",
+      "project_brief_cn": "这是一个AI 编程助手。它主要是帮你理解仓库上下文后生成补丁并配合测试回归，也能在本地终端环境里执行操作。大家通常会用它来理解仓库上下文后生成补丁并配合测试回归，也会顺手在本地终端环境里执行操作。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ronitg1/alpha-terminal",
+      "project_brief_cn": "这是一个金融交易 agent 框架。它主要是帮你把策略研究和信号判断串起来，也能围绕市场信息组织研究流程。常见用法是拿它来做行情研究、策略回测和组合决策支持。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "run-llama/llama_index",
+      "project_brief_cn": "LlamaIndex是一个领先的文档智能体和OCR平台，帮助开发者构建基于文档的问答和数据处理应用，常用于处理大量文本信息并提取结构化数据。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:12.005Z"
+    },
+    {
+      "repo_full_name": "ryunzz/sb_hacks",
+      "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你接管桌面级操作与本地执行流程，也能把任务流程自动化串起来。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "sahil87/fab-kit",
+      "project_brief_cn": "fab-kit 是一个为 AI 编程助手（如 Claude Code、Cursor、Windsurf 等）设计的结构化开发工作流工具，它提供基于规范驱动的开发流程，帮助开发者在使用 AI 编码代理时保持代码质量与项目一致性。通常用于让 AI 代理按照预定义规范和步骤进行编程，减少混乱和错误。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "sandhere01/meta-ads-automation-ai",
+      "project_brief_cn": "这是一个金融交易研究 agent。它主要是帮你围绕市场信息组织研究流程，也能把任务流程自动化串起来。常见用法是拿它来做行情研究、策略回测和组合决策支持。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Saurabh22111998/Hollywood-Quality-UGC-Ad-Generator",
+      "project_brief_cn": "这是一个AI工具，只需上传一张产品照片，就能自动生成好莱坞级别的高清视频广告。大家通常用它来快速制作营销视频，无需专业团队和昂贵设备，适合电商、品牌营销等场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "serenakeyitan/awesome-ai-shopping-agents",
+      "project_brief_cn": "一份精选清单，收录了各类AI购物助手、平台政策及相关商业生态资源，方便开发者或用户了解和选择。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:42.087Z"
+    },
+    {
+      "repo_full_name": "shimo4228/contemplative-agent",
+      "project_brief_cn": "Contemplative Agent 是一个运行在本地 9B 模型上的 CLI 智能体，它通过六阶段知识循环（AKC）处理自身日志，每次升级都需要人类批准。用户通常用它来构建安全、可控的本地知识管理助手，确保 AI 功能不越界。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Shivam00980/Telegram-Automation-Toolkit",
+      "project_brief_cn": "这是一个面向 Telegram 的自动化营销工具箱，内置 43+ 个工具，能帮你自动管理群组成员、爬取联系人、发送定向消息，让推广工作更省力。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Shopify/ucp-cli",
+      "project_brief_cn": "这是一个命令行工具，基于 Universal Commerce Protocol，为 AI 代理提供购物能力，让 AI 能执行购买等电商操作。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:55.356Z"
+    },
+    {
+      "repo_full_name": "simonesiega/get-agents",
+      "project_brief_cn": "get-agents 是一个命令行工具，让你可以浏览网络上公开的 AI agent 和技能（skills），并一键安装它们。用户可以通过它快速发现和部署 AI 助手功能，无需手动配置。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "sinclarespeaking143/openclaw-superagent",
+      "project_brief_cn": "OpenClaw SuperAgent 是一个基于 OpenClaw 框架的 AI 智能体构建工具，它集成了记忆、自我修复、语音交互、自动化任务和内置诊断功能。开发者通常用它来快速搭建具备长期记忆和自动恢复能力的语音助手或自动化工作流智能体，尤其适用于需要稳定运行和自我监控的企业级场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "sipeed/picoclaw",
+      "project_brief_cn": "它是一个微小、快速且可随处部署的AI代理运行时，专注于自动化繁琐任务以释放创造力。用户常用它在边缘设备或嵌入式系统中运行轻量级智能代理。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:04.209Z"
+    },
+    {
+      "repo_full_name": "SissNonn/clawtbot",
+      "project_brief_cn": "AI代理驱动的社交媒体自动化工具，协调多代理工作流高效管理和安排内容发布。用于自动发帖、互动和社交媒体账号管理。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:53.582Z"
+    },
+    {
+      "repo_full_name": "SkyBlue997/enableMacosAI",
+      "project_brief_cn": "这是一键开启国行 Mac Apple 智能的工具，支持端侧和云端 AI，适用于 macOS 27 及 Apple Silicon 芯片的 Mac。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:55.356Z"
+    },
+    {
+      "repo_full_name": "sourcegraph/smoke-tests",
+      "project_brief_cn": "Sourcegraph 代码搜索平台的冒烟测试集，用于验证基本功能是否正常。开发者常用它来确保 Sourcegraph 部署后核心功能无异常。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:18.417Z"
+    },
+    {
+      "repo_full_name": "stoa-hq/stoa",
+      "project_brief_cn": "Stoa 是一个开源的商业引擎，专为人类和 AI 代理设计。它使用 Go 语言构建以获得高性能，内置了 Svelte 前端商店、管理后台、REST API，并原生支持 MCP（模型上下文协议），让 AI 代理能够直接参与购物。你可以把它理解为：一个支持 AI 自主购物的开源电商平台，既能给人类用，也能让 AI 代理直接下单。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "sushilk1991/mastisk",
+      "project_brief_cn": "Mastisk 是一个个人知识维基系统，集成了 24/7 全天候的研究助手。它利用 Claude 和 Ollama 等 AI 模型，结合 iCloud 存储和 PWA 技术，帮助用户随时整理、检索和扩展自己的知识库。通常人们把它当作一个智能笔记工具或第二大脑，让 AI 自动帮你做研究、总结和关联知识。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "susomejias/rembric",
+      "project_brief_cn": "为AI编程助手（如Claude Code）提供持久记忆的轻量级服务，自托管、基于MCP协议、追加存储，使用Docker和SQLite，让编码Agent拥有长期上下文。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "TapPay/tappay-agentic-commerce",
+      "project_brief_cn": "这是一个让AI代理能一站式完成购物和结账的开源工具包。它整合了钱包准备、选择商家、在浏览器中执行结账、填写支付字段以及处理过期状态恢复等功能，形成一个连续的智能合约流程。开发者可用它来构建能独立完成端到端购物的AI助手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "tensorflow/tensorflow",
+      "project_brief_cn": "谷歌开源的机器学习框架，支持深度学习模型训练与部署，广泛用于图像识别、自然语言处理等场景。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:32.883Z"
+    },
+    {
+      "repo_full_name": "the-open-agent/openagent",
+      "project_brief_cn": "OpenAgent 是一个下一代个人 AI 助手，集成了大语言模型、RAG（检索增强生成）和智能体循环。它能像人类一样使用电脑、操作浏览器、编写代码，帮你完成各种任务。通常人们用它来打造一个能自动处理浏览器操作、文件管理和代码编写的全能型 AI 助手。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "thuanhd2/auto-devs",
+      "project_brief_cn": "auto-devs 是一个通过 AI 编程智能体和命令行界面自动化开发工作流的工具。简单来说，它让你用自然语言或脚本命令来驱动 AI 自动完成编码、测试、部署等开发者日常任务，就像有一个 AI 开发助手在帮你跑整个工作流程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "THUDM/slime",
+      "project_brief_cn": "这是一个语言模型的后训练框架，专注于强化学习扩展（RL Scaling），用于进一步提升模型性能。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:55.356Z"
+    },
+    {
+      "repo_full_name": "TinyAGI/tinyagi",
+      "project_brief_cn": "TinyAGI是为单人公司设计的AI代理团队编排工具，管理多个AI代理协同工作，提升个人效率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:07.618Z"
+    },
+    {
+      "repo_full_name": "TirupMehta/trace-guard",
+      "project_brief_cn": "Trace Guard 是一个 HTTP/HTTPS 请求拦截工具，它会偷偷地在网络请求中注入行为检测脚本，用来识别并拦截机器人——包括那些使用 Playwright、Puppeteer、Claude Computer Use 等视觉语言模型驱动的智能浏览器 Agent。简单说，它就像一个网站的反机器人守卫，专门对付高级自动化访问。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Tomsonx232/smb-sales-boost-skill",
+      "project_brief_cn": "它是一个Claude销售提升技能，通过SMB Sales Boost API搜索、筛选并导出美国新注册的中小企业信息，销售人员用它做B2B冷开发、市场拓展和销售线索生成。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:43:07.300Z"
+    },
+    {
+      "repo_full_name": "TonyWang-hub/mcp-cn-commerce",
+      "project_brief_cn": "这是一个MCP / 工具接入项目。它主要是帮你围绕 MCP 暴露工具能力。常见用法是拿它来把 GitHub、Slack 或内部 API 接成 agent 可调用工具。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Toufumind/mind-agency",
+      "project_brief_cn": "这是一个多代理编排平台。它主要是帮你把任务流程自动化串起来。常见用法是拿它来把多个 agent 角色和工具编排成可重复执行的工作流。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "twbs/bootstrap",
+      "project_brief_cn": "Bootstrap 是最流行的 HTML/CSS/JS 前端框架，用于快速开发响应式、移动优先的网站",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:56.542Z"
+    },
+    {
+      "repo_full_name": "Veeksha29/ai-lead-qualifier",
+      "project_brief_cn": "一个基于AI的销售线索筛选系统，能够自动理解客户意图、提出关键问题，并结构化高质量线索，无需硬编码流程，常用于自动化销售获客。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:46.109Z"
+    },
+    {
+      "repo_full_name": "vegedon/open-computer-use",
+      "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你接管桌面级操作与本地执行流程。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "vercel/ai",
+      "project_brief_cn": "Vercel推出的AI SDK，为TypeScript开发者提供构建AI应用和智能体的开源工具包，支持多种模型和框架。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:40.264Z"
+    },
+    {
+      "repo_full_name": "vercel/next.js",
+      "project_brief_cn": "Next.js 是一个基于 React 的全栈框架，用于构建服务端渲染和静态网站。开发者常用它快速搭建高性能的 Web 应用，支持 SSG、SSR 和 API 路由。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:16.649Z"
+    },
+    {
+      "repo_full_name": "victorRT3868/shopping-agent-ai",
+      "project_brief_cn": "AI购物助手，能在多个电商平台自动比价并生成智能购物报告，帮助用户快速找到最优价格，简化在线购物决策过程。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:24.115Z"
+    },
+    {
+      "repo_full_name": "warwickwood-cell/gengeo-agent-registry",
+      "project_brief_cn": "这是一个专为AI购物代理设计的机器可读商家验证基础设施。简单来说，它帮助AI代理（如购物助手）在替用户下单前，自动验证商家是否可信，防止被骗。开发者通常用它为电商平台（如Shopify）集成MCP（模型上下文协议），让AI能安全地替你买东西。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "Wide-Moat/open-computer-use",
+      "project_brief_cn": "这是一个终端 AI 助手 / agent shell。它主要是帮你接管桌面级操作与本地执行流程，也能围绕代码仓库做分析与修改。常见用法是拿它来在本地终端里读文件、跑命令并串联工具操作。",
+      "source": "observer",
+      "provider": "template_fallback",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "xai-org/plugin-marketplace",
+      "project_brief_cn": "这是xAI官方推出的插件市场，提供各类插件扩展xAI产品功能，用户可在此发现和安装插件。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:42:32.160Z"
+    },
+    {
+      "repo_full_name": "XiaomiMiMo/MiMo-Code",
+      "project_brief_cn": "它是一个AI编码代理工具，帮助开发者通过AI自动生成和优化代码。用户通常用它来辅助编程，提高开发效率。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:04.209Z"
+    },
+    {
+      "repo_full_name": "XXXaber/Deepagent-research-context-engineering",
+      "project_brief_cn": "Deepagent-research-context-engineering 是一个基于多智能体系统的研究加速工具，它利用 DeepAgent 和 LangChain 库来高效管理研究中的上下文工程。简单来说，它可以帮助研究人员或开发者通过多个AI智能体协作，更快地梳理、整合和利用研究资料，尤其适合需要处理大量文献或复杂知识关联的场景。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "zfy465914233/scholar-agent",
+      "project_brief_cn": "它是一个让大语言模型（LLM）拥有长期记忆和在线搜索能力的知识代理工具。你可以把它想象成一个自动化的研究助手，它能在网上查找资料，并把找到的信息保存下来，越用越聪明。它支持 MCP（模型上下文协议），可以无缝集成到支持 MCP 的应用中，比如 Claude Code 或 VS Code。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "zhukunpenglinyutong/desktop-cc-gui",
+      "project_brief_cn": "这是一个桌面版CC GUI客户端，专为开发者打造的VibeCoding平台。它让程序员通过图形界面更高效地进行AI辅助编程，尤其适合需要集成浏览器与桌面操作的场景。大家通常用它来提升编码效率，自动化开发流程。",
+      "source": "observer",
+      "provider": "agent",
+      "generated_at": "2026-06-13T22:45:44+08:00"
+    },
+    {
+      "repo_full_name": "ZhuLinsen/alphaevo",
+      "project_brief_cn": "这是一个自我进化的股票策略研究智能体，能够自动进行策略回测并根据表现自我优化，适合量化投资者快速迭代交易策略。",
+      "source": "agent",
+      "provider": "deepseek",
+      "generated_at": "2026-06-19T17:41:12.005Z"
+    }
+  ]
+}

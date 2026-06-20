@@ -14,6 +14,7 @@ import {
   getMissionScoutArtifact,
   getMissionScoutEnhancementArtifact,
   getObserverArtifact,
+  getProjectLibraryEnhancementArtifact,
   getRunSummary,
   getVerifyDailyResult,
   getWeeklyAudit,
@@ -55,6 +56,11 @@ type MissionScoutEnhancementEntry = {
   repo_full_name: string;
   project_brief_cn: string;
   why_today_cn: string;
+};
+
+type ProjectLibraryEnhancementEntry = {
+  repo_full_name: string;
+  project_brief_cn: string;
 };
 
 const runSnapshotCache = new Map<string, DerivedCacheEntry<RunSnapshotResult>>();
@@ -345,6 +351,16 @@ function readMissionScoutEnhancements(date: string): Map<string, MissionScoutEnh
   );
 }
 
+function readProjectLibraryEnhancements(date: string): Map<string, ProjectLibraryEnhancementEntry> {
+  const artifact = getProjectLibraryEnhancementArtifact(date);
+  if (artifact.status !== "ok") return new Map();
+  return new Map(
+    (artifact.value.entries ?? [])
+      .filter((entry) => entry.project_brief_cn?.trim())
+      .map((entry) => [entry.repo_full_name.toLowerCase(), entry] as const),
+  );
+}
+
 function applyProjectEnhancements(
   projects: DailyRankedProject[],
   enhancements: Map<string, MissionScoutEnhancementEntry>,
@@ -357,6 +373,23 @@ function applyProjectEnhancements(
       ...project,
       project_brief_cn: enhancement.project_brief_cn,
       why_today_cn: enhancement.why_today_cn,
+      enhancement_source: "agent",
+      summary_source: "agent",
+    };
+  });
+}
+
+function applyProjectLibraryEnhancements(
+  projects: DailyRankedProject[],
+  enhancements: Map<string, ProjectLibraryEnhancementEntry>,
+): DailyRankedProject[] {
+  if (enhancements.size === 0) return projects;
+  return projects.map((project) => {
+    const enhancement = enhancements.get(project.project.repo_full_name.toLowerCase());
+    if (!enhancement) return project;
+    return {
+      ...project,
+      project_brief_cn: enhancement.project_brief_cn,
       enhancement_source: "agent",
       summary_source: "agent",
     };
@@ -1495,10 +1528,23 @@ export function buildProjectsView(
   const { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date, options);
   resolved.context.generated_at = snapshot?.daily_report.generated_at ?? null;
   const projectEnhancements = readMissionScoutEnhancements(resolved.context.selected_date);
-  const todayPulseProjects = applyProjectEnhancements(snapshot ? readTodayPulseProjects(snapshot.daily_report) : [], projectEnhancements);
-  const missionMatchProjects = applyProjectEnhancements(snapshot ? readMissionProjects(snapshot.daily_report) : [], projectEnhancements);
-  const exploreRibbonProjects = applyProjectEnhancements(snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [], projectEnhancements);
-  const contextOnlyProjects = applyProjectEnhancements(snapshot ? snapshot.daily_report.context_only_projects : [], projectEnhancements);
+  const projectLibraryEnhancements = readProjectLibraryEnhancements(resolved.context.selected_date);
+  const todayPulseProjects = applyProjectLibraryEnhancements(
+    applyProjectEnhancements(snapshot ? readTodayPulseProjects(snapshot.daily_report) : [], projectEnhancements),
+    projectLibraryEnhancements,
+  );
+  const missionMatchProjects = applyProjectLibraryEnhancements(
+    applyProjectEnhancements(snapshot ? readMissionProjects(snapshot.daily_report) : [], projectEnhancements),
+    projectLibraryEnhancements,
+  );
+  const exploreRibbonProjects = applyProjectLibraryEnhancements(
+    applyProjectEnhancements(snapshot ? readExploreRibbonProjects(snapshot.daily_report) : [], projectEnhancements),
+    projectLibraryEnhancements,
+  );
+  const contextOnlyProjects = applyProjectLibraryEnhancements(
+    applyProjectEnhancements(snapshot ? snapshot.daily_report.context_only_projects : [], projectEnhancements),
+    projectLibraryEnhancements,
+  );
   const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects];
   const missionScoutInventoryProjects = snapshot
     ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects, contextOnlyProjects)
@@ -1509,9 +1555,12 @@ export function buildProjectsView(
     projectEnhancements,
   );
   const catalogInventoryProjects = snapshot
-    ? applyProjectEnhancements(
-        buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects),
-        projectEnhancements,
+    ? applyProjectLibraryEnhancements(
+        applyProjectEnhancements(
+          buildExtendedProjectInventory(snapshot.daily_report, options?.requestInterestTopics, surfacedWithScoutProjects),
+          projectEnhancements,
+        ),
+        projectLibraryEnhancements,
       )
     : [];
   const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects, ...observerInventoryProjects].filter(

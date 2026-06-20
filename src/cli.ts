@@ -2,6 +2,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildEnhancedDailyReport, renderDailyReport } from "./action/dailyReport.ts";
+import { generateProjectLibraryEnhancements } from "./action/projectLibraryEnhancement.ts";
 import { applyProjectSearchDailySections } from "./action/projectSearchDailySections.ts";
 import { buildProjectSearchDailySections } from "./action/projectSearchExposurePlanner.ts";
 import { buildVerifyDailyResult, renderVerifyDailyResult } from "./action/dailyVerification.ts";
@@ -693,6 +694,13 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       recent_daily_reports: readRecentDailyReports(opts.date, 5),
     }),
   );
+  await generateProjectLibraryEnhancements({
+    date: opts.date,
+    scored,
+    config,
+    observerEntries: observer.artifact.entries,
+    dryRun,
+  });
   reportWithFreshness.llm_diagnostics = {
     enabled: reportWithFreshness.llm_diagnostics?.enabled ?? llmDiagnostics.enabled,
     provider: reportWithFreshness.llm_diagnostics?.provider ?? llmDiagnostics.provider,
@@ -894,6 +902,16 @@ export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
     generatedAt,
     freshnessSources,
     rawSignals: raw,
+  });
+  const observerArtifact = readJsonFile(path.join("data", "observer", "ecosystem-focus", `${opts.date}.json`), null as {
+    entries?: Array<Record<string, unknown>>;
+  } | null);
+  await generateProjectLibraryEnhancements({
+    date: opts.date,
+    scored,
+    config,
+    observerEntries: Array.isArray(observerArtifact?.entries) ? (observerArtifact.entries as never) : [],
+    dryRun,
   });
   writeJsonFile(dailyReportJsonPath(opts.date), report, dryRun);
   writeTextFile(dailyReportMarkdownPath(opts.date), renderDailyReport(report), dryRun);

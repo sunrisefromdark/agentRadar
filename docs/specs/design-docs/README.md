@@ -14,6 +14,7 @@
 - `architecture-boundaries.md`：系统边界和架构取舍。
 - `agent-enhancement-layer-and-weekly-trend-design.md`：冻结 Agent 增强消费层的五层语义、daily 个性化与风险复核边界，以及 weekly 趋势抽象结构。
 - `agent-reach-external-discovery-and-evidence-design.md`：冻结 AgentReach 外部发现与补证信号层的 provider artifact、事件模型、daily / weekly 消费、降级审计与 V1 平台边界。
+- `行业级Agent趋势判断设计文档.md`：冻结行业级 Agent 趋势判断的 Industry Claim Ledger、十轴证据矩阵、多 Agent 分工、工具四级保障链路、趋势等级裁决和 weekly 降级语义。
 - `build-vs-fork-decision.md`：为什么独立新建项目，而不是直接改 agents-radar。
 - `daily-report-freshness-readability-design.md`：daily report 的新鲜度状态、主榜单分层、fallback 降级与用户可读卡片设计。
 - `historical-replay-integrity-design.md`：历史 daily / weekly backfill 的双运行模式、source 历史能力分级、归档/回执与独立验证设计。

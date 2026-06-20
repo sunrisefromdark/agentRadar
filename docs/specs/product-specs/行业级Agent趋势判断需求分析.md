@@ -146,11 +146,11 @@
 - Expected outcome：新增来源不需要重写整个 weekly 判断链路，系统能消费外部 Agent 产出的标准化证据。
 
 ### 需求 8：系统必须支持多 Agent 分工完成行业趋势判断
-- What：系统必须允许多个专责 Agent 分别负责行业证据搜寻、证据标准化、趋势聚类、证据审计和综合判断；完整分工应覆盖研究前沿、顶会/学术活动、大厂/产品发布、知名开发者/工作室、中文社区、海外社区、项目/开源生态、资本金融、政策监管、政策研究/智库、新闻/宣传信号、证据去重归一、反证审计和 weekly 趋势综合。
+- What：系统必须允许多个专责 Agent 分别负责行业证据搜寻、工具发现、证据标准化、趋势聚类、证据审计和综合判断；完整分工应覆盖研究前沿、顶会/学术活动、大厂/产品发布、知名开发者/工作室、中文社区、海外社区、项目/开源生态、资本金融、政策监管、政策研究/智库、新闻/宣传信号、工具 registry 维护、证据去重归一、反证审计和 weekly 趋势综合。各 Agent 之间必须使用统一消息 envelope、artifact manifest、payload schema 和可审计 handoff，不得各自定义输入输出格式。
 - Why：行业趋势判断跨度大，单一 Agent 难以稳定覆盖全部渠道和判断维度。
 - Who：AgentRadar 维护者、weekly 用户。
 - When：weekly 趋势判断需要整合多个领域证据时。
-- Expected outcome：趋势判断过程可以分工、审计和降级；用户能感知最终结论不是单一来源或单一模型臆断。
+- Expected outcome：趋势判断过程可以分工、审计和降级；每个 Agent 的输入、输出、依赖、失败和下游消费关系都可追溯；用户能感知最终结论不是单一来源或单一模型臆断。
 
 ### 需求 9：系统必须保留证据反链和反证审计
 - What：每条趋势必须保留正向证据、反向证据、缺失证据和来源类别；当某证据轴为空或冲突时，weekly 必须表达。
@@ -160,7 +160,7 @@
 - Expected outcome：用户能核对趋势为何成立，也能看到哪些证据不足以支持更强结论。
 
 ### 需求 10：weekly 输出必须显式表达趋势等级和证据覆盖
-- What：weekly 必须区分核心行业趋势、观察中行业趋势、项目热度簇、证据不足但值得跟踪方向，并展示各自证据覆盖摘要。
+- What：weekly 必须区分核心行业趋势、观察中行业趋势、风向探针、项目热度簇、证据不足但值得跟踪方向，并展示各自证据覆盖摘要。
 - Why：用户需要的是行业判断，不是把所有热闹都写成趋势。
 - Who：所有 weekly 用户。
 - When：生成 weekly 可读产物和结构化产物时。
@@ -171,37 +171,37 @@
 ### 关键请求 A：“当前周趋势覆盖面很小”
 - 解释 A1：增加更多预设主题标签，让现有项目聚类覆盖更多方向。
 - 解释 A2：改变趋势判断证据边界，引入行业级多源信号。
-- 推荐冻结：采用 `A2`
+- 冻结：采用 `A2`
 - 原因：问题根因不是标签数量不够，而是输入和判断标准过度 repo-centric。
 
 ### 关键请求 B：“趋势判断不应该只看几个高分项目”
 - 解释 B1：降低高分项目阈值，允许更多项目进入趋势候选。
 - 解释 B2：将趋势成立标准改为跨来源独立证据，并保留项目热度作为其中一个证据轴。
-- 推荐冻结：采用 `B2`
+- 冻结：采用 `B2`
 - 原因：降低阈值会扩大噪声，不能解决行业视野狭窄问题。
 
 ### 关键请求 C：“判断整个 AI Agent 行业的发展趋势”
 - 解释 C1：覆盖所有泛 AI 新闻和泛科技事件。
-- 解释 C2：围绕 AI Agent / automation / intelligent software 的行业前沿，覆盖研究、产品、社区、资本、政策和落地信号。
-- 推荐冻结：采用 `C2`
+- 解释 C2：围绕 AI Agent / automation / intelligent software 及通过 `Agent relevance gate` 的相邻方向，覆盖研究、产品、社区、资本、政策和落地信号。
+- 冻结：采用 `C2`
 - 原因：产品仍应保持 AgentRadar 边界，不能泛化成全行业新闻聚合器。
 
 ### 关键请求 D：“关注大厂、研究所、顶会、开发者、社区、资本、政策”
 - 解释 D1：把这些内容作为 weekly 文案背景补充，不影响趋势判断。
-- 解释 D2：把这些内容作为正式证据轴参与趋势成立、降级和审计。
-- 推荐冻结：采用 `D2`
+- 解释 D2：把这些内容作为正式证据轴参与趋势成立、降级和审计，而且趋势判断要证据链明确，写明依据。
+- 冻结：采用 `D2`
 - 原因：用户要的是趋势判断标准扩展，而不是阅读材料堆叠。
 
 ### 关键请求 E：“尽量借助已有开源工具”
 - 解释 E1：每个来源都在 AgentRadar 内自研采集器。
 - 解释 E2：优先接入 AgentReach、RSS/网页抓取、学术/新闻/金融/政策 API 等现成工具或外部 Agent，AgentRadar 负责消费、归一和判断。
-- 推荐冻结：采用 `E2`
+- 冻结：采用 `E2`
 - 原因：用户明确要求低成本、省时省力，并且行业信息源变化快，工具层必须可替换。
 
 ### 关键请求 F：“是否用多 Agent 完成任务”
 - 解释 F1：继续使用一个 weekly Agent，提示词里要求它综合所有内容。
 - 解释 F2：使用多 Agent 分工搜寻和审计，再由趋势综合 Agent 输出 weekly 判断。
-- 推荐冻结：采用 `F2`
+- 冻结：采用 `F2`
 - 原因：多源行业趋势判断天然跨领域，分工能提高覆盖、降低单点失败，并让证据缺口更可见。
 
 ## 6. Constraints
@@ -216,7 +216,7 @@
 - repo、paper、policy、funding、community thread、product release 等对象必须允许拥有不同字段，不得强行统一成 GitHub 项目。
 - 趋势证据必须保留来源类别、时间、主体、链接或可追溯引用。
 - 无法核验或来源不明的信息只能进入低可信观察，不得进入核心趋势证据。
-- 对政策倾斜、宣传倾斜、资本流向等高解释风险信号，必须表达为“迹象”而非确定事实。
+- 对政策倾斜、宣传倾斜、资本流向等高解释风险信号，必须首先用Agent给出分析，然后说明为“迹象”而非确定事实。
 - 中文社区和海外社区必须区分来源类别与语言标签；趋势权重不因中文或海外身份天然加权，只取决于机构、团队、个人或社区本身的权威程度与证据评分。
 
 ### 业务规则约束
@@ -248,16 +248,16 @@
 
 ### 验收 2：趋势证据轴可见
 - 可观察结果：每条核心趋势都有完整证据轴摘要，能看出项目/开源、研究/论文、顶会/学术活动、大厂/产品发布、开发者/工作室、技术社区、资本/金融、政策/监管、智库/政策研究、新闻/宣传等维度是否存在证据。
-- 成功条件：用户能判断一条趋势是“研究强”“社区强”“产品强”“资本强”“政策强”“媒体/宣传强”还是“多维共振”，并能看到缺失轴。
+- 成功条件：用户能判断一条趋势是“研究强”“社区强”“产品强”“资本强”“政策强”“媒体/宣传强”还是“多维共振”，并能看到缺失轴。且对应的证据也要能够进行查看和追溯，就像"数据状态"模块下的点击下钻一样，要能够逐级展开，查看对应的完整证据。
 - 失败条件：用户只能看到趋势名称和 supporting projects，无法判断行业证据结构。
 
-### 验收 3：系统能识别非 repo 行业信号
+### 验收 3：系统能识别并利用所有提到的非 repo 行业信号
 - 可观察结果：weekly 或行业观察池中出现无法映射到 GitHub repo 的论文、政策、会议、融资、产品发布或社区主题信号。
-- 成功条件：这些信号能作为方向级证据被审计和消费，而不是被丢弃。
+- 成功条件：这些信号能作为方向级证据被稳定的审计和消费，而不是被丢弃。
 - 失败条件：非 repo 证据必须强行绑定项目，否则无法进入判断。
 
 ### 验收 4：趋势等级区分清晰
-- 可观察结果：weekly 明确区分核心行业趋势、观察中行业趋势、项目热度簇和证据不足方向。
+- 可观察结果：weekly 明确区分核心行业趋势、观察中行业趋势、风向探针、项目热度簇和证据不足方向。
 - 成功条件：用户能理解为什么某方向被升级、降级或只列为观察。
 - 失败条件：所有热闹方向都被写成“趋势”，或所有方向都只按项目数量排序。
 
@@ -271,9 +271,9 @@
 - 成功条件：用户能看到“为什么这条趋势成立”以及“它还缺什么证据”。
 - 失败条件：weekly 只输出正向叙事，不暴露证据不足、来源偏置或冲突。
 
-### 验收 7：工具失效时可降级
-- 可观察结果：某类外部工具或 Agent 失败时，weekly 仍能产出，并标注对应证据轴缺失。
-- 成功条件：主产物稳定，用户知道本周哪些行业证据未参与判断。
+### 验收 7：工具失效时可稳定降级到备用工具，其次才是回退链路
+- 可观察结果：某类外部工具或 Agent 失败时，weekly 仍能产出，并标注对应证据轴使用了哪条备用链路、哪些证据缺失、哪些证据只进入观察层。
+- 成功条件：每个核心证据轴都能展示 `primary_tool`、`secondary_toolset`、`fallback_tools`、`last_resort_mode` 和 `unavailable_state`；主产物稳定，用户知道本周哪些行业证据未参与判断。
 - 失败条件：工具失败导致 weekly 中断，或系统把缺失证据伪装成没有趋势。
 
 ### 验收 8：行业趋势边界没有泛化失控
@@ -292,26 +292,27 @@
 - 如果多 Agent 之间没有清晰职责，可能出现重复搜寻、互相矛盾、结论堆叠的问题。
 
 ### 风险应对设计
-- 对“更多材料 + 同样狭窄判断”：趋势模型必须先生成行业主张，再按完整证据轴寻找支撑与反证；项目标签聚类不能直接等同于行业趋势。
-- 对资本、政策或宣传泡沫：资本、政策和宣传信号只能提升“行业关注度 / 组织投入迹象”，不能单独把方向升级为核心行业趋势；至少需要研究、产品、社区、开源或落地证据中的一个维度形成交叉确认。
-- 对外部 Agent 黑盒：所有外部 Agent 只允许产出标准化证据，不允许直接产出最终趋势；证据必须包含来源、时间、主体、证据轴、语言、链接或可追溯引用、摘要、置信度和可核验性。
+- 对“更多材料 + 同样狭窄判断”：趋势模型必须先生成行业主张，再按完整证据轴寻找支撑与反证；项目标签聚类只是辅助，绝对不能等同于行业趋势。
+- 对资本、政策或宣传泡沫：资本、政策和宣传信号只能提升“行业关注度 / 组织投入迹象”，不能单独把方向升级为核心行业趋势；若信号足够前置且来源质量高，可以进入“风向探针”，但升级为核心行业趋势仍至少需要研究、产品、社区、开源或落地证据中的一个维度形成交叉确认。
+- 对外部 Agent 黑盒：所有外部 Agent 都要产出标准化证据，不允许直接产出最终趋势；证据必须包含来源、时间、主体、证据轴、语言、链接或可追溯引用、摘要、置信度和可核验性。
 - 对证据轴过多导致用户难懂：weekly 只需要显式突出三类证据轴：主导证据轴、辅助证据轴、缺失 / 反证轴；完整证据矩阵可下钻查看，但主叙事必须说明真正推动结论的是哪几个轴。
-- 对泛 AI 情报平台漂移：所有趋势候选必须先通过 `Agent relevance gate`，确认其与 autonomous action、tool use、workflow execution、agentic coding、computer use、multi-agent、memory、eval/governance、vertical agent 或 intelligent software automation 相关；否则只能作为背景材料，不能进入核心趋势。
+- 对泛 AI 情报平台漂移：所有趋势候选必须先通过 `Agent relevance gate`，确认其与 autonomous action、tool use、workflow execution、agentic coding、computer use、multi-agent、memory、eval/governance、vertical agent 或 intelligent software automation 等Agent领域相关；否则只能作为背景材料，不能进入核心趋势。
 - 对多 Agent 结论堆叠：专责 Agent 只负责搜寻和证据整理，证据归一 Agent 负责实体对齐和去重，反证审计 Agent 负责降级与风险提示，趋势综合 Agent 才能输出 weekly 趋势等级。
 
 ### 趋势成立阈值冻结
-- 核心行业趋势：至少 3 个证据轴有独立证据，其中至少 1 个证据来自 `core` 或 `proven` 权威主体，且不存在强反证。
-- 观察中行业趋势：至少 2 个证据轴有独立证据，或 1 个高权威信号叠加持续社区讨论。
-- 项目热度簇：项目 / 开源轴强，但研究、产品、资本、政策、社区等行业轴不足。
+- 核心行业趋势：至少 3 个证据轴按各自 `axis-status-threshold-profile.v1` 达到 `strong / medium`，其中至少 1 个证据来自 `core` 或 `proven` 权威主体，且不存在强反证。
+- 观察中行业趋势：至少 2 个证据轴按各自 profile 达到 `strong / medium`，或 1 个高权威信号叠加持续社区讨论。
+- 风向探针：资本、政策、研究前沿、大厂战略或高质量机构观察信号中至少 2 个轴达到各自 `early_signal_min`，其中至少 1 个信号来自 `core / proven` 来源，但产品、社区、开源或落地证据尚不足以进入核心行业趋势。
+- 项目热度簇：当前项目 / 开源轴达到 `project_heat_min`，但研究、产品、资本、政策、社区等行业轴不足；只能作为落地样本和补证触发器，不得在行业证据补足前升级为核心行业趋势。
 - 证据不足方向：存在零散材料，但来源单一、不可核验、缺少 Agent 相关性，或只能说明泛 AI 热点。
-- 降级规则：若趋势主要由资本、政策、新闻或宣传信号驱动，而缺少研究、产品、社区、开源或落地证据，默认不得进入核心行业趋势。
+- 降级规则：若方向主要由资本、政策、新闻或宣传信号驱动，而缺少研究、产品、社区、开源或落地证据，默认不得进入核心行业趋势；如其信号来自高质量来源且具有前置布局价值，应进入“风向探针”板块，并明确写成可能方向而非已成立趋势。
 
 ### 最低冻结设计要求
 
 以下内容不再作为“缺口”留空。设计阶段可以细化数值、字段和实现方式，但不得低于本节冻结的最低要求。
 
 #### 证据轴评分最低要求
-- 每个证据轴必须至少输出 `0-100` 的轴评分，并拆成 `authority_score`、`freshness_score`、`independence_score`、`primary_source_score`、`continuity_score`、`agent_relevance_score` 六个子分。
+- 每个证据轴必须至少输出 `0-100` 的轴评分，并拆成 `authority_score`、`freshness_score`、`independence_score`、`primary_source_score`、`continuity_score`、`agent_relevance_score` 六个子分，同时记录 `score_formula_version` 和 `scoring_profile_id`。
 - `authority_score` 衡量主体权威程度，必须基于 `core / proven / watch / ordinary` 实体层级。
 - `freshness_score` 衡量信号是否足够新，过期信号只能作为背景，不得推动趋势升级。
 - `independence_score` 衡量独立来源数量，同一新闻转载链、同一公司通稿、同一作者多平台转发不得重复计数。
@@ -321,40 +322,67 @@
 - 每个趋势必须输出 `leading_axes`、`supporting_axes`、`missing_axes`、`counter_axes`，避免把多轴证据压成单一总分。
 
 #### 权重函数最低要求
-- 趋势总判断不得采用简单材料数量相加，必须采用“证据轴覆盖 + 主体权威 + 独立性 + 新鲜度 + Agent 相关性”的组合。
-- 项目 / 开源轴最多只能作为一个证据轴，不得因项目数量多而吞没研究、产品、社区、资本和政策轴。
+- 趋势总判断不得采用简单材料数量相加，必须采用“证据轴覆盖 + 主体权威 + 一手程度 + 独立性 + 新鲜度 + 持续性 + Agent 相关性”的组合。
+- 十个证据轴不得共享同一套轴评分权重；每个轴必须绑定设计文档冻结的 per-axis `AxisScoringProfile`，并按该轴的证据形态计算 `axis_score`。
+- 项目 / 开源轴最多只能作为一个证据轴，不得因项目数量多而吞没研究、产品、社区、资本和政策轴；在核心行业趋势判断中，各证据轴必须按质量和独立性合并，在风向探针中资本、政策、研究前沿和大厂战略信号可以作为主导证据，但必须标注为前置信号。
 - 资本、政策、新闻和宣传轴不得单独把方向升级为核心行业趋势，只能在与研究、产品、社区、开源或落地证据交叉确认后提升趋势置信度。
 - `core / proven` 来源可以推动趋势升级；`watch` 来源只能增强观察热度；`excluded` 来源不得参与评分。
-- 中文来源和海外来源不按语言区域加权；权重只取决于主体权威、证据质量、独立性、持续性和一手程度。
-- 设计阶段如果引入更复杂权重函数，必须保留上述门槛和降级规则，不得把它们改写为单一黑盒分数。
+- 中文来源和海外来源不按语言区域加权；权重只取决于主体权威、一手程度、独立性、新鲜度、持续性、Agent 相关性和证据质量。
+- 设计阶段如果引入更复杂权重函数，必须保留上述门槛、六个子分和每轴 profile，不得把它们改写为单一黑盒分数或全轴统一权重。
+
+#### 差异化裁决最低要求
+- `agent_relevance_score` 不得只使用一组全局阈值；direct agent capability、agent infra/runtime、agent learning/research、embodied/vertical/enterprise automation 必须分别使用设计文档冻结的 `agent-relevance-profile.v1`。
+- `AxisEvidenceSummary.status` 不得用全局固定分段计算；每个证据轴必须使用设计文档冻结的 `axis-status-threshold-profile.v1`，分别计算 `strong`、`medium` 和 `early_signal`。
+- `authority_tier` 不得跨证据轴直接等价；来源必须按 `axis + source_type + primary_source_distance` 解释权威层级，不能用一个轴的高权威来源替代另一个轴的一手证据。
+- `counter_evidence_severity` 不得按统一文本强度或来源数量计算；必须结合 `conflict_type`、受影响 evidence axis、claim 依赖路径和替代证据，使用设计文档冻结的 `counter-evidence-severity-profile.v1`。
 
 #### 冲突合并最低要求
 - 所有趋势候选必须经过实体对齐、同源去重、转载链去重和重复主体去重。
 - 同一主体多渠道发布只能算作一个主体信号，但可以增强该主体的持续性记录。
 - 若不同证据轴结论冲突，系统必须输出冲突说明，而不是只保留正向证据。
-- 若高权威反证出现，例如论文复现失败、项目停止维护、监管否定、公司撤回发布或融资信息无法核验，趋势必须降级或进入反证审计。
+- 若高权威反证出现，例如论文复现失败、项目停止维护、监管否定、公司撤回发布或融资信息无法核验，趋势必须降级或进入反证审计，并保留可追溯的历史证据链。
 - 若多个 Agent 产出相互矛盾，反证审计 Agent 的降级结论优先于趋势综合 Agent 的升级结论。
 - 合并后的趋势必须能追溯到原始证据项、来源类别和参与合并的 Agent。
 
-#### Seed Registry 最低要求
-- V1 Seed Registry 已在本文冻结，设计阶段必须以本文名单为初始 registry，不得留空、缩减为少数热门公司，或只实现 GitHub / 学术 / 社区中的一部分。
+#### Seed Registry 完成态要求
+- V1 Seed Registry 已在本文冻结，本文名单是 V1 完成态覆盖基线，而不是最小可行版本、试点名单或可被设计 / 实现阶段继续裁剪的起步清单；不得留空、缩减为少数热门公司、抽样实现，或只实现 GitHub / 学术 / 社区中的一部分。
 - 每个 registry entry 必须记录 `entity_id`、`display_name`、`entity_type`、`authority_tier`、`region`、`language`、`source_urls`、`evidence_axes`、`maintenance_agent_id`、`approval_agent_id`、`last_agent_reviewed_at`、`review_status` 和 `human_exception_required`。
-- Registry 默认由 Agent 自动巡检、提议、审批和维护；人工只处理 `human_exception_required = true` 的争议项、付费授权项、法律风险项或高影响删除项。
+- Registry 默认由 Agent 自动巡检、提议、审批和维护；默认不设常规人工维护流程，只有 `human_exception_required = true` 的争议项、付费授权项、法律风险项或高影响删除项进入例外队列。
 - 新增来源必须给出加入理由；删除来源必须给出删除理由和替代来源。
 - V1 可以因为工具成本或授权限制暂不自动采集某些来源，但必须在 registry 中保留其状态，例如 `auto`、`agent_review`、`optional_paid`、`human_exception`、`unavailable`。
 
 #### 资本 / 政策 / 宣传可信度分层最低要求
-- `high_confidence`：监管披露、SEC 文件、公司官方公告、财报、政府文件、标准组织文件、顶级会议官方材料、论文原文。
+- `high_confidence`：监管披露、SEC 文件、公司官方公告、财报、政府文件、标准组织文件、顶级会议官方材料、论文原文、official proceedings 或 benchmark 原文；完整源码、数据集、复现材料或官方实现可进一步提升置信度，但不是论文进入高置信度的硬前提。
 - `medium_confidence`：Reuters、Bloomberg、The Information、Dealroom、Sifted、专业数据库、投资机构正式报告、可追溯一手来源的媒体报道。
 - `low_confidence`：普通科技媒体、泛行业媒体、二手博客、社媒总结、未给出来源链的市场传闻。
 - `excluded`：营销软文、无法追溯来源、明显 SEO 内容、搬运号、纯观点文章、未经确认的融资或并购传闻。
 - 政策和宣传信号必须表达为“监管关注、政策空间、产业投入迹象、叙事扩散或风险关注”，不得写成确定审批、确定支持或确定落地，除非来源本身明确。
 
 #### 外部工具准入最低要求
-- 每个外部工具必须记录 `tool_name`、`covered_axes`、`access_mode`、`cost_tier`、`rate_limit`、`license_risk`、`freshness_sla`、`failure_mode`、`fallback_mode`。
-- 优先使用成熟开源工具、官方 API 和稳定第三方工具，例如 AgentReach、RSSHub、OpenAlex、Semantic Scholar、arXiv、OpenReview、Papers with Code、PaperQA / PaperQA2、OpenScholar、GPT Researcher、Crawl4AI / Firecrawl、Jina Reader、GitHub API、Hugging Face Hub API、OpenBB、SEC EDGAR、Federal Register、GDELT。
+- 每个外部工具必须记录 `tool_name`、`covered_axes`、`access_mode`、`cost_tier`、`rate_limit`、`license_risk`、`freshness_sla`、`failure_mode`、`primary_tool`、`secondary_toolset`、`fallback_tools`、`last_resort_mode`、`unavailable_state`。
+- 优先使用成熟集成型工具 / Agent，其次才是官方 API、专用 connector 和底层 reader / crawler。首选工具应尽量像 AgentReach 一样已经完成多源接入、任务编排、去重或结构化输出；OpenAlex、GitHub API、Hugging Face Hub API、SEC EDGAR、Federal Register、GDELT 等官方 API 是高质量底层证据源，但默认属于备用层或证据核验层，不应因为权威就自动成为 Agent 调用首选。
+- 优先复用现成中间件承担 schema 校验、connector 接入、trace 观测和可选 DAG / workflow 编排，例如 JSON Schema / Zod / TypeBox、MCP、OpenTelemetry / Langfuse、LangGraph、Temporal / Prefect / Dagster；但这些中间件不得替代设计文档冻结的 message envelope、artifact manifest、evidence event、claim ledger、audit 和趋势裁决语义。
 - 高成本、授权复杂或稳定性不足的工具不得成为 V1 自动化链路硬依赖，只能作为 `optional_paid`、`agent_review`、`human_exception` 或后续扩展；默认先由 Agent 判断是否存在免费替代源、公开 API 或可接受的延迟补证方式。
 - 工具失效时必须标注对应证据轴缺失，不得把缺失误写成该方向没有趋势。
+- Tool Discovery Agent 必须定期维护工具 registry，记录候选工具、质量层级、替代关系、最近一次 Agent 审核时间、失败模式和授权状态；当发现更成熟的开源工具、官方 API 或稳定第三方工具时，应自动提出替换建议并交由审批 Agent 处理。
+
+#### 工具四级保障链路最低要求
+- 四级链路定义：`primary_tool` 是该证据轴反响最好、稳定性最高、集成度最高的首选工具 / Agent；`secondary_toolset` 是同样具备多源召回、去重、初筛或 research workflow 的次选工具集；`fallback_tools` 是更底层的官方 API、专用 connector、reader 或 crawler；`last_resort_mode` 是定向抓取、弱信号或只标注缺失。
+- 首选工具选择规则：不得因为某个工具集成度高就把它设为所有证据轴的默认首选。Tool Discovery Agent 必须按证据轴分别评估候选工具的适配度、维护活跃度、稳定性、社区反馈、输出结构化程度、可追溯引用能力、调用成本和授权风险；只有在该轴评估最高的成熟集成型工具 / Agent 才能成为 `primary_tool`。AgentReach 只能作为跨平台聚合候选之一，不得天然覆盖所有方向。
+- 次选工具集的输出不得直接替代原始证据。它们可以用于发现线索、合并多源结果、补齐引用链和触发专用 Agent 补证，但趋势评分必须落回原始来源、官方 API、论文、监管文件、财报、repo、社区原帖或可追溯引用。
+- 次选工具集种子：AutoSearch、Open Deep Research、GPT Researcher、Tongyi DeepResearch、dzhng/deep-research、Local Deep Research、MorningAI、agents-radar、AI Community Intelligence、Paper Search MCP、mcp-omnisearch、open-websearch。Tool Discovery Agent 必须持续维护该名单的质量层级、授权状态、可用性、覆盖轴和替代关系；低成熟度、小规模或维护不稳定的搜索 CLI / MCP 只能进入 `watch` 候选池，不能默认成为 V1 次选工具。
+- 跨平台搜寻与工具路由：首选候选为 AgentReach、AutoSearch、mcp-omnisearch；次选 open-websearch、GPT Researcher；备用 direct platform APIs、RSSHub、Crawl4AI、Firecrawl；最后回退为标注对应渠道 `unavailable`，不得用普通搜索结果伪装覆盖。
+- 官方网页 / 文档 / changelog 抓取：首选候选为 Firecrawl、Crawl4AI；次选 AgentReach、AutoSearch、mcp-omnisearch、open-websearch；备用 Jina Reader、RSSHub、官方 sitemap / RSS；最后回退为 Playwright / Scrapy 定向抓取，并把证据标注为 `last_resort`。
+- 学术元数据：首选候选为 Paper Search MCP、Open Deep Research、Local Deep Research；次选 AutoSearch、GPT Researcher；备用 OpenAlex、Semantic Scholar API、arXiv API、OpenReview API；最后回退为顶会或机构官方页面定向抓取。
+- 学术综合 / auto research：首选候选为 PaperQA / PaperQA2、Open Deep Research、GPT Researcher；次选 Tongyi DeepResearch、dzhng/deep-research、Local Deep Research、OpenScholar；备用 Paper Search MCP、OpenAlex、Semantic Scholar API、arXiv API、OpenReview API；最后只输出文献列表和引用链，不得输出不可追溯的综合判断。
+- 顶会 / benchmark：首选候选为 Paper Search MCP、Open Deep Research、agents-radar；次选 AutoSearch、GPT Researcher；备用 OpenReview、arXiv、Semantic Scholar、OpenAlex、Papers with Code、官方 proceedings、official schedule、leaderboard；最后回退为官方网页抓取。
+- 开源项目与依赖生态：首选候选为 agents-radar、AI Community Intelligence、AutoSearch；次选 MorningAI、mcp-omnisearch、AgentReach；备用 GitHub REST / GraphQL API、GH Archive、ecosyste.ms、Libraries.io、deps.dev；最后回退为 GitHub HTML 弱信号，且不得单独驱动趋势升级。
+- 模型 / 数据集 / Space：首选候选为 agents-radar、AI Community Intelligence、AutoSearch；次选 MorningAI、AgentReach；备用 Hugging Face Hub API、`huggingface_hub`、ModelScope、OpenXLab、GitHub org；最后回退为网页抓取并降低证据权重。
+- 社区讨论：首选候选为 AI Community Intelligence、agents-radar、AgentReach；次选 AutoSearch、MorningAI、mcp-omnisearch；备用 Hacker News Algolia API、Reddit API、GitHub Discussions GraphQL、Hugging Face community、公开 Discord / forum；最后只进入观察热度，不得推动升级。
+- 大厂 / 产品发布：首选候选为 MorningAI、AI Community Intelligence、agents-radar；次选 AgentReach、AutoSearch、Open Deep Research；备用官方 blog、RSS、release notes、API docs、GitHub org、Hugging Face org、RSSHub、Firecrawl、Crawl4AI、Jina Reader；最后只能引用新闻转述作为辅助观察。
+- 政策 / 监管：首选候选为 Open Deep Research、GPT Researcher、AutoSearch；次选 AgentReach、mcp-omnisearch；备用 Federal Register API、OECD.AI、SEC EDGAR、官方政府 / EU API、RSSHub、Crawl4AI、Jina Reader；最后只能使用新闻或智库解读作为辅助解释。
+- 金融 / 资本：首选候选为 OpenBB、Open Deep Research、GPT Researcher；次选 AutoSearch、mcp-omnisearch、AgentReach；备用 SEC EDGAR、公司 investor relations、公开财报和公告、GDELT、Reuters、Bloomberg、The Information、Sifted、Dealroom；最后只能使用 TechCrunch、36氪等 watch 源作为线索，不得单独升级趋势。
+- 全球新闻 / 叙事扩散：首选候选为 MorningAI、AI Community Intelligence、agents-radar；次选 AgentReach、AutoSearch、mcp-omnisearch、open-websearch；备用 GDELT DOC / Context API、RSSHub、Firecrawl、Crawl4AI、Jina Reader；最后标注新闻轴缺失或只输出低置信观察。
 
 #### 中文 / 海外社区口径最低要求
 - 中文社区和海外社区必须分开标注来源类别和语言，但不按语言区域天然加权。
@@ -365,7 +393,7 @@
 
 ### V1 Seed Registry
 
-以下名单是 V1 初始维护名单，用于确保行业证据搜寻不会在设计阶段落空。名单不是永久全集，但设计阶段必须以此为最低覆盖基线；新增或删除需要说明理由。
+以下名单是 V1 完成态维护名单，用于确保行业证据搜寻不会在设计和落地阶段被矮化。名单不是永久全集，但 V1 必须完整 materialize 该覆盖基线；新增主体只能在完整基线之上扩展，删除或降级必须给出理由、替代来源和审批记录。
 
 #### Source Quality Gate
 - 质量优先于数量：所有来源必须先进入 `core / proven / watch / excluded` 分层，再参与趋势判断；未经分层的来源不得推动趋势升级。
@@ -375,7 +403,7 @@
 - `excluded`：低质量转载、SEO 内容、泛问答、营销号、低新鲜度媒体、无法追溯来源或高噪声平台；默认不得进入核心证据池。
 - 每条来源必须记录 `authority_tier`、`source_type`、`language`、`access_mode`、`cost_tier`、`freshness_expectation` 和 `primary_source_distance`。
 - 趋势升级只允许由 `core / proven` 来源推动；`watch` 来源可以增加观察热度，但不能把方向升级为核心行业趋势。
-- 工具优先原则：如果某一类来源已有成熟开源工具、官方 API 或稳定第三方工具，V1 应优先接入工具输出，AgentRadar 负责归一、审计和趋势判断，不重复造爬虫。
+- 工具优先原则：如果某一类来源已有成熟开源工具、官方 API 或稳定第三方工具，V1 应优先接入工具输出，AgentRadar 负责归一、审计和趋势判断；只有在没有可用替代工具、官方 API 或稳定第三方工具时，才允许自研采集链路。
 
 #### 大厂 / 产品与平台主体
 - 国际大厂与实验室：OpenAI、Anthropic、Google / Google DeepMind / Gemini、Microsoft / GitHub、Meta / FAIR、Amazon / AWS、Apple、NVIDIA、xAI、IBM、Salesforce、ServiceNow、Adobe、Databricks、Snowflake。
@@ -393,30 +421,31 @@
 - 推荐工具：OpenAlex、Semantic Scholar API、arXiv API、OpenReview API、PaperQA / PaperQA2、OpenScholar、Papers with Code、institution RSS / sitemap、AgentReach。
 
 #### 顶会 / 学术活动 / Benchmark 场域
-- AI / ML 顶会：NeurIPS、ICML、ICLR、AAAI、IJCAI、COLM。
+- AI / ML 顶会：NeurIPS、ICML、ICLR、AAAI、COLM。
 - NLP / Agent 语言系统：ACL、EMNLP、NAACL、EACL、CoNLL。
 - 数据、Web 与系统：KDD、The Web Conference、SIGIR、VLDB、SIGMOD、OSDI、SOSP、USENIX ATC。
 - 人机交互与工具使用：CHI、UIST、CSCW、IUI。
 - 多模态、视觉和具身智能：CVPR、ICCV、ECCV、RSS、CoRL、ICRA、IROS。
 - V1 必须特别跟踪这些会议中的 agent、tool use、computer use、workflow automation、coding agent、multi-agent、memory、eval、alignment、safety、governance、robotics agent、web agent、GUI agent 相关 workshop、tutorial、challenge 和 benchmark。
 - 质量规则：顶会信号优先取 accepted papers、oral / spotlight、workshop、challenge、benchmark leaderboard、official schedule、OpenReview discussion、官方 proceedings；社媒总结和媒体榜单只能作为检索线索。
-- Auto research 规则：学术与 benchmark 方向必须优先接入成熟 auto research / literature synthesis 工具，不从零写论文爬虫或摘要器。V1 推荐以 OpenAlex / Semantic Scholar / arXiv / OpenReview / Papers with Code 做检索与元数据底座，以 PaperQA / PaperQA2 或 OpenScholar 做引用可追溯的文献综合，以 GPT Researcher 或 AgentReach 作为网页补充研究，不允许让通用搜索结果直接替代学术源。
+- Auto research 规则：学术与 benchmark 方向必须优先接入成熟 auto research / literature synthesis 工具，不从零写论文爬虫或摘要器。Tool Discovery Agent 必须定期维护 auto research 工具 registry，记录候选工具、质量层级、替代关系、最近一次 Agent 审核时间和失效状态。V1 应以 OpenAlex / Semantic Scholar / arXiv / OpenReview / Papers with Code 做检索与元数据底座，以 PaperQA / PaperQA2 或 OpenScholar 做引用可追溯的文献综合，以 GPT Researcher 或 AgentReach 作为网页补充研究；不得让通用搜索结果直接替代学术源。
 
 #### 知名开发者 / 工作室 / 开源维护者
 - 个人与意见领袖种子：Simon Willison、Andrej Karpathy、Swyx、Harrison Chase、Jerry Liu、Paul Gauthier、Yohei Nakajima、Jason Liu、Addy Osmani、Thorsten Ball、Chip Huyen、Lilian Weng、Eugene Yan、Sebastian Raschka。
 - Builder / 工作室 / 开源团队种子：LangChain、LlamaIndex、Aider、OpenHands、Browser Use、CrewAI、Mem0、Composio、Continue、Pydantic AI、Mastra、DSPy、Langfuse、Ragas、Model Context Protocol 社区、Hugging Face Agents / Smolagents 社区。
 - 维护规则：个人名单必须允许按 `core / proven / watch / ordinary` 分层维护，且不得因为单次爆红自动进入高权威层级。
 - 质量规则：开发者信号必须来自明确身份主体的 GitHub、个人博客、X / Twitter、Substack、conference talk、podcast transcript、官方 repo discussion 或 release；搬运号、二创剪辑和无来源摘要默认排除。
-- 推荐工具：GitHub API、RSSHub、AgentReach、X / Twitter connector、Crawl4AI / Firecrawl、Jina Reader。
+- 推荐工具：由 Tool Discovery Agent 维护 developer intelligence 工具 registry，优先评估现成开源工具、官方 API 和稳定 connector；基础链路包括 GitHub API、RSSHub、AgentReach、X / Twitter connector、Crawl4AI / Firecrawl、Jina Reader。
 
 #### 中文社区 / 海外社区
 - 社区质量规则：V1 不追求社区数量完整，而追求高质量、前沿性和可追溯性；低质量转载站、SEO 内容站、营销号聚合、泛问答平台和低新鲜度科技媒体不得进入核心证据池。
 - 海外核心社区种子：Hacker News、Reddit 中的高质量 AI / ML / Local LLM / programming 子社区、X / Twitter 高权威开发者与研究者网络、GitHub Discussions、Hugging Face community、Papers with Code、Lobsters、LessWrong / Alignment Forum、AI Engineer community、Latent Space community、OpenReview discussion、LangChain / LlamaIndex / MCP / Hugging Face / EleutherAI / LAION 等公开 Discord 或论坛。
 - 海外内容型观察源：高质量 Substack / 技术博客、YouTube 技术频道、podcast / transcript 可作为观察证据，但必须绑定明确作者、机构或社区来源；不得仅按播放量或订阅数提升权重。
-- 中文核心社区种子：GitHub 中文开发者讨论、Hugging Face / ModelScope / OpenXLab / OpenMMLab 等模型与开源生态社区、V2EX 中高质量 AI / 编程讨论、少量可验证作者的个人技术博客或公众号。
-- 中文观察源：腾讯研究院 AI 速递、InfoQ 中文、AI 科技评论、机器之心、量子位、智东西等只能作为新闻/宣传、机构观察或二级观察源，不得作为核心社区讨论证据；其中腾讯研究院 AI 速递因具备机构研究属性，可作为产业 / 政策 / 大厂动态的辅助证据，若包含可追溯原始来源、官方链接或一手发布信息，可升级为 `proven` 证据。
+- 中文核心社区种子：GitHub 中文开发者讨论、Hugging Face / ModelScope / OpenXLab / OpenMMLab 等模型与开源生态社区、V2EX 中高质量 AI / 编程讨论、少量可验证作者的个人技术博客或公众号；必须绑定明确作者、机构或一手来源，不得把泛公众号合集当作核心社区。
+- 中文高质量机构观察源：腾讯研究院 AI 速递作为高质量机构观察源单独维护，不与普通中文公众号同层；若包含可追溯原始来源、官方链接、一手发布信息或稳定高质量研究整理，可升级为 `proven` 辅助证据。
+- 中文观察源：InfoQ 中文、AI 科技评论、机器之心、量子位、智东西等只能作为新闻/宣传、机构观察或二级观察源，不得作为核心社区讨论证据；
 - 中文排除或低权重源：知乎、掘金、CSDN、小红书、泛 Bilibili 技术内容、泛微信公众号精选源默认不进入 V1 核心证据池；如需使用，只能作为弱背景噪声、低优先级 Agent 反向检索线索或争议项排查入口，不能参与趋势升级。
-- 语言规则：中文与海外来源必须标注语言和来源类别，但权重只由主体权威程度、证据质量、独立性和持续性决定；中文来源不会因为覆盖稀缺而被补偿性加权，海外来源也不会因为语言区域天然更高权重。
+- 语言规则：中文与海外来源必须标注语言和来源类别，但权重只由主体权威、一手程度、独立性、新鲜度、持续性、Agent 相关性和证据质量决定；中文来源不会因为覆盖稀缺而被补偿性加权，海外来源也不会因为语言区域天然更高权重。
 - 推荐工具：AgentReach、RSSHub、Hacker News Algolia API、Reddit API、GitHub Discussions API、Hugging Face Hub API、Crawl4AI / Firecrawl、Jina Reader。
 
 #### 政策监管机构 / 政策研究 / 智库
@@ -432,11 +461,10 @@
 - 融资与并购 watch 源：TechCrunch、VentureBeat、Forbes、CNBC、36氪、钛媒体、晚点 LatePost 等只能作为观察源或线索源；只有包含一手公告、投资方确认、公司官方声明或监管披露时，才能升级为辅助证据。
 - 产业研究与市场报告源：Gartner、Forrester、IDC、McKinsey、BCG、Bain、a16z、Sequoia、Lightspeed、Index Ventures、ARK Invest、ARK Big Ideas、Stanford AI Index。
 - 质量规则：金融 / 资本信号必须优先依赖公开披露、公司公告、监管文件、可信金融媒体或专业数据库；普通科技媒体融资报道不得单独推动趋势升级。
-- 成本规则：Crunchbase、PitchBook、CB Insights、Bloomberg、Gartner、Forrester 等高成本或授权受限来源可以作为 Agent 异步补证、可选付费工具或人工例外项，不应成为 V1 自动化链路的硬依赖。
+- 成本规则：Crunchbase、PitchBook、CB Insights、Bloomberg、Gartner、Forrester 等高成本或授权受限来源可以作为 Agent 异步补证、可选付费工具或 `human_exception_required` 授权例外状态，不应成为 V1 自动化链路的硬依赖。
 - 推荐工具：OpenBB、SEC EDGAR API、FRED API、company investor relations RSS / pages、GDELT、RSSHub、Crawl4AI / Firecrawl、AgentReach。
 
 ### 隐含假设
-- 用户接受“行业趋势”比“项目热度”更慢、更复杂，也会出现证据不足的结论。
 - 用户愿意阅读趋势证据矩阵，而不只看简短项目榜单。
 - 系统未来可以维护核心实体名单和来源目录。
 - 外部信息搜寻 Agent 能产出足够结构化、可追溯的结果。
@@ -447,7 +475,7 @@
 
 1. V1 的行业证据轴是否全部上线，还是先冻结最小集合？
    - 冻结：需求中提到的行业证据轴必须全部上线，包括项目/开源、研究/论文、顶会/学术活动、大厂/产品发布、知名开发者/工作室、技术社区/极客讨论、资本/金融、政策/监管、政策研究/智库与媒体宣传信号。
-   - 原因：如果只冻结最小集合，设计和实现阶段容易继续偷懒，weekly 仍会退回少量项目和少数通用方向。
+   - 原因：如果只冻结最小集合，设计和实现阶段容易继续收缩范围，weekly 仍会退回少量项目和少数通用方向。
 
 2. V1 是否需要区分中文社区和海外社区？
    - 冻结：需要区分中文社区和海外社区，但先以来源类别和语言标注表达，不引入复杂语言区域权重。
@@ -455,7 +483,7 @@
 
 3. 资本流向是否只看公开融资新闻，还是也看财报、SEC 披露、基金报告和并购？
    - 冻结：融资新闻、财报、SEC 披露、基金报告、并购、上市公司公告等都应纳入资本金融证据范围。
-   - 成本口径：应尽量借助现成第三方工具、开放 API 或已有数据服务获取；获取成本高、授权复杂或维护成本过高的来源可以不接入 V1 自动化链路，但必须标注为未覆盖、Agent 异步补证、可选付费工具或人工例外范围。
+   - 成本口径：应尽量借助现成第三方工具、开放 API 或已有数据服务获取；获取成本高、授权复杂或维护成本过高的来源可以不接入 V1 自动化链路，但必须标注为未覆盖、Agent 异步补证、可选付费工具或 `human_exception_required` 授权例外状态。
 
 4. 政策倾斜如何避免过度解读？
    - 冻结：只表达为政策/监管信号，不直接写成确定支持或确定审批，除非来源本身明确。
@@ -475,9 +503,11 @@
      - 政策监管 Agent：跟踪政策文件、监管公告、审批、政府项目、公共采购和官方机构动态。
      - 政策研究与智库 Agent：跟踪 OECD.AI、CSET、Stanford AI Index、行业研究机构、咨询机构和高水平政策研究者。
      - 新闻与宣传信号 Agent：跟踪全球新闻、官方媒体、行业媒体、宣传倾斜和叙事扩散。
+     - Tool Discovery Agent：负责维护 auto research、developer intelligence、finance / policy data、crawler / reader、community connector 等工具 registry，定期评估工具质量、授权状态、成本、替代关系和失效备用链路。
      - 证据归一 Agent：负责实体对齐、去重、来源类别标注、语言标注和证据轴归档。
      - 反证审计 Agent：负责发现单源泡沫、反向证据、证据缺口、来源偏置和过度解读风险。
-     - 趋势综合 Agent：负责把各专责 Agent 的证据汇总为核心行业趋势、观察趋势、项目热度簇和证据不足方向。
+     - 趋势综合 Agent：负责把各专责 Agent 的证据汇总为核心行业趋势、观察趋势、风向探针、项目热度簇和证据不足方向。
+   - 消息协议：完整形态必须冻结统一的 Agent message envelope、artifact manifest、payload schema、handoff 状态和交互 DAG；不得只列 Agent 名称而让各实现者自定义输入输出。
 
 6. 行业趋势与项目趋势是否需要两个分开的 weekly 区域？
    - 冻结：需要分开表达。行业趋势是 weekly 主叙事，项目趋势作为证据和落地样本承载。
@@ -498,5 +528,5 @@
 可直接进入下一阶段设计：
 - 设计行业级证据对象和趋势证据矩阵。
 - 设计外部信息搜寻 Agent 的标准化输入契约。
-- 设计 weekly 中行业趋势、项目热度簇、观察趋势和证据不足方向的输出结构。
+- 设计 weekly 中核心行业趋势、观察趋势、风向探针、项目热度簇和证据不足方向的输出结构。
 - 设计多 Agent 分工、证据审计和降级语义。

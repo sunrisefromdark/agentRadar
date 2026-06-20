@@ -106,6 +106,390 @@ If these escape hatches exist and materially affect outcome:
 
 ---
 
+## Lessons From Industry-Agent Design Hardening（行业级 Agent 设计沉淀）
+
+The following review requirements come from hardening the Industry Agent Trend design.  
+以下要求来自“行业级 Agent 趋势判断”设计文档逐步补强过程，是以后审核同类复杂设计时必须主动检查的经验项。
+
+### 1. V1 must not be quietly reframed as MVP
+
+If the requirement intends V1 to be the complete target shape, the design must not describe it as:
+
+- initial baseline
+- minimum viable version
+- pilot set
+- can be expanded later
+- first subset
+
+Reviewer must check whether phrases like `initial`, `minimal`, `baseline`, `seed`, `optional`, `phase later`, or `can be tuned later` are being used to soften a frozen requirement.
+
+If V1 is meant to be complete, the design must say:
+
+- V1 is the completion baseline
+- implementation must not sample, shrink, or defer the frozen set
+- new additions may extend the baseline but not replace it
+- missing frozen coverage is a failure, not a future enhancement
+
+Weakening V1 completion semantics → `HIGH` or `BLOCKING`.
+
+### 2. Shared scoring formulas are suspicious in heterogeneous evidence systems
+
+When a design scores heterogeneous objects or evidence axes, reviewer must ask:
+
+- Are materially different things being scored by the same formula?
+- Does one threshold mean the same thing across all categories?
+- Are policy, capital, research, community, product, and open-source signals being treated as interchangeable?
+- Does a single weight table create false precision?
+
+If evidence types differ, the design should usually define:
+
+- per-axis scoring profiles
+- per-axis status thresholds
+- per-category relevance thresholds
+- per-conflict severity profiles
+- role semantics such as `technical_support`, `landing_support`, `attention_signal`, `narrative_signal`
+
+Using one global score / threshold where different evidence shapes require different rules → `HIGH`.
+
+### 3. Tables are not enough; every new field needs semantics
+
+A design is not ready for ExecPlan merely because it shows interfaces or JSON examples.
+
+For each important field, reviewer must check:
+
+- type / allowed values
+- meaning
+- producer
+- consumer
+- whether it is user-visible
+- whether it affects ranking, scoring, routing, or downgrade
+- what happens when it is missing
+- whether it is canonical data or explanatory text
+
+Fields such as `status`, `reason_code`, `confidence`, `source_ref`, `score_formula_version`, `scoring_profile_id`, `active_route_level`, `public_safe`, `summary_cn`, and `*_artifact_refs` must not be left to implementer interpretation.
+
+If another AI or engineer could plausibly assign a different meaning and still claim compliance, the design is ambiguous → `HIGH`.
+
+### 4. Multi-agent designs require an information protocol, not just role names
+
+Listing agents is not a multi-agent design.
+
+Reviewer must check whether the document defines:
+
+- agent IDs and responsibilities
+- input artifact format
+- output artifact format
+- message envelope
+- artifact manifest
+- payload schema
+- handoff state
+- dependency graph / DAG
+- idempotency / retry behavior
+- failure notice format
+- which agent may or may not call tools directly
+- which agent is allowed to synthesize final decisions
+
+The design must prevent each agent team from inventing its own JSON shape.
+
+If a multi-agent design only lists agents and responsibilities but does not define message passing, artifact handoff, and consumption rules → `BLOCKING` for complex workflows.
+
+### 5. Middleware should be adopted as an execution layer, not a semantic layer
+
+Reviewer must distinguish between:
+
+- product / evidence / decision contracts
+- middleware used to execute or observe those contracts
+
+Good designs may reuse:
+
+- JSON Schema / Zod / TypeBox for validation
+- MCP / connectors / official SDKs for tool access
+- OpenTelemetry / Langfuse for tracing
+- LangGraph for DAG execution
+- Temporal / Prefect / Dagster for workflow orchestration
+- n8n / Activepieces for peripheral connectors
+
+But middleware must not become the source of truth.
+
+Reviewer must require:
+
+- canonical artifacts remain canonical
+- framework internal state is not the evidence ledger
+- traces do not replace audit records
+- DAG state does not replace message envelopes
+- connector output does not bypass normalization
+- changing middleware does not change public schemas
+
+If the design says “use framework X” without mapping it back to canonical artifacts and failure semantics → `HIGH`.
+
+### 6. Source authority is contextual
+
+Reviewer must reject designs where authority is treated as a global badge.
+
+Examples:
+
+- a prestigious media source may be strong for narrative but cannot replace a regulatory filing
+- a famous developer may be strong for builder signal but cannot replace a benchmark result
+- a top conference source may be strong for research but cannot prove product adoption
+
+Good designs define authority in context:
+
+- axis + source_type + primary_source_distance
+- what counts as `core / proven / watch / excluded` per axis
+- what cannot substitute for a primary source
+
+Global authority tiers without context in multi-source systems → `HIGH`.
+
+### 7. Negative evidence needs typed severity, not vague caution
+
+For systems that make claims, reviewer must check whether negative evidence is first-class.
+
+A strong design defines:
+
+- counter evidence schema
+- conflict types
+- severity levels
+- downgrade rules
+- blocking conditions
+- unresolved questions
+- who audits counter evidence
+- how counter evidence changes confidence or tier
+
+Vague “consider risks” or “show caveats” is not enough.
+
+If positive evidence is structured but negative evidence is prose-only → `HIGH`.
+
+### 8. User-facing semantics must be protected from internal shortcuts
+
+If a user sees categories such as:
+
+- core trend
+- observing trend
+- wind probe
+- project heat
+- insufficient evidence
+
+then the design must define:
+
+- what each category means
+- what it cannot mean
+- what evidence moves an item into or out of it
+- what tone is allowed
+- what failure or missing evidence looks like
+
+Otherwise implementation can collapse categories into a ranked list with labels.
+
+Label-only product semantics → `HIGH`.
+
+### 9. Artifact-first systems need explicit canonicality
+
+If the product depends on auditability, reviewer must check:
+
+- what artifacts are canonical
+- what is local-only raw input
+- what is public-safe
+- what downstream surfaces are allowed to read
+- whether frontend / visual surfaces may recompute decisions
+- whether artifact refs are resolvable
+- whether schema versions are frozen
+
+If a design uses traces, runtime memory, UI state, or framework state as the only record of decisions → `BLOCKING` for audit-heavy systems.
+
+### 10. Production-grade design must include product, ops, eval, and governance
+
+A design that is technically elegant may still be below production bar.
+
+For big-company-grade design, reviewer must look for:
+
+- user workflow and decision scenario
+- user-visible information architecture
+- SLO / SLA / latency expectations
+- cost budget and escalation policy
+- failure budget and alerting
+- replay / backfill behavior
+- eval harness and gold sets
+- false positive / false negative metrics
+- source citation accuracy metrics
+- human review / approval queue
+- override policy with audit trail
+- access control and public-safe boundary
+- admin / control plane for registry, tools, agents, and runs
+
+If these are absent in a design that clearly needs production operations or high-stakes trust, mark the gap `MEDIUM` to `HIGH` depending on product stage.
+
+---
+
+## Hardened Review Annotations（硬化后的审核标注）
+
+When applying the lessons above, reviewer should not write vague comments such as “consider making this clearer”.
+
+评审者必须把问题标成可执行的设计缺口，而不是泛泛建议。
+
+Use this annotation shape:
+
+```text
+[Severity] Finding title
+Problem:
+Why it matters:
+Required design change:
+Acceptance check:
+```
+
+Where:
+
+- `Problem` names the exact ambiguity, weakening, missing contract, or product gap.
+- `Why it matters` explains what weaker implementation would become possible.
+- `Required design change` states what section, schema, threshold, workflow, or artifact must be added or frozen.
+- `Acceptance check` states how the reviewer or ExecPlan author can verify the gap is closed.
+
+For the Industry-Agent class of designs, common hardened annotations include:
+
+| Pitfall observed | Review annotation should require | Default severity |
+| --- | --- | --- |
+| V1 被写成 initial / baseline / seed，从完成目标滑成 MVP | Freeze V1 as completion baseline; missing frozen coverage is failure, not later extension | `HIGH` / `BLOCKING` |
+| 异构证据轴使用同一套评分公式 | Define differentiated scoring/status/relevance/counter-evidence profiles by axis or evidence family | `HIGH` |
+| 表格有字段名但没有字段语义 | Add field definitions with type, meaning, producer, consumer, missing behavior, and whether it affects decisions | `HIGH` |
+| 只列 Agent 名称，没有信息流 | Define message envelope, artifact manifest, payload schema, DAG, retry/idempotency, and allowed tool-calling boundaries | `BLOCKING` |
+| “使用某框架”替代产品契约 | Map middleware to canonical schemas, artifacts, audit logs, failure states, and replay behavior | `HIGH` |
+| 权威来源被全局化 | Define source authority by axis, source type, primary-source distance, and allowed substitution rules | `HIGH` |
+| 反证只是文案提醒 | Make counter-evidence typed, scored, auditable, and connected to downgrade/blocking rules | `HIGH` |
+| 用户可见等级只有 label | Freeze category meaning, entry/exit rules, tone constraints, and forbidden interpretations | `HIGH` |
+| 可审计系统没有 canonical artifact | Define canonical artifacts, raw/local-only boundary, public-safe artifacts, schema versions, and allowed readers | `BLOCKING` |
+| 生产设计只覆盖 Agent 流程 | Add product workflow, SLO/cost, eval/replay, human review, governance/control plane | `MEDIUM` / `HIGH` |
+
+If a design has multiple related pitfalls, reviewer should group them under one mechanism-level finding rather than scatter many small comments. For example, “multi-agent handoff contract missing” is stronger than five separate comments about missing input, output, schema, retry, and DAG.
+
+---
+
+## Big-Company Production Design Bar（大厂级生产设计水位）
+
+When reviewing strategic, multi-agent, evidence-heavy, or decision-support systems, apply this higher bar.
+
+成熟团队通常不会只审核“能不能实现”，还会审核：
+
+### Product Layer
+
+- Who uses this?
+- How often?
+- What decision do they make from it?
+- What do they do after seeing the output?
+- What is the one-sentence mental model?
+- What is the primary surface and what is drilldown?
+
+Required design evidence:
+
+- named primary user roles or operating personas
+- main workflow from entry, interpretation, drilldown, action, to return visit
+- user-visible information architecture and empty / partial / stale states
+- decision scenarios that distinguish “read-only insight” from “actionable judgment”
+- wording constraints for user-facing categories and confidence language
+
+Missing user workflow in a decision-support product → usually `HIGH`.
+
+### Data / Evidence Layer
+
+- What is canonical evidence?
+- What is raw and local-only?
+- What is public-safe?
+- How are sources tiered?
+- How is provenance preserved?
+- How are conflicts and missing evidence represented?
+
+Required design evidence:
+
+- canonical schemas and artifact names
+- raw input boundary and retention/publication policy
+- source authority model and primary-source-distance semantics
+- provenance references that survive summarization, scoring, and UI rendering
+- conflict, missing, stale, duplicate, and rejected evidence states
+- replay/backfill behavior when evidence changes
+
+Evidence-heavy product without provenance and replay semantics → `HIGH` / `BLOCKING`.
+
+### Agent / Workflow Layer
+
+- What are the agents?
+- What messages do they exchange?
+- What artifacts do they produce?
+- What is the DAG?
+- Who can call tools?
+- Who can synthesize?
+- Who can audit?
+- What happens on retry, timeout, partial failure, or stale snapshot?
+
+Required design evidence:
+
+- agent responsibility matrix
+- message envelope and artifact manifest
+- payload schemas for each handoff
+- DAG / dependency graph
+- idempotency key, retry, timeout, and stale-input rules
+- tool-calling permissions by agent
+- explicit rule that synthesis agents cannot bypass normalization/audit contracts unless the design says so
+
+Multi-agent design without message and artifact contracts → `BLOCKING`.
+
+### Decision / Evaluation Layer
+
+- What rules produce decisions?
+- Which thresholds are global and which are differentiated?
+- What negative cases prevent upgrade?
+- How is historical replay performed?
+- What is the gold set?
+- What metrics indicate quality?
+- What tests prevent regression or underbuilding?
+
+Required design evidence:
+
+- decision formulas or rule profiles with version IDs
+- differentiated thresholds where object families differ
+- negative-case and downgrade rules
+- gold-set definition and minimum evaluation slices
+- false-positive / false-negative / citation-accuracy metrics
+- replay suite over historical inputs
+- regression tests that fail when implementation collapses required distinctions
+
+Decision system without eval/replay/gold-set plan → `HIGH`.
+
+### Ops / Governance Layer
+
+- What is the SLO?
+- What is the cost budget?
+- What is the human review path?
+- What requires approval?
+- How are registry/tool changes governed?
+- What is logged, traced, and audited?
+- What can be overridden, by whom, and with what record?
+
+Required design evidence:
+
+- SLO/SLA or freshness/latency expectations
+- cost budget and escalation/degradation policy
+- failure budget, alerting, and owner path
+- human review queue and approval conditions
+- override policy with actor, reason, before/after value, expiry, and audit log
+- control plane for registry, tools, agents, runs, schemas, and feature flags
+- access control and public-safe boundary
+
+Production claim without governance and operating controls → `MEDIUM` / `HIGH`; for high-trust or externally visible systems, usually `HIGH`.
+
+If a design claims production readiness but only covers the middle Agent/workflow layer, it is incomplete.
+
+### Big-Company Design Review Must Produce
+
+For high-complexity systems, reviewer should end the review with:
+
+- top risks ordered by severity
+- explicit approval state: `APPROVE`, `REQUEST_CHANGES`, or `BLOCK`
+- required design changes, not implementation tasks
+- unresolved questions that must be answered before ExecPlan
+- tests/evals that must exist before completion can be claimed
+- sections that must be added or rewritten
+
+Do not accept “ExecPlan will decide” for product semantics, canonical schemas, scoring meaning, governance, or user-visible decision categories.
+
+---
+
 ## Designer-Grade Thinking Mandate（设计师级思考强制要求）
 
 Before judging the design, the reviewer MUST first do an internal design expansion pass.
@@ -521,6 +905,20 @@ Check whether the design clearly defines:
 
 Ambiguous contracts → `HIGH`
 
+For multi-agent / evidence / scoring systems, also check:
+
+- Are message envelopes defined?
+- Are artifact manifests defined?
+- Are field semantics defined, not just field names?
+- Are all important states and reason codes frozen?
+- Are scoring and thresholds differentiated where evidence types differ?
+- Are middleware responsibilities separated from product semantics?
+- Can another AI generate an ExecPlan without inventing schema or handoff behavior?
+
+If not:
+
+→ `HIGH` or `BLOCKING`
+
 ---
 
 ### 8. Architecture Consistency（架构一致性）
@@ -537,6 +935,8 @@ Check compatibility with:
 - compatibility with current readers / downstream consumers
 
 Architecture mismatch → `HIGH` / `BLOCKING`
+
+Also check whether any proposed framework, library, middleware, or orchestration layer is only an execution aid. It must not become the canonical source of product truth unless the design explicitly maps it to stable artifacts, schemas, and audit records.
 
 ---
 

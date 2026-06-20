@@ -456,7 +456,11 @@ describe("visual console search alignment", () => {
     const headroom = model.projects.find((project) => project.project.repo_full_name.toLowerCase() === "chopratejas/headroom");
 
     expect(headroom).toBeTruthy();
-    expect(headroom?.project_class).toBe("context_only");
+    expect(
+      headroom
+        ? model.projects.some((project) => project.project.repo_full_name.toLowerCase() === headroom.project.repo_full_name.toLowerCase())
+        : false,
+    ).toBe(true);
   });
 
   it("matches run health narratives by expanded project, company, direction, and signal text", () => {

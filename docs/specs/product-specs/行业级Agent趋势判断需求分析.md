@@ -146,7 +146,7 @@
 - Expected outcome：新增来源不需要重写整个 weekly 判断链路，系统能消费外部 Agent 产出的标准化证据。
 
 ### 需求 8：系统必须支持多 Agent 分工完成行业趋势判断
-- What：系统必须允许多个专责 Agent 分别负责行业证据搜寻、工具发现、证据标准化、趋势聚类、证据审计和综合判断；完整分工应覆盖研究前沿、顶会/学术活动、大厂/产品发布、知名开发者/工作室、中文社区、海外社区、项目/开源生态、资本金融、政策监管、政策研究/智库、新闻/宣传信号、工具 registry 维护、证据去重归一、反证审计和 weekly 趋势综合。各 Agent 之间必须使用统一消息 envelope、artifact manifest、payload schema 和可审计 handoff，不得各自定义输入输出格式。
+- What：系统必须允许多个专责 Agent 分别负责行业证据搜寻、工具发现、证据标准化、趋势聚类、证据审计和综合判断；完整分工应覆盖研究前沿、顶会/学术活动、大厂/产品发布、知名开发者/工作室、中文社区、海外社区、项目/开源生态、资本金融、政策监管、政策研究/智库、新闻/宣传信号、工具 registry 维护、证据去重归一、反证审计和 weekly 趋势综合。各 Agent 之间必须使用统一消息 envelope、artifact manifest（即每个中间产物的登记清单）、payload schema 和可审计 handoff，不得各自定义输入输出格式。
 - Why：行业趋势判断跨度大，单一 Agent 难以稳定覆盖全部渠道和判断维度。
 - Who：AgentRadar 维护者、weekly 用户。
 - When：weekly 趋势判断需要整合多个领域证据时。
@@ -507,7 +507,7 @@
      - 证据归一 Agent：负责实体对齐、去重、来源类别标注、语言标注和证据轴归档。
      - 反证审计 Agent：负责发现单源泡沫、反向证据、证据缺口、来源偏置和过度解读风险。
      - 趋势综合 Agent：负责把各专责 Agent 的证据汇总为核心行业趋势、观察趋势、风向探针、项目热度簇和证据不足方向。
-   - 消息协议：完整形态必须冻结统一的 Agent message envelope、artifact manifest、payload schema、handoff 状态和交互 DAG；不得只列 Agent 名称而让各实现者自定义输入输出。
+   - 消息协议：完整形态必须冻结统一的 Agent message envelope、artifact manifest（产物登记清单）、payload schema、handoff 状态和交互 DAG；不得只列 Agent 名称而让各实现者自定义输入输出。
 
 6. 行业趋势与项目趋势是否需要两个分开的 weekly 区域？
    - 冻结：需要分开表达。行业趋势是 weekly 主叙事，项目趋势作为证据和落地样本承载。

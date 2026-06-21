@@ -187,6 +187,21 @@ interface IndustryAgentArtifactManifest {
 | `content_hash` | string | artifact 内容 hash。 | 用于防止同 ref 内容漂移；内容变化必须新 hash。 |
 | `storage_path` | string | 本地或公开产物路径。 | raw local-only artifact 不得出现在 public manifest 中。 |
 
+### Lineage 与 Manifest 语义
+
+其余协作术语统一以 [术语与审计词汇表](09-术语与审计词汇表.md) 为准；这里仅补充本章最关键的两个审计对象。
+
+
+为避免实现阶段把消息系统退化成“发几份 JSON 就算交接完成”，这里额外冻结两个专用名词：
+
+- `message lineage`：指同一 `run_id`、`thread_id`、`correlation_id` 下，消息从 request 到 result、从 claim-builder pass 到 audit pass、再到 tier-decider pass 的依赖链。它不是日志时间线，而是可被 `depends_on_message_ids`、`source_message_id`、`input_artifact_refs` 和 `output_artifact_refs` 验证的结构化交接链。
+- `artifact manifest`：指对每个 canonical artifact 的登记条目，即 `IndustryAgentArtifactManifest`。它不是文件列表，而是 artifact 的 canonical inventory，负责说明这个 artifact 是谁在什么 schema version 下、基于哪些输入产出的，以及下游应该如何解析它。
+
+执行约束：
+
+- 没有 `message lineage` 的消息，只能视为未完成 handoff，不能证明某个 claim 真正经过了审计和裁决。
+- 没有 `artifact manifest` 的 artifact，只能视为未登记中间产物，下游不得把它当作 canonical 输入消费。
+
 ### Payload Schema Registry
 
 `payload_schema` 不能只是 envelope 上的字符串。V1 冻结以下 payload schema registry；ExecPlan 可以把字段落成 JSON Schema / Zod / TypeBox，但不得删减 producer、consumer、required refs、missing behavior 或失败语义。

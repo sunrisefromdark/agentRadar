@@ -61,6 +61,13 @@ Policy Agent 的复杂度要求：
 3. 有单独的 `status`、`status_reason` 和失败/跳过语义。
 4. 可在测试中证明 Trend Agent 只消费上游 Agent 的输出，不直接补采原始来源。
 
+V1 对“独立”的现实约束：
+
+- 本章默认的“独立 Agent”首先指职责边界、输入输出 artifact、状态语义、失败语义和工具调用边界独立，不默认要求独立进程、独立队列、独立部署单元或独立服务账号。
+- V1 允许多个实际 Agent 运行在同一 CLI pipeline、同一 DAG runner 或同一进程内，只要 artifact、message lineage、tool permission 和 decision boundary 仍可审计区分。
+- `finance-agent`、`policy-agent`、`audit-agent` 和 `trend-agent` 的“独立”是高优先级语义约束：即使复用同一运行时，也不得合并为同一不可区分输出。
+- 若 ExecPlan 选择把多个 Agent 映射到同一运行单元，必须说明共享了什么、仍独立保留了什么，以及如何测试“没有被静默合并”。
+
 ### 多 Agent 消息与交互协议
 
 V1 不允许各 Agent 自行定义输入输出 JSON。所有 Agent 间通信必须通过统一的 `IndustryAgentMessageEnvelope` 和可引用 artifact 完成；自由文本只能作为 `summary_cn` 或 notes，不能作为下游可执行事实。
@@ -82,6 +89,7 @@ type IndustryAgentMessageKind =
   | "failure_notice";
 
 type IndustryArtifactKind =
+  | "agent_message_payload"
   | "raw_tool_output_ref"
   | "industry_signal_event_batch"
   | "normalized_event_batch"
@@ -129,9 +137,13 @@ interface IndustryAgentMessageEnvelope {
   depends_on_message_ids: string[];
   correlation_id?: string;
   idempotency_key: string;
-  status: "created" | "sent" | "consumed" | "superseded" | "failed";
+  status: "created" | "sent" | "consumed" | "superseded" | "failed" | "rejected";
   reason_code?: string;
-  public_safe: boolean;
+  visibility_tier: "internal_only" | "redacted_public" | "public";
+  redaction_policy_version?: string;
+  contains_raw_text: boolean;
+  contains_profile_urls: boolean;
+  public_projection_artifact_ref?: string;
 }
 
 interface IndustryAgentArtifactManifest {
@@ -146,7 +158,11 @@ interface IndustryAgentArtifactManifest {
   event_ids: string[];
   claim_ids: string[];
   axis_keys: IndustryEvidenceAxisKey[];
-  public_safe: boolean;
+  visibility_tier: "internal_only" | "redacted_public" | "public";
+  redaction_policy_version?: string;
+  contains_raw_text: boolean;
+  contains_profile_urls: boolean;
+  public_projection_artifact_ref?: string;
   content_hash: string;
   storage_path: string;
   summary_cn: string;
@@ -170,9 +186,12 @@ interface IndustryAgentArtifactManifest {
 | `depends_on_message_ids` | string[] | 前置消息依赖。 | 依赖未 consumed 时不得消费当前消息。 |
 | `correlation_id` | string optional | 同一任务、重试或请求-响应链路 ID。 | request/result、retry/supersede 必须共享 correlation。 |
 | `idempotency_key` | string | 幂等键。 | 相同 key 的重复消息不得重复写入 evidence event。 |
-| `status` | enum | 消息生命周期状态。 | 只有 `sent` 可被消费；消费成功改为 `consumed`；被替代改为 `superseded`。 |
-| `reason_code` | string optional | 失败、替代或拒绝原因。 | `failed/superseded` 必填。 |
-| `public_safe` | boolean | 消息及 payload 是否可公开消费。 | false 时 payload 不得进入公开 weekly。 |
+| `status` | enum | 消息生命周期状态。 | 只有 `sent` 可被消费；消费成功改为 `consumed`；被替代改为 `superseded`；schema 不匹配、payload 非法或关键 ref 无法解析时必须为 `rejected`。 |
+| `reason_code` | string optional | 失败、替代或拒绝原因。 | `failed/superseded/rejected` 必填。 |
+| `visibility_tier` | `internal_only` / `redacted_public` / `public` | 消息及 payload 的可见层级。 | `internal_only` 不得被公开 weekly 或 Web surface 直接消费；公开展示必须走显式 projection。 |
+| `redaction_policy_version` | string optional | redaction 策略版本。 | `redacted_public` 时必填；`public` 若无需脱敏可为空。 |
+| `contains_raw_text` / `contains_profile_urls` | boolean | 是否仍包含 raw text / profile URL。 | 公开 projection 必须为 `false`；否则只能保留 internal。 |
+| `public_projection_artifact_ref` | string optional | 对应公开投影 artifact ref。 | `visibility_tier="redacted_public"` 或 `"public"` 时应可解析；不得与 internal storage path 复用同一文件。 |
 
 `IndustryAgentArtifactManifest` 字段定义冻结如下：
 
@@ -184,8 +203,61 @@ interface IndustryAgentArtifactManifest {
 | `source_message_id` | string optional | 触发该 artifact 的消息。 | 由消息驱动产物必须填写。 |
 | `input_artifact_refs` | string[] | 产物依赖的上游 artifact。 | 用于审计信息流，不能省略。 |
 | `event_ids` / `claim_ids` / `axis_keys` | arrays | 产物覆盖对象。 | 不适用时为空数组；不得省略字段。 |
+| `visibility_tier` | `internal_only` / `redacted_public` / `public` | artifact 的可见层级。 | internal artifact 可服务 weekly/audit，但不得被公开 surface 直接读取。 |
+| `redaction_policy_version` | string optional | artifact 的 redaction 策略版本。 | `redacted_public` 时必填。 |
+| `contains_raw_text` / `contains_profile_urls` | boolean | artifact 是否仍含 raw social text / profile URL。 | 公开 projection 必须为 `false`。 |
+| `public_projection_artifact_ref` | string optional | 对应公开投影 artifact。 | 存在公开版本时必须登记；不得与 internal artifact 共用 `artifact_ref`。 |
 | `content_hash` | string | artifact 内容 hash。 | 用于防止同 ref 内容漂移；内容变化必须新 hash。 |
 | `storage_path` | string | 本地或公开产物路径。 | raw local-only artifact 不得出现在 public manifest 中。 |
+
+控制类 payload 的 manifest 约束：
+
+- 所有 `payload_ref` 都必须登记为 `IndustryAgentArtifactManifest`。
+- `task_request`、`task_result`、`normalization_request`、`registry_review_request`、`registry_review_result`、`audit_request`、`audit_result`、`trend_decision_input`、`tool_status_report` 和 `failure_notice` 这类控制或交接 payload，如不属于 event/ledger/audit/coverage canonical artifact，必须使用 `artifact_kind="agent_message_payload"` 登记。
+- 同一 `payload_ref` 不得被多个 `payload_schema` 复用；如 payload 内容变化，必须生成新 `artifact_ref` 与新 `content_hash`。
+- payload 与 manifest 的 `visibility_tier`、raw-text/profile-url 标记必须一致；若某 payload 需要公开消费，必须额外登记独立的 public projection artifact，而不是复用 internal payload path。
+
+V1 的消息与 artifact 粒度约束：
+
+- V1 默认以 `responsibility_id + run_id`、`claim_candidate_group + run_id` 或 `stage + run_id` 为消息 / payload 的主要粒度，不按单个 event 生成独立 envelope，除非该 event 自身需要被单独审计。
+- `evidence_batch`、`tool_status_report`、`failure_notice`、`registry_review_request` 和 `registry_review_result` 默认允许按同一 responsibility 或同一 stage 聚合；只要内部对象仍可由 `event_id`、`claim_id`、`reason_code` 或 `artifact_ref` 反查。
+- V1 文件型 canonical runtime 不要求“每个控制动作一个独立小 artifact”；只要求交接边界可审计、payload schema 匹配、内部对象可追溯。
+- ExecPlan 不得把消息粒度细化到导致本地 JSONL / manifest index 成为主要运行瓶颈；如需单 event 粒度，必须写明为什么 batch 粒度不够。
+- 消息与 manifest 允许热存压缩，但 compaction 后必须保留 `run_id`、`message_id`、`correlation_id`、`source_message_id`、`input_artifact_refs`、`output_artifact_refs`、`status` 和 visibility 元数据；不得为了省空间把 lineage 压成不可验证摘要。
+
+### Metric Profile Handoff 规则
+
+本文档不冻结 freshness、axis scoring、trend decision 或 runtime budget 的具体数值；这些数值以对应评分、运行和产品治理文档中的 profile 为准。
+
+但所有 Agent 输出必须携带下游计算这些指标所需的原始结构化字段，不能只输出已经算好的分数或自然语言判断。专责搜寻 Agent 不得自行裁决：
+
+- `axis_score`
+- `freshness_score`
+- `decision_tier`
+- `core_industry_trend`
+- `strong / medium / weak`
+
+专责搜寻 Agent 只负责输出计算 profile 所需的事实字段，例如：
+
+- `source_published_at`
+- `observed_at`
+- `source.source_type`
+- `source.primary_source_distance`
+- `axis`
+- `polarity`
+- `agent_relevance`
+- `source.authority_tier`
+- `tool_route_id`
+- `raw_ref` / `citation_ref`
+- `audit.dedupe_key`
+- `freshness_anchor_kind`；如当前来源无法判断，必须填 `unknown` 并写稳定 `reason_code`
+
+执行约束：
+
+- 专责搜寻 Agent 可以输出“建议性” notes，但不能把这些 notes 当作正式评分结论传给下游。
+- `normalization-agent` 必须补齐、降级或拒绝缺少关键 metric input 的 event；不得默认缺字段 event 为可评分 supporting evidence。
+- `trend-agent` 可以消费已归一事件、registry review、tool coverage 和 audit result，但不得把原始事件中的缺失 freshness / source / authority / relevance 字段默认为高分判断。
+- 任何需要 profile 计算却缺少关键输入字段的 event，必须在 payload、contribution 或 rejected audit 中显式可见；不得静默丢弃。
 
 ### Lineage 与 Manifest 语义
 
@@ -212,12 +284,13 @@ interface IndustryAgentArtifactManifest {
 - `source_message_id` 必须指向当前 payload 所属 envelope；request / result 链路还必须共享 `correlation_id`。
 - payload 中的 `*_artifact_ref(s)` 必须能在 `IndustryAgentArtifactManifest` 中解析；无法解析时消息进入 `failed` 或 `rejected`，不得由下游猜测。
 - `summary_cn` 只能解释结构化字段，不得新增事实；下游可执行事实只能来自 event、registry、audit、coverage 或 ledger artifact。
+- 如 payload 依赖评分、freshness、authority 或 relevance profile，则 producer 必须显式传递 profile 计算所需的原始字段缺口；不得用“已判断为 strong / fresh / core”替代输入事实。
 
 | payload_schema | allowed `kind` | producer | consumer | required fields / refs | missing / failure behavior |
 | --- | --- | --- | --- | --- | --- |
 | `task-request.v1` | `task_request` | registry-agent 或上游实际 Agent | 专责搜寻 Agent、normalization-agent、audit-agent、trend-agent | `task_id`、`responsibility_id`、`axis_keys`、`registry_snapshot_ref`、`tool_registry_snapshot_ref`、`deadline_at`、`budget_profile_id`、`input_artifact_refs` | 缺 registry/tool snapshot 时任务不得启动，必须产出 `failure_notice.v1`。 |
 | `task-result.v1` | `task_result` | 任一实际 Agent | task requester、registry-agent | `task_id`、`status`、`output_artifact_refs`、`agent_contribution_ref`、`reason_code?` | `partial/skipped/failed/unavailable` 必须有 `reason_code`；不得只返回自然语言摘要。 |
-| `event-batch.v1` | `evidence_batch` | academic/product/community/finance/policy Agent | normalization-agent | `events_ref`、`raw_tool_output_refs`、`agent_contribution_ref`、`tool_status_report_refs`、`responsibility_id` | 缺 `events_ref` 时视为无 accepted events；仍必须有 contribution 或 failure notice。 |
+| `event-batch.v1` | `evidence_batch` | academic/product/community/finance/policy Agent | normalization-agent | `events_ref`、`raw_tool_output_refs`、`agent_contribution_ref`、`tool_status_report_refs`、`responsibility_id`、`metric_input_completeness` | 缺 `events_ref` 时视为无 accepted events；仍必须有 contribution 或 failure notice。缺关键 metric input 时不得默认为 accepted supporting events，必须补齐、降级为 context、进入 rejected_event_batch 或发送 failure notice。 |
 | `normalization-request.v1` | `normalization_request` | registry-agent / trend-agent claim-builder pass | normalization-agent | `event_batch_refs`、`registry_snapshot_ref`、`dedupe_policy_version` | 缺 event batch 时不得生成空成功结果；应标 `skipped` 或 `unavailable`。 |
 | `normalization-result.v1` | `normalization_result` | normalization-agent | registry-agent、audit-agent、trend-agent claim-builder pass | `normalized_event_batch_ref`、`rejected_event_batch_ref`、`merge_audit_ref`、`used_event_batch_refs` | 未产出 `merge_audit_ref` 时下游不得消费 normalized events。 |
 | `registry-review-request.v1` | `registry_review_request` | normalization-agent、audit-agent、专责搜寻 Agent | registry-agent | `unknown_actor_refs`、`provisional_authority_refs`、`basis_event_ids`、`requested_action` | 缺 basis events 时只能生成 rejected review，不能提升 authority。 |
@@ -226,10 +299,45 @@ interface IndustryAgentArtifactManifest {
 | `audit-result.v1` | `audit_result` | audit-agent | trend-agent tier-decider pass | `counter_evidence_audit_ref`、`audited_claim_candidate_ids`、`blocking_claim_candidate_ids`、`downgrade_recommendations` | 每个进入 tier decision 的 candidate 必须有 audit result；缺失时最高 `insufficient_evidence`。 |
 | `claim-candidate-batch.v1` | `claim_candidate_batch` | trend-agent claim-builder pass | audit-agent、trend-agent tier-decider pass | `claim_candidate_batch_ref`、`claim_builder_audit_refs`、`candidate_group_ids`、`input_event_ids`、`generated_claim_ids`、`deferred_event_ids`、`rejected_event_ids` | 该 payload 不得包含最终 `decision_tier`；候选缺 audit 时不得进入最终 ledger。 |
 | `trend-decision-input.v1` | `trend_decision_input` | registry-agent / trend-agent tier-decider pass | trend-agent tier-decider pass | `claim_candidate_batch_ref`、`normalization_result_ref`、`registry_review_result_refs`、`audit_result_refs`、`tool_coverage_report_refs`、`agent_contribution_refs`、`project_weekly_artifact_refs` | 缺 `audit_result_refs`、tool coverage 或 agent contribution 时必须降级并写入 `missing_axes` / `not_complete_unless`。 |
-| `tool-status-report.v1` | `tool_status_report` | registry-agent、专责搜寻 Agent | normalization-agent、trend-agent、weekly output | `axis_tool_coverage_report_refs`、`tool_registry_snapshot_ref`、`active_route_level`、`degradation_reason_codes` | 没有每轴 coverage report 时，相关轴必须为 `unavailable`，不能默认为 covered。 |
+| `tool-status-report.v1` | `tool_status_report` | registry-agent、专责搜寻 Agent | normalization-agent、trend-agent、weekly output | `axis_tool_coverage_report_refs`、`tool_registry_snapshot_ref`、`active_route_level`、`active_source_class`、`selection_scorecard_version?`、`selection_score_total?`、`veto_reason_codes`、`degradation_reason_codes`、`budget_status_summary` | 没有每轴 coverage report 时，相关轴必须为 `unavailable`，不能默认为 covered；高权威轴若缺 `active_source_class`、scorecard 关键信息或预算摘要，不得被下游默认为 official-first 已满足。 |
 | `failure-notice.v1` | `failure_notice` | 任一实际 Agent | 下游依赖 Agent、weekly output | `failed_agent_id`、`responsibility_id?`、`failed_kind`、`reason_code`、`affected_axis_keys`、`retryable`、`fallback_action` | 下游必须把 affected axes 写入 missing/unavailable；不得静默重试后丢失失败记录。 |
 
 Payload schema 与 message kind 的匹配是结构测试项：`kind` 与 `payload_schema` 不匹配时消息必须 rejected；同一 `payload_ref` 不能被多个不兼容 schema 复用。
+
+Schema 兼容与 replay 边界冻结如下：
+
+- breaking change 必须升级 `schema_version`；不得在同一版本下改变字段语义、枚举语义或失败语义。
+- V1 consumer 至少要明确两类结果：`supported` 与 `unsupported_version`；遇到未知更高 major version 时必须 rejected 并发送 `failure_notice.v1`，不得“尽量解析”。
+- replay runner 必须记录本次使用的 schema snapshot / reader set，区分“数据漂移”“规则漂移”和“版本不兼容阻断”。
+- `WeeklyIndustryTrendSection`、`IndustryClaimLedger`、`IndustryAgentMessageEnvelope` 和 `IndustryAgentArtifactManifest` 的 consumer 在 V1 至少要支持当前冻结版本和同 major 的上一个兼容版本；若不支持，必须在治理面标明迁移窗口。
+- payload 仍只负责传递结构化字段和 artifact refs；超过单次消费边界的批量对象必须拆成 batch artifact，不得回退为超大 inline JSON。
+
+`metric_input_completeness` 最小语义冻结如下：
+
+- `missing_source_published_at_event_ids`
+- `missing_primary_source_distance_event_ids`
+- `missing_freshness_anchor_kind_event_ids`
+- `missing_agent_relevance_event_ids`
+- `missing_dedupe_key_event_ids`
+- `reason_codes`
+
+其作用不是重新打分，而是让 `normalization-agent`、`audit-agent` 和 weekly coverage 明确知道：哪些 event 缺 profile 计算前提、为什么缺、是否被补齐、是否被降级为 context、以及是否进入 rejected audit。
+
+V1 metric input 的最小必填集冻结如下：
+
+- `axis`
+- `source.source_type`
+- `source.primary_source_distance`
+- `agent_relevance.state`
+- `agent_relevance.score`
+- `audit.dedupe_key`
+- `source_published_at` 或稳定 `reason_code`
+
+执行约束：
+
+- 缺少上述最小必填集的 event，不得默认为 accepted supporting evidence；默认只能进入 rejected_event_batch 或 `context`。
+- `freshness_anchor_kind`、`source.authority_tier`、`tool_route_id` 和 `citation_ref` 在 V1 可缺，但缺失时必须进入 `metric_input_completeness`，并触发降级、补齐或 rejected audit。
+- `normalization-agent` 可以补齐衍生字段，但不应承担开放式事实猜测；V1 不得把 normalization 扩张成无限制的数据清洗层。
 
 Agent 交互 DAG 冻结如下：
 
@@ -269,13 +377,33 @@ trend-agent (tier-decider pass)
 1. 专责搜寻 Agent 只能输出 `evidence_batch`、`tool_status_report` 和 `agent_contribution`；不得直接输出 `IndustryTrendDecision`。
 2. `normalization-agent` 是所有 `IndustrySignalEvent` 进入 claim builder 前的唯一归一入口；trend-agent 不得直接消费 raw tool output。
 3. `registry-agent` 负责 registry/tool snapshot 与 provisional authority review；其他 Agent 可以提出 `registry_review_request`，但不能自授权。
-4. `trend-agent` 必须拆成 claim-builder pass 与 tier-decider pass：前者只生成 `claim_candidate_batch` 和 `claim_builder_audit`，不得输出最终 `decision_tier`；后者必须在消费 `audit_result` 后才能生成 `claim_ledger`。
+4. `trend-agent` 必须拆成 claim-builder pass 与 tier-decider pass：前者只能消费 `normalization_result`、`registry_review_result`、`tool_coverage_report` 和现有 project weekly artifacts，只生成 `claim_candidate_batch` 和 `claim_builder_audit`，不得输出最终 `decision_tier`、`claim_ledger` 或把缺失 metric input 解释成正式评分结论；后者必须在消费 `audit_result`、`agent_contribution` 和完整 coverage 后才能生成 `claim_ledger`。
 5. `audit-agent` 必须在 `claim_candidate_batch` 之后、最终 `claim_ledger` 之前输出 `audit_result`；没有反证也必须输出空审计。
 6. `trend-agent` 只能消费 `normalization_result`、`registry_review_result`、`claim_candidate_batch`、`audit_result`、`tool_coverage_report`、`agent_contribution` 和现有 project weekly artifacts；不得发送搜寻型 `task_request` 给自己，也不得临时调用原始 provider。
-7. 任一 Agent 失败必须发送 `failure_notice` 或在 contribution 中标 `failed/unavailable`；下游必须把缺口写入 missing/unavailable 状态，不能静默跳过。
+7. 跨 Agent task 的失败、timeout、schema mismatch、关键输入缺失或 payload 被 rejected 时，必须发送 `failure_notice.v1`；`IndustryAgentContribution.status=failed/unavailable` 只能作为 weekly 贡献账本，不得替代 failure notice 或 message lineage。下游必须把缺口写入 missing/unavailable 状态，不能静默跳过。
 8. 所有跨 Agent 输入输出必须有 `IndustryAgentMessageEnvelope`、`IndustryAgentArtifactManifest` 和匹配的 payload schema；只有 artifact 路径而没有 envelope / manifest / schema 的输出不得被下游消费。
 9. 同一 `idempotency_key` 产生的重复 event 必须由 normalization-agent 去重，并在 `IndustryMergeAudit` 中记录。
 10. 任何进入 tier-decider pass 的 claim candidate 必须能反查 `claim-candidate-batch.v1`、`audit-result.v1`、tool coverage 和 agent contribution；缺任一项时不得输出 `core_industry_trend`。
+
+### Daily / Weekly 打包产物约束
+
+`DailyIndustryEvidencePack` 与 `WeeklyIndustryTrendSection` 属于运行时打包产物，而不是新的事实来源。它们可以由 `registry-agent`、weekly output stage、run-summary stage 或等价 packager 生成，但 packager 只能做索引、聚合、公开投影和状态归纳，不得新增事实、改写 axis judgement、补造 lineage 或重算 trend decision。
+
+对齐 [运行输出与安全](07-运行输出与安全.md) 的执行约束如下：
+
+- `DailyIndustryEvidencePack` 必须采用轻索引形态，显式输出 `run_id`、`window_start`、`window_end`、`source_message_ids`、`input_artifact_refs`、`normalized_event_batch_ref`、`rejected_event_batch_ref`、`public_projection` 和 `cost_and_degradation_summary`；不得再次内嵌 accepted / rejected 全量事件。
+- `WeeklyIndustryTrendSection` 必须显式输出 `lineage_refs` 与 `run_budget_summary`；缺少 `claim_candidate_batch_ref`、`audit_result_refs` 或 `trend_decision_input_ref` 时，packager 不得生成 `core_industry_trends`。
+- weekly packager 只能消费 canonical artifact：daily pack、normalization result、registry review、audit result、claim ledger、tool coverage、agent contribution 和既有 project weekly artifacts；不得回头读取 provider raw input。
+- `IndustryTrendCard` 的 `freshness_summary` 必须由已归一 event 的 anchor 与 freshness profile 计算得出；packager 不得把 `observed_at`、`ingested_at` 或 run date 伪装成 freshness anchor。
+- 任何 public artifact 都必须是独立 projection：internal artifact 与 public artifact 必须拥有不同 `artifact_ref`、`content_hash` 和 `storage_path`；只允许通过 `public_projection_artifact_ref` 建立关联。
+- daily / weekly packager 若发现 daily pack 的 visibility、lineage、budget 或 degraded-axis 元数据不合法，必须产出 `failure_notice.v1` 或把窗口状态降为 `failed/partial`，而不是静默继续生成正常 weekly。
+
+现实吞吐约束：
+
+- `registry-agent + audit-agent` 的双审只应用于可能影响 `core_industry_trend`、`observing_industry_trend`、`wind_probe` 分层，或会提升主体到 `core/proven/provisional_authority` 的 unknown actor / provisional actor。
+- 其余未入 registry 的长尾主体，默认按 `watch / ordinary` 处理，不因未完成双审而阻断主 weekly。
+- `failure_notice.v1` 默认允许在同一 `run_id + responsibility_id + reason_code + correlation_id` 下聚合；重复失败应优先 supersede 现有 notice 或在聚合 payload 中追加计数，而不是无限新增独立 notice。
+- 工具批量限流、上游 schema 漂移或统一输入缺失时，ExecPlan 应优先产生 stage-level 聚合 failure notice，而不是为每个 event 生成一条失败消息。
 
 ### 中间件采用策略
 
@@ -343,6 +471,9 @@ interface IndustryAgentContribution {
   accepted_event_count: number;
   rejected_event_count: number;
   counter_event_count: number;
+  metric_input_gap_count: number;
+  unscorable_event_count: number;
+  profile_blocked_event_count: number;
   input_artifact_refs: string[];
   output_artifact_refs: string[];
   tool_route_ids: string[];
@@ -363,6 +494,9 @@ interface IndustryAgentContribution {
 | `accepted_event_count` | number | 被接受进入证据包的事件数。 | 不能包含 rejected 或 public unsafe event。 |
 | `rejected_event_count` | number | 被拒绝的事件数。 | 大于 0 时必须有 rejected reason / audit。 |
 | `counter_event_count` | number | 反证事件数。 | 大于 0 时必须进入 `CounterEvidenceAudit`。 |
+| `metric_input_gap_count` | number | 缺少 freshness/source/authority/relevance/dedupe 等关键计算输入的事件数。 | 大于 0 时必须能反查 `metric_input_completeness`、reason code 或 normalization/rejected audit。 |
+| `unscorable_event_count` | number | 因缺少关键字段、payload 不完整或 profile 前提不足而不能进入 axis scoring 的事件数。 | 这些事件不得伪装成 accepted supporting evidence；必须降级为 context、进入 rejected batch 或在 status_reason 中解释。 |
+| `profile_blocked_event_count` | number | 被 Agent relevance、freshness stale、primary-source cap、authority context 或其他冻结 profile 阻断的事件数。 | 用于证明“看到了但不能算分”；不得和 rejected 或 counter 静默混写。 |
 | `input_artifact_refs` | string[] | 输入 artifact 引用。 | `ok/partial` 状态不能为空。 |
 | `output_artifact_refs` | string[] | 输出 artifact 引用。 | `ok/partial/failed` 都应有输出或失败日志引用；`skipped/unavailable` 应有原因。 |
 | `tool_route_ids` | string[] | 使用的工具 route。 | 有工具调用时必须可追溯到 tool registry。 |

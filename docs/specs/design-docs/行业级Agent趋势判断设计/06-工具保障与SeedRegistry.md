@@ -8,14 +8,14 @@
 
 每个证据轴必须记录 `primary_tool`、`secondary_toolset`、`fallback_tools`、`last_resort_mode`、`unavailable_state`。工具失败时，先走备用链路，最后才标注缺失或弱观察。
 
-V1 不再把“来源”和“工具”混成一个优先级表。四级保障链路必须同时表达两层语义：
+当前设计不再把“来源”和“工具”混成一个优先级表。四级保障链路必须同时表达两层语义：
 
 - `source_class`：这条证据路线优先访问哪类来源。高权威轴优先级固定为 `official_structured_api` 或 `official_owned_feed_or_doc`，而不是先跑聚合器再补官方源。
 - `tool`：负责发现、抓取、解析、引用追溯或补证的执行器。工具只是一种执行手段，不能替代来源类型本身的权威语义。
 
-本节冻结的是工具治理语义，不冻结某个具体工具的永久优先级。`primary_tool / secondary_toolset / fallback_tools / last_resort_mode` 是能力层级；具体工具名称只是 V1 `tools.json` 的候选 seed，必须由 `registry-agent` 按轴评估后写入 tool registry snapshot。ExecPlan 不得把下表硬编码为固定调用顺序，也不得因为某个 seed 工具暂不可用就降低四级保障链路、工具覆盖报告或 unavailable 语义。
+本节冻结的是工具治理语义，不冻结某个具体工具的永久优先级。`primary_tool / secondary_toolset / fallback_tools / last_resort_mode` 是能力层级；具体工具名称只是当前 `tools.json` 的候选 seed，必须由 `registry-agent` 按轴评估后写入 tool registry snapshot。ExecPlan 不得把下表硬编码为固定调用顺序，也不得因为某个 seed 工具暂不可用就降低四级保障链路、工具覆盖报告或 unavailable 语义。
 
-V1 工具候选 seed 如下：
+当前冻结的工具候选 seed 如下：
 
 | 证据场景 | primary source class | secondary source class | preferred retrieval executors | fallback executors / sources | last_resort_mode |
 | --- | --- | --- | --- | --- | --- |
@@ -53,7 +53,7 @@ AgentReach 不是所有证据轴的天然首选。`registry-agent` 必须按证�
 | `output_structure` | `0.15` | 是否能稳定输出结构化字段，而不是难审计的自由文本。 |
 | `freshness_sla_fit` | `0.10` | 工具的刷新承诺是否满足该 axis 的实际新鲜度要求。 |
 | `stability` | `0.10` | 最近运行稳定性、失败率、rate limit 表现和维护活跃度。 |
-| `cost_efficiency` | `0.10` | 单次采集和核验成本是否适合进入默认 V1 主路径。 |
+| `cost_efficiency` | `0.10` | 单次采集和核验成本是否适合进入默认自动化主路径。 |
 | `license_risk_fit` | `0.05` | 授权、抓取和复用风险是否可控。 |
 
 默认晋升门槛冻结如下：
@@ -66,7 +66,7 @@ AgentReach 不是所有证据轴的天然首选。`registry-agent` 必须按证�
 默认 veto 规则冻结如下：
 
 - `license_risk="high/unknown"` 不得进入 `primary_tool`。
-- `cost_tier="high"` 或 `access_mode="optional_paid"` 不得成为 V1 自动化 primary。
+- `cost_tier="high"` 或 `access_mode="optional_paid"` 不得成为当前自动化 primary。
 - 无法产出 canonical ref、source trace 或稳定结构化输出的工具不得进入 `primary_tool`。
 - `freshness_sla` 低于该 axis 需求的工具不得进入 `primary_tool`。
 - `general_web_search`、`specialized_research_or_discovery`、`manual_or_local_only` 不得直接成为 `policy_regulatory`、`capital_finance`、`product_vendor_release` 的 primary supporting route。
@@ -74,14 +74,14 @@ AgentReach 不是所有证据轴的天然首选。`registry-agent` 必须按证�
 审计落点冻结如下：
 
 - `tool-selection-scorecard.v1` 不是只存在于实现代码中的隐式打分函数；每次 active route 选择都必须在 canonical artifact 中留下版本、总分、分项得分、候选集合和 veto 原因。
-- V1 可以把这些字段直接挂在 `AxisToolCoverageReport`，也可以额外输出 `ToolSelectionAudit` artifact；但至少要有一处能被 weekly、审计和 replay 直接消费。
+- 当前设计可以把这些字段直接挂在 `AxisToolCoverageReport`，也可以额外输出 `ToolSelectionAudit` artifact；但至少要有一处能被 weekly、审计和 replay 直接消费。
 
 工具 seed 维护规则：
 
 - 下表中的工具名不构成产品语义，不得出现在趋势等级裁决逻辑中；裁决只能依赖 evidence event、authority、axis summary、tool route state 和 audit。
 - `registry-agent` 可以新增、降级、替换或标记 seed 工具不可用，但必须保留 `replacement_tool_ids`、`unavailable_state`、成本/授权状态、`source_class`、`retrieval_role` 和变更原因。
 - 当某类工具没有可用实现时，系统仍必须输出对应轴的 `AxisToolCoverageReport`，并用 `active_route_level="none"` 或降级 route 表达，而不是把该轴从设计范围移除。
-- ExecPlan 可以把工具接入拆成阶段，但不能把未接入的证据轴从 V1 完成定义中删掉；未自动覆盖的轴必须以 `unavailable / partial / needs_review` 进入 weekly 可见账本。
+- ExecPlan 可以把工具接入拆成阶段，但不能把未接入的证据轴从目标态完成定义中删掉；未自动覆盖的轴必须以 `unavailable / partial / needs_review` 进入 weekly 可见账本。
 
 `AxisToolCoverageReport` 是 weekly 可见的工具覆盖账本，不能只在 registry 内部存在。
 
@@ -199,9 +199,19 @@ interface AxisToolCoverageReport {
 - `last_resort_mode` 产出的证据不得单独推动趋势升级，只能作为弱观察、补证线索或缺口说明。
 - `policy_regulatory`、`capital_finance`、`product_vendor_release` 若本次没有命中官方 source class，则即使工具调用成功，也不得单独把该轴升级为 `strong`。
 
-## V1 Seed Registry 采用范围
+## 冻结 Seed Registry 采用范围
 
-本设计采用需求文档中的 V1 Seed Registry 作为 V1 完成态 registry，不允许缩减为热门公司、只实现部分轴、先落地最小子集，或把下列覆盖族降级为后续扩展项。以下覆盖族必须在 V1 materialize；新增前沿主体只能追加到该完整基线之上。这里的 `materialize` 指完整进入 registry、具备 authority / access / review / monitoring_tier 等治理字段，不等于每个 seed 都要默认高频主动扫描。
+本设计采用需求文档中的 Seed Registry 冻结基线作为目标态 registry，不允许缩减为热门公司、只实现部分轴、先落地最小子集，或把下列覆盖族降级为后续扩展项。以下覆盖族必须在目标态中 materialize；新增前沿主体只能追加到该完整基线之上。这里的 `materialize` 指完整进入 registry、具备 authority / access / review / monitoring_tier 等治理字段，不等于每个 seed 都要默认高频主动扫描。
+
+### Seed taxonomy 与 lifecycle 冻结
+
+以下规则与 [03-数据模型契约](03-数据模型契约.md) 中的 `IndustryEntityRegistryEntry` 一起构成 Seed Registry 的边界约束：
+
+- seed list 不是平面字符串名单；每个 materialized seed 都必须同时声明 `canonical_scope`、`entity_type`、`lifecycle_status` 与必要的 `parent_entity_id` / `merge_into_entity_id`。
+- 同一名字若同时指向法主体、研究组、品牌/产品线、社区表面或会议系列，必须拆成独立 entry；不得靠 alias 把不同治理对象揉成一个 seed。
+- rename、merge、退场、停更和长期失效不得通过删 entry 处理；必须保留旧 ID、记录生效时间，并通过 `merge_into_entity_id` 或 `replacement_entity_ids` 指向新的 canonical 主体。
+- 父子主体可以同时进入冻结基线，但同一 event 只能命中一个最贴近事实语义的 canonical owner；父子 entry 不得双计成两个独立 authority 信号。
+- seed family 名单只冻结“必须 materialize 的覆盖族”，不冻结“所有子主体都必须同频主动扫描”；扫描优先级仍由 `monitoring_tier` 与 `axis_monitoring_overrides` 决定。
 
 ### 大厂 / 产品与平台主体
 
@@ -236,7 +246,7 @@ interface AxisToolCoverageReport {
 - 中文核心社区种子：GitHub 中文开发者讨论、Hugging Face / ModelScope / OpenXLab / OpenMMLab 等模型与开源生态社区、V2EX 中高质量 AI / 编程讨论、少量可验证作者的个人技术博客或公众号。
 - 中文高质量机构观察源：腾讯研究院 AI 速递。
 - 中文观察源：InfoQ 中文、AI 科技评论、机器之心、量子位、智东西，只能作为新闻/宣传、机构观察或二级观察源。
-- 中文排除或低权重源：知乎、掘金、CSDN、小红书、泛 Bilibili 技术内容、泛微信公众号精选源，默认不进入 V1 核心证据池。
+- 中文排除或低权重源：知乎、掘金、CSDN、小红书、泛 Bilibili 技术内容、泛微信公众号精选源，默认不进入核心证据池。
 
 ### 政策监管机构 / 政策研究 / 智库
 
@@ -252,7 +262,7 @@ interface AxisToolCoverageReport {
 
 ### Seed monitoring tiers
 
-完整 seed registry 不等于全量同频扫描。V1 必须给每个 seed 分配 `monitoring_tier`；对多轴主体，如不同 axis 需要不同频率或不同触发方式，必须再用 `axis_monitoring_overrides` 精细化：
+完整 seed registry 不等于全量同频扫描。当前设计必须给每个 seed 分配 `monitoring_tier`；对多轴主体，如不同 axis 需要不同频率或不同触发方式，必须再用 `axis_monitoring_overrides` 精细化：
 
 | tier | 默认行为 | 可推动的作用 | 成本约束 |
 | --- | --- | --- | --- |
@@ -262,13 +272,14 @@ interface AxisToolCoverageReport {
 
 冻结规则：
 
-- V1 完成态要求完整 seed families 全部 materialize，但不要求全部进入 `core_monitor`。
-- `watchlist` 或 `cold_archive` 的主体仍在 V1 覆盖边界内；它们只是默认扫描优先级更低，不得被实现阶段当作“后续再说”的借口。
+- 目标态要求完整 seed families 全部 materialize，但不要求全部进入 `core_monitor`。
+- `watchlist` 或 `cold_archive` 的主体仍在当前设计覆盖边界内；它们只是默认扫描优先级更低，不得被实现阶段当作“后续再说”的借口。
 - 任何从 `core_monitor` 降到 `watchlist` 或 `cold_archive` 的变更都必须保留 `change_reason` 和生效时间。
 - 同一主体如果在不同 axis 上需要不同巡检强度，必须用 `axis_monitoring_overrides` 显式表达；不得用一个全局 tier 粗暴覆盖全部 axis。
+- 若主体已 `merged/renamed/retired`，其 `monitoring_tier` 只控制旧 entry 的跟踪与重定向，不得继续把旧 entry 当作 active seed 参与新一轮 authority 记账。
 
 成本和授权规则：
 
-- Crunchbase、PitchBook、CB Insights、Bloomberg、Gartner、Forrester 等高成本或授权受限来源不得成为 V1 自动化硬依赖。
+- Crunchbase、PitchBook、CB Insights、Bloomberg、Gartner、Forrester 等高成本或授权受限来源不得成为当前自动化硬依赖。
 - 它们必须保留 registry 状态，并使用已冻结的 schema 字段组合表达：可选付费用 `access_mode="optional_paid"`，Agent 异步补证或待审用 `review_status="needs_review"`，人工授权例外用 `access_mode="human_exception"` 且 `human_exception_required=true`，不可用或未覆盖用 `access_mode="unavailable"` 或 `review_status="unavailable"`。
 - `optional_paid`、`human_exception`、高成本数据库和登录态内容可以作为 `watchlist` 补证线索或人工复核材料，但不能成为 accepted event 的唯一 canonical source，也不能成为高权威轴的唯一 primary route。

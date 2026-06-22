@@ -119,6 +119,21 @@ describe("external discovery public-safe redaction", () => {
     },
   );
 
+  it.each(["C:/Users/Aspetta/private-path", "D:\\AgentRadar\\agentRadar\\secret.json"])(
+    "rejects local path %s in public aggregate text",
+    (localPath) => {
+      const aggregate = makeSanitizedAggregate({
+        audit: {
+          rejected_events: [],
+          warnings: [`redacted local path ${localPath}`],
+        },
+      });
+
+      expect(containsForbiddenPublicArtifactText(aggregate)).toBe(true);
+      expect(assertPublicSafeAggregate(aggregate).ok).toBe(false);
+    },
+  );
+
   it("rejects missing or false public-safe contract fields", () => {
     const result = assertPublicSafeAggregate({
       ...makeSanitizedAggregate(),

@@ -1,5 +1,9 @@
 import fs from "node:fs";
 
+import {
+  attachExternalActorIdentityHashes,
+  parseExternalActorIdentityHashes,
+} from "./actorIdentity.ts";
 import { externalRawInputPath } from "./paths.ts";
 import { containsForbiddenPublicArtifactText, stableSourceInputHash } from "./redaction.ts";
 import {
@@ -204,6 +208,9 @@ function validateArtifact(value: unknown): {
   if (!isNonEmptyString(value.provider_run_id)) errors.push("provider_run_id is required");
   if (!isNonEmptyString(value.generated_at)) errors.push("generated_at is required");
   if (!Object.hasOwn(value, "query")) errors.push("query is required");
+  if (Object.hasOwn(value, "query") && containsForbiddenPublicArtifactText(value.query)) {
+    errors.push("query is not public-safe");
+  }
   if (!Array.isArray(value.platforms)) {
     errors.push("platforms is required");
   } else if (!value.platforms.every(isExternalPlatform)) {
@@ -233,7 +240,7 @@ function parseCoverage(value: unknown): {
   coverage?: ExternalDiscoveryCoverage;
   errors: string[];
 } {
-  if (value === undefined) return { errors: [] };
+  if (value === undefined) return { errors: ["coverage is required"] };
   const errors: string[] = [];
   if (!isRecord(value)) return { errors: ["coverage must be an object"] };
   if (containsForbiddenPublicArtifactText(value)) {
@@ -273,6 +280,11 @@ function parseCoverage(value: unknown): {
       }
     }
     coverage[platform] = platformCoverage;
+  }
+  for (const platform of EXTERNAL_PLATFORMS) {
+    if (!coverage[platform]) {
+      errors.push(`coverage.${platform} is required`);
+    }
   }
 
   return { coverage, errors };
@@ -382,6 +394,16 @@ function itemToEvent(
     "unknown external target";
   const providerTierHint =
     actor && isProviderTierHint(actor.tier_hint) ? actor.tier_hint : undefined;
+  const canonicalActor = attachExternalActorIdentityHashes(
+    {
+      ...(actor && isNonEmptyString(actor.display_name) ? { display_name: actor.display_name } : {}),
+      actor_type: canonicalActorType(actor),
+      ...(providerTierHint ? { provider_tier_hint: providerTierHint } : {}),
+      effective_tier: "unknown",
+      tier_basis: "unknown",
+    },
+    parseExternalActorIdentityHashes(actor?.identity_hashes),
+  );
   const { directionLabels, warnings } = canonicalizeDirectionLabels(item.direction_labels);
   const eventIdSeed = JSON.stringify({
     provider_run_id: providerRunId,
@@ -405,13 +427,7 @@ function itemToEvent(
       ingested_at: ingestedAt,
       ...(url ? { event_url: url } : {}),
       ...(isNonEmptyString(item.title) ? { content_title: item.title } : {}),
-      actor: {
-        ...(actor && isNonEmptyString(actor.display_name) ? { display_name: actor.display_name } : {}),
-        actor_type: canonicalActorType(actor),
-        ...(providerTierHint ? { provider_tier_hint: providerTierHint } : {}),
-        effective_tier: "unknown",
-        tier_basis: "unknown",
-      },
+      actor: canonicalActor,
       target: {
         target_type: targetType,
         name: targetName,

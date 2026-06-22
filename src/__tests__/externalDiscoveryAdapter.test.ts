@@ -347,6 +347,72 @@ describe("AgentReach local provider adapter", () => {
     );
   });
 
+  it("returns failed for public-unsafe query without leaking query text", () => {
+    const inputPath = writeJsonArtifact(
+      makeArtifact({
+        query: {
+          terms: ["OAuth token expired for private provider account"],
+        },
+      }),
+    );
+
+    const result = loadAgentReachProviderArtifact({ date: "2026-06-14", inputPath });
+
+    expect(result.status).toBe("failed");
+    expect(result.status_reason).toBe("schema_invalid");
+    expect(result.events).toEqual([]);
+    expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
+    expect(result.rejected_events[0]?.reason_detail).toContain("query");
+    expect(JSON.stringify(result)).not.toContain(
+      "OAuth token expired for private provider account",
+    );
+  });
+
+  it("returns failed when formal v1 artifact omits coverage", () => {
+    const artifact = makeArtifact();
+    delete artifact.coverage;
+    const inputPath = writeJsonArtifact(artifact);
+
+    const result = loadAgentReachProviderArtifact({ date: "2026-06-14", inputPath });
+
+    expect(result.status).toBe("failed");
+    expect(result.status_reason).toBe("schema_invalid");
+    expect(result.events).toEqual([]);
+    expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
+    expect(result.rejected_events[0]?.reason_detail).toContain("coverage is required");
+  });
+
+  it("returns failed when formal v1 artifact coverage omits a V1 platform", () => {
+    const inputPath = writeJsonArtifact(
+      makeArtifact({
+        coverage: {
+          x_twitter: {
+            status: "manual_import_only",
+          },
+          reddit: {
+            status: "manual_import_only",
+          },
+          hacker_news: {
+            status: "not_configured",
+          },
+          official_blog: {
+            status: "ok",
+          },
+        },
+      }),
+    );
+
+    const result = loadAgentReachProviderArtifact({ date: "2026-06-14", inputPath });
+
+    expect(result.status).toBe("failed");
+    expect(result.status_reason).toBe("schema_invalid");
+    expect(result.events).toEqual([]);
+    expect(result.rejected_events[0]?.reason_code).toBe("schema_invalid");
+    expect(result.rejected_events[0]?.reason_detail).toContain(
+      "coverage.official_web is required",
+    );
+  });
+
   it.each([
     ["provider", { provider: "not-agent-reach" }],
     ["schema_version", { schema_version: "wrong.v1" }],

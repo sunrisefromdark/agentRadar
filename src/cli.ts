@@ -66,9 +66,22 @@ import {
   buildWeeklyExternalDiscoveryArtifacts,
   readWeeklyExternalDiscoveryWindow,
 } from "./externalDiscovery/weeklyWindow.ts";
-import type {
-  DailyExternalAggregate,
+import {
+  EXTERNAL_PLATFORMS,
+  type DailyExternalAggregate,
 } from "./externalDiscovery/types.ts";
+import { buildAgentReachGatewayRequest } from "./externalAgentReach/toolSurface.ts";
+import {
+  runExternalAgentReachLocalRunnerAdapter,
+  type ExternalAgentReachLocalRunner,
+  type RunExternalAgentReachLocalRunnerAdapterOptions,
+  type RunExternalAgentReachLocalRunnerAdapterResult,
+} from "./externalAgentReach/localRunnerAdapter.ts";
+import { createExternalAgentReachProcessRunner } from "./externalAgentReach/processRunner.ts";
+import type {
+  AgentReachEvidenceClass,
+  AgentReachGatewayRequest,
+} from "./externalAgentReach/types.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -93,6 +106,8 @@ export interface CliOptions {
   externalDiscoveryInputPath?: string;
   externalDiscoveryInputExplicit: boolean;
   externalDiscoveryGenerate: boolean;
+  externalAgentReachGenerate: boolean;
+  externalAgentReachRunnerPath?: string;
   agentReachConfigPath?: string;
   configPath: string;
   view?: "overview" | "projects" | "weekly" | "run-health" | "observer" | "knowledge-base" | "kb";
@@ -117,6 +132,8 @@ export interface ExternalDiscoveryCliMode {
   externalDiscoveryInputExplicit: boolean;
   externalDiscoveryInputPath?: string;
   agentReachGenerate?: true;
+  externalAgentReachGenerate?: true;
+  externalAgentReachRunnerPath?: string;
   disabledStatusReason?: ExternalDiscoveryCliDisabledStatusReason;
 }
 
@@ -162,6 +179,14 @@ const FLAG_HANDLERS: Record<string, FlagHandler> = {
   },
   "--agentreach-config": (opts, argv, index) => {
     opts.agentReachConfigPath = readRequiredFlagValue("--agentreach-config", argv, index);
+    return index + 1;
+  },
+  "--external-agentreach-generate": (opts, _argv, index) => {
+    opts.externalAgentReachGenerate = true;
+    return index;
+  },
+  "--external-agentreach-runner": (opts, argv, index) => {
+    opts.externalAgentReachRunnerPath = readRequiredFlagValue("--external-agentreach-runner", argv, index);
     return index + 1;
   },
   "--record-agent-memory": (opts, _argv, index) => {
@@ -224,6 +249,7 @@ export function parseArgs(argv: string[]): { command: string; opts: CliOptions }
     externalDiscoveryEnabled: true,
     externalDiscoveryInputExplicit: false,
     externalDiscoveryGenerate: false,
+    externalAgentReachGenerate: false,
     configPath: "config.yaml",
     view: "overview",
     recordAgentMemory: false,
@@ -267,6 +293,10 @@ export function resolveExternalDiscoveryCliMode(command: string, opts: CliOption
       readsExternalRawInput: true,
       generatesDailyAggregate: true,
       ...(opts.externalDiscoveryGenerate ? { agentReachGenerate: true as const } : {}),
+      ...(opts.externalAgentReachGenerate ? { externalAgentReachGenerate: true as const } : {}),
+      ...(opts.externalAgentReachRunnerPath
+        ? { externalAgentReachRunnerPath: opts.externalAgentReachRunnerPath }
+        : {}),
     };
   }
 
@@ -290,6 +320,30 @@ export function validateExternalDiscoveryCliMatrix(command: string, opts: CliOpt
   }
   if (opts.agentReachConfigPath && command !== "run-daily") {
     throw new Error(`${command} does not accept --agentreach-config`);
+  }
+  if (opts.externalAgentReachGenerate && command !== "run-daily") {
+    throw new Error(`${command} does not accept --external-agentreach-generate`);
+  }
+  if (opts.externalAgentReachRunnerPath && command !== "run-daily") {
+    throw new Error(`${command} does not accept --external-agentreach-runner`);
+  }
+  if (opts.externalAgentReachGenerate && opts.externalDiscoveryGenerate) {
+    throw new Error("--external-agentreach-generate cannot be combined with --external-discovery-generate");
+  }
+  if (opts.externalAgentReachGenerate && opts.agentReachConfigPath) {
+    throw new Error("--external-agentreach-generate cannot be combined with --agentreach-config");
+  }
+  if (opts.externalAgentReachGenerate && !opts.externalDiscoveryEnabled) {
+    throw new Error("--external-agentreach-generate cannot be combined with --no-external-discovery");
+  }
+  if (opts.externalAgentReachGenerate && opts.externalDiscoveryInputExplicit) {
+    throw new Error("--external-agentreach-generate cannot be combined with --external-discovery-input");
+  }
+  if (opts.externalAgentReachGenerate && !opts.externalAgentReachRunnerPath) {
+    throw new Error("--external-agentreach-generate requires --external-agentreach-runner");
+  }
+  if (opts.externalAgentReachRunnerPath && !opts.externalAgentReachGenerate) {
+    throw new Error("--external-agentreach-runner requires --external-agentreach-generate");
   }
   if (opts.externalDiscoveryGenerate && !opts.externalDiscoveryEnabled) {
     throw new Error("--external-discovery-generate cannot be combined with --no-external-discovery");
@@ -317,10 +371,27 @@ export interface AgentReachDailyGenerationDependencies {
   ) => Promise<AgentReachArtifactWriteResult>;
 }
 
+export interface ExternalAgentReachDailyGenerationDependencies {
+  createExternalAgentReachRunner?: (runnerPath: string) => ExternalAgentReachLocalRunner;
+  runExternalAgentReachLocalRunnerAdapter?: (
+    opts: RunExternalAgentReachLocalRunnerAdapterOptions,
+  ) => Promise<RunExternalAgentReachLocalRunnerAdapterResult>;
+}
+
 interface AgentReachDailyGenerationResult {
   providerResultOverride?: AgentReachProviderResult;
   warnings: string[];
 }
+
+const EXTERNAL_AGENTREACH_DAILY_EVIDENCE_CLASSES: AgentReachEvidenceClass[] = [
+  "project_discovery",
+  "actor_message",
+  "discussion_thread",
+  "product_launch",
+  "paper_mention",
+  "benchmark_mention",
+  "trend_signal",
+];
 
 function skippedAgentReachProviderResult(input: {
   date: string;
@@ -410,6 +481,86 @@ export async function prepareAgentReachGenerationForDaily(
   return { warnings: [] };
 }
 
+function buildExternalAgentReachDailyRequest(date: string): AgentReachGatewayRequest {
+  return buildAgentReachGatewayRequest({
+    intent: "collect_trend_signals",
+    platforms: [...EXTERNAL_PLATFORMS],
+    time_window: { date },
+    allowed_evidence_classes: EXTERNAL_AGENTREACH_DAILY_EVIDENCE_CLASSES,
+  });
+}
+
+export async function prepareExternalAgentReachGenerationForDaily(
+  input: {
+    command: "run-daily" | "recover-daily";
+    opts: CliOptions;
+    generatedAt: string;
+    dryRun: boolean;
+  },
+  dependencies: ExternalAgentReachDailyGenerationDependencies = {},
+): Promise<AgentReachDailyGenerationResult> {
+  if (input.command !== "run-daily" || !input.opts.externalAgentReachGenerate) {
+    return { warnings: [] };
+  }
+
+  const sourceInputRef = externalRawInputPath(input.opts.date);
+  if (input.dryRun) {
+    const warning = "external_agentreach_generate_dry_run";
+    return {
+      providerResultOverride: skippedAgentReachProviderResult({
+        date: input.opts.date,
+        sourceInputRef,
+        statusReason: warning,
+        warnings: [warning],
+      }),
+      warnings: [warning],
+    };
+  }
+
+  const runnerPath = input.opts.externalAgentReachRunnerPath;
+  if (!runnerPath) {
+    const warning = "external_agentreach_runner_missing";
+    return {
+      providerResultOverride: failedAgentReachProviderResult({
+        date: input.opts.date,
+        sourceInputRef,
+        statusReason: warning,
+        warnings: [warning],
+      }),
+      warnings: [warning],
+    };
+  }
+
+  const createRunner =
+    dependencies.createExternalAgentReachRunner ??
+    ((pathToRunner: string) => createExternalAgentReachProcessRunner({ runnerPath: pathToRunner }));
+  const runAdapter =
+    dependencies.runExternalAgentReachLocalRunnerAdapter ??
+    runExternalAgentReachLocalRunnerAdapter;
+
+  try {
+    await runAdapter({
+      date: input.opts.date,
+      request: buildExternalAgentReachDailyRequest(input.opts.date),
+      runner: createRunner(runnerPath),
+      generatedAt: input.generatedAt,
+    });
+  } catch {
+    const warning = "external_agentreach_generate_failed";
+    return {
+      providerResultOverride: failedAgentReachProviderResult({
+        date: input.opts.date,
+        sourceInputRef,
+        statusReason: warning,
+        warnings: [warning],
+      }),
+      warnings: [warning],
+    };
+  }
+
+  return { warnings: [] };
+}
+
 function externalTopicContext(config: AppConfig, scored: ScoredProject[]) {
   return {
     userInterestTopics: config.sources.userInterestProfile?.topics.map((topic) => topic.name) ?? [],
@@ -456,12 +607,19 @@ async function buildDailyExternalDiscoveryRuntime(input: {
   scored: ScoredProject[];
 }): Promise<DailyExternalDiscoveryRuntime> {
   const mode = resolveExternalDiscoveryCliMode(input.command, input.opts);
-  const generation = await prepareAgentReachGenerationForDaily({
-    command: input.command,
-    opts: input.opts,
-    generatedAt: input.generatedAt,
-    dryRun: input.dryRun,
-  });
+  const generation = input.opts.externalAgentReachGenerate
+    ? await prepareExternalAgentReachGenerationForDaily({
+        command: input.command,
+        opts: input.opts,
+        generatedAt: input.generatedAt,
+        dryRun: input.dryRun,
+      })
+    : await prepareAgentReachGenerationForDaily({
+        command: input.command,
+        opts: input.opts,
+        generatedAt: input.generatedAt,
+        dryRun: input.dryRun,
+      });
   const sourceInputRef = mode.externalDiscoveryInputPath ?? externalRawInputPath(input.opts.date);
   const providerResult = generation.providerResultOverride ?? (mode.enabled && mode.generatesDailyAggregate
     ? loadAgentReachProviderArtifact({

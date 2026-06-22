@@ -21,6 +21,8 @@ const FORBIDDEN_PUBLIC_KEYS = new Set([
 
 const SENSITIVE_TEXT_PATTERN = /\b(cookie|session|token|password|oauth)\b/i;
 const HANDLE_TEXT_PATTERN = /(^|[^a-z0-9._%+-])@[a-z0-9_]{2,}\b/i;
+const LOCAL_PATH_TEXT_PATTERN =
+  /(^|[\s"'(])(?:[a-z]:[\\/]|\/(?:users|home)\/)[^\s"'<>)]*/i;
 const ALLOWED_DIRECTION_LABELS = new Set<string>(EXTERNAL_DIRECTION_LABELS);
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -38,7 +40,11 @@ function collectForbiddenPaths(
   seen: WeakSet<object>,
 ): void {
   if (typeof value === "string") {
-    if (SENSITIVE_TEXT_PATTERN.test(value) || HANDLE_TEXT_PATTERN.test(value)) {
+    if (
+      SENSITIVE_TEXT_PATTERN.test(value) ||
+      HANDLE_TEXT_PATTERN.test(value) ||
+      LOCAL_PATH_TEXT_PATTERN.test(value)
+    ) {
       paths.push(currentPath);
     }
     return;

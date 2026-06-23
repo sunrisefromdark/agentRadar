@@ -1,0 +1,553 @@
+{
+  "schema_version": "state-transition-registry.v1",
+  "status": "active",
+  "entries": [
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "created",
+      "canonical_state_class": "draft",
+      "allowed_transitions": [
+        "sent",
+        "rejected"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "sent",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "consumed",
+        "failed",
+        "superseded",
+        "rejected"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "consumed",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "failed",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "rejected",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-message.status",
+      "local_state": "superseded",
+      "canonical_state_class": "closed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-contribution.status",
+      "local_state": "ok",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-contribution.status",
+      "local_state": "partial",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-contribution.status",
+      "local_state": "skipped",
+      "canonical_state_class": "skipped",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-contribution.status",
+      "local_state": "failed",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-agent-contribution.status",
+      "local_state": "unavailable",
+      "canonical_state_class": "unavailable",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "requested",
+      "canonical_state_class": "queued",
+      "allowed_transitions": [
+        "granted",
+        "rejected",
+        "superseded",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "granted",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "consumed",
+        "released",
+        "expired",
+        "superseded"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "consumed",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "released",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "released",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "expired",
+      "canonical_state_class": "closed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "rejected",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "capacity-reservation.reservation_state",
+      "local_state": "superseded",
+      "canonical_state_class": "closed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "open",
+      "canonical_state_class": "queued",
+      "allowed_transitions": [
+        "assigned",
+        "closing",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "assigned",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "in_review",
+        "closed",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "in_review",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "closing",
+        "closed",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "closing",
+      "canonical_state_class": "finalizing",
+      "allowed_transitions": [
+        "closed",
+        "reopened"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "closed",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [
+        "reopened"
+      ],
+      "terminal": true,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "expired",
+      "canonical_state_class": "closed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "human-review-queue-item.queue_state",
+      "local_state": "reopened",
+      "canonical_state_class": "queued",
+      "allowed_transitions": [
+        "assigned",
+        "closing",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "human-review-queue-item.reservation_binding_state",
+      "local_state": "not_reserved",
+      "canonical_state_class": "idle",
+      "allowed_transitions": [
+        "reserved",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "human-review-queue-item.reservation_binding_state",
+      "local_state": "reserved",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "released",
+        "expired"
+      ],
+      "terminal": false,
+      "reopenable": false
+    },
+    {
+      "state_family": "human-review-queue-item.reservation_binding_state",
+      "local_state": "released",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "human-review-queue-item.reservation_binding_state",
+      "local_state": "expired",
+      "canonical_state_class": "closed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "fact-partition.state",
+      "local_state": "open",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "closing",
+        "reopened"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "fact-partition.state",
+      "local_state": "closing",
+      "canonical_state_class": "finalizing",
+      "allowed_transitions": [
+        "closed",
+        "reopened"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "fact-partition.state",
+      "local_state": "closed",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [
+        "reopened"
+      ],
+      "terminal": true,
+      "reopenable": true
+    },
+    {
+      "state_family": "fact-partition.state",
+      "local_state": "reopened",
+      "canonical_state_class": "active",
+      "allowed_transitions": [
+        "closing",
+        "closed"
+      ],
+      "terminal": false,
+      "reopenable": true
+    },
+    {
+      "state_family": "industry-trend-card.consumer_readiness_state",
+      "local_state": "ready",
+      "canonical_state_class": "ready",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.consumer_readiness_state",
+      "local_state": "provisional",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.consumer_readiness_state",
+      "local_state": "needs_review",
+      "canonical_state_class": "review_required",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.consumer_readiness_state",
+      "local_state": "blocked_public_output",
+      "canonical_state_class": "blocked",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.internal_consumption_state",
+      "local_state": "allowed",
+      "canonical_state_class": "allowed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.internal_consumption_state",
+      "local_state": "review_required",
+      "canonical_state_class": "review_required",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.internal_consumption_state",
+      "local_state": "blocked",
+      "canonical_state_class": "blocked",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.public_consumption_state",
+      "local_state": "allowed",
+      "canonical_state_class": "allowed",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.public_consumption_state",
+      "local_state": "redaction_required",
+      "canonical_state_class": "redaction_required",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "industry-trend-card.public_consumption_state",
+      "local_state": "blocked",
+      "canonical_state_class": "blocked",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.evidence_window_status.status",
+      "local_state": "ok",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.evidence_window_status.status",
+      "local_state": "partial",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.evidence_window_status.status",
+      "local_state": "missing",
+      "canonical_state_class": "unavailable",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.evidence_window_status.status",
+      "local_state": "failed",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.publication_readiness_status.status",
+      "local_state": "ready",
+      "canonical_state_class": "ready",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.publication_readiness_status.status",
+      "local_state": "partial_blocked",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.publication_readiness_status.status",
+      "local_state": "blocked",
+      "canonical_state_class": "blocked",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.governance_load_status.status",
+      "local_state": "nominal",
+      "canonical_state_class": "nominal",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.governance_load_status.status",
+      "local_state": "stressed",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.governance_load_status.status",
+      "local_state": "saturated",
+      "canonical_state_class": "saturated",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.industry_window_status.status",
+      "local_state": "ok",
+      "canonical_state_class": "complete",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.industry_window_status.status",
+      "local_state": "partial",
+      "canonical_state_class": "degraded",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.industry_window_status.status",
+      "local_state": "missing",
+      "canonical_state_class": "unavailable",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.industry_window_status.status",
+      "local_state": "failed",
+      "canonical_state_class": "error",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.run_budget_summary.run_cost_status",
+      "local_state": "within_budget",
+      "canonical_state_class": "nominal",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.run_budget_summary.run_cost_status",
+      "local_state": "near_soft_stop",
+      "canonical_state_class": "warning",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.run_budget_summary.run_cost_status",
+      "local_state": "soft_stop_reached",
+      "canonical_state_class": "limited",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    },
+    {
+      "state_family": "weekly-industry-trend-section.run_budget_summary.run_cost_status",
+      "local_state": "hard_cap_reached",
+      "canonical_state_class": "blocked",
+      "allowed_transitions": [],
+      "terminal": true,
+      "reopenable": false
+    }
+  ]
+}

@@ -1,0 +1,1128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "bundle_id": "industry-canonical-schema",
+  "bundle_version": "1.0.0",
+  "status": "active",
+  "schema_owner": "industry-design-review",
+  "source_of_truth_dir": "schemas/industry",
+  "codegen_targets": [
+    "json-schema-bundle",
+    "ts-literal-catalog"
+  ],
+  "entries": [
+    {
+      "schema_id": "industry-signal-event.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent",
+        "finance-agent",
+        "policy-agent"
+      ],
+      "consumer_roles": [
+        "normalization-agent",
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "event_id",
+        "schema_version",
+        "observed_at",
+        "ingested_at",
+        "freshness_anchor_kind",
+        "freshness_profile_id",
+        "axis",
+        "source_polarity_cue",
+        "source",
+        "agent_relevance",
+        "evidence",
+        "collected_by_agent_id",
+        "responsibility_id",
+        "execution_context",
+        "audit"
+      ]
+    },
+    {
+      "schema_id": "industry-claim.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "claim_id",
+        "schema_version",
+        "claim_family_key",
+        "generated_by_agent_id",
+        "proposed_claim_archetype",
+        "claim_cn"
+      ]
+    },
+    {
+      "schema_id": "industry-claim-ledger.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "weekly-packager",
+        "replay-runner",
+        "governance-console"
+      ],
+      "required_fields": [
+        "claim_id",
+        "schema_version",
+        "decision_tier",
+        "decision_confidence",
+        "coverage_audit_state",
+        "consumer_readiness_state",
+        "consumer_display_priority",
+        "claim_evidence_link_refs",
+        "counter_evidence_audit_ref",
+        "fact_resolution_audit_ref"
+      ]
+    },
+    {
+      "schema_id": "industry-agent-message.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "all-actual-agents",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "message_id",
+        "schema_version",
+        "thread_id",
+        "run_id",
+        "window_start",
+        "window_end",
+        "sent_at",
+        "from_agent_id",
+        "to_agent_id",
+        "checkpoint_stage",
+        "capability_class",
+        "kind",
+        "payload_schema",
+        "payload_ref",
+        "input_artifact_refs",
+        "output_artifact_refs",
+        "capacity_reservation_refs",
+        "required_depends_on_message_ids",
+        "advisory_depends_on_message_ids",
+        "idempotency_key",
+        "status",
+        "visibility_tier",
+        "contains_raw_text",
+        "contains_profile_urls"
+      ]
+    },
+    {
+      "schema_id": "industry-agent-artifact-manifest.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "all-actual-agents",
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "consumer-projection",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "artifact_ref",
+        "artifact_kind",
+        "schema_version",
+        "produced_by_agent_id",
+        "produced_at",
+        "input_artifact_refs",
+        "event_ids",
+        "claim_ids",
+        "axis_keys",
+        "visibility_tier",
+        "contains_raw_text",
+        "contains_profile_urls",
+        "content_hash",
+        "storage_path",
+        "summary_cn"
+      ]
+    },
+    {
+      "schema_id": "decision-context-artifact.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "trend-agent"
+      ],
+      "required_fields": [
+        "artifact_id",
+        "schema_version",
+        "claim_candidate_batch_ref",
+        "audit_result_refs",
+        "registry_review_result_refs",
+        "tool_coverage_report_refs",
+        "agent_contribution_refs",
+        "claim_admission_assessment_ref"
+      ]
+    },
+    {
+      "schema_id": "capacity-reservation.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "reservation_id",
+        "schema_version",
+        "run_id",
+        "pool_id",
+        "requested_slots",
+        "granted_slots",
+        "estimated_cost_units",
+        "priority_class",
+        "reservation_state",
+        "decision_reason_codes",
+        "source_message_id"
+      ],
+      "controlled_literals": {
+        "pool_id": [
+          "finance_official_fetch_pool",
+          "policy_official_fetch_pool",
+          "registry_review_pool",
+          "audit_pass_pool",
+          "manual_review_pool",
+          "publication_and_p0_reserve_pool"
+        ],
+        "reserve_scope.reserve_class": [
+          "publication_packaging",
+          "public_safe_repair",
+          "p0_review_blocking"
+        ]
+      }
+    },
+    {
+      "schema_id": "human-review-queue-item.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "audit-agent",
+        "registry-agent",
+        "trend-agent",
+        "human-review-service"
+      ],
+      "consumer_roles": [
+        "weekly-packager",
+        "governance-console",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "review_id",
+        "schema_version",
+        "review_priority",
+        "queue_state",
+        "blocking_output_scope",
+        "review_execution_mode",
+        "default_system_action",
+        "source_message_id",
+        "capacity_reservation_refs"
+      ]
+    },
+    {
+      "schema_id": "same-run-dispatch-context.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "queue-dispatcher",
+        "all-actual-agents"
+      ],
+      "required_fields": [
+        "dispatch_context_id",
+        "schema_version",
+        "run_id",
+        "scheduling_key",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units",
+        "claim_admission_assessment_ref",
+        "capacity_reservation_refs"
+      ]
+    },
+    {
+      "schema_id": "industry-trend-card.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "consumer-projection",
+        "public-projection"
+      ],
+      "required_fields": [
+        "card_id",
+        "schema_version",
+        "claim_id",
+        "claim_ledger_ref",
+        "trend_name_cn",
+        "claim_cn",
+        "decision_tier",
+        "decision_confidence",
+        "coverage_audit_state",
+        "consumer_readiness_state",
+        "consumer_display_priority",
+        "evidence_matrix",
+        "leading_axes",
+        "supporting_axes",
+        "missing_axes",
+        "counter_axes",
+        "freshness_summary",
+        "source_trace_refs"
+      ]
+    },
+    {
+      "schema_id": "weekly-industry-trend-section.v2",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "consumer-projection",
+        "public-projection",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "section_id",
+        "schema_version",
+        "window_start",
+        "window_end",
+        "evidence_window_status",
+        "publication_readiness_status",
+        "governance_load_status",
+        "industry_window_status",
+        "run_snapshot",
+        "core_industry_trends",
+        "observing_industry_trends",
+        "wind_probes",
+        "project_heat_clusters",
+        "insufficient_evidence_directions",
+        "display_index",
+        "agent_contribution_report",
+        "tool_coverage_report",
+        "lineage_refs",
+        "run_budget_summary",
+        "ordering_basis"
+      ]
+    },
+    {
+      "schema_id": "public-weekly-industry-projection.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "public-surface"
+      ],
+      "required_fields": [
+        "projection_id",
+        "schema_version",
+        "source_weekly_section_ref",
+        "generated_at",
+        "window_start",
+        "window_end",
+        "publication_snapshot_at",
+        "headline_core_card_ids",
+        "tier_visible_card_ids",
+        "redacted_card_ids",
+        "blocked_card_ids",
+        "public_card_projection_refs",
+        "blocked_reason_codes"
+      ]
+    },
+    {
+      "schema_id": "consumer-weekly-industry-view.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "internal-product",
+        "internal-api",
+        "ops-console"
+      ],
+      "required_fields": [
+        "view_id",
+        "schema_version",
+        "source_weekly_section_ref",
+        "generated_at",
+        "window_start",
+        "window_end",
+        "view_scope",
+        "visible_card_ids",
+        "headline_card_ids",
+        "watchlist_card_ids",
+        "needs_review_card_ids",
+        "hidden_card_ids",
+        "ordering_basis",
+        "card_projection_refs"
+      ]
+    },
+    {
+      "schema_id": "task-request.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "task_request",
+      "producer_roles": [
+        "registry-agent",
+        "upstream-actual-agent"
+      ],
+      "consumer_roles": [
+        "search-agents",
+        "normalization-agent",
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "task_id",
+        "responsibility_id",
+        "axis_keys",
+        "registry_snapshot_ref",
+        "tool_registry_snapshot_ref",
+        "deadline_at",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units",
+        "input_artifact_refs",
+        "dispatch_context_ref"
+      ]
+    },
+    {
+      "schema_id": "task-result.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "task_result",
+      "producer_roles": [
+        "all-actual-agents"
+      ],
+      "consumer_roles": [
+        "task-requester",
+        "registry-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "task_id",
+        "request_message_id",
+        "status",
+        "output_artifact_refs",
+        "agent_contribution_ref",
+        "dispatch_context_ref",
+        "actual_latency_ms"
+      ]
+    },
+    {
+      "schema_id": "event-batch.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "evidence_batch",
+      "producer_roles": [
+        "search-agents"
+      ],
+      "consumer_roles": [
+        "normalization-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "events_ref",
+        "raw_tool_output_refs",
+        "agent_contribution_ref",
+        "tool_status_report_refs",
+        "responsibility_id",
+        "metric_input_completeness"
+      ]
+    },
+    {
+      "schema_id": "normalization-request.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "normalization_request",
+      "producer_roles": [
+        "registry-agent",
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "normalization-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "event_batch_refs",
+        "registry_snapshot_ref",
+        "dedupe_policy_version",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units"
+      ]
+    },
+    {
+      "schema_id": "normalization-result.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "normalization_result",
+      "producer_roles": [
+        "normalization-agent"
+      ],
+      "consumer_roles": [
+        "registry-agent",
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "normalized_event_batch_ref",
+        "rejected_event_batch_ref",
+        "merge_audit_ref",
+        "fact_resolution_audit_ref",
+        "used_event_batch_refs",
+        "actual_latency_ms"
+      ]
+    },
+    {
+      "schema_id": "evidence-gap-request.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "evidence_gap_request",
+      "producer_roles": [
+        "trend-agent",
+        "audit-agent",
+        "registry-agent"
+      ],
+      "consumer_roles": [
+        "search-agents",
+        "registry-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "claim_id",
+        "requested_agent_id",
+        "claim_admission_assessment_ref",
+        "gap_scope",
+        "missing_axis_keys",
+        "gap_reason_code",
+        "expected_source_constraints",
+        "deadline_at",
+        "retry_count",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units",
+        "input_artifact_refs"
+      ]
+    },
+    {
+      "schema_id": "evidence-gap-result.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "evidence_gap_result",
+      "producer_roles": [
+        "search-agents",
+        "registry-agent"
+      ],
+      "consumer_roles": [
+        "request-originator",
+        "trend-agent",
+        "audit-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "claim_id",
+        "request_message_id",
+        "gap_scope",
+        "status",
+        "output_artifact_refs",
+        "resolved_axis_keys",
+        "remaining_gap_reason_codes",
+        "actual_latency_ms"
+      ]
+    },
+    {
+      "schema_id": "registry-review-request.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "registry_review_request",
+      "producer_roles": [
+        "normalization-agent",
+        "audit-agent",
+        "search-agents"
+      ],
+      "consumer_roles": [
+        "registry-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "unknown_actor_refs",
+        "provisional_authority_refs",
+        "basis_event_ids",
+        "requested_action",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units"
+      ]
+    },
+    {
+      "schema_id": "registry-review-result.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "registry_review_result",
+      "producer_roles": [
+        "registry-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "registry_review_ref",
+        "registry_snapshot_ref",
+        "approved_entity_ids",
+        "rejected_entity_ids",
+        "reason_codes",
+        "actual_latency_ms"
+      ]
+    },
+    {
+      "schema_id": "audit-request.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "audit_request",
+      "producer_roles": [
+        "trend-agent",
+        "registry-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "claim_candidate_batch_ref",
+        "claim_evidence_link_batch_ref",
+        "normalized_event_batch_ref",
+        "registry_review_result_refs",
+        "supporting_event_ids",
+        "counter_event_ids",
+        "fact_resolution_audit_ref",
+        "claim_admission_assessment_ref",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "critical_path_class",
+        "estimated_cost_units"
+      ]
+    },
+    {
+      "schema_id": "audit-result.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "audit_result",
+      "producer_roles": [
+        "audit-agent"
+      ],
+      "consumer_roles": [
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "counter_evidence_audit_ref",
+        "audited_claim_candidate_ids",
+        "blocking_claim_candidate_ids",
+        "downgrade_recommendations",
+        "high_impact_unresolved_group_ids",
+        "actual_latency_ms"
+      ]
+    },
+    {
+      "schema_id": "claim-candidate-batch.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "claim_candidate_batch",
+      "producer_roles": [
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent",
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "claim_candidate_batch_ref",
+        "claim_evidence_link_batch_ref",
+        "claim_builder_audit_refs",
+        "candidate_group_ids",
+        "input_event_ids",
+        "generated_claim_ids",
+        "deferred_event_ids",
+        "rejected_event_ids"
+      ]
+    },
+    {
+      "schema_id": "trend-decision-input.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "trend_decision_input",
+      "producer_roles": [
+        "registry-agent",
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "trend-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "claim_candidate_batch_ref",
+        "claim_evidence_link_batch_ref",
+        "decision_context_artifact_ref",
+        "missing_context_reason_codes",
+        "project_weekly_artifact_refs"
+      ]
+    },
+    {
+      "schema_id": "tool-status-report.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "tool_status_report",
+      "producer_roles": [
+        "registry-agent",
+        "search-agents"
+      ],
+      "consumer_roles": [
+        "normalization-agent",
+        "trend-agent",
+        "weekly-packager"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "axis_tool_coverage_report_refs",
+        "tool_registry_snapshot_ref",
+        "active_route_level",
+        "active_source_class",
+        "veto_reason_codes",
+        "degradation_reason_codes",
+        "budget_status_summary"
+      ]
+    },
+    {
+      "schema_id": "failure-notice.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "failure_notice",
+      "producer_roles": [
+        "all-actual-agents",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "governance-console",
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "reason_code",
+        "failure_scope",
+        "correlation_id",
+        "summary_cn"
+      ]
+    },
+    {
+      "schema_id": "industry-claim-evidence-link.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent",
+        "trend-agent",
+        "weekly-packager"
+      ],
+      "required_fields": [
+        "link_id",
+        "claim_id",
+        "event_id",
+        "axis",
+        "role",
+        "dependency_strength",
+        "materiality_class",
+        "is_tier_material",
+        "materiality_reason_codes",
+        "derived_from_source_polarity_cue",
+        "reason_codes",
+        "created_by_agent_id",
+        "reviewed_by_agent_ids"
+      ]
+    },
+    {
+      "schema_id": "industry-merge-audit.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "normalization-agent"
+      ],
+      "consumer_roles": [
+        "audit-agent",
+        "trend-agent",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "merged_event_groups",
+        "fact_groups",
+        "cross_axis_projection_groups",
+        "source_chain_dedupe_groups",
+        "repeated_actor_groups",
+        "merge_resolution_notes",
+        "rejected_event_ids",
+        "rejected_reasons",
+        "unresolved_conflicts"
+      ]
+    },
+    {
+      "schema_id": "counter-evidence-audit.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "audit-agent"
+      ],
+      "consumer_roles": [
+        "trend-agent",
+        "weekly-packager",
+        "governance-console",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "audited_by_agent_id",
+        "audited_at",
+        "audit_mode",
+        "audit_priority",
+        "blocking_counter_evidence",
+        "counter_evidence_severity",
+        "blocking_scopes",
+        "supporting_event_ids_reviewed",
+        "reviewed_claim_evidence_link_ids",
+        "unchecked_supporting_event_ids",
+        "sampling_reason_codes",
+        "counter_event_ids",
+        "missing_axis_keys",
+        "source_bias_notes",
+        "conflict_groups",
+        "decision_state",
+        "contested_by_agent_ids",
+        "escalation_reason_codes",
+        "unresolved_questions"
+      ]
+    },
+    {
+      "schema_id": "axis-evidence-summary.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent",
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "trend-agent",
+        "weekly-packager",
+        "consumer-projection",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "axis",
+        "axis_applicability_state",
+        "status",
+        "coverage_state",
+        "freshness_state",
+        "axis_score",
+        "score_formula_version",
+        "subscore_rubric_version",
+        "scoring_profile_id",
+        "authority_score",
+        "freshness_score",
+        "independence_score",
+        "primary_source_score",
+        "continuity_score",
+        "agent_relevance_score",
+        "supporting_event_ids",
+        "counter_event_ids",
+        "missing_reason_codes",
+        "leading_entities",
+        "source_tiers_present",
+        "tool_route_state",
+        "degradation_reason_codes",
+        "summary_cn"
+      ]
+    },
+    {
+      "schema_id": "axis-tool-coverage-report.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "registry-agent",
+        "search-agents"
+      ],
+      "consumer_roles": [
+        "normalization-agent",
+        "trend-agent",
+        "weekly-packager",
+        "governance-console",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "axis",
+        "primary_tool_ids",
+        "secondary_toolset_ids",
+        "fallback_tool_ids",
+        "last_resort_tool_ids",
+        "eligible_tool_ids",
+        "selected_from_tool_ids",
+        "attempted_tool_ids",
+        "selection_scorecard_version",
+        "selection_score_total",
+        "selection_score_breakdown",
+        "veto_reason_codes",
+        "selection_reason_codes",
+        "active_route_level",
+        "active_tool_ids",
+        "active_source_class",
+        "route_status",
+        "budget_status",
+        "degraded",
+        "degradation_reason_codes",
+        "candidate_ref_count",
+        "accepted_ref_count",
+        "citation_trace_rate",
+        "evidence_event_ids",
+        "rejected_event_ids",
+        "registry_snapshot_ref",
+        "tool_registry_snapshot_ref",
+        "summary_cn"
+      ]
+    },
+    {
+      "schema_id": "claim-admission-assessment.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "trend-agent",
+        "main-coordinator-if-present"
+      ],
+      "consumer_roles": [
+        "queue-dispatcher",
+        "shared-pool-allocator",
+        "trend-agent",
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "assessment_id",
+        "schema_version",
+        "run_id",
+        "claim_id",
+        "candidate_group_id",
+        "claim_family_key",
+        "projected_decision_tier",
+        "projected_consumer_readiness_state",
+        "projected_consumer_display_priority",
+        "priority_class",
+        "projected_blocking_classes",
+        "key_independent_confirmation_complete",
+        "estimated_runtime_minutes",
+        "estimated_cost_units",
+        "estimated_required_pool_ids",
+        "assessment_snapshot_cutoff_at",
+        "assessment_reason_codes",
+        "source_artifact_refs"
+      ]
+    },
+    {
+      "schema_id": "fact-resolution-audit.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "normalization-agent"
+      ],
+      "consumer_roles": [
+        "trend-agent",
+        "audit-agent",
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "audit_id",
+        "schema_version",
+        "snapshot_id",
+        "event_fact_assignments",
+        "relation_edges",
+        "high_impact_unresolved_groups"
+      ]
+    },
+    {
+      "schema_id": "rolling-evidence-window-snapshot.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "trend-agent",
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "snapshot_id",
+        "schema_version",
+        "window_end",
+        "carry_forward_horizon_days",
+        "derived_from_daily_pack_refs",
+        "derived_from_claim_ledger_refs",
+        "carry_forward_entries",
+        "expired_entry_ids",
+        "fact_snapshot_ref",
+        "registry_snapshot_ref"
+      ]
+    },
+    {
+      "schema_id": "daily-industry-evidence-pack.v2",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "normalization-agent",
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "weekly-packager",
+        "replay-runner",
+        "governance-console"
+      ],
+      "required_fields": [
+        "schema_version",
+        "date",
+        "generated_at",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_ids",
+        "input_artifact_refs",
+        "normalized_event_batch_ref",
+        "rejected_event_batch_ref",
+        "agent_contributions",
+        "accepted_event_count",
+        "rejected_event_count",
+        "registry_snapshot_ref",
+        "tool_registry_snapshot_ref",
+        "public_projection",
+        "cost_and_degradation_summary",
+        "coverage_summary"
+      ]
+    },
+    {
+      "schema_id": "budget-arbitration-record.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present",
+        "weekly-packager"
+      ],
+      "consumer_roles": [
+        "queue-dispatcher",
+        "shared-pool-allocator",
+        "weekly-packager",
+        "governance-console",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "arbitration_id",
+        "schema_version",
+        "run_id",
+        "scope_kind",
+        "scope_key",
+        "requested_budget_class",
+        "runtime_budget_profile_id",
+        "cost_budget_profile_id",
+        "estimated_cost_units",
+        "source_message_id",
+        "decision",
+        "reason_codes",
+        "settlement_snapshot_at"
+      ]
+    }
+  ]
+}

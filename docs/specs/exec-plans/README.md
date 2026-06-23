@@ -15,6 +15,7 @@
 | `trend-radar-visual-console-v0.1.exec-plan.md` | `Proposed` | 为 Trend Radar Visual Console 落地统一读取层、状态模型、5 个一级消费视图与跨视图钻取契约 | 进入 exec-plan review，通过后实施 |
 | `agent-enhancement-layer-and-weekly-trend-v0.2.exec-plan.md` | `Completed` | 为 daily / weekly 报告落地 Agent 增强消费层、风险复核、显式个性化与 7 天周趋势抽象 | 已与当前设计、代码和验证记录同步；后续新增语义要求走补充记录或 follow-up |
 | `report-output-remediation-v0.1.exec-plan.md` | `Proposed` | 修复当前 `daily / run-summary / verify-daily` 产物中 freshness source、项目分类、可读性和质检口径偏差 | 进入修复 review，通过后实施 |
+| `external-agentreach-live-runner-consumer-loop.exec-plan.md` | `Proposed` | 把外接 AgentReach 真实 runner 结果消费成可降级、可审计、可展示的 daily / weekly / browser 闭环 | 进入 exec-plan review，通过后实施 |
 | `ecosystem-focused-observer-v0.1.exec-plan.md` | `Proposed` | 为 `ecosystem-focused-observer-design.md` 落地独立长尾生态观察模块、observer artifacts / run-summary status，以及替换一级 `kb` 导航的 `observer` 工作台 | 进入 exec-plan review，通过后实施 |
 | `project-search-system-redesign-v0.1.exec-plan.md` | `Proposed` | 为 `project-search-system-redesign-design.md` 落地双栈发现、16 个 must-cover 目录、mission scout/deep、coverage atlas、gap ledger、gap pressure、observer incubator 与新日报/控制台契约 | 进入 exec-plan review，通过后实施 |
 | `natural-language-fuzzy-search-recommendation-v0.1.exec-plan.md` | `Proposed` | 为 `natural-language-fuzzy-search-recommendation-design.md` 落地 direct search gate、zero-result LLM routing、7 类语义分类、敏感领域关键词搜索、fuzzy endpoint、前端状态与审计诊断 | 进入 exec-plan review，通过后实施 |

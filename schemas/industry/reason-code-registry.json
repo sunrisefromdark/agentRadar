@@ -1,0 +1,327 @@
+{
+  "schema_version": "reason-code-registry.v1",
+  "status": "active",
+  "codes": [
+    {
+      "code": "budget_exceeded",
+      "family": "budget",
+      "meaning_cn": "预算已达到当前 policy 允许上限。",
+      "allowed_in_schemas": [
+        "capacity-reservation.v1",
+        "failure-notice.v1",
+        "weekly-industry-trend-section.v2"
+      ],
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present"
+      ],
+      "consumer_required_behavior": "must_degrade_or_defer",
+      "forbidden_synonyms": [
+        "over_budget",
+        "budget_limit_hit"
+      ]
+    },
+    {
+      "code": "capacity_exhausted",
+      "family": "capacity",
+      "meaning_cn": "共享池或 reservation lane 容量已耗尽。",
+      "allowed_in_schemas": [
+        "capacity-reservation.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "allocator-role",
+        "queue-dispatcher"
+      ],
+      "consumer_required_behavior": "must_queue_or_defer",
+      "forbidden_synonyms": [
+        "pool_exhausted",
+        "slot_full"
+      ]
+    },
+    {
+      "code": "timeout_budget_exhausted",
+      "family": "budget",
+      "meaning_cn": "当前关键路径剩余时间不足以继续启动该动作。",
+      "allowed_in_schemas": [
+        "failure-notice.v1",
+        "weekly-industry-trend-section.v2"
+      ],
+      "producer_roles": [
+        "main-coordinator-if-present",
+        "allocator-role"
+      ],
+      "consumer_required_behavior": "must_stop_same_run_expansion",
+      "forbidden_synonyms": [
+        "time_budget_hit",
+        "timeout_limit_hit"
+      ]
+    },
+    {
+      "code": "late_snapshot_cutoff",
+      "family": "snapshot",
+      "meaning_cn": "结果晚于当前 snapshot cutoff，不能直接回写本轮结论。",
+      "allowed_in_schemas": [
+        "failure-notice.v1",
+        "same-run-dispatch-context.v1"
+      ],
+      "producer_roles": [
+        "queue-dispatcher",
+        "weekly-packager"
+      ],
+      "consumer_required_behavior": "must_reroute_to_next_run_or_rerun",
+      "forbidden_synonyms": [
+        "late_result",
+        "missed_cutoff"
+      ]
+    },
+    {
+      "code": "schema_mismatch",
+      "family": "schema",
+      "meaning_cn": "消息 kind 与 payload schema 或字段契约不匹配。",
+      "allowed_in_schemas": [
+        "industry-agent-message.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "queue-dispatcher",
+        "schema-validator"
+      ],
+      "consumer_required_behavior": "must_reject",
+      "forbidden_synonyms": [
+        "payload_mismatch",
+        "invalid_schema"
+      ]
+    },
+    {
+      "code": "unsupported_version",
+      "family": "schema",
+      "meaning_cn": "consumer 不支持当前 major/minor 版本。",
+      "allowed_in_schemas": [
+        "industry-agent-message.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "queue-dispatcher",
+        "consumer-runtime"
+      ],
+      "consumer_required_behavior": "must_reject_and_emit_failure_notice",
+      "forbidden_synonyms": [
+        "unknown_version",
+        "version_not_supported"
+      ]
+    },
+    {
+      "code": "public_output_blocked",
+      "family": "publication",
+      "meaning_cn": "对象可保留 internal，但不得进入 public projection。",
+      "allowed_in_schemas": [
+        "weekly-industry-trend-section.v2",
+        "public-weekly-industry-projection.v1",
+        "human-review-queue-item.v1"
+      ],
+      "producer_roles": [
+        "weekly-packager",
+        "audit-agent",
+        "registry-agent"
+      ],
+      "consumer_required_behavior": "must_block_public_projection_only",
+      "forbidden_synonyms": [
+        "public_blocked",
+        "not_public_safe"
+      ]
+    },
+    {
+      "code": "review_pending_p0",
+      "family": "review",
+      "meaning_cn": "仍有未关闭的 P0 review，阻断当前输出域。",
+      "allowed_in_schemas": [
+        "human-review-queue-item.v1",
+        "weekly-industry-trend-section.v2"
+      ],
+      "producer_roles": [
+        "human-review-service",
+        "weekly-packager"
+      ],
+      "consumer_required_behavior": "must_block_configured_scope",
+      "forbidden_synonyms": [
+        "p0_waiting_review"
+      ]
+    },
+    {
+      "code": "review_pending_p1",
+      "family": "review",
+      "meaning_cn": "仍有未关闭的 P1 review，需要保守降级但不一定阻断 internal ledger。",
+      "allowed_in_schemas": [
+        "human-review-queue-item.v1",
+        "weekly-industry-trend-section.v2"
+      ],
+      "producer_roles": [
+        "human-review-service",
+        "weekly-packager"
+      ],
+      "consumer_required_behavior": "must_degrade_readiness_or_confidence",
+      "forbidden_synonyms": [
+        "p1_waiting_review"
+      ]
+    },
+    {
+      "code": "review_pending_p2",
+      "family": "review",
+      "meaning_cn": "仍有未关闭的 P2 review，默认进入 backlog 或后补治理。",
+      "allowed_in_schemas": [
+        "human-review-queue-item.v1",
+        "weekly-industry-trend-section.v2"
+      ],
+      "producer_roles": [
+        "human-review-service",
+        "weekly-packager"
+      ],
+      "consumer_required_behavior": "may_keep_internal_and_defer",
+      "forbidden_synonyms": [
+        "p2_waiting_review"
+      ]
+    },
+    {
+      "code": "authority_hold",
+      "family": "authority",
+      "meaning_cn": "authority 认定尚未通过，禁止把主体晋升到更高 authority tier。",
+      "allowed_in_schemas": [
+        "registry-review-result.v1",
+        "weekly-industry-trend-section.v2",
+        "human-review-queue-item.v1"
+      ],
+      "producer_roles": [
+        "registry-agent",
+        "audit-agent"
+      ],
+      "consumer_required_behavior": "must_block_authority_promotion",
+      "forbidden_synonyms": [
+        "authority_pending",
+        "hold_authority"
+      ]
+    },
+    {
+      "code": "owner_arbitration_unresolved",
+      "family": "normalization",
+      "meaning_cn": "事实 owner 主语义尚未定案，不能静默固化为最终 owner。",
+      "allowed_in_schemas": [
+        "fact-resolution-audit.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "normalization-agent"
+      ],
+      "consumer_required_behavior": "must_keep_provisional_or_reroute_to_review",
+      "forbidden_synonyms": [
+        "owner_conflict",
+        "owner_pending"
+      ]
+    },
+    {
+      "code": "dispatch_context_missing",
+      "family": "dispatch",
+      "meaning_cn": "需要 same-run 调度的消息缺少 dispatch context。",
+      "allowed_in_schemas": [
+        "industry-agent-message.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "queue-dispatcher",
+        "schema-validator"
+      ],
+      "consumer_required_behavior": "must_reject_before_queueing",
+      "forbidden_synonyms": [
+        "missing_dispatch_context"
+      ]
+    },
+    {
+      "code": "reservation_missing",
+      "family": "dispatch",
+      "meaning_cn": "需要 reservation 的动作缺少 granted reservation 引用。",
+      "allowed_in_schemas": [
+        "industry-agent-message.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "queue-dispatcher",
+        "schema-validator"
+      ],
+      "consumer_required_behavior": "must_reject_before_execution",
+      "forbidden_synonyms": [
+        "missing_reservation"
+      ]
+    },
+    {
+      "code": "lineage_failed",
+      "family": "lineage",
+      "meaning_cn": "关键 lineage ref 缺失或无法解析。",
+      "allowed_in_schemas": [
+        "weekly-industry-trend-section.v2",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "consumer_required_behavior": "must_block_ready_public_output",
+      "forbidden_synonyms": [
+        "lineage_missing",
+        "trace_broken"
+      ]
+    },
+    {
+      "code": "reservation_superseded",
+      "family": "dispatch",
+      "meaning_cn": "当前 reservation 或 budget 记录已被后继记录替代。",
+      "allowed_in_schemas": [
+        "capacity-reservation.v1",
+        "budget-arbitration-record.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present"
+      ],
+      "consumer_required_behavior": "must_follow_supersede_chain",
+      "forbidden_synonyms": [
+        "reservation_replaced"
+      ]
+    },
+    {
+      "code": "partial_budget_grant",
+      "family": "budget",
+      "meaning_cn": "预算只获得部分授予，需显式保留剩余缺口。",
+      "allowed_in_schemas": [
+        "capacity-reservation.v1",
+        "budget-arbitration-record.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "allocator-role",
+        "queue-dispatcher"
+      ],
+      "consumer_required_behavior": "must_preserve_partial_grant",
+      "forbidden_synonyms": [
+        "partial_grant"
+      ]
+    },
+    {
+      "code": "settlement_superseded",
+      "family": "budget",
+      "meaning_cn": "同一预算作用域已有后继结算记录。",
+      "allowed_in_schemas": [
+        "budget-arbitration-record.v1",
+        "failure-notice.v1"
+      ],
+      "producer_roles": [
+        "allocator-role",
+        "main-coordinator-if-present"
+      ],
+      "consumer_required_behavior": "must_use_latest_settlement",
+      "forbidden_synonyms": [
+        "duplicate_settlement"
+      ]
+    }
+  ]
+}

@@ -1,5 +1,7 @@
 ﻿import React, { useEffect, useState } from "react";
 
+import type { HeadProjectExceptionReason, ObserverPresetBucket, ObserverPresetFilter, ProjectUtilityHint, RepeatExposureState } from "../../src/types.ts";
+
 export type ObserverEntry = {
   key: string;
   repoFullName: string;
@@ -35,6 +37,18 @@ export type ObserverEntry = {
   orgSeeds: string[];
   searchOrganizations?: string[];
   searchText?: string;
+  presetBucket: ObserverPresetBucket;
+  utilityHint: ProjectUtilityHint;
+  repeatExposureState: RepeatExposureState;
+  headProjectExceptionReason: HeadProjectExceptionReason | null;
+  hardInfra: boolean;
+};
+
+export type ObserverPresetOption = {
+  key: ObserverPresetFilter;
+  label: string;
+  description: string;
+  count: number;
 };
 
 export type ObserverViewProps = {
@@ -101,6 +115,8 @@ export type ObserverViewProps = {
   notes: string[];
   ecosystemBadges: string[];
   entries: ObserverEntry[];
+  defaultPreset: ObserverPresetFilter;
+  presetOptions: ObserverPresetOption[];
   initialSelectedKey: string | null;
   canTrack: boolean;
   trackingActionPath: string;
@@ -193,6 +209,8 @@ const DEFAULT_PROPS: ObserverViewProps = {
   notes: [],
   ecosystemBadges: [],
   entries: [],
+  defaultPreset: "all",
+  presetOptions: [],
   initialSelectedKey: null,
   canTrack: false,
   trackingActionPath: "",
@@ -680,6 +698,11 @@ export function filterObserverEntries(entries: ObserverEntry[], searchQuery: str
     .map((item) => item.entry);
 }
 
+export function filterObserverEntriesByPreset(entries: ObserverEntry[], preset: ObserverPresetFilter): ObserverEntry[] {
+  if (preset === "all") return entries;
+  return entries.filter((entry) => entry.presetBucket === preset);
+}
+
 export function paginateObserverEntries<T>(entries: T[], page: number, pageSize: number): ObserverPagination<T> {
   const safePageSize = Math.max(1, Math.floor(pageSize) || 1);
   const totalCount = entries.length;
@@ -820,6 +843,7 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchSuggestionIndex, setSearchSuggestionIndex] = useState(0);
+  const [selectedPreset, setSelectedPreset] = useState<ObserverPresetFilter>(props.defaultPreset);
   const [selectedKey, setSelectedKey] = useState<string | null>(props.initialSelectedKey ?? props.entries[0]?.key ?? null);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailScrollActive, setDetailScrollActive] = useState(false);
@@ -868,6 +892,10 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
   }, [isMobileViewport]);
 
   useEffect(() => {
+    setSelectedPreset(props.defaultPreset);
+  }, [props.defaultPreset]);
+
+  useEffect(() => {
     if (props.entries.length === 0) {
       setSelectedKey(null);
       return;
@@ -893,7 +921,8 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
     };
   }, [normalizedSuggestions.length]);
 
-  const filteredEntries = filterObserverEntries(props.entries, normalizedSearch);
+  const presetEntries = filterObserverEntriesByPreset(props.entries, selectedPreset);
+  const filteredEntries = filterObserverEntries(presetEntries, normalizedSearch);
   const paginatedEntries = paginateObserverEntries(filteredEntries, currentPage, OBSERVER_PAGE_SIZE);
   const visibleEntries = paginatedEntries.items;
 
@@ -909,7 +938,7 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [normalizedSearch]);
+  }, [normalizedSearch, selectedPreset]);
 
   useEffect(() => {
     if (paginatedEntries.currentPage !== currentPage) {
@@ -1054,10 +1083,36 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
             </div>
           </section>
 
+          <section className="mb-4 md:mb-5">
+            <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
+              {props.presetOptions.map((option) => {
+                const isActive = option.key === selectedPreset;
+                return (
+                  <button
+                    key={option.key}
+                    type="button"
+                    onClick={() => setSelectedPreset(option.key)}
+                    className={`rounded-[20px] border px-4 py-3 text-left transition ${
+                      isActive
+                        ? "border-indigo-400/60 bg-indigo-500/[0.08] text-indigo-700 dark:border-indigo-400/50 dark:bg-indigo-500/[0.12] dark:text-indigo-200"
+                        : "border-neutral-200/70 bg-white/45 text-neutral-600 hover:border-indigo-200/80 dark:border-slate-800/80 dark:bg-slate-950/40 dark:text-neutral-300"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-[12px] md:text-[13px] font-bold">{option.label}</span>
+                      <span className="rounded-full bg-black/5 px-2 py-0.5 text-[11px] font-mono dark:bg-white/10">{option.count}</span>
+                    </div>
+                    <p className="mt-1.5 text-[11px] md:text-[12px] leading-5 opacity-80">{option.description}</p>
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
           <div className="flex items-center justify-between px-1 mb-2.5 md:mb-3">
             <div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                共找到 {filteredEntries.length} 条结果
+                {isZh ? `当前视图 ${filteredEntries.length} 条结果` : `${filteredEntries.length} results in this view`}
               </p>
             </div>
             <div className="text-right flex flex-wrap items-center justify-end gap-2">

@@ -72,6 +72,17 @@ function filtersFromRequest(request: FuzzyProjectSearchRequest): { paradigm: str
   };
 }
 
+function presetFromRequest(request: FuzzyProjectSearchRequest): string {
+  const rawPath = request.page_context?.path ?? "";
+  if (!rawPath) return "all";
+  try {
+    const parsed = new URL(rawPath, "http://localhost");
+    return parsed.searchParams.get("preset")?.trim() || "all";
+  } catch {
+    return "all";
+  }
+}
+
 function projectIds(records: ProjectSearchRecord[]): string[] {
   return records.map((record) => record.projectId);
 }
@@ -131,6 +142,7 @@ function hotProjectRecords(records: ProjectSearchRecord[], request: FuzzyProject
   return filterAndSortProjectCards(records, {
     search: "",
     sort: sortFromRequest(request),
+    preset: presetFromRequest(request),
     paradigm: active.paradigm,
     persistence: active.persistence,
   });
@@ -141,6 +153,7 @@ function directProjectRecords(records: ProjectSearchRecord[], request: FuzzyProj
   return filterAndSortProjectCards(records, {
     search: request.raw_query,
     sort: sortFromRequest(request),
+    preset: presetFromRequest(request),
     paradigm: active.paradigm,
     persistence: active.persistence,
   });
@@ -354,6 +367,7 @@ function expandedProjectRecords(
     const result = filterAndSortProjectCards(records, {
       search: expanded.query,
       sort: sortFromRequest(request, interpretation),
+      preset: presetFromRequest(request),
       paradigm: active.paradigm,
       persistence: active.persistence,
     });
@@ -379,6 +393,7 @@ function responseFromFallback(
     const constrained = filterAndSortProjectCards(records, {
       search: constraintTerms.join(" "),
       sort: sortFromRequest(request),
+      preset: presetFromRequest(request),
       paradigm: active.paradigm,
       persistence: active.persistence,
     }).filter((record) => constraintTerms.some((term) => projectSearchRecordContainsTerm(record, term)));

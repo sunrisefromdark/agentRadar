@@ -203,6 +203,42 @@ interface AxisToolCoverageReport {
 
 本设计采用需求文档中的 Seed Registry 冻结基线作为目标态 registry，不允许缩减为热门公司、只实现部分轴、先落地最小子集，或把下列覆盖族降级为后续扩展项。以下覆盖族必须在目标态中 materialize；新增前沿主体只能追加到该完整基线之上。这里的 `materialize` 指完整进入 registry、具备 authority / access / review / monitoring_tier 等治理字段，不等于每个 seed 都要默认高频主动扫描。
 
+### `RegistryCandidate` 与动态准入治理
+
+完整 seed family 冻结的是覆盖基线，不是“只有名单、没有准入机制”。为避免 registry 退化成纯手工常量表，当前设计补充冻结 `RegistryCandidate` 与动态准入生命周期：
+
+```ts
+interface RegistryCandidate {
+  candidate_id: string;
+  canonical_label: string;
+  discovered_at: string;
+  discovered_from_event_ids: string[];
+  proposed_axis_keys: IndustryEvidenceAxisKey[];
+  proposed_entity_type: IndustryEntityRegistryEntry["entity_type"];
+  lifecycle_state:
+    | "candidate_discovered"
+    | "provisional_tracked"
+    | "materialized"
+    | "stale_watch"
+    | "retired_or_merged";
+  admission_reason_codes: string[];
+  promotion_evidence_refs: string[];
+  review_due_at?: string;
+  last_seen_at?: string;
+  staleness_reason_codes: string[];
+  merge_into_entity_id?: string;
+}
+```
+
+冻结规则：
+
+- 新发现主体不得因为“尚未进入完整 seed family 名单”就直接消失；必须先进入 `RegistryCandidate` 或等价治理对象。
+- `candidate_discovered` 可被 watchlist、gap request、人工 review 或低优先级补证消费，但不得自动继承 `core/proven` authority。
+- 只有在跨窗口连续性、可信 source chain、关键 axis 命中或人工治理确认达到阈值后，候选主体才允许升为 `provisional_tracked` 或 `materialized`。
+- `materialized` 表示该主体已正式进入 registry 主表并接受 `monitoring_tier`、authority、access、review 和 lifecycle 治理；它不是“默认进入 core_monitor”的同义词。
+- 长期未命中、已被并入他体、长期停更或事实语义失效的主体不得直接删除；必须进入 `stale_watch` 或 `retired_or_merged`，并保留 `merge_into_entity_id` 或稳定 audit 记录。
+- 新主体的动态准入只能扩展完整基线，不能替代完整基线；实现阶段不得以“支持动态发现”为由回退静态覆盖族 materialization。
+
 ### Seed taxonomy 与 lifecycle 冻结
 
 以下规则与 [03-数据模型契约](03-数据模型契约.md) 中的 `IndustryEntityRegistryEntry` 一起构成 Seed Registry 的边界约束：
@@ -212,6 +248,7 @@ interface AxisToolCoverageReport {
 - rename、merge、退场、停更和长期失效不得通过删 entry 处理；必须保留旧 ID、记录生效时间，并通过 `merge_into_entity_id` 或 `replacement_entity_ids` 指向新的 canonical 主体。
 - 父子主体可以同时进入冻结基线，但同一 event 只能命中一个最贴近事实语义的 canonical owner；父子 entry 不得双计成两个独立 authority 信号。
 - seed family 名单只冻结“必须 materialize 的覆盖族”，不冻结“所有子主体都必须同频主动扫描”；扫描优先级仍由 `monitoring_tier` 与 `axis_monitoring_overrides` 决定。
+- `RegistryCandidate.lifecycle_state` 与 `IndustryEntityRegistryEntry.lifecycle_status` 必须可衔接：候选主体升级为正式 registry entry 时，必须保留 candidate -> materialized 的审计链；不得只保留最终主表结果。
 
 ### 大厂 / 产品与平台主体
 

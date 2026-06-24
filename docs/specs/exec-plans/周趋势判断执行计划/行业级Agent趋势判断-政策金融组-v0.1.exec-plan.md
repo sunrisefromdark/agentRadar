@@ -1,0 +1,315 @@
+# 执行计划：行业级Agent趋势判断-政策金融组 v0.1
+
+## 文档状态
+
+- 版本：`v0.1`
+- 当前状态：`Draft`
+- 上游总控：
+  - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
+- 对应设计：
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/02-证据轴与相关性门控.md`
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/03-数据模型契约.md`
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/05-多Agent协作与中间件.md`
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/06-工具保障与SeedRegistry.md`
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/08-验证追溯与完成定义.md`
+  - `docs/specs/design-docs/行业级Agent趋势判断设计/09-术语与审计词汇表.md`
+- 负责人：`1号执行人`
+
+## 目标
+
+只把政策与金融三轴输入面做扎实：稳定产出 `IndustrySignalEvent`、`AxisToolCoverageReport`、`IndustryAgentContribution` 和失败/降级账本，不碰最终 tier decision。
+
+## 负责范围
+
+对应运行时 Agent：
+
+- `finance-agent`
+- `policy-agent`
+
+对应职责项：
+
+- `capital-finance`
+- `policy-regulatory`
+- `policy-research-thinktank`
+
+负责交付：
+
+1. finance / policy / thinktank 三轴 canonical event 生产。
+2. official-first route 选择、降级、stop policy、budget 命中与 reason code 落账。
+3. 这三轴的 daily 输入包、tool coverage、agent contribution、rejected / failed / unavailable 证据。
+
+## 单写者边界
+
+### 允许修改
+
+- `src/industry/agents/finance-agent/*`
+- `src/industry/agents/policy-agent/*`
+- `src/__tests__/industry/agents/finance-agent/*`
+- `src/__tests__/industry/agents/policy-agent/*`
+- `fixtures/industry/agents/finance-agent/*`
+- `fixtures/industry/agents/policy-agent/*`
+- `data/industry-seeds/agents/finance-agent/*`
+- `data/industry-seeds/agents/policy-agent/*`
+- finance / policy tool fixture、doc fixture
+- 本组目录下的 docs-note / handoff-note / fixture note
+
+### 禁止修改
+
+- 不得直接修改 `schemas/industry/*`
+- 不得修改 `src/action/weekly*`
+- 不得写 `decision_tier`、`decision_confidence`、`coverage_audit_state`
+- 不得把搜索聚合、媒体转述、研究摘要直接当 `policy_regulatory` 或 `capital_finance` 的 primary supporting source
+- 不得直接修改 `docs/specs/services/*`、`docs/specs/constraints/*`、`docs/specs/feedback-loops/*`、`README.md`、`data/README.md`
+
+## 工作目录与文件落点
+
+本组独立工作目录固定为：
+
+- `src/industry/agents/finance-agent/*`
+- `src/industry/agents/policy-agent/*`
+- `src/__tests__/industry/agents/finance-agent/*`
+- `src/__tests__/industry/agents/policy-agent/*`
+- `fixtures/industry/agents/finance-agent/*`
+- `fixtures/industry/agents/policy-agent/*`
+- `data/industry-seeds/agents/finance-agent/*`
+- `data/industry-seeds/agents/policy-agent/*`
+
+目录内建议按“轴 + 流水线阶段”拆分，避免一个文件同时承载 source、budget、event、handoff：
+
+- `src/industry/agents/finance-agent/sourceCatalog.ts`
+- `src/industry/agents/finance-agent/routeSelection.ts`
+- `src/industry/agents/finance-agent/fetchStopPolicy.ts`
+- `src/industry/agents/finance-agent/eventBuilder.ts`
+- `src/industry/agents/finance-agent/coverageReport.ts`
+- `src/industry/agents/finance-agent/contributionLedger.ts`
+- `src/industry/agents/finance-agent/handoff.ts`
+- `src/industry/agents/policy-agent/regulatorySourceCatalog.ts`
+- `src/industry/agents/policy-agent/regulatoryRouteSelection.ts`
+- `src/industry/agents/policy-agent/thinktankSourceCatalog.ts`
+- `src/industry/agents/policy-agent/thinktankRouteSelection.ts`
+- `src/industry/agents/policy-agent/eventBuilder.ts`
+- `src/industry/agents/policy-agent/coverageReport.ts`
+- `src/industry/agents/policy-agent/contributionLedger.ts`
+- `src/industry/agents/policy-agent/handoff.ts`
+- `src/__tests__/industry/agents/finance-agent/{contract,unit,negative,replay}*.test.ts`
+- `src/__tests__/industry/agents/policy-agent/{contract,unit,negative,replay}*.test.ts`
+
+落点约束：
+
+- finance 轴逻辑只放 `src/industry/agents/finance-agent/*`，不得回写 `src/action/*`。
+- `policy_regulatory` 与 `policy_research_thinktank` 虽同属 policy 组，但 source class、route、anti-upgrade fixture 必须拆文件，不能揉成一个 `policy.ts` 大文件。
+- 本组若需要共享本组内部 helper，只能放在 `src/industry/agents/finance-agent/` 或 `src/industry/agents/policy-agent/` 下；不得把 helper 扔进共享目录等别组复用。
+- fixture 按语义拆目录：`fixtures/industry/agents/finance-agent/{official-first,owner-boundary,anti-upgrade,compatibility}/`、`fixtures/industry/agents/policy-agent/{official-first,owner-boundary,anti-upgrade,compatibility}/`，避免所有反例堆在一个文件。
+- 现有 `src/industry/tools/*`、其他旧目录只允许只读复用；如需改写或抽共享 runtime，必须先提 `shared-runtime-note`，由中台组上收进 `src/industry/platform/*`。
+
+### 运行方式
+
+- 本组优先使用独立 worktree / workspace root；若无法隔离，至少保证只写本组目录与本组 fixture / seed / test。
+- `finance / policy` 的 source catalog、route selection、coverage、handoff 只允许在本组目录内闭合，不得写进 `src/action/*`。
+- `shared-runtime-note` 只负责描述需要上收的共享运行时，不允许把政策金融 helper 再复制进学术或产品生态目录。
+- 若需要修改跨组 specs / README，只能提交 `docs-change-note` 给中台组统一写入；本组不得直接改跨组文档真源。
+
+文件规模约束：
+
+- 任意文件必须 `< 2000` 行。
+- 任一文件超过 `1200` 行时，立即按 finance / regulatory / thinktank 或按 `source -> policy -> builder -> handoff` 拆分。
+- 测试文件超过 `800` 行时，优先拆成 contract、unit、negative、replay 四类。
+
+## 依赖输入
+
+开始前必须拿到：
+
+1. 中台组发布的 schema 真源版本与 reason/state 字典。
+2. official-first route 与 `AxisToolCoverageReport` 字段定义。
+3. 总控计划中的单写者边界。
+4. 已发布的共享治理契约：
+   - `field-ownership-policy.v1`
+   - `fact-resolution-profile.v1`
+   - `agent-relevance-profile.v1`
+   - `SourceAuthorityContextProfile`
+   - `tool-selection-scorecard.v1`
+   - `axis-runtime-budget-profile.v1`
+   - `axis-activation-policy.v1`
+   - `canonical-fetch-stop-policy.v1`
+   - `same-run-eligible-micro-task-matrix.v1`
+   - `micro-task-runtime-budget-profile.v1`
+   - `micro-task-cost-profile.v1`
+   - `claim-admission-budget-profile.v1`
+   - `claim-runtime-budget-profile.v1`
+   - `run-critical-path-budget.v1`
+   - `shared-capacity-policy.v1`
+   - `run-total-budget-policy.v1`
+   - `same-run-review-availability-policy.v1`
+   - `gap-scope-contract.v1`
+   - `message-key-policy.v1`
+   - `runtime-concurrency-control-policy.v1`
+5. 已发布的 dispatch / budget runtime 基座：
+   - `same-run-dispatch-context.v1`
+   - `CapacityReservation`
+   - `BudgetArbitrationRecord`
+   - current consumer / negative fixtures
+
+## 输出与 handoff
+
+必须交给中台组的产物：
+
+1. `industry-signal-event-batch.v1` envelope + payload + manifest：
+   - `capital_finance` accepted / counter / diagnostic / rejected batch refs
+   - `policy_regulatory` accepted / counter / diagnostic / rejected batch refs
+   - `policy_research_thinktank` accepted / counter / diagnostic / rejected batch refs
+2. 三轴 `axis-tool-coverage-report.v1` envelope + payload + manifest
+3. 三条 `industry-agent-contribution.v1` envelope + payload + manifest
+4. `daily-industry-evidence-pack-input.v1` envelope + payload + manifest
+5. 失败 / unavailable / review-needed artifact refs
+6. 若命中 same-run admission / budget / review，必须附 `dispatch_context_ref`、`scheduling_key` 与相关 reservation / admission refs
+7. `cross_responsibility_attestation_refs?`、official-first failure refs、owner boundary negative fixture refs
+
+handoff 要求：
+
+- event 必须符合 `industry-signal-event.v1`
+- tool coverage 必须显式包含 `active_source_class`、`active_route_level`、`degraded`、`degradation_reason_codes`
+- official fetch 停止时必须留下 `stop_reason_code`
+- 不得只交 batch 路径字符串；必须交完整 `IndustryAgentMessageEnvelope`、`payload_ref`、`IndustryAgentArtifactManifest`、`input_artifact_refs`、`output_artifact_refs`
+- `IndustryAgentContribution` 必须按 `responsibility_id` 拆成三条：
+  - `capital-finance`
+  - `policy-regulatory`
+  - `policy-research-thinktank`
+- `DailyIndustryEvidencePack` 输入只能交 ref 与 lineage，不得内嵌 accepted / rejected 全量 event
+- 本组只负责提交 `daily-industry-evidence-pack-input.v1`；`DailyIndustryEvidencePack.v2` 只能由中台组 materialize 和写盘
+- `daily-industry-evidence-pack-input.v1` 必须使用数组字段；本组冻结为 `coverage_refs=3`、`contribution_refs=3`，且 `normalized_event_batch_refs` 必须覆盖三轴 canonical batch
+- 若同一事实被新闻、社区、政策摘要或金融转述侧同时看到，本组只能提交一个 provisional owner accepted event；其余必须走 attestation / context / relation edge
+
+## 实施阶段
+
+### Phase 1：source class 与 route 基线
+
+1. 以中台组已完成的目录骨架 bootstrap 为前提，只在本组既定工作根目录内新增文件；若根目录缺失，只报告中台组补齐，不得自行改路径命名。
+2. 若发现实现需要直接改 `src/industry/tools/*` 或其他共享旧模块，立即停止并提交 `shared-runtime-note`；本组不得自行越界改共享热点。
+3. 固定三轴 source class：
+   - `capital_finance` 优先 `official_structured_api` / `official_owned_feed_or_doc`
+   - `policy_regulatory` 优先 `official_structured_api` / `official_owned_feed_or_doc`
+   - `policy_research_thinktank` 优先可信报告与机构自有文档
+4. 领域内实现 `primary / secondary / fallback / last_resort` route 映射。
+5. 先把搜索聚合器降到 discovery / context / weak-signal-only，不允许先查聚合再补官方的倒序实现。
+6. 所有 route selection、activation、stop、review 行为都必须消费总控已发布的共享治理 profile；不得在本组内重新发明 budget 阈值、review 语义或近义 reason code。
+7. 命中 same-run 的 route 必须显式从中台组消费 `dispatch_context_ref`、`claim_admission_assessment_ref`、`capacity_reservation_refs`、`scheduling_key` 与 `gap_scope` 语义；不得本地猜测“现在应该能跑”。
+
+### Phase 2：event 生产
+
+1. 生成 finance / policy / thinktank 事件适配器。
+2. 每条 event 必须带：
+   - `axis`
+   - `source`
+   - `agent_relevance`
+   - `execution_context`
+   - `audit`
+   - `evidence`
+3. 未拿到 canonical source 时：
+   - 可输出 `context` / `needs_review`
+   - 不得伪装成 strong accepted supporting evidence
+4. accepted / counter / diagnostic / rejected 事件必须分别进入受控 batch refs；不得在一个 batch 内混语义靠字段猜。
+5. 任何 finance / policy accepted event 若存在跨职责语义，必须补 `cross_responsibility_attestation_refs` 输入位；不得等中台组事后从 prose 猜。
+
+### Phase 3：activation / stop / budget
+
+1. 落地高成本轴激活条件。
+2. 落地 canonical fetch 停止条件：
+   - `license_risk_high`
+   - `access_mode_optional_paid`
+   - `human_exception_required`
+   - `timeout_budget_exhausted`
+   - `no_canonical_source_available`
+   - `public_fetch_disallowed`
+3. 超预算默认动作只能是：
+   - `defer_followup`
+   - `needs_review`
+   - `unavailable`
+   - `weak`
+4. 不得因 `manual_review_pool` 有槽位就默认 same-run 有人可审；必须按 `same-run-review-availability-policy.v1` 判断。
+5. 没有 `reservation_state=\"granted\"` 的 reservation ref 时，不得启动 official high-cost fetch。
+
+### Phase 4：tool coverage 与 contribution
+
+1. 三轴都要输出 `AxisToolCoverageReport`。
+2. `IndustryAgentContribution` 必须一条职责项一条记录，不得把 finance / policy 混成一条。
+3. `accepted_event_count`、`rejected_event_count`、`counter_event_count`、`diagnostic_event_count` 要闭合。
+4. 三轴 coverage 必须按 `axis_id` 分开；三条 contribution 必须按 `responsibility_id` 分开，不能互相代替。
+5. 若发现媒体转述、研究摘要或社区讨论命中本组事实，只能保留 provisional owner 或 attestation 输入，不得双计 accepted event。
+
+### Phase 4A：daily handoff 冻结
+
+1. 产出本组的 `daily-industry-evidence-pack-input.v1`。
+2. payload 至少能解析：
+   - `normalized_event_batch_refs`
+   - `rejected_event_batch_refs`
+   - `source_message_ids`
+   - `coverage_refs`
+   - `contribution_refs`
+3. cardinality 冻结为：
+   - `coverage_refs` 恰好 `3`
+   - `contribution_refs` 恰好 `3`
+   - `normalized_event_batch_refs` 至少覆盖 `capital_finance`、`policy_regulatory`、`policy_research_thinktank`
+4. 不得把 accepted / rejected 全量 event 内嵌进 daily 输入包。
+
+### Phase 4B：owner / attestation 负例 fixture
+
+1. 产出 finance / policy 媒体转述不抢 owner 反例。
+2. 产出 official-first failure 反例。
+3. 产出 `capital_finance`、`policy_regulatory`、`policy_research_thinktank` anti-upgrade 反例：
+   - 资本强但缺研究/产品/社区交叉确认
+   - 政策关注强但缺落地确认
+   - 智库观点强但不是监管结论
+4. 这些 fixture 必须在本组目录下维护，由中台组只消费不重写。
+
+### Phase 5：领域测试与 handoff 冻结
+
+1. 跑完领域测试。
+2. 产出稳定 fixture。
+3. 产出跨组 contract fixtures：
+   - current schema version consumer fixture
+   - previous compatible same-major consumer fixture
+   - missing required ref negative fixture
+   - unknown higher major negative fixture
+4. 把 envelope / payload / manifest / batch refs / coverage refs / contribution refs 交给中台组接入。
+5. 把 owner / attestation / anti-upgrade / official-first failure fixtures 一并交给中台组接入 replay/eval。
+
+## 验收标准
+
+1. 三轴都能独立产出 canonical event。
+2. 三轴都显式体现 official-first；未命中官方源时必须 `degraded=true` 或 `unavailable`。
+3. 搜索聚合、新闻转述、研究摘要最高只能做 weak / context / needs_review。
+4. `capital_finance`、`policy_regulatory`、`policy_research_thinktank` 不直接触碰 tier decision。
+5. 高成本 / 授权受限来源不会被伪装成“已覆盖”。
+6. 三轴 handoff 产物能被中台组直接消费，无需再猜字段。
+7. daily handoff 是轻索引输入，不回传胖 event 快照。
+8. current + previous compatible contract fixtures 均能被中台组按 compatibility matrix 消费。
+9. finance / policy 媒体转述不会抢走 direct fact owner。
+10. official-first failure、anti-upgrade 反例可直接进入统一 eval/replay。
+11. 本组全部源码、测试、fixture builder 文件都小于 `2000` 行，且 finance / regulatory / thinktank 没有堆进单文件实现。
+
+## 验证矩阵
+
+| 范围 | 验证内容 | 方式 | 通过标准 |
+| --- | --- | --- | --- |
+| finance adapters | official filing / IR / report / news 区分 | unit test | 官方源与转述源分层正确 |
+| policy adapters | official policy / regulator / news 解读区分 | unit test | 新闻解读不能冒充政策主证 |
+| thinktank adapters | 智库 / 研究报告与政策文件区分 | unit test | `policy_research_thinktank` 不与 `policy_regulatory` 混轴 |
+| route selection | official-first 与 fallback | fixture test | 未命中官方源时显式降级 |
+| activation / stop | budget / timeout / license / paid gate | fixture test | 停止后留下可审计 reason code |
+| contribution | 三职责项交账 | schema test | 一职责项一记录，计数闭合 |
+| daily handoff | daily 输入是轻索引 | schema + fixture test | 只交 ref / lineage，不内嵌全量 event |
+| cross-group contract | envelope / manifest / payload / compatibility | contract fixture | 中台组无需口头补字段即可消费 |
+| owner boundary | 转述源不抢 owner | negative fixture | 新闻/摘要不会双计 accepted |
+| anti-upgrade | 资本/政策/智库单轴热度 | eval fixture | 不会误升 core |
+
+## 回滚策略
+
+1. 若官方源适配不稳，先保留 discovery/context 输入，不让弱证据进入 accepted supporting。
+2. 若 stop / budget 策略有 bug，先收紧为 `needs_review / unavailable`，不要放宽成“先给强结论”。
+
+## 验证记录
+
+| 日期 | 命令 | 结果 | 备注 |
+| --- | --- | --- | --- |
+| 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
+| 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |

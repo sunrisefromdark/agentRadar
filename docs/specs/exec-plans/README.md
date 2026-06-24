@@ -17,6 +17,11 @@
 | `report-output-remediation-v0.1.exec-plan.md` | `Proposed` | 修复当前 `daily / run-summary / verify-daily` 产物中 freshness source、项目分类、可读性和质检口径偏差 | 进入修复 review，通过后实施 |
 | `external-agentreach-live-runner-consumer-loop.exec-plan.md` | `Proposed` | 把外接 AgentReach 真实 runner 结果消费成可降级、可审计、可展示的 daily / weekly / browser 闭环 | 进入 exec-plan review，通过后实施 |
 | `ecosystem-focused-observer-v0.1.exec-plan.md` | `Proposed` | 为 `ecosystem-focused-observer-design.md` 落地独立长尾生态观察模块、observer artifacts / run-summary status，以及替换一级 `kb` 导航的 `observer` 工作台 | 进入 exec-plan review，通过后实施 |
+| `周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md` | `Draft` | 行业级 Agent 趋势判断总控计划，负责总阶段、单写者边界、四组 handoff 与最终拼装顺序 | 先完成设计评审与 exec-plan review，再按四份子计划实施 |
+| `周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md` | `Draft` | 政策+金融三轴子计划，负责 `capital-finance`、`policy-regulatory`、`policy-research-thinktank` 输入面 | 由你负责，实现 official-first、activation/stop policy、owner boundary fixture 与 handoff artifact |
+| `周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Draft` | 学术前沿子计划，负责 `research_paper`、`conference_academic` 两轴与 replay/eval 学术输入 | 设计评审通过后由第 2 人实施 |
+| `周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md` | `Draft` | 产品生态子计划，负责产品、开源、开发者、社区、新闻五类输入面 | 设计评审通过后由第 3 人实施 |
+| `周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md` | `Draft` | 中台裁决子计划，负责 schema 真源、dispatch/budget runtime、normalization、audit、tier decision 与 weekly 三层输出 | 设计评审通过后由第 4 人实施；不再独吞领域 seed/fixture/docs |
 | `project-search-system-redesign-v0.1.exec-plan.md` | `Proposed` | 为 `project-search-system-redesign-design.md` 落地双栈发现、16 个 must-cover 目录、mission scout/deep、coverage atlas、gap ledger、gap pressure、observer incubator 与新日报/控制台契约 | 进入 exec-plan review，通过后实施 |
 | `natural-language-fuzzy-search-recommendation-v0.1.exec-plan.md` | `Proposed` | 为 `natural-language-fuzzy-search-recommendation-design.md` 落地 direct search gate、zero-result LLM routing、7 类语义分类、敏感领域关键词搜索、fuzzy endpoint、前端状态与审计诊断 | 进入 exec-plan review，通过后实施 |
 | `daily-report-freshness-readability-v0.1.exec-plan.md` | `In Progress` | 落地 daily report 的实时发现优先、新鲜度状态首屏、主榜单/历史补充分层与最小偏好层 | 结合 `report-output-remediation-v0.1.exec-plan.md` 完成实现偏差修复后再收口 |

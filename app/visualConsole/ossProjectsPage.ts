@@ -318,6 +318,47 @@ function projectBucketDescription(bucket: ProjectBucketKey, lang: UiLang): strin
   }
 }
 
+function projectFilterDescription(filter: ProjectFilterKey, lang: UiLang): string {
+  if (filter === "all") {
+    return uiText(lang, "默认展示全部项目，不预设子榜筛选。", "Show the full library without preset filtering.");
+  }
+  return projectBucketDescription(filter, lang);
+}
+
+function projectPresetIcon(filter: ProjectFilterKey): string {
+  switch (filter) {
+    case "all":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17"></path><path d="M12 3.5c2.6 2.3 4.1 5.3 4.1 8.5S14.6 18.2 12 20.5C9.4 18.2 7.9 15.2 7.9 12S9.4 5.8 12 3.5Z"></path></svg>';
+    case "useful_first":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3.5v3"></path><path d="M20.5 12h-3"></path></svg>';
+    case "by_scenario":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.5" y="5.5" width="5.5" height="12.5" rx="1"></rect><rect x="10" y="5.5" width="4" height="12.5" rx="1"></rect><rect x="14" y="5.5" width="5.5" height="12.5" rx="1"></rect><path d="M10 8.5h4"></path><path d="M10 11.75h4"></path></svg>';
+    case "worth_trying_today":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2.5 6 13h4l-1 8.5 7.5-10h-4l1-9Z"></path></svg>';
+    case "infra_tools":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.2 6.2a3.1 3.1 0 0 0-4.1 4.1L4.8 15.6a1.6 1.6 0 0 0 2.2 2.2l5.3-5.3a3.1 3.1 0 0 0 4.1-4.1l-2 2-2.2-2.2 2-2Z"></path></svg>';
+    case "supplemental_inventory":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="4.5" width="12" height="15" rx="2"></rect><path d="M10 8h4"></path><path d="M9.5 12h5"></path><path d="M10.5 16h3"></path></svg>';
+  }
+}
+
+function projectPresetIconStyle(filter: ProjectFilterKey): string {
+  switch (filter) {
+    case "all":
+      return "color:#2995ff;background:rgba(41,149,255,0.14);";
+    case "useful_first":
+      return "color:#ff5e57;background:rgba(255,94,87,0.14);";
+    case "by_scenario":
+      return "color:#18b39c;background:rgba(24,179,156,0.16);";
+    case "worth_trying_today":
+      return "color:#ff8a2a;background:rgba(255,138,42,0.16);";
+    case "infra_tools":
+      return "color:#8f929e;background:rgba(143,146,158,0.16);";
+    case "supplemental_inventory":
+      return "color:#86c82d;background:rgba(134,200,45,0.18);";
+  }
+}
+
 function renderProjectsBucketDeck(model: ProjectsViewModel, lang: UiLang): string {
   const counts: Record<ProjectBucketKey, number> = {
     useful_first: model.preset_groups.useful_first.length,
@@ -328,11 +369,26 @@ function renderProjectsBucketDeck(model: ProjectsViewModel, lang: UiLang): strin
   };
   return `
     <section class="projects-preset-bar" data-project-bucket-deck="true" aria-label="${escapeHtml(uiText(lang, "项目子榜", "Project Presets"))}">
-      <div class="filter-chip-row">
+      <div class="projects-preset-grid">
         ${PROJECT_FILTER_ORDER.map((filter) => {
           const count = filter === "all" ? model.projects.length : counts[filter];
           const active = filter === model.default_preset;
-          return `<button type="button" class="filter-chip${active ? " is-active" : ""}" data-projects-preset-option="${escapeHtml(filter)}" aria-pressed="${active ? "true" : "false"}">${escapeHtml(projectFilterLabel(filter, lang))} · ${escapeHtml(String(count))}</button>`;
+          return `
+            <button type="button" class="projects-preset-card projects-preset-card-${escapeHtml(filter)}${active ? " is-active" : ""}" data-projects-preset-option="${escapeHtml(filter)}" aria-pressed="${active ? "true" : "false"}">
+              <span class="projects-preset-card-indicator" aria-hidden="true"></span>
+              <span class="projects-preset-card-main">
+                <span class="projects-preset-card-heading">
+                  <span class="projects-preset-card-icon" aria-hidden="true" style="${projectPresetIconStyle(filter)}">${projectPresetIcon(filter)}</span>
+                  <span class="projects-preset-card-title">${escapeHtml(projectFilterLabel(filter, lang))}</span>
+                </span>
+                <span class="projects-preset-card-copy">${escapeHtml(projectFilterDescription(filter, lang))}</span>
+              </span>
+              <span class="projects-preset-card-meta">
+                <span class="projects-preset-card-kicker">${escapeHtml(uiText(lang, "数量比对", "Count"))}</span>
+                <span class="projects-preset-card-count">&middot; ${escapeHtml(String(count))}</span>
+              </span>
+            </button>
+          `;
         }).join("")}
       </div>
     </section>

@@ -9728,6 +9728,297 @@ body.theme-dark[data-route="projects"] .projects-filter-groups .filter-chip.is-a
   width: 100%;
 }
 
+[data-route="projects"] .projects-preset-bar {
+  margin-top: 14px;
+}
+
+[data-route="projects"] .projects-preset-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(172px, 1fr));
+  gap: 12px;
+  overflow-x: auto;
+  padding: 2px 2px 10px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+[data-route="projects"] .projects-preset-grid::-webkit-scrollbar {
+  display: none;
+}
+
+[data-route="projects"] .projects-preset-card {
+  appearance: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+  min-height: 138px;
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(212, 218, 238, 0.96);
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(248, 250, 255, 0.84)),
+    rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 10px 24px rgba(157, 173, 214, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease;
+}
+
+[data-route="projects"] .projects-preset-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(156, 168, 244, 0.88);
+  box-shadow:
+    0 14px 28px rgba(157, 173, 214, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+}
+
+[data-route="projects"] .projects-preset-card.is-active {
+  transform: translateY(-1px);
+  border-color: rgba(98, 109, 241, 0.52);
+  background:
+    linear-gradient(180deg, rgba(244, 246, 255, 0.96), rgba(236, 240, 255, 0.88)),
+    rgba(243, 245, 255, 0.92);
+  box-shadow:
+    0 16px 32px rgba(118, 132, 233, 0.18),
+    0 0 0 1px rgba(98, 109, 241, 0.08);
+}
+
+[data-route="projects"] .projects-preset-card:focus-visible {
+  outline: 0;
+  border-color: rgba(98, 109, 241, 0.72);
+  box-shadow:
+    0 0 0 3px rgba(98, 109, 241, 0.18),
+    0 16px 32px rgba(118, 132, 233, 0.18);
+}
+
+[data-route="projects"] .projects-preset-card-indicator {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #5b63f3;
+  box-shadow: 0 0 0 4px rgba(91, 99, 243, 0.12);
+  opacity: 0;
+  transform: scale(0.72);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+[data-route="projects"] .projects-preset-card.is-active .projects-preset-card-indicator {
+  opacity: 1;
+  transform: scale(1);
+}
+
+[data-route="projects"] .projects-preset-card-main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+[data-route="projects"] .projects-preset-card-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+[data-route="projects"] .projects-preset-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 10px;
+  background: rgba(91, 99, 243, 0.08);
+  color: #5962ef;
+  flex: 0 0 auto;
+}
+
+[data-route="projects"] .projects-preset-card-icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+[data-route="projects"] .projects-preset-card-title {
+  min-width: 0;
+  color: rgba(51, 60, 90, 0.96);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+[data-route="projects"] .projects-preset-card.is-active .projects-preset-card-title {
+  color: #4d56de;
+}
+
+[data-route="projects"] .projects-preset-card-copy {
+  color: rgba(110, 120, 146, 0.92);
+  font-size: 11px;
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+[data-route="projects"] .projects-preset-card-all .projects-preset-card-icon {
+  background: rgba(50, 152, 255, 0.12);
+  color: #2995ff;
+}
+
+[data-route="projects"] .projects-preset-card-useful_first .projects-preset-card-icon {
+  background: rgba(255, 92, 92, 0.12);
+  color: #ff5e57;
+}
+
+[data-route="projects"] .projects-preset-card-by_scenario .projects-preset-card-icon {
+  background: rgba(25, 189, 160, 0.14);
+  color: #18b39c;
+}
+
+[data-route="projects"] .projects-preset-card-worth_trying_today .projects-preset-card-icon {
+  background: rgba(255, 138, 55, 0.14);
+  color: #ff8a2a;
+}
+
+[data-route="projects"] .projects-preset-card-infra_tools .projects-preset-card-icon {
+  background: rgba(153, 153, 163, 0.14);
+  color: #8f929e;
+}
+
+[data-route="projects"] .projects-preset-card-supplemental_inventory .projects-preset-card-icon {
+  background: rgba(147, 211, 57, 0.16);
+  color: #86c82d;
+}
+
+[data-route="projects"] .projects-preset-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(226, 230, 243, 0.92);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+[data-route="projects"] .projects-preset-card-kicker {
+  color: rgba(145, 152, 176, 0.94);
+}
+
+[data-route="projects"] .projects-preset-card-count {
+  color: rgba(63, 72, 102, 0.96);
+  font-weight: 700;
+}
+
+[data-route="projects"] .projects-preset-card.is-active .projects-preset-card-count {
+  color: #4d56de;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card {
+  border-color: rgba(57, 73, 120, 0.9);
+  background:
+    linear-gradient(180deg, rgba(14, 20, 36, 0.98), rgba(8, 13, 25, 0.96)),
+    rgba(9, 14, 26, 0.96);
+  box-shadow:
+    0 16px 34px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(173, 190, 255, 0.04);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card:hover {
+  border-color: rgba(88, 106, 178, 0.94);
+  box-shadow:
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(87, 105, 177, 0.12);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card.is-active {
+  border-color: rgba(111, 129, 255, 0.62);
+  background:
+    linear-gradient(180deg, rgba(15, 25, 50, 0.98), rgba(8, 14, 31, 0.96)),
+    rgba(10, 16, 32, 0.96);
+  box-shadow:
+    0 22px 44px rgba(0, 0, 0, 0.42),
+    0 0 0 1px rgba(111, 129, 255, 0.14);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-icon {
+  background: rgba(97, 110, 255, 0.14);
+  color: #c8d4ff;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-all .projects-preset-card-icon {
+  background: rgba(54, 121, 255, 0.2);
+  color: #79b5ff;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-useful_first .projects-preset-card-icon {
+  background: rgba(255, 93, 93, 0.18);
+  color: #ff837d;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-by_scenario .projects-preset-card-icon {
+  background: rgba(32, 196, 168, 0.18);
+  color: #63e0c8;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-worth_trying_today .projects-preset-card-icon {
+  background: rgba(255, 145, 66, 0.18);
+  color: #ffb061;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-infra_tools .projects-preset-card-icon {
+  background: rgba(144, 147, 160, 0.16);
+  color: #d3d6df;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-supplemental_inventory .projects-preset-card-icon {
+  background: rgba(141, 210, 61, 0.2);
+  color: #b9ec65;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-title {
+  color: rgba(235, 239, 255, 0.96);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card.is-active .projects-preset-card-title,
+body.theme-dark[data-route="projects"] .projects-preset-card.is-active .projects-preset-card-count {
+  color: #d7e0ff;
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-copy {
+  color: rgba(149, 161, 192, 0.82);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-meta {
+  border-top-color: rgba(38, 49, 82, 0.96);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-kicker {
+  color: rgba(120, 132, 164, 0.84);
+}
+
+body.theme-dark[data-route="projects"] .projects-preset-card-count {
+  color: rgba(228, 233, 255, 0.92);
+}
+
 [data-route="projects"] .projects-stage-meta-right {
   justify-content: flex-end;
   gap: 10px;

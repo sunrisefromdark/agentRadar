@@ -1162,6 +1162,7 @@ export function renderClientScriptSource(): string {
           const search = root.querySelector("[data-projects-search='true']");
           const searchRotator = root.querySelector("[data-projects-search-rotator='true']");
           const searchExamples = Array.from(root.querySelectorAll("[data-projects-search-example]")).filter((node) => node instanceof HTMLButtonElement);
+          const presetOptions = Array.from(document.querySelectorAll("[data-projects-preset-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortOptions = Array.from(root.querySelectorAll("[data-projects-sort-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortDropdown = root.querySelector("[data-projects-sort-dropdown='true']");
           const sortToggle = root.querySelector("[data-projects-sort-toggle='true']");
@@ -1201,6 +1202,7 @@ export function renderClientScriptSource(): string {
 
           const state = {
             search: search.value,
+            preset: root.getAttribute("data-projects-default-preset") || "all",
             sort: "score",
             paradigm: "all",
             persistence: "all",
@@ -1213,6 +1215,7 @@ export function renderClientScriptSource(): string {
           const buildFuzzyRequestKey = () =>
             JSON.stringify({
               q: normalizeProjectSearchText(state.search),
+              preset: state.preset,
               sort: state.sort,
               paradigm: state.paradigm,
               persistence: state.persistence,
@@ -1235,6 +1238,11 @@ export function renderClientScriptSource(): string {
                 score: Number(card.dataset.projectScore || "0"),
                 growth: Number(card.dataset.projectGrowth || "0"),
                 order: Number(card.dataset.projectOrder || "0"),
+                preset: card.dataset.projectPreset || "",
+                presets: String(card.dataset.projectPresets || "")
+                  .split(",")
+                  .map((value) => value.trim())
+                  .filter(Boolean),
                 paradigm: card.dataset.projectParadigm || "",
                 persistence: card.dataset.projectPersistence || "",
               }));
@@ -1373,7 +1381,7 @@ export function renderClientScriptSource(): string {
                   page_context: {
                     page: state.page,
                     page_size: state.pageSize,
-                    path: window.location.pathname,
+                    path: window.location.pathname + "?preset=" + encodeURIComponent(state.preset),
                   },
                 }),
               });
@@ -1467,6 +1475,7 @@ export function renderClientScriptSource(): string {
             const cards = projectCardRecords();
             const lane = document.querySelector("[data-projects-lane='true']");
             const count = document.querySelector("[data-projects-count='true']");
+            const total = document.querySelector("[data-projects-total='true']");
             const emptyState = document.querySelector("[data-projects-empty='true']");
             if (!(lane instanceof HTMLElement)) return;
 
@@ -1495,6 +1504,7 @@ export function renderClientScriptSource(): string {
             });
 
             if (count instanceof HTMLElement) count.textContent = String(page.totalCount);
+            if (total instanceof HTMLElement) total.textContent = String(cards.length);
             if (emptyState instanceof HTMLElement) emptyState.hidden = page.totalCount > 0;
 
             const pageStatusText = page.totalCount === 0 ? "0 / 0" : String(page.currentPage) + " / " + String(page.pageCount);
@@ -1527,6 +1537,7 @@ export function renderClientScriptSource(): string {
 
             setOptionState(sortOptions, state.sort, "data-projects-sort-option");
             syncSortDropdown();
+            setOptionState(presetOptions, state.preset, "data-projects-preset-option");
             setOptionState(paradigmOptions, state.paradigm, "data-projects-paradigm-option");
             setOptionState(persistenceOptions, state.persistence, "data-projects-persistence-option");
             syncFuzzySearch(directCards.length, options.fuzzyTrigger || "debounced");
@@ -1588,6 +1599,14 @@ export function renderClientScriptSource(): string {
           sortOptions.forEach((option) => {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-option") || "score";
+              state.page = 1;
+              resetFuzzyState();
+              apply();
+            });
+          });
+          presetOptions.forEach((option) => {
+            option.addEventListener("click", () => {
+              state.preset = option.getAttribute("data-projects-preset-option") || "all";
               state.page = 1;
               resetFuzzyState();
               apply();

@@ -3,6 +3,7 @@ export type ProjectsWorkbenchSortMode = "score" | "growth";
 export interface ProjectsWorkbenchState {
   search: string;
   sort: ProjectsWorkbenchSortMode;
+  preset?: string;
   paradigm: string;
   persistence: string;
   page?: number;
@@ -18,6 +19,8 @@ export interface ProjectsWorkbenchCardRecord {
   order: number;
   paradigm: string;
   persistence: string;
+  preset?: string;
+  presets?: string[];
 }
 
 export interface ProjectsWorkbenchPagination<T> {
@@ -245,9 +248,11 @@ export function filterAndSortProjectCards<T extends ProjectsWorkbenchCardRecord>
     .filter((card) => {
       const relevance = normalizedSearch ? rankProjectSearchMatch(card, normalizedSearch) : 0;
       const matchesSearch = !normalizedSearch || relevance > 0;
+      const presetPool = card.presets && card.presets.length > 0 ? card.presets : [card.preset ?? "unassigned"];
+      const matchesPreset = !state.preset || state.preset === "all" || presetPool.includes(state.preset);
       const matchesParadigm = state.paradigm === "all" || card.paradigm === state.paradigm;
       const matchesPersistence = state.persistence === "all" || card.persistence === state.persistence;
-      return matchesSearch && matchesParadigm && matchesPersistence;
+      return matchesSearch && matchesPreset && matchesParadigm && matchesPersistence;
     })
     .sort((left, right) => {
       if (normalizedSearch) {

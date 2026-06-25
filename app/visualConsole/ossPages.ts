@@ -1,14 +1,6 @@
 ﻿import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
-import type {
-  DailyExposureProject,
-  DailyReportProjectDetail,
-  DirectionCoverageStatus,
-  DirectionGapLedgerEntry,
-  KnowledgeCard,
-  ObserverPresetBucket,
-  ObserverPresetFilter,
-} from "../../src/types.ts";
+import type { DailyExposureProject, DailyReportProjectDetail, DirectionCoverageStatus, DirectionGapLedgerEntry, KnowledgeCard } from "../../src/types.ts";
 import { buildProjectsView } from "../../src/visualConsole/build.ts";
 import type { KnowledgeBaseViewModel, ObserverViewModel, OverviewViewModel, ProjectsViewModel, RunHealthViewModel, WeeklyViewModel } from "../../src/visualConsole/types.ts";
 import App, { type AppProps as OverviewReactAppProps } from "../client/App.tsx";
@@ -87,7 +79,7 @@ function buildSparklineSvgHtml(path: string): string {
   return `<svg class="w-14 h-4" viewBox="0 0 72 20" fill="none"><path d="${escapeHtml(path)}" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`;
 }
 
-function projectBoardValue(project: DailyExposureProject | ProjectsViewModel["projects"][number]): string {
+function projectBoardValue(project: ProjectsViewModel["projects"][number]): string {
   const value = (project as unknown as Record<string, unknown>)["project_class"];
   return typeof value === "string" && value.length > 0 ? value : "today_star";
 }
@@ -219,138 +211,6 @@ function buildObserverTrendPathFromScores(observerScore: number, baseScore: numb
   const fourth = Math.max(4, third - Math.min(3, Math.round(Math.log10(Math.max(stars, 1)))));
   const fifth = Math.max(2, fourth - Math.min(2, Math.max(0, appearances - 1)));
   return `M1 ${start} L18 ${second} L36 ${third} L54 ${fourth} L71 ${fifth}`;
-}
-
-const OVERVIEW_SEMANTIC_BAND_ORDER = ["mission_match", "today_pulse", "explore_ribbon", "infra_context"] as const;
-
-function collectOverviewSemanticProjects(model: OverviewViewModel): DailyExposureProject[] {
-  const deduped = new Map<string, DailyExposureProject>();
-  for (const bandKey of OVERVIEW_SEMANTIC_BAND_ORDER) {
-    const band = model.semantic_bands.find((entry) => entry.key === bandKey);
-    for (const project of band?.projects ?? []) {
-      const repoKey = project.project.repo_full_name.toLowerCase();
-      if (!deduped.has(repoKey)) deduped.set(repoKey, project);
-    }
-  }
-  return Array.from(deduped.values());
-}
-
-function observerPresetLabel(preset: ObserverPresetFilter, lang: UiLang): string {
-  switch (preset) {
-    case "all":
-      return uiText(lang, "总榜", "All");
-    case "early_watch":
-      return uiText(lang, "值得提前关注", "Watch Early");
-    case "new_direction":
-      return uiText(lang, "新方向", "New Direction");
-    case "by_scenario":
-      return uiText(lang, "按场景找", "By Scenario");
-    case "infra_early":
-      return uiText(lang, "看底层新东西", "Infra Early");
-  }
-}
-
-function observerPresetDescription(preset: ObserverPresetFilter, lang: UiLang): string {
-  switch (preset) {
-    case "all":
-      return uiText(lang, "先看完整观察池，再按子榜缩小范围。", "Start with the full watch pool, then narrow into a sub-board.");
-    case "early_watch":
-      return uiText(lang, "先看那些已经出现早期强信号、但还没形成稳定共识的项目。", "See candidates with early signals before consensus fully forms.");
-    case "new_direction":
-      return uiText(lang, "优先看结构化新变化正在形成的方向。", "Focus on candidates that represent an emerging new direction.");
-    case "by_scenario":
-      return uiText(lang, "把明确命中场景的问题导向项目放在一起看。", "Group candidates that clearly map to a concrete scenario.");
-    case "infra_early":
-      return uiText(lang, "专门留给底层基础设施的新东西，避免混回通用潜力池。", "Reserve a lane for new infra building blocks instead of mixing them into the general watch pool.");
-  }
-}
-
-function mapObserverProjectionToEntry(
-  entry: ObserverViewModel["entries"][number],
-  selectedDate: string,
-  lang: UiLang,
-  theme: UiTheme,
-): ObserverViewProps["entries"][number] {
-  const repoKey = observerEntryKey(entry.repo_full_name);
-  return {
-    key: repoKey,
-    repoFullName: entry.repo_full_name,
-    projectHref: toViewHref("projects", lang, theme, {
-      date: selectedDate,
-      project: entry.repo_full_name,
-      source_view: "observer",
-    }),
-    repoUrl: entry.repo_url,
-    isTracked: false,
-    radarScore: entry.observer_score ?? 0,
-    baseObserverScore: entry.base_observer_score ?? entry.observer_score ?? 0,
-    trendPath: buildObserverTrendPathFromScores(
-      entry.observer_score ?? 0,
-      entry.base_observer_score ?? entry.observer_score ?? 0,
-      entry.stars ?? 0,
-      entry.historical_precision_score ?? 0,
-    ),
-    stars: entry.stars ?? 0,
-    forks: entry.forks ?? 0,
-    issues: entry.issues ?? 0,
-    prs: entry.PR ?? 0,
-    attentionReason: entry.long_tail_reason ?? "ecosystem-signal",
-    freshnessTag: entry.freshness_label ?? entry.breakout_label ?? "context-window",
-    hostLevel: entry.entity_tier ?? "none",
-    historyHit: entry.historical_precision_label ?? "none",
-    qualification: entry.position_qualification ?? "keep-observing",
-    observedAt: formatCompactDateTime(entry.observed_at),
-    summarySource: entry.summary_source ?? "template_fallback",
-    judgeSource: entry.judge_source ?? "rules-only",
-    judgeDelta: formatObserverJudgeDelta(entry.judge_score_delta),
-    whyItMatters: readableText(
-      entry.project_brief_cn ?? entry.description,
-      lang === "zh" ? "摘要暂未补齐，先保留在观察池中。" : "Summary is still being consolidated for this observer candidate.",
-    ),
-    whyNow: readableText(
-      entry.why_now_cn,
-      lang === "zh" ? "当前时效性理由仍在补充，先继续观察。" : "Why-now evidence is still being consolidated.",
-    ),
-    verdict: readableText(
-      entry.position_rationale_cn,
-      lang === "zh" ? "当前仍需更多跨源确认与持续活跃度信号。" : "This candidate still needs more cross-source confirmation and sustained activity.",
-    ),
-    recommendation: readableText(
-      entry.watch_next_cn,
-      lang === "zh" ? "继续观察 README 更新频率、版本节奏和跨源命中变化。" : "Keep monitoring release cadence, README updates, and cross-source hits.",
-    ),
-    ecosystems: entry.ecosystems ?? [],
-    labels: entry.labels ?? [],
-    pedigreeTokens: uniqueObserverStrings([
-      ...(entry.pedigree?.builders.map((value) => `builder:${value}`) ?? []),
-      ...(entry.pedigree?.companies.map((value) => `company:${value}`) ?? []),
-      ...(entry.pedigree?.engineers.map((value) => `engineer:${value}`) ?? []),
-    ]),
-    keywords: entry.matched_by.keywords ?? [],
-    topics: entry.matched_by.topic_hints ?? [],
-    repoSeeds: entry.matched_by.repo_seeds ?? [],
-    orgSeeds: entry.matched_by.org_seeds ?? [],
-    searchOrganizations: uniqueObserverStrings([entry.repo_full_name.split("/")[0] ?? "", ...(entry.pedigree?.companies ?? [])]),
-    searchText: uniqueObserverStrings([
-      entry.repo_full_name,
-      entry.repo_url,
-      entry.description ?? "",
-      entry.project_brief_cn ?? "",
-      entry.why_now_cn ?? "",
-      entry.position_rationale_cn ?? "",
-      entry.watch_next_cn ?? "",
-      entry.observer_preset_bucket ?? "",
-      entry.utility_hint ?? "",
-      entry.repeat_exposure_state ?? "",
-      entry.head_project_exception_reason ?? "",
-      entry.hard_infra ? "hard infra infrastructure" : "",
-    ]).join(" "),
-    presetBucket: entry.observer_preset_bucket ?? "early_watch",
-    utilityHint: entry.utility_hint,
-    repeatExposureState: entry.repeat_exposure_state,
-    headProjectExceptionReason: entry.head_project_exception_reason,
-    hardInfra: entry.hard_infra,
-  };
 }
 
 const OBSERVER_SEARCH_EXAMPLES = ["claw", "memory agent", "openai sdk"];
@@ -510,19 +370,6 @@ function buildSupplementObserverEntries(
 ): ObserverViewProps["entries"] {
   if (!selectedDate) return [];
 
-  const supplementPreset = (project: ProjectsViewModel["projects"][number]): ObserverPresetBucket => {
-    switch (project.preset_bucket) {
-      case "by_scenario":
-        return "by_scenario";
-      case "worth_trying_today":
-        return "new_direction";
-      case "infra_tools":
-        return "infra_early";
-      default:
-        return "early_watch";
-    }
-  };
-
   return buildProjectsView(selectedDate).projects
     .filter((project) => project.project_class === "context_only" || project.exposure_bucket === "explore_ribbon")
     .filter((project) => !existingKeys.has(observerEntryKey(project.project.repo_full_name)))
@@ -612,11 +459,6 @@ function buildSupplementObserverEntries(
         orgSeeds,
         searchOrganizations: uniqueObserverStrings([repoOwner, ...orgSeeds]),
         searchText: observerHaystackFromProject(project),
-        presetBucket: supplementPreset(project),
-        utilityHint: project.utility_hint,
-        repeatExposureState: project.repeat_exposure_state,
-        headProjectExceptionReason: project.head_project_exception_reason,
-        hardInfra: project.hard_infra,
       };
     });
 }
@@ -1025,10 +867,9 @@ export function buildOverviewReactProps(model: OverviewViewModel, requestUrl: UR
   const weeklyHref = toViewHref("weekly", lang, theme, { date: selectedDate, anchor: weeklyAnchor });
   const runHealthHref = toViewHref("run-health", lang, theme, { date: selectedDate, source_view: "overview" });
   const observerHref = toViewHref("observer", lang, theme, { date: selectedDate, source_view: "overview" });
-  const semanticProjects = collectOverviewSemanticProjects(model);
-  const slides = semanticProjects.slice(0, 5);
-  const continuationProjects = semanticProjects.slice(1, 5);
-  const leadDecision = semanticProjects[0] ?? null;
+  const slides = model.top_decisions.slice(0, 5);
+  const continuationProjects = model.top_decisions.slice(1, 5);
+  const leadDecision = model.top_decisions[0] ?? null;
 
   return {
     lang,
@@ -1079,7 +920,7 @@ export function buildOverviewReactProps(model: OverviewViewModel, requestUrl: UR
     signalMetaHtml: buildMetaPairsHtml([
       { label: uiText(lang, "校验结果摘要", "Verify Summary"), value: verifyStatus },
       { label: uiText(lang, "活跃来源", "Active Sources"), value: String(activeSources) },
-      { label: uiText(lang, "重点项目", "Top Decisions"), value: String(semanticProjects.length) },
+      { label: uiText(lang, "重点项目", "Top Decisions"), value: String(model.top_decisions.length) },
     ]),
     decisionsPanelLabel: uiText(lang, "今日重点项目", "Top Decisions"),
     decisionsPanelTitle: "Lead Decision And Continuations",
@@ -1097,13 +938,7 @@ export function buildOverviewReactProps(model: OverviewViewModel, requestUrl: UR
     })),
     risksPanelLabel: uiText(lang, "风险与建议动作", "What To Watch Next"),
     risksPanelTitle: "What To Watch Next",
-    watchlistItems: [
-      ...model.semantic_bands
-        .filter((band) => !band.empty_state)
-        .slice(0, 3)
-        .map((band) => `${band.label} · ${band.projects.length}`),
-      ...model.risks_and_actions,
-    ].slice(0, 4),
+    watchlistItems: model.risks_and_actions.slice(0, 4),
     weeklyEntryLabel: "Weekly Entry",
     weeklyPanelTitle: "Continue In Weekly",
     weeklySummary: uiText(
@@ -1905,11 +1740,6 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
         entry.position_rationale_cn ?? "",
         entry.watch_next_cn ?? "",
       ]).join(" "),
-      presetBucket: "early_watch",
-      utilityHint: "general",
-      repeatExposureState: "unknown",
-      headProjectExceptionReason: null,
-      hardInfra: false,
     };
   });
 
@@ -1983,39 +1813,6 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
     notes: model.banner.notes,
     ecosystemBadges: Object.entries(artifact?.ecosystem_counts ?? {}).map(([name, count]) => `${name}: ${count}`),
     entries,
-    defaultPreset: "all",
-    presetOptions: [
-      {
-        key: "all",
-        label: observerPresetLabel("all", lang),
-        description: observerPresetDescription("all", lang),
-        count: entries.length,
-      },
-      {
-        key: "early_watch",
-        label: observerPresetLabel("early_watch", lang),
-        description: observerPresetDescription("early_watch", lang),
-        count: 0,
-      },
-      {
-        key: "new_direction",
-        label: observerPresetLabel("new_direction", lang),
-        description: observerPresetDescription("new_direction", lang),
-        count: 0,
-      },
-      {
-        key: "by_scenario",
-        label: observerPresetLabel("by_scenario", lang),
-        description: observerPresetDescription("by_scenario", lang),
-        count: 0,
-      },
-      {
-        key: "infra_early",
-        label: observerPresetLabel("infra_early", lang),
-        description: observerPresetDescription("infra_early", lang),
-        count: 0,
-      },
-    ],
     initialSelectedKey,
     canTrack: false,
     trackingActionPath: "",
@@ -2032,16 +1829,90 @@ function buildObserverReactPropsLegacy(model: ObserverViewModel, requestUrl: URL
 export function buildObserverReactProps(model: ObserverViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): ObserverViewProps {
   const ui = copy(lang);
   const artifact = model.artifact;
-  const selectedDate = model.context.selected_date ?? requestUrl.searchParams.get("date") ?? "latest";
-  const entries: ObserverViewProps["entries"] = model.entries.map((entry) => mapObserverProjectionToEntry(entry, selectedDate, lang, theme));
+  const primaryEntries: ObserverViewProps["entries"] = (artifact?.entries ?? []).map((entry) => {
+    const repoKey = observerEntryKey(entry.repo_full_name);
+    return {
+      key: repoKey,
+      repoFullName: entry.repo_full_name,
+      projectHref: toViewHref("projects", lang, theme, {
+        date: model.context.selected_date ?? requestUrl.searchParams.get("date") ?? "latest",
+        project: entry.repo_full_name,
+        source_view: "observer",
+      }),
+      repoUrl: entry.repo_url,
+      isTracked: false,
+      radarScore: entry.observer_score ?? 0,
+      baseObserverScore: entry.base_observer_score ?? entry.observer_score ?? 0,
+      trendPath: buildObserverTrendPathFromScores(
+        entry.observer_score ?? 0,
+        entry.base_observer_score ?? entry.observer_score ?? 0,
+        entry.stars ?? 0,
+        entry.historical_precision_score ?? 0,
+      ),
+      stars: entry.stars ?? 0,
+      forks: entry.forks ?? 0,
+      issues: entry.issues ?? 0,
+      prs: entry.PR ?? 0,
+      attentionReason: entry.long_tail_reason ?? "ecosystem-signal",
+      freshnessTag: entry.freshness_label ?? entry.breakout_label ?? "context-window",
+      hostLevel: entry.entity_tier ?? "none",
+      historyHit: entry.historical_precision_label ?? "none",
+      qualification: entry.position_qualification ?? "keep-observing",
+      observedAt: formatCompactDateTime(entry.observed_at),
+      summarySource: entry.summary_source ?? "template_fallback",
+      judgeSource: entry.judge_source ?? "rules-only",
+      judgeDelta: formatObserverJudgeDelta(entry.judge_score_delta),
+      whyItMatters: readableText(
+        entry.project_brief_cn ?? entry.description,
+        lang === "zh" ? "摘要暂未补齐，先保留在观察池中。" : "Summary is still being consolidated for this observer candidate.",
+      ),
+      whyNow: readableText(
+        entry.why_now_cn,
+        lang === "zh" ? "当前时效性理由仍在补充，先继续观察。" : "Why-now evidence is still being consolidated.",
+      ),
+      verdict: readableText(
+        entry.position_rationale_cn,
+        lang === "zh" ? "当前仍需更多跨源确认与持续活跃度信号。" : "This candidate still needs more cross-source confirmation and sustained activity.",
+      ),
+      recommendation: readableText(
+        entry.watch_next_cn,
+        lang === "zh" ? "继续观察 README 更新频率、版本节奏和跨源命中变化。" : "Keep monitoring release cadence, README updates, and cross-source hits.",
+      ),
+      ecosystems: entry.ecosystems ?? [],
+      labels: entry.labels ?? [],
+      pedigreeTokens: uniqueObserverStrings([
+        ...(entry.pedigree?.builders.map((value) => `builder:${value}`) ?? []),
+        ...(entry.pedigree?.companies.map((value) => `company:${value}`) ?? []),
+        ...(entry.pedigree?.engineers.map((value) => `engineer:${value}`) ?? []),
+      ]),
+      keywords: entry.matched_by.keywords ?? [],
+      topics: entry.matched_by.topic_hints ?? [],
+      repoSeeds: entry.matched_by.repo_seeds ?? [],
+      orgSeeds: entry.matched_by.org_seeds ?? [],
+      searchOrganizations: uniqueObserverStrings([entry.repo_full_name.split("/")[0] ?? "", ...(entry.pedigree?.companies ?? [])]),
+      searchText: uniqueObserverStrings([
+        entry.repo_full_name,
+        entry.repo_url,
+        entry.description ?? "",
+        entry.project_brief_cn ?? "",
+        entry.why_now_cn ?? "",
+        entry.position_rationale_cn ?? "",
+        entry.watch_next_cn ?? "",
+      ]).join(" "),
+    };
+  });
+  const entries = [
+    ...primaryEntries,
+    ...buildSupplementObserverEntries(
+      model.context.selected_date ?? requestUrl.searchParams.get("date") ?? "latest",
+      lang,
+      theme,
+      new Set(primaryEntries.map((entry) => entry.key)),
+    ),
+  ];
 
   const requestedCandidateKey = observerEntryKey(requestUrl.searchParams.get("candidate") ?? "");
-  const defaultPresetEntries = model.default_preset === "all"
-    ? entries
-    : entries.filter((entry) => entry.presetBucket === model.default_preset);
-  const initialSelectedKey = entries.some((entry) => entry.key === requestedCandidateKey)
-    ? requestedCandidateKey
-    : defaultPresetEntries[0]?.key ?? entries[0]?.key ?? null;
+  const initialSelectedKey = entries.some((entry) => entry.key === requestedCandidateKey) ? requestedCandidateKey : entries[0]?.key ?? null;
   const combinedEcosystemCounts = entries.reduce<Record<string, number>>((accumulator, entry) => {
     for (const ecosystem of entry.ecosystems) {
       accumulator[ecosystem] = (accumulator[ecosystem] ?? 0) + 1;
@@ -2123,13 +1994,6 @@ export function buildObserverReactProps(model: ObserverViewModel, requestUrl: UR
     notes: model.banner.notes,
     ecosystemBadges: Object.entries(combinedEcosystemCounts).map(([name, count]) => `${name}: ${count}`),
     entries,
-    defaultPreset: model.default_preset,
-    presetOptions: (["all", "early_watch", "new_direction", "by_scenario", "infra_early"] as const).map((preset) => ({
-      key: preset,
-      label: observerPresetLabel(preset, lang),
-      description: observerPresetDescription(preset, lang),
-      count: preset === "all" ? entries.length : entries.filter((entry) => entry.presetBucket === preset).length,
-    })),
     initialSelectedKey,
     canTrack: false,
     trackingActionPath: "",

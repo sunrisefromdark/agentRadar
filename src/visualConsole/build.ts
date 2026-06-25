@@ -1,21 +1,7 @@
 import { knowledgeCardSlug } from "../action/knowledgeCard.ts";
 import { buildProjectBriefFromScoredProject } from "../action/projectBriefs.ts";
 import { DIRECTION_CATALOG } from "../signal/directionCatalog.ts";
-import type {
-  DailyExposureBucket,
-  DailyReport,
-  HeadProjectExceptionReason,
-  KnowledgeCard,
-  ObserverPresetBucket,
-  ProjectPresetBucket,
-  ProjectUtilityHint,
-  RawSignal,
-  RepeatExposureState,
-  ScoredProject,
-  UserInterestTopicName,
-  WeeklyJudgmentReport,
-  WeeklyReport,
-} from "../types.ts";
+import type { DailyReport, KnowledgeCard, RawSignal, ScoredProject, UserInterestTopicName, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
 import { resolveDailyContext, resolveDailyTimeWindow, resolveNearestWeeklyAnchor, resolveWeeklyContext, resolveWeeklyTimeWindow } from "./context.ts";
 import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
@@ -43,10 +29,8 @@ import type {
   DrilldownRef,
   KnowledgeBaseViewModel,
   ObserverViewModel,
-  ObserverProjection,
   OverviewViewModel,
   ProjectContextBinding,
-  ProjectProjection,
   ProjectsViewModel,
   RouteFrameModel,
   RunHealthViewModel,
@@ -186,27 +170,6 @@ const REGULATED_SPECIALIST_MISSION_SCOUT_INVENTORY_LIMIT = 16;
 const MISSION_SCOUT_INVENTORY_LIMIT_OVERRIDES = new Map<string, number>([
   ["finance-investment-research-agent", 24],
 ]);
-const PROJECT_PRESET_ORDER: ProjectPresetBucket[] = ["useful_first", "by_scenario", "worth_trying_today", "infra_tools", "supplemental_inventory"];
-const OBSERVER_PRESET_ORDER: ObserverPresetBucket[] = ["early_watch", "new_direction", "by_scenario", "infra_early"];
-const INFRA_HINT_PATTERN =
-  /\b(infra|infrastructure|framework|sdk|runtime|orchestrator|toolchain|compiler|mcp|connector|platform|deployment|gateway|middleware|engine)\b/i;
-const STRONG_INFRA_HINT_PATTERN = /\b(framework|sdk|orchestrator|toolchain|compiler|mcp|connector|protocol|gateway|middleware|observability)\b/i;
-const HEAD_INFRA_HINT_PATTERN = /\b(runtime|platform|engine|deployment)\b/i;
-const RELEASE_SIGNAL_PATTERN = /\b(release|v\d+\.\d+|launch|ga|general availability)\b/i;
-const BRANCH_SIGNAL_PATTERN = /\b(branch|mode|desktop|mobile|cli|copilot|plugin|extension)\b/i;
-const DOMAIN_ADOPTION_PATTERN = /\b(finance|medical|legal|commerce|education|research|workflow|support)\b/i;
-const ECOSYSTEM_SHIFT_PATTERN = /\b(ecosystem|platform|protocol|standard|runtime)\b/i;
-const OBSERVER_NEW_DIRECTION_BREAKOUT_PATTERN = /\b(breakout|rising|watch|early)\b/i;
-const OBSERVER_FRESHNESS_NEW_PATTERN = /\bnew-(24h|72h)\b/i;
-const OBSERVER_SCENARIO_DIRECTION_KEYS = new Set(
-  DIRECTION_CATALOG.filter((direction) => direction.boundary_mode !== "strict-agent").map((direction) => direction.direction_key),
-);
-const OBSERVER_TEXT_SCENARIO_DIRECTION_KEYS = new Set(
-  DIRECTION_CATALOG
-    .filter((direction) => direction.boundary_mode === "workflow-intelligence" || direction.boundary_mode === "regulated-specialist")
-    .filter((direction) => direction.direction_key !== "workflow-automation-agent" && direction.direction_key !== "research-knowledge-agent")
-    .map((direction) => direction.direction_key),
-);
 
 function missionScoutInventoryLimit(directionKey: string): number {
   const override = MISSION_SCOUT_INVENTORY_LIMIT_OVERRIDES.get(directionKey);
@@ -228,140 +191,13 @@ const SEARCHABLE_DIRECTION_INFERENCE_RULES: Array<{ directionKey: string; patter
   },
   {
     directionKey: "finance-investment-research-agent",
-    pattern: /\b(finance|financial|investment|trading|stock|stocks|equity|equities|a-share|quant|portfolio|market)\b/i,
-  },
-  {
-    directionKey: "shopping-commerce-agent",
-    pattern: /\b(e-?commerce|commerce|shopping|shopify|tiktok-shop|taobao|pinduoduo|jd|amazon seller|product ops|merchandising)\b/i,
-  },
-  {
-    directionKey: "sales-prospecting-agent",
-    pattern: /\b(sales|prospecting|lead generation|crm|outbound|inbound leads|pipeline)\b/i,
-  },
-  {
-    directionKey: "customer-support-agent",
-    pattern: /\b(customer support|customer service|helpdesk|service desk|ticketing|ticket automation)\b/i,
-  },
-  {
-    directionKey: "marketing-content-ops-agent",
-    pattern: /\b(marketing|content ops|content operation|growth|seo|campaign|social media ops)\b/i,
-  },
-  {
-    directionKey: "data-analytics-bi-agent",
-    pattern: /\b(data analytics|business intelligence|bi\b|dashboard|reporting|data copilot|sql analytics)\b/i,
-  },
-  {
-    directionKey: "legal-compliance-agent",
-    pattern: /\b(legal|compliance|contract review|policy review|regulatory|privacy)\b/i,
-  },
-  {
-    directionKey: "security-soc-agent",
-    pattern: /\b(security|soc|threat detection|incident response|security audit|vulnerability)\b/i,
-  },
-  {
-    directionKey: "healthcare-ops-agent",
-    pattern: /\b(healthcare|clinical|medical|patient|hospital|ehr|emr)\b/i,
-  },
-  {
-    directionKey: "recruiting-hr-agent",
-    pattern: /\b(recruiting|recruitment|hr\b|human resources|talent sourcing|interview)\b/i,
-  },
-  {
-    directionKey: "supply-chain-procurement-agent",
-    pattern: /\b(supply chain|procurement|inventory planning|vendor management|purchase order|logistics)\b/i,
-  },
-  {
-    directionKey: "industrial-field-ops-agent",
-    pattern: /\b(industrial|field ops|field operation|maintenance|factory|plant|manufacturing)\b/i,
+    pattern: /\b(finance|financial|investment|trading|stock|stocks|quant|portfolio|market)\b/i,
   },
 ];
 
 function inferDirectionMatchesFromSearchableText(values: Array<string | null | undefined>): string[] {
   const searchable = values.map((value) => String(value ?? "")).join(" ");
   return SEARCHABLE_DIRECTION_INFERENCE_RULES.filter((rule) => rule.pattern.test(searchable)).map((rule) => rule.directionKey);
-}
-
-function normalizeLegacyExposureBucket(project: DailyRankedProject, exposureBucket: DailyExposureBucket): DailyRankedProject {
-  if (project.exposure_bucket === exposureBucket) return project;
-  return {
-    ...project,
-    exposure_bucket: exposureBucket,
-  };
-}
-
-function projectStructuredText(project: DailyRankedProject): string {
-  return [
-    project.project.repo_full_name,
-    project.project.project_name,
-    project.project.description,
-    project.project_brief_cn,
-    project.why_today_cn,
-    ...(project.project.tags ?? []),
-    ...(project.project.raw_signals ?? []).flatMap((signal) => [signal.description ?? "", ...signal.tags]),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-}
-
-function projectHasStrongInfraSignal(project: DailyRankedProject): boolean {
-  const descriptiveText = [
-    project.project.repo_full_name,
-    project.project.project_name,
-    project.project.description,
-    project.project_brief_cn,
-    project.why_today_cn,
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  if (STRONG_INFRA_HINT_PATTERN.test(descriptiveText)) return true;
-  return Boolean(project.head_project) && HEAD_INFRA_HINT_PATTERN.test(descriptiveText);
-}
-
-function isInventoryBackfillProject(project: DailyRankedProject): boolean {
-  const reasons = project.appearance_reason_codes ?? [];
-  return reasons.includes("catalog_inventory_backfill") || reasons.includes("observer_inventory_backfill");
-}
-
-function isFreshInventoryExplorationProject(project: DailyRankedProject): boolean {
-  if (!isInventoryBackfillProject(project)) return false;
-  const appearances = Number(project.project.appearances ?? 0);
-  const freshByExposure = appearances <= 1 || project.project.first_seen === project.project.last_seen;
-  const hasMomentum = Number(project.project.star_delta_daily ?? 0) > 0 || Boolean(project.project.star_delta_available);
-  return freshByExposure && hasMomentum;
-}
-
-function observerScenarioSignals(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): string[] {
-  const explicitDirectionValues = [
-    ...(entry.ecosystems ?? []),
-    ...(entry.matched_by.topic_hints ?? []),
-    ...(entry.labels ?? []).map((label) => label.replace(/^ecosystem:/i, "")),
-  ].map((value) => String(value ?? "").trim().toLowerCase());
-  const inferredDirections = inferDirectionMatchesFromSearchableText([
-    ...(entry.matched_by.keywords ?? []),
-    entry.description,
-    entry.project_brief_cn,
-    entry.why_now_cn,
-  ]).filter((value) => OBSERVER_TEXT_SCENARIO_DIRECTION_KEYS.has(value));
-  const inferredFallback = inferredDirections.length === 1 ? inferredDirections : [];
-
-  return [
-    ...new Set(
-      [...explicitDirectionValues, ...inferredFallback]
-        .filter(Boolean)
-        .filter((value) => OBSERVER_SCENARIO_DIRECTION_KEYS.has(value)),
-    ),
-  ];
-}
-
-function observerHasPotentialSignal(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): boolean {
-  if (typeof entry.judge_score_delta === "number" && entry.judge_score_delta > 0) return true;
-  if (entry.breakout_label && OBSERVER_NEW_DIRECTION_BREAKOUT_PATTERN.test(entry.breakout_label) && !/^steady$/i.test(entry.breakout_label)) return true;
-  if (entry.freshness_label && OBSERVER_FRESHNESS_NEW_PATTERN.test(entry.freshness_label)) return true;
-  if (entry.position_qualification === "strong-watch") return true;
-  if (inferObserverHeadExceptionReason(entry)) return true;
-  return false;
 }
 
 function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProject {
@@ -398,7 +234,91 @@ function buildCatalogInventoryProject(project: ScoredProject): DailyRankedProjec
     judge_source: "template_fallback",
     direction_matches: inferredDirectionMatches,
     appearance_reason_codes: ["catalog_inventory_backfill"],
-    appearance_explanation_cn: "该项目来自扩展项目池补充，会按项目库分桶规则参与列表分发。",
+    appearance_explanation_cn: "该项目来自扩展项目池补充，用于提升项目库检索覆盖面，不伪装成今日正式曝光位。",
+    exposure_bucket: "historical_context",
+    head_project: false,
+    head_saturation_state: "normal",
+  };
+}
+
+function buildObserverInventoryProject(
+  entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number],
+): DailyRankedProject {
+  const scoreValue = Number(entry.observer_score ?? entry.base_observer_score ?? 0);
+  const repoKey = entry.repo_full_name.split("/")[1] ?? entry.repo_full_name;
+  const tags = [...new Set([...(entry.labels ?? []), ...(entry.ecosystems ?? []), ...(entry.matched_by.keywords ?? []), ...(entry.matched_by.topic_hints ?? [])])];
+  const inferredDirectionMatches = [
+    ...new Set([
+      ...(entry.ecosystems ?? []),
+      ...inferDirectionMatchesFromSearchableText([
+        entry.repo_full_name,
+        entry.description,
+        entry.project_brief_cn,
+        entry.why_now_cn,
+        ...(entry.labels ?? []),
+        ...(entry.matched_by.keywords ?? []),
+      ]),
+    ]),
+  ];
+
+  return {
+    project: {
+      project_name: repoKey,
+      repo_url: entry.repo_url,
+      repo_full_name: entry.repo_full_name,
+      first_seen: entry.repo_created_at ?? entry.observed_at,
+      last_seen: entry.repo_updated_at ?? entry.observed_at,
+      sources: ["manual"],
+      source_counts: { manual: 1 },
+      appearances: Math.max(1, entry.historical_precision_score ?? 1),
+      appearance_dates: [String(entry.observed_at).slice(0, 10)].filter(Boolean),
+      persistence_state: entry.historical_precision_label === "validated" ? "persistent" : "emerging",
+      stars: entry.stars ?? 0,
+      star_delta_daily: 0,
+      star_delta_weekly: 0,
+      star_delta_source: "unavailable",
+      forks: entry.forks ?? 0,
+      issues: entry.issues ?? 0,
+      PR: entry.PR ?? 0,
+      tags,
+      description: entry.description ?? entry.project_brief_cn ?? entry.repo_full_name,
+      metrics_source: "unavailable",
+      metrics_trust_score: 0.5,
+      data_trust: "medium",
+      star_delta_available: false,
+      trust_flags: [],
+      raw_signals: [],
+    },
+    score: {
+      total_score: scoreValue,
+      components: [],
+      verdict: scoreValue >= 75 ? "high" : scoreValue >= 50 ? "watch" : "low",
+      confidence: entry.historical_precision_label === "validated" ? "high" : "medium",
+      trust_score: 0.5,
+      data_trust: "medium",
+      paradigm: (entry.ecosystems ?? [])[0] ?? "observer",
+      anti_noise_flags: [],
+      risks: [],
+      next_actions: [entry.watch_next_cn ?? "keep observing observer candidate"],
+      rules_only: true,
+    },
+    project_class: "context_only",
+    objective_score: scoreValue,
+    preference_boost: 0,
+    base_final_rank: scoreValue,
+    final_rank: scoreValue,
+    matched_interest_topics: inferredDirectionMatches,
+    project_brief_cn: entry.project_brief_cn ?? entry.description ?? entry.repo_full_name,
+    why_today_cn: entry.why_now_cn ?? entry.long_tail_reason ?? "observer candidate backfill",
+    enhancement_source: "template_fallback",
+    summary_source: entry.summary_source ?? "template_fallback",
+    position_qualification: entry.position_qualification ?? "keep-observing",
+    position_rationale_cn: entry.position_rationale_cn,
+    judge_score_delta: entry.judge_score_delta ?? 0,
+    judge_source: entry.judge_source ?? "template_fallback",
+    direction_matches: inferredDirectionMatches,
+    appearance_reason_codes: ["observer_inventory_backfill"],
+    appearance_explanation_cn: "该项目来自新兴潜力候选池补充，用于提升项目库搜索覆盖面，不伪装成主榜正式曝光位。",
     exposure_bucket: "historical_context",
     head_project: false,
     head_saturation_state: "normal",
@@ -593,24 +513,16 @@ function buildMissionScoutInventory(
 function readTodayPulseProjects(report: DailyReport): DailyRankedProject[] {
   const todayPulseProjects = Array.isArray(report.today_pulse_projects) ? report.today_pulse_projects : [];
   const todayStarProjects = Array.isArray(report.today_star_projects) ? report.today_star_projects : [];
-  return todayPulseProjects.length > 0 ? todayPulseProjects : todayStarProjects.map((project) => normalizeLegacyExposureBucket(project, "today_pulse"));
+  return todayPulseProjects.length > 0 ? todayPulseProjects : todayStarProjects;
 }
 
 function readMissionProjects(report: DailyReport): DailyRankedProject[] {
   const missionProjects = Array.isArray(report.mission_match_projects) ? report.mission_match_projects : [];
-  return missionProjects.map((project) => normalizeLegacyExposureBucket(project, "mission_match"));
+  return missionProjects;
 }
 
 function readExploreRibbonProjects(report: DailyReport): DailyRankedProject[] {
-  return Array.isArray(report.explore_ribbon_projects)
-    ? report.explore_ribbon_projects.map((project) => normalizeLegacyExposureBucket(project, "explore_ribbon"))
-    : [];
-}
-
-function readHistoricalContextProjects(report: DailyReport): DailyRankedProject[] {
-  return Array.isArray(report.context_only_projects)
-    ? report.context_only_projects.map((project) => normalizeLegacyExposureBucket(project, "historical_context"))
-    : [];
+  return Array.isArray(report.explore_ribbon_projects) ? report.explore_ribbon_projects : [];
 }
 
 function distinctInterestTopics(topics: UserInterestTopicName[] | undefined): UserInterestTopicName[] {
@@ -684,191 +596,6 @@ function personalizeRankedProject(project: DailyRankedProject, interestTopics: U
 
 function comparePersonalizedProjects(left: DailyRankedProject, right: DailyRankedProject): number {
   return right.final_rank - left.final_rank || right.base_final_rank - left.base_final_rank || right.score.total_score - left.score.total_score;
-}
-
-function uniqueByRepo<T extends { project: { repo_full_name: string } }>(projects: T[]): T[] {
-  return projects.filter(
-    (project, index, all) =>
-      all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
-  );
-}
-
-function projectSearchableText(project: DailyRankedProject): string {
-  return [
-    project.project.repo_full_name,
-    project.project.project_name,
-    project.project.description,
-    project.project_brief_cn,
-    project.why_today_cn,
-    project.position_rationale_cn,
-    ...(project.project.tags ?? []),
-    ...(project.direction_matches ?? []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-}
-
-function inferUtilityHint(project: DailyRankedProject): ProjectUtilityHint {
-  if ((project.direction_matches ?? []).length > 0) return "scenario";
-  return INFRA_HINT_PATTERN.test(projectSearchableText(project)) ? "infra" : "general";
-}
-
-function inferRepeatExposureState(project: DailyRankedProject): RepeatExposureState {
-  if (typeof project.project.appearances === "number") return project.project.appearances > 1 ? "repeat" : "fresh";
-  return "unknown";
-}
-
-function inferHeadProjectExceptionReason(project: DailyRankedProject): HeadProjectExceptionReason | null {
-  const text = projectSearchableText(project);
-  if (RELEASE_SIGNAL_PATTERN.test(text)) return "major_new_release";
-  if (BRANCH_SIGNAL_PATTERN.test(text)) return "new_branch_or_mode";
-  if (DOMAIN_ADOPTION_PATTERN.test(text) && (project.direction_matches ?? []).length > 0) return "new_domain_adoption";
-  if (ECOSYSTEM_SHIFT_PATTERN.test(text) && inferUtilityHint(project) === "infra") return "critical_ecosystem_shift";
-  return null;
-}
-
-function inferHardInfra(project: DailyRankedProject, utilityHint: ProjectUtilityHint): boolean {
-  return (project.direction_matches ?? []).length === 0 && utilityHint === "infra" && (Boolean(project.head_project) || projectHasStrongInfraSignal(project));
-}
-
-function projectHasTodayReason(
-  project: DailyRankedProject,
-  utilityHint: ProjectUtilityHint,
-): boolean {
-  if (project.exposure_bucket === "today_pulse" || project.exposure_bucket === "mission_match" || project.exposure_bucket === "explore_ribbon") return true;
-  if ((project.appearance_reason_codes ?? []).includes("mission_scout_candidate")) return true;
-  if (isFreshInventoryExplorationProject(project) && utilityHint !== "infra") return true;
-  if (inferHeadProjectExceptionReason(project)) return true;
-  return Number(project.project.star_delta_daily ?? 0) > 0;
-}
-
-function inferProjectPresetMemberships(project: DailyRankedProject): ProjectPresetBucket[] {
-  const utilityHint = inferUtilityHint(project);
-  const hardInfra = inferHardInfra(project, utilityHint);
-  const inventoryBackfill = isInventoryBackfillProject(project);
-  const memberships = new Set<ProjectPresetBucket>();
-  const hasScenario = (project.direction_matches ?? []).length > 0;
-  const hasTodayReason = projectHasTodayReason(project, utilityHint);
-  const directlyUseful = !hardInfra && (hasScenario || project.exposure_bucket === "today_pulse" || project.exposure_bucket === "mission_match" || project.exposure_bucket === "explore_ribbon" || isFreshInventoryExplorationProject(project));
-
-  if (hasScenario) memberships.add("by_scenario");
-  if (hardInfra) memberships.add("infra_tools");
-  if (!hardInfra && hasTodayReason) memberships.add("worth_trying_today");
-  if (directlyUseful) memberships.add("useful_first");
-  if (memberships.size === 0 && (inventoryBackfill || project.exposure_bucket === "historical_context")) {
-    memberships.add("supplemental_inventory");
-  }
-
-  return PROJECT_PRESET_ORDER.filter((preset) => memberships.has(preset));
-}
-
-function inferProjectPresetBucket(project: DailyRankedProject): ProjectPresetBucket | null {
-  const memberships = inferProjectPresetMemberships(project);
-  if (memberships.includes("by_scenario")) return "by_scenario";
-  if (memberships.includes("worth_trying_today")) return "worth_trying_today";
-  if (memberships.includes("useful_first")) return "useful_first";
-  if (memberships.includes("infra_tools")) return "infra_tools";
-  if (memberships.includes("supplemental_inventory")) return "supplemental_inventory";
-  return null;
-}
-
-function projectToProjection(project: DailyRankedProject): ProjectProjection {
-  const utilityHint = inferUtilityHint(project);
-  return {
-    ...project,
-    preset_bucket: inferProjectPresetBucket(project),
-    preset_memberships: inferProjectPresetMemberships(project),
-    utility_hint: utilityHint,
-    repeat_exposure_state: inferRepeatExposureState(project),
-    head_project_exception_reason: inferHeadProjectExceptionReason(project),
-    hard_infra: inferHardInfra(project, utilityHint),
-  };
-}
-
-function inferObserverUtilityHint(entry: ObserverProjection | NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): ProjectUtilityHint {
-  const haystack = [
-    entry.repo_full_name,
-    entry.description,
-    entry.project_brief_cn,
-    entry.why_now_cn,
-    ...(entry.labels ?? []),
-    ...(entry.ecosystems ?? []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  if (observerScenarioSignals(entry as NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]).length > 0) return "scenario";
-  return INFRA_HINT_PATTERN.test(haystack) ? "infra" : "general";
-}
-
-function inferObserverRepeatExposureState(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): RepeatExposureState {
-  const score = entry.historical_precision_score ?? 0;
-  if (score > 1) return "repeat";
-  if (score === 1) return "fresh";
-  return "unknown";
-}
-
-function inferObserverHeadExceptionReason(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): HeadProjectExceptionReason | null {
-  const text = [
-    entry.repo_full_name,
-    entry.description,
-    entry.project_brief_cn,
-    entry.why_now_cn,
-    ...(entry.labels ?? []),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
-  if (RELEASE_SIGNAL_PATTERN.test(text)) return "major_new_release";
-  if (BRANCH_SIGNAL_PATTERN.test(text)) return "new_branch_or_mode";
-  if (DOMAIN_ADOPTION_PATTERN.test(text) && (entry.matched_by.topic_hints ?? []).length > 0) return "new_domain_adoption";
-  if (ECOSYSTEM_SHIFT_PATTERN.test(text) && inferObserverUtilityHint(entry) === "infra") return "critical_ecosystem_shift";
-  return null;
-}
-
-function inferObserverPresetBucket(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): ObserverPresetBucket | null {
-  if (observerScenarioSignals(entry).length > 0) return "by_scenario";
-  if (inferObserverUtilityHint(entry) === "infra") return "infra_early";
-  if (observerHasPotentialSignal(entry)) {
-    return "new_direction";
-  }
-  return "early_watch";
-}
-
-function observerEntryToProjection(entry: NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): ObserverProjection {
-  const utilityHint = inferObserverUtilityHint(entry);
-  return {
-    ...entry,
-    observer_preset_bucket: inferObserverPresetBucket(entry),
-    utility_hint: utilityHint,
-    repeat_exposure_state: inferObserverRepeatExposureState(entry),
-    head_project_exception_reason: inferObserverHeadExceptionReason(entry),
-    hard_infra: utilityHint === "infra" && observerScenarioSignals(entry).length === 0,
-  };
-}
-
-function enforceDefaultLandingDiversity(projects: ProjectProjection[], limit: number, headLimit: number): ProjectProjection[] {
-  const orgCounts = new Map<string, number>();
-  let headCount = 0;
-  const accepted: ProjectProjection[] = [];
-  const deferred: ProjectProjection[] = [];
-  for (const project of projects) {
-    const org = project.project.repo_full_name.split("/")[0]?.toLowerCase() ?? "";
-    const orgCount = orgCounts.get(org) ?? 0;
-    const headProject = Boolean(project.head_project);
-    const hasException = Boolean(project.head_project_exception_reason);
-    const blockedByOrg = orgCount >= 2;
-    const blockedByHead = headProject && !hasException && headCount >= headLimit;
-    if (accepted.length < limit && !blockedByOrg && !blockedByHead) {
-      accepted.push(project);
-      orgCounts.set(org, orgCount + 1);
-      if (headProject) headCount += 1;
-    } else {
-      deferred.push(project);
-    }
-  }
-  return [...accepted, ...deferred];
 }
 
 function personalizeDailyReportForRequest(report: DailyReport, requestInterestTopics: UserInterestTopicName[] | undefined): DailyReport {
@@ -1692,7 +1419,6 @@ export function buildOverviewView(
       route_frame: {} as RouteFrameModel,
       run_snapshot: null,
       top_decisions: [],
-      semantic_bands: [],
       risks_and_actions: [],
       weekly_entry: null,
     };
@@ -1707,18 +1433,6 @@ export function buildOverviewView(
     ? [...snapshot.run_summary.watchouts, ...snapshot.run_summary.recommended_actions]
     : auditNotes;
   const weeklyAnchor = resolveNearestWeeklyAnchor(resolved.context.selected_date);
-  const missionBand = snapshot ? uniqueByRepo(readMissionProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
-  const pulseBand = snapshot ? uniqueByRepo(readTodayPulseProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
-  const exploreBand = snapshot ? uniqueByRepo(readExploreRibbonProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
-  const infraBand = snapshot
-    ? uniqueByRepo(snapshot.daily_report.context_only_projects.map((project) => projectToProjection(project)).filter((project) => project.hard_infra))
-    : [];
-  const orderedOverviewProjects = [
-    ...enforceDefaultLandingDiversity(missionBand, 2, 1),
-    ...enforceDefaultLandingDiversity(pulseBand, 3, 1),
-    ...enforceDefaultLandingDiversity(exploreBand, 2, 1),
-    ...enforceDefaultLandingDiversity(infraBand, 1, 1),
-  ];
 
   const view: OverviewViewModel = {
     context: resolved.context,
@@ -1735,13 +1449,7 @@ export function buildOverviewView(
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
     run_snapshot: snapshot,
-    top_decisions: orderedOverviewProjects.slice(0, 8),
-    semantic_bands: [
-      { key: "mission_match", label: "与你当前方向更相关", capacity: 2, projects: missionBand.slice(0, 2), empty_state: missionBand.length === 0, collapsible: false },
-      { key: "today_pulse", label: "今日最值得看", capacity: 3, projects: pulseBand.slice(0, 3), empty_state: pulseBand.length === 0, collapsible: false },
-      { key: "explore_ribbon", label: "值得建立新认知", capacity: 2, projects: exploreBand.slice(0, 2), empty_state: exploreBand.length === 0, collapsible: false },
-      { key: "infra_context", label: "基础设施变化", capacity: 1, projects: infraBand.slice(0, 1), empty_state: infraBand.length === 0, collapsible: true },
-    ],
+    top_decisions: snapshot ? readTodayPulseProjects(snapshot.daily_report) : [],
     risks_and_actions: risksAndActions,
     weekly_entry: weeklyAnchor
       ? { label: "Open Weekly", view: "weekly", anchor_date: weeklyAnchor }
@@ -1765,15 +1473,6 @@ function buildFailedProjectsView(
     mission_match_projects: [],
     explore_ribbon_projects: [],
     historical_context_projects: [],
-    default_preset: "all",
-    preset_query_enabled: false,
-    preset_groups: {
-      useful_first: [],
-      by_scenario: [],
-      worth_trying_today: [],
-      infra_tools: [],
-      supplemental_inventory: [],
-    },
     projects: [],
     selected_project: null,
   };
@@ -1843,7 +1542,7 @@ export function buildProjectsView(
     projectLibraryEnhancements,
   );
   const contextOnlyProjects = applyProjectLibraryEnhancements(
-    applyProjectEnhancements(snapshot ? readHistoricalContextProjects(snapshot.daily_report) : [], projectEnhancements),
+    applyProjectEnhancements(snapshot ? snapshot.daily_report.context_only_projects : [], projectEnhancements),
     projectLibraryEnhancements,
   );
   const surfacedProjects = [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects];
@@ -1851,6 +1550,10 @@ export function buildProjectsView(
     ? buildMissionScoutInventory(resolved.context.selected_date, surfacedProjects, contextOnlyProjects)
     : [];
   const surfacedWithScoutProjects = [...surfacedProjects, ...missionScoutInventoryProjects];
+  const observerInventoryProjects = applyProjectEnhancements(
+    snapshot?.observer_artifact ? snapshot.observer_artifact.entries.map((entry) => buildObserverInventoryProject(entry)) : [],
+    projectEnhancements,
+  );
   const catalogInventoryProjects = snapshot
     ? applyProjectLibraryEnhancements(
         applyProjectEnhancements(
@@ -1860,21 +1563,16 @@ export function buildProjectsView(
         projectLibraryEnhancements,
       )
     : [];
-  const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects].filter(
-    (project, index, all) => all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
+  const historicalContextProjects = [...contextOnlyProjects, ...catalogInventoryProjects, ...observerInventoryProjects].filter(
+    (project, index, all) =>
+      all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
   );
-  const allProjects = snapshot
-    ? uniqueByRepo([...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...missionScoutInventoryProjects, ...historicalContextProjects])
+  const projects = snapshot
+    ? [...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...missionScoutInventoryProjects, ...historicalContextProjects].filter(
+        (project, index, all) =>
+          all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
+      )
     : [];
-  const projectedProjects = allProjects.map((project) => projectToProjection(project));
-  const presetGroups = {
-    useful_first: projectedProjects.filter((project) => project.preset_memberships.includes("useful_first")),
-    by_scenario: projectedProjects.filter((project) => project.preset_memberships.includes("by_scenario")),
-    worth_trying_today: projectedProjects.filter((project) => project.preset_memberships.includes("worth_trying_today")),
-    infra_tools: projectedProjects.filter((project) => project.preset_memberships.includes("infra_tools")),
-    supplemental_inventory: projectedProjects.filter((project) => project.preset_memberships.includes("supplemental_inventory")),
-  } satisfies ProjectsViewModel["preset_groups"];
-  const projects = projectedProjects;
   const state = buildProjectsState(snapshot, resolved.context.stale, projects);
   const selected = snapshot ? findSelectedProject(projects, selectedProject) : null;
 
@@ -1899,9 +1597,6 @@ export function buildProjectsView(
         all.findIndex((item) => item.project.repo_full_name.toLowerCase() === project.project.repo_full_name.toLowerCase()) === index,
     ),
     historical_context_projects: historicalContextProjects,
-    default_preset: "all",
-    preset_query_enabled: false,
-    preset_groups: presetGroups,
     projects,
     selected_project: buildSelectedProjectView(selected, binding, resolved.context.selected_date),
   };
@@ -2021,9 +1716,6 @@ export function buildObserverView(dateOrLatest: string, options?: { requestInter
       time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
       route_frame: {} as RouteFrameModel,
       artifact: null,
-      default_preset: "all",
-      preset_query_enabled: false,
-      entries: [],
     };
     view.route_frame = buildObserverRouteFrame(view);
     return view;
@@ -2063,9 +1755,6 @@ export function buildObserverView(dateOrLatest: string, options?: { requestInter
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
     route_frame: {} as RouteFrameModel,
     artifact,
-    default_preset: "all",
-    preset_query_enabled: false,
-    entries: (artifact?.entries ?? []).map((entry) => observerEntryToProjection(entry)),
   };
   view.route_frame = buildObserverRouteFrame(view);
   return view;

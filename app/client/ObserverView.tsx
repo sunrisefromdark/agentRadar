@@ -703,6 +703,51 @@ export function filterObserverEntriesByPreset(entries: ObserverEntry[], preset: 
   return entries.filter((entry) => entry.presetBucket === preset);
 }
 
+function observerPresetFallbackCopy(preset: ObserverPresetFilter, isZh: boolean): Pick<ObserverPresetOption, "label" | "description"> {
+  switch (preset) {
+    case "all":
+      return {
+        label: isZh ? "总榜" : "All",
+        description: isZh ? "先看完整观察池，再按子榜缩小范围。" : "Start with the full watch pool, then narrow into a sub-board.",
+      };
+    case "early_watch":
+      return {
+        label: isZh ? "值得提前关注" : "Watch Early",
+        description: isZh ? "先看那些已经出现早期强信号、但还没形成稳定共识的项目。" : "See candidates with early signals before consensus fully forms.",
+      };
+    case "new_direction":
+      return {
+        label: isZh ? "新方向" : "New Direction",
+        description: isZh ? "优先看结构化新变化正在形成的方向。" : "Focus on candidates that represent an emerging new direction.",
+      };
+    case "by_scenario":
+      return {
+        label: isZh ? "按场景找" : "By Scenario",
+        description: isZh ? "把明确命中场景的问题导向项目放在一起看。" : "Group candidates that clearly map to a concrete scenario.",
+      };
+    case "infra_early":
+      return {
+        label: isZh ? "看底层新东西" : "Infra Early",
+        description: isZh ? "专门留给底层基础设施的新东西，避免混回通用潜力池。" : "Reserve a lane for new infra building blocks instead of mixing them into the general watch pool.",
+      };
+  }
+}
+
+function buildObserverPresetOptions(entries: ObserverEntry[], presetOptions: ObserverPresetOption[], isZh: boolean): ObserverPresetOption[] {
+  const order: ObserverPresetFilter[] = ["all", "early_watch", "new_direction", "by_scenario", "infra_early"];
+  const source = new Map(presetOptions.map((option) => [option.key, option] as const));
+  return order.map((preset) => {
+    const fallback = observerPresetFallbackCopy(preset, isZh);
+    const provided = source.get(preset);
+    return {
+      key: preset,
+      label: provided?.label || fallback.label,
+      description: provided?.description || fallback.description,
+      count: preset === "all" ? entries.length : entries.filter((entry) => entry.presetBucket === preset).length,
+    };
+  });
+}
+
 export function paginateObserverEntries<T>(entries: T[], page: number, pageSize: number): ObserverPagination<T> {
   const safePageSize = Math.max(1, Math.floor(pageSize) || 1);
   const totalCount = entries.length;
@@ -839,18 +884,20 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
     ecosystemBadges: rawProps.ecosystemBadges ?? DEFAULT_PROPS.ecosystemBadges,
     entries: rawProps.entries ?? DEFAULT_PROPS.entries,
   };
+  const isZh = props.lang !== "en";
+  const presetOptions = buildObserverPresetOptions(props.entries, rawProps.presetOptions ?? props.presetOptions, isZh);
+  const selectedPresetSeed = presetOptions.some((option) => option.key === props.defaultPreset) ? props.defaultPreset : "all";
 
   const [searchQuery, setSearchQuery] = useState("");
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchSuggestionIndex, setSearchSuggestionIndex] = useState(0);
-  const [selectedPreset, setSelectedPreset] = useState<ObserverPresetFilter>(props.defaultPreset);
+  const [selectedPreset, setSelectedPreset] = useState<ObserverPresetFilter>(selectedPresetSeed);
   const [selectedKey, setSelectedKey] = useState<string | null>(props.initialSelectedKey ?? props.entries[0]?.key ?? null);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailScrollActive, setDetailScrollActive] = useState(false);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const detailScrollRef = React.useRef<HTMLDivElement | null>(null);
   const mobileSelectionPrimedRef = React.useRef(false);
-  const isZh = props.lang !== "en";
   const normalizedSearch = searchQuery.trim().toLowerCase();
   const normalizedSuggestions = props.searchSuggestions.filter(Boolean);
   const activeSuggestion = normalizedSuggestions[searchSuggestionIndex % Math.max(normalizedSuggestions.length, 1)] ?? "";
@@ -892,8 +939,8 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
   }, [isMobileViewport]);
 
   useEffect(() => {
-    setSelectedPreset(props.defaultPreset);
-  }, [props.defaultPreset]);
+    setSelectedPreset(selectedPresetSeed);
+  }, [selectedPresetSeed]);
 
   useEffect(() => {
     if (props.entries.length === 0) {
@@ -1085,7 +1132,7 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
 
           <section className="mb-4 md:mb-5">
             <div className="grid gap-2 md:grid-cols-2 xl:grid-cols-5">
-              {props.presetOptions.map((option) => {
+              {presetOptions.map((option) => {
                 const isActive = option.key === selectedPreset;
                 return (
                   <button

@@ -9,7 +9,7 @@ import RunHealthView, { type RunHealthViewProps } from "../client/RunHealth.tsx"
 import WeeklyView, { buildWeeklyMatrixAxes, type WeeklyViewProps } from "../client/WeeklyView.tsx";
 import { ScoreEvidencePanel } from "../components/ScoreEvidencePanel.tsx";
 import { copy } from "./ossCopy.ts";
-import { renderProjectsWorkbenchPage } from "./ossProjectsPage.ts";
+import { renderProjectsAssistantShell, renderProjectsWorkbenchPage } from "./ossProjectsPage.ts";
 import { formatCompactDateTime, renderStatusPill, summarizeStateTone } from "./ossDocument.ts";
 import { slugify, toViewHref } from "./ossRouting.ts";
 import type { RenderedRoute, UiLang, UiTheme } from "./ossTypes.ts";
@@ -45,7 +45,7 @@ export function renderPrimary(rendered: RenderedRoute, requestUrl: URL, lang: Ui
     }
   })();
 
-  return renderRouteFrame(rendered.model.route_frame, `<div class="surface-route-wrap">${routeHtml}</div>`);
+  return renderRouteFrame(rendered.model.route_frame, `<div class="surface-route-wrap">${routeHtml}</div>${renderProjectsAssistantShell(lang)}`);
 }
 
 const OVERVIEW_WORKSPACE_SECTIONS = ["signals", "decisions", "watchlist", "sources"] as const;
@@ -1239,7 +1239,7 @@ function renderOverviewWorkspacePanels(model: OverviewViewModel, requestUrl: URL
 
 function renderOverviewPage(model: OverviewViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): string {
   return `
-    <div id="overview-react-root" data-react-overview="true">
+    <div id="overview-react-root" data-react-overview="true" data-react-ssr="false">
       ${renderToStaticMarkup(createElement(App, buildOverviewReactProps(model, requestUrl, lang, theme)))}
     </div>
   `;
@@ -1633,7 +1633,7 @@ export function buildWeeklyReactProps(model: WeeklyViewModel, requestUrl: URL, l
 
 function renderWeeklyPage(model: WeeklyViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): string {
   return `
-    <div id="weekly-react-root" data-react-weekly="true">
+    <div id="weekly-react-root" data-react-weekly="true" data-react-ssr="false">
       ${renderToStaticMarkup(createElement(WeeklyView, buildWeeklyReactProps(model, requestUrl, lang, theme)))}
     </div>
   `;
@@ -1641,7 +1641,7 @@ function renderWeeklyPage(model: WeeklyViewModel, requestUrl: URL, lang: UiLang,
 
 function renderRunHealthPage(model: RunHealthViewModel, lang: UiLang): string {
   return `
-    <div id="run-health-react-root" data-react-run-health="true">
+    <div id="run-health-react-root" data-react-run-health="true" data-react-ssr="false">
       ${renderToStaticMarkup(createElement(RunHealthView, buildRunHealthReactProps(model, lang)))}
     </div>
   `;
@@ -2009,7 +2009,7 @@ export function buildObserverReactProps(model: ObserverViewModel, requestUrl: UR
 
 function renderObserverPage(model: ObserverViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): string {
   return `
-    <div id="observer-react-root" data-react-observer="true">
+    <div id="observer-react-root" data-react-observer="true" data-react-ssr="false">
       ${renderToStaticMarkup(createElement(ObserverView, buildObserverReactProps(model, requestUrl, lang, theme)))}
     </div>
   `;

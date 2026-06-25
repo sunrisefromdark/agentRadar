@@ -23,6 +23,7 @@
 | `周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md` | `Draft` | 产品生态子计划，负责产品、开源、开发者、社区、新闻五类输入面 | 设计评审通过后由第 3 人实施 |
 | `周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md` | `Draft` | 中台裁决子计划，负责 schema 真源、dispatch/budget runtime、normalization、audit、tier decision 与 weekly 三层输出 | 设计评审通过后由第 4 人实施；不再独吞领域 seed/fixture/docs |
 | `project-search-system-redesign-v0.1.exec-plan.md` | `Proposed` | 为 `project-search-system-redesign-design.md` 落地双栈发现、16 个 must-cover 目录、mission scout/deep、coverage atlas、gap ledger、gap pressure、observer incubator 与新日报/控制台契约 | 进入 exec-plan review，通过后实施 |
+| `side-assistant-natural-language-search-v0.1.exec-plan.md` | `Proposed` | 为 `side-assistant-natural-language-search-design.md` 落地右侧 `AI 搜项目` 助手、主搜索框剥离 fuzzy、会话级多轮记忆、3 条预览链接、详情联动与完整结果切换 | 进入 exec-plan review，通过后实施 |
 | `natural-language-fuzzy-search-recommendation-v0.1.exec-plan.md` | `Proposed` | 为 `natural-language-fuzzy-search-recommendation-design.md` 落地 direct search gate、zero-result LLM routing、7 类语义分类、敏感领域关键词搜索、fuzzy endpoint、前端状态与审计诊断 | 进入 exec-plan review，通过后实施 |
 | `daily-report-freshness-readability-v0.1.exec-plan.md` | `In Progress` | 落地 daily report 的实时发现优先、新鲜度状态首屏、主榜单/历史补充分层与最小偏好层 | 结合 `report-output-remediation-v0.1.exec-plan.md` 完成实现偏差修复后再收口 |
 | `harness-bootstrap.exec-plan.md` | `Done` | SDD/Harness 初始目录搭建 | 由当前索引和结构测试继续守护 |

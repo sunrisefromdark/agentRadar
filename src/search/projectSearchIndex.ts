@@ -39,6 +39,8 @@ const COMPANY_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
 ];
 
 const DIRECTION_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
+  [/\bcoding-agent\b|\bcoding-agents\b|\b(coding agent|code agent|ai coding|code review|editor|ide|cursor|aider|codex|claude code)\b/i, ["Agent IDE", "代码助手", "编程智能体", "代码编辑器", "开发工具"]],
+  [/\bbrowser-computer-use(-agent)?\b|\b(browser[-\s]?use|open-browser-use|browser automation|web automation|computer[-\s]?use|desktop agent|playwright|operator ui)\b/i, ["浏览器", "浏览器智能体", "浏览器自动化", "网页自动化", "电脑使用", "计算机使用", "桌面智能体"]],
   [/\bshopping-commerce-agent\b|\b(e-?commerce|commerce|shopping|shopify|tiktok-shop|taobao|pinduoduo|jd)\b/i, ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
   [/\bfinance-investment-research-agent\b|\b(finance|investment|trading|stock|quant)\b/i, ["股票", "投研", "金融", "量化", "交易"]],
   [/\bresearch-knowledge-agent\b|\b(research|knowledge|rag|retrieval|literature|paper|papers|notebook|citation|scientific|science|academic|document research)\b/i, ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
@@ -49,6 +51,10 @@ const DIRECTION_SEARCH_ALIASES: Array<[RegExp, string[]]> = [
 ];
 
 const DIRECTION_KEYWORD_ALIASES = new Map<string, string[]>([
+  ["coding-agent", ["Agent IDE", "代码助手", "编程智能体", "代码编辑器", "开发工具"]],
+  ["coding-agents", ["Agent IDE", "代码助手", "编程智能体", "代码编辑器", "开发工具"]],
+  ["browser-computer-use", ["浏览器", "浏览器智能体", "浏览器自动化", "网页自动化", "电脑使用", "计算机使用", "桌面智能体"]],
+  ["browser-computer-use-agent", ["浏览器", "浏览器智能体", "浏览器自动化", "网页自动化", "电脑使用", "计算机使用", "桌面智能体"]],
   ["shopping-commerce-agent", ["电商", "导购", "购物", "商品", "商城", "比价", "商家经营"]],
   ["finance-investment-research-agent", ["股票", "投研", "金融", "量化", "交易"]],
   ["research-knowledge-agent", ["科研", "研究", "知识工作", "文献", "论文", "检索", "知识库"]],
@@ -122,6 +128,15 @@ function projectParadigmFamily(paradigm: string): string {
 
 export function buildProjectSearchText(project: ProjectsViewModel["projects"][number], lang: ProjectSearchLang): string {
   const repoOwner = project.project.repo_full_name.split("/")[0] ?? "";
+  const directionAliasSource = [
+    project.project.repo_full_name,
+    project.project.project_name,
+    project.project.description,
+    project.project_brief_cn,
+    ...project.project.tags,
+    ...project.matched_interest_topics,
+    ...(project.direction_matches ?? []),
+  ];
   return [
     project.project.repo_full_name,
     project.project.project_name,
@@ -151,17 +166,7 @@ export function buildProjectSearchText(project: ProjectsViewModel["projects"][nu
       project.why_today_cn,
       ...project.project.tags,
     ]),
-    ...directionSearchAliases([
-      project.project.repo_full_name,
-      project.project.project_name,
-      project.project.description,
-      project.project_brief_cn,
-      project.why_today_cn,
-      ...project.project.tags,
-      ...project.matched_interest_topics,
-      ...(project.direction_matches ?? []),
-      ...project.project.raw_signals.flatMap((signal) => [signal.description ?? "", ...signal.tags]),
-    ]),
+    ...directionSearchAliases(directionAliasSource),
     ...directionKeyAliases([...(project.matched_interest_topics ?? []), ...(project.direction_matches ?? [])]),
   ]
     .filter(Boolean)

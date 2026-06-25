@@ -449,6 +449,85 @@ function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang, in
   `;
 }
 
+export function renderProjectsAssistantShell(lang: UiLang): string {
+  const quickQueries = [
+    uiText(lang, "浏览器智能体", "Browser agents"),
+    uiText(lang, "金融投研 Agent", "Research agents"),
+    uiText(lang, "客服自动化", "Support automation"),
+    uiText(lang, "Agent IDE", "Agent IDE"),
+  ];
+  return `
+    <div
+      data-projects-ai-assistant-host="true"
+      class="projects-ai-assistant-host"
+    >
+      <button
+        type="button"
+        class="button-link projects-ai-launch"
+        data-projects-ai-launch="true"
+        aria-label="${escapeHtml(uiText(lang, "打开 AI 搜项目", "Open AI Project Search"))}"
+      >
+        <span class="projects-ai-launch-avatar" aria-hidden="true">
+          <img class="projects-ai-launch-image" src="/app-assets/projects-ai-avatar.png?v=2" alt="" />
+        </span>
+      </button>
+      <section
+        class="surface-card projects-ai-panel"
+        data-projects-ai-panel="true"
+        hidden
+        aria-label="${escapeHtml(uiText(lang, "AI 搜项目", "AI Project Search"))}"
+      >
+        <div class="projects-ai-panel-head">
+          <div>
+            <strong>${escapeHtml(uiText(lang, "AI 搜项目", "AI Project Search"))}</strong>
+            <span class="projects-ai-panel-copy">${escapeHtml(uiText(lang, "站内项目库", "Local library"))}</span>
+          </div>
+          <div class="projects-ai-panel-actions">
+            <button type="button" class="projects-ai-icon-button" data-projects-ai-new-chat="true" aria-label="${escapeHtml(uiText(lang, "新对话", "New Chat"))}" title="${escapeHtml(uiText(lang, "新对话", "New Chat"))}">+</button>
+            <button type="button" class="projects-ai-icon-button" data-projects-ai-close="true" aria-label="${escapeHtml(uiText(lang, "关闭", "Close"))}" title="${escapeHtml(uiText(lang, "关闭", "Close"))}">&times;</button>
+          </div>
+        </div>
+        <div class="projects-ai-quickstart" data-projects-ai-quickstart="true">
+          <p class="meta-line projects-ai-quickstart-copy">${escapeHtml(uiText(lang, "先给一个方向，我返回 3 条线索；需要展开再进入项目库承接。", "Start with a direction and I will return three leads."))}</p>
+          <div class="projects-ai-quickstart-grid">
+            ${quickQueries
+              .map(
+                (query) => `
+                  <button
+                    type="button"
+                    class="projects-ai-quickstart-card"
+                    data-projects-ai-option-query="${escapeHtml(query)}"
+                  >${escapeHtml(query)}</button>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+        <div class="projects-ai-quickstart-toggle-row" data-projects-ai-quickstart-toggle-row="true" hidden>
+          <button type="button" class="button-link-secondary projects-ai-quickstart-toggle" data-projects-ai-quickstart-toggle="true">${escapeHtml(uiText(lang, "推荐方向", "Suggestions"))}</button>
+        </div>
+        <div data-projects-ai-messages="true" class="projects-ai-messages"></div>
+        <div data-projects-ai-status="true" class="meta-line projects-ai-status" hidden></div>
+        <form data-projects-ai-form="true" class="projects-ai-form">
+          <label class="sr-only" for="projects-ai-search-input">${escapeHtml(uiText(lang, "AI 搜项目输入框", "AI Project Search Input"))}</label>
+          <input
+            id="projects-ai-search-input"
+            type="search"
+            data-projects-ai-input="true"
+            class="projects-ai-input"
+            placeholder="${escapeHtml(uiText(lang, "例如：找自动化投研、Agent IDE、浏览器智能体", "Try: agent IDE, browser agents, research automation"))}"
+            autocomplete="off"
+          />
+          <div class="projects-ai-form-row">
+            <span class="meta-line projects-ai-form-copy">${escapeHtml(uiText(lang, "输入“更多”继续", "Type more to continue"))}</span>
+            <button type="submit" class="button-link projects-ai-submit" data-projects-ai-submit="true">${escapeHtml(uiText(lang, "发送", "Send"))}</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  `;
+}
+
 function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], lang: UiLang, initialQuery = ""): string {
   const paradigms = ["Agent System", "Runtime", "Tool"];
   const persistenceStates = Array.from(new Set(projects.map((project) => project.project.persistence_state)));
@@ -475,17 +554,9 @@ function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], la
           </div>
         </div>
       </div>
-      <div class="status-banner status-degraded" data-projects-fuzzy-status="true" hidden>
-        <div class="status-banner-head">
-          <span class="context-label" data-projects-fuzzy-label="true">${escapeHtml(uiText(lang, "扩展搜索", "Expanded Search"))}</span>
-          <strong data-projects-fuzzy-title="true"></strong>
-        </div>
-        <p data-projects-fuzzy-message="true"></p>
-        <div class="filter-chip-row" data-projects-fuzzy-options="true" hidden></div>
-      </div>
       <div class="projects-extension-note">
-        <span class="context-label">${escapeHtml(uiText(lang, "扩展入口", "Extension Ready"))}</span>
-        <p>${escapeHtml(uiText(lang, "搜索、范式、持续性和分区都留在同一条控制带里，后续增加更多任务筛选或方向过滤时可以直接接进这里。", "Search, paradigm, persistence, and section controls share one command deck so extra filters can plug in here later without reshaping the page."))}</p>
+        <span class="context-label">${escapeHtml(uiText(lang, "AI 搜索入口", "AI Search Entry"))}</span>
+        <p>${escapeHtml(uiText(lang, "主搜索框只做关键词过滤；自然语言搜索请从右下角的 AI 搜项目 进入。", "The main search box now stays keyword-only; use AI Project Search for natural-language lookups."))}</p>
       </div>
     </section>
   `;
@@ -586,6 +657,7 @@ function renderProjectsListV3(projects: ProjectsViewModel["projects"], model: Pr
     </div>
     <div class="projects-empty-state" data-projects-empty="true" hidden>
       <p class="empty-copy">${escapeHtml(uiText(lang, "当前没有匹配的项目，请调整过滤条件。", "No projects match the active scan filters."))}</p>
+      <button type="button" class="button-link" data-projects-ai-empty-cta="true">${escapeHtml(uiText(lang, "打开 AI 搜项目", "Open AI Project Search"))}</button>
     </div>
   `;
 }
@@ -792,7 +864,8 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
       })
     : "";
 
-  return renderProjectsRoute({
+  return (
+    renderProjectsRoute({
     heroHtml: renderProjectsHeroStage(lang),
     hasDetail,
     filterHtml: renderProjectsFilterStripV3(model.projects, lang, initialQuery),
@@ -803,11 +876,22 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
           ${renderProjectsPaginationControls(model.projects.length, lang, "top")}
         </div>
       </div>
+      <div class="status-banner" data-projects-ai-main-result="true" hidden>
+        <div class="status-banner-head">
+          <span class="context-label">${escapeHtml(uiText(lang, "AI 助手结果", "AI Assistant Results"))}</span>
+          <strong data-projects-ai-main-result-query="true"></strong>
+        </div>
+        <p>${escapeHtml(uiText(lang, "主列表当前只显示本轮 AI 搜项目 返回的项目。", "The main list is showing only the projects returned by the latest AI search."))}</p>
+        <div class="filter-chip-row">
+          <button type="button" class="filter-chip" data-projects-ai-reset="true">${escapeHtml(uiText(lang, "返回普通项目库", "Back To Default Library"))}</button>
+        </div>
+      </div>
       ${renderProjectsBucketDeck(model, lang)}
     `,
     rowsHtml: renderProjectsListV3(model.projects, model, requestUrl, lang),
     stageBottomHtml: renderProjectsPaginationControls(model.projects.length, lang, "bottom"),
     dockHtml,
     emptyDockHtml: "",
-  });
+    })
+  );
 }

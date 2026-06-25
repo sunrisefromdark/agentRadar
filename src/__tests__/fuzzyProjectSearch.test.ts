@@ -416,6 +416,45 @@ describe("fuzzy project search service", () => {
     expect(response.project_ids[0]).toBe("acme/education-agent");
   });
 
+  it("matches browser-computer-use projects for concise Chinese browser-agent queries", async () => {
+    let calls = 0;
+    const response = await searchFuzzyProjects({
+      request: { raw_query: "浏览器智能体", date: "2026-06-12", lang: "zh" },
+      view: makeView([
+        makeProject({
+          repo: "browser-use/open-browser-use",
+          description: "Desktop agent for browser automation and computer use workflows.",
+          briefCn: "桌面自动化执行代理。",
+          whyCn: "命中 desktop agent 方向。",
+          tags: ["browser-computer-use", "computer-use", "desktop-agent", "playwright"],
+          directions: ["browser-computer-use"],
+          score: 86,
+          growth: 16,
+        }),
+        makeProject({
+          repo: "acme/desktop-command-center",
+          description: "Desktop command center for Claude Code and Codex workflows.",
+          briefCn: "桌面命令中心。",
+          whyCn: "命中桌面协作方向。",
+          tags: ["desktop-app", "claude-code", "codex"],
+          directions: ["workflow-automation-agent"],
+          score: 90,
+          growth: 12,
+        }),
+      ]),
+      llm: disabledLlm,
+      interpreter: async () => {
+        calls += 1;
+        return { status: "fallback", fallbackReason: "schema_invalid", repaired: false };
+      },
+    });
+
+    expect(calls).toBe(0);
+    expect(response.source).toBe("direct_search");
+    expect(response.diagnostics.llm_triggered).toBe(false);
+    expect(response.project_ids).toEqual(["browser-use/open-browser-use"]);
+  });
+
   it("routes CJK topics with generic agent terms away from broad direct search", async () => {
     let calls = 0;
     const response = await searchFuzzyProjects({

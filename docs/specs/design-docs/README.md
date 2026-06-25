@@ -22,6 +22,7 @@
 - `postgresql-auth-and-user-state-design.md`：PostgreSQL 认证与用户态隔离设计，冻结 GitHub OAuth + Email Magic Link、server session、`/preferences` / tracking 的按用户持久化，以及 CSRF / SSRF 等安全边界。
 - `reuse-from-agents-radar.md`：哪些 agents-radar-system 模块可以直接搬运、改造复用或仅参考。
 - `self-evolving-skill-tree-design.md`：冻结仓库内 Agent 自进化 Skill 的分层记忆、候选提炼、保守路由、生命周期治理与技能树物化规则。
+- `side-assistant-natural-language-search-design.md`：冻结侧边助手自然语言项目搜索的前端会话壳、`sessionStorage` 多轮记忆、`project_ids` 预览链接、当前页详情打开和主列表助手结果态。
 - `signal-filter-action-version-design.md`：agent-trend-radar 的较完整版本设计规格，定义 Signal / Filter / Action 闭环、信号源优先级、评分判定、反噪声机制和行动输出。
 - `trend-radar-overview-weekly-layout-refresh-v0.1.md`：Overview / Weekly 页面级布局补充设计，冻结总览判断主舞台、周视图编辑台、侧轨职责与六轴证据矩阵映射规则。
 - `trend-radar-ui-v3-stage-redesign-design.md`：UI V3 舞台化重设计规格，冻结全局工作台语法、五路由舞台人格、`surface role` 组件契约与设计 token 演进边界。

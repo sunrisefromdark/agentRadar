@@ -26,8 +26,10 @@ const DEFAULT_HOST = process.env.HOST?.trim() || "127.0.0.1";
 const DEFAULT_PORT = Number(process.env.PORT || 3210);
 const APP_DIR = path.dirname(fileURLToPath(import.meta.url));
 const CLIENT_DIR = path.join(APP_DIR, "client");
+const APP_ASSET_DIR = path.join(APP_DIR, "assets");
 const STYLE_PATH = path.join(APP_DIR, "styles.css");
 const STYLE_CACHE_CONTROL = "public, max-age=300";
+const APP_ASSET_ROUTE_PREFIX = "/app-assets/";
 const CLIENT_ROUTE_PREFIX = "/app-client/";
 const CLIENT_MOUNT_ROUTE = `${CLIENT_ROUTE_PREFIX}mount.js`;
 
@@ -151,6 +153,30 @@ function handleClientAsset(requestUrl: URL, response: http.ServerResponse): bool
   }
 
   respondJavaScript(response, transpileClientModule(sourcePath));
+  return true;
+}
+
+function handleAppAsset(requestUrl: URL, response: http.ServerResponse): boolean {
+  if (!requestUrl.pathname.startsWith(APP_ASSET_ROUTE_PREFIX)) return false;
+
+  const relativePath = requestUrl.pathname.slice(APP_ASSET_ROUTE_PREFIX.length);
+  const safePath = path.normalize(relativePath).replace(/^(\.\.(\/|\\|$))+/, "");
+  const sourcePath = path.join(APP_ASSET_DIR, safePath);
+  if (!sourcePath.startsWith(APP_ASSET_DIR) || !fs.existsSync(sourcePath)) {
+    respondText(response, 404, "Not found.\n");
+    return true;
+  }
+
+  const ext = path.extname(sourcePath).toLowerCase();
+  const contentType =
+    ext === ".png" ? "image/png" :
+    ext === ".jpg" || ext === ".jpeg" ? "image/jpeg" :
+    ext === ".webp" ? "image/webp" :
+    ext === ".svg" ? "image/svg+xml" :
+    "application/octet-stream";
+
+  response.writeHead(200, { "content-type": contentType, "cache-control": "no-store" });
+  fs.createReadStream(sourcePath).pipe(response);
   return true;
 }
 
@@ -321,7 +347,7 @@ async function handleFuzzySearchApiRequest(request: http.IncomingMessage, respon
 async function handleVisualConsoleRequest(request: http.IncomingMessage, response: http.ServerResponse, options: Required<VisualConsoleServerOptions>): Promise<void> {
     const requestUrl = new URL(request.url || "/", `http://${request.headers.host || "localhost"}`);
 
-    if (handleClientAsset(requestUrl, response)) {
+    if (handleClientAsset(requestUrl, response) || handleAppAsset(requestUrl, response)) {
       return;
     }
 

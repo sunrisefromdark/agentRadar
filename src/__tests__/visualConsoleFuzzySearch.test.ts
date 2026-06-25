@@ -75,22 +75,4 @@ describe("visual console fuzzy project search", () => {
     );
     expect(source).not.toContain('directCards.length === 0 && fuzzyState.status === "ready"');
   });
-
-  it("keeps projects preset as local page state and forwards it only through fuzzy page context", () => {
-    const html = renderProjectsWorkbenchPage(
-      buildProjectsView("2026-06-12"),
-      new URL("http://localhost/projects?date=2026-06-12"),
-      "zh",
-      "light",
-    );
-    const source = renderClientScriptSource();
-
-    expect(html).toContain('data-projects-default-preset="all"');
-    expect(html).toContain('data-projects-preset-option="all"');
-    expect(html).not.toContain("预设视图");
-    expect(html).not.toContain("当前契约");
-    expect(source).toContain('preset: root.getAttribute("data-projects-default-preset") || "all"');
-    expect(source).toContain('setOptionState(presetOptions, state.preset, "data-projects-preset-option")');
-    expect(source).toContain('path: window.location.pathname + "?preset=" + encodeURIComponent(state.preset)');
-  });
 });

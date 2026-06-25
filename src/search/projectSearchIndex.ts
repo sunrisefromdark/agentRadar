@@ -14,8 +14,6 @@ export interface ProjectSearchRecord {
   order: number;
   paradigm: string;
   persistence: string;
-  preset: string;
-  presets: string[];
 }
 
 export interface ProjectSearchActiveFilters {
@@ -122,13 +120,6 @@ function projectParadigmFamily(paradigm: string): string {
   return "Tool";
 }
 
-function projectPresetMemberships(project: ProjectsViewModel["projects"][number]): string[] {
-  if (Array.isArray(project.preset_memberships) && project.preset_memberships.length > 0) {
-    return project.preset_memberships;
-  }
-  return project.preset_bucket ? [project.preset_bucket] : [];
-}
-
 export function buildProjectSearchText(project: ProjectsViewModel["projects"][number], lang: ProjectSearchLang): string {
   const repoOwner = project.project.repo_full_name.split("/")[0] ?? "";
   return [
@@ -144,12 +135,6 @@ export function buildProjectSearchText(project: ProjectsViewModel["projects"][nu
     project.why_today_cn,
     project.position_rationale_cn,
     project.exposure_bucket,
-    project.preset_bucket,
-    ...projectPresetMemberships(project),
-    project.utility_hint,
-    project.repeat_exposure_state,
-    project.head_project_exception_reason,
-    project.hard_infra ? "hard_infra" : "",
     project.score.paradigm,
     project.project.persistence_state,
     ...project.project.tags,
@@ -196,8 +181,6 @@ export function buildProjectSearchRecords(projects: ProjectsViewModel["projects"
     order: index,
     paradigm: projectParadigmFamily(project.score.paradigm),
     persistence: project.project.persistence_state,
-    preset: project.preset_bucket ?? "unassigned",
-    presets: projectPresetMemberships(project),
   }));
 }
 

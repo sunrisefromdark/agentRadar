@@ -47,7 +47,6 @@ function makeProject(args: {
   confidence?: "high" | "medium" | "low";
 }): ProjectsViewModel["projects"][number] {
   const projectName = args.repo.split("/")[1] ?? args.repo;
-  const presetBucket = args.directions.length > 0 ? "by_scenario" : "useful_first";
   return {
     project: {
       project_name: projectName,
@@ -111,12 +110,6 @@ function makeProject(args: {
     exposure_bucket: "mission_match",
     head_project: false,
     head_saturation_state: "normal",
-    preset_bucket: presetBucket,
-    preset_memberships: [presetBucket],
-    utility_hint: "scenario",
-    repeat_exposure_state: "fresh",
-    head_project_exception_reason: null,
-    hard_infra: false,
   };
 }
 
@@ -158,15 +151,6 @@ function makeView(projects: ProjectsViewModel["projects"] = fixtureProjects()): 
     mission_match_projects: projects,
     explore_ribbon_projects: [],
     historical_context_projects: [],
-    default_preset: "all",
-    preset_query_enabled: false,
-    preset_groups: {
-      useful_first: projects.filter((project) => project.preset_bucket === "useful_first"),
-      by_scenario: projects.filter((project) => project.preset_bucket === "by_scenario"),
-      worth_trying_today: projects.filter((project) => project.preset_bucket === "worth_trying_today"),
-      infra_tools: projects.filter((project) => project.preset_bucket === "infra_tools"),
-      supplemental_inventory: projects.filter((project) => project.preset_bucket === "supplemental_inventory"),
-    },
     projects,
     selected_project: null,
   };

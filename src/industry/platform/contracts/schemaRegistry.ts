@@ -17,6 +17,15 @@ type RegistryFile = {
   schema_version: string;
 };
 
+type ReasonCodeEntry = {
+  code: string;
+};
+
+type StateTransitionEntry = {
+  state_family: string;
+  local_state: string;
+};
+
 export type IndustrySchemaRegistry = {
   canonical: {
     bundle_id: string;
@@ -25,8 +34,12 @@ export type IndustrySchemaRegistry = {
   compatibility: RegistryFile & {
     entries: CompatibilityEntry[];
   };
-  reasonCodes: RegistryFile;
-  stateTransitions: RegistryFile;
+  reasonCodes: RegistryFile & {
+    codes: ReasonCodeEntry[];
+  };
+  stateTransitions: RegistryFile & {
+    entries: StateTransitionEntry[];
+  };
 };
 
 type PayloadValidation =

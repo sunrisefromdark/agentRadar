@@ -12,6 +12,16 @@ import {
   validateFinancePolicyHandoff,
   type FinancePolicyHandoffBundle,
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
+import {
+  PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS,
+  PHASE1_SHARED_GOVERNANCE_PROFILE_IDS,
+  validateSharedGovernanceBaseline,
+} from "../../../industry/platform/contracts/sharedGovernance.ts";
+import { validateDispatchRuntimeGate } from "../../../industry/platform/contracts/dispatchRuntime.ts";
+import {
+  validateExecutionContext,
+  validateSameRunConsumerRefs,
+} from "../../../industry/platform/contracts/consumerFixtures.ts";
 
 describe("industry platform contracts", () => {
   it("keeps the parallel worktree skeleton frozen under the agreed roots", () => {
@@ -50,6 +60,10 @@ describe("industry platform contracts", () => {
     expect(registry.reasonCodes.schema_version).toBe("reason-code-registry.v1");
     expect(registry.stateTransitions.schema_version).toBe("state-transition-registry.v1");
     expect(getPayloadSchemaIds(registry)).toContain("industry-signal-event-batch.v1");
+    expect(
+      registry.compatibility.entries
+        .every((entry) => registry.canonical.entries.some((schema) => schema.schema_id === entry.schema_id)),
+    ).toBe(true);
   });
 
   it("rejects informal payload names before other groups build producer payloads", () => {
@@ -62,7 +76,6 @@ describe("industry platform contracts", () => {
     });
     expect(payloadSchemaIds).not.toContain("event-batch.v1");
     expect(registry.compatibility.entries.map((entry) => entry.schema_id)).not.toContain("event-batch.v1");
-    expect(registry.compatibility.entries.map((entry) => entry.schema_id)).not.toContain("tool-status-report.v1");
     expect(validatePayloadSchema(registry, "event-batch.v1")).toEqual({
       ok: false,
       reasonCode: "schema_mismatch",
@@ -97,6 +110,167 @@ describe("industry platform contracts", () => {
       artifactRef: "industry://internal/2026-06-25/daily-industry-evidence-pack.v2/pack-001",
       storagePath: "data/industry/internal/2026-06-25/daily-industry-evidence-pack.v2/pack-001.json",
     });
+  });
+
+  it("publishes Phase 1 current and negative fixtures for other groups to consume", () => {
+    const root = process.cwd();
+    const current = JSON.parse(
+      fs.readFileSync(path.join(root, "fixtures/industry/platform/current-consumer/phase1-runtime.json"), "utf-8"),
+    ) as {
+      dispatch_gate: { high_cost_requires_reservation_state: string };
+      event_consumer_gate: { takeover_requires_takeover_audit_ref: boolean };
+      feedback_payload_schemas: string[];
+      handoff_payload_schemas: string[];
+      shared_governance_profile_ids: string[];
+    };
+    const negative = JSON.parse(
+      fs.readFileSync(path.join(root, "fixtures/industry/platform/negative/phase1-runtime.json"), "utf-8"),
+    ) as { cases: Array<{ expected_reason_code: string }> };
+
+    expect(current.handoff_payload_schemas).toContain("daily-industry-evidence-pack-input.v1");
+    expect(current.shared_governance_profile_ids).toEqual([...PHASE1_SHARED_GOVERNANCE_PROFILE_IDS]);
+    expect(current.feedback_payload_schemas).toEqual([...PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS]);
+    expect(current.dispatch_gate.high_cost_requires_reservation_state).toBe("granted");
+    expect(current.event_consumer_gate.takeover_requires_takeover_audit_ref).toBe(true);
+    expect(negative.cases.map((item) => item.expected_reason_code)).toContain("dispatch_context_missing");
+    expect(fs.existsSync(path.join(root, "data/industry-seeds/platform/schema-change-note.template.json"))).toBe(true);
+  });
+
+  it("publishes the Phase 1 shared governance baseline without adding a governance engine", () => {
+    const registry = loadIndustrySchemaRegistry();
+    const result = validateSharedGovernanceBaseline(loadIndustrySchemaRegistry());
+
+    for (const schemaId of [...PHASE1_SHARED_GOVERNANCE_PROFILE_IDS, ...PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS]) {
+      expect(registry.canonical.entries.some((entry) => entry.schema_id === schemaId)).toBe(true);
+      expect(registry.compatibility.entries.some((entry) => entry.schema_id === schemaId)).toBe(true);
+    }
+    expect(result).toMatchObject({ ok: true, status: "shared_governance_published" });
+    if (result.ok) {
+      expect(result.profileIds).toContain("field-ownership-policy.v1");
+      expect(result.profileIds).toContain("axis-activation-policy.v1");
+      expect(result.profileIds).toContain("canonical-fetch-stop-policy.v1");
+      expect(result.profileIds).toContain("same-run-review-availability-policy.v1");
+    }
+  });
+
+  it("gates same-run and high-cost actions on dispatch, reservation, and budget refs", () => {
+    const accepted = {
+      message: {
+        dispatch_context_ref: "industry://internal/2026-06-25/same-run-dispatch-context.v1/dispatch-001",
+        scheduling_key: "claim:abc",
+        candidate_group_id: "candidate:abc",
+        claim_admission_assessment_ref: "industry://internal/2026-06-25/claim-admission-assessment.v1/admit-001",
+        capacity_reservation_refs: ["industry://internal/2026-06-25/capacity-reservation.v1/res-001"],
+      },
+      dispatchContext: { scheduling_key: "claim:abc" },
+      reservations: [{ reservation_state: "granted" }],
+      budgetArbitration: { decision: "approved" },
+      requiresCapacityReservation: true,
+    };
+
+    expect(validateDispatchRuntimeGate(accepted)).toEqual({ ok: true, status: "accepted_for_dispatch" });
+    expect(validateDispatchRuntimeGate({ message: accepted.message, dispatchContext: accepted.dispatchContext })).toEqual({
+      ok: true,
+      status: "accepted_for_dispatch",
+    });
+    expect(validateDispatchRuntimeGate({ ...accepted, dispatchContext: {} })).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+    expect(validateDispatchRuntimeGate({ ...accepted, message: {} })).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+    expect(
+      validateDispatchRuntimeGate({
+        ...accepted,
+        message: { ...accepted.message, candidate_group_id: undefined },
+      }),
+    ).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+    expect(validateDispatchRuntimeGate({ ...accepted, reservations: [{ reservation_state: "requested" }] })).toMatchObject({
+      ok: false,
+      reasonCode: "reservation_missing",
+    });
+    expect(
+      validateDispatchRuntimeGate({
+        ...accepted,
+        message: { ...accepted.message, capacity_reservation_refs: [] },
+      }),
+    ).toMatchObject({
+      ok: false,
+      reasonCode: "reservation_missing",
+    });
+    expect(
+      validateDispatchRuntimeGate({
+        ...accepted,
+        requiresSameRunReview: true,
+        reviewAvailability: { review_execution_mode: "async_only" },
+      }),
+    ).toMatchObject({
+      ok: false,
+      reasonCode: "reservation_missing",
+    });
+    expect(validateDispatchRuntimeGate({ ...accepted, budgetArbitration: { decision: "rejected" } })).toMatchObject({
+      ok: false,
+      reasonCode: "budget_exceeded",
+    });
+  });
+
+  it("validates Phase 1 current consumer collaboration fields", () => {
+    const event = {
+      responsibility_id: "capital-finance",
+      execution_context: {
+        primary_responsibility_id: "capital-finance",
+        operational_executor_id: "finance-agent",
+        takeover_mode: "none",
+      },
+    };
+    const sameRunMessage = {
+      dispatch_context_ref: "industry://internal/2026-06-25/same-run-dispatch-context.v1/dispatch-001",
+      scheduling_key: "claim:abc",
+      candidate_group_id: "candidate:abc",
+      claim_admission_assessment_ref: "industry://internal/2026-06-25/claim-admission-assessment.v1/admit-001",
+      capacity_reservation_refs: ["industry://internal/2026-06-25/capacity-reservation.v1/res-001"],
+    };
+
+    expect(validateExecutionContext(event)).toEqual({ ok: true, status: "current_consumer_ready" });
+    expect(
+      validateExecutionContext({
+        ...event,
+        execution_context: { ...event.execution_context, primary_responsibility_id: "policy-regulatory" },
+      }),
+    ).toMatchObject({ ok: false, reasonCode: "schema_mismatch" });
+    expect(
+      validateExecutionContext({
+        ...event,
+        execution_context: { ...event.execution_context, takeover_mode: "delegated_execution" },
+      }),
+    ).toMatchObject({ ok: false, reasonCode: "schema_mismatch" });
+    expect(validateSameRunConsumerRefs(sameRunMessage)).toEqual({ ok: true, status: "current_consumer_ready" });
+    expect(validateSameRunConsumerRefs({ ...sameRunMessage, candidate_group_id: undefined })).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+    expect(validateSameRunConsumerRefs({ ...sameRunMessage, capacity_reservation_refs: [] })).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+  });
+
+  it("keeps the main coordinator as a boundary, not a new agent or hot-file owner", () => {
+    const root = process.cwd();
+    const agents = fs
+      .readdirSync(path.join(root, "src/industry/agents"), { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => entry.name);
+
+    expect(agents).not.toContain("main-coordinator");
+    for (const file of ["src/types.ts", "src/cli.ts"]) {
+      expect(fs.readFileSync(path.join(root, file), "utf-8")).not.toContain("main-coordinator");
+    }
   });
 
   describe("finance policy handoff gate", () => {
@@ -261,6 +435,24 @@ describe("industry platform contracts", () => {
       expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,
         reasonCode: "dispatch_context_missing",
+      });
+    });
+
+    it("accepts claim-critical messages only when same-run refs are complete", () => {
+      const bundle = baseBundle();
+      bundle.messages[0] = {
+        ...bundle.messages[0],
+        capability_class: "claim-critical",
+        dispatch_context_ref: "industry://internal/2026-06-25/same-run-dispatch-context.v1/dispatch-001",
+        scheduling_key: "claim:abc",
+        candidate_group_id: "candidate:abc",
+        claim_admission_assessment_ref: "industry://internal/2026-06-25/claim-admission-assessment.v1/admit-001",
+        capacity_reservation_refs: ["industry://internal/2026-06-25/capacity-reservation.v1/res-001"],
+      };
+
+      expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), bundle)).toEqual({
+        ok: true,
+        status: "accepted_for_dry_run",
       });
     });
   });

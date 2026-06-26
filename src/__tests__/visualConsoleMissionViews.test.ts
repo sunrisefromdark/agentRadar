@@ -3,8 +3,24 @@ import { renderProjectsView, renderRunHealthView } from "../visualConsole/render
 import type { ProjectsViewModel, RunHealthViewModel } from "../visualConsole/types.ts";
 import type { DailyReport } from "../types.ts";
 
-function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> = {}): ProjectsViewModel["projects"][number] {
+function withProjectPresetDefaults(
+  project: Omit<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra"> &
+    Partial<Pick<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra">>,
+): ProjectsViewModel["projects"][number] {
+  const presetBucket = project.preset_bucket ?? "useful_first";
   return {
+    ...project,
+    preset_bucket: presetBucket,
+    preset_memberships: project.preset_memberships ?? [presetBucket],
+    utility_hint: project.utility_hint ?? "general",
+    repeat_exposure_state: project.repeat_exposure_state ?? "fresh",
+    head_project_exception_reason: project.head_project_exception_reason ?? null,
+    hard_infra: project.hard_infra ?? false,
+  };
+}
+
+function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> = {}): ProjectsViewModel["projects"][number] {
+  return withProjectPresetDefaults({
     project: {
       project_name: "coder",
       repo_url: "https://github.com/acme/coder",
@@ -56,7 +72,7 @@ function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> =
     exposure_bucket: "today_pulse",
     direction_matches: ["coding-agent"],
     ...overrides,
-  };
+  });
 }
 
 describe("visual console mission-facing views", () => {
@@ -115,6 +131,15 @@ describe("visual console mission-facing views", () => {
       mission_match_projects: [mission],
       explore_ribbon_projects: [explore],
       historical_context_projects: [historical],
+      default_preset: "all",
+      preset_query_enabled: false,
+      preset_groups: {
+        useful_first: [pulse, mission, explore, historical],
+        by_scenario: [],
+        worth_trying_today: [],
+        infra_tools: [],
+        supplemental_inventory: [],
+      },
       projects: [pulse, mission, explore, historical],
       selected_project: null,
     };

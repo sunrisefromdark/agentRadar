@@ -47,6 +47,48 @@
 | `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `2号执行人` | 落地 `research_paper`、`conference_academic` 两轴与 academic freshness / citation / replay 输入面 |
 | `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md` | `3号执行人` | 落地产品、开源、开发者、社区、新闻五类输入面 |
 | `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md` | `4号执行人` | 落地 schema 真源、registry snapshot、normalization、audit、tier decision、weekly 输出拼装 |
+| `docs/specs/exec-plans/周趋势判断执行计划/四人并行开工任务单-v0.1.md` | `全员` | 把四个人 `Day-0/Day-1` 的零等待开工内容、禁止等待理由与三道闸门收敛成直接可派发的任务单 |
+
+## 给实现人的直接说明
+
+### `handoff freeze` 是什么
+
+- 白话讲：就是“从这一步开始，跨组交接要按正式格式来，不能再拿本地临时 stub、口头约定或随手改的字段互相传东西”。
+- 它不是“所有人停工等待审批”。
+- 它真正冻结的是三件事：
+  - 交接时用什么 payload 名字、什么 schema、什么 artifact path
+  - 哪些字段必须传，哪些审计 ref 不能省
+  - 中台按什么兼容规则接收，什么情况直接拒收
+- 在它之前，允许各组先做本组目录里的准备工作；在它之后，跨组交付必须切到正式合同。
+
+### 四个人现在是什么关系
+
+- `1号执行人`、`2号执行人`、`3号执行人` 是三个领域生产方，各自先把自己那一组的 source、规则、样本、event batch、coverage、contribution 做出来。
+- `4号执行人` 不是前三个人开工前的审批员，而是“跨组边界冻结者 + 最终拼装方”。他的第一责任是尽快把正式交接边界定下来，而不是把前三组手里的领域工作接过去自己做。
+- 前三组之间默认没有串行关系。政策金融不等学术，学术不等产品生态，产品生态也不等政策金融。
+- `4号执行人` 和前三组是“边做边收口”的关系，不是“先全部等中台发完再开始”的关系。
+
+### 推荐实现顺序
+
+1. 第一天四个人同时开工，只做各自目录内的准备工作。
+2. `4号执行人` 优先产出 `Phase 1A` 的正式交接边界。
+3. `1/2/3号执行人` 在本地把 adapter seam、fixture、event builder、writer 草稿先跑通。
+4. `4号执行人` 一旦发出 canonical schema、payload 正式名、artifact path，`1/2/3号执行人` 就把本地 seam 收口成正式 handoff。
+5. 哪一组先交齐正式 handoff，`4号执行人` 就先接哪一组做 contract test 和 dry-run，不等另外两组。
+6. 三组都完成正式 handoff 后，再做最终 weekly 集成和闭环验收。
+
+### 什么时候真的要等
+
+- 只有要做跨组正式交接时，才需要等 `4号执行人` 完成 `Phase 1A`。
+- 只有要写 claim-critical payload、same-run 接线、shared runtime 合流时，才需要等正式 schema 和兼容规则冻结。
+- 只有要做最终 weekly 集成时，才需要等三组正式 handoff、cross-group replay / eval 资产都齐。
+
+### 不要因为这些原因停工
+
+- 不要因为“中台 machine-readable bundle 还没全发完”就不做本组 source / fixture / seed。
+- 不要因为“别组 owner-boundary 还没写完”就不做自己的 event builder。
+- 不要因为“共享 helper 还没上收”就不做本组逻辑；先留本地 seam。
+- 不要因为“另外两组还没交齐”就不做已就绪组的 contract test、normalization dry-run。
 
 ## 目标
 
@@ -66,14 +108,58 @@
 
 ### 真源门禁
 
-以下 machine-readable 真源必须先通过可读性与非占位检查，才允许各实现组并行开工：
+以下 machine-readable 真源必须先通过可读性与非占位检查，才允许进入正式跨组 handoff、claim-critical payload 编码、shared runtime 合流与 same-run 接线：
 
 - `schemas/industry/canonical-schema.bundle.json`
 - `schemas/industry/compatibility-matrix.json`
 - `schemas/industry/reason-code-registry.json`
 - `schemas/industry/state-transition-registry.json`
 
-若其中任一文件缺失关键 schema family、仍为占位内容，或与 [03-数据模型契约](../design-docs/行业级Agent趋势判断设计/03-数据模型契约.md) 冲突，则 Phase 0 直接阻断，不允许后续“边写边补”。
+若其中任一文件缺失关键 schema family、仍为占位内容，或与 [03-数据模型契约](../design-docs/行业级Agent趋势判断设计/03-数据模型契约.md) 冲突，则 Phase 0 直接阻断正式跨组接线，不允许后续“边写边补”把临时约定升格为真源。
+
+补充边界：
+
+- 上述门禁阻断的是“跨模块 handoff 冻结、claim-critical payload 编码、shared runtime 合流与 same-run 接线”，不是阻断四个人当天开始各自的本地 preparatory work。
+- 在 `schemas/industry/*` 尚未 materialize 完整前，允许各组先做只落在本组目录内、且不跨 canonical checkpoint 的准备性实现：source catalog、route 草稿、fixture/seed、negative case、owner-boundary 样本、replay 样本、局部 adapter seam、目录与测试骨架。
+- 凡是尚未进入 machine-readable 真源的字段、payload required behavior 或共享 runtime，不得被这类 preparatory work 当成跨组正式契约；一旦需要跨组消费，必须回到 `schemas/industry/*` 和 compatibility matrix 冻结后再收口。
+
+### 并行开工最小包
+
+为避免把“能开始写本组代码”与“能完成全链路接线”混成一件事，本计划把依赖分成三层：
+
+| 依赖层级 | 内容 | 阻塞范围 |
+| --- | --- | --- |
+| `L0a 零等待开工包` | 已批准设计文档、总控映射表、单写者边界、各组目录命名模板 | 只阻塞当天是否能开工；拿到后四个人当天都能启动 |
+| `L0b 跨模块冻结包` | `schemas/industry/*` 真源、payload 正式名、artifact path 约定、compatibility matrix | 只阻塞正式跨组 handoff、claim-critical payload 编码、same-run 接线 |
+| `L1 并行接线依赖` | shared governance profiles、dispatch / reservation / budget runtime base、current consumer fixtures、owner-boundary / replay 草案 | 只阻塞对应接线阶段，不阻塞本组 preparatory work |
+| `L2 总体验收依赖` | 三组正式 handoff、cross-group replay/eval、weekly internal / consumer / public 三层产物 | 只阻塞最终集成与验收 |
+
+执行约束：
+
+- `L0` 再拆成两层：
+  - `L0a 零等待开工包`：只依赖已批准设计文档、总控映射表、单写者边界和目录模板；四个人收到任务后当天就能开工。
+  - `L0b 跨模块冻结包`：`schemas/industry/*` 真源、payload 正式名、artifact path、compatibility matrix；它阻断跨组 handoff 冻结，但不阻断本组 preparatory work。
+- `A/B/C` 三个领域组只要拿到 `L0a` 就可以开始各自目录内的 source / event builder / fixture / handoff producer 开发；只有进入正式跨组 handoff 时才需要补齐 `L0b`。
+- `L1` 资产未发布时，领域组必须先在本组目录内实现 adapter seam、schema-aligned producer fixture 与 negative fixture；不得因为等待 shared governance 或 dispatch current fixture 而停工。
+- `4号执行人` 必须把 `L1` 资产视为“后接线接口包”，而不是“别人没法开工的前置闸门”。
+- 只有进入跨组消费、normalization 接线、weekly 拼装和 Phase 7 验收时，才要求对应 `L1/L2` 资产齐备。
+
+### 四人零等待开工包
+
+为保证任务能真的分给四个人同时开工，而不是“逻辑上可并行、实际上仍等 4 号出契约”，总控再冻结一层 `Day-0/Day-1` 立即开工包：
+
+| 执行人 | 当天可立即开工内容 | 明确暂不做 |
+| --- | --- | --- |
+| `1号执行人` | finance/policy source catalog、official-first route draft、negative fixture、seed、owner-boundary / anti-upgrade 样本、local adapter seam | 不冻结跨组 payload required behavior；不接线 same-run 高成本路径 |
+| `2号执行人` | paper/conference source catalog、citation/freshness 规则、replay window 样本、academic boundary fixture、local adapter seam | 不冻结 claim-critical payload；不接线 same-run 全文抓取 |
+| `3号执行人` | product/community/news source catalog、owner-boundary / propagation / anti-upgrade 样本、coverage / contribution writer 草稿、local adapter seam | 不冻结 shared runtime；不接线 same-run 深补证 |
+| `4号执行人` | schema materialization、artifact path、payload registry、contract fixture、normalization/audit/weekly shell、structure test | 不回头吞 A/B/C 的领域样本与模板首稿 |
+
+执行约束：
+
+- `Day-0/Day-1` 开工包只允许依赖设计冻结语义和总控映射表，不要求等待 `4号执行人` 先提交 machine-readable bundle。
+- A/B/C 在 `L0b` 未完成前可以写本组 stub、fixture、adapter seam 和 tests，但不得把这些 stub 直接当成跨组 handoff 真源。
+- `4号执行人` 的首日任务是“冻结跨组边界”，不是“成为所有组开工前的串行审批点”。
 
 ## 设计保真锚点
 
@@ -186,6 +272,12 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 - 四组都不得并发改同一份总控文档、总控 README 或结构测试；领域组若要补充说明，只能改自己子计划和本组目录下的 fixture/seed，或提交 `docs-change-note`；`docs/specs/services/*`、`docs/specs/constraints/*`、`docs/specs/feedback-loops/*`、`README.md`、`data/README.md` 统一由中台组写入和收口。
 - replay / eval 草案、owner-boundary 汇总、schema-change-note 与 shared-runtime-note 都必须有唯一 writer；其他组只能引用，不得复制改写成第二份真源。
 
+共享逻辑补充规则：
+
+- 若领域组发现需要抽共享 helper 或改旧共享模块，第一动作是提交 `shared-runtime-note`；第二动作不是停工，而是在本组目录内先保留临时 wrapper / adapter seam，继续推进本组功能与样本。
+- 这些本组临时 wrapper / adapter seam 只允许服务本组目录内实现，不得被第二个领域组直接依赖，更不得演化成第二套事实上的 shared runtime。
+- `4号执行人` 后续负责把被多个组共同需要的逻辑上收进 `src/industry/platform/*`；上收完成前，其他组继续消费自己本地 seam，不互相依赖。
+
 补充文档协作约束：
 
 - `docs-change-note` 是领域组唯一允许提交的跨组文档变更输入，最少包含：目标文档、拟新增/修改的小节、设计依据、关联 schema/payload、验证影响。
@@ -213,7 +305,7 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 
 ### 目录骨架与单 Agent 工作区
 
-总控冻结以下目录骨架；并行开发前必须先由 `4号执行人` 完成一次“只建目录、不写业务逻辑”的 bootstrap，把单 Agent 级工作根目录、测试根目录、fixture 根目录和 seed 根目录全部落出来。当前仓库还没有成型的 `src/industry/*`、`src/__tests__/industry/*`、`fixtures/industry/*`、`data/industry-seeds/*`，如果继续让各组在自己 Phase 里顺手创建，最先分叉的不是实现而是目录命名与根路径。除共享真源外，其他目录只允许对应组维护：
+总控冻结以下目录骨架。`4号执行人` 仍负责先发布命名模板与目录清单，但这不再是其他三组的开工闸门：只要命名模板已冻结，A/B/C 就可以在各自单写者边界内自行创建本组目录并开工。为避免继续分叉，允许“各组自行创建”的前提仅限于严格遵守下列固定路径；除共享真源外，其他目录只允许对应组维护：
 
 - `中台裁决组` 独立工作区：
   - `schemas/industry/*`
@@ -518,10 +610,11 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 | 阶段 | 状态 | 目标 | 主要负责人 |
 | --- | --- | --- | --- |
 | Phase 0：上游门禁与真源核对 | `Pending` | 确认设计批准状态、schema 真源完整度、实现边界与 preflight | `4号执行人` |
-| Phase 1A：L0/L1 契约与存储基座 | `Pending` | 固定 `schemas/industry/*`、artifact path、message/manifest 基线与 payload registry 真源 | `4号执行人` |
-| Phase 1B：共享治理契约基线 | `Pending` | 固定 budget / activation / scorecard / review availability 基线 | `4号执行人` |
-| Phase 1C：Dispatch / Budget Runtime Base | `Pending` | 固定 `same-run-dispatch-context`、reservation、budget arbitration 与 reject 行为 | `4号执行人` |
-| Phase 2：三组领域 Agent 并行落地 | `Pending` | 按学术 / 产品生态 / 政策金融三条输入面生成 canonical event、provisional owner 与领域级负例 fixture | `1/2/3号执行人` |
+| Phase 0.5：四人零等待开工包 | `Pending` | 按已批准设计和单写者边界，先并行启动各组本地 preparatory work 与目录骨架 | `全员` |
+| Phase 1A：L0 契约与最小开工包 | `Pending` | 固定 `schemas/industry/*`、artifact path、message/manifest 基线与 payload registry 真源，并把本地 preparatory work 收口到 canonical seam | `4号执行人` |
+| Phase 1B：共享治理契约基线 | `Pending` | 发布 budget / activation / scorecard / review availability 基线，供各组后接线 | `4号执行人` |
+| Phase 1C：Dispatch / Budget Runtime Base | `Pending` | 发布 `same-run-dispatch-context`、reservation、budget arbitration 与 reject 行为，供各组后接线 | `4号执行人` |
+| Phase 2：三组领域 Agent 并行落地 | `Pending` | 在仅依赖 `L0` 的前提下先完成各自 source / event / handoff producer，再按需接入治理与 same-run | `1/2/3号执行人` |
 | Phase 3：Registry、工具覆盖与预算治理 | `Pending` | 跑通 registry snapshot、tool coverage、activation/stop policy、capacity/budget 基线 | `4号执行人` 主导，`1号执行人` 负责高权威轴预算接线，`2号执行人` 负责 replay/eval 输入模板，`3号执行人` 负责 owner-boundary 模板 |
 | Phase 4：归一、claim admission 与反证审计 | `Pending` | 跑通 attestation、fact resolution、owner arbitration、claim fold、audit 输入 | `4号执行人` |
 | Phase 5：tier decision 与 weekly 三层输出 | `Pending` | 生成 ledger、weekly internal section、consumer view、public projection | `4号执行人` |
@@ -552,6 +645,43 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 3. 总控验收时只认 artifact refs、schema version、compatibility matrix 和验证记录，不认“已经口头对齐”。
 4. `replay/eval` 草案、`owner-boundary` 汇总与 `schema-change-note` 只允许各自指定的责任方写入，其他组只能消费引用，不得并行改写同一份草案。
 
+消息字段补充冻结：
+
+- 所有领域组对外 handoff 的 envelope 都必须显式带 `responsibility_id`，不得让中台从文件路径或目录名反推职责项。
+- 所有 accepted / counter / rejected / diagnostic event 的 `execution_context.primary_responsibility_id` 必须与事件 `responsibility_id` 一致；`execution_context.operational_executor_id` 必须与本次实际运行的 Agent 一致，不得回填默认 owner 伪装成本组正常执行。
+- 若发生 takeover / delegated execution / backfill execution，必须显式带 `takeover_mode` 与 `takeover_audit_ref`；没有合格 takeover 留痕时，不得把事件记成已覆盖成功。
+- 任何会进入 same-run admission、shared pool、claim-level queue 或 coalesce 的消息，除 `dispatch_context_ref` 外，还必须显式带 `claim_partition_id` 或 `candidate_group_id`，避免调度器回头解 payload 猜稳定键。
+- handoff 的 `checkpoint_stage` 之外，再补一层 `capability_class` 约束：claim-critical、batch-governance、internal-helper 三类 checkpoint 不得混用同一 payload 语义；只有 claim-critical checkpoint 允许触达 claim admission、owner transfer、audit 结论和 tier decision。
+
+### 增量集成规则
+
+为避免“必须三组一起齐活，中台才能开始”，本计划冻结以下增量集成顺序：
+
+1. `4号执行人` 可在 `L0a` 到位后立即开始 schema、registry、normalization、audit、weekly shell 的实现与结构测试，并同步 materialize `L0b`，不等待 A/B/C 正式 handoff。
+2. `A/B/C` 任一组只要交出本组合法 envelope / manifest / payload / refs，中台就必须允许该组先进入 contract test 与 normalization dry-run；不得以“另外两组还没好”为由卡住已完成的组。
+3. owner boundary、official-first failure、replay/eval 资产只阻塞对应组的 promotion to final integration，不阻塞其他组推进。
+4. 只有 `WeeklyIndustryTrendSection`、`ConsumerWeeklyIndustryView`、`PublicWeeklyIndustryProjection` 的最终拼装与 Phase 7 验收，才要求三组 handoff 全量齐备。
+5. 在 `Phase 0.5` 期间，A/B/C 可以先交本组 preparatory artifact refs、stub fixture refs 和 negative fixtures 给 D 做早期 contract review；这类输入不视为正式 handoff，但允许 D 提前发现契约缺口。
+
+### 争议分层与默认系统动作
+
+为避免把 `normalization-agent` 变成“所有争议都要 same-run 清零”的串行瓶颈，本计划把 owner / attestation / audit 争议明确分层：
+
+1. `same_run_critical_resolution`
+   - 仅限命中 `tier_blocking`、`public_output_only`、headline 主语义归属未定或核心 owner transfer 未定的高影响争议。
+   - 这类争议才允许占用 same-run blocking、shared pool 和人工 adjudication 容量。
+2. `provisional_resolution`
+   - 对内部 ledger 可先保留 provisional owner、降 `decision_confidence`、限 `consumer_readiness_state`，但不阻断其他 claim / 其他组推进。
+   - 这类争议必须显式输出 `impact_scope`、`default_system_action` 与后续治理入口，不得留成口头 TODO。
+3. `post_weekly_governance_resolution`
+   - 长尾 owner / attestation / relation edge / authority 治理默认进入后续治理队列或 replay，不得为了“本轮全部裁清”阻断 weekly。
+
+执行约束：
+
+- 领域组提交 attestation / owner-boundary 时，必须区分“same-run 必裁清”与“可后续治理”的事项，不得把所有跨域事实都升级成 same-run 必填动作。
+- `4号执行人` 只对高影响争议负责 same-run promotion decision；其余争议按 `default_system_action` 自动降 confidence、限制 public output 或进入治理队列。
+- 任一组未交长尾争议样本，不得成为其他组 normalization、claim-builder 或 weekly internal dry-run 的全局阻塞条件。
+
 ### Handoff Payload Contract
 
 下表冻结本计划允许的跨组 handoff payload 族。字段 required 性、兼容边界和 machine-readable field truth 仍以 `schemas/industry/*` 为准；这里是协作用引用摘录（非真源）。
@@ -568,6 +698,7 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 补充约束：
 
 - 所有 claim-critical checkpoint 若命中 same-run admission / budget / review / shared pool，message 必须显式带 `dispatch_context_ref`、`scheduling_key` 和相关 reservation / admission refs。
+- 所有 claim-critical checkpoint 若涉及实际执行者与默认 owner 分离，必须显式带 `execution_context.operational_executor_id`、`takeover_mode` 与 `takeover_audit_ref`；不得把 delegated execution 伪装成默认 owner 正常运行。
 - 没有 envelope、manifest、payload schema 或 canonical artifact ref 的输出，一律视为未登记中间产物，下游不得消费。
 - 领域组、中台组都不得以自由文本、会议纪要或临时路径补足 handoff 所缺字段。
 - `daily-industry-evidence-pack-input.v1` 是多轴/多职责 producer 的聚合输入，不允许把数组字段压扁成单值字段或本地路径字符串；consumer 只认 canonical ref 数组。
@@ -721,7 +852,27 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 4. 先补 industry 结构测试与 doc consistency 测试，未通过前不进入生产实现。
 5. 若设计评审仍要求补冻结项，本计划状态保持 `Draft`，停止后续阶段。
 
-### Phase 1A：L0/L1 契约与存储基座
+### Phase 0.5：四人零等待开工包
+
+1. `1/2/3号执行人` 在不等待 `schemas/industry/*` materialize 完整的前提下，先各自启动：
+   - source catalog
+   - route / freshness / owner-boundary 规则草稿
+   - fixture / seed / replay window / anti-upgrade 样本
+   - 本组 local adapter seam 与测试骨架
+2. `4号执行人` 同步启动：
+   - canonical schema materialization
+   - artifact path 与 payload registry
+   - structure test / contract fixture / shell runtime
+3. `Phase 0.5` 明确禁止：
+   - A/B/C 把本地 stub 当成跨组 handoff 正式真源
+   - D 以“schema 还没发完”为由阻止 A/B/C 做本地 preparatory work
+   - 任一组越界创建共享 runtime 或共享文档真源
+4. 退出条件：
+   - 四个人都已有各自独立可推进的工作面
+   - `4号执行人` 已开始 materialize `L0b`
+   - A/B/C 已准备好在 `Phase 1A` 完成后把本地 seam 收口到 canonical contract
+
+### Phase 1A：L0 契约与最小开工包
 
 1. 固定 `schemas/industry/*` 为跨模块唯一真源。
 2. 先创建并冻结 industry 目录骨架，至少包括：
@@ -788,14 +939,14 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 7. 在 `src/types.ts`、`src/cli.ts` 中预留 daily / weekly / replay / governance 的 industry 入口，但不提前写业务裁决。
 8. 先把 internal/public artifact 分离路径定下来，避免后续打包层回写内部产物。
 9. 对 `src/action/*`、`src/types.ts`、`src/cli.ts` 这类热点文件，只允许保留薄入口；业务实现必须下沉到 `src/industry/*`，避免形成新的 mega-file。
-10. 在 Phase 1A 同步完成目录骨架 bootstrap，至少创建：
+10. 在 Phase 1A 同步冻结目录骨架模板，并优先补齐以下目录：
    - `src/industry/platform/{contracts,registry,normalization,audit,trend,output}/`
    - `src/industry/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
    - `src/__tests__/industry/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
    - `fixtures/industry/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
    - `data/industry-seeds/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
 11. 这一步只允许建目录和占位索引，不允许提前把业务逻辑塞进 `src/action/*`、`src/types.ts` 或其他热点共享文件。
-12. 目录骨架 bootstrap 未完成前，A/B/C 三组不得开始代码实现；否则最先发生冲突的是路径与归属，而不是业务逻辑。
+12. 若目录尚未被 `4号执行人` 预创建，A/B/C 三组可按已冻结模板自行创建各自目录并开始代码实现；禁止的是改路径命名或越界创建他组 / 共享目录，不是等待 bootstrap 提交通知后才能开工。
 
 ### Phase 1B：共享治理契约基线
 
@@ -875,7 +1026,7 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 
 补充并行推进约束：
 
-- Phase 1A / 1B / 1C 一旦完成，`4号执行人` 不得再以“等待 replay 草案 / owner-boundary 模板 / official-first 反例”为由阻塞 A/B/C 进入 event producer 开发；这些资产采用并行前推、后续接线的方式集成。
+- Phase 1A 一旦完成，`4号执行人` 不得再以“等待 replay 草案 / owner-boundary 模板 / official-first 反例 / current consumer fixture / dispatch 基座”为由阻塞 A/B/C 进入 event producer 开发；这些资产采用并行前推、后续接线的方式集成。
 - 前推唯一 writer 固定为：
   - `1号执行人`：official-first failure / finance-policy anti-upgrade 模板
   - `2号执行人`：replay / eval 草案
@@ -887,10 +1038,16 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 
 前置依赖：
 
+- Phase 0.5 已完成
 - Phase 1A 完成
-- Phase 1B 完成
-- Phase 1C 完成
 - canonical schema 已稳定
+- artifact path、payload 正式名与单写者边界已冻结
+
+并行推进说明：
+
+- Phase 1B/1C 未完成时，A/B/C 仍可先完成 source catalog、event builder、batch writer、domain fixture、handoff producer 与本组 contract tests。
+- `activation / stop / review / budget / same-run` 相关逻辑在各组内部作为后接线阶段推进；只在对应模块 merge / handoff freeze 前要求消费 D 组正式治理包与 current fixtures。
+- 任何组不得因为等待另一个领域组的 owner boundary、replay 样本或 anti-upgrade 反例而停自己的 producer 开发。
 
 #### Phase 2A：学术前沿面
 
@@ -924,6 +1081,7 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 3. 让 `1/2/3号执行人` 的工具调用都通过 Phase 1B 已发布的统一 budget / reservation / reason-code 真源落账。
 4. 建立 `manual_review_pool`、`audit_pass_pool`、`registry_review_pool` 等共享池语义，但不把它们混成日志统计。
 5. 验证 `manual_review_pool` 不等于 reviewer availability；`async_only` 时必须走保守消费路径。
+6. 固定高成本扩张顺序：`claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion`；任何组不得跳过前序仲裁，直接用 axis importance 抢占 same-run 高成本配额。
 
 ### Phase 4：归一、claim admission 与反证审计
 
@@ -933,7 +1091,8 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
    - provisional owner 事件
    - `cross_responsibility_attestation_refs`
    - owner boundary negative fixtures
-2. 未交 provisional owner / attestation 或 owner boundary 负例 fixture 的组，不允许进入 normalization 集成。
+2. 未交 provisional owner / attestation 或 owner boundary 负例 fixture 的组，不允许该组进入 normalization promotion；但不得阻塞其他已交付组的 normalization 集成、contract test 和 dry-run。
+3. 高影响 owner / attestation 争议若命中 `tier_blocking`、`public_output_only` 或 headline 主语义未定，才允许进入 same-run critical resolution；其余争议默认进入 provisional / post-weekly 路径，不得全部卡在 Phase 4A。
 
 #### Phase 4B：Normalization Resolution
 
@@ -947,6 +1106,11 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
    - `FactResolutionAudit`
    - owner transfer artifact
    - `snapshot_id` / `fact_partition_id`
+3. 必须显式区分：
+   - `same_run_critical_resolution`
+   - `provisional_resolution`
+   - `post_weekly_governance_resolution`
+   并给出各自 `impact_scope`、`default_system_action` 与可否阻断 public/internal 消费；不得把全部 unresolved groups 一律塞进 same-run blocking。
 
 #### Phase 4C：Claim Builder / Audit Consumption Guard
 
@@ -1027,12 +1191,14 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
    - 十轴完整输出
    - 9 实际 Agent / 15 职责项都能交账
    - 领域组没有越界改写共享热点目录
+   - `execution_context.primary_responsibility_id` / `operational_executor_id`、`takeover_mode`、`takeover_audit_ref`、`claim_partition_id` / `candidate_group_id` 等关键协作字段不缺失
    - 新增源码、测试、fixture builder 文件 `< 2000` 行，热点入口文件 `< 800` 行
 5. 补齐跨组 contract tests，确保：
    - 领域组 producer fixture 能被中台组当前版本 consumer 直接消费
    - 同 major 的上一个兼容版本 fixture 仍可消费
    - 未知更高 major version 被正确拒绝
-   - manifest resolve / payload kind mismatch / missing required refs 时报错一致
+   - 运行执行者与默认 owner 不一致时必须命中 takeover / delegated execution 约束，不能静默通过
+    - manifest resolve / payload kind mismatch / missing required refs 时报错一致
 
 ### Phase 7：总体验收
 
@@ -1062,6 +1228,9 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 14. industry 层缺失或失败时，主 weekly 仍能回退到项目级输出，但必须显式写出“行业证据不足 / 降级”，不得静默伪装为正常行业判断。
 15. `same-run-dispatch-context`、`CapacityReservation`、`BudgetArbitrationRecord` 与 `run_budget_summary` 可被独立验证，A/B/C 不得各写一套本地 same-run 口径。
 16. owner arbitration、cross-responsibility attestation 与 fact snapshot 形成独立 artifact 和 replay 断言，晚到结果不得静默篡改当前 weekly。
+17. `execution_context.primary_responsibility_id`、`execution_context.operational_executor_id`、`takeover_mode / takeover_audit_ref`、`claim_partition_id / candidate_group_id` 等协作字段在跨组 handoff 中完整、可验证，不再依赖目录名、路径名或口头解释补链。
+18. owner / attestation / unresolved group 争议按 `same_run_critical_resolution`、`provisional_resolution`、`post_weekly_governance_resolution` 三层输出；只有高影响争议占用 same-run blocking，其余默认按 `default_system_action` 自动降 confidence、限 public 或进入后续治理。
+19. 高成本扩张严格遵守 `claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion` 的固定顺序，不存在任一领域组绕过前序仲裁直接抢 same-run 高成本配额。
 
 ## 验证矩阵
 
@@ -1075,6 +1244,9 @@ ExecPlan 可以直接引用上游设计冻结结论，但不得在本计划中�
 | `src/industry/platform/normalization/*` | source-chain、fact resolution、owner transfer、snapshot partition | unit + replay fixture | claim-builder 只消费已关闭 snapshot，晚到结果不静默回写 |
 | `src/industry/platform/audit/*` | counter evidence、blocking、missing、unresolved group | unit + decision fixture | 反证能阻断或降 confidence，不能只做文案提醒 |
 | `src/industry/platform/trend/*`、`src/industry/platform/output/*` | claim archetype、admission、tier decision、consumer readiness、headline capacity、projection | unit + eval fixture | 不同 archetype 不共用一套偷懒门槛，public projection 不回写 internal |
+| 跨组执行上下文 | `primary_responsibility_id`、`operational_executor_id`、takeover、claim partition / candidate group、same-run refs | contract + pipeline fixture | 不靠目录名反推 owner / executor；delegated execution 必须留痕；same-run 稳定键完整 |
+| unresolved group 分层 | `same_run_critical_resolution`、`provisional_resolution`、`post_weekly_governance_resolution`、`impact_scope`、`default_system_action` | replay + review fixture | 只有高影响争议占用 same-run blocking，其余按默认系统动作自动分流 |
+| 高成本仲裁顺序 | fold、admission、claim budget、shared capacity、axis expansion | run fixture + snapshot | 不存在倒序扩张或先烧高成本后补 admission 的实现 |
 | `src/action/weekly*`、`src/action/runSummary.ts`、`src/action/dailyVerification.ts` | weekly 三层输出、回退、public/internal 分离、window status | integration + snapshot | public projection 独立，industry failure 有显式降级 |
 | `src/__tests__/industryReplay*`、`industryEval*` | gold / negative / replay / diff audit | replay + eval command | 指标达到设计冻结地板，且能解释回归 |
 | 跨组 contract fixtures | message envelope、manifest、payload schema、compatibility matrix、current/previous consumer 兼容 | contract + replay fixture | 领域组产物无需口头补字段即可被中台组消费；unknown higher major 正确拒绝 |

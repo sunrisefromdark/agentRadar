@@ -485,7 +485,7 @@
       ]
     },
     {
-      "schema_id": "event-batch.v1",
+      "schema_id": "industry-signal-event-batch.v1",
       "current_version": "1.0.0",
       "must_read_fields": [
         "payload_id",
@@ -824,37 +824,6 @@
       ],
       "consumer_support": [
         "trend-agent"
-      ]
-    },
-    {
-      "schema_id": "tool-status-report.v1",
-      "current_version": "1.0.0",
-      "must_read_fields": [
-        "payload_id",
-        "run_id",
-        "source_message_id",
-        "axis_tool_coverage_report_refs",
-        "tool_registry_snapshot_ref",
-        "active_route_level",
-        "active_source_class",
-        "veto_reason_codes",
-        "degradation_reason_codes",
-        "budget_status_summary"
-      ],
-      "conditionally_required_fields": [
-        "actual_cost_units"
-      ],
-      "ignorable_forward_compatible_fields": [
-        "tool_ext"
-      ],
-      "producer_support": [
-        "registry-agent",
-        "search-agents"
-      ],
-      "consumer_support": [
-        "normalization-agent",
-        "trend-agent",
-        "weekly-packager"
       ]
     },
     {
@@ -1265,6 +1234,66 @@
         "weekly-packager",
         "governance-console",
         "replay-runner"
+      ]
+    },
+    {
+      "schema_id": "industry-agent-contribution.v1",
+      "current_version": "1.0.0",
+      "must_read_fields": [
+        "payload_id",
+        "run_id",
+        "source_message_id",
+        "actual_agent_id",
+        "responsibility_id",
+        "status",
+        "input_artifact_refs",
+        "output_artifact_refs"
+      ],
+      "conditionally_required_fields": [
+        "failure_notice_ref",
+        "actual_latency_ms",
+        "actual_cost_units"
+      ],
+      "ignorable_forward_compatible_fields": [
+        "summary_cn"
+      ],
+      "producer_support": [
+        "all-actual-agents"
+      ],
+      "consumer_support": [
+        "registry-agent",
+        "weekly-packager",
+        "replay-runner"
+      ]
+    },
+    {
+      "schema_id": "daily-industry-evidence-pack-input.v1",
+      "current_version": "1.0.0",
+      "must_read_fields": [
+        "payload_id",
+        "run_id",
+        "source_message_id",
+        "normalized_event_batch_refs",
+        "source_message_ids",
+        "coverage_refs",
+        "contribution_refs"
+      ],
+      "conditionally_required_fields": [
+        "rejected_event_batch_refs"
+      ],
+      "ignorable_forward_compatible_fields": [
+        "summary_cn"
+      ],
+      "producer_support": [
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent",
+        "finance-agent",
+        "policy-agent"
+      ],
+      "consumer_support": [
+        "weekly-packager",
+        "normalization-agent"
       ]
     }
   ]

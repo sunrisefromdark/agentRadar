@@ -448,7 +448,7 @@
       ]
     },
     {
-      "schema_id": "event-batch.v1",
+      "schema_id": "industry-signal-event-batch.v1",
       "schema_kind": "payload",
       "allowed_kind": "evidence_batch",
       "producer_roles": [
@@ -759,7 +759,7 @@
     },
     {
       "schema_id": "tool-status-report.v1",
-      "schema_kind": "payload",
+      "schema_kind": "registry_family",
       "allowed_kind": "tool_status_report",
       "producer_roles": [
         "registry-agent",
@@ -1122,6 +1122,60 @@
         "decision",
         "reason_codes",
         "settlement_snapshot_at"
+      ]
+    },
+    {
+      "schema_id": "industry-agent-contribution.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "industry_agent_contribution",
+      "producer_roles": [
+        "all-actual-agents"
+      ],
+      "consumer_roles": [
+        "registry-agent",
+        "weekly-packager",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "actual_agent_id",
+        "responsibility_id",
+        "status",
+        "input_artifact_refs",
+        "output_artifact_refs"
+      ]
+    },
+    {
+      "schema_id": "daily-industry-evidence-pack-input.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "daily_industry_evidence_pack_input",
+      "producer_roles": [
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent",
+        "finance-agent",
+        "policy-agent"
+      ],
+      "consumer_roles": [
+        "weekly-packager",
+        "normalization-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "window_start",
+        "window_end",
+        "source_message_id",
+        "normalized_event_batch_refs",
+        "source_message_ids",
+        "coverage_refs",
+        "contribution_refs"
       ]
     }
   ]

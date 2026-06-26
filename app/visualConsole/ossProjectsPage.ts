@@ -640,14 +640,6 @@ function renderProjectsFilterStripV3(model: ProjectsViewModel, lang: UiLang, ini
           </div>
         </div>
       </div>
-      <div class="status-banner status-degraded" data-projects-fuzzy-status="true" hidden>
-        <div class="status-banner-head">
-          <span class="context-label" data-projects-fuzzy-label="true">${escapeHtml(uiText(lang, "扩展搜索", "Expanded Search"))}</span>
-          <strong data-projects-fuzzy-title="true"></strong>
-        </div>
-        <p data-projects-fuzzy-message="true"></p>
-        <div class="filter-chip-row" data-projects-fuzzy-options="true" hidden></div>
-      </div>
     </section>
   `;
 }
@@ -1028,6 +1020,16 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
           <strong data-projects-ai-main-result-query="true"></strong>
         </div>
         <p>${escapeHtml(uiText(lang, "主列表当前只显示本轮 AI 搜项目 返回的项目。", "The main list is showing only the projects returned by the latest AI search."))}</p>
+        <div class="filter-chip-row">
+          <button type="button" class="filter-chip" data-projects-ai-reset="true">${escapeHtml(uiText(lang, "返回普通项目库", "Back To Default Library"))}</button>
+        </div>
+      </div>
+      <div class="status-banner" data-projects-ai-empty-cta="true" hidden>
+        <div class="status-banner-head">
+          <span class="context-label">${escapeHtml(uiText(lang, "AI 助手空结果", "AI Assistant Empty Result"))}</span>
+          <strong>${escapeHtml(uiText(lang, "换个说法再试一次", "Try another phrasing"))}</strong>
+        </div>
+        <p>${escapeHtml(uiText(lang, "没有命中项目时，继续换关键词、补充场景，或回到普通项目库继续浏览。", "If no projects match, refine the query, add a use case, or return to the default library."))}</p>
         <div class="filter-chip-row">
           <button type="button" class="filter-chip" data-projects-ai-reset="true">${escapeHtml(uiText(lang, "返回普通项目库", "Back To Default Library"))}</button>
         </div>

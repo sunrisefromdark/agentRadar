@@ -117,12 +117,20 @@
 
 ## 依赖输入
 
-开始前必须拿到：
+最小开工只需要拿到：
 
-1. 中台组发布的 schema 真源版本与 reason/state 字典。
-2. official-first route 与 `AxisToolCoverageReport` 字段定义。
-3. 总控计划中的单写者边界。
-4. 已发布的共享治理契约：
+1. 已批准设计文档中的 official-first、source authority、finance/policy 语义冻结结论。
+2. 总控计划中的单写者边界、职责映射表与目录命名模板。
+3. `daily-industry-evidence-pack-input.v1` 最小数组合同。
+
+其中：
+
+- `Day-0/Day-1` 零等待开工不要求先拿到中台已 materialize 的 machine-readable bundle；本组可先按设计冻结语义启动 source / route / fixture / seed / local adapter seam。
+- 进入跨组 handoff 冻结、claim-critical payload 编码与 same-run 接线前，仍必须回到中台组发布的 schema 真源版本与 reason/state 字典。
+
+以下资产属于“后接线依赖”，不阻塞本组先做 source / event / fixture / handoff producer：
+
+- 已发布的共享治理契约：
    - `field-ownership-policy.v1`
    - `fact-resolution-profile.v1`
    - `agent-relevance-profile.v1`
@@ -143,11 +151,56 @@
    - `gap-scope-contract.v1`
    - `message-key-policy.v1`
    - `runtime-concurrency-control-policy.v1`
-5. 已发布的 dispatch / budget runtime 基座：
+- 已发布的 dispatch / budget runtime 基座：
    - `same-run-dispatch-context.v1`
    - `CapacityReservation`
    - `BudgetArbitrationRecord`
    - current consumer / negative fixtures
+
+执行约束：
+
+- 若共享治理或 dispatch 基座尚未发布，本组必须先在本组目录内保留 adapter seam、schema-aligned producer fixture 与 negative fixture，不得停工等待。
+- 未接入 shared governance 前，可以先完成 source catalog、event builder、batch writer、coverage / contribution writer 与 owner / anti-upgrade fixtures；但不得本地发明新的正式字段、reason code 或 state 语义。
+- 若 `shared-runtime-note` 尚未被中台上收，本组允许先在 finance/policy 目录内保留只服务本组的临时 wrapper / adapter seam；但不得把它暴露成别组依赖的共享运行时。
+
+## 给实现人的白话派工
+
+### 你先做什么
+
+- 先把 `finance-agent`、`policy-agent` 目录骨架搭好。
+- 先把 official-first source catalog、route 草稿、stop policy 草稿写出来。
+- 先把 negative fixture、owner-boundary / anti-upgrade 样本补齐。
+- 先把本组 local adapter seam 和 contract / unit / replay 测试骨架跑起来。
+
+### 第一阶段做到哪一步就可以先交
+
+- 只要你已经能稳定产出本组 event batch 草稿、coverage / contribution 草稿，并且 fixture 能覆盖正例和反例，就可以先把 preparatory artifact refs 交给 `4号执行人` 做早期 contract review。
+- 这一步不要求你已经接好最终 same-run，也不要求学术组或产品生态组已经完成。
+
+### 你只在这些时点必须等待
+
+- 只有在你要把本组结果正式交给别组消费时，才需要等待 `4号执行人` 的 `Phase 1A`。
+- 只有在你要写正式 `industry-signal-event-batch.v1`、`axis-tool-coverage-report.v1`、`industry-agent-contribution.v1` 并作为跨组真交接件提交时，才需要等 canonical schema 和 payload 正式名冻结。
+- 只有在你要接 same-run 的高成本路径时，才需要等 dispatch / budget runtime 基座。
+
+### 等到什么产物出来再继续
+
+- 等到 `4号执行人` 发出 canonical schema、reason/state 真源、artifact path、payload 正式名。
+- 等到 current consumer fixtures 和 compatibility matrix 可用后，再把本地 seam 收口成正式 handoff。
+
+### 不要等什么
+
+- 不要等学术组先交 citation 样本。
+- 不要等产品生态组先交 owner-boundary 模板。
+- 不要等 shared runtime 先抽好；先在本组目录内留临时 seam 继续做。
+
+### 本组从开工到完工的顺序
+
+1. 先在本组目录里把 source catalog、route 草稿、fixture、local seam、测试骨架做起来。
+2. 等 `4号执行人` 发出 `Phase 1A` 的 canonical schema、payload 正式名、artifact path 后，把本地 seam 收口成正式 handoff。
+3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
+4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 activation / stop / budget / same-run 这些后接线能力接上。
+5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
 ## 输出与 handoff
 
@@ -167,6 +220,8 @@
 handoff 要求：
 
 - event 必须符合 `industry-signal-event.v1`
+- `execution_context.primary_responsibility_id` 必须与 event 的 `responsibility_id` 一致；`execution_context.operational_executor_id` 必须如实记录这次实际执行采集/补证的 Agent
+- 若存在 delegated execution / takeover / backfill，必须显式带 `takeover_mode` 与 `takeover_audit_ref`；否则宁可记 `unavailable / needs_review`，不得伪装成正常已覆盖
 - tool coverage 必须显式包含 `active_source_class`、`active_route_level`、`degraded`、`degradation_reason_codes`
 - official fetch 停止时必须留下 `stop_reason_code`
 - 不得只交 batch 路径字符串；必须交完整 `IndustryAgentMessageEnvelope`、`payload_ref`、`IndustryAgentArtifactManifest`、`input_artifact_refs`、`output_artifact_refs`
@@ -183,7 +238,7 @@ handoff 要求：
 
 ### Phase 1：source class 与 route 基线
 
-1. 以中台组已完成的目录骨架 bootstrap 为前提，只在本组既定工作根目录内新增文件；若根目录缺失，只报告中台组补齐，不得自行改路径命名。
+1. 以总控已冻结的目录模板为前提，只在本组既定工作根目录内新增文件；若根目录缺失，本组可按模板自行创建本组目录，但不得改路径命名或越界创建共享目录。
 2. 若发现实现需要直接改 `src/industry/tools/*` 或其他共享旧模块，立即停止并提交 `shared-runtime-note`；本组不得自行越界改共享热点。
 3. 固定三轴 source class：
    - `capital_finance` 优先 `official_structured_api` / `official_owned_feed_or_doc`
@@ -191,8 +246,9 @@ handoff 要求：
    - `policy_research_thinktank` 优先可信报告与机构自有文档
 4. 领域内实现 `primary / secondary / fallback / last_resort` route 映射。
 5. 先把搜索聚合器降到 discovery / context / weak-signal-only，不允许先查聚合再补官方的倒序实现。
-6. 所有 route selection、activation、stop、review 行为都必须消费总控已发布的共享治理 profile；不得在本组内重新发明 budget 阈值、review 语义或近义 reason code。
-7. 命中 same-run 的 route 必须显式从中台组消费 `dispatch_context_ref`、`claim_admission_assessment_ref`、`capacity_reservation_refs`、`scheduling_key` 与 `gap_scope` 语义；不得本地猜测“现在应该能跑”。
+6. route selection 核心实现可先落地；进入 activation / stop / review / budget 接线时，必须消费总控已发布的共享治理 profile；不得在本组内重新发明 budget 阈值、review 语义或近义 reason code。
+7. 一旦接入 same-run 的 route，必须显式从中台组消费 `dispatch_context_ref`、`claim_admission_assessment_ref`、`capacity_reservation_refs`、`scheduling_key` 与 `gap_scope` 语义；不得本地猜测“现在应该能跑”。
+8. 高成本扩张必须遵守固定顺序：`claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion`；finance / policy 不得因为“看起来重要”就先抢 official fetch 或 same-run 高成本配额。
 
 ### Phase 2：event 生产
 
@@ -209,8 +265,9 @@ handoff 要求：
    - 不得伪装成 strong accepted supporting evidence
 4. accepted / counter / diagnostic / rejected 事件必须分别进入受控 batch refs；不得在一个 batch 内混语义靠字段猜。
 5. 任何 finance / policy accepted event 若存在跨职责语义，必须补 `cross_responsibility_attestation_refs` 输入位；不得等中台组事后从 prose 猜。
+6. 只有命中 `tier_blocking`、`public_output_only` 或 headline 主语义争议的跨职责事实，才要求 same-run critical attestation；其余跨域事实可先按 provisional / post-weekly 路径留痕，不得把所有长尾争议都堵在本组开工阶段。
 
-### Phase 3：activation / stop / budget
+### Phase 3：activation / stop / budget 接线
 
 1. 落地高成本轴激活条件。
 2. 落地 canonical fetch 停止条件：
@@ -227,6 +284,10 @@ handoff 要求：
    - `weak`
 4. 不得因 `manual_review_pool` 有槽位就默认 same-run 有人可审；必须按 `same-run-review-availability-policy.v1` 判断。
 5. 没有 `reservation_state=\"granted\"` 的 reservation ref 时，不得启动 official high-cost fetch。
+
+补充说明：
+
+- 本阶段只阻塞 high-cost fetch、same-run、review 和 budget 相关能力的上线，不阻塞前序 source / event / handoff producer 开发。
 
 ### Phase 4：tool coverage 与 contribution
 
@@ -272,6 +333,7 @@ handoff 要求：
    - unknown higher major negative fixture
 4. 把 envelope / payload / manifest / batch refs / coverage refs / contribution refs 交给中台组接入。
 5. 把 owner / attestation / anti-upgrade / official-first failure fixtures 一并交给中台组接入 replay/eval。
+6. 若中台 current consumer fixture 尚未发布，本组先提交 producer fixture 与 artifact refs；待中台发布后再补兼容消费用例，不回头改本组领域语义。
 
 ## 验收标准
 

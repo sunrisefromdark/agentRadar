@@ -1,0 +1,17 @@
+{
+  "id": "paper-single-preprint-guard",
+  "axis": "research_paper",
+  "title": "Single Preprint Should Not Auto-Upgrade",
+  "summary_cn": "只有 arXiv 首发，没有录用、proceedings 或独立复核，因此必须保留 anti-upgrade guard。",
+  "observed_at": "2026-06-24T00:00:00.000Z",
+  "published_at": "2026-06-23T00:00:00.000Z",
+  "source_key": "arxiv",
+  "source_url": "https://arxiv.org/abs/2606.54321",
+  "polarity": "supporting",
+  "freshness_anchor_kind": "first_release",
+  "canonical_refs": {
+    "arxiv_id": "2606.54321"
+  },
+  "venue": "arXiv",
+  "venue_year": 2026
+}

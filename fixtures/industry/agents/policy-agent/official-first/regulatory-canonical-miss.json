@@ -1,0 +1,5 @@
+{
+  "scenario": "policy_regulatory official source unavailable",
+  "expected_route_level": "none",
+  "expected_stop_reason": "no_canonical_source_available"
+}

@@ -1,0 +1,5 @@
+{
+  "schema_version": "industry-agent-message.v1",
+  "payload_ref": "",
+  "expected_reason": "missing_required_artifact_ref"
+}

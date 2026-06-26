@@ -1,0 +1,4 @@
+{
+  "scenario": "thinktank opinion does not equal regulatory conclusion",
+  "expected_axis": "policy_research_thinktank"
+}

@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`In Progress`
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -14,6 +14,46 @@
   - `docs/specs/design-docs/行业级Agent趋势判断设计/08-验证追溯与完成定义.md`
   - `docs/specs/design-docs/行业级Agent趋势判断设计/09-术语与审计词汇表.md`
 - 负责人：`1号执行人`
+
+## 当前进度
+
+| Phase | 状态 | 已落地项 | 说明 |
+| --- | --- | --- | --- |
+| Phase 1-2：source / route / event / handoff 骨架 | `DONE` | `finance-agent`、`policy-agent` 目录骨架、source catalog、route selection、event builder、handoff、unit/contract/negative/replay fixture 与测试骨架 | 当前仓库内可独立落地的骨架、最小领域验证与 producer artifact 校验已闭环 |
+| Phase 3-5：shared governance / same-run / 正式 cross-group contract 冻结 | `BLOCKED` | `dispatch_context_ref`、reservation、canonical schema 真源、compatibility matrix 消费侧冻结 | 这些步骤依赖 `4号执行人` 发布中台真源，当前先维持本地 seam 与 producer fixture，不停工等待 |
+
+## 落地标记（截至 2026-06-26）
+
+### 已完成
+
+| 项目 | 当前判断 | 依据 |
+| --- | --- | --- |
+| `finance-agent` / `policy-agent` 目录骨架 | `DONE` | 目录与建议文件已存在，source / route / event / handoff 已落在本组目录 |
+| 三轴 source catalog 与 official-first route 基线 | `DONE` | finance / regulatory / thinktank 的 source catalog 与 route selection 已实现 |
+| 三轴 canonical event / batch producer 骨架 | `DONE` | accepted / counter / diagnostic / rejected 四类 batch 已能生成 |
+| tool coverage / contribution 基础产物 | `DONE` | 三轴 coverage 与 contribution 已可生成；计数闭合缺口已在本轮修复 |
+| daily handoff 轻索引输入骨架 | `DONE` | `daily-industry-evidence-pack-input.v1` 已生成，且 `coverage_refs=3`、`contribution_refs=3` 有 contract test |
+| owner-boundary / official-first / anti-upgrade 基础 fixture | `DONE` | finance 与 policy 目录下已落基础反例样本 |
+| 本组最小领域回归 | `DONE` | finance unit、policy unit / negative / contract 共 6 条测试通过 |
+
+### 已完成（本轮补齐）
+
+| 项目 | 当前判断 | 说明 |
+| --- | --- | --- |
+| finance 侧 `contract / negative / replay` 测试补齐 | `DONE` | 已补 finance `contract.test.ts`、`negative.test.ts`、`replay.test.ts` |
+| policy / finance fixture 细化与 replay 覆盖 | `DONE` | 已新增 finance `compatibility/`、`replay/` fixture，并补 group replay 覆盖 |
+| stop / budget 本地弱接线回归 | `DONE` | 已补 finance timeout-budget / fallback / last-resort 回归 |
+| preparatory producer fixture 整理 | `DONE` | 已用 replay/contract 测试固定 `source_message_ids`、batch refs、coverage refs、contribution refs 的包装关系 |
+
+### 必须等 4 号
+
+| 项目 | 当前判断 | 阻塞原因 |
+| --- | --- | --- |
+| 正式 cross-group handoff 收口 | `BLOCKED` | 需等待 canonical schema、payload 正式名、artifact path 真源冻结 |
+| current / previous compatible consumer fixture 最终对接闭环 | `BLOCKED` | 需等待中台组发布 consumer fixture 与 compatibility matrix 消费基线 |
+| `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `BLOCKED` | 需等待 dispatch / budget runtime 基座 |
+| activation / stop / budget 正式治理接线 | `BLOCKED` | 需等待共享治理 profile 与受控 reason/state 字典 |
+| 正式提交给中台组消费的 envelope / payload / manifest 套件 | `BLOCKED` | 当前可生成 producer 侧草稿，但不能替代中台真源命名与消费契约 |
 
 ## 目标
 
@@ -375,3 +415,11 @@ handoff 要求：
 | --- | --- | --- | --- |
 | 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |
+| 2026-06-26 | `npx vitest run src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts` | `Passed` | 4 个测试文件、6 条测试全部通过；已覆盖 finance official-first、policy 轴拆分、negative fixture 与 daily handoff contract |
+| 2026-06-26 | `npx vitest run src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 8 个测试文件、12 条测试全部通过；已覆盖 finance/policy 的 unit、contract、negative、replay 与 producer artifact refs 闭环 |
+| 2026-06-26 | `npx tsx scripts/execPlanPreflight.ts --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md" && npx tsx scripts/execPlanPreflight.ts --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md"` | `Passed` | 已补齐本计划对应 receipt，并通过 code-implementation preflight 校验 |
+
+## 下一阶段入口
+
+1. 本组在不依赖中台真源的范围内已无剩余必做项；后续仅在发现新边界样本时增补 fixture / replay。
+2. 若需要正式交付 cross-group handoff，则等待 `4号执行人` 发布 canonical schema、reason/state 真源、artifact path 与 current consumer fixture 后再收口。

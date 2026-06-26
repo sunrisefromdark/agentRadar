@@ -1,0 +1,5 @@
+{
+  "scenario": "capital heat alone should not upgrade",
+  "expected_degraded": true,
+  "expected_rejected_reason": "official_first_not_met"
+}

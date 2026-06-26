@@ -1,0 +1,48 @@
+[
+  {
+    "id": "conf-neurips-workshop-agents",
+    "axis": "conference_academic",
+    "title": "NeurIPS 2026 Agents Workshop Accepted List",
+    "summary_cn": "官方 accepted list 显示 Agent systems workshop 成为独立议题。",
+    "observed_at": "2026-06-21T00:00:00.000Z",
+    "published_at": "2026-06-20T00:00:00.000Z",
+    "source_key": "accepted_list",
+    "source_url": "https://neurips.cc/Conferences/2026/Workshop/Agents",
+    "polarity": "supporting",
+    "freshness_anchor_kind": "accepted_or_proceedings",
+    "canonical_refs": {
+      "official_url": "https://neurips.cc/Conferences/2026/Workshop/Agents"
+    },
+    "venue": "NeurIPS",
+    "venue_year": 2026
+  },
+  {
+    "id": "conf-acl-leaderboard-gap",
+    "axis": "conference_academic",
+    "title": "ACL Challenge Leaderboard Pending Snapshot",
+    "summary_cn": "官方 leaderboard 已指向挑战更新，但发布时间缺失，应进入 diagnostic 以等待中台正式接线。",
+    "observed_at": "2026-06-25T00:00:00.000Z",
+    "source_key": "challenge",
+    "source_url": "https://aclweb.org/challenges/agents-2026",
+    "polarity": "supporting",
+    "freshness_anchor_kind": "benchmark_or_dataset_update",
+    "canonical_refs": {
+      "leaderboard_url": "https://aclweb.org/challenges/agents-2026/leaderboard"
+    },
+    "venue": "ACL",
+    "venue_year": 2026
+  },
+  {
+    "id": "conf-screenshot-no-venue",
+    "axis": "conference_academic",
+    "title": "Conference Screenshot Without Venue Context",
+    "summary_cn": "只有会场截图，没有可追溯官方 venue 或 proceedings，应拒绝。",
+    "observed_at": "2026-06-25T00:00:00.000Z",
+    "published_at": "2026-06-24T00:00:00.000Z",
+    "source_key": "schedule",
+    "source_url": "https://example.com/conf-screenshot",
+    "polarity": "supporting",
+    "freshness_anchor_kind": "accepted_or_proceedings",
+    "venue_year": 2026
+  }
+]

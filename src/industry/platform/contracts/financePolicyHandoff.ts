@@ -37,7 +37,7 @@ function hasText(value: unknown): value is string {
 }
 
 function hasStringArray(value: unknown, length?: number): value is string[] {
-  return Array.isArray(value) && value.every(hasText) && (length === undefined || value.length === length);
+  return Array.isArray(value) && value.length > 0 && value.every(hasText) && (length === undefined || value.length === length);
 }
 
 function canConsumeHandoffSchema(
@@ -108,12 +108,16 @@ export function validateFinancePolicyHandoff(
 
     if (
       message.capability_class === "claim-critical" &&
-      (!hasText(message.dispatch_context_ref) || !hasText(message.scheduling_key))
+      (!hasText(message.dispatch_context_ref) ||
+        !hasText(message.scheduling_key) ||
+        (!hasText(message.claim_partition_id) && !hasText(message.candidate_group_id)) ||
+        !hasText(message.claim_admission_assessment_ref) ||
+        !hasStringArray(message.capacity_reservation_refs))
     ) {
       return {
         ok: false,
         reasonCode: "dispatch_context_missing",
-        message: "Claim-critical handoff requires dispatch_context_ref and scheduling_key.",
+        message: "Claim-critical handoff requires dispatch context, scheduling key, stable claim key, admission ref, and reservation refs.",
       };
     }
   }

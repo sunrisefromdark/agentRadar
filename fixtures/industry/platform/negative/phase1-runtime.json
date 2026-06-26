@@ -1,0 +1,49 @@
+{
+  "fixture_id": "platform-phase1-negative-fixtures.v1",
+  "cases": [
+    {
+      "case_id": "kind-payload-mismatch",
+      "expected_reason_code": "schema_mismatch"
+    },
+    {
+      "case_id": "missing-required-ref",
+      "expected_reason_code": "lineage_failed"
+    },
+    {
+      "case_id": "manifest-resolve-failure",
+      "expected_reason_code": "lineage_failed"
+    },
+    {
+      "case_id": "unknown-higher-major",
+      "expected_reason_code": "unsupported_version"
+    },
+    {
+      "case_id": "same-run-missing-dispatch-context",
+      "expected_reason_code": "dispatch_context_missing"
+    },
+    {
+      "case_id": "same-run-missing-stable-claim-key",
+      "expected_reason_code": "dispatch_context_missing"
+    },
+    {
+      "case_id": "same-run-missing-claim-admission-assessment",
+      "expected_reason_code": "dispatch_context_missing"
+    },
+    {
+      "case_id": "execution-context-mismatch",
+      "expected_reason_code": "schema_mismatch"
+    },
+    {
+      "case_id": "takeover-missing-audit-ref",
+      "expected_reason_code": "schema_mismatch"
+    },
+    {
+      "case_id": "high-cost-reservation-not-granted",
+      "expected_reason_code": "reservation_missing"
+    },
+    {
+      "case_id": "budget-rejected",
+      "expected_reason_code": "budget_exceeded"
+    }
+  ]
+}

@@ -1177,6 +1177,752 @@
         "coverage_refs",
         "contribution_refs"
       ]
+    },
+    {
+      "schema_id": "field-ownership-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "fact-resolution-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "freshness-decay-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "agent-relevance-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "SourceAuthorityContextProfile",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "tool-selection-scorecard.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "task-timeout-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "tool-call-timeout-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "axis-subscore-rubric.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "axis-runtime-budget-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "axis-activation-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "claim-archetype-axis-applicability.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "axis-status-threshold-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "claim-archetype-decision-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "independence-credit-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "canonical-fetch-stop-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "same-run-eligible-micro-task-matrix.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "micro-task-runtime-budget-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "micro-task-cost-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "rotation-budget-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "claim-admission-budget-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "claim-runtime-budget-profile.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "run-critical-path-budget.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "shared-capacity-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "run-total-budget-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "same-run-review-availability-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "runtime-sizing-assumptions.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "gap-scope-contract.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "message-key-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "runtime-concurrency-control-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "backlog-compaction-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "reopen-impact-matrix.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "headline-capacity-policy.v1",
+      "schema_kind": "governance_profile",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "governance-console"
+      ],
+      "required_fields": [
+        "profile_id",
+        "schema_version",
+        "effective_from",
+        "owner_agent_id",
+        "rules_ref"
+      ]
+    },
+    {
+      "schema_id": "normalization-feedback.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "normalization_feedback",
+      "producer_roles": [
+        "normalization-agent",
+        "schema-validator",
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "finance-agent",
+        "policy-agent",
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "run_id",
+        "source_message_id",
+        "fact_resolution_audit_ref",
+        "producer_agent_id",
+        "feedback_status"
+      ]
+    },
+    {
+      "schema_id": "schema-governance-notice.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "schema_governance_notice",
+      "producer_roles": [
+        "normalization-agent",
+        "schema-validator",
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "finance-agent",
+        "policy-agent",
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent"
+      ],
+      "required_fields": [
+        "payload_id",
+        "schema_version",
+        "schema_id",
+        "compatibility_note_ref",
+        "reason_state_registry_ref",
+        "notice_status"
+      ]
+    },
+    {
+      "schema_id": "schema-change-note.v1",
+      "schema_kind": "payload",
+      "allowed_kind": "schema_change_note",
+      "producer_roles": [
+        "normalization-agent",
+        "schema-validator",
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "finance-agent",
+        "policy-agent",
+        "academic-agent",
+        "product-oss-agent",
+        "community-news-agent"
+      ],
+      "required_fields": [
+        "note_id",
+        "schema_version",
+        "change_background",
+        "affected_schema_ids",
+        "layer",
+        "producer_roles",
+        "consumer_roles",
+        "breaking_change",
+        "compatibility_impact",
+        "required_tests"
+      ]
+    },
+    {
+      "schema_id": "override-audit.v1",
+      "schema_kind": "canonical_object",
+      "producer_roles": [
+        "governance-console",
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "weekly-packager",
+        "replay-runner",
+        "governance-console"
+      ],
+      "required_fields": [
+        "override_id",
+        "schema_version",
+        "run_id",
+        "source_artifact_ref",
+        "decision",
+        "reason_codes",
+        "created_at"
+      ]
+    },
+    {
+      "schema_id": "payload-registry.v1",
+      "schema_kind": "registry_family",
+      "producer_roles": [
+        "industry-design-review"
+      ],
+      "consumer_roles": [
+        "all-actual-agents",
+        "queue-dispatcher",
+        "replay-runner"
+      ],
+      "required_fields": [
+        "bundle_id",
+        "bundle_version",
+        "entries"
+      ]
     }
   ]
 }

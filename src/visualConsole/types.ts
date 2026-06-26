@@ -2,9 +2,17 @@ import type {
   DailyReport,
   DailyRunSummary,
   EcosystemObserverArtifact,
+  EcosystemObserverEntry,
   EnhancementStatus,
   GitHubEnrichmentAuditEntry,
+  HeadProjectExceptionReason,
   KnowledgeCard,
+  ObserverPresetBucket,
+  ObserverPresetFilter,
+  ProjectPresetBucket,
+  ProjectPresetFilter,
+  ProjectUtilityHint,
+  RepeatExposureState,
   ScoreComponentName,
   VerifyDailyResult,
 } from "../types.ts";
@@ -275,10 +283,35 @@ export interface OverviewViewModel {
   time_navigator: TimeNavigatorModel;
   route_frame: RouteFrameModel;
   run_snapshot: RunSnapshot | null;
-  top_decisions: DailyReport["today_star_projects"];
+  top_decisions: ProjectProjection[];
+  semantic_bands: Array<{
+    key: "mission_match" | "today_pulse" | "explore_ribbon" | "infra_context";
+    label: string;
+    capacity: number;
+    projects: ProjectProjection[];
+    empty_state: boolean;
+    collapsible: boolean;
+  }>;
   risks_and_actions: string[];
   weekly_entry: DrilldownRef | null;
 }
+
+export type ProjectProjection = (DailyReport["today_star_projects"][number] | DailyReport["context_only_projects"][number]) & {
+  preset_bucket: ProjectPresetBucket | null;
+  preset_memberships: ProjectPresetBucket[];
+  utility_hint: ProjectUtilityHint;
+  repeat_exposure_state: RepeatExposureState;
+  head_project_exception_reason: HeadProjectExceptionReason | null;
+  hard_infra: boolean;
+};
+
+export type ObserverProjection = EcosystemObserverEntry & {
+  observer_preset_bucket: ObserverPresetBucket | null;
+  utility_hint: ProjectUtilityHint;
+  repeat_exposure_state: RepeatExposureState;
+  head_project_exception_reason: HeadProjectExceptionReason | null;
+  hard_infra: boolean;
+};
 
 export interface ProjectsViewModel {
   context: ViewContext;
@@ -290,10 +323,13 @@ export interface ProjectsViewModel {
   mission_match_projects: DailyReport["today_star_projects"];
   explore_ribbon_projects: DailyReport["today_star_projects"];
   historical_context_projects: DailyReport["context_only_projects"];
-  projects: Array<DailyReport["today_star_projects"][number] | DailyReport["context_only_projects"][number]>;
+  default_preset: ProjectPresetFilter;
+  preset_query_enabled: boolean;
+  preset_groups: Record<ProjectPresetBucket, ProjectProjection[]>;
+  projects: ProjectProjection[];
   selected_project:
     | {
-        project: DailyReport["today_star_projects"][number] | DailyReport["context_only_projects"][number];
+        project: ProjectProjection;
         binding: ProjectContextBinding;
         kb_preview: KnowledgeCard | null;
         kb_missing: boolean;
@@ -328,6 +364,9 @@ export interface ObserverViewModel {
   time_navigator: TimeNavigatorModel;
   route_frame: RouteFrameModel;
   artifact: EcosystemObserverArtifact | null;
+  default_preset: ObserverPresetFilter;
+  preset_query_enabled: boolean;
+  entries: ObserverProjection[];
 }
 
 export interface KnowledgeBaseViewModel {

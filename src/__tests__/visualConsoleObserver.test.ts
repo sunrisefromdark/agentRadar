@@ -56,6 +56,9 @@ describe("renderObserverView", () => {
         reader: null,
         audit: [],
       },
+      default_preset: "all",
+      preset_query_enabled: false,
+      entries: [],
       artifact: {
         scope: "ecosystem-focus",
         date: "2026-06-12",
@@ -180,6 +183,9 @@ describe("renderObserverView", () => {
         reader: null,
         audit: [],
       },
+      default_preset: "all",
+      preset_query_enabled: false,
+      entries: [],
       artifact: {
         scope: "ecosystem-focus",
         date: "2026-06-11",

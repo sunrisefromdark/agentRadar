@@ -34,6 +34,22 @@ const disabledLlm: AppConfig["llm"] = {
   provider: "none",
 };
 
+function withProjectPresetDefaults(
+  project: Omit<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra"> &
+    Partial<Pick<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra">>,
+): ProjectsViewModel["projects"][number] {
+  const presetBucket = project.preset_bucket ?? "useful_first";
+  return {
+    ...project,
+    preset_bucket: presetBucket,
+    preset_memberships: project.preset_memberships ?? [presetBucket],
+    utility_hint: project.utility_hint ?? "general",
+    repeat_exposure_state: project.repeat_exposure_state ?? "fresh",
+    head_project_exception_reason: project.head_project_exception_reason ?? null,
+    hard_infra: project.hard_infra ?? false,
+  };
+}
+
 function makeProject(args: {
   repo: string;
   description: string;
@@ -47,7 +63,7 @@ function makeProject(args: {
   confidence?: "high" | "medium" | "low";
 }): ProjectsViewModel["projects"][number] {
   const projectName = args.repo.split("/")[1] ?? args.repo;
-  return {
+  return withProjectPresetDefaults({
     project: {
       project_name: projectName,
       repo_url: `https://github.com/${args.repo}`,
@@ -110,7 +126,7 @@ function makeProject(args: {
     exposure_bucket: "mission_match",
     head_project: false,
     head_saturation_state: "normal",
-  };
+  });
 }
 
 function makeView(projects: ProjectsViewModel["projects"] = fixtureProjects()): ProjectsViewModel {
@@ -151,6 +167,15 @@ function makeView(projects: ProjectsViewModel["projects"] = fixtureProjects()): 
     mission_match_projects: projects,
     explore_ribbon_projects: [],
     historical_context_projects: [],
+    default_preset: "all",
+    preset_query_enabled: false,
+    preset_groups: {
+      useful_first: projects,
+      by_scenario: [],
+      worth_trying_today: [],
+      infra_tools: [],
+      supplemental_inventory: [],
+    },
     projects,
     selected_project: null,
   };

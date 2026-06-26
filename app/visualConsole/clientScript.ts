@@ -1702,6 +1702,7 @@ export function renderClientScriptSource(): string {
           const search = root.querySelector("[data-projects-search='true']");
           const searchRotator = root.querySelector("[data-projects-search-rotator='true']");
           const searchExamples = Array.from(root.querySelectorAll("[data-projects-search-example]")).filter((node) => node instanceof HTMLButtonElement);
+          const presetOptions = Array.from(document.querySelectorAll("[data-projects-preset-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortOptions = Array.from(root.querySelectorAll("[data-projects-sort-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortDropdown = root.querySelector("[data-projects-sort-dropdown='true']");
           const sortToggle = root.querySelector("[data-projects-sort-toggle='true']");
@@ -1821,6 +1822,7 @@ export function renderClientScriptSource(): string {
 
           const state = {
             search: search.value,
+            preset: root.getAttribute("data-projects-default-preset") || "all",
             sort: "score",
             paradigm: "all",
             persistence: "all",
@@ -1855,6 +1857,11 @@ export function renderClientScriptSource(): string {
                 score: Number(card.dataset.projectScore || "0"),
                 growth: Number(card.dataset.projectGrowth || "0"),
                 order: Number(card.dataset.projectOrder || "0"),
+                preset: card.dataset.projectPreset || "",
+                presets: String(card.dataset.projectPresets || "")
+                  .split(",")
+                  .map((value) => value.trim())
+                  .filter(Boolean),
                 paradigm: card.dataset.projectParadigm || "",
                 persistence: card.dataset.projectPersistence || "",
               }));
@@ -2252,6 +2259,7 @@ export function renderClientScriptSource(): string {
 
             setOptionState(sortOptions, state.sort, "data-projects-sort-option");
             syncSortDropdown();
+            setOptionState(presetOptions, state.preset, "data-projects-preset-option");
             setOptionState(paradigmOptions, state.paradigm, "data-projects-paradigm-option");
             setOptionState(persistenceOptions, state.persistence, "data-projects-persistence-option");
             if (assistantEmptyCta instanceof HTMLElement) assistantEmptyCta.hidden = page.totalCount > 0;
@@ -2313,6 +2321,13 @@ export function renderClientScriptSource(): string {
           sortOptions.forEach((option) => {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-option") || "score";
+              state.page = 1;
+              apply();
+            });
+          });
+          presetOptions.forEach((option) => {
+            option.addEventListener("click", () => {
+              state.preset = option.getAttribute("data-projects-preset-option") || "all";
               state.page = 1;
               apply();
             });

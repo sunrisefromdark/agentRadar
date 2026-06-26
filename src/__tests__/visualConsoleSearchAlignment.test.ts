@@ -1,15 +1,32 @@
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { filterObserverEntries, type ObserverEntry } from "../../app/client/ObserverView.tsx";
+import ObserverView, { filterObserverEntries, type ObserverEntry, type ObserverViewProps } from "../../app/client/ObserverView.tsx";
 import { filterRunHealthNarratives, type NarrativeItem } from "../../app/client/RunHealth.tsx";
 import { filterAndSortProjectCards, rankProjectSearchMatch } from "../../app/visualConsole/clientScript.ts";
 import { renderProjectsWorkbenchPage } from "../../app/visualConsole/ossProjectsPage.ts";
 import { buildProjectsView } from "../visualConsole/build.ts";
 import type { ProjectsViewModel } from "../visualConsole/types.ts";
 
+function withProjectPresetDefaults(project: ProjectsViewModel["projects"][number]): ProjectsViewModel["projects"][number] {
+  const presetBucket = project.preset_bucket ?? "useful_first";
+  return {
+    ...project,
+    preset_bucket: presetBucket,
+    preset_memberships: project.preset_memberships ?? [presetBucket],
+    utility_hint: project.utility_hint ?? "general",
+    repeat_exposure_state: project.repeat_exposure_state ?? "fresh",
+    head_project_exception_reason: project.head_project_exception_reason ?? null,
+    hard_infra: project.hard_infra ?? false,
+  };
+}
+
 function makeObserverEntry(overrides: Partial<ObserverEntry> = {}): ObserverEntry {
   return {
     key: "bytedance/ui-tars-desktop",
     repoFullName: "bytedance/UI-TARS-desktop",
+    displayName: "UI-TARS-desktop",
+    authorName: "bytedance",
     projectHref: "/projects?project=bytedance%2FUI-TARS-desktop",
     repoUrl: "https://github.com/bytedance/UI-TARS-desktop",
     isTracked: false,
@@ -42,12 +59,105 @@ function makeObserverEntry(overrides: Partial<ObserverEntry> = {}): ObserverEntr
     orgSeeds: ["bytedance-seed"],
     searchOrganizations: ["bytedance"],
     searchText: "Multimodal desktop agent for browser automation and computer use.",
+    preferenceScore: 0,
+    presetBucket: "early_watch",
+    utilityHint: "general",
+    repeatExposureState: "fresh",
+    headProjectExceptionReason: null,
+    hardInfra: false,
+    ...overrides,
+  };
+}
+
+function makeObserverProps(overrides: Partial<ObserverViewProps> = {}): ObserverViewProps {
+  return {
+    lang: "en",
+    initialTheme: "light",
+    pageBadge: "Long-tail Watch",
+    pageTitle: "Long-tail Watch",
+    pageSummary: "Projects worth watching.",
+    pageSummaryCaption: "Observer deck.",
+    searchLabel: "Search",
+    searchPlaceholder: "Search projects",
+    searchSuggestionsLabel: "Suggestions",
+    searchSuggestions: [],
+    searchExamples: [],
+    searchHelperBody: "",
+    searchEmptyTitle: "Empty",
+    searchEmptyBody: "No matches",
+    detailEmptyTitle: "No selection",
+    detailEmptyBody: "Select a project",
+    telemetryStatusLabel: "Status",
+    telemetryStatusValue: "active",
+    telemetryGeneratedAtLabel: "Generated",
+    telemetryGeneratedAtValue: "2026-06-12",
+    telemetryModeLabel: "Mode",
+    telemetryModeValue: "rules-only",
+    telemetrySourceHealthLabel: "Source Health",
+    telemetrySourceHealthValue: "ok",
+    telemetryCandidateCountLabel: "Candidates",
+    telemetryCandidateCountValue: "1",
+    telemetryEcosystemCountLabel: "Ecosystems",
+    telemetryEcosystemCountValue: "1",
+    guidanceJudgeLabel: "Watch Heuristic",
+    guidanceJudgeBody: "Watch it.",
+    guidanceLinkageLabel: "Dock Linkage",
+    guidanceLinkageBody: "Open details.",
+    detailStageLabel: "Observer Detail Cabin",
+    detailStageStatus: "Observing",
+    closeLabel: "Close",
+    openProjectLabel: "Project Detail",
+    openRepositoryLabel: "Open Repository",
+    keepTrackingLabel: "Keep Tracking",
+    keepTrackingActiveLabel: "Tracking Active",
+    observerScoreLabel: "Observer Score",
+    watchReasonLabel: "Watch Reason",
+    freshnessLabel: "Freshness",
+    tierLabel: "Tier",
+    historyLabel: "History",
+    whyNowTitle: "Why Now",
+    positionTitle: "Current Judgment",
+    recommendationTitle: "Watch Next",
+    semanticSignalsTitle: "Signals",
+    semanticSignalsHint: "",
+    pedigreeLabel: "Pedigree",
+    keywordsLabel: "Keywords",
+    topicsLabel: "Topics",
+    repoSeedsLabel: "Repo Seeds",
+    orgSeedsLabel: "Org Seeds",
+    ecosystemsLabel: "Ecosystems",
+    labelsLabel: "Labels",
+    summarySourceLabel: "Summary Source",
+    judgeSourceLabel: "Judgment Source",
+    observedAtLabel: "Observed At",
+    judgeDeltaLabel: "Judgment Delta",
+    notes: [],
+    ecosystemBadges: [],
+    entries: [makeObserverEntry()],
+    defaultPreset: "all",
+    presetOptions: [
+      { key: "all", label: "All", description: "All entries", count: 1 },
+      { key: "early_watch", label: "Watch Early", description: "Early signals", count: 1 },
+      { key: "new_direction", label: "New Direction", description: "New shifts", count: 0 },
+      { key: "by_scenario", label: "By Scenario", description: "Scenario hits", count: 0 },
+      { key: "infra_early", label: "Infra Early", description: "Infra watch", count: 0 },
+    ],
+    initialSelectedKey: "bytedance/ui-tars-desktop",
+    canTrack: false,
+    trackingActionPath: "",
+    trackingReturnTo: "/observer",
+    trackingSignInHref: "#",
+    signInToTrackLabel: "Sign in to track",
+    csrfToken: "",
+    trackingStatusRepoKey: null,
+    trackingStatusMessage: "",
+    trackingStatusTone: "neutral",
     ...overrides,
   };
 }
 
 function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> = {}): ProjectsViewModel["projects"][number] {
-  return {
+  return withProjectPresetDefaults({
     project: {
       project_name: "UI-TARS-desktop",
       repo_url: "https://github.com/bytedance/UI-TARS-desktop",
@@ -111,7 +221,7 @@ function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> =
     head_project: false,
     head_saturation_state: "normal",
     ...overrides,
-  };
+  } as ProjectsViewModel["projects"][number]);
 }
 
 function makeProjectsModel(project: ProjectsViewModel["projects"][number]): ProjectsViewModel {
@@ -152,6 +262,15 @@ function makeProjectsModel(project: ProjectsViewModel["projects"][number]): Proj
     mission_match_projects: [project],
     explore_ribbon_projects: [],
     historical_context_projects: [],
+    default_preset: "all",
+    preset_query_enabled: false,
+    preset_groups: {
+      useful_first: [project],
+      by_scenario: [],
+      worth_trying_today: [],
+      infra_tools: [],
+      supplemental_inventory: [],
+    },
     projects: [project],
     selected_project: null,
   };
@@ -197,6 +316,21 @@ describe("visual console search alignment", () => {
     const results = filterObserverEntries(entries, "Headroom");
     expect(results).toHaveLength(1);
     expect(results[0]?.repoFullName.toLowerCase()).toBe("chopratejas/headroom");
+  });
+
+  it("renders the observer preset deck and sort switch with the newer observer UI structure", () => {
+    const html = renderToStaticMarkup(createElement(ObserverView, makeObserverProps()));
+
+    expect(html).toContain('data-observer-preset-deck="true"');
+    expect(html).toContain('data-observer-preset-option="all"');
+    expect(html).toContain('data-observer-preset-option="early_watch"');
+    expect(html).toContain('data-observer-preset-option="new_direction"');
+    expect(html).toContain('data-observer-preset-option="by_scenario"');
+    expect(html).toContain('data-observer-preset-option="infra_early"');
+    expect(html).toContain("Objective");
+    expect(html).toContain("Preference");
+    expect(html).toContain("UI-TARS-desktop");
+    expect(html).toContain("bytedance");
   });
 
   it("matches project workbench cards by name, description, metadata, and aliases", () => {
@@ -319,6 +453,11 @@ describe("visual console search alignment", () => {
     ]) {
       expect(html.toLowerCase(), value).toContain(value.toLowerCase());
     }
+    expect(html).toContain('data-project-bucket-deck="true"');
+    expect(html).toContain('data-projects-preset-option="all"');
+    expect(html).toContain("projects-preset-card-topline");
+    expect(html).toContain("projects-preset-card-icon");
+    expect(html).toContain("projects-preset-card-meta-value");
   });
 
   it("renders vertical direction aliases so Chinese demand searches can find commerce projects", () => {

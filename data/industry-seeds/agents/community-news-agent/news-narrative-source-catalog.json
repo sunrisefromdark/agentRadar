@@ -1,0 +1,6 @@
+{
+  "responsibility_id": "news-pr",
+  "axis": "news_pr_narrative",
+  "primary_tool_ids": ["news-pr-narrative-index", "press-release-wire-monitor"],
+  "owner_rule": "Media reports and press releases provide narrative context and do not directly upgrade core trend."
+}

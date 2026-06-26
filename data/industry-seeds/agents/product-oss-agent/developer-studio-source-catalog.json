@@ -1,0 +1,6 @@
+{
+  "responsibility_id": "developer-studio",
+  "axis": "developer_studio",
+  "primary_tool_ids": ["developer-docs-changelog", "sdk-release-feed"],
+  "owner_rule": "Developer docs, SDK releases, console updates, and platform UX changes stay with developer-studio."
+}

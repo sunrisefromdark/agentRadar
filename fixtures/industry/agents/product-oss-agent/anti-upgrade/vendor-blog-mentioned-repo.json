@@ -1,0 +1,5 @@
+{
+  "case_id": "vendor-blog-mentioned-repo",
+  "expected_core_upgrade_allowed": false,
+  "expected_attestation_ref": "attestation://product-oss/vendor-blog-repo-boundary"
+}

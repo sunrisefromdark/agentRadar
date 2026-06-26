@@ -1,0 +1,6 @@
+{
+  "axis": "community_discussion",
+  "responsibility_ids": ["cn-community", "global-community"],
+  "primary_tool_ids": ["cn-community-original-thread-index", "global-community-original-thread-index"],
+  "owner_rule": "Original posts, issues, forums, reproductions, and user practice stay with community."
+}

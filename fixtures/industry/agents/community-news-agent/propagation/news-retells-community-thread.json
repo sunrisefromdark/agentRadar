@@ -1,0 +1,5 @@
+{
+  "case_id": "news-retells-community-thread",
+  "expected_relation_ref_prefix": "relation://retells/",
+  "expected_no_double_accepted": true
+}

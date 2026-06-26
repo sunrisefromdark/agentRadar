@@ -142,7 +142,20 @@
 
 ## 依赖输入
 
-开始 tier / weekly 集成前，必须拿到前三组 handoff：
+本组依赖分三层消费，不再把前三组完整 handoff 写成统一开工前置：
+
+### L0：本组可独立启动的工作
+
+- `schemas/industry/*`
+- artifact path / ref 约定
+- payload registry 正式名
+- 单写者边界与目录模板
+
+以上足以让本组先启动 schema、registry、normalization shell、audit shell、weekly shell 与结构测试。
+
+### L1：按组增量消费的 handoff
+
+任一领域组只要交出以下产物，本组就必须允许该组先进入 contract test、normalization dry-run 与 daily pack 聚合测试：
 
 1. 各自的 `IndustryAgentMessageEnvelope`
 2. 各自的 `payload_schema`、`payload_ref`
@@ -152,11 +165,59 @@
 6. 若命中 same-run admission / budget / review，则还必须拿到 `dispatch_context_ref`、`scheduling_key` 与相关 refs
 7. 各领域组的 owner boundary / anti-upgrade / official-first failure / replay fixture refs
 
+### L2：最终 weekly 集成前必须齐备
+
+- 三个领域组正式 handoff 全量交付
+- cross-group replay / eval 资产
+- daily pack、rolling snapshot、weekly internal / consumer / public 的闭环验证
+
 消费约束：
 
 - 无 envelope / manifest / payload schema / canonical artifact ref 的产物一律拒收
 - 只接收 compatibility matrix 明确兼容的当前版本与同 major 上一个兼容版本
 - unknown higher major version 必须 rejected 并生成 failure notice
+- 某一组 handoff 不完整时，只阻塞该组 promotion to final integration；不得阻塞其他已就绪组的 dry-run、contract test 和 normalization 接线
+- 若领域组未显式提交 `execution_context.primary_responsibility_id`、`execution_context.operational_executor_id`、必要的 `takeover_mode / takeover_audit_ref`、或 same-run 所需 `claim_partition_id / candidate_group_id`，本组必须按 schema / contract 错误拒收，不得本地脑补。
+
+## 给 `4号执行人` 的白话派工
+
+### 你先做什么
+
+- 先把 `schemas/industry/*`、payload registry、artifact path、compatibility / reason / state registry 立起来。
+- 先把 structure tests、contract fixtures、normalization / audit / weekly shell 立起来。
+- 先把“别人怎么把东西交给你”这件事说清楚，而不是先替别人写领域逻辑。
+
+### 你的第一优先交付
+
+- `Phase 1A` 的 canonical schema、payload 正式名、artifact path。
+- current consumer fixtures。
+- shared governance contracts。
+- dispatch / reservation / budget base。
+
+### 你什么时候必须等待
+
+- 只有在做最终 weekly 集成时，才需要等待三组都交齐正式 handoff。
+- 做 contract test、normalization dry-run、daily pack 聚合测试时，不需要等三组一起完成；谁先齐就先接谁。
+
+### 别把自己变成串行瓶颈
+
+- 不要要求 `1/2/3号执行人` 等你把所有 schema 全部打磨完才开始本地准备工作。
+- 不要回头接管 A/B/C 的领域 seed、反例文本、source catalog 首稿。
+- 不要因为某一组 handoff 不完整，就停掉其他已就绪组的 dry-run 和接线。
+
+### 你要怎么接前三组
+
+- 哪一组先交齐 envelope、payload、manifest、artifact refs，就先接哪一组。
+- 如果对方缺 `execution_context`、`takeover`、same-run 必填 ref，就直接按合同拒收，并把缺什么写清楚；不要自己脑补。
+- 早期可以先消费 preparatory artifact refs 做 contract review，但这不算正式 handoff。
+
+### 本组从开工到完工的顺序
+
+1. 先把 `Phase 0.5` 需要的 schema、payload registry、artifact path、structure tests、weekly shell 搭起来，让前三组不必等你才能开工。
+2. 尽快交出 `Phase 1A` 的 canonical schema、payload 正式名、artifact path、compatibility matrix，让前三组把本地 seam 收口成正式 handoff。
+3. 哪个领域组先交齐 envelope / payload / manifest / refs，就先接哪个组做 contract test、normalization dry-run 和 daily pack 聚合测试。
+4. 再发布 `Phase 1B / 1C` 的治理契约和 same-run runtime，让前三组按需接 activation / stop / budget / review / same-run。
+5. 最后等三组正式 handoff、cross-group replay / eval、weekly 三层闭环都齐后，再做最终 weekly 集成和总验收。
 
 ## 输出与 handoff
 
@@ -189,7 +250,7 @@
    - `fixtures/industry/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
    - `data/industry-seeds/agents/{finance-agent,policy-agent,academic-agent,product-oss-agent,community-news-agent,registry-agent,normalization-agent,audit-agent,trend-agent}/`
 2. 这一步只允许建目录和占位索引，不允许提前把业务逻辑塞进 `src/action/*`、`src/types.ts` 或热点共享文件。
-3. A/B/C 三组在收到 bootstrap 完成通知前，不得开始代码实现；否则路径和归属会先分叉。
+3. 若 bootstrap 尚未合入，A/B/C 仍可按总控已冻结的目录模板在各自私有目录内开工；禁止的是擅自改共享目录命名，不是等待本组通知后才能写代码。
 
 ### Phase 1A-2：schema 真源与 artifact 路径
 
@@ -267,11 +328,12 @@
    - missing required ref
    - manifest resolve failure
    - unknown higher major
-3. 只有 current fixtures 与 compatibility matrix 通过后，A/B/C 三组才允许开始写 producer payload。
+3. current fixtures 与 compatibility matrix 是跨组 handoff 冻结前置，不是领域组 source / event 核心开发前置；A/B/C 可先按 schema 真源产出 producer payload 与本组 fixture，待 current fixture 发布后补 contract consumption 验证。
+4. current consumer fixtures 必须覆盖 `execution_context.primary_responsibility_id / operational_executor_id` 一致性、takeover 留痕、`claim_partition_id / candidate_group_id` presence 和 same-run admission ref 完整性；不得只验 payload 名称和 ref 存在。
 
 ### Phase 1B：shared governance 发布
 
-1. 在领域组开工前发布：
+1. 优先尽早发布，供领域组后接线消费：
    - `field-ownership-policy.v1`
    - `fact-resolution-profile.v1`
    - `freshness-decay-profile.v1`
@@ -309,7 +371,8 @@
    - `reopen-impact-matrix.v1`
    - `headline-capacity-policy.v1`
 2. 冻结预算、activation、review、reserve、shared pool、queue 并发、gap 稳定键、reopen 和 headline capacity 的 reason/state 契约。
-3. 结构测试未通过前，不允许 A/B/C 进入各自的 activation / budget 代码实现。
+3. 结构测试未通过前，不允许 A/B/C 合入各自的 activation / budget / review 正式接线；但不阻塞领域组先完成 source / event / handoff producer 的本地实现。
+4. 明确固定高成本仲裁顺序：`claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion`；任何 registry / dispatch / scheduler runtime 不得接受倒序执行。
 
 ### Phase 1C：dispatch / budget runtime base
 
@@ -324,7 +387,7 @@
    - 缺 `dispatch_context_ref` 的 same-run 请求 rejected
    - 无 `reservation_state="granted"` 的高成本动作 rejected
    - `manual_review_pool` 与 reviewer availability 分离，`async_only` 时走保守消费路径
-3. 向 A/B/C 发布 current fixtures，作为各组接入 activation / stop / budget 的硬前置。
+3. 向 A/B/C 发布 current fixtures，作为各组接入 activation / stop / budget / same-run 的前置；但这只约束接线阶段，不约束领域组先做 source / event / fixture 开发。
 
 ### Phase 1C+：main coordinator 边界固化
 
@@ -348,6 +411,8 @@
 3. 生成可供运行时消费的 snapshot，不让未发布 review 结果穿透到当前 run。
 4. 验证 `manual_review_pool` 不等于 reviewer availability；`async_only` 时必须强制保守消费或 public block。
 5. 发布 registry/tool snapshot current fixtures，避免 A/B/C 各自发明本地假 snapshot。
+6. 对 A/B/C 的接入按组推进：哪个组先交合法 refs，就先给哪个组跑 snapshot / normalization dry-run；不得要求“三组一起到齐”才开始。
+7. 对长尾 owner / attestation / authority 争议，默认只发布 `provisional_resolution` 或 `post_weekly_governance_resolution` 输入，不得把所有 unresolved groups 都提升成 same-run blocking。
 
 ### Phase 3：normalization 与 fact snapshot
 
@@ -360,6 +425,7 @@
    - `FactResolutionAudit`
    - owner transfer artifact
    - `snapshot_id` / `fact_partition_id`
+6. unresolved groups 必须按 `same_run_critical_resolution`、`provisional_resolution`、`post_weekly_governance_resolution` 三层输出，并显式带 `impact_scope` 与 `default_system_action`；不得把所有长尾争议都保留在 same-run blocking。
 
 ### Phase 4：claim-builder 与 audit
 
@@ -408,6 +474,7 @@
    - 第二套平台根目录
    - 领域组越界写共享目录
    - 新增源码、测试、fixture builder 文件 `>= 2000` 行
+6. 最终 weekly 拼装前，必须复核三组都已从“producer 就绪”提升到“handoff 冻结 + promotion 就绪”；但这一步不回溯阻塞已完成的中间 dry-run。
 
 ## 验收标准
 

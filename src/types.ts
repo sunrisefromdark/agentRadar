@@ -176,6 +176,18 @@ export interface DailyReportProjectDetail {
 }
 
 export interface DailyExposureProject extends ScoredProject, DailyReportProjectDetail {}
+
+export type ProjectPresetBucket = "useful_first" | "by_scenario" | "worth_trying_today" | "infra_tools" | "supplemental_inventory";
+export type ProjectPresetFilter = "all" | ProjectPresetBucket;
+export type ObserverPresetBucket = "early_watch" | "new_direction" | "by_scenario" | "infra_early";
+export type ObserverPresetFilter = "all" | ObserverPresetBucket;
+export type ProjectUtilityHint = "infra" | "scenario" | "general";
+export type RepeatExposureState = "fresh" | "repeat" | "unknown";
+export type HeadProjectExceptionReason =
+  | "major_new_release"
+  | "new_branch_or_mode"
+  | "new_domain_adoption"
+  | "critical_ecosystem_shift";
 // design compatibility aliases:
 // today_pulse_projects: Array<DailyExposureProject>;
 // mission_match_projects: Array<DailyExposureProject>;

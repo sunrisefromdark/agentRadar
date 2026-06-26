@@ -34,6 +34,22 @@ const disabledLlm: AppConfig["llm"] = {
   provider: "none",
 };
 
+function withProjectPresetDefaults(
+  project: Omit<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra"> &
+    Partial<Pick<ProjectsViewModel["projects"][number], "preset_bucket" | "preset_memberships" | "utility_hint" | "repeat_exposure_state" | "head_project_exception_reason" | "hard_infra">>,
+): ProjectsViewModel["projects"][number] {
+  const presetBucket = project.preset_bucket ?? "useful_first";
+  return {
+    ...project,
+    preset_bucket: presetBucket,
+    preset_memberships: project.preset_memberships ?? [presetBucket],
+    utility_hint: project.utility_hint ?? "general",
+    repeat_exposure_state: project.repeat_exposure_state ?? "fresh",
+    head_project_exception_reason: project.head_project_exception_reason ?? null,
+    hard_infra: project.hard_infra ?? false,
+  };
+}
+
 function makeProject(args: {
   repo: string;
   description: string;
@@ -47,7 +63,7 @@ function makeProject(args: {
   confidence?: "high" | "medium" | "low";
 }): ProjectsViewModel["projects"][number] {
   const projectName = args.repo.split("/")[1] ?? args.repo;
-  return {
+  return withProjectPresetDefaults({
     project: {
       project_name: projectName,
       repo_url: `https://github.com/${args.repo}`,
@@ -110,7 +126,7 @@ function makeProject(args: {
     exposure_bucket: "mission_match",
     head_project: false,
     head_saturation_state: "normal",
-  };
+  });
 }
 
 function makeView(projects: ProjectsViewModel["projects"] = fixtureProjects()): ProjectsViewModel {
@@ -151,6 +167,15 @@ function makeView(projects: ProjectsViewModel["projects"] = fixtureProjects()): 
     mission_match_projects: projects,
     explore_ribbon_projects: [],
     historical_context_projects: [],
+    default_preset: "all",
+    preset_query_enabled: false,
+    preset_groups: {
+      useful_first: projects,
+      by_scenario: [],
+      worth_trying_today: [],
+      infra_tools: [],
+      supplemental_inventory: [],
+    },
     projects,
     selected_project: null,
   };
@@ -414,6 +439,45 @@ describe("fuzzy project search service", () => {
     expect(response.source).toBe("direct_search");
     expect(response.diagnostics.llm_triggered).toBe(false);
     expect(response.project_ids[0]).toBe("acme/education-agent");
+  });
+
+  it("matches browser-computer-use projects for concise Chinese browser-agent queries", async () => {
+    let calls = 0;
+    const response = await searchFuzzyProjects({
+      request: { raw_query: "浏览器智能体", date: "2026-06-12", lang: "zh" },
+      view: makeView([
+        makeProject({
+          repo: "browser-use/open-browser-use",
+          description: "Desktop agent for browser automation and computer use workflows.",
+          briefCn: "桌面自动化执行代理。",
+          whyCn: "命中 desktop agent 方向。",
+          tags: ["browser-computer-use", "computer-use", "desktop-agent", "playwright"],
+          directions: ["browser-computer-use"],
+          score: 86,
+          growth: 16,
+        }),
+        makeProject({
+          repo: "acme/desktop-command-center",
+          description: "Desktop command center for Claude Code and Codex workflows.",
+          briefCn: "桌面命令中心。",
+          whyCn: "命中桌面协作方向。",
+          tags: ["desktop-app", "claude-code", "codex"],
+          directions: ["workflow-automation-agent"],
+          score: 90,
+          growth: 12,
+        }),
+      ]),
+      llm: disabledLlm,
+      interpreter: async () => {
+        calls += 1;
+        return { status: "fallback", fallbackReason: "schema_invalid", repaired: false };
+      },
+    });
+
+    expect(calls).toBe(0);
+    expect(response.source).toBe("direct_search");
+    expect(response.diagnostics.llm_triggered).toBe(false);
+    expect(response.project_ids).toEqual(["browser-use/open-browser-use"]);
   });
 
   it("routes CJK topics with generic agent terms away from broad direct search", async () => {

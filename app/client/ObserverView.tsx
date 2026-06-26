@@ -1,8 +1,12 @@
 ﻿import React, { useEffect, useState } from "react";
 
+import type { HeadProjectExceptionReason, ObserverPresetBucket, ObserverPresetFilter, ProjectUtilityHint, RepeatExposureState } from "../../src/types.ts";
+
 export type ObserverEntry = {
   key: string;
   repoFullName: string;
+  displayName?: string;
+  authorName?: string | null;
   projectHref: string;
   repoUrl: string;
   isTracked: boolean;
@@ -35,6 +39,19 @@ export type ObserverEntry = {
   orgSeeds: string[];
   searchOrganizations?: string[];
   searchText?: string;
+  preferenceScore?: number;
+  presetBucket?: ObserverPresetBucket;
+  utilityHint?: ProjectUtilityHint;
+  repeatExposureState?: RepeatExposureState;
+  headProjectExceptionReason?: HeadProjectExceptionReason | null;
+  hardInfra?: boolean;
+};
+
+export type ObserverPresetOption = {
+  key: ObserverPresetFilter;
+  label: string;
+  description: string;
+  count: number;
 };
 
 export type ObserverViewProps = {
@@ -101,6 +118,8 @@ export type ObserverViewProps = {
   notes: string[];
   ecosystemBadges: string[];
   entries: ObserverEntry[];
+  defaultPreset: ObserverPresetFilter;
+  presetOptions: ObserverPresetOption[];
   initialSelectedKey: string | null;
   canTrack: boolean;
   trackingActionPath: string;
@@ -193,6 +212,8 @@ const DEFAULT_PROPS: ObserverViewProps = {
   notes: [],
   ecosystemBadges: [],
   entries: [],
+  defaultPreset: "all",
+  presetOptions: [],
   initialSelectedKey: null,
   canTrack: false,
   trackingActionPath: "",
@@ -594,28 +615,27 @@ function lowerJoined(values: Array<string | null | undefined>): string {
     .join(" ");
 }
 
-function tokenizeSearchText(value: string): string[] {
-  return value
-    .trim()
-    .toLowerCase()
-    .split(/[\s,.;:!?()[\]{}"'`/\\_-]+/)
-    .filter(Boolean);
+function tokenizeObserverSearchText(value: string): string[] {
+  return [
+    ...new Set(
+      value
+        .trim()
+        .toLowerCase()
+        .split(/[^\p{L}\p{N}+#.-]+/u)
+        .filter(Boolean),
+    ),
+  ];
 }
 
-function denseObserverMatch(value: string, normalizedQuery: string): boolean {
-  const normalizedValue = value.trim().toLowerCase();
-  if (!normalizedValue) return false;
-  if (normalizedValue === normalizedQuery || normalizedValue.startsWith(normalizedQuery) || normalizedValue.includes(normalizedQuery)) return true;
-
-  const queryTokens = tokenizeSearchText(normalizedQuery);
-  const valueTokens = tokenizeSearchText(normalizedValue);
+function observerTextMatchesAllTokens(text: string, queryTokens: string[]): boolean {
   if (queryTokens.length === 0) return false;
-  if (queryTokens.every((token) => valueTokens.includes(token))) return true;
-  if (queryTokens.length === 1) {
-    const [token] = queryTokens;
-    return valueTokens.some((candidate) => candidate.startsWith(token) || candidate.includes(token));
-  }
-  return false;
+  const normalizedText = lowerJoined([text]);
+  if (!normalizedText) return false;
+  const textTokens = tokenizeObserverSearchText(normalizedText);
+  return queryTokens.every((token) => {
+    if (normalizedText.includes(token)) return true;
+    return textTokens.some((candidate) => candidate.includes(token) || token.includes(candidate));
+  });
 }
 
 function repoNameSearchVariants(repoFullName: string): string[] {
@@ -632,25 +652,22 @@ function pedigreeCompanyTokens(entry: ObserverEntry): string[] {
 }
 
 function scoreObserverEntryMatch(entry: ObserverEntry, normalizedQuery: string): number {
-  const safeRepoFullName = typeof entry.repoFullName === "string" ? entry.repoFullName : "";
-  if (!safeRepoFullName.trim()) return -1;
-
-  const repoVariants = repoNameSearchVariants(safeRepoFullName);
+  const queryTokens = tokenizeObserverSearchText(normalizedQuery);
+  const repoVariants = repoNameSearchVariants(entry.repoFullName);
   const repoNameText = lowerJoined(repoVariants);
   const organizationText = lowerJoined([
     ...repoVariants,
     ...(entry.searchOrganizations ?? []),
     ...pedigreeCompanyTokens(entry),
-    ...entry.orgSeeds,
     ...companySearchAliases([
       ...repoVariants,
       ...(entry.searchOrganizations ?? []),
       ...pedigreeCompanyTokens(entry),
-      ...entry.orgSeeds,
       entry.searchText,
     ]),
   ]);
-  const thematicText = lowerJoined([...entry.ecosystems, ...entry.keywords, ...entry.topics, ...entry.labels, ...entry.repoSeeds, ...entry.orgSeeds]);
+  const thematicText = lowerJoined([...entry.ecosystems, ...entry.keywords, ...entry.topics, ...entry.labels]);
+  const seedText = lowerJoined([...entry.repoSeeds, ...entry.orgSeeds]);
   const narrativeText = lowerJoined([
     entry.attentionReason,
     entry.freshnessTag,
@@ -661,11 +678,16 @@ function scoreObserverEntryMatch(entry: ObserverEntry, normalizedQuery: string):
     entry.searchText,
   ]);
 
-  if (repoVariants.some((value) => value.toLowerCase() === normalizedQuery)) return 900;
-  if (denseObserverMatch(repoNameText, normalizedQuery)) return 760;
-  if (denseObserverMatch(organizationText, normalizedQuery)) return 520;
-  if (denseObserverMatch(thematicText, normalizedQuery)) return 340;
-  if (denseObserverMatch(narrativeText, normalizedQuery)) return 160;
+  if (repoVariants.some((value) => value.toLowerCase() === normalizedQuery)) return 600;
+  if (repoNameText.includes(normalizedQuery)) return 520;
+  if (organizationText.includes(normalizedQuery)) return 380;
+  if (/[-/]/.test(normalizedQuery) && seedText.includes(normalizedQuery)) return 300;
+  if (thematicText.includes(normalizedQuery)) return 240;
+  if (narrativeText.includes(normalizedQuery)) return 120;
+  if (observerTextMatchesAllTokens(organizationText, queryTokens)) return 330;
+  if (/[-/]/.test(normalizedQuery) && observerTextMatchesAllTokens(seedText, queryTokens)) return 260;
+  if (observerTextMatchesAllTokens(thematicText, queryTokens)) return 210;
+  if (observerTextMatchesAllTokens(narrativeText, queryTokens)) return 110;
   return -1;
 }
 
@@ -678,6 +700,11 @@ export function filterObserverEntries(entries: ObserverEntry[], searchQuery: str
     .filter((item) => item.score >= 0)
     .sort((left, right) => right.score - left.score || left.index - right.index)
     .map((item) => item.entry);
+}
+
+export function filterObserverEntriesByPreset(entries: ObserverEntry[], preset: ObserverPresetFilter): ObserverEntry[] {
+  if (preset === "all") return entries;
+  return entries.filter((entry) => entry.presetBucket === preset);
 }
 
 export function paginateObserverEntries<T>(entries: T[], page: number, pageSize: number): ObserverPagination<T> {
@@ -818,8 +845,10 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
   };
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortMode, setSortMode] = useState<"objective" | "preference">("objective");
   const [searchFocused, setSearchFocused] = useState(false);
   const [searchSuggestionIndex, setSearchSuggestionIndex] = useState(0);
+  const [selectedPreset, setSelectedPreset] = useState<ObserverPresetFilter>(props.defaultPreset);
   const [selectedKey, setSelectedKey] = useState<string | null>(props.initialSelectedKey ?? props.entries[0]?.key ?? null);
   const [currentPage, setCurrentPage] = useState(1);
   const [detailScrollActive, setDetailScrollActive] = useState(false);
@@ -868,6 +897,10 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
   }, [isMobileViewport]);
 
   useEffect(() => {
+    setSelectedPreset(props.defaultPreset);
+  }, [props.defaultPreset]);
+
+  useEffect(() => {
     if (props.entries.length === 0) {
       setSelectedKey(null);
       return;
@@ -893,8 +926,14 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
     };
   }, [normalizedSuggestions.length]);
 
-  const filteredEntries = filterObserverEntries(props.entries, normalizedSearch);
-  const paginatedEntries = paginateObserverEntries(filteredEntries, currentPage, OBSERVER_PAGE_SIZE);
+  const presetEntries = filterObserverEntriesByPreset(props.entries, selectedPreset);
+  const filteredEntries = filterObserverEntries(presetEntries, normalizedSearch);
+  const sortedEntries = sortMode === "preference"
+    ? [...filteredEntries].sort((left, right) =>
+        Number(right.preferenceScore ?? 0) - Number(left.preferenceScore ?? 0) || right.radarScore - left.radarScore,
+      )
+    : filteredEntries;
+  const paginatedEntries = paginateObserverEntries(sortedEntries, currentPage, OBSERVER_PAGE_SIZE);
   const visibleEntries = paginatedEntries.items;
 
   const selectedEntry =
@@ -909,7 +948,7 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [normalizedSearch]);
+  }, [normalizedSearch, selectedPreset, sortMode]);
 
   useEffect(() => {
     if (paginatedEntries.currentPage !== currentPage) {
@@ -1054,13 +1093,73 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
             </div>
           </section>
 
+          {props.presetOptions.length > 0 ? (
+            <section className="mb-4 md:mb-6" data-observer-preset-deck="true">
+              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-5 gap-2.5 md:gap-3">
+                {props.presetOptions.map((option) => {
+                  const active = selectedPreset === option.key;
+                  return (
+                    <button
+                      key={option.key}
+                      type="button"
+                      onClick={() => setSelectedPreset(option.key)}
+                      className={`text-left rounded-[20px] border px-4 py-3 transition ${
+                        active
+                          ? "border-indigo-500/40 bg-indigo-500/10 dark:bg-indigo-500/15 shadow-[0_16px_34px_rgba(79,70,229,0.14)]"
+                          : "border-indigo-100/70 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/55 hover:border-indigo-300/80"
+                      }`}
+                      aria-pressed={active}
+                      data-observer-preset-option={option.key}
+                    >
+                      <div className="flex items-center justify-between gap-3">
+                        <span className={`text-[12px] font-black ${active ? "text-indigo-700 dark:text-indigo-200" : "text-neutral-900 dark:text-white"}`}>
+                          {option.label}
+                        </span>
+                        <span className={`rounded-full px-2 py-1 text-[10px] font-bold ${active ? "bg-indigo-600 text-white" : "bg-neutral-100 dark:bg-slate-800 text-neutral-500 dark:text-neutral-300"}`}>
+                          {option.count}
+                        </span>
+                      </div>
+                      <p className="mt-2 text-[11px] leading-5 text-neutral-500 dark:text-neutral-400">{option.description}</p>
+                    </button>
+                  );
+                })}
+              </div>
+            </section>
+          ) : null}
+
           <div className="flex items-center justify-between px-1 mb-2.5 md:mb-3">
             <div>
               <p className="text-xs text-neutral-500 dark:text-neutral-400">
-                共找到 {filteredEntries.length} 条结果
+                {isZh ? `共找到 ${filteredEntries.length} 条结果` : `${filteredEntries.length} results in this view`}
               </p>
             </div>
             <div className="text-right flex flex-wrap items-center justify-end gap-2">
+              <div className="inline-flex rounded-full border border-indigo-100/70 dark:border-slate-800/80 bg-white/70 dark:bg-slate-950/60 p-1">
+                <button
+                  type="button"
+                  onClick={() => setSortMode("objective")}
+                  className={`min-h-[30px] rounded-full px-3 text-[11px] font-bold transition ${
+                    sortMode === "objective"
+                      ? "bg-neutral-900 text-white dark:bg-white dark:text-neutral-900"
+                      : "text-neutral-500 dark:text-neutral-300 hover:text-indigo-600 dark:hover:text-indigo-300"
+                  }`}
+                  aria-pressed={sortMode === "objective"}
+                >
+                  {isZh ? "客观排序" : "Objective"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSortMode("preference")}
+                  className={`min-h-[30px] rounded-full px-3 text-[11px] font-bold transition ${
+                    sortMode === "preference"
+                      ? "bg-indigo-600 text-white"
+                      : "text-neutral-500 dark:text-neutral-300 hover:text-indigo-600 dark:hover:text-indigo-300"
+                  }`}
+                  aria-pressed={sortMode === "preference"}
+                >
+                  {isZh ? "偏好展示" : "Preference"}
+                </button>
+              </div>
               <ObserverPaginationControls
                 currentPage={paginatedEntries.currentPage}
                 pageCount={paginatedEntries.pageCount}
@@ -1106,7 +1205,12 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
                           <div className="pl-1">
                             <div className="flex items-start justify-between gap-3 mb-2">
                               <h3 className="font-bold text-[14px] md:text-[16px] font-mono text-neutral-900 dark:text-white tracking-tight flex flex-1 items-center gap-1.5 min-w-0 leading-snug">
-                                <span className="truncate block flex-1 min-w-0">{entry.repoFullName}</span>
+                                <span className="truncate block flex-1 min-w-0">
+                                  <span className="block truncate">{entry.displayName ?? entry.repoFullName}</span>
+                                  {entry.authorName ? (
+                                    <span className="block text-[10px] font-mono text-neutral-400 dark:text-neutral-500 truncate">{entry.authorName}</span>
+                                  ) : null}
+                                </span>
                                 {isSelected ? (
                                   <span className="w-2.5 h-2.5 rounded-full bg-indigo-500 shadow-lg shadow-indigo-500/50 animate-pulse shrink-0"></span>
                                 ) : (
@@ -1184,8 +1288,11 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
                             {isZh ? "长尾观察档案" : "Long-tail Dossier"}
                           </span>
                           <h2 className="mt-1 text-[1.16rem] md:text-[1.32rem] font-black tracking-tight text-neutral-900 dark:text-white font-mono break-all leading-snug">
-                            {selectedEntry.repoFullName}
+                            {selectedEntry.displayName ?? selectedEntry.repoFullName}
                           </h2>
+                          {selectedEntry.authorName ? (
+                            <span className="mt-1 block text-xs font-mono text-neutral-400 dark:text-neutral-500 truncate">{selectedEntry.authorName}</span>
+                          ) : null}
                           <p className="mt-1.5 text-[12px] md:text-[13px] text-neutral-500 dark:text-neutral-400">
                             {props.observedAtLabel}: {selectedEntry.observedAt}
                           </p>
@@ -1353,8 +1460,11 @@ export default function ObserverView(rawProps: ObserverViewProps): React.ReactEl
                         {isZh ? "长尾观察档案" : "Long-tail Dossier"}
                       </span>
                       <h2 className="mt-1 text-[1.08rem] font-black tracking-tight text-neutral-900 dark:text-white font-mono break-all leading-snug">
-                        {selectedEntry.repoFullName}
+                        {selectedEntry.displayName ?? selectedEntry.repoFullName}
                       </h2>
+                      {selectedEntry.authorName ? (
+                        <span className="mt-1 block text-xs font-mono text-neutral-400 dark:text-neutral-500 truncate">{selectedEntry.authorName}</span>
+                      ) : null}
                       <p className="mt-1.5 text-[11px] text-neutral-500 dark:text-neutral-400">
                         {props.observedAtLabel}: {selectedEntry.observedAt}
                       </p>

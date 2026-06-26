@@ -1,6 +1,12 @@
 ﻿import fs from "node:fs";
 import path from "node:path";
 import { buildProjectSearchText } from "../../src/search/projectSearchIndex.ts";
+import {
+  filterAndSortProjectCards,
+  paginateProjectCards,
+  type ProjectsWorkbenchCardRecord,
+  type ProjectsWorkbenchState,
+} from "../../src/search/projectSearchKernel.ts";
 import type { ScoredProject } from "../../src/types.ts";
 import { readCachedJsonFile } from "../../src/visualConsole/fileCache.ts";
 import type { ProjectsViewModel } from "../../src/visualConsole/types.ts";
@@ -23,8 +29,10 @@ type ProjectsLocalDetailPayload = {
 
 const PROJECT_SEARCH_FALLBACK_SUGGESTIONS = ["claw", "memory", "skill", "openai sdk"];
 const SEARCH_EXAMPLE_TERMS = ["claw", "memory agent", "openai sdk"];
-const PROJECT_BUCKET_ORDER = ["today_pulse", "mission_match", "explore_ribbon", "historical_context"] as const;
+const PROJECT_BUCKET_ORDER = ["useful_first", "by_scenario", "worth_trying_today", "infra_tools", "supplemental_inventory"] as const;
 type ProjectBucketKey = (typeof PROJECT_BUCKET_ORDER)[number];
+const PROJECT_FILTER_ORDER = ["all", ...PROJECT_BUCKET_ORDER] as const;
+type ProjectFilterKey = (typeof PROJECT_FILTER_ORDER)[number];
 
 function uiText(lang: UiLang, zh: string, en: string): string {
   return lang === "zh" ? zh : en;
@@ -268,68 +276,146 @@ function deriveProjectSearchSuggestions(projects: ProjectsViewModel["projects"])
 }
 
 function projectBucketKey(project: ProjectsViewModel["projects"][number]): ProjectBucketKey {
-  if (project.exposure_bucket === "today_pulse") return "today_pulse";
-  if (project.exposure_bucket === "mission_match") return "mission_match";
-  if (project.exposure_bucket === "explore_ribbon") return "explore_ribbon";
-  return "historical_context";
+  return (project.preset_bucket ?? project.preset_memberships?.[0] ?? "supplemental_inventory") as ProjectBucketKey;
+}
+
+function projectPresetKeys(project: ProjectsViewModel["projects"][number]): ProjectBucketKey[] {
+  return project.preset_memberships && project.preset_memberships.length > 0 ? project.preset_memberships : [projectBucketKey(project)];
+}
+
+function projectFilterLabel(filter: ProjectFilterKey, lang: UiLang): string {
+  if (filter === "all") return uiText(lang, "总榜", "All Projects");
+  return projectBucketLabel(filter, lang);
 }
 
 function projectBucketLabel(bucket: ProjectBucketKey, lang: UiLang): string {
   switch (bucket) {
-    case "today_pulse":
-      return uiText(lang, "今日全局脉冲", "Today Pulse");
-    case "mission_match":
-      return uiText(lang, "与你当前任务更相关", "Mission Match");
-    case "explore_ribbon":
-      return uiText(lang, "探索补位带", "Explore Ribbon");
-    case "historical_context":
-      return uiText(lang, "历史补充观察", "Historical Context");
+    case "useful_first":
+      return uiText(lang, "更可能用得上", "Useful First");
+    case "by_scenario":
+      return uiText(lang, "按场景找", "By Scenario");
+    case "worth_trying_today":
+      return uiText(lang, "今天值得试试", "Worth Trying Today");
+    case "infra_tools":
+      return uiText(lang, "看底层工具", "Infra Tools");
+    case "supplemental_inventory":
+      return uiText(lang, "补充项目池", "Supplemental Inventory");
   }
 }
 
 function projectBucketDescription(bucket: ProjectBucketKey, lang: UiLang): string {
   switch (bucket) {
-    case "today_pulse":
-      return uiText(lang, "全局热度与新鲜度最高的一层，保留主视角。", "The global surface with the strongest freshness and shared momentum.");
-    case "mission_match":
-      return uiText(lang, "和当前任务、方向覆盖或兴趣命中更贴近的项目。", "Projects that line up more directly with the current task and direction coverage.");
-    case "explore_ribbon":
-      return uiText(lang, "当任务命中不足时，用来补充新鲜探索，不伪装成正式命中。", "Fresh exploration capacity that never pretends to be a formal mission hit.");
-    case "historical_context":
-      return uiText(lang, "保留上下文、连续性和复盘价值的补充样本。", "Backfill context preserved for continuity, comparison, and later review.");
+    case "useful_first":
+      return uiText(lang, "最可能今天就能直接拿来用、而不是只适合旁观的项目。", "Projects most likely ready for direct use today, not just observation.");
+    case "by_scenario":
+      return uiText(lang, "优先展示明确命中任务方向和场景的项目。", "Projects with explicit scenario and direction matches.");
+    case "worth_trying_today":
+      return uiText(lang, "今天有新增理由值得点开看的项目，不要求它必须是第一次出现。", "Projects with a real reason to open today, even if they have appeared before.");
+    case "infra_tools":
+      return uiText(lang, "把底层框架、SDK 和运行时沉到基础设施子榜。", "Infrastructure-first tools, SDKs, runtimes, and connectors.");
+    case "supplemental_inventory":
+      return uiText(lang, "保留暂时不适合前四类的补充项目，继续可搜可翻。", "Supplemental projects that do not cleanly fit the first four buckets yet.");
+  }
+}
+
+function projectFilterDescription(filter: ProjectFilterKey, lang: UiLang): string {
+  if (filter === "all") {
+    return uiText(lang, "默认展示全部项目，不预设子榜筛选。", "Show the full library without preset filtering.");
+  }
+  return projectBucketDescription(filter, lang);
+}
+
+function projectPresetIcon(filter: ProjectFilterKey): string {
+  switch (filter) {
+    case "all":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M3.5 12h17"></path><path d="M12 3.5c2.6 2.3 4.1 5.3 4.1 8.5S14.6 18.2 12 20.5C9.4 18.2 7.9 15.2 7.9 12S9.4 5.8 12 3.5Z"></path></svg>';
+    case "useful_first":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3.5v3"></path><path d="M20.5 12h-3"></path></svg>';
+    case "by_scenario":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="4.5" y="5.5" width="5.5" height="12.5" rx="1"></rect><rect x="10" y="5.5" width="4" height="12.5" rx="1"></rect><rect x="14" y="5.5" width="5.5" height="12.5" rx="1"></rect><path d="M10 8.5h4"></path><path d="M10 11.75h4"></path></svg>';
+    case "worth_trying_today":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M13.5 2.5 6 13h4l-1 8.5 7.5-10h-4l1-9Z"></path></svg>';
+    case "infra_tools":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.2 6.2a3.1 3.1 0 0 0-4.1 4.1L4.8 15.6a1.6 1.6 0 0 0 2.2 2.2l5.3-5.3a3.1 3.1 0 0 0 4.1-4.1l-2 2-2.2-2.2 2-2Z"></path></svg>';
+    case "supplemental_inventory":
+      return '<svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="6" y="4.5" width="12" height="15" rx="2"></rect><path d="M10 8h4"></path><path d="M9.5 12h5"></path><path d="M10.5 16h3"></path></svg>';
+  }
+}
+
+function projectPresetIconStyle(filter: ProjectFilterKey): string {
+  switch (filter) {
+    case "all":
+      return "color:#2995ff;background:rgba(41,149,255,0.14);";
+    case "useful_first":
+      return "color:#ff5e57;background:rgba(255,94,87,0.14);";
+    case "by_scenario":
+      return "color:#18b39c;background:rgba(24,179,156,0.16);";
+    case "worth_trying_today":
+      return "color:#ff8a2a;background:rgba(255,138,42,0.16);";
+    case "infra_tools":
+      return "color:#8f929e;background:rgba(143,146,158,0.16);";
+    case "supplemental_inventory":
+      return "color:#86c82d;background:rgba(134,200,45,0.18);";
+  }
+}
+
+function projectPresetIconTone(filter: ProjectFilterKey): string {
+  switch (filter) {
+    case "all":
+      return "is-tone-all";
+    case "useful_first":
+      return "is-tone-useful";
+    case "by_scenario":
+      return "is-tone-scenario";
+    case "worth_trying_today":
+      return "is-tone-today";
+    case "infra_tools":
+      return "is-tone-infra";
+    case "supplemental_inventory":
+      return "is-tone-supplemental";
   }
 }
 
 function renderProjectsBucketDeck(model: ProjectsViewModel, lang: UiLang): string {
-  const counts: Record<ProjectBucketKey, number> = {
-    today_pulse: model.today_pulse_projects.length,
-    mission_match: model.mission_match_projects.length,
-    explore_ribbon: model.explore_ribbon_projects.length,
-    historical_context: model.historical_context_projects.length,
+  const presetGroups = model.preset_groups ?? {
+    useful_first: [],
+    by_scenario: [],
+    worth_trying_today: [],
+    infra_tools: [],
+    supplemental_inventory: [],
   };
-  const total = Object.values(counts).reduce((sum, count) => sum + count, 0);
-
+  const defaultPreset = model.default_preset ?? "all";
+  const counts: Record<ProjectBucketKey, number> = {
+    useful_first: presetGroups.useful_first.length,
+    by_scenario: presetGroups.by_scenario.length,
+    worth_trying_today: presetGroups.worth_trying_today.length,
+    infra_tools: presetGroups.infra_tools.length,
+    supplemental_inventory: presetGroups.supplemental_inventory.length,
+  };
   return `
-    <div class="projects-bucket-deck" data-project-bucket-deck="true">
-      ${PROJECT_BUCKET_ORDER.map((bucket, index) => {
-        const count = counts[bucket];
-        const share = total > 0 ? Math.max(4, Math.round((count / total) * 100)) : 0;
-        return `
-        <article class="projects-bucket-card projects-bucket-card-${escapeHtml(bucket)}" data-project-bucket-card="${escapeHtml(bucket)}" style="--bucket-share: ${escapeHtml(String(share))}%">
-          <div class="projects-bucket-card-head">
-            <span class="projects-bucket-index">${escapeHtml(String(index + 1).padStart(2, "0"))}</span>
-            <span class="projects-bucket-label">${escapeHtml(projectBucketLabel(bucket, lang))}</span>
-          </div>
-          <div class="projects-bucket-value-row">
-            <strong>${escapeHtml(String(count))}</strong>
-            <span>${escapeHtml(uiText(lang, "项目", "items"))}</span>
-          </div>
-          <div class="projects-bucket-meter" aria-hidden="true"><span></span></div>
-          <p>${escapeHtml(projectBucketDescription(bucket, lang))}</p>
-        </article>
-      `;
-      }).join("")}
-    </div>
+    <section class="projects-preset-bar" data-project-bucket-deck="true" aria-label="${escapeHtml(uiText(lang, "项目子榜", "Project Presets"))}">
+      <div class="projects-preset-grid">
+        ${PROJECT_FILTER_ORDER.map((filter) => {
+          const count = filter === "all" ? model.projects.length : counts[filter];
+          const active = filter === defaultPreset;
+          return `
+            <button type="button" class="projects-preset-card${active ? " is-active" : ""}" data-projects-preset-option="${escapeHtml(filter)}" aria-pressed="${active ? "true" : "false"}">
+              <span class="projects-preset-card-topline">
+                <span class="projects-preset-card-labelrow">
+                  <span class="projects-preset-card-icon ${projectPresetIconTone(filter)}" aria-hidden="true">${projectPresetIcon(filter)}</span>
+                  <span class="projects-preset-card-title">${escapeHtml(projectFilterLabel(filter, lang))}</span>
+                </span>
+              </span>
+              <span class="projects-preset-card-copy">${escapeHtml(projectFilterDescription(filter, lang))}</span>
+              <span class="projects-preset-card-meta">
+                <span>${escapeHtml(uiText(lang, "数量比对", "Count"))}</span>
+                <span class="projects-preset-card-meta-value">${escapeHtml(String(count))}</span>
+              </span>
+            </button>
+          `;
+        }).join("")}
+      </div>
+    </section>
   `;
 }
 
@@ -449,13 +535,92 @@ function renderProjectsSearchShell(searchSuggestions: string[], lang: UiLang, in
   `;
 }
 
-function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], lang: UiLang, initialQuery = ""): string {
+export function renderProjectsAssistantShell(lang: UiLang): string {
+  const quickQueries = [
+    uiText(lang, "浏览器智能体", "Browser agents"),
+    uiText(lang, "金融投研 Agent", "Research agents"),
+    uiText(lang, "客服自动化", "Support automation"),
+    uiText(lang, "Agent IDE", "Agent IDE"),
+  ];
+  return `
+    <div
+      data-projects-ai-assistant-host="true"
+      class="projects-ai-assistant-host"
+    >
+      <button
+        type="button"
+        class="button-link projects-ai-launch"
+        data-projects-ai-launch="true"
+        aria-label="${escapeHtml(uiText(lang, "打开 AI 搜项目", "Open AI Project Search"))}"
+      >
+        <span class="projects-ai-launch-avatar" aria-hidden="true">
+          <img class="projects-ai-launch-image" src="/app-assets/projects-ai-avatar.png?v=2" alt="" />
+        </span>
+      </button>
+      <section
+        class="surface-card projects-ai-panel"
+        data-projects-ai-panel="true"
+        hidden
+        aria-label="${escapeHtml(uiText(lang, "AI 搜项目", "AI Project Search"))}"
+      >
+        <div class="projects-ai-panel-head">
+          <div>
+            <strong>${escapeHtml(uiText(lang, "AI 搜项目", "AI Project Search"))}</strong>
+            <span class="projects-ai-panel-copy">${escapeHtml(uiText(lang, "站内项目库", "Local library"))}</span>
+          </div>
+          <div class="projects-ai-panel-actions">
+            <button type="button" class="projects-ai-icon-button" data-projects-ai-new-chat="true" aria-label="${escapeHtml(uiText(lang, "新对话", "New Chat"))}" title="${escapeHtml(uiText(lang, "新对话", "New Chat"))}">+</button>
+            <button type="button" class="projects-ai-icon-button" data-projects-ai-close="true" aria-label="${escapeHtml(uiText(lang, "关闭", "Close"))}" title="${escapeHtml(uiText(lang, "关闭", "Close"))}">&times;</button>
+          </div>
+        </div>
+        <div class="projects-ai-quickstart" data-projects-ai-quickstart="true">
+          <p class="meta-line projects-ai-quickstart-copy">${escapeHtml(uiText(lang, "先给一个方向，我返回 3 条线索；需要展开再进入项目库承接。", "Start with a direction and I will return three leads."))}</p>
+          <div class="projects-ai-quickstart-grid">
+            ${quickQueries
+              .map(
+                (query) => `
+                  <button
+                    type="button"
+                    class="projects-ai-quickstart-card"
+                    data-projects-ai-option-query="${escapeHtml(query)}"
+                  >${escapeHtml(query)}</button>
+                `,
+              )
+              .join("")}
+          </div>
+        </div>
+        <div class="projects-ai-quickstart-toggle-row" data-projects-ai-quickstart-toggle-row="true" hidden>
+          <button type="button" class="button-link-secondary projects-ai-quickstart-toggle" data-projects-ai-quickstart-toggle="true">${escapeHtml(uiText(lang, "推荐方向", "Suggestions"))}</button>
+        </div>
+        <div data-projects-ai-messages="true" class="projects-ai-messages"></div>
+        <div data-projects-ai-status="true" class="meta-line projects-ai-status" hidden></div>
+        <form data-projects-ai-form="true" class="projects-ai-form">
+          <label class="sr-only" for="projects-ai-search-input">${escapeHtml(uiText(lang, "AI 搜项目输入框", "AI Project Search Input"))}</label>
+          <input
+            id="projects-ai-search-input"
+            type="search"
+            data-projects-ai-input="true"
+            class="projects-ai-input"
+            placeholder="${escapeHtml(uiText(lang, "例如：找自动化投研、Agent IDE、浏览器智能体", "Try: agent IDE, browser agents, research automation"))}"
+            autocomplete="off"
+          />
+          <div class="projects-ai-form-row">
+            <span class="meta-line projects-ai-form-copy">${escapeHtml(uiText(lang, "输入“更多”继续", "Type more to continue"))}</span>
+            <button type="submit" class="button-link projects-ai-submit" data-projects-ai-submit="true">${escapeHtml(uiText(lang, "发送", "Send"))}</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  `;
+}
+
+function renderProjectsFilterStripV3(model: ProjectsViewModel, lang: UiLang, initialQuery = ""): string {
   const paradigms = ["Agent System", "Runtime", "Tool"];
-  const persistenceStates = Array.from(new Set(projects.map((project) => project.project.persistence_state)));
-  const searchSuggestions = deriveProjectSearchSuggestions(projects);
+  const persistenceStates = Array.from(new Set(model.projects.map((project) => project.project.persistence_state)));
+  const searchSuggestions = deriveProjectSearchSuggestions(model.projects);
 
   return `
-    <section class="projects-filter-strip projects-command-deck" aria-label="${escapeHtml(uiText(lang, "项目过滤", "Project Filters"))}" data-projects-workbench="true" data-projects-page-size="15">
+    <section class="projects-filter-strip projects-command-deck" aria-label="${escapeHtml(uiText(lang, "项目过滤", "Project Filters"))}" data-projects-workbench="true" data-projects-page-size="15" data-projects-default-preset="${escapeHtml(model.default_preset)}">
       <div class="projects-command-row">
         ${renderProjectsSearchShell(searchSuggestions, lang, initialQuery)}
       </div>
@@ -474,18 +639,6 @@ function renderProjectsFilterStripV3(projects: ProjectsViewModel["projects"], la
             ${persistenceStates.map((state) => `<button type="button" class="filter-chip" data-projects-persistence-option="${escapeHtml(state)}" aria-pressed="false">${escapeHtml(localizePersistence(state, lang))}</button>`).join("")}
           </div>
         </div>
-      </div>
-      <div class="status-banner status-degraded" data-projects-fuzzy-status="true" hidden>
-        <div class="status-banner-head">
-          <span class="context-label" data-projects-fuzzy-label="true">${escapeHtml(uiText(lang, "扩展搜索", "Expanded Search"))}</span>
-          <strong data-projects-fuzzy-title="true"></strong>
-        </div>
-        <p data-projects-fuzzy-message="true"></p>
-        <div class="filter-chip-row" data-projects-fuzzy-options="true" hidden></div>
-      </div>
-      <div class="projects-extension-note">
-        <span class="context-label">${escapeHtml(uiText(lang, "扩展入口", "Extension Ready"))}</span>
-        <p>${escapeHtml(uiText(lang, "搜索、范式、持续性和分区都留在同一条控制带里，后续增加更多任务筛选或方向过滤时可以直接接进这里。", "Search, paradigm, persistence, and section controls share one command deck so extra filters can plug in here later without reshaping the page."))}</p>
       </div>
     </section>
   `;
@@ -511,6 +664,50 @@ function renderProjectsPaginationControls(totalCount: number, lang: UiLang, posi
   `;
 }
 
+type ServerProjectsWorkbenchCard = ProjectsWorkbenchCardRecord & {
+  project: ProjectsViewModel["projects"][number];
+};
+
+function buildInitialProjectsWorkbenchState(model: ProjectsViewModel, initialQuery: string): Required<ProjectsWorkbenchState> {
+  return {
+    search: initialQuery,
+    preset: model.default_preset ?? "all",
+    sort: "score",
+    paradigm: "all",
+    persistence: "all",
+    page: 1,
+    pageSize: 15,
+  };
+}
+
+function buildServerProjectsWorkbenchCards(model: ProjectsViewModel, lang: UiLang): ServerProjectsWorkbenchCard[] {
+  return model.projects.map((project, index) => ({
+    project,
+    searchName: `${project.project.repo_full_name} ${project.project.project_name}`.trim(),
+    searchDescription: projectIntroduction(project, lang),
+    searchMeta: buildProjectSearchText(project, lang),
+    score: Number(project.score.total_score ?? 0),
+    growth: projectGrowthValue(project),
+    order: index,
+    preset: projectBucketKey(project),
+    presets: projectPresetKeys(project),
+    paradigm: projectParadigmFamily(project.score.paradigm),
+    persistence: project.project.persistence_state,
+  }));
+}
+
+function computeInitialProjectsWorkbench(model: ProjectsViewModel, lang: UiLang, initialQuery: string) {
+  const state = buildInitialProjectsWorkbenchState(model, initialQuery);
+  const cards = buildServerProjectsWorkbenchCards(model, lang);
+  const filteredCards = filterAndSortProjectCards(cards, state);
+  const page = paginateProjectCards(filteredCards, state.page, state.pageSize);
+
+  return {
+    totalCount: page.totalCount,
+    visibleProjectNames: new Set(page.items.map((item) => item.project.project.repo_full_name.toLowerCase())),
+  };
+}
+
 function projectRouteHref(model: ProjectsViewModel, project: ProjectsViewModel["projects"][number], requestUrl: URL, lang: UiLang): string {
   return toViewHref("projects", lang, resolveTheme(requestUrl), {
     date: model.context.selected_date,
@@ -519,7 +716,13 @@ function projectRouteHref(model: ProjectsViewModel, project: ProjectsViewModel["
   });
 }
 
-function renderProjectsListV3(projects: ProjectsViewModel["projects"], model: ProjectsViewModel, requestUrl: URL, lang: UiLang): string {
+function renderProjectsListV3(
+  projects: ProjectsViewModel["projects"],
+  model: ProjectsViewModel,
+  requestUrl: URL,
+  lang: UiLang,
+  visibleProjectNames?: ReadonlySet<string>,
+): string {
   const ui = copy(lang);
   if (projects.length === 0) {
     return `<p class="empty-copy">${escapeHtml(ui.none)}</p>`;
@@ -538,6 +741,9 @@ function renderProjectsListV3(projects: ProjectsViewModel["projects"], model: Pr
           const starValue = formatProjectMetricValue(Number(project.project.stars ?? 0));
           const scoreValue = Number(project.score.total_score);
           const isSelected = selectedKey === project.project.repo_full_name.toLowerCase();
+          const isInitiallyVisible = visibleProjectNames
+            ? visibleProjectNames.has(project.project.repo_full_name.toLowerCase())
+            : true;
 
           return `
             <article
@@ -551,6 +757,9 @@ function renderProjectsListV3(projects: ProjectsViewModel["projects"], model: Pr
               data-project-growth="${escapeHtml(String(growthValue))}"
               data-project-order="${escapeHtml(String(index))}"
               data-project-bucket="${escapeHtml(projectBucketKey(project))}"
+              data-project-preset="${escapeHtml(projectBucketKey(project))}"
+              data-project-presets="${escapeHtml(projectPresetKeys(project).join(","))}"
+              ${isInitiallyVisible ? "" : 'hidden="true"'}
             >
               <div class="card-head projects-scan-card-head">
                 <div class="projects-scan-card-title-block">
@@ -785,6 +994,7 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
   const ui = copy(lang);
   const hasDetail = Boolean(model.selected_project || requestUrl.searchParams.get("project"));
   const initialQuery = requestUrl.searchParams.get("q") || "";
+  const initialWorkbench = computeInitialProjectsWorkbench(model, lang, initialQuery);
   const dockHtml = hasDetail
     ? renderDockSurface("projects-dossier-dock", renderProjectDetailV4(model.selected_project, requestUrl, lang), {
         ariaLabel: uiText(lang, "详情面板", "Detail Surface"),
@@ -792,22 +1002,44 @@ export function renderProjectsWorkbenchPage(model: ProjectsViewModel, requestUrl
       })
     : "";
 
-  return renderProjectsRoute({
+  return (
+    renderProjectsRoute({
     heroHtml: renderProjectsHeroStage(lang),
     hasDetail,
-    filterHtml: renderProjectsFilterStripV3(model.projects, lang, initialQuery),
+    filterHtml: renderProjectsFilterStripV3(model, lang, initialQuery),
     stageTopHtml: `
       <div class="section-head weekly-matrix-shell-head projects-stage-head projects-stage-head-pagination-only">
         <div class="projects-stage-meta">
-          <span class="projects-stage-count-label">${escapeHtml(uiText(lang, "共找到", "Found"))} <span data-projects-count="true">${escapeHtml(String(model.projects.length))}</span> ${escapeHtml(uiText(lang, "条结果", "results"))}</span>
-          ${renderProjectsPaginationControls(model.projects.length, lang, "top")}
+          <span class="projects-stage-count-label">${escapeHtml(uiText(lang, "共找到", "Found"))} <span data-projects-count="true">${escapeHtml(String(initialWorkbench.totalCount))}</span> ${escapeHtml(uiText(lang, "条结果", "results"))}</span>
+          ${renderProjectsPaginationControls(initialWorkbench.totalCount, lang, "top")}
+        </div>
+      </div>
+      <div class="status-banner" data-projects-ai-main-result="true" hidden>
+        <div class="status-banner-head">
+          <span class="context-label">${escapeHtml(uiText(lang, "AI 助手结果", "AI Assistant Results"))}</span>
+          <strong data-projects-ai-main-result-query="true"></strong>
+        </div>
+        <p>${escapeHtml(uiText(lang, "主列表当前只显示本轮 AI 搜项目 返回的项目。", "The main list is showing only the projects returned by the latest AI search."))}</p>
+        <div class="filter-chip-row">
+          <button type="button" class="filter-chip" data-projects-ai-reset="true">${escapeHtml(uiText(lang, "返回普通项目库", "Back To Default Library"))}</button>
+        </div>
+      </div>
+      <div class="status-banner" data-projects-ai-empty-cta="true" hidden>
+        <div class="status-banner-head">
+          <span class="context-label">${escapeHtml(uiText(lang, "AI 助手空结果", "AI Assistant Empty Result"))}</span>
+          <strong>${escapeHtml(uiText(lang, "换个说法再试一次", "Try another phrasing"))}</strong>
+        </div>
+        <p>${escapeHtml(uiText(lang, "没有命中项目时，继续换关键词、补充场景，或回到普通项目库继续浏览。", "If no projects match, refine the query, add a use case, or return to the default library."))}</p>
+        <div class="filter-chip-row">
+          <button type="button" class="filter-chip" data-projects-ai-reset="true">${escapeHtml(uiText(lang, "返回普通项目库", "Back To Default Library"))}</button>
         </div>
       </div>
       ${renderProjectsBucketDeck(model, lang)}
     `,
-    rowsHtml: renderProjectsListV3(model.projects, model, requestUrl, lang),
-    stageBottomHtml: renderProjectsPaginationControls(model.projects.length, lang, "bottom"),
+    rowsHtml: renderProjectsListV3(model.projects, model, requestUrl, lang, initialWorkbench.visibleProjectNames),
+    stageBottomHtml: renderProjectsPaginationControls(initialWorkbench.totalCount, lang, "bottom"),
     dockHtml,
     emptyDockHtml: "",
-  });
+    })
+  );
 }

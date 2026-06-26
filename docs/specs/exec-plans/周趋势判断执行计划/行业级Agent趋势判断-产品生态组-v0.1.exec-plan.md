@@ -118,9 +118,20 @@
 
 ## 依赖输入
 
-1. 中台组发布的 event / contribution 契约。
-2. 学术组、政策金融组无需先完成；本组可独立产出自己的 event batch。
-3. 已发布的共享治理契约：
+最小开工只需要拿到：
+
+1. 已批准设计文档中的 product / oss / community / news 语义冻结结论与总控职责映射表。
+2. 学术组、政策金融组无需先完成；本组可独立产出自己的 preparatory artifacts 与 event batch 草稿。
+3. 单写者边界、本组目录模板与 `daily-industry-evidence-pack-input.v1` 最小数组合同。
+
+其中：
+
+- `Day-0/Day-1` 零等待开工不要求先拿到中台已 materialize 的 event / contribution 契约；本组可先启动 source、owner-boundary / propagation / anti-upgrade 样本、coverage / contribution writer 草稿与 local adapter seam。
+- 进入跨组 handoff 冻结、claim-critical payload 编码与 same-run 接线前，仍必须回到中台组发布的 canonical schema、payload 正式名与 compatibility matrix。
+
+以下资产属于“后接线依赖”，不阻塞本组先做 source / event / fixture / handoff producer：
+
+- 已发布的共享治理契约：
    - `field-ownership-policy.v1`
    - `fact-resolution-profile.v1`
    - `agent-relevance-profile.v1`
@@ -141,7 +152,52 @@
    - `gap-scope-contract.v1`
    - `message-key-policy.v1`
    - `runtime-concurrency-control-policy.v1`
-4. 已发布的 dispatch / budget runtime 基座与 payload registry current fixtures。
+- 已发布的 dispatch / budget runtime 基座与 payload registry current fixtures。
+
+执行约束：
+
+- 若共享治理、dispatch 基座或 current fixtures 尚未发布，本组仍需继续推进五类输入面的 source/event、owner boundary 负例、coverage / contribution writer 与 handoff producer。
+- 未接入 shared governance 前，可以先用 schema 对齐的本组 stub fixture 跑领域测试，但不得本地扩展正式 `payload_schema`、reason code、state 或 weekly 语义。
+- 若 `shared-runtime-note` 尚未被中台上收，本组允许先在 product/community/news 目录内保留只服务本组的临时 wrapper / adapter seam；但不得把它暴露成别组依赖的共享运行时。
+
+## 给实现人的白话派工
+
+### 你先做什么
+
+- 先把 `product-oss-agent`、`community-news-agent` 目录骨架搭好。
+- 先把 product / oss / developer / community / news 的 source catalog 写出来。
+- 先把 owner-boundary / propagation / anti-upgrade 样本补齐。
+- 先把 coverage / contribution writer 草稿、local adapter seam 和 contract / unit / replay 测试骨架跑起来。
+
+### 第一阶段做到哪一步就可以先交
+
+- 只要你已经能稳定产出五类 event batch 草稿、coverage / contribution 草稿，并且 owner-boundary / propagation 反例能跑，就可以先把 preparatory artifact refs 交给 `4号执行人` 做早期 contract review。
+- 这一步不要求你已经把 shared runtime 上收，也不要求政策金融组或学术组先完成。
+
+### 你只在这些时点必须等待
+
+- 只有在你要做正式跨组 handoff 时，才需要等待 `4号执行人` 的 `Phase 1A`。
+- 只有在你要把 coverage / contribution 正式 payload 交给中台消费时，才需要等 canonical schema、payload 正式名和 compatibility matrix。
+- 只有在你要接 same-run 的深补证路径时，才需要等 dispatch / budget runtime 基座。
+
+### 等到什么产物出来再继续
+
+- 等到 `4号执行人` 发出 canonical schema、payload 正式名、artifact path、compatibility matrix。
+- 等到 current consumer fixtures 可用后，再把本地 seam 收口成正式 handoff。
+
+### 不要等什么
+
+- 不要等学术组先交 replay 结果。
+- 不要等政策金融组先交 owner 争议样本。
+- 不要等 shared runtime 先抽完；先在本组目录里把逻辑做出来。
+
+### 本组从开工到完工的顺序
+
+1. 先在本组目录里把五类 source catalog、owner-boundary / propagation / anti-upgrade 样本、coverage / contribution 草稿、local seam、测试骨架做起来。
+2. 等 `4号执行人` 发出 `Phase 1A` 的 canonical schema、payload 正式名、artifact path、compatibility matrix 后，把本地 seam 收口成正式 handoff。
+3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
+4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 activation / budget / same-run 深补证这类后接线能力接上。
+5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
 ## 输出与 handoff
 
@@ -183,6 +239,8 @@ handoff 要求：
 
 - 不得再使用“五条或六条 coverage”这类模糊口径；本组 coverage 固定为 `5` 条，contribution 固定为 `6` 条
 - 不得只交 event batch ref；必须交完整 `IndustryAgentMessageEnvelope`、`payload_ref`、`IndustryAgentArtifactManifest`
+- `execution_context.primary_responsibility_id` 必须与 event 的 `responsibility_id` 一致；`execution_context.operational_executor_id` 必须如实记录这次实际执行的 Agent
+- 若发生 delegated execution / takeover / backfill，必须显式带 `takeover_mode` 与 `takeover_audit_ref`；否则宁可记 `context / unavailable / needs_review`，不得伪装为本组正常已覆盖
 - daily 输入只能交 ref 与 lineage，不得内嵌 accepted / rejected 全量 event
 - 本组只负责提交 `daily-industry-evidence-pack-input.v1`；`DailyIndustryEvidencePack.v2` 只能由中台组 materialize 和写盘
 - `daily-industry-evidence-pack-input.v1` 必须使用数组字段；本组冻结为 `coverage_refs=5`、`contribution_refs=6`，且 `normalized_event_batch_refs` 必须覆盖五条主要 `axis_id`
@@ -192,7 +250,7 @@ handoff 要求：
 
 ### Phase 1：职责边界固定
 
-1. 以中台组已完成的目录骨架 bootstrap 为前提，只在本组既定工作根目录内新增文件；若根目录缺失，只报告中台组补齐，不得自行改路径命名。
+1. 以总控已冻结的目录模板为前提，只在本组既定工作根目录内新增文件；若根目录缺失，本组可按模板自行创建本组目录，但不得改路径命名或越界创建共享目录。
 2. 固定 `product-platform` vs `project-oss`：
    - 官方产品发布、API docs、release notes、客户案例归 `product-platform`
    - repo release、包版本、模型卡、依赖采纳、维护动作归 `project-oss`
@@ -205,7 +263,8 @@ handoff 要求：
    - `6` 条职责项 contribution
    - accepted event direct owner 唯一，不能双 owner
 6. 若发现需要直接改 `src/signal/*` 或其他共享旧模块，立即停止并提交 `shared-runtime-note`；本组不得自行越界改共享热点。
-7. 命中 same-run 的 producer payload 必须消费中台组发布的 `dispatch_context_ref`、`claim_admission_assessment_ref`、reservation refs、`scheduling_key` 与 `gap_scope` 语义。
+7. 命中 same-run 的 producer payload 一旦接线，必须消费中台组发布的 `dispatch_context_ref`、`claim_admission_assessment_ref`、reservation refs、`scheduling_key` 与 `gap_scope` 语义。
+8. 高成本扩张必须遵守固定顺序：`claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion`；不得因为叙事热度或社区噪声高就跳过前序仲裁直接抢 same-run 配额。
 
 ### Phase 2：event 生产
 
@@ -216,13 +275,14 @@ handoff 要求：
    - 新闻只作为 context / relation / supporting trace
 4. accepted / counter / diagnostic / rejected 事件必须进入分离 batch refs，不能在一个批次里混语义。
 5. 若发现跨职责高价值事实，必须产出 `cross_responsibility_attestation_refs` 输入位，而不是等中台组靠文本猜 owner。
+6. 只有命中 `tier_blocking`、`public_output_only` 或 headline 主语义争议的跨职责事实，才要求 same-run critical attestation；其余传播链 / owner 边界争议允许先进入 provisional / post-weekly 治理。
 
 ### Phase 3：tool coverage 与降级
 
 1. 五类输入面都要有 coverage 报告。
 2. `news_pr_narrative` 永远不能单独推动核心趋势升级。
 3. 社区高噪声源、搬运号、SEO 内容默认 rejected / watch / context。
-4. tool coverage、review、budget 和 reason code 必须消费共享治理 profile 与受控字典；不得本地重写阈值。
+4. tool coverage 核心 writer 可先落地；进入 review / budget / reason code 接线时，必须消费共享治理 profile 与受控字典；不得本地重写阈值。
 5. 没有 `reservation_state=\"granted\"` 的 same-run 请求不得启动高成本拉取或 deep check。
 
 ### Phase 4：contribution 与测试
@@ -257,6 +317,7 @@ handoff 要求：
 3. 产出 missing required ref negative fixture。
 4. 产出 unknown higher major negative fixture。
 5. 产出 owner boundary / anti-upgrade fixture refs，供中台组统一接入 eval/replay。
+6. 若中台 current consumer fixture 尚未发布，本组先提交 producer fixture 与 artifact refs；待中台 fixture 发布后补兼容消费验证，不回退五轴 / 六职责口径。
 
 ## 验收标准
 

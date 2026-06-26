@@ -22,9 +22,10 @@ import {
   type ProjectsWorkbenchState,
 } from "../../src/search/projectSearchKernel.ts";
 import {
-  FUZZY_SEARCH_DEBOUNCE_MS,
   FUZZY_SEARCH_MIN_CHINESE_CHARS,
   FUZZY_SEARCH_MIN_ENGLISH_CHARS,
+  type FuzzyProjectSearchResponse,
+  type FuzzySearchSource,
 } from "../../src/search/fuzzyQueryTypes.ts";
 
 export {
@@ -49,6 +50,175 @@ export {
   type ProjectsWorkbenchState,
 };
 
+export interface SideAssistantSearchContext {
+  composed_query: string;
+  last_user_query: string;
+  seen_project_ids: string[];
+  last_project_ids: string[];
+}
+
+export interface SideAssistantMessage {
+  role: "user" | "assistant";
+  text: string;
+  query?: string;
+  source?: FuzzyProjectSearchResponse["source"];
+  project_ids?: string[];
+  preview_project_ids?: string[];
+  clarification_options?: Array<{ label_cn: string; query: string }>;
+  can_view_all?: boolean;
+}
+
+export interface SideAssistantActiveMainResult {
+  query: string;
+  project_ids: string[];
+  scope_key: string;
+}
+
+export interface SideAssistantSearchSession {
+  panel_open: boolean;
+  messages: SideAssistantMessage[];
+  search_context: SideAssistantSearchContext | null;
+  active_main_result: SideAssistantActiveMainResult | null;
+  quickstart_collapsed: boolean;
+}
+
+export function createEmptySideAssistantSession(): SideAssistantSearchSession {
+  return {
+    panel_open: false,
+    messages: [],
+    search_context: null,
+    active_main_result: null,
+    quickstart_collapsed: false,
+  };
+}
+
+export function isSideAssistantMoreQuery(rawQuery: string): boolean {
+  return /^(more|更多|再来|继续|换一批)$/i.test(normalizeProjectSearchText(rawQuery));
+}
+
+export function composeSideAssistantQuery(previous: SideAssistantSearchContext | null | undefined, rawQuery: string): string {
+  const trimmed = String(rawQuery || "").trim();
+  if (!trimmed) return "";
+  if (isSideAssistantMoreQuery(trimmed)) return previous?.composed_query?.trim() || "";
+  const previousQuery = previous?.composed_query?.trim() || "";
+  return previousQuery ? `${previousQuery}\n补充：${trimmed}` : trimmed;
+}
+
+export function pickSideAssistantPreviewIds(projectIds: string[], seenProjectIds: string[] = [], limit = 3): string[] {
+  const seen = new Set(seenProjectIds.map((item) => String(item || "").trim().toLowerCase()).filter(Boolean));
+  const preview: string[] = [];
+  for (const id of projectIds) {
+    const normalized = String(id || "").trim();
+    const key = normalized.toLowerCase();
+    if (!normalized || seen.has(key)) continue;
+    preview.push(normalized);
+    seen.add(key);
+    if (preview.length >= Math.max(1, limit)) break;
+  }
+  return preview;
+}
+
+export function buildSideAssistantScopeKey(input: {
+  path: string;
+  date: string;
+  lang: "zh" | "en";
+  sort: ProjectsWorkbenchSortMode;
+  paradigm: string;
+  persistence: string;
+}): string {
+  return JSON.stringify({
+    path: input.path || "/projects",
+    date: input.date || "latest",
+    lang: input.lang === "en" ? "en" : "zh",
+    sort: input.sort === "growth" ? "growth" : "score",
+    paradigm: input.paradigm || "all",
+    persistence: input.persistence || "all",
+  });
+}
+
+export function canRestoreSideAssistantMainResult(scopeKey: string | null | undefined, currentScopeKey: string): boolean {
+  return Boolean(scopeKey) && scopeKey === currentScopeKey;
+}
+
+export function resetSideAssistantConversation(session: SideAssistantSearchSession, keepPanelOpen = true): SideAssistantSearchSession {
+  return {
+    panel_open: keepPanelOpen,
+    messages: [],
+    search_context: null,
+    active_main_result: null,
+    quickstart_collapsed: false,
+  };
+}
+
+export function normalizeSideAssistantSession(value: unknown): SideAssistantSearchSession {
+  if (!value || typeof value !== "object") return createEmptySideAssistantSession();
+  const record = value as Record<string, unknown>;
+  return {
+    panel_open: record.panel_open === true,
+    messages: Array.isArray(record.messages)
+      ? record.messages
+          .filter((message) => message && typeof message === "object")
+          .map((message): SideAssistantMessage => {
+            const item = message as Record<string, unknown>;
+            return {
+              role: item.role === "user" ? "user" : "assistant",
+              text: typeof item.text === "string" ? item.text : "",
+              query: typeof item.query === "string" ? item.query : "",
+              source: typeof item.source === "string" ? (item.source as FuzzySearchSource) : undefined,
+              project_ids: Array.isArray(item.project_ids) ? item.project_ids.map((entry) => String(entry || "")).filter(Boolean) : [],
+              preview_project_ids: Array.isArray(item.preview_project_ids) ? item.preview_project_ids.map((entry) => String(entry || "")).filter(Boolean) : [],
+              clarification_options: Array.isArray(item.clarification_options)
+                ? item.clarification_options
+                    .filter((option) => option && typeof option === "object")
+                    .map((option) => {
+                      const choice = option as Record<string, unknown>;
+                      return {
+                        label_cn: typeof choice.label_cn === "string" ? choice.label_cn : "",
+                        query: typeof choice.query === "string" ? choice.query : "",
+                      };
+                    })
+                    .filter((option) => option.label_cn || option.query)
+                : [],
+              can_view_all: item.can_view_all === true,
+            };
+          })
+          .filter((message) => message.text)
+      : [],
+    search_context:
+      record.search_context && typeof record.search_context === "object"
+        ? {
+            composed_query: typeof (record.search_context as Record<string, unknown>).composed_query === "string"
+              ? ((record.search_context as Record<string, unknown>).composed_query as string)
+              : "",
+            last_user_query: typeof (record.search_context as Record<string, unknown>).last_user_query === "string"
+              ? ((record.search_context as Record<string, unknown>).last_user_query as string)
+              : "",
+            seen_project_ids: Array.isArray((record.search_context as Record<string, unknown>).seen_project_ids)
+              ? ((record.search_context as Record<string, unknown>).seen_project_ids as unknown[]).map((entry) => String(entry || "")).filter(Boolean)
+              : [],
+            last_project_ids: Array.isArray((record.search_context as Record<string, unknown>).last_project_ids)
+              ? ((record.search_context as Record<string, unknown>).last_project_ids as unknown[]).map((entry) => String(entry || "")).filter(Boolean)
+              : [],
+          }
+        : null,
+    active_main_result:
+      record.active_main_result && typeof record.active_main_result === "object"
+        ? {
+            query: typeof (record.active_main_result as Record<string, unknown>).query === "string"
+              ? ((record.active_main_result as Record<string, unknown>).query as string)
+              : "",
+            project_ids: Array.isArray((record.active_main_result as Record<string, unknown>).project_ids)
+              ? ((record.active_main_result as Record<string, unknown>).project_ids as unknown[]).map((entry) => String(entry || "")).filter(Boolean)
+              : [],
+            scope_key: typeof (record.active_main_result as Record<string, unknown>).scope_key === "string"
+              ? ((record.active_main_result as Record<string, unknown>).scope_key as string)
+              : "",
+          }
+        : null,
+    quickstart_collapsed: record.quickstart_collapsed === true,
+  };
+}
+
 export function renderClientScriptSource(): string {
   return `
       (() => {
@@ -62,6 +232,13 @@ export function renderClientScriptSource(): string {
         const scoreProjectSearchField = ${scoreProjectSearchField.toString()};
         const rankProjectSearchMatch = ${rankProjectSearchMatch.toString()};
         const shouldUseDirectProjectSearch = ${shouldUseDirectProjectSearch.toString()};
+        const isSideAssistantMoreQuery = ${isSideAssistantMoreQuery.toString()};
+        const composeSideAssistantQuery = ${composeSideAssistantQuery.toString()};
+        const pickSideAssistantPreviewIds = ${pickSideAssistantPreviewIds.toString()};
+        const buildSideAssistantScopeKey = ${buildSideAssistantScopeKey.toString()};
+        const canRestoreSideAssistantMainResult = ${canRestoreSideAssistantMainResult.toString()};
+        const createEmptySideAssistantSession = ${createEmptySideAssistantSession.toString()};
+        const normalizeSideAssistantSession = ${normalizeSideAssistantSession.toString()};
         const directSearchLooksNaturalLanguage = ${directSearchLooksNaturalLanguage.toString()};
         const informativeDirectSearchTerms = ${informativeDirectSearchTerms.toString()};
         const directSearchTokenRecordCount = ${directSearchTokenRecordCount.toString()};
@@ -71,7 +248,6 @@ export function renderClientScriptSource(): string {
         const CJK_QUERY_NOISE_PATTERNS = ${JSON.stringify(CJK_QUERY_NOISE_PATTERNS)};
         const filterAndSortProjectCards = ${filterAndSortProjectCards.toString()};
         const paginateProjectCards = ${paginateProjectCards.toString()};
-        const fuzzySearchDebounceMs = ${FUZZY_SEARCH_DEBOUNCE_MS};
         const fuzzySearchMinChineseChars = ${FUZZY_SEARCH_MIN_CHINESE_CHARS};
         const fuzzySearchMinEnglishChars = ${FUZZY_SEARCH_MIN_ENGLISH_CHARS};
         const FUZZY_SEARCH_MIN_CHINESE_CHARS = fuzzySearchMinChineseChars;
@@ -82,6 +258,45 @@ export function renderClientScriptSource(): string {
           const cjkCount = Array.from(normalized).filter((char) => /[\\u3400-\\u9fff]/u.test(char)).length;
           if (cjkCount > 0) return cjkCount >= FUZZY_SEARCH_MIN_CHINESE_CHARS;
           return normalized.replace(/\\s+/g, "").length >= FUZZY_SEARCH_MIN_ENGLISH_CHARS;
+        };
+        const sideAssistantSessionStorageKey = "visual-console-side-assistant-search";
+        const readSideAssistantSession = () => {
+          try {
+            return normalizeSideAssistantSession(JSON.parse(sessionStorage.getItem(sideAssistantSessionStorageKey) || "null"));
+          } catch {
+            return normalizeSideAssistantSession(null);
+          }
+        };
+        const writeSideAssistantSession = (session) => {
+          try {
+            sessionStorage.setItem(sideAssistantSessionStorageKey, JSON.stringify(session));
+          } catch {}
+        };
+        const syncSideAssistantShell = () => {
+          const session = readSideAssistantSession();
+          const assistantHost = document.querySelector("[data-projects-ai-assistant-host='true']");
+          const assistantLauncher = document.querySelector("[data-projects-ai-launch='true']");
+          const assistantPanel = document.querySelector("[data-projects-ai-panel='true']");
+          const assistantInput = document.querySelector("[data-projects-ai-input='true']");
+          document.body?.classList.toggle("projects-ai-open", session.panel_open === true);
+          if (assistantHost instanceof HTMLElement) assistantHost.style.pointerEvents = "none";
+          if (assistantLauncher instanceof HTMLElement) {
+            assistantLauncher.hidden = session.panel_open === true;
+            assistantLauncher.style.pointerEvents = "auto";
+          }
+          if (assistantPanel instanceof HTMLElement) {
+            assistantPanel.hidden = session.panel_open !== true;
+            assistantPanel.style.pointerEvents = "auto";
+          }
+          if (session.panel_open === true && assistantInput instanceof HTMLInputElement) {
+            assistantInput.focus({ preventScroll: true });
+          }
+        };
+        const setSideAssistantPanelOpen = (isOpen) => {
+          const session = readSideAssistantSession();
+          session.panel_open = isOpen;
+          writeSideAssistantSession(session);
+          syncSideAssistantShell();
         };
 
         const scrollKey = "visual-console-scroll-target";
@@ -1149,6 +1364,331 @@ export function renderClientScriptSource(): string {
           const initialIndex = workspaceRailSections.indexOf(initialSection);
           apply(initialIndex >= 0 ? initialIndex : 0);
         };
+        const bindGlobalSideAssistant = () => {
+          if (document.querySelector("[data-projects-workbench='true']")) return;
+          const assistantHost = document.querySelector("[data-projects-ai-assistant-host='true']");
+          const assistantLauncher = document.querySelector("[data-projects-ai-launch='true']");
+          const assistantPanel = document.querySelector("[data-projects-ai-panel='true']");
+          const assistantClose = document.querySelector("[data-projects-ai-close='true']");
+          const assistantNewChat = document.querySelector("[data-projects-ai-new-chat='true']");
+          const assistantForm = document.querySelector("[data-projects-ai-form='true']");
+          const assistantInput = document.querySelector("[data-projects-ai-input='true']");
+          const assistantSubmit = document.querySelector("[data-projects-ai-submit='true']");
+          const assistantMessages = document.querySelector("[data-projects-ai-messages='true']");
+          const assistantStatus = document.querySelector("[data-projects-ai-status='true']");
+          if (!(assistantHost instanceof HTMLElement) || assistantHost.dataset.projectsAiBound === "true") return;
+          assistantHost.dataset.projectsAiBound = "true";
+          let assistantSession = readSideAssistantSession();
+          let assistantPending = false;
+          let assistantAbortController = null;
+          const currentProjectsLang = () => (document.documentElement.lang || document.body?.getAttribute("data-lang") || "").toLowerCase().startsWith("en") ? "en" : "zh";
+          const currentProjectsDate = () => new URL(window.location.href).searchParams.get("date") || "latest";
+          const buildProjectsScope = () =>
+            buildSideAssistantScopeKey({
+              path: "/projects",
+              date: currentProjectsDate(),
+              lang: currentProjectsLang(),
+              sort: "score",
+              paradigm: "all",
+              persistence: "all",
+            });
+          const buildAssistantProjectHref = (projectId) => {
+            const normalizedProjectId = String(projectId || "").trim();
+            if (!normalizedProjectId) return "";
+            const target = new URL(window.location.href);
+            target.pathname = "/projects";
+            target.searchParams.set("lang", currentProjectsLang());
+            target.searchParams.set("date", currentProjectsDate());
+            target.searchParams.set("project", normalizedProjectId);
+            target.searchParams.set("source_view", "projects");
+            if (!target.searchParams.get("theme")) target.searchParams.set("theme", "light");
+            return target.toString();
+          };
+          const navigateToProjectsResults = (query, projectIds) => {
+            assistantSession.active_main_result = {
+              query: query || assistantSession.search_context?.last_user_query || "AI 搜项目",
+              project_ids: Array.isArray(projectIds) ? projectIds.map((item) => String(item || "")).filter(Boolean) : [],
+              scope_key: buildProjectsScope(),
+            };
+            writeSideAssistantSession(assistantSession);
+            const target = new URL(window.location.href);
+            target.pathname = "/projects";
+            target.searchParams.set("lang", currentProjectsLang());
+            target.searchParams.set("date", currentProjectsDate());
+            target.searchParams.delete("project");
+            target.searchParams.delete("slug");
+            target.searchParams.delete("source_view");
+            if (typeof fetchAndApply === "function") {
+              void fetchAndApply(target.toString(), "route", "push");
+            } else {
+              window.location.assign(target.toString());
+            }
+          };
+          const projectLinkMap = () => new Map();
+          const setAssistantStatus = (text) => {
+            if (!(assistantStatus instanceof HTMLElement)) return;
+            assistantStatus.hidden = !text;
+            assistantStatus.textContent = text || "";
+          };
+          const renderAssistantMessageNode = (message) => {
+            const wrapper = document.createElement("article");
+            wrapper.className = "surface-card projects-ai-message " + (message.role === "user" ? "is-user" : "is-assistant");
+            const label = document.createElement("div");
+            label.className = "context-label";
+            label.textContent = message.role === "user" ? "你" : "AI 搜项目";
+            const text = document.createElement("p");
+            text.className = "projects-ai-message-copy";
+            text.textContent = message.text;
+            wrapper.append(label, text);
+            if (message.role === "assistant") {
+              const linkMap = projectLinkMap();
+              const previewIds = Array.isArray(message.preview_project_ids) ? message.preview_project_ids : [];
+              if (previewIds.length > 0) {
+                const previewList = document.createElement("div");
+                previewList.className = "projects-ai-preview-list";
+                previewIds.forEach((projectId) => {
+                  const matched = linkMap.get(String(projectId || "").trim().toLowerCase());
+                  const link = document.createElement("a");
+                  link.href = matched?.href || buildAssistantProjectHref(projectId);
+                  link.textContent = matched?.label || projectId;
+                  link.className = "inline-link projects-ai-project-link";
+                  link.dataset.projectsAiProjectLink = "true";
+                  link.dataset.projectsAiProjectId = projectId;
+                  const arrow = document.createElement("span");
+                  arrow.className = "projects-ai-project-link-arrow";
+                  arrow.textContent = "›";
+                  arrow.setAttribute("aria-hidden", "true");
+                  link.appendChild(arrow);
+                  previewList.appendChild(link);
+                });
+                if (previewList.childElementCount > 0) wrapper.appendChild(previewList);
+              }
+              const options = Array.isArray(message.clarification_options) ? message.clarification_options : [];
+              if (options.length > 0) {
+                const optionRow = document.createElement("div");
+                optionRow.className = "filter-chip-row projects-ai-option-row";
+                options.forEach((option) => {
+                  const button = document.createElement("button");
+                  button.type = "button";
+                  button.className = "filter-chip";
+                  button.dataset.projectsAiOptionQuery = option.query || "";
+                  button.textContent = option.label_cn || option.query || "";
+                  optionRow.appendChild(button);
+                });
+                wrapper.appendChild(optionRow);
+              }
+              if (message.can_view_all === true && Array.isArray(message.project_ids) && message.project_ids.length > 0) {
+                const actionRow = document.createElement("div");
+                actionRow.className = "projects-ai-action-row";
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "button-link-secondary projects-ai-view-all";
+                button.dataset.projectsAiViewAll = "true";
+                button.dataset.projectsAiViewAllQuery = message.query || "";
+                button.dataset.projectsAiProjectIds = JSON.stringify(message.project_ids);
+                button.textContent = "查看全部结果";
+                actionRow.appendChild(button);
+                wrapper.appendChild(actionRow);
+              }
+            }
+            return wrapper;
+          };
+          const renderAssistantPanel = () => {
+            assistantSession = readSideAssistantSession();
+            document.body?.classList.toggle("projects-ai-open", assistantSession.panel_open === true);
+            assistantHost.style.pointerEvents = "none";
+            if (assistantLauncher instanceof HTMLElement) {
+              assistantLauncher.hidden = assistantSession.panel_open === true;
+              assistantLauncher.style.pointerEvents = "auto";
+            }
+            const assistantQuickstart = assistantPanel?.querySelector("[data-projects-ai-quickstart='true']");
+            const assistantQuickstartToggleRow = assistantPanel?.querySelector("[data-projects-ai-quickstart-toggle-row='true']");
+            if (assistantPanel instanceof HTMLElement) {
+              assistantPanel.hidden = assistantSession.panel_open !== true;
+              assistantPanel.style.pointerEvents = "auto";
+              assistantPanel.classList.toggle("is-compact", assistantSession.quickstart_collapsed === true);
+            }
+            if (assistantQuickstart instanceof HTMLElement) {
+              assistantQuickstart.hidden = assistantSession.quickstart_collapsed === true;
+            }
+            if (assistantQuickstartToggleRow instanceof HTMLElement) {
+              assistantQuickstartToggleRow.hidden = assistantSession.quickstart_collapsed !== true;
+            }
+            if (assistantMessages instanceof HTMLElement) {
+              assistantMessages.innerHTML = "";
+              if (assistantSession.messages.length === 0) {
+                const intro = document.createElement("article");
+                intro.className = "surface-card projects-ai-message projects-ai-empty-state";
+                intro.textContent = "描述你想找的项目方向，我会返回简短说明、最多 3 个项目链接，并可切换到项目库承接全部结果。";
+                assistantMessages.appendChild(intro);
+              } else {
+                assistantSession.messages.forEach((message) => {
+                  assistantMessages.appendChild(renderAssistantMessageNode(message));
+                });
+              }
+              assistantMessages.scrollTop = assistantMessages.scrollHeight;
+            }
+            if (assistantInput instanceof HTMLInputElement && assistantSession.panel_open === true && !assistantPending && !assistantInput.value.trim()) {
+              assistantInput.focus({ preventScroll: true });
+            }
+            setAssistantStatus(assistantPending ? "正在搜索站内项目库…" : "");
+          };
+          const openAssistantPanel = () => {
+            assistantSession.panel_open = true;
+            writeSideAssistantSession(assistantSession);
+            renderAssistantPanel();
+          };
+          const closeAssistantPanel = () => {
+            assistantSession.panel_open = false;
+            writeSideAssistantSession(assistantSession);
+            renderAssistantPanel();
+          };
+          const buildAssistantMessage = (response, previewIds, isMoreMode) => {
+            if (response.source === "regulated_keyword_search") return response.boundary_message_cn || response.explanation_cn || "仅按站内 AI Agent 项目检索，不提供真实专业建议。";
+            if (response.source === "needs_clarification") return response.explanation_cn || "需要更具体一点，我给你几个可直接点的改写。";
+            if (response.source === "llm_failed_fallback") return response.explanation_cn || "扩展搜索暂不可用，先按站内热门项目给你结果。";
+            if (previewIds.length === 0 && isMoreMode) return "没有更多未展示项目了，可以换个补充条件继续找。";
+            if (previewIds.length === 0) return response.explanation_cn || "这轮没有匹配到可展示的项目。";
+            return response.explanation_cn || ("找到 " + String(response.project_ids.length) + " 个相关项目，先给你看最值得点开的几条。");
+          };
+          const submitAssistantQuery = async (rawQuery) => {
+            const trimmed = String(rawQuery || "").trim();
+            if (!trimmed || !(assistantInput instanceof HTMLInputElement) || assistantPending) return;
+            assistantSession.quickstart_collapsed = true;
+            const isMoreMode = isSideAssistantMoreQuery(trimmed);
+            const composedQuery = composeSideAssistantQuery(assistantSession.search_context, trimmed);
+            if (!composedQuery) {
+              assistantSession.messages.push({ role: "assistant", text: "先描述一个更具体的项目方向，我再帮你搜。" });
+              writeSideAssistantSession(assistantSession);
+              renderAssistantPanel();
+              return;
+            }
+            if (!queryMeetsFuzzyTriggerThreshold(composedQuery)) {
+              assistantSession.quickstart_collapsed = true;
+              assistantSession.messages.push(
+                { role: "user", text: trimmed, query: trimmed },
+                { role: "assistant", text: "描述再具体一点，比如公司、任务、方向词或想看的场景。" },
+              );
+              writeSideAssistantSession(assistantSession);
+              renderAssistantPanel();
+              return;
+            }
+            if (assistantAbortController) assistantAbortController.abort();
+            assistantAbortController = new AbortController();
+            assistantPending = true;
+            assistantSession.panel_open = true;
+            assistantSession.quickstart_collapsed = true;
+            assistantSession.messages.push({ role: "user", text: trimmed, query: trimmed });
+            writeSideAssistantSession(assistantSession);
+            renderAssistantPanel();
+            assistantInput.value = "";
+            try {
+              const response = await fetch("/api/projects/fuzzy-search", {
+                method: "POST",
+                headers: { "content-type": "application/json" },
+                cache: "no-store",
+                signal: assistantAbortController.signal,
+                body: JSON.stringify({
+                  raw_query: composedQuery,
+                  date: currentProjectsDate(),
+                  lang: currentProjectsLang(),
+                  filters: { paradigm: "all", persistence: "all" },
+                  sort: "score",
+                  page_context: { page: 1, page_size: 15, path: "/projects" },
+                }),
+              });
+              if (!response.ok) throw new Error("fuzzy-search-failed");
+              const payload = await response.json();
+              const projectIds = Array.isArray(payload?.project_ids) ? payload.project_ids.map((item) => String(item || "")).filter(Boolean) : [];
+              const previousSeen = isMoreMode ? assistantSession.search_context?.seen_project_ids || [] : [];
+              const previewIds = pickSideAssistantPreviewIds(projectIds, previousSeen, 3);
+              assistantSession.search_context = {
+                composed_query: composedQuery,
+                last_user_query: trimmed,
+                seen_project_ids: isMoreMode ? Array.from(new Set(previousSeen.concat(previewIds))) : previewIds.slice(),
+                last_project_ids: projectIds,
+              };
+              assistantSession.messages.push({
+                role: "assistant",
+                text: buildAssistantMessage(payload, previewIds, isMoreMode),
+                query: trimmed,
+                source: payload?.source || "",
+                project_ids: projectIds,
+                preview_project_ids: previewIds,
+                clarification_options:
+                  payload?.source === "needs_clarification" && Array.isArray(payload?.clarification_options)
+                    ? payload.clarification_options.map((option) => ({ label_cn: option.label_cn || option.query || "", query: option.query || "" }))
+                    : [],
+                can_view_all: projectIds.length > 0,
+              });
+            } catch (error) {
+              if (error && error.name === "AbortError") return;
+              assistantSession.messages.push({
+                role: "assistant",
+                text: "这次搜索没有成功，但我保留了上下文，你可以直接换个说法继续问。",
+                query: trimmed,
+              });
+            } finally {
+              assistantPending = false;
+              assistantAbortController = null;
+              writeSideAssistantSession(assistantSession);
+              renderAssistantPanel();
+            }
+          };
+          const triggerAssistantSubmit = (event) => {
+            event?.preventDefault?.();
+            if (!(assistantInput instanceof HTMLInputElement) || assistantPending) return;
+            void submitAssistantQuery(assistantInput.value);
+          };
+          assistantLauncher instanceof HTMLButtonElement && assistantLauncher.addEventListener("click", openAssistantPanel);
+          assistantClose instanceof HTMLButtonElement && assistantClose.addEventListener("click", closeAssistantPanel);
+          assistantNewChat instanceof HTMLButtonElement &&
+            assistantNewChat.addEventListener("click", () => {
+              assistantSession = resetSideAssistantConversation(assistantSession, true);
+              if (assistantInput instanceof HTMLInputElement) assistantInput.value = "";
+              writeSideAssistantSession(assistantSession);
+              renderAssistantPanel();
+            });
+          assistantSubmit instanceof HTMLButtonElement && assistantSubmit.addEventListener("click", triggerAssistantSubmit);
+          assistantForm instanceof HTMLFormElement && assistantForm.addEventListener("submit", triggerAssistantSubmit);
+          assistantInput instanceof HTMLInputElement &&
+            assistantInput.addEventListener("input", () => {
+              if (assistantSession.quickstart_collapsed === true) return;
+              if (!assistantInput.value.trim()) return;
+              assistantSession.quickstart_collapsed = true;
+              writeSideAssistantSession(assistantSession);
+              renderAssistantPanel();
+            });
+          assistantInput instanceof HTMLInputElement &&
+            assistantInput.addEventListener("keydown", (event) => {
+              if (event.key !== "Enter" || event.isComposing) return;
+              triggerAssistantSubmit(event);
+            });
+          assistantPanel instanceof HTMLElement &&
+            assistantPanel.addEventListener("click", (event) => {
+              const target = event.target;
+              if (!(target instanceof Element)) return;
+              const option = target.closest("[data-projects-ai-option-query]");
+              if (option instanceof HTMLElement) {
+                const nextValue = option.dataset.projectsAiOptionQuery || "";
+                if (!nextValue) return;
+                if (assistantInput instanceof HTMLInputElement) assistantInput.value = nextValue;
+                void submitAssistantQuery(nextValue);
+                return;
+              }
+              const viewAll = target.closest("[data-projects-ai-view-all='true']");
+              if (viewAll instanceof HTMLElement) {
+                let projectIds = [];
+                try {
+                  projectIds = JSON.parse(viewAll.dataset.projectsAiProjectIds || "[]");
+                } catch {
+                  projectIds = [];
+                }
+                navigateToProjectsResults(viewAll.dataset.projectsAiViewAllQuery || assistantSession.search_context?.last_user_query || "AI 搜项目", projectIds);
+              }
+            });
+          renderAssistantPanel();
+        };
         const bindProjectsWorkbench = () => {
           const root = document.querySelector("[data-projects-workbench='true']");
           if (!(root instanceof HTMLElement)) return;
@@ -1162,7 +1702,6 @@ export function renderClientScriptSource(): string {
           const search = root.querySelector("[data-projects-search='true']");
           const searchRotator = root.querySelector("[data-projects-search-rotator='true']");
           const searchExamples = Array.from(root.querySelectorAll("[data-projects-search-example]")).filter((node) => node instanceof HTMLButtonElement);
-          const presetOptions = Array.from(document.querySelectorAll("[data-projects-preset-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortOptions = Array.from(root.querySelectorAll("[data-projects-sort-option]")).filter((option) => option instanceof HTMLButtonElement);
           const sortDropdown = root.querySelector("[data-projects-sort-dropdown='true']");
           const sortToggle = root.querySelector("[data-projects-sort-toggle='true']");
@@ -1175,11 +1714,20 @@ export function renderClientScriptSource(): string {
           const nextPageButtons = Array.from(document.querySelectorAll("[data-projects-page-next='true']")).filter((node) => node instanceof HTMLButtonElement);
           const pageStatusNodes = Array.from(document.querySelectorAll("[data-projects-page-status='true']")).filter((node) => node instanceof HTMLElement);
           const pageSummaryNodes = Array.from(document.querySelectorAll("[data-projects-page-summary='true']")).filter((node) => node instanceof HTMLElement);
-          const fuzzyStatus = root.querySelector("[data-projects-fuzzy-status='true']");
-          const fuzzyLabel = root.querySelector("[data-projects-fuzzy-label='true']");
-          const fuzzyTitle = root.querySelector("[data-projects-fuzzy-title='true']");
-          const fuzzyMessage = root.querySelector("[data-projects-fuzzy-message='true']");
-          const fuzzyOptions = root.querySelector("[data-projects-fuzzy-options='true']");
+          const assistantHost = document.querySelector("[data-projects-ai-assistant-host='true']");
+          const assistantLauncher = document.querySelector("[data-projects-ai-launch='true']");
+          const assistantPanel = document.querySelector("[data-projects-ai-panel='true']");
+          const assistantClose = document.querySelector("[data-projects-ai-close='true']");
+          const assistantNewChat = document.querySelector("[data-projects-ai-new-chat='true']");
+          const assistantForm = document.querySelector("[data-projects-ai-form='true']");
+          const assistantInput = document.querySelector("[data-projects-ai-input='true']");
+          const assistantSubmit = document.querySelector("[data-projects-ai-submit='true']");
+          const assistantMessages = document.querySelector("[data-projects-ai-messages='true']");
+          const assistantStatus = document.querySelector("[data-projects-ai-status='true']");
+          const assistantEmptyCta = document.querySelector("[data-projects-ai-empty-cta='true']");
+          const assistantMainResult = document.querySelector("[data-projects-ai-main-result='true']");
+          const assistantMainResultQuery = document.querySelector("[data-projects-ai-main-result-query='true']");
+          const assistantReset = document.querySelector("[data-projects-ai-reset='true']");
 
           if (!(search instanceof HTMLInputElement)) return;
 
@@ -1195,14 +1743,84 @@ export function renderClientScriptSource(): string {
                 })()
               : [];
           let rotatorIndex = 0;
-          let fuzzyTimer = null;
-          let fuzzyAbortController = null;
-          let fuzzySequence = 0;
-          let fuzzyState = { status: "idle", key: "", response: null };
+          const assistantSessionStorageKey = "visual-console-side-assistant-search";
+          const emptyAssistantSession = () => ({
+            panel_open: false,
+            messages: [],
+            search_context: null,
+            active_main_result: null,
+          });
+          const normalizeAssistantSession = (value) => {
+            if (!value || typeof value !== "object") return emptyAssistantSession();
+            return {
+              panel_open: value.panel_open === true,
+              messages: Array.isArray(value.messages)
+                ? value.messages
+                    .filter((message) => message && typeof message === "object")
+                    .map((message) => ({
+                      role: message.role === "user" ? "user" : "assistant",
+                      text: typeof message.text === "string" ? message.text : "",
+                      query: typeof message.query === "string" ? message.query : "",
+                      source: typeof message.source === "string" ? message.source : "",
+                      project_ids: Array.isArray(message.project_ids) ? message.project_ids.map((item) => String(item || "")).filter(Boolean) : [],
+                      preview_project_ids: Array.isArray(message.preview_project_ids) ? message.preview_project_ids.map((item) => String(item || "")).filter(Boolean) : [],
+                      clarification_options: Array.isArray(message.clarification_options)
+                        ? message.clarification_options
+                            .filter((option) => option && typeof option === "object")
+                            .map((option) => ({
+                              label_cn: typeof option.label_cn === "string" ? option.label_cn : "",
+                              query: typeof option.query === "string" ? option.query : "",
+                            }))
+                            .filter((option) => option.label_cn || option.query)
+                        : [],
+                      can_view_all: message.can_view_all === true,
+                    }))
+                    .filter((message) => message.text)
+                : [],
+              search_context:
+                value.search_context && typeof value.search_context === "object"
+                  ? {
+                      composed_query: typeof value.search_context.composed_query === "string" ? value.search_context.composed_query : "",
+                      last_user_query: typeof value.search_context.last_user_query === "string" ? value.search_context.last_user_query : "",
+                      seen_project_ids: Array.isArray(value.search_context.seen_project_ids)
+                        ? value.search_context.seen_project_ids.map((item) => String(item || "")).filter(Boolean)
+                        : [],
+                      last_project_ids: Array.isArray(value.search_context.last_project_ids)
+                        ? value.search_context.last_project_ids.map((item) => String(item || "")).filter(Boolean)
+                        : [],
+                    }
+                  : null,
+              active_main_result:
+                value.active_main_result && typeof value.active_main_result === "object"
+                  ? {
+                      query: typeof value.active_main_result.query === "string" ? value.active_main_result.query : "",
+                      project_ids: Array.isArray(value.active_main_result.project_ids)
+                        ? value.active_main_result.project_ids.map((item) => String(item || "")).filter(Boolean)
+                        : [],
+                      scope_key: typeof value.active_main_result.scope_key === "string" ? value.active_main_result.scope_key : "",
+                    }
+                  : null,
+              quickstart_collapsed: value.quickstart_collapsed === true || (Array.isArray(value.messages) && value.messages.length > 0),
+            };
+          };
+          const readAssistantSession = () => {
+            try {
+              return normalizeSideAssistantSession(JSON.parse(sessionStorage.getItem(assistantSessionStorageKey) || "null"));
+            } catch {
+              return normalizeSideAssistantSession(null);
+            }
+          };
+          const writeAssistantSession = () => {
+            try {
+              sessionStorage.setItem(assistantSessionStorageKey, JSON.stringify(assistantSession));
+            } catch {}
+          };
+          let assistantSession = readAssistantSession();
+          let assistantPending = false;
+          let assistantAbortController = null;
 
           const state = {
             search: search.value,
-            preset: root.getAttribute("data-projects-default-preset") || "all",
             sort: "score",
             paradigm: "all",
             persistence: "all",
@@ -1212,15 +1830,14 @@ export function renderClientScriptSource(): string {
 
           const currentProjectsLang = () => (document.documentElement.lang || document.body?.getAttribute("data-lang") || "").toLowerCase().startsWith("en") ? "en" : "zh";
           const currentProjectsDate = () => new URL(window.location.href).searchParams.get("date") || "latest";
-          const buildFuzzyRequestKey = () =>
-            JSON.stringify({
-              q: normalizeProjectSearchText(state.search),
-              preset: state.preset,
+          const buildAssistantScope = () =>
+            buildSideAssistantScopeKey({
+              path: window.location.pathname,
+              date: currentProjectsDate(),
+              lang: currentProjectsLang(),
               sort: state.sort,
               paradigm: state.paradigm,
               persistence: state.persistence,
-              date: currentProjectsDate(),
-              lang: currentProjectsLang(),
             });
           const projectCardRecords = () =>
             Array.from(document.querySelectorAll("[data-project-card='true']"))
@@ -1238,139 +1855,231 @@ export function renderClientScriptSource(): string {
                 score: Number(card.dataset.projectScore || "0"),
                 growth: Number(card.dataset.projectGrowth || "0"),
                 order: Number(card.dataset.projectOrder || "0"),
-                preset: card.dataset.projectPreset || "",
-                presets: String(card.dataset.projectPresets || "")
-                  .split(",")
-                  .map((value) => value.trim())
-                  .filter(Boolean),
                 paradigm: card.dataset.projectParadigm || "",
                 persistence: card.dataset.projectPersistence || "",
               }));
-          const fuzzyStatusCopy = (response) => {
-            if (!response) return { label: "扩展搜索", title: "", message: "" };
-            if (response.source === "llm_expanded") {
-              return {
-                label: "扩展搜索",
-                title: "已扩展项目库搜索",
-                message: response.explanation_cn || "已按相关关键词扩展项目库搜索。",
-              };
-            }
-            if (response.source === "regulated_keyword_search") {
-              return {
-                label: "边界提示",
-                title: "敏感领域项目搜索",
-                message: response.boundary_message_cn || response.explanation_cn || "仅按站内 AI Agent 项目检索，不提供真实专业建议。",
-              };
-            }
-            if (response.source === "needs_clarification") {
-              return {
-                label: "澄清搜索",
-                title: "需要选择更具体的方向",
-                message: response.explanation_cn || "请选择一个可执行的搜索改写。",
-              };
-            }
-            if (response.source === "llm_failed_fallback") {
-              return {
-                label: "降级搜索",
-                title: "扩展搜索暂不可用",
-                message: response.explanation_cn || "先展示当前热门项目。",
-              };
-            }
-            return {
-              label: "热门项目",
-              title: "展示当前热门项目",
-              message: response.explanation_cn || "按当前热门项目展示。",
-            };
-          };
-          const renderFuzzyStatus = () => {
-            if (!(fuzzyStatus instanceof HTMLElement)) return;
-            const showLoading = fuzzyState.status === "loading";
-            const showError = fuzzyState.status === "error";
-            const response = fuzzyState.status === "ready" ? fuzzyState.response : null;
-            const shouldShow = showLoading || showError || Boolean(response && response.source !== "direct_search");
-            fuzzyStatus.hidden = !shouldShow;
-            if (!shouldShow) {
-              if (fuzzyOptions instanceof HTMLElement) {
-                fuzzyOptions.hidden = true;
-                fuzzyOptions.innerHTML = "";
-              }
-              return;
-            }
-
-            const copy = showLoading
-              ? { label: "扩展搜索", title: "正在扩展项目库搜索", message: "正在解释这个查询并匹配站内项目库。" }
-              : showError
-                ? { label: "降级搜索", title: "扩展搜索暂不可用", message: "先展示当前热门项目。" }
-                : fuzzyStatusCopy(response);
-            if (fuzzyLabel instanceof HTMLElement) fuzzyLabel.textContent = copy.label;
-            if (fuzzyTitle instanceof HTMLElement) fuzzyTitle.textContent = copy.title;
-            if (fuzzyMessage instanceof HTMLElement) fuzzyMessage.textContent = copy.message;
-
-            if (fuzzyOptions instanceof HTMLElement) {
-              const options = response && response.source === "needs_clarification" && Array.isArray(response.clarification_options)
-                ? response.clarification_options
-                : [];
-              fuzzyOptions.hidden = options.length === 0;
-              fuzzyOptions.innerHTML = "";
-              options.forEach((option) => {
-                const button = document.createElement("button");
-                button.type = "button";
-                button.className = "filter-chip";
-                button.dataset.fuzzyOptionQuery = option.query || "";
-                button.textContent = option.label_cn || option.query || "";
-                fuzzyOptions.appendChild(button);
-              });
-            }
-          };
-          const clearFuzzyTimer = () => {
-            if (fuzzyTimer !== null) {
-              window.clearTimeout(fuzzyTimer);
-              fuzzyTimer = null;
-            }
-          };
-          const abortFuzzyRequest = () => {
-            if (fuzzyAbortController) {
-              fuzzyAbortController.abort();
-              fuzzyAbortController = null;
-            }
-          };
-          const resetFuzzyState = () => {
-            clearFuzzyTimer();
-            abortFuzzyRequest();
-            fuzzySequence += 1;
-            fuzzyState = { status: "idle", key: "", response: null };
-            renderFuzzyStatus();
-          };
-          const applyFuzzyProjectIds = (records, response) => {
-            const ids = Array.isArray(response?.project_ids) ? response.project_ids : [];
+          const applyAssistantProjectIds = (records, projectIds) => {
+            const ids = Array.isArray(projectIds) ? projectIds : [];
             const order = new Map(ids.map((id, index) => [String(id || "").toLowerCase(), index]));
             return records
               .filter((record) => order.has((record.element.dataset.projectName || "").toLowerCase()))
               .sort((left, right) => (order.get((left.element.dataset.projectName || "").toLowerCase()) ?? 0) - (order.get((right.element.dataset.projectName || "").toLowerCase()) ?? 0));
           };
-          const hotProjectCards = (records) =>
-            filterAndSortProjectCards(records, {
-              ...state,
-              search: "",
-            });
-          const startFuzzySearch = async (key) => {
-            clearFuzzyTimer();
-            abortFuzzyRequest();
-            const sequence = fuzzySequence + 1;
-            fuzzySequence = sequence;
-            const controller = new AbortController();
-            fuzzyAbortController = controller;
-            fuzzyState = { status: "loading", key, response: null };
-            renderFuzzyStatus();
+          const projectLinkMap = () =>
+            new Map(
+              projectCardRecords().map((record) => {
+                const cardLink = record.element.querySelector("[data-project-card-link='true']");
+                const href = cardLink instanceof HTMLAnchorElement ? cardLink.href : "";
+                const label = cardLink?.textContent?.trim() || record.element.dataset.projectName || "";
+                return [(record.element.dataset.projectName || "").trim().toLowerCase(), { href, label }];
+              }),
+            );
+          const buildAssistantProjectHref = (projectId) => {
+            const normalizedProjectId = String(projectId || "").trim();
+            if (!normalizedProjectId) return "";
+            const target = new URL(window.location.href);
+            target.pathname = "/projects";
+            target.searchParams.set("lang", currentProjectsLang());
+            target.searchParams.set("date", currentProjectsDate());
+            target.searchParams.set("project", normalizedProjectId);
+            target.searchParams.set("source_view", "projects");
+            if (!target.searchParams.get("theme")) target.searchParams.set("theme", "light");
+            return target.toString();
+          };
+          const openAssistantPanel = () => {
+            assistantSession.panel_open = true;
+            writeAssistantSession();
+            renderAssistantPanel();
+          };
+          const closeAssistantPanel = () => {
+            assistantSession.panel_open = false;
+            writeAssistantSession();
+            renderAssistantPanel();
+          };
+          const setAssistantStatus = (text) => {
+            if (!(assistantStatus instanceof HTMLElement)) return;
+            assistantStatus.hidden = !text;
+            assistantStatus.textContent = text || "";
+          };
+          const renderAssistantMessageNode = (message) => {
+            const wrapper = document.createElement("article");
+            wrapper.className = "surface-card projects-ai-message " + (message.role === "user" ? "is-user" : "is-assistant");
+            const label = document.createElement("div");
+            label.className = "context-label";
+            label.textContent = message.role === "user" ? "你" : "AI 搜项目";
+            const text = document.createElement("p");
+            text.className = "projects-ai-message-copy";
+            text.textContent = message.text;
+            wrapper.append(label, text);
+
+            if (message.role === "assistant") {
+              const linkMap = projectLinkMap();
+              const previewIds = Array.isArray(message.preview_project_ids) ? message.preview_project_ids : [];
+              if (previewIds.length > 0) {
+                const previewList = document.createElement("div");
+                previewList.className = "projects-ai-preview-list";
+                previewIds.forEach((projectId) => {
+                  const matched = linkMap.get(String(projectId || "").trim().toLowerCase());
+                  const link = document.createElement("a");
+                  link.href = matched?.href || buildAssistantProjectHref(projectId);
+                  link.textContent = matched.label || projectId;
+                  link.className = "inline-link projects-ai-project-link";
+                  link.dataset.projectsAiProjectLink = "true";
+                  link.dataset.projectsAiProjectId = projectId;
+                  const arrow = document.createElement("span");
+                  arrow.className = "projects-ai-project-link-arrow";
+                  arrow.textContent = "›";
+                  arrow.setAttribute("aria-hidden", "true");
+                  link.appendChild(arrow);
+                  previewList.appendChild(link);
+                });
+                if (previewList.childElementCount > 0) wrapper.appendChild(previewList);
+              }
+
+              const options = Array.isArray(message.clarification_options) ? message.clarification_options : [];
+              if (options.length > 0) {
+                const optionRow = document.createElement("div");
+                optionRow.className = "filter-chip-row projects-ai-option-row";
+                options.forEach((option) => {
+                  const button = document.createElement("button");
+                  button.type = "button";
+                  button.className = "filter-chip";
+                  button.dataset.projectsAiOptionQuery = option.query || "";
+                  button.textContent = option.label_cn || option.query || "";
+                  optionRow.appendChild(button);
+                });
+                wrapper.appendChild(optionRow);
+              }
+
+              if (message.can_view_all === true && Array.isArray(message.project_ids) && message.project_ids.length > 0) {
+                const actionRow = document.createElement("div");
+                actionRow.className = "projects-ai-action-row";
+                const button = document.createElement("button");
+                button.type = "button";
+                button.className = "button-link-secondary projects-ai-view-all";
+                button.dataset.projectsAiViewAll = "true";
+                button.dataset.projectsAiViewAllQuery = message.query || "";
+                button.dataset.projectsAiProjectIds = JSON.stringify(message.project_ids);
+                button.textContent = "查看全部结果";
+                actionRow.appendChild(button);
+                wrapper.appendChild(actionRow);
+              }
+            }
+
+            return wrapper;
+          };
+          function renderAssistantPanel() {
+            document.body?.classList.toggle("projects-ai-open", assistantSession.panel_open === true);
+            if (assistantHost instanceof HTMLElement) assistantHost.style.pointerEvents = "none";
+            if (assistantLauncher instanceof HTMLElement) {
+              assistantLauncher.hidden = assistantSession.panel_open === true;
+              assistantLauncher.style.pointerEvents = "auto";
+            }
+            const assistantQuickstart = assistantPanel?.querySelector("[data-projects-ai-quickstart='true']");
+            const assistantQuickstartToggleRow = assistantPanel?.querySelector("[data-projects-ai-quickstart-toggle-row='true']");
+            if (assistantPanel instanceof HTMLElement) {
+              assistantPanel.hidden = assistantSession.panel_open !== true;
+              assistantPanel.style.pointerEvents = "auto";
+              assistantPanel.classList.toggle("is-compact", assistantSession.quickstart_collapsed === true);
+            }
+            if (assistantQuickstart instanceof HTMLElement) {
+              assistantQuickstart.hidden = assistantSession.quickstart_collapsed === true;
+            }
+            if (assistantQuickstartToggleRow instanceof HTMLElement) {
+              assistantQuickstartToggleRow.hidden = assistantSession.quickstart_collapsed !== true;
+            }
+            if (assistantMessages instanceof HTMLElement) {
+              assistantMessages.innerHTML = "";
+              if (assistantSession.messages.length === 0) {
+                const intro = document.createElement("article");
+                intro.className = "surface-card projects-ai-message projects-ai-empty-state";
+                intro.textContent = "描述你想找的项目方向，我会返回简短说明、最多 3 个项目链接，并可切换主列表查看全部结果。";
+                assistantMessages.appendChild(intro);
+              } else {
+                assistantSession.messages.forEach((message) => {
+                  assistantMessages.appendChild(renderAssistantMessageNode(message));
+                });
+              }
+              assistantMessages.scrollTop = assistantMessages.scrollHeight;
+            }
+            if (assistantInput instanceof HTMLInputElement && assistantSession.panel_open === true && !assistantPending && !assistantInput.value.trim()) {
+              assistantInput.focus({ preventScroll: true });
+            }
+            setAssistantStatus(assistantPending ? "正在搜索站内项目库…" : "");
+          }
+          const applyActiveMainResultState = () => {
+            if (!(assistantMainResult instanceof HTMLElement)) return;
+            const active = assistantSession.active_main_result && canRestoreSideAssistantMainResult(assistantSession.active_main_result.scope_key, buildAssistantScope())
+              ? assistantSession.active_main_result
+              : null;
+            assistantMainResult.hidden = !active;
+            if (assistantMainResultQuery instanceof HTMLElement) assistantMainResultQuery.textContent = active?.query || "";
+          };
+          const buildAssistantMessage = (response, previewIds, isMoreMode) => {
+            if (response.source === "regulated_keyword_search") {
+              return response.boundary_message_cn || response.explanation_cn || "仅按站内 AI Agent 项目检索，不提供真实专业建议。";
+            }
+            if (response.source === "needs_clarification") {
+              return response.explanation_cn || "需要更具体一点，我给你几个可直接点的改写。";
+            }
+            if (response.source === "llm_failed_fallback") {
+              return response.explanation_cn || "扩展搜索暂不可用，先按站内热门项目给你结果。";
+            }
+            if (previewIds.length === 0 && isMoreMode) {
+              return "没有更多未展示项目了，可以换个补充条件继续找。";
+            }
+            if (previewIds.length === 0) {
+              return response.explanation_cn || "这轮没有匹配到可展示的项目。";
+            }
+            return response.explanation_cn || ("找到 " + String(response.project_ids.length) + " 个相关项目，先给你看最值得点开的几条。");
+          };
+          const triggerAssistantSubmit = (event) => {
+            event?.preventDefault?.();
+            if (!(assistantInput instanceof HTMLInputElement) || assistantPending) return;
+            void submitAssistantQuery(assistantInput.value);
+          };
+          const submitAssistantQuery = async (rawQuery) => {
+            const trimmed = String(rawQuery || "").trim();
+            if (!trimmed) return;
+            assistantSession.quickstart_collapsed = true;
+            const isMoreMode = isSideAssistantMoreQuery(trimmed);
+            const composedQuery = composeSideAssistantQuery(assistantSession.search_context, trimmed);
+            if (!composedQuery) {
+              assistantSession.messages.push({
+                role: "assistant",
+                text: "先描述一个更具体的项目方向，我再帮你搜。",
+              });
+              renderAssistantPanel();
+              writeAssistantSession();
+              return;
+            }
+            if (!queryMeetsFuzzyTriggerThreshold(composedQuery)) {
+              assistantSession.messages.push(
+                { role: "user", text: trimmed, query: trimmed },
+                { role: "assistant", text: "描述再具体一点，比如公司、任务、方向词或想看的场景。" },
+              );
+              renderAssistantPanel();
+              writeAssistantSession();
+              return;
+            }
+
+            if (assistantAbortController) assistantAbortController.abort();
+            assistantAbortController = new AbortController();
+            assistantPending = true;
+            assistantSession.panel_open = true;
+            assistantSession.messages.push({ role: "user", text: trimmed, query: trimmed });
+            writeAssistantSession();
+            renderAssistantPanel();
+            if (assistantInput instanceof HTMLInputElement) assistantInput.value = "";
 
             try {
               const response = await fetch("/api/projects/fuzzy-search", {
                 method: "POST",
                 headers: { "content-type": "application/json" },
                 cache: "no-store",
-                signal: controller.signal,
+                signal: assistantAbortController.signal,
                 body: JSON.stringify({
-                  raw_query: state.search,
+                  raw_query: composedQuery,
                   date: currentProjectsDate(),
                   lang: currentProjectsLang(),
                   filters: {
@@ -1381,53 +2090,62 @@ export function renderClientScriptSource(): string {
                   page_context: {
                     page: state.page,
                     page_size: state.pageSize,
-                    path: window.location.pathname + "?preset=" + encodeURIComponent(state.preset),
+                    path: window.location.pathname,
                   },
                 }),
               });
               if (!response.ok) throw new Error("fuzzy-search-failed");
               const payload = await response.json();
-              if (sequence !== fuzzySequence || key !== buildFuzzyRequestKey()) return;
-              fuzzyAbortController = null;
-              fuzzyState = { status: "ready", key, response: payload };
-              apply({ fuzzyTrigger: "none" });
+              const projectIds = Array.isArray(payload?.project_ids) ? payload.project_ids.map((item) => String(item || "")).filter(Boolean) : [];
+              const previousSeen = isMoreMode ? assistantSession.search_context?.seen_project_ids || [] : [];
+              const previewIds = pickSideAssistantPreviewIds(projectIds, previousSeen, 3);
+              assistantSession.search_context = {
+                composed_query: composedQuery,
+                last_user_query: trimmed,
+                seen_project_ids: isMoreMode ? Array.from(new Set(previousSeen.concat(previewIds))) : previewIds.slice(),
+                last_project_ids: projectIds,
+              };
+              assistantSession.messages.push({
+                role: "assistant",
+                text: buildAssistantMessage(payload, previewIds, isMoreMode),
+                query: trimmed,
+                source: payload?.source || "",
+                project_ids: projectIds,
+                preview_project_ids: previewIds,
+                clarification_options:
+                  payload?.source === "needs_clarification" && Array.isArray(payload?.clarification_options)
+                    ? payload.clarification_options.map((option) => ({
+                        label_cn: option.label_cn || option.query || "",
+                        query: option.query || "",
+                      }))
+                    : [],
+                can_view_all: projectIds.length > 0,
+              });
             } catch (error) {
               if (error && error.name === "AbortError") return;
-              if (sequence !== fuzzySequence || key !== buildFuzzyRequestKey()) return;
-              fuzzyAbortController = null;
-              fuzzyState = { status: "error", key, response: null };
-              apply({ fuzzyTrigger: "none" });
+              assistantSession.search_context = {
+                composed_query: composedQuery,
+                last_user_query: trimmed,
+                seen_project_ids: assistantSession.search_context?.seen_project_ids || [],
+                last_project_ids: assistantSession.search_context?.last_project_ids || [],
+              };
+              assistantSession.messages.push({
+                role: "assistant",
+                text: "这次搜索没有成功，但我保留了上下文，你可以直接换个说法继续问。",
+                query: trimmed,
+              });
+            } finally {
+              assistantPending = false;
+              assistantAbortController = null;
+              writeAssistantSession();
+              renderAssistantPanel();
+              apply();
             }
           };
-          const syncFuzzySearch = (_directResultCount, trigger = "debounced") => {
-            const key = buildFuzzyRequestKey();
-            if (fuzzyState.key === key && (fuzzyState.status === "loading" || fuzzyState.status === "ready" || fuzzyState.status === "error")) {
-              renderFuzzyStatus();
-              return;
-            }
-          const cards = projectCardRecords();
-          const directCards = filterAndSortProjectCards(cards, state);
-          const shouldTriggerFuzzy = shouldUseDirectProjectSearch(cards, state.search, directCards) === false;
-          const canTrigger = shouldTriggerFuzzy && queryMeetsFuzzyTriggerThreshold(state.search);
-            if (!canTrigger) {
-              if (fuzzyState.status !== "idle") resetFuzzyState();
-              else renderFuzzyStatus();
-              return;
-            }
-            clearFuzzyTimer();
-            abortFuzzyRequest();
-            fuzzySequence += 1;
-            fuzzyState = { status: "idle", key, response: null };
-            renderFuzzyStatus();
-            if (trigger === "none") return;
-            if (trigger === "immediate") {
-              void startFuzzySearch(key);
-              return;
-            }
-            fuzzyTimer = window.setTimeout(() => {
-              void startFuzzySearch(key);
-            }, fuzzySearchDebounceMs);
-          };
+          if (assistantSession.active_main_result && !canRestoreSideAssistantMainResult(assistantSession.active_main_result.scope_key, buildAssistantScope())) {
+            assistantSession.active_main_result = null;
+            writeAssistantSession();
+          }
 
           const setOptionState = (options, activeValue, attrName) => {
             options.forEach((option) => {
@@ -1475,22 +2193,21 @@ export function renderClientScriptSource(): string {
             const cards = projectCardRecords();
             const lane = document.querySelector("[data-projects-lane='true']");
             const count = document.querySelector("[data-projects-count='true']");
-            const total = document.querySelector("[data-projects-total='true']");
             const emptyState = document.querySelector("[data-projects-empty='true']");
             if (!(lane instanceof HTMLElement)) return;
 
             const directCards = filterAndSortProjectCards(cards, state);
-            const currentFuzzyKey = buildFuzzyRequestKey();
-            const useFuzzyResponse = fuzzyState.status === "ready" && fuzzyState.key === currentFuzzyKey;
-            const useFuzzyFallback = fuzzyState.status === "error" && fuzzyState.key === currentFuzzyKey;
-            const filteredCards =
-              useFuzzyResponse && fuzzyState.response?.source === "needs_clarification"
-                ? []
-                : useFuzzyResponse
-                  ? applyFuzzyProjectIds(cards, fuzzyState.response)
-                  : useFuzzyFallback
-                    ? hotProjectCards(cards)
-                    : directCards;
+            const activeMainResult = assistantSession.active_main_result && canRestoreSideAssistantMainResult(assistantSession.active_main_result.scope_key, buildAssistantScope())
+              ? assistantSession.active_main_result
+              : null;
+            const filteredCards = activeMainResult ? applyAssistantProjectIds(cards, activeMainResult.project_ids) : directCards;
+            const activeProject = decodeURIComponent(new URL(window.location.href).searchParams.get("project") || "").trim().toLowerCase();
+            if (activeProject) {
+              const selectedIndex = filteredCards.findIndex((card) => (card.element.dataset.projectName || "").trim().toLowerCase() === activeProject);
+              if (selectedIndex >= 0) {
+                state.page = Math.floor(selectedIndex / state.pageSize) + 1;
+              }
+            }
             const page = paginateProjectCards(filteredCards, state.page, state.pageSize);
             const visibleCards = page.items;
             state.page = page.currentPage;
@@ -1504,7 +2221,6 @@ export function renderClientScriptSource(): string {
             });
 
             if (count instanceof HTMLElement) count.textContent = String(page.totalCount);
-            if (total instanceof HTMLElement) total.textContent = String(cards.length);
             if (emptyState instanceof HTMLElement) emptyState.hidden = page.totalCount > 0;
 
             const pageStatusText = page.totalCount === 0 ? "0 / 0" : String(page.currentPage) + " / " + String(page.pageCount);
@@ -1527,7 +2243,6 @@ export function renderClientScriptSource(): string {
               button.setAttribute("aria-disabled", button.disabled ? "true" : "false");
             });
 
-            const activeProject = decodeURIComponent(new URL(window.location.href).searchParams.get("project") || "").trim().toLowerCase();
             if (activeProject) {
               const selectedStillVisible = visibleCards.some((card) => (card.element.dataset.projectName || "").trim().toLowerCase() === activeProject);
               if (!selectedStillVisible) {
@@ -1537,11 +2252,10 @@ export function renderClientScriptSource(): string {
 
             setOptionState(sortOptions, state.sort, "data-projects-sort-option");
             syncSortDropdown();
-            setOptionState(presetOptions, state.preset, "data-projects-preset-option");
             setOptionState(paradigmOptions, state.paradigm, "data-projects-paradigm-option");
             setOptionState(persistenceOptions, state.persistence, "data-projects-persistence-option");
-            syncFuzzySearch(directCards.length, options.fuzzyTrigger || "debounced");
-            renderFuzzyStatus();
+            if (assistantEmptyCta instanceof HTMLElement) assistantEmptyCta.hidden = page.totalCount > 0;
+            applyActiveMainResultState();
             scheduleProjectDetailPrefetch();
           };
           root.__projectsWorkbenchApply = apply;
@@ -1566,7 +2280,7 @@ export function renderClientScriptSource(): string {
             if (event.key !== "Enter") return;
             state.search = search.value;
             state.page = 1;
-            apply({ fuzzyTrigger: "immediate" });
+            apply();
             syncSearchRotator();
           });
           search.addEventListener("search", () => {
@@ -1591,7 +2305,7 @@ export function renderClientScriptSource(): string {
               search.value = nextValue;
               state.search = nextValue;
               state.page = 1;
-              apply({ fuzzyTrigger: "immediate" });
+              apply();
               syncSearchRotator();
             });
           });
@@ -1600,15 +2314,6 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-option") || "score";
               state.page = 1;
-              resetFuzzyState();
-              apply();
-            });
-          });
-          presetOptions.forEach((option) => {
-            option.addEventListener("click", () => {
-              state.preset = option.getAttribute("data-projects-preset-option") || "all";
-              state.page = 1;
-              resetFuzzyState();
               apply();
             });
           });
@@ -1623,7 +2328,6 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.sort = option.getAttribute("data-projects-sort-value") || "score";
               state.page = 1;
-              resetFuzzyState();
               setSortDropdownOpen(false);
               apply();
             });
@@ -1641,7 +2345,6 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.paradigm = option.getAttribute("data-projects-paradigm-option") || "all";
               state.page = 1;
-              resetFuzzyState();
               apply();
             });
           });
@@ -1649,26 +2352,94 @@ export function renderClientScriptSource(): string {
             option.addEventListener("click", () => {
               state.persistence = option.getAttribute("data-projects-persistence-option") || "all";
               state.page = 1;
-              resetFuzzyState();
               apply();
             });
           });
-          if (fuzzyOptions instanceof HTMLElement) {
-            fuzzyOptions.addEventListener("click", (event) => {
+          assistantLauncher instanceof HTMLButtonElement && assistantLauncher.addEventListener("click", openAssistantPanel);
+          assistantEmptyCta instanceof HTMLButtonElement && assistantEmptyCta.addEventListener("click", openAssistantPanel);
+          assistantClose instanceof HTMLButtonElement && assistantClose.addEventListener("click", closeAssistantPanel);
+          assistantReset instanceof HTMLButtonElement &&
+            assistantReset.addEventListener("click", () => {
+              state.page = 1;
+              assistantSession.active_main_result = null;
+              writeAssistantSession();
+              apply();
+            });
+          assistantNewChat instanceof HTMLButtonElement &&
+            assistantNewChat.addEventListener("click", () => {
+              assistantSession = {
+                panel_open: true,
+                messages: [],
+                search_context: null,
+                active_main_result: null,
+                quickstart_collapsed: false,
+              };
+              if (assistantInput instanceof HTMLInputElement) assistantInput.value = "";
+              writeAssistantSession();
+              renderAssistantPanel();
+              apply();
+            });
+          assistantSubmit instanceof HTMLButtonElement &&
+            assistantSubmit.addEventListener("pointerup", triggerAssistantSubmit);
+          assistantSubmit instanceof HTMLButtonElement &&
+            assistantSubmit.addEventListener("click", triggerAssistantSubmit);
+          assistantForm instanceof HTMLFormElement &&
+            assistantForm.addEventListener("submit", triggerAssistantSubmit);
+          assistantInput instanceof HTMLInputElement &&
+            assistantInput.addEventListener("input", () => {
+              if (assistantSession.quickstart_collapsed === true) return;
+              if (!assistantInput.value.trim()) return;
+              assistantSession.quickstart_collapsed = true;
+              writeAssistantSession();
+              renderAssistantPanel();
+            });
+          assistantInput instanceof HTMLInputElement &&
+            assistantInput.addEventListener("keydown", (event) => {
+              if (event.key !== "Enter" || event.isComposing) return;
+              triggerAssistantSubmit(event);
+            });
+          assistantPanel instanceof HTMLElement &&
+            assistantPanel.addEventListener("click", (event) => {
               const target = event.target;
               if (!(target instanceof Element)) return;
-              const option = target.closest("[data-fuzzy-option-query]");
-              if (!(option instanceof HTMLElement)) return;
-              const nextValue = option.dataset.fuzzyOptionQuery || "";
-              if (!nextValue) return;
-              search.value = nextValue;
-              state.search = nextValue;
-              state.page = 1;
-              resetFuzzyState();
-              apply({ fuzzyTrigger: "immediate" });
-              syncSearchRotator();
+              const projectLink = target.closest("[data-projects-ai-project-link='true']");
+              if (projectLink instanceof HTMLAnchorElement) {
+                return;
+              }
+              const option = target.closest("[data-projects-ai-option-query]");
+              if (option instanceof HTMLElement) {
+                const nextValue = option.dataset.projectsAiOptionQuery || "";
+                if (!nextValue) return;
+                assistantSession.quickstart_collapsed = true;
+                if (assistantInput instanceof HTMLInputElement) assistantInput.value = nextValue;
+                void submitAssistantQuery(nextValue);
+                return;
+              }
+              const quickstartToggle = target.closest("[data-projects-ai-quickstart-toggle='true']");
+              if (quickstartToggle instanceof HTMLElement) {
+                assistantSession.quickstart_collapsed = !assistantSession.quickstart_collapsed;
+                writeAssistantSession();
+                renderAssistantPanel();
+                return;
+              }
+              const viewAll = target.closest("[data-projects-ai-view-all='true']");
+              if (viewAll instanceof HTMLElement) {
+                let projectIds = [];
+                try {
+                  projectIds = JSON.parse(viewAll.dataset.projectsAiProjectIds || "[]");
+                } catch {
+                  projectIds = [];
+                }
+                state.page = 1;
+                assistantSession.active_main_result = {
+                  query: viewAll.dataset.projectsAiViewAllQuery || assistantSession.search_context?.last_user_query || "AI 搜项目",
+                  project_ids: Array.isArray(projectIds) ? projectIds.map((item) => String(item || "")).filter(Boolean) : [],
+                  scope_key: buildAssistantScope(),
+                };
+                writeAssistantSession();
+                apply();
+              }
             });
-          }
           previousPageButtons.forEach((button) => {
             button.addEventListener("click", () => {
               if (button.disabled) return;
@@ -1687,7 +2458,8 @@ export function renderClientScriptSource(): string {
           });
 
           syncSearchRotator();
-          apply({ fuzzyTrigger: state.search ? "immediate" : "debounced" });
+          renderAssistantPanel();
+          apply();
         };
         const restoreScrollIfNeeded = () => {
           const payload = readScroll();
@@ -1781,10 +2553,12 @@ export function renderClientScriptSource(): string {
         };
         const bindInteractiveSurfaces = () => {
           syncPreferenceState();
+          syncSideAssistantShell();
           bindAutoHideNav();
           bindPremiumNav();
           bindTopProjectCarousel();
           bindOverviewWorkspaceRail();
+          bindGlobalSideAssistant();
           bindProjectsWorkbench();
           warmCriticalRoutes();
           schedulePrimaryRoutePrefetch();
@@ -1981,6 +2755,14 @@ export function renderClientScriptSource(): string {
         document.addEventListener("click", (event) => {
           const target = event.target;
           if (!(target instanceof Element)) return;
+          if (target.closest("[data-projects-ai-launch='true']")) {
+            setSideAssistantPanelOpen(true);
+            return;
+          }
+          if (target.closest("[data-projects-ai-close='true']")) {
+            setSideAssistantPanelOpen(false);
+            return;
+          }
           const projectCard = target.closest("[data-project-card='true']");
           if (
             projectCard instanceof HTMLElement &&

@@ -1,23 +1,10 @@
 import { describe, expect, it } from "vitest";
-import { filterObserverEntries, filterObserverEntriesByPreset, type ObserverEntry } from "../../app/client/ObserverView.tsx";
+import { filterObserverEntries, type ObserverEntry } from "../../app/client/ObserverView.tsx";
 import { filterRunHealthNarratives, type NarrativeItem } from "../../app/client/RunHealth.tsx";
 import { filterAndSortProjectCards, rankProjectSearchMatch } from "../../app/visualConsole/clientScript.ts";
 import { renderProjectsWorkbenchPage } from "../../app/visualConsole/ossProjectsPage.ts";
-import { buildOverviewView, buildProjectsView } from "../visualConsole/build.ts";
+import { buildProjectsView } from "../visualConsole/build.ts";
 import type { ProjectsViewModel } from "../visualConsole/types.ts";
-
-function withProjectPresetDefaults(project: ProjectsViewModel["projects"][number]): ProjectsViewModel["projects"][number] {
-  const presetBucket = project.preset_bucket ?? "useful_first";
-  return {
-    ...project,
-    preset_bucket: presetBucket,
-    preset_memberships: project.preset_memberships ?? [presetBucket],
-    utility_hint: project.utility_hint ?? "general",
-    repeat_exposure_state: project.repeat_exposure_state ?? "fresh",
-    head_project_exception_reason: project.head_project_exception_reason ?? null,
-    hard_infra: project.hard_infra ?? false,
-  };
-}
 
 function makeObserverEntry(overrides: Partial<ObserverEntry> = {}): ObserverEntry {
   return {
@@ -55,17 +42,12 @@ function makeObserverEntry(overrides: Partial<ObserverEntry> = {}): ObserverEntr
     orgSeeds: ["bytedance-seed"],
     searchOrganizations: ["bytedance"],
     searchText: "Multimodal desktop agent for browser automation and computer use.",
-    presetBucket: "early_watch",
-    utilityHint: "general",
-    repeatExposureState: "fresh",
-    headProjectExceptionReason: null,
-    hardInfra: false,
     ...overrides,
   };
 }
 
 function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> = {}): ProjectsViewModel["projects"][number] {
-  const base = {
+  return {
     project: {
       project_name: "UI-TARS-desktop",
       repo_url: "https://github.com/bytedance/UI-TARS-desktop",
@@ -128,12 +110,8 @@ function makeProject(overrides: Partial<ProjectsViewModel["projects"][number]> =
     exposure_bucket: "mission_match",
     head_project: false,
     head_saturation_state: "normal",
-  };
-
-  return withProjectPresetDefaults({
-    ...base,
     ...overrides,
-  } as ProjectsViewModel["projects"][number]);
+  };
 }
 
 function makeProjectsModel(project: ProjectsViewModel["projects"][number]): ProjectsViewModel {
@@ -174,15 +152,6 @@ function makeProjectsModel(project: ProjectsViewModel["projects"][number]): Proj
     mission_match_projects: [project],
     explore_ribbon_projects: [],
     historical_context_projects: [],
-    default_preset: "all",
-    preset_query_enabled: false,
-    preset_groups: {
-      useful_first: [project],
-      by_scenario: [],
-      worth_trying_today: [],
-      infra_tools: [],
-      supplemental_inventory: [],
-    },
     projects: [project],
     selected_project: null,
   };
@@ -335,66 +304,6 @@ describe("visual console search alignment", () => {
     expect(results[0]?.searchName).toBe("chopratejas/headroom");
   });
 
-  it("keeps project filtering inside the active preset bucket", () => {
-    const usefulCard = {
-      searchName: "acme/general-agent",
-      searchDescription: "General assistant",
-      searchMeta: "general assistant",
-      score: 60,
-      growth: 6,
-      order: 1,
-      preset: "useful_first",
-      paradigm: "Agent System",
-      persistence: "emerging",
-    };
-    const scenarioCard = {
-      searchName: "acme/commerce-agent",
-      searchDescription: "Commerce scenario agent",
-      searchMeta: "commerce ecommerce shopping",
-      score: 90,
-      growth: 12,
-      order: 0,
-      preset: "by_scenario",
-      paradigm: "Agent System",
-      persistence: "emerging",
-    };
-
-    const results = filterAndSortProjectCards([usefulCard, scenarioCard], {
-      search: "",
-      preset: "useful_first",
-      sort: "score",
-      paradigm: "all",
-      persistence: "all",
-    });
-
-    expect(results).toHaveLength(1);
-    expect(results[0]?.searchName).toBe("acme/general-agent");
-  });
-
-  it("keeps observer filtering inside the selected preset before search ranking", () => {
-    const entries = [
-      makeObserverEntry({ key: "early", repoFullName: "acme/early-watch", presetBucket: "early_watch", whyItMatters: "Early signal" }),
-      makeObserverEntry({ key: "infra", repoFullName: "acme/infra-watch", presetBucket: "infra_early", whyItMatters: "Infra signal" }),
-    ];
-
-    const presetEntries = filterObserverEntriesByPreset(entries, "infra_early");
-    const results = filterObserverEntries(presetEntries, "signal");
-
-    expect(results).toHaveLength(1);
-    expect(results[0]?.repoFullName).toBe("acme/infra-watch");
-  });
-
-  it("keeps observer all view unfiltered before search ranking", () => {
-    const entries = [
-      makeObserverEntry({ key: "early", repoFullName: "acme/early-watch", presetBucket: "early_watch", whyItMatters: "Early signal" }),
-      makeObserverEntry({ key: "infra", repoFullName: "acme/infra-watch", presetBucket: "infra_early", whyItMatters: "Infra signal" }),
-    ];
-
-    const presetEntries = filterObserverEntriesByPreset(entries, "all");
-
-    expect(presetEntries.map((entry) => entry.repoFullName)).toEqual(["acme/early-watch", "acme/infra-watch"]);
-  });
-
   it("renders project search metadata with repo, tags, directions, raw signals, and bilingual company aliases", () => {
     const html = renderProjectsWorkbenchPage(makeProjectsModel(makeProject()), new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
 
@@ -410,81 +319,6 @@ describe("visual console search alignment", () => {
     ]) {
       expect(html.toLowerCase(), value).toContain(value.toLowerCase());
     }
-  });
-
-  it("keeps initial project count and visible cards aligned with the default preset", () => {
-    const usefulProject = makeProject({
-      project: {
-        ...makeProject().project,
-        project_name: "general-agent",
-        repo_full_name: "acme/general-agent",
-        repo_url: "https://github.com/acme/general-agent",
-      },
-      preset_bucket: "useful_first",
-    });
-    const supplementalProject = makeProject({
-      project: {
-        ...makeProject().project,
-        project_name: "history-agent",
-        repo_full_name: "acme/history-agent",
-        repo_url: "https://github.com/acme/history-agent",
-      },
-      preset_bucket: null,
-      preset_memberships: ["supplemental_inventory"],
-      exposure_bucket: "historical_context",
-    });
-    const mixedModel = {
-      ...makeProjectsModel(usefulProject),
-      projects: [usefulProject, supplementalProject],
-    };
-    const mixedHtml = renderProjectsWorkbenchPage(mixedModel, new URL("http://localhost/projects?date=2026-06-12"), "zh", "light");
-
-    expect(mixedHtml).toContain('data-projects-count="true">2</span>');
-    expect(mixedHtml).toContain('data-projects-page-summary="true">1-2 / 2</span>');
-    expect(mixedHtml).toMatch(/data-project-name="acme\/general-agent"/);
-    expect(mixedHtml).not.toMatch(/data-project-name="acme\/general-agent"[^>]*hidden="true"/);
-    expect(mixedHtml).not.toMatch(/data-project-name="acme\/history-agent"[^>]*hidden="true"/);
-  });
-
-  it("applies initial query inside the default preset when rendering project count", () => {
-    const usefulProject = makeProject({
-      project: {
-        ...makeProject().project,
-        project_name: "commerce-agent",
-        repo_full_name: "acme/commerce-agent",
-        repo_url: "https://github.com/acme/commerce-agent",
-        description: "Commerce assistant for shopping workflows.",
-      },
-      project_brief_cn: "电商导购助手。",
-      why_today_cn: "命中电商方向。",
-      preset_bucket: "useful_first",
-      direction_matches: ["shopping-commerce-agent"],
-    });
-    const otherUsefulProject = makeProject({
-      project: {
-        ...makeProject().project,
-        project_name: "coding-agent",
-        repo_full_name: "acme/coding-agent",
-        repo_url: "https://github.com/acme/coding-agent",
-        description: "Code assistant.",
-      },
-      preset_bucket: "useful_first",
-    });
-    const model = {
-      ...makeProjectsModel(usefulProject),
-      projects: [usefulProject, otherUsefulProject],
-      preset_groups: {
-        useful_first: [usefulProject, otherUsefulProject],
-        by_scenario: [],
-        worth_trying_today: [],
-        infra_tools: [],
-        supplemental_inventory: [],
-      },
-    };
-    const html = renderProjectsWorkbenchPage(model, new URL("http://localhost/projects?date=2026-06-12&q=电商"), "zh", "light");
-
-    expect(html).toContain('data-projects-count="true">1</span>');
-    expect(html).toContain('data-projects-page-summary="true">1-1 / 1</span>');
   });
 
   it("renders vertical direction aliases so Chinese demand searches can find commerce projects", () => {
@@ -618,7 +452,7 @@ describe("visual console search alignment", () => {
   });
 
   it("keeps Headroom searchable inside the project library inventory", () => {
-    const model = buildProjectsView("2026-06-20");
+    const model = buildProjectsView("latest");
     const headroom = model.projects.find((project) => project.project.repo_full_name.toLowerCase() === "chopratejas/headroom");
 
     expect(headroom).toBeTruthy();
@@ -627,24 +461,6 @@ describe("visual console search alignment", () => {
         ? model.projects.some((project) => project.project.repo_full_name.toLowerCase() === headroom.project.repo_full_name.toLowerCase())
         : false,
     ).toBe(true);
-  });
-
-  it("builds projects and overview views with preset groups and semantic bands", () => {
-    const projectsModel = buildProjectsView("2026-06-12");
-    const overviewModel = buildOverviewView("2026-06-12");
-
-    expect(projectsModel.default_preset).toBe("all");
-    expect(projectsModel.preset_query_enabled).toBe(false);
-    expect(projectsModel.projects.some((project) => project.preset_bucket !== null)).toBe(true);
-    expect(projectsModel.preset_groups.useful_first.every((project) => project.preset_memberships.includes("useful_first"))).toBe(true);
-
-    expect(overviewModel.semantic_bands.map((band) => band.key)).toEqual([
-      "mission_match",
-      "today_pulse",
-      "explore_ribbon",
-      "infra_context",
-    ]);
-    expect(overviewModel.top_decisions.length).toBeLessThanOrEqual(8);
   });
 
   it("matches run health narratives by expanded project, company, direction, and signal text", () => {

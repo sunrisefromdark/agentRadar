@@ -1,6 +1,5 @@
 import { describe, expect, it } from "vitest";
 import { renderObserverView } from "../visualConsole/render.ts";
-import { buildObserverView } from "../visualConsole/build.ts";
 import type { ObserverViewModel } from "../visualConsole/types.ts";
 
 describe("renderObserverView", () => {
@@ -57,9 +56,6 @@ describe("renderObserverView", () => {
         reader: null,
         audit: [],
       },
-      default_preset: "all",
-      preset_query_enabled: false,
-      entries: [],
       artifact: {
         scope: "ecosystem-focus",
         date: "2026-06-12",
@@ -184,9 +180,6 @@ describe("renderObserverView", () => {
         reader: null,
         audit: [],
       },
-      default_preset: "all",
-      preset_query_enabled: false,
-      entries: [],
       artifact: {
         scope: "ecosystem-focus",
         date: "2026-06-11",
@@ -220,14 +213,5 @@ describe("renderObserverView", () => {
     expect(rendered).toContain("- no incubating directions");
     expect(rendered).toContain("## Promotion Review");
     expect(rendered).toContain("- no promotion candidates");
-  });
-
-  it("builds observer preset projections with local default preset state", () => {
-    const model = buildObserverView("2026-06-12");
-
-    expect(model.default_preset).toBe("all");
-    expect(model.preset_query_enabled).toBe(false);
-    expect(model.entries.length).toBeGreaterThan(0);
-    expect(model.entries.every((entry) => entry.observer_preset_bucket !== null)).toBe(true);
   });
 });

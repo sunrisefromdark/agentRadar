@@ -1,0 +1,4 @@
+{
+  "scenario": "news retell cannot claim owner",
+  "expected_rejected_reason": "media_retell_cannot_claim_owner"
+}

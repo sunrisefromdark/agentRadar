@@ -1,0 +1,7 @@
+{
+  "scenario": "capital_finance replay window preserves fallback lineage",
+  "window_start": "2026-06-20T00:00:00+08:00",
+  "window_end": "2026-06-26T23:59:59+08:00",
+  "expected_route_level": "fallback_tools",
+  "expected_source_message_count": 4
+}

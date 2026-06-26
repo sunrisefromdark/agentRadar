@@ -9,8 +9,12 @@ import nextPlatformActionsFixture from "../../../../../fixtures/industry/agents/
 import deliveryChecksumsFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-delivery-checksums.json" with { type: "json" };
 import { validateFinancePolicyHandoff } from "../../../../industry/platform/contracts/financePolicyHandoff.ts";
 import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
+import type { IndustryAgentMessageEnvelope } from "../../../../industry/agents/policy-agent/groupProtocol.ts";
 
 describe("policy-finance group replay handoff", () => {
+  const replayMessages = replayBundleFixture.messages as IndustryAgentMessageEnvelope[];
+  const negativeMessages = negativeBundleFixture.messages as IndustryAgentMessageEnvelope[];
+
   it("keeps producer artifact refs aligned across daily handoff packaging", () => {
     const result = buildPolicyFinanceGroupHandoff({
       runId: "run-group-replay-1",
@@ -105,13 +109,13 @@ describe("policy-finance group replay handoff", () => {
   });
 
   it("publishes a machine-readable current bundle fixture for downstream dry-run consumption", () => {
-    expect(replayBundleFixture.messages).toHaveLength(19);
+    expect(replayMessages).toHaveLength(19);
     expect(replayBundleFixture.manifests).toHaveLength(19);
     expect(replayBundleFixture.payloads).toHaveLength(19);
     expect(replayBundleFixture.artifactRefs).toHaveLength(19);
-    expect(replayBundleFixture.messages.every((message) => message.capability_class === "claim-critical")).toBe(true);
+    expect(replayMessages.every((message) => message.capability_class === "claim-critical")).toBe(true);
     expect(
-      replayBundleFixture.messages.every(
+      replayMessages.every(
         (message) =>
           typeof message.dispatch_context_ref === "string" &&
           typeof message.scheduling_key === "string" &&
@@ -125,17 +129,17 @@ describe("policy-finance group replay handoff", () => {
   });
 
   it("publishes a machine-readable negative bundle fixture that fails on missing stable claim key", () => {
-    expect(negativeBundleFixture.messages).toHaveLength(19);
+    expect(negativeMessages).toHaveLength(19);
     expect(negativeBundleFixture.manifests).toHaveLength(19);
     expect(negativeBundleFixture.payloads).toHaveLength(19);
     expect(negativeBundleFixture.artifactRefs).toHaveLength(19);
     expect(
-      negativeBundleFixture.messages.some(
+      negativeMessages.some(
         (message) => message.responsibility_id === "capital-finance" && message.capability_class === "claim-critical",
       ),
     ).toBe(true);
     expect(
-      negativeBundleFixture.messages.every(
+      negativeMessages.every(
         (message) => message.responsibility_id !== "capital-finance" || (
           typeof message.dispatch_context_ref === "string" &&
           typeof message.scheduling_key === "string" &&

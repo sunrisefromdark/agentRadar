@@ -1,4 +1,5 @@
 import { buildCapitalFinanceHandoff, type BuildCapitalFinanceHandoffInput } from "../finance-agent/handoff.ts";
+import type { FinancePolicyHandoffBundle } from "../../platform/contracts/financePolicyHandoff.ts";
 import {
   assertConsumableEnvelope,
   buildDailyInputArtifact,
@@ -6,6 +7,10 @@ import {
   type ArtifactEnvelope,
   type AxisSourceInput,
   type AxisArtifacts,
+  type DailyIndustryEvidencePackInput,
+  type EventBatchPayload,
+  type CoveragePayload,
+  type ContributionPayload,
   type SameRunRuntimeContext,
 } from "./groupProtocol.ts";
 import { buildPolicyAxisArtifacts } from "./eventBuilder.ts";
@@ -121,8 +126,8 @@ export function buildPolicyFinanceHandoffBundle(result: {
   finance: AxisArtifacts;
   regulatory: AxisArtifacts;
   thinktank: AxisArtifacts;
-  dailyInput: ArtifactEnvelope<unknown>;
-}) {
+  dailyInput: ArtifactEnvelope<DailyIndustryEvidencePackInput>;
+}): FinancePolicyHandoffBundle {
   const axisArtifacts = [result.finance, result.regulatory, result.thinktank];
   const envelopes = axisArtifacts.flatMap((artifact) => [
     artifact.accepted.envelope,
@@ -140,7 +145,7 @@ export function buildPolicyFinanceHandoffBundle(result: {
     artifact.coverage.manifest,
     artifact.contribution.manifest,
   ]);
-  const payloads = axisArtifacts.flatMap((artifact) => [
+  const payloads: Array<EventBatchPayload | CoveragePayload | ContributionPayload | DailyIndustryEvidencePackInput> = axisArtifacts.flatMap((artifact) => [
     artifact.accepted.payload,
     artifact.counter.payload,
     artifact.diagnostic.payload,
@@ -154,9 +159,9 @@ export function buildPolicyFinanceHandoffBundle(result: {
   payloads.push(result.dailyInput.payload);
 
   return {
-    messages: envelopes,
-    manifests,
-    payloads,
+    messages: envelopes as unknown as Array<Record<string, unknown>>,
+    manifests: manifests as unknown as Array<Record<string, unknown>>,
+    payloads: payloads as unknown as Array<Record<string, unknown>>,
     artifactRefs: manifests.map((manifest) => manifest.artifact_ref),
   };
 }

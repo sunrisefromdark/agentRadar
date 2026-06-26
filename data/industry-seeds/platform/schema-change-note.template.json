@@ -1,0 +1,11 @@
+{
+  "schema_version": "schema-change-note.v1",
+  "change_background": "",
+  "affected_schema_ids": [],
+  "layer": "L1",
+  "producer_roles": [],
+  "consumer_roles": [],
+  "breaking_change": false,
+  "compatibility_impact": "",
+  "required_tests": []
+}

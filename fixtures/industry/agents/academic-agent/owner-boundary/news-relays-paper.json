@@ -1,0 +1,9 @@
+{
+  "fact_id": "fact-agent-memory-layers",
+  "direct_owner_axis": "research_paper",
+  "direct_owner_agent_id": "academic-agent",
+  "relayed_by_axis": "news_pr_narrative",
+  "relayed_source_url": "https://example.com/news/agent-memory-layers",
+  "academic_source_url": "https://arxiv.org/abs/2606.12345",
+  "summary_cn": "新闻稿转述论文结论时，direct fact owner 仍必须回到 academic-agent。"
+}

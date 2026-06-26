@@ -1,5 +1,14 @@
 import { describe, expect, it } from "vitest";
-import { buildPolicyFinanceGroupHandoff } from "../../../../industry/agents/policy-agent/handoff.ts";
+import fs from "node:fs";
+import path from "node:path";
+import { buildPolicyFinanceGroupHandoff } from "../../../../industry/agents/policy-agent/index.ts";
+import replayBundleFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json" with { type: "json" };
+import negativeBundleFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json" with { type: "json" };
+import deliveryManifestFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json" with { type: "json" };
+import nextPlatformActionsFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-next-platform-actions.json" with { type: "json" };
+import deliveryChecksumsFixture from "../../../../../fixtures/industry/agents/policy-agent/replay/phase1-delivery-checksums.json" with { type: "json" };
+import { validateFinancePolicyHandoff } from "../../../../industry/platform/contracts/financePolicyHandoff.ts";
+import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
 
 describe("policy-finance group replay handoff", () => {
   it("keeps producer artifact refs aligned across daily handoff packaging", () => {
@@ -93,5 +102,92 @@ describe("policy-finance group replay handoff", () => {
     ]);
     expect(result.dailyInput.payload).not.toHaveProperty("events");
     expect(new Set(result.dailyInput.payload.source_message_ids).size).toBe(result.dailyInput.payload.source_message_ids.length);
+  });
+
+  it("publishes a machine-readable current bundle fixture for downstream dry-run consumption", () => {
+    expect(replayBundleFixture.messages).toHaveLength(19);
+    expect(replayBundleFixture.manifests).toHaveLength(19);
+    expect(replayBundleFixture.payloads).toHaveLength(19);
+    expect(replayBundleFixture.artifactRefs).toHaveLength(19);
+    expect(replayBundleFixture.messages.every((message) => message.capability_class === "claim-critical")).toBe(true);
+    expect(
+      replayBundleFixture.messages.every(
+        (message) =>
+          typeof message.dispatch_context_ref === "string" &&
+          typeof message.scheduling_key === "string" &&
+          (typeof message.claim_partition_id === "string" || typeof message.candidate_group_id === "string"),
+      ),
+    ).toBe(true);
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), replayBundleFixture)).toEqual({
+      ok: true,
+      status: "accepted_for_dry_run",
+    });
+  });
+
+  it("publishes a machine-readable negative bundle fixture that fails on missing stable claim key", () => {
+    expect(negativeBundleFixture.messages).toHaveLength(19);
+    expect(negativeBundleFixture.manifests).toHaveLength(19);
+    expect(negativeBundleFixture.payloads).toHaveLength(19);
+    expect(negativeBundleFixture.artifactRefs).toHaveLength(19);
+    expect(
+      negativeBundleFixture.messages.some(
+        (message) => message.responsibility_id === "capital-finance" && message.capability_class === "claim-critical",
+      ),
+    ).toBe(true);
+    expect(
+      negativeBundleFixture.messages.every(
+        (message) => message.responsibility_id !== "capital-finance" || (
+          typeof message.dispatch_context_ref === "string" &&
+          typeof message.scheduling_key === "string" &&
+          message.claim_partition_id === undefined &&
+          message.candidate_group_id === undefined
+        ),
+      ),
+    ).toBe(true);
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), negativeBundleFixture)).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+  });
+
+  it("publishes a machine-readable delivery manifest for downstream consumers", () => {
+    const root = process.cwd();
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.stable_entrypoints.policy_agent_index))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.stable_entrypoints.finance_agent_index))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.bundle_fixtures.current))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.bundle_fixtures.negative_missing_stable_claim_key))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.same_run_fixtures.current))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.same_run_fixtures.negative_missing_stable_claim_key))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.notes.handoff))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.notes.shared_runtime))).toBe(true);
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), replayBundleFixture)).toMatchObject({
+      ok: true,
+      status: deliveryManifestFixture.expected_platform_gates.current_bundle,
+    });
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), negativeBundleFixture)).toMatchObject({
+      ok: false,
+      reasonCode: deliveryManifestFixture.expected_platform_gates.negative_bundle,
+    });
+  });
+
+  it("publishes a machine-readable next-actions manifest for executor 4", () => {
+    const root = process.cwd();
+    expect(nextPlatformActionsFixture.status).toBe("waiting_for_executor_4");
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.delivery_manifest))).toBe(true);
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.current_bundle))).toBe(true);
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.negative_bundle))).toBe(true);
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.handoff_note))).toBe(true);
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.shared_runtime_note))).toBe(true);
+    expect(nextPlatformActionsFixture.required_platform_actions).toHaveLength(3);
+  });
+
+  it("publishes delivery checksums for executor 4 to verify consumed inputs", () => {
+    const root = process.cwd();
+    expect(deliveryChecksumsFixture.algorithm).toBe("sha256");
+    expect(deliveryChecksumsFixture.entries).toHaveLength(10);
+    for (const entry of deliveryChecksumsFixture.entries) {
+      expect(fs.existsSync(path.join(root, entry.path))).toBe(true);
+      expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
+    }
   });
 });

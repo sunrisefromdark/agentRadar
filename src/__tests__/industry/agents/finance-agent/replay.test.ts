@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/handoff.ts";
+import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/index.ts";
 import replayFixture from "../../../../../fixtures/industry/agents/finance-agent/replay/capital-finance-window.json" with { type: "json" };
 
 describe("finance-agent replay window", () => {
@@ -35,6 +35,7 @@ describe("finance-agent replay window", () => {
     expect(firstRun.coverage.payload.report.active_route_level).toBe(replayFixture.expected_route_level);
     expect(firstRun.accepted.envelope.message_id).toBe(secondRun.accepted.envelope.message_id);
     expect(firstRun.accepted.manifest.artifact_ref).toBe(secondRun.accepted.manifest.artifact_ref);
+    expect(firstRun.accepted.manifest.artifact_ref).toMatch(/^industry:\/\/internal\//);
     expect(
       [
         firstRun.accepted.envelope.message_id,

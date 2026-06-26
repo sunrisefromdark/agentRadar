@@ -1,0 +1,25 @@
+{
+  "capability_class": "claim-critical",
+  "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+  "scheduling_key": "claim:missing-stable-key",
+  "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+  "capacity_reservation_refs": [
+    "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+  ],
+  "dispatch_context": {
+    "scheduling_key": "claim:missing-stable-key"
+  },
+  "reservations": [
+    {
+      "reservation_state": "requested"
+    }
+  ],
+  "budget_arbitration": {
+    "decision": "approved"
+  },
+  "expected_reason": {
+    "consumer_gate": "dispatch_context_missing",
+    "handoff_gate": "dispatch_context_missing",
+    "dispatch_gate_when_reservation_missing": "reservation_missing"
+  }
+}

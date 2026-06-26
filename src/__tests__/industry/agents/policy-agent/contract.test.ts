@@ -2,8 +2,14 @@ import { describe, expect, it } from "vitest";
 import {
   assertConsumableEnvelope,
   assertCurrentAndCompatibleFixtures,
+  buildPolicyFinanceHandoffBundle,
   buildPolicyFinanceGroupHandoff,
 } from "../../../../industry/agents/policy-agent/handoff.ts";
+import { validateDispatchRuntimeGate } from "../../../../industry/platform/contracts/dispatchRuntime.ts";
+import { validateFinancePolicyHandoff } from "../../../../industry/platform/contracts/financePolicyHandoff.ts";
+import { validateSameRunConsumerRefs } from "../../../../industry/platform/contracts/consumerFixtures.ts";
+import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
+import sameRunCurrentFixture from "../../../../../fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json" with { type: "json" };
 
 describe("policy-finance group handoff", () => {
   it("builds daily evidence pack input with three coverage refs and three contribution refs", () => {
@@ -91,6 +97,12 @@ describe("policy-finance group handoff", () => {
       result.regulatory.accepted.manifest.artifact_ref,
       result.thinktank.accepted.manifest.artifact_ref,
     ]);
+    expect(result.finance.accepted.payload.events_ref).toBe(result.finance.accepted.manifest.artifact_ref);
+    expect(result.finance.accepted.payload.agent_contribution_ref).toBe(result.finance.contribution.manifest.artifact_ref);
+    expect(result.finance.accepted.payload.tool_status_report_refs).toEqual([result.finance.coverage.manifest.artifact_ref]);
+    expect(result.finance.accepted.payload.source_message_id).toBe(result.finance.accepted.envelope.message_id);
+    expect(result.finance.contribution.payload.source_message_id).toBe(result.finance.contribution.envelope.message_id);
+    expect(result.dailyInput.payload.source_message_id).toBe(result.dailyInput.envelope.message_id);
     expect(result.dailyInput.envelope.payload_schema).toBe("daily-industry-evidence-pack-input.v1");
   });
 
@@ -153,6 +165,122 @@ describe("policy-finance group handoff", () => {
     expect(assertConsumableEnvelope(higherMajor, result.finance.accepted.manifest.schema_version)).toEqual({
       ok: false,
       reason: "unknown_higher_major",
+    });
+  });
+
+  it("passes the platform finance-policy handoff gate with canonical payload names and refs", () => {
+    const result = buildPolicyFinanceGroupHandoff({
+      runId: "run-group-3",
+      threadId: "thread-group-3",
+      windowStart: "2026-06-20T00:00:00+08:00",
+      windowEnd: "2026-06-26T23:59:59+08:00",
+      now: "2026-06-26T18:00:00+08:00",
+      finance: {
+        runId: "run-group-3",
+        threadId: "thread-group-3",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T18:00:00+08:00",
+        availableToolIds: ["sec-edgar-api"],
+        canonicalSourceAvailable: true,
+        sources: [],
+      },
+      regulatory: {
+        runId: "run-group-3",
+        threadId: "thread-group-3",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T18:00:00+08:00",
+        availableToolIds: ["official-regulator-rss"],
+        canonicalSourceAvailable: true,
+        sources: [],
+      },
+      thinktank: {
+        runId: "run-group-3",
+        threadId: "thread-group-3",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T18:00:00+08:00",
+        availableToolIds: ["thinktank-report-registry"],
+        canonicalSourceAvailable: true,
+        sources: [],
+      },
+    });
+
+    const bundle = buildPolicyFinanceHandoffBundle(result);
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), bundle)).toEqual({
+      ok: true,
+      status: "accepted_for_dry_run",
+    });
+  });
+
+  it("carries complete same-run refs for claim-critical handoff messages", () => {
+    const runtimeContext = {
+      capabilityClass: sameRunCurrentFixture.capability_class as "claim-critical",
+      dispatchContextRef: sameRunCurrentFixture.dispatch_context_ref,
+      schedulingKey: sameRunCurrentFixture.scheduling_key,
+      candidateGroupId: sameRunCurrentFixture.candidate_group_id,
+      claimAdmissionAssessmentRef: sameRunCurrentFixture.claim_admission_assessment_ref,
+      capacityReservationRefs: sameRunCurrentFixture.capacity_reservation_refs,
+    };
+    const result = buildPolicyFinanceGroupHandoff({
+      runId: "run-group-4",
+      threadId: "thread-group-4",
+      windowStart: "2026-06-20T00:00:00+08:00",
+      windowEnd: "2026-06-26T23:59:59+08:00",
+      now: "2026-06-26T19:00:00+08:00",
+      finance: {
+        runId: "run-group-4",
+        threadId: "thread-group-4",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T19:00:00+08:00",
+        availableToolIds: ["sec-edgar-api"],
+        canonicalSourceAvailable: true,
+        runtimeContext,
+        sources: [],
+      },
+      regulatory: {
+        runId: "run-group-4",
+        threadId: "thread-group-4",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T19:00:00+08:00",
+        availableToolIds: ["official-regulator-rss"],
+        canonicalSourceAvailable: true,
+        sources: [],
+      },
+      thinktank: {
+        runId: "run-group-4",
+        threadId: "thread-group-4",
+        windowStart: "2026-06-20T00:00:00+08:00",
+        windowEnd: "2026-06-26T23:59:59+08:00",
+        now: "2026-06-26T19:00:00+08:00",
+        availableToolIds: ["thinktank-report-registry"],
+        canonicalSourceAvailable: true,
+        sources: [],
+      },
+    });
+
+    expect(validateSameRunConsumerRefs(result.finance.accepted.envelope)).toEqual({
+      ok: true,
+      status: sameRunCurrentFixture.expected.consumer_gate,
+    });
+    expect(
+      validateDispatchRuntimeGate({
+        message: result.finance.accepted.envelope,
+        dispatchContext: sameRunCurrentFixture.dispatch_context,
+        reservations: sameRunCurrentFixture.reservations,
+        budgetArbitration: sameRunCurrentFixture.budget_arbitration,
+        requiresCapacityReservation: true,
+      }),
+    ).toEqual({
+      ok: true,
+      status: sameRunCurrentFixture.expected.dispatch_gate,
+    });
+    expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), buildPolicyFinanceHandoffBundle(result))).toEqual({
+      ok: true,
+      status: sameRunCurrentFixture.expected.handoff_gate,
     });
   });
 });

@@ -12,6 +12,7 @@ export interface PolicyAxisScenarioInput {
   executionContext: AxisBuildInput["executionContext"];
   responsibilityId: AxisBuildInput["responsibilityId"];
   axis: AxisBuildInput["axis"];
+  runtimeContext?: AxisBuildInput["runtimeContext"];
   sources: AxisSourceInput[];
 }
 
@@ -31,6 +32,7 @@ export function buildPolicyAxisArtifacts(input: PolicyAxisScenarioInput) {
     registrySnapshotRef: seed.registry_snapshot_ref,
     toolRegistrySnapshotRef: seed.tool_registry_snapshot_ref,
     budgetProfileId: seed.budget_profile_id,
+    runtimeContext: input.runtimeContext,
     sources: input.sources,
   });
 }

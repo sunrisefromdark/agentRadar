@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/handoff.ts";
 import { assertConsumableEnvelope } from "../../../../industry/agents/policy-agent/groupProtocol.ts";
-import currentConsumerFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/current-consumer.json";
-import previousCompatibleFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/previous-compatible-consumer.json";
-import missingRequiredRefFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/missing-required-ref-negative.json";
-import unknownHigherMajorFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/unknown-higher-major-negative.json";
+import currentConsumerFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/current-consumer.json" with { type: "json" };
+import previousCompatibleFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/previous-compatible-consumer.json" with { type: "json" };
+import missingRequiredRefFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/missing-required-ref-negative.json" with { type: "json" };
+import unknownHigherMajorFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/unknown-higher-major-negative.json" with { type: "json" };
 
 describe("finance-agent compatibility contract", () => {
   it("matches current and previous compatible consumer expectations", () => {

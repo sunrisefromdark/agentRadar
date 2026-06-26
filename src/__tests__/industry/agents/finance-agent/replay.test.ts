@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/handoff.ts";
-import replayFixture from "../../../../../fixtures/industry/agents/finance-agent/replay/capital-finance-window.json";
+import replayFixture from "../../../../../fixtures/industry/agents/finance-agent/replay/capital-finance-window.json" with { type: "json" };
 
 describe("finance-agent replay window", () => {
   it("replays the same capital-finance window with stable fallback lineage", () => {

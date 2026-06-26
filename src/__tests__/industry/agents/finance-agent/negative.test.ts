@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/handoff.ts";
-import antiUpgradeFixture from "../../../../../fixtures/industry/agents/finance-agent/anti-upgrade/capital-heat-without-cross-confirmation.json";
-import officialFirstFixture from "../../../../../fixtures/industry/agents/finance-agent/official-first/canonical-miss-fallback.json";
-import ownerBoundaryFixture from "../../../../../fixtures/industry/agents/finance-agent/owner-boundary/news-retell-does-not-own.json";
+import antiUpgradeFixture from "../../../../../fixtures/industry/agents/finance-agent/anti-upgrade/capital-heat-without-cross-confirmation.json" with { type: "json" };
+import officialFirstFixture from "../../../../../fixtures/industry/agents/finance-agent/official-first/canonical-miss-fallback.json" with { type: "json" };
+import ownerBoundaryFixture from "../../../../../fixtures/industry/agents/finance-agent/owner-boundary/news-retell-does-not-own.json" with { type: "json" };
 
 describe("finance-agent negative cases", () => {
   it("keeps anti-upgrade and owner-boundary evidence out of accepted owner facts", () => {

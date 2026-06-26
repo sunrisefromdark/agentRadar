@@ -1,0 +1,6 @@
+{
+  "responsibility_id": "project-oss",
+  "axis": "project_open_source",
+  "primary_tool_ids": ["github-release-feed", "package-registry-version-feed"],
+  "owner_rule": "Repo releases, package versions, model cards, dependencies, and maintainer actions stay with project-oss."
+}

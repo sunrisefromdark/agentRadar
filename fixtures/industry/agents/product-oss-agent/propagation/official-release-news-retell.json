@@ -1,0 +1,6 @@
+{
+  "case_id": "official-release-news-retell",
+  "origin_owner": "product-platform",
+  "retell_treatment": "context",
+  "expected_no_double_accepted": true
+}

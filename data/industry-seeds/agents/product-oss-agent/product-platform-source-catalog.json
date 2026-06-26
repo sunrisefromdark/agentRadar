@@ -1,0 +1,6 @@
+{
+  "responsibility_id": "product-platform",
+  "axis": "product_vendor_release",
+  "primary_tool_ids": ["vendor-release-notes-feed", "vendor-api-docs-diff"],
+  "owner_rule": "Official product release, API docs, release notes, and customer stories stay with product-platform."
+}

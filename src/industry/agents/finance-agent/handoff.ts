@@ -1,4 +1,4 @@
-import { createExecutionContext, type AxisSourceInput } from "../policy-agent/groupProtocol.ts";
+import { createExecutionContext, type AxisSourceInput, type SameRunRuntimeContext } from "../policy-agent/groupProtocol.ts";
 import { buildCapitalFinanceArtifacts } from "./eventBuilder.ts";
 import { evaluateCapitalFinanceStopPolicy, type CapitalFinanceStopPolicyInput } from "./fetchStopPolicy.ts";
 import { selectCapitalFinanceRoute } from "./routeSelection.ts";
@@ -14,6 +14,7 @@ export interface BuildCapitalFinanceHandoffInput {
   canonicalSourceAvailable: boolean;
   budgetExceeded?: boolean;
   stopPolicy?: CapitalFinanceStopPolicyInput;
+  runtimeContext?: SameRunRuntimeContext;
   sources: AxisSourceInput[];
 }
 
@@ -39,6 +40,7 @@ export function buildCapitalFinanceHandoff(input: BuildCapitalFinanceHandoffInpu
     now: input.now,
     routeSelection,
     executionContext: createExecutionContext("capital-finance", "finance-agent", "finance-agent"),
+    runtimeContext: input.runtimeContext,
     sources: input.sources,
   });
 }

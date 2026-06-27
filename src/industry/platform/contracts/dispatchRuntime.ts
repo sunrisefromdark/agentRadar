@@ -1,13 +1,13 @@
 type RuntimeRecord = Record<string, unknown>;
 
 export type DispatchRuntimeInput = {
-  message: RuntimeRecord;
-  dispatchContext?: RuntimeRecord;
-  reservations?: RuntimeRecord[];
-  budgetArbitration?: RuntimeRecord;
+  message: object;
+  dispatchContext?: object;
+  reservations?: object[];
+  budgetArbitration?: object;
   requiresCapacityReservation?: boolean;
   requiresSameRunReview?: boolean;
-  reviewAvailability?: RuntimeRecord;
+  reviewAvailability?: object;
 };
 
 type DispatchRuntimeResult =
@@ -27,10 +27,15 @@ function hasStringArray(value: unknown): value is string[] {
 }
 
 export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): DispatchRuntimeResult {
-  const dispatchRef = input.message.dispatch_context_ref;
-  const schedulingKey = input.message.scheduling_key;
+  const message = input.message as RuntimeRecord;
+  const dispatchContext = input.dispatchContext as RuntimeRecord | undefined;
+  const budgetArbitration = input.budgetArbitration as RuntimeRecord | undefined;
+  const reviewAvailability = input.reviewAvailability as RuntimeRecord | undefined;
+  const reservations = input.reservations as RuntimeRecord[] | undefined;
+  const dispatchRef = message.dispatch_context_ref;
+  const schedulingKey = message.scheduling_key;
 
-  if (!hasText(dispatchRef) || !hasText(schedulingKey) || !input.dispatchContext) {
+  if (!hasText(dispatchRef) || !hasText(schedulingKey) || !dispatchContext) {
     return {
       ok: false,
       reasonCode: "dispatch_context_missing",
@@ -38,7 +43,7 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     };
   }
 
-  if (input.dispatchContext.scheduling_key !== schedulingKey) {
+  if (dispatchContext.scheduling_key !== schedulingKey) {
     return {
       ok: false,
       reasonCode: "dispatch_context_missing",
@@ -46,11 +51,11 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     };
   }
 
-  if (input.budgetArbitration?.decision === "rejected") {
+  if (budgetArbitration?.decision === "rejected") {
     return { ok: false, reasonCode: "budget_exceeded", message: "budget arbitration rejected this action." };
   }
 
-  if (!hasText(input.message.claim_admission_assessment_ref)) {
+  if (!hasText(message.claim_admission_assessment_ref)) {
     return {
       ok: false,
       reasonCode: "dispatch_context_missing",
@@ -58,7 +63,7 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     };
   }
 
-  if (!hasText(input.message.claim_partition_id) && !hasText(input.message.candidate_group_id)) {
+  if (!hasText(message.claim_partition_id) && !hasText(message.candidate_group_id)) {
     return {
       ok: false,
       reasonCode: "dispatch_context_missing",
@@ -66,7 +71,7 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     };
   }
 
-  if (input.requiresSameRunReview && input.reviewAvailability?.review_execution_mode === "async_only") {
+  if (input.requiresSameRunReview && reviewAvailability?.review_execution_mode === "async_only") {
     return {
       ok: false,
       reasonCode: "reservation_missing",
@@ -78,7 +83,7 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     return { ok: true, status: "accepted_for_dispatch" };
   }
 
-  if (!hasStringArray(input.message.capacity_reservation_refs)) {
+  if (!hasStringArray(message.capacity_reservation_refs)) {
     return {
       ok: false,
       reasonCode: "reservation_missing",
@@ -86,7 +91,7 @@ export function validateDispatchRuntimeGate(input: DispatchRuntimeInput): Dispat
     };
   }
 
-  if (!input.reservations?.some((reservation) => reservation.reservation_state === "granted")) {
+  if (!reservations?.some((reservation) => reservation.reservation_state === "granted")) {
     return {
       ok: false,
       reasonCode: "reservation_missing",

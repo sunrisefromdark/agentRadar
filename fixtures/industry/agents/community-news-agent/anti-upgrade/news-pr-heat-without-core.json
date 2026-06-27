@@ -1,0 +1,6 @@
+{
+  "case_id": "news-pr-heat-without-core",
+  "source_type": "press_release",
+  "expected_core_upgrade_allowed": false,
+  "expected_role": "narrative_context_only"
+}

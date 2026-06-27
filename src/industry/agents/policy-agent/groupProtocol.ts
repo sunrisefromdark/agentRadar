@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { buildIndustryArtifactRef } from "../../platform/contracts/artifactPaths.ts";
 
 export type IndustryAgentId = "finance-agent" | "policy-agent";
 export type IndustryResponsibilityId = "capital-finance" | "policy-regulatory" | "policy-research-thinktank";
@@ -174,14 +175,20 @@ export interface IndustryAgentMessageEnvelope {
   to_agent_id: IndustryAgentId | "broadcast";
   responsibility_id?: IndustryResponsibilityId;
   checkpoint_stage: "packaging";
-  capability_class: "projection";
-  kind: "task-result";
-  payload_schema: "event-batch.v1" | "tool-status-report.v1" | "daily-industry-evidence-pack-input.v1";
+  capability_class: "projection" | "claim-critical";
+  kind: "evidence_batch" | "tool_status_report" | "industry_agent_contribution" | "daily_industry_evidence_pack_input";
+  payload_schema:
+    | "industry-signal-event-batch.v1"
+    | "axis-tool-coverage-report.v1"
+    | "industry-agent-contribution.v1"
+    | "daily-industry-evidence-pack-input.v1";
   payload_ref: string;
   input_artifact_refs: string[];
   output_artifact_refs: string[];
   dispatch_context_ref?: string;
   scheduling_key?: string;
+  claim_partition_id?: string;
+  candidate_group_id?: string;
   claim_admission_assessment_ref?: string;
   capacity_reservation_refs: string[];
   required_depends_on_message_ids: string[];
@@ -220,34 +227,64 @@ export interface IndustryAgentArtifactManifest {
 }
 
 export interface EventBatchPayload {
-  schema_id: "event-batch.v1";
+  payload_schema: "industry-signal-event-batch.v1";
   schema_version: "1.0.0";
   payload_id: string;
   run_id: string;
   window_start: string;
   window_end: string;
+  source_message_id: string;
+  events_ref: string;
+  raw_tool_output_refs: string[];
+  agent_contribution_ref: string;
+  tool_status_report_refs: string[];
   responsibility_id: IndustryResponsibilityId;
+  metric_input_completeness: {
+    accepted_event_count: number;
+    counter_event_count: number;
+    diagnostic_event_count: number;
+    rejected_event_count: number;
+  };
   axis: IndustryEvidenceAxisKey;
   bucket: EvidenceBucket;
   events: IndustrySignalEvent[];
 }
 
 export interface CoveragePayload {
-  schema_id: "tool-status-report.v1";
+  payload_schema: "axis-tool-coverage-report.v1";
   schema_version: "1.0.0";
   payload_id: string;
   run_id: string;
+  source_message_id: string;
   responsibility_id: IndustryResponsibilityId;
+  axis: IndustryEvidenceAxisKey;
+  primary_tool_ids: string[];
+  secondary_toolset_ids: string[];
+  fallback_tool_ids: string[];
+  last_resort_tool_ids: string[];
+  eligible_tool_ids: string[];
+  selected_from_tool_ids: string[];
+  attempted_tool_ids: string[];
+  active_route_level: RouteLevel;
+  active_tool_ids: string[];
+  active_source_class: SourceClass;
+  route_status: AxisToolCoverageReport["route_status"];
+  budget_status: AxisToolCoverageReport["budget_status"];
+  degraded: boolean;
+  degradation_reason_codes: string[];
+  registry_snapshot_ref: string;
+  tool_registry_snapshot_ref: string;
   report: AxisToolCoverageReport;
 }
 
 export interface DailyIndustryEvidencePackInput {
-  schema_id: "daily-industry-evidence-pack-input.v1";
+  payload_schema: "daily-industry-evidence-pack-input.v1";
   schema_version: "1.0.0";
   payload_id: string;
   run_id: string;
   window_start: string;
   window_end: string;
+  source_message_id: string;
   source_message_ids: string[];
   normalized_event_batch_refs: string[];
   rejected_event_batch_refs: string[];
@@ -256,10 +293,16 @@ export interface DailyIndustryEvidencePackInput {
 }
 
 export interface ContributionPayload {
-  schema_id: "industry-agent-contribution.v1";
+  payload_schema: "industry-agent-contribution.v1";
   schema_version: "1.0.0";
   payload_id: string;
   run_id: string;
+  source_message_id: string;
+  actual_agent_id: IndustryAgentId;
+  responsibility_id: IndustryResponsibilityId;
+  status: IndustryAgentContribution["status"];
+  input_artifact_refs: string[];
+  output_artifact_refs: string[];
   contribution: IndustryAgentContribution;
 }
 
@@ -304,6 +347,16 @@ export interface RouteSelectionResult {
   attemptedToolIds: string[];
 }
 
+export interface SameRunRuntimeContext {
+  capabilityClass?: IndustryAgentMessageEnvelope["capability_class"];
+  dispatchContextRef?: string;
+  schedulingKey?: string;
+  claimPartitionId?: string;
+  candidateGroupId?: string;
+  claimAdmissionAssessmentRef?: string;
+  capacityReservationRefs?: string[];
+}
+
 export interface AxisBuildInput {
   runId: string;
   threadId: string;
@@ -318,6 +371,7 @@ export interface AxisBuildInput {
   registrySnapshotRef: string;
   toolRegistrySnapshotRef: string;
   budgetProfileId: string;
+  runtimeContext?: SameRunRuntimeContext;
   sources: AxisSourceInput[];
 }
 
@@ -459,6 +513,11 @@ export function buildAxisArtifacts(input: AxisBuildInput): AxisArtifacts {
   const coverage = buildCoverageArtifact(input, acceptedEvents, rejectedEvents);
   const contribution = buildContributionArtifact(input, accepted, counter, diagnostic, rejected);
 
+  for (const artifact of [accepted, counter, diagnostic, rejected]) {
+    artifact.payload.agent_contribution_ref = contribution.manifest.artifact_ref;
+    artifact.payload.tool_status_report_refs = [coverage.manifest.artifact_ref];
+  }
+
   return {
     accepted,
     counter,
@@ -533,13 +592,24 @@ function buildEventBatchArtifact(
   events: IndustrySignalEvent[],
 ): ArtifactEnvelope<EventBatchPayload> {
   const payload: EventBatchPayload = {
-    schema_id: "event-batch.v1",
+    payload_schema: "industry-signal-event-batch.v1",
     schema_version: "1.0.0",
     payload_id: stableId("payload", `${input.runId}:${input.responsibilityId}:${input.axis}:${bucket}`),
     run_id: input.runId,
     window_start: input.windowStart,
     window_end: input.windowEnd,
+    source_message_id: "",
+    events_ref: "",
+    raw_tool_output_refs: [],
+    agent_contribution_ref: "",
+    tool_status_report_refs: [],
     responsibility_id: input.responsibilityId,
+    metric_input_completeness: {
+      accepted_event_count: bucket === "accepted" ? events.length : 0,
+      counter_event_count: bucket === "counter" ? events.length : 0,
+      diagnostic_event_count: bucket === "diagnostic" ? events.length : 0,
+      rejected_event_count: bucket === "rejected" ? events.length : 0,
+    },
     axis: input.axis,
     bucket,
     events,
@@ -553,13 +623,14 @@ function buildEventBatchArtifact(
     windowEnd: input.windowEnd,
     fromAgentId: input.producerAgentId,
     responsibilityId: input.responsibilityId,
-    payloadSchema: "event-batch.v1",
+    payloadSchema: "industry-signal-event-batch.v1",
     payload,
     artifactKind: "event-batch",
     schemaVersion: payload.schema_version,
     axisKeys: [input.axis],
     eventIds: events.map((item) => item.event_id),
     summaryCn: `${input.responsibilityId} ${bucket} 事件批次`,
+    runtimeContext: input.runtimeContext,
   });
 }
 
@@ -627,11 +698,29 @@ function buildCoverageArtifact(
   };
 
   const payload: CoveragePayload = {
-    schema_id: "tool-status-report.v1",
+    payload_schema: "axis-tool-coverage-report.v1",
     schema_version: "1.0.0",
     payload_id: stableId("payload", `${input.runId}:${input.responsibilityId}:${input.axis}:coverage`),
     run_id: input.runId,
+    source_message_id: "",
     responsibility_id: input.responsibilityId,
+    axis: coverage.axis,
+    primary_tool_ids: coverage.primary_tool_ids,
+    secondary_toolset_ids: coverage.secondary_toolset_ids,
+    fallback_tool_ids: coverage.fallback_tool_ids,
+    last_resort_tool_ids: coverage.last_resort_tool_ids,
+    eligible_tool_ids: coverage.eligible_tool_ids,
+    selected_from_tool_ids: coverage.selected_from_tool_ids,
+    attempted_tool_ids: coverage.attempted_tool_ids,
+    active_route_level: coverage.active_route_level,
+    active_tool_ids: coverage.active_tool_ids,
+    active_source_class: coverage.active_source_class,
+    route_status: coverage.route_status,
+    budget_status: coverage.budget_status,
+    degraded: coverage.degraded,
+    degradation_reason_codes: coverage.degradation_reason_codes,
+    registry_snapshot_ref: coverage.registry_snapshot_ref,
+    tool_registry_snapshot_ref: coverage.tool_registry_snapshot_ref,
     report: coverage,
   };
 
@@ -643,13 +732,14 @@ function buildCoverageArtifact(
     windowEnd: input.windowEnd,
     fromAgentId: input.producerAgentId,
     responsibilityId: input.responsibilityId,
-    payloadSchema: "tool-status-report.v1",
+    payloadSchema: "axis-tool-coverage-report.v1",
     payload,
     artifactKind: "tool-coverage-report",
     schemaVersion: payload.schema_version,
     axisKeys: [input.axis],
     eventIds: [...acceptedEvents.map((item) => item.event_id), ...rejectedEvents.map((item) => item.event_id)],
     summaryCn: `${input.responsibilityId} 工具覆盖报告`,
+    runtimeContext: input.runtimeContext,
   });
 
   envelope.payload.report.primary_tool_ids = input.routeSelection.routeStatus.primary_tool.state === "unavailable" ? [] : input.routeSelection.selectedFromToolIds;
@@ -694,10 +784,16 @@ function buildContributionArtifact(
   };
 
   const payload: ContributionPayload = {
-    schema_id: "industry-agent-contribution.v1",
+    payload_schema: "industry-agent-contribution.v1",
     schema_version: "1.0.0",
     payload_id: stableId("payload", `${input.runId}:${input.responsibilityId}:${input.axis}:contribution`),
     run_id: input.runId,
+    source_message_id: "",
+    actual_agent_id: input.producerAgentId,
+    responsibility_id: input.responsibilityId,
+    status: contribution.status,
+    input_artifact_refs: contribution.input_artifact_refs,
+    output_artifact_refs: contribution.output_artifact_refs,
     contribution,
   };
 
@@ -709,13 +805,14 @@ function buildContributionArtifact(
     windowEnd: input.windowEnd,
     fromAgentId: input.producerAgentId,
     responsibilityId: input.responsibilityId,
-    payloadSchema: "tool-status-report.v1",
+    payloadSchema: "industry-agent-contribution.v1",
     payload,
     artifactKind: "agent-contribution",
     schemaVersion: payload.schema_version,
     axisKeys: [input.axis],
     eventIds: accepted.payload.events.map((item) => item.event_id),
     summaryCn: `${input.responsibilityId} contribution`,
+    runtimeContext: input.runtimeContext,
   });
 }
 
@@ -734,11 +831,18 @@ interface BuildArtifactEnvelopeInput<TPayload> {
   axisKeys: IndustryEvidenceAxisKey[];
   eventIds: string[];
   summaryCn: string;
+  runtimeContext?: SameRunRuntimeContext;
 }
 
 function buildArtifactEnvelope<TPayload>(input: BuildArtifactEnvelopeInput<TPayload>): ArtifactEnvelope<TPayload> {
   const serializedPayload = JSON.stringify(input.payload);
-  const artifactRef = `artifact://${input.runId}/${stableId("artifact", `${input.payloadSchema}:${serializedPayload}`)}`;
+  const artifactId = stableId("artifact", `${input.payloadSchema}:${serializedPayload}`);
+  const { artifactRef, storagePath } = buildIndustryArtifactRef({
+    visibility: "internal",
+    date: input.now.slice(0, 10),
+    schemaId: input.payloadSchema,
+    artifactId,
+  });
   const manifest: IndustryAgentArtifactManifest = {
     artifact_ref: artifactRef,
     artifact_kind: input.artifactKind,
@@ -754,11 +858,16 @@ function buildArtifactEnvelope<TPayload>(input: BuildArtifactEnvelopeInput<TPayl
     contains_raw_text: false,
     contains_profile_urls: false,
     content_hash: sha256(serializedPayload),
-    storage_path: `data/industry-runs/${input.runId}/${input.payloadSchema}/${stableId("blob", artifactRef)}.json`,
+    storage_path: storagePath,
     summary_cn: input.summaryCn,
   };
+  const messageId = stableId("msg", `${input.runId}:${artifactRef}`);
+  const payloadWithSourceMessageId =
+    input.payload && typeof input.payload === "object" && !Array.isArray(input.payload)
+      ? { ...input.payload, source_message_id: messageId }
+      : input.payload;
   const envelope: IndustryAgentMessageEnvelope = {
-    message_id: stableId("msg", `${input.runId}:${artifactRef}`),
+    message_id: messageId,
     schema_version: "industry-agent-message.v1",
     thread_id: input.threadId,
     run_id: input.runId,
@@ -769,13 +878,18 @@ function buildArtifactEnvelope<TPayload>(input: BuildArtifactEnvelopeInput<TPayl
     to_agent_id: "broadcast",
     responsibility_id: input.responsibilityId,
     checkpoint_stage: "packaging",
-    capability_class: "projection",
-    kind: "task-result",
+    capability_class: input.runtimeContext?.capabilityClass ?? "projection",
+    kind: kindForPayloadSchema(input.payloadSchema),
     payload_schema: input.payloadSchema,
     payload_ref: artifactRef,
     input_artifact_refs: [],
     output_artifact_refs: [artifactRef],
-    capacity_reservation_refs: [],
+    dispatch_context_ref: input.runtimeContext?.dispatchContextRef,
+    scheduling_key: input.runtimeContext?.schedulingKey,
+    claim_partition_id: input.runtimeContext?.claimPartitionId,
+    candidate_group_id: input.runtimeContext?.candidateGroupId,
+    claim_admission_assessment_ref: input.runtimeContext?.claimAdmissionAssessmentRef,
+    capacity_reservation_refs: input.runtimeContext?.capacityReservationRefs ?? [],
     required_depends_on_message_ids: [],
     advisory_depends_on_message_ids: [],
     idempotency_key: stableId("idem", artifactRef),
@@ -785,7 +899,14 @@ function buildArtifactEnvelope<TPayload>(input: BuildArtifactEnvelopeInput<TPayl
     contains_profile_urls: false,
   };
 
-  return { envelope, manifest, payload: input.payload };
+  if (input.payload && typeof input.payload === "object" && !Array.isArray(input.payload)) {
+    const payloadRecord = payloadWithSourceMessageId as Record<string, unknown>;
+    if (typeof payloadRecord.events_ref === "string" && payloadRecord.events_ref.length === 0) {
+      payloadRecord.events_ref = artifactRef;
+    }
+  }
+
+  return { envelope, manifest, payload: payloadWithSourceMessageId as TPayload };
 }
 
 export function buildDailyInputArtifact(input: {
@@ -799,14 +920,16 @@ export function buildDailyInputArtifact(input: {
   rejectedEventBatchRefs: string[];
   coverageRefs: string[];
   contributionRefs: string[];
+  runtimeContext?: SameRunRuntimeContext;
 }): ArtifactEnvelope<DailyIndustryEvidencePackInput> {
   const payload: DailyIndustryEvidencePackInput = {
-    schema_id: "daily-industry-evidence-pack-input.v1",
+    payload_schema: "daily-industry-evidence-pack-input.v1",
     schema_version: "1.0.0",
     payload_id: stableId("payload", `${input.runId}:daily-pack-input`),
     run_id: input.runId,
     window_start: input.windowStart,
     window_end: input.windowEnd,
+    source_message_id: "",
     source_message_ids: input.sourceMessageIds,
     normalized_event_batch_refs: input.normalizedEventBatchRefs,
     rejected_event_batch_refs: input.rejectedEventBatchRefs,
@@ -828,7 +951,21 @@ export function buildDailyInputArtifact(input: {
     axisKeys: ["capital_finance", "policy_regulatory", "policy_research_thinktank"],
     eventIds: [],
     summaryCn: "政策金融组 daily-industry-evidence-pack-input",
+    runtimeContext: input.runtimeContext,
   });
+}
+
+function kindForPayloadSchema(payloadSchema: IndustryAgentMessageEnvelope["payload_schema"]): IndustryAgentMessageEnvelope["kind"] {
+  switch (payloadSchema) {
+    case "industry-signal-event-batch.v1":
+      return "evidence_batch";
+    case "axis-tool-coverage-report.v1":
+      return "tool_status_report";
+    case "industry-agent-contribution.v1":
+      return "industry_agent_contribution";
+    case "daily-industry-evidence-pack-input.v1":
+      return "daily_industry_evidence_pack_input";
+  }
 }
 
 export function isSupportedSameMajorVersion(current: string, incoming: string): boolean {

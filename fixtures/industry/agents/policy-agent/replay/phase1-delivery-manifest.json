@@ -6,7 +6,8 @@
     "finance_agent_index": "src/industry/agents/finance-agent/index.ts"
   },
   "platform_consumers": {
-    "normalization_dry_run": "src/industry/platform/normalization/financePolicyDryRun.ts"
+    "normalization_dry_run": "src/industry/platform/normalization/financePolicyDryRun.ts",
+    "normalization_runtime": "src/industry/platform/normalization/financePolicyDryRun.ts"
   },
   "bundle_fixtures": {
     "current": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
@@ -22,6 +23,7 @@
   },
   "expected_platform_gates": {
     "current_bundle": "accepted_for_dry_run",
+    "current_runtime": "policy_finance_runtime_ready",
     "negative_bundle": "dispatch_context_missing"
   }
 }

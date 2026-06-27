@@ -3,13 +3,19 @@ import currentBundleFixture from "../../../../fixtures/industry/agents/policy-ag
 import negativeBundleFixture from "../../../../fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json" with { type: "json" };
 import sameRunCurrentFixture from "../../../../fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json" with { type: "json" };
 import sameRunNegativeFixture from "../../../../fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json" with { type: "json" };
-import { consumeFinancePolicyHandoffForDryRun } from "../../../industry/platform/normalization/financePolicyDryRun.ts";
+import {
+  consumeFinancePolicyHandoffForDryRun,
+  consumeFinancePolicyHandoffForRuntime,
+} from "../../../industry/platform/normalization/financePolicyDryRun.ts";
 import type { FinancePolicyHandoffBundle } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
+
+const currentBundle = currentBundleFixture as FinancePolicyHandoffBundle;
+const negativeBundle = negativeBundleFixture as FinancePolicyHandoffBundle;
 
 describe("industry platform normalization dry-run", () => {
   it("materializes the policy-finance current bundle without a producer wrapper", () => {
     const result = consumeFinancePolicyHandoffForDryRun({
-      bundle: currentBundleFixture as FinancePolicyHandoffBundle,
+      bundle: currentBundle,
       dispatchContext: sameRunCurrentFixture.dispatch_context,
       reservations: sameRunCurrentFixture.reservations,
       budgetArbitration: sameRunCurrentFixture.budget_arbitration,
@@ -49,7 +55,7 @@ describe("industry platform normalization dry-run", () => {
 
   it("rejects the policy-finance negative bundle before normalization dry-run", () => {
     const result = consumeFinancePolicyHandoffForDryRun({
-      bundle: negativeBundleFixture as FinancePolicyHandoffBundle,
+      bundle: negativeBundle,
       dispatchContext: sameRunNegativeFixture.dispatch_context,
       reservations: sameRunNegativeFixture.reservations,
       budgetArbitration: sameRunNegativeFixture.budget_arbitration,
@@ -59,6 +65,108 @@ describe("industry platform normalization dry-run", () => {
     expect(result).toMatchObject({
       ok: false,
       reasonCode: "dispatch_context_missing",
+    });
+  });
+
+  it("promotes policy-finance handoff through the runtime path after governance profiles resolve", () => {
+    const result = consumeFinancePolicyHandoffForRuntime({
+      bundle: currentBundle,
+      dispatchContext: sameRunCurrentFixture.dispatch_context,
+      reservations: sameRunCurrentFixture.reservations,
+      budgetArbitration: sameRunCurrentFixture.budget_arbitration,
+      requiresCapacityReservation: true,
+    });
+    const claimCriticalMessages = currentBundle.messages.filter((message) => message.capability_class === "claim-critical");
+
+    expect(result).toMatchObject({
+      ok: true,
+      status: "policy_finance_runtime_ready",
+      runtimeConsumedSameRunMessages: claimCriticalMessages.length,
+      activationProfileIds: [
+        "axis-activation-policy.v1/capital_finance",
+        "axis-activation-policy.v1/policy_regulatory",
+        "axis-activation-policy.v1/policy_research_thinktank",
+        "axis-runtime-budget-profile.v1/capital_finance",
+        "axis-runtime-budget-profile.v1/policy_regulatory",
+        "axis-runtime-budget-profile.v1/policy_research_thinktank",
+      ],
+      stopProfileIds: [
+        "canonical-fetch-stop-policy.v1/capital_finance",
+        "canonical-fetch-stop-policy.v1/policy_regulatory",
+        "canonical-fetch-stop-policy.v1/policy_research_thinktank",
+      ],
+      reviewProfileIds: ["same-run-review-availability-policy.v1/policy_finance"],
+      runtimeRegistrySnapshots: [
+        {
+          ok: true,
+          status: "runtime_snapshot_published",
+          registrySnapshotRef: "registry://industry/source-authority/finance/v1",
+          toolRegistrySnapshotRef: "registry://industry/tool-catalog/finance/v1",
+          runtimeInputRefs: [
+            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-a5d9b9371f3d",
+            "registry://industry/source-authority/finance/v1",
+          ],
+          sameRunReviewAvailable: false,
+        },
+        {
+          ok: true,
+          status: "runtime_snapshot_published",
+          registrySnapshotRef: "registry://industry/source-authority/policy/v1",
+          toolRegistrySnapshotRef: "registry://industry/tool-catalog/policy/v1",
+          runtimeInputRefs: [
+            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-e6203625b947",
+            "registry://industry/source-authority/policy/v1",
+          ],
+          sameRunReviewAvailable: false,
+        },
+        {
+          ok: true,
+          status: "runtime_snapshot_published",
+          registrySnapshotRef: "registry://industry/source-authority/thinktank/v1",
+          toolRegistrySnapshotRef: "registry://industry/tool-catalog/thinktank/v1",
+          runtimeInputRefs: [
+            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-fcfa36416828",
+            "registry://industry/source-authority/thinktank/v1",
+          ],
+          sameRunReviewAvailable: false,
+        },
+      ],
+    });
+  });
+
+  it("rejects policy-finance runtime handoff when same-run refs are incomplete", () => {
+    const result = consumeFinancePolicyHandoffForRuntime({
+      bundle: negativeBundle,
+      dispatchContext: sameRunNegativeFixture.dispatch_context,
+      reservations: sameRunNegativeFixture.reservations,
+      budgetArbitration: sameRunNegativeFixture.budget_arbitration,
+      requiresCapacityReservation: true,
+    });
+
+    expect(result).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+  });
+
+  it("rejects policy-finance runtime handoff when coverage refs cannot publish runtime snapshots", () => {
+    const brokenBundle = structuredClone(currentBundle);
+    const dailyInput = brokenBundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1") as {
+      coverage_refs: string[];
+    };
+    dailyInput.coverage_refs[0] = "industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing";
+
+    const result = consumeFinancePolicyHandoffForRuntime({
+      bundle: brokenBundle,
+      dispatchContext: sameRunCurrentFixture.dispatch_context,
+      reservations: sameRunCurrentFixture.reservations,
+      budgetArbitration: sameRunCurrentFixture.budget_arbitration,
+      requiresCapacityReservation: true,
+    });
+
+    expect(result).toMatchObject({
+      ok: false,
+      reasonCode: "lineage_failed",
     });
   });
 });

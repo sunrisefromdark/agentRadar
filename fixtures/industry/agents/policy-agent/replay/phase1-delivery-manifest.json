@@ -1,8 +1,12 @@
 {
   "manifest_id": "policy-finance-phase1-delivery-manifest.v1",
+  "policy_finance_inputs_complete_for_executor_4": true,
   "stable_entrypoints": {
     "policy_agent_index": "src/industry/agents/policy-agent/index.ts",
     "finance_agent_index": "src/industry/agents/finance-agent/index.ts"
+  },
+  "platform_consumers": {
+    "normalization_dry_run": "src/industry/platform/normalization/financePolicyDryRun.ts"
   },
   "bundle_fixtures": {
     "current": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",

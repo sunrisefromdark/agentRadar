@@ -41,6 +41,10 @@
     {
       "path": "src/industry/agents/finance-agent/index.ts",
       "sha256": "5f8621f8a9b190f4389488d6f943d48b764e8db09af65a500860a899d8b361c0"
+    },
+    {
+      "path": "src/industry/platform/normalization/financePolicyDryRun.ts",
+      "sha256": "96f20162db8ca5fabdd07c214ed0bbd550b05bb3d41d3b839323e3b268acdd45"
     }
   ]
 }

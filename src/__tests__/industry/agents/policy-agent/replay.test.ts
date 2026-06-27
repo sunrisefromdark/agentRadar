@@ -156,8 +156,10 @@ describe("policy-finance group replay handoff", () => {
 
   it("publishes a machine-readable delivery manifest for downstream consumers", () => {
     const root = process.cwd();
+    expect(deliveryManifestFixture.policy_finance_inputs_complete_for_executor_4).toBe(true);
     expect(fs.existsSync(path.join(root, deliveryManifestFixture.stable_entrypoints.policy_agent_index))).toBe(true);
     expect(fs.existsSync(path.join(root, deliveryManifestFixture.stable_entrypoints.finance_agent_index))).toBe(true);
+    expect(fs.existsSync(path.join(root, deliveryManifestFixture.platform_consumers.normalization_dry_run))).toBe(true);
     expect(fs.existsSync(path.join(root, deliveryManifestFixture.bundle_fixtures.current))).toBe(true);
     expect(fs.existsSync(path.join(root, deliveryManifestFixture.bundle_fixtures.negative_missing_stable_claim_key))).toBe(true);
     expect(fs.existsSync(path.join(root, deliveryManifestFixture.same_run_fixtures.current))).toBe(true);
@@ -177,18 +179,22 @@ describe("policy-finance group replay handoff", () => {
   it("publishes a machine-readable next-actions manifest for executor 4", () => {
     const root = process.cwd();
     expect(nextPlatformActionsFixture.status).toBe("waiting_for_executor_4");
+    expect(nextPlatformActionsFixture.executor_4_can_continue_phase1_without_more_policy_finance_inputs).toBe(true);
     expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.delivery_manifest))).toBe(true);
     expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.current_bundle))).toBe(true);
     expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.negative_bundle))).toBe(true);
     expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.handoff_note))).toBe(true);
     expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.shared_runtime_note))).toBe(true);
-    expect(nextPlatformActionsFixture.required_platform_actions).toHaveLength(3);
+    expect(fs.existsSync(path.join(root, nextPlatformActionsFixture.ready_inputs.normalization_dry_run))).toBe(true);
+    expect(nextPlatformActionsFixture.completed_platform_actions).toHaveLength(1);
+    expect(nextPlatformActionsFixture.completed_platform_actions[0]?.action).toBe("consume_current_bundle");
+    expect(nextPlatformActionsFixture.remaining_platform_actions).toHaveLength(2);
   });
 
   it("publishes delivery checksums for executor 4 to verify consumed inputs", () => {
     const root = process.cwd();
     expect(deliveryChecksumsFixture.algorithm).toBe("sha256");
-    expect(deliveryChecksumsFixture.entries).toHaveLength(10);
+    expect(deliveryChecksumsFixture.entries).toHaveLength(11);
     for (const entry of deliveryChecksumsFixture.entries) {
       expect(fs.existsSync(path.join(root, entry.path))).toBe(true);
       expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);

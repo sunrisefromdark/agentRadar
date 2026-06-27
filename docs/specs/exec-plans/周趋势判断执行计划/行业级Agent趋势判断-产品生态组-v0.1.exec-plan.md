@@ -15,6 +15,28 @@
   - `docs/specs/design-docs/行业级Agent趋势判断设计/09-术语与审计词汇表.md`
 - 负责人：`3号执行人`
 
+## 当前进度
+
+| Phase | 状态 | 已落地项 | 说明 |
+| --- | --- | --- | --- |
+| Phase 1：职责边界固定 | `DONE` | product-platform / developer-studio / project-oss / community_discussion / news-pr owner 初判与负例 | 已在本组目录内落地 owner boundary policy 与 fixture |
+| Phase 2：event 生产草稿 | `DONE` | 五类输入面的 canonical-like event batch draft | accepted / counter / diagnostic / rejected 分离 batch refs |
+| Phase 3：tool coverage 与降级草稿 | `DONE` | 五条 axis coverage draft | daily 输入中 `coverage_refs=5` 有 contract test |
+| Phase 4：contribution 与测试 | `DONE` | 六职责项 contribution draft 与 unit / contract / negative / replay 测试 | `cn-community` 与 `global-community` contribution 分账 |
+| Phase 4A：daily handoff 草稿 | `DONE` | `daily-industry-evidence-pack-input.v1` 轻索引草稿 | 只包含 refs / lineage，不内嵌全量 event |
+| Phase 4B：正式跨组 consumer contract | `BLOCKED` | producer-side fixture / artifact refs 已准备 | 等 `4号执行人` 发布 canonical schema、artifact path、compatibility matrix 与 current consumer fixtures 后再收口 |
+
+## 落地标记（截至 2026-06-26）
+
+| 项目 | 当前判断 | 依据 |
+| --- | --- | --- |
+| source catalog | `DONE` | 已新增产品、开发者、OSS、社区、新闻五类 source catalog 与 seed |
+| owner-boundary / propagation / anti-upgrade fixture | `DONE` | 已新增 product/community/news 的边界、传播链与 anti-upgrade 样本 |
+| producer event builder | `DONE` | 已新增 product / developer / OSS / community / news event builder 草稿 |
+| coverage / contribution writer | `DONE` | 本组 coverage 固定 5 条，contribution 固定 6 条 |
+| local adapter seam / daily input | `DONE` | `buildProductEcosystemHandoff` 可生成本组 daily 输入草稿 |
+| 正式 handoff freeze | `BLOCKED` | 等中台 Phase 1A 发布正式 schema / payload / compatibility matrix |
+
 ## 目标
 
 把产品、开源、开发者、社区、新闻五类输入面做成可记账、可去重、可降级的 canonical event 来源，并且在 producer 阶段先保住 owner 边界，不把媒体回声写成多条 accepted evidence。
@@ -355,3 +377,12 @@ handoff 要求：
 | --- | --- | --- | --- |
 | 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |
+| 2026-06-26 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、10 条测试通过；覆盖产品/OSS、社区/新闻 owner 边界、news-pr anti-upgrade、5 coverage / 6 contribution 与 daily 轻索引 |
+| 2026-06-26 | `corepack pnpm run typecheck` | `Passed` | TypeScript 全仓类型检查通过 |
+| 2026-06-26 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 产品生态组 implementation preflight 校验通过 |
+
+## 下一阶段入口
+
+1. 等 `4号执行人` 发布 Phase 1A 的 canonical schema、payload 正式名、artifact path 与 compatibility matrix 后，刷新本地 seam 为正式 envelope / payload / manifest handoff。
+2. 等 current consumer fixtures 发布后，补 current / previous compatible / unknown higher major 的正式消费侧 contract 验证。
+3. 等 Phase 1B / 1C 发布后，再接 activation / budget / review / same-run 深补证能力。

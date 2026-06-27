@@ -76,7 +76,7 @@ describe("project search system redesign design contract", () => {
     expect(source).toContain("explore_ribbon_projects");
   });
 
-  it("keeps the 16 must-cover directions frozen in the implementation catalog", () => {
+  it("keeps the 19 must-cover directions frozen in the implementation catalog", () => {
     const catalogPath = path.join(workspaceRoot, "src/signal/missionCatalog.ts");
     expect(fs.existsSync(catalogPath)).toBe(true);
 
@@ -98,6 +98,9 @@ describe("project search system redesign design contract", () => {
       "recruiting-hr-agent",
       "supply-chain-procurement-agent",
       "industrial-field-ops-agent",
+      "short-drama-generation-agent",
+      "image-generation-agent",
+      "time-series-forecasting-agent",
     ];
 
     for (const directionKey of expectedDirectionKeys) {
@@ -105,7 +108,7 @@ describe("project search system redesign design contract", () => {
     }
   });
 
-  it("freezes the four families and sixteen must-cover directions without silent expansion or shrinkage", () => {
+  it("freezes the four families and nineteen must-cover directions without silent expansion or shrinkage", () => {
     const catalogPath = path.join(workspaceRoot, "src/signal/missionCatalog.ts");
     expect(fs.existsSync(catalogPath)).toBe(true);
 
@@ -133,6 +136,9 @@ describe("project search system redesign design contract", () => {
       "recruiting-hr-agent",
       "supply-chain-procurement-agent",
       "industrial-field-ops-agent",
+      "short-drama-generation-agent",
+      "image-generation-agent",
+      "time-series-forecasting-agent",
     ];
 
     for (const familyKey of familyKeys) {
@@ -140,7 +146,7 @@ describe("project search system redesign design contract", () => {
     }
 
     const matchedDirections = directionKeys.filter((directionKey) => source.includes(directionKey));
-    expect(matchedDirections).toHaveLength(16);
+    expect(matchedDirections).toHaveLength(19);
   });
 
   it("freezes the hard quantity thresholds and seat quotas in mission discovery config", () => {

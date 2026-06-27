@@ -34,6 +34,7 @@ const baseDailyReport = {
       objectiveScore: 88,
       description: "Research workflow agent for literature review.",
       exposureBucket: "mission_match",
+      headProject: false,
       directionMatches: ["research-knowledge-agent"],
     }),
   ],
@@ -44,6 +45,7 @@ const baseDailyReport = {
       objectiveScore: 84,
       description: "Browser workflow helper with a new plugin mode.",
       exposureBucket: "explore_ribbon",
+      headProject: false,
     }),
   ],
   context_only_projects: [

@@ -69,7 +69,7 @@ function makeScoredProject(args: {
 }
 
 describe("project search system redesign behavior", () => {
-  it("freezes the V1 catalog to the approved 16 must-cover directions from the design doc", () => {
+  it("freezes the V1 catalog to the approved 19 must-cover directions from the design doc", () => {
     const expectedDirectionKeys = [
       "coding-agent",
       "browser-computer-use",
@@ -87,9 +87,12 @@ describe("project search system redesign behavior", () => {
       "recruiting-hr-agent",
       "supply-chain-procurement-agent",
       "industrial-field-ops-agent",
+      "short-drama-generation-agent",
+      "image-generation-agent",
+      "time-series-forecasting-agent",
     ];
 
-    expect(PROJECT_SEARCH_CONSTANTS.directionCount).toBe(16);
+    expect(PROJECT_SEARCH_CONSTANTS.directionCount).toBe(19);
     expect(DIRECTION_CATALOG.map((item) => item.direction_key)).toEqual(expectedDirectionKeys);
   });
 

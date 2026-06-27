@@ -13,7 +13,7 @@ export type AcademicFormalHandoffBundle = {
 };
 
 type AcademicPrepReviewResult =
-  | { ok: true; status: "preparatory_review_ready"; promotionReady: false }
+  | { ok: true; status: "handoff_ready" }
   | { ok: false; reasonCode: "schema_mismatch" | "lineage_failed"; message: string };
 
 type AcademicHandoffResult =
@@ -72,7 +72,7 @@ function canConsumeHandoffSchema(
   return undefined;
 }
 
-export function validateAcademicHandoff(
+function validateAcademicFormalHandoff(
   registry: IndustrySchemaRegistry,
   bundle: AcademicFormalHandoffBundle,
 ): AcademicHandoffResult {
@@ -188,6 +188,28 @@ export function validateAcademicHandoff(
   return { ok: true, status: "accepted_for_dry_run" };
 }
 
+function isAcademicFormalHandoffBundle(
+  bundle: AcademicHandoffBundle | AcademicFormalHandoffBundle,
+): bundle is AcademicFormalHandoffBundle {
+  return "messages" in bundle && "manifests" in bundle && "payloads" in bundle && "artifactRefs" in bundle;
+}
+
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicHandoffBundle,
+): AcademicPrepReviewResult;
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicFormalHandoffBundle,
+): AcademicHandoffResult;
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicHandoffBundle | AcademicFormalHandoffBundle,
+): AcademicPrepReviewResult | AcademicHandoffResult {
+  if (isAcademicFormalHandoffBundle(bundle)) return validateAcademicFormalHandoff(registry, bundle);
+  return reviewAcademicPreparatoryHandoff(registry, bundle);
+}
+
 export function reviewAcademicPreparatoryHandoff(
   registry: IndustrySchemaRegistry,
   bundle: AcademicHandoffBundle,
@@ -225,21 +247,26 @@ export function reviewAcademicPreparatoryHandoff(
     }
   }
 
-  if (!bundle.event_batches.every((artifact) => artifact.payload_schema === "event-batch.v1")) {
-    return { ok: false, reasonCode: "schema_mismatch", message: "Academic event batches are still expected as preparatory event-batch.v1 seams." };
+  if (!bundle.event_batches.every((artifact) => artifact.payload_schema === "industry-signal-event-batch.v1")) {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic event batches must use industry-signal-event-batch.v1." };
   }
   if (!bundle.coverage_reports.every((artifact) => artifact.payload_schema === "axis-tool-coverage-report.v1")) {
     return { ok: false, reasonCode: "schema_mismatch", message: "Academic coverage reports must use axis-tool-coverage-report.v1." };
   }
-  if (!bundle.contributions.every((artifact) => artifact.payload?.upstream_payload_schema === "industry-agent-contribution.v1")) {
-    return { ok: false, reasonCode: "schema_mismatch", message: "Academic contributions must declare their canonical upstream schema." };
+  if (!bundle.contributions.every((artifact) => artifact.payload_schema === "industry-agent-contribution.v1")) {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic contributions must use industry-agent-contribution.v1." };
   }
-  if (bundle.daily_input.payload?.upstream_payload_schema !== "daily-industry-evidence-pack-input.v1") {
-    return { ok: false, reasonCode: "schema_mismatch", message: "Academic daily input must declare its canonical upstream schema." };
+  if (bundle.daily_input.payload_schema !== "daily-industry-evidence-pack-input.v1") {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic daily input must use daily-industry-evidence-pack-input.v1." };
   }
-  for (const schemaId of ["axis-tool-coverage-report.v1", "industry-agent-contribution.v1", "daily-industry-evidence-pack-input.v1"]) {
+  for (const schemaId of [
+    "industry-signal-event-batch.v1",
+    "axis-tool-coverage-report.v1",
+    "industry-agent-contribution.v1",
+    "daily-industry-evidence-pack-input.v1",
+  ]) {
     if (!knownSchemaExists(registry, schemaId)) {
-      return { ok: false, reasonCode: "schema_mismatch", message: `Missing canonical schema for academic preparatory review: ${schemaId}` };
+      return { ok: false, reasonCode: "schema_mismatch", message: `Missing canonical schema for academic handoff: ${schemaId}` };
     }
   }
 
@@ -267,5 +294,5 @@ export function reviewAcademicPreparatoryHandoff(
     return { ok: false, reasonCode: "lineage_failed", message: "Academic daily input references unresolved artifacts." };
   }
 
-  return { ok: true, status: "preparatory_review_ready", promotionReady: false };
+  return { ok: true, status: "handoff_ready" };
 }

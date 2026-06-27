@@ -206,7 +206,8 @@ describe("policy-finance group replay handoff", () => {
       const filePath = path.join(root, entry.path);
       expect(fs.existsSync(filePath)).toBe(true);
       expect(entry.sha256).toMatch(/^[a-f0-9]{64}$/);
-      expect(crypto.createHash("sha256").update(fs.readFileSync(filePath)).digest("hex")).toBe(entry.sha256);
+      const content = fs.readFileSync(filePath, "utf8").replace(/\r\n/g, "\n");
+      expect(crypto.createHash("sha256").update(content, "utf8").digest("hex")).toBe(entry.sha256);
     }
   });
 });

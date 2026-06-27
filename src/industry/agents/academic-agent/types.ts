@@ -140,8 +140,9 @@ export interface IndustrySignalEvent {
 }
 
 export interface EventBatchPayload {
+  payload_schema: "industry-signal-event-batch.v1";
   payload_id: string;
-  schema_version: "event-batch.v1";
+  schema_version: "1.0.0";
   run_id: string;
   window_start: string;
   window_end: string;
@@ -154,6 +155,7 @@ export interface EventBatchPayload {
   bucket: EventBucket;
   event_ids: string[];
   events_ref: string;
+  events: IndustrySignalEvent[];
   metric_input_completeness: {
     citation_trace_complete: number;
     freshness_anchor_complete: number;
@@ -193,8 +195,15 @@ export interface AxisToolCoverageReport {
 }
 
 export interface LocalIndustryAgentContribution {
+  payload_schema: "industry-agent-contribution.v1";
+  payload_id: string;
+  schema_version: "1.0.0";
+  run_id: string;
+  window_start: string;
+  window_end: string;
+  source_message_id: string;
+  actual_agent_id: "academic-agent";
   responsibility_id: IndustryResponsibilityId;
-  handled_by_agent_id: "academic-agent";
   execution_context: ExecutionContext;
   status: "ok" | "partial";
   covered_axes: IndustryEvidenceAxisKey[];
@@ -212,13 +221,11 @@ export interface LocalIndustryAgentContribution {
   tool_route_ids: string[];
   status_reason?: string;
   contribution_summary_cn: string;
-  // ponytail: local seam until canonical payload registry lands upstream.
-  upstream_payload_schema: "industry-agent-contribution.v1";
 }
 
 export interface IndustryAgentArtifactManifest {
   artifact_ref: string;
-  artifact_kind: string;
+  artifact_kind: "event-batch" | "tool-coverage-report" | "agent-contribution" | "daily-pack-input";
   schema_version: "industry-agent-artifact-manifest.v1";
   produced_by_agent_id: "academic-agent";
   produced_at: string;
@@ -226,7 +233,7 @@ export interface IndustryAgentArtifactManifest {
   event_ids: string[];
   claim_ids: string[];
   axis_keys: IndustryEvidenceAxisKey[];
-  visibility_tier: "internal";
+  visibility_tier: "internal_only";
   contains_raw_text: false;
   contains_profile_urls: false;
   content_hash: string;
@@ -244,10 +251,15 @@ export interface IndustryAgentMessageEnvelope {
   sent_at: string;
   from_agent_id: "academic-agent";
   to_agent_id: "normalization-agent";
-  checkpoint_stage: "preparatory_handoff";
-  capability_class: "academic_evidence";
-  kind: "artifact_handoff";
-  payload_schema: string;
+  responsibility_id?: IndustryResponsibilityId;
+  checkpoint_stage: "packaging";
+  capability_class: "projection";
+  kind: "evidence_batch" | "tool_status_report" | "industry_agent_contribution" | "daily_industry_evidence_pack_input";
+  payload_schema:
+    | "industry-signal-event-batch.v1"
+    | "axis-tool-coverage-report.v1"
+    | "industry-agent-contribution.v1"
+    | "daily-industry-evidence-pack-input.v1";
   payload_ref: string;
   input_artifact_refs: string[];
   output_artifact_refs: string[];
@@ -255,15 +267,16 @@ export interface IndustryAgentMessageEnvelope {
   required_depends_on_message_ids: string[];
   advisory_depends_on_message_ids: string[];
   idempotency_key: string;
-  status: "ok";
-  visibility_tier: "internal";
+  status: "sent";
+  visibility_tier: "internal_only";
   contains_raw_text: false;
   contains_profile_urls: false;
 }
 
 export interface LocalDailyIndustryEvidencePackInput {
+  payload_schema: "daily-industry-evidence-pack-input.v1";
   payload_id: string;
-  schema_version: "academic-local-daily-industry-evidence-pack-input.v1";
+  schema_version: "1.0.0";
   run_id: string;
   window_start: string;
   window_end: string;
@@ -277,8 +290,6 @@ export interface LocalDailyIndustryEvidencePackInput {
   contribution_refs: string[];
   input_artifact_refs: string[];
   summary_cn: string;
-  // ponytail: local seam until canonical payload registry lands upstream.
-  upstream_payload_schema: "daily-industry-evidence-pack-input.v1";
 }
 
 export interface ProducedArtifact<TPayload> {
@@ -321,12 +332,4 @@ export function daysBetween(start: string, end: string): number {
 
 export function sha1Json(value: unknown): string {
   return createHash("sha1").update(JSON.stringify(value)).digest("hex");
-}
-
-export function makeArtifactRef(runId: string, axis: string, name: string): string {
-  return `artifact://academic-agent/${runId}/${axis}/${name}.json`;
-}
-
-export function makeStoragePath(runId: string, axis: string, name: string): string {
-  return `fixtures/industry/agents/academic-agent/generated/${runId}/${axis}/${name}.json`;
 }

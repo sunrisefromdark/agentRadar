@@ -24,7 +24,7 @@
 | Phase 3：tool coverage 与降级草稿 | `DONE` | 五条 axis coverage draft | daily 输入中 `coverage_refs=5` 有 contract test |
 | Phase 4：contribution 与测试 | `DONE` | 六职责项 contribution draft 与 unit / contract / negative / replay 测试 | `cn-community` 与 `global-community` contribution 分账 |
 | Phase 4A：daily handoff 草稿 | `DONE` | `daily-industry-evidence-pack-input.v1` 轻索引草稿 | 只包含 refs / lineage，不内嵌全量 event |
-| Phase 4B：正式跨组 consumer contract | `PARTIAL` | 本组 formal envelope / payload / manifest / refs 已收口，consumer contract fixture 已补齐 | 本组 producer-side freeze 已完成；等待 `4号执行人` 接入中台 contract dry-run / normalization dry-run |
+| Phase 4B：正式跨组 consumer contract | `DONE` | 本组 formal envelope / payload / manifest / refs 已收口，consumer contract fixture 已补齐；中台已接入 contract dry-run / registry snapshot / normalization dry-run | 本组 producer-side freeze 与中台 dry-run 对接已完成；后续只根据 `normalization-feedback.v1` 失败反馈在本组目录内修正。 |
 
 ## 阶段更新（2026-06-27）
 
@@ -39,13 +39,13 @@
 
 未完成 / 继续阻塞：
 
-1. 中台 contract dry-run / normalization dry-run 尚未完成。原因：需要 `4号执行人` 在中台运行时接收本组 formal bundle，并接入统一 consumer runner、normalization dry-run 与反馈产物。
+1. 中台 contract dry-run / registry snapshot / normalization dry-run 已完成最小接入。`4号执行人` 现在可接收本组 formal bundle，并返回 runtime snapshot、normalized / rejected / coverage / contribution refs 与成功/失败两类 `normalization-feedback.v1` dry-run payload。
 2. activation / budget / review / same-run 深补证尚未接入。原因：本阶段明确只做 formal handoff freeze，后续需要等待 `4号执行人` 发布 Phase 1B / 1C 的 dispatch、budget、review、same-run 运行时基座与 current fixtures。
 3. weekly 总集成尚未完成。原因：需要三组正式 handoff 全量齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly internal / consumer / public 三层闭环。
 
 继续推进所需产出：
 
-1. `4号执行人`：接收产品生态 formal bundle，提供 contract dry-run / normalization dry-run 结果与失败反馈格式。
+1. `4号执行人`：已接收产品生态 formal bundle，并提供 contract dry-run / registry snapshot / normalization dry-run 结果与 `normalization-feedback.v1` 反馈格式。
 2. `4号执行人`：发布 Phase 1B / 1C 的 activation、budget、review、same-run consumer fixtures 与 runtime 接线约束。
 3. 产品生态组：收到中台 dry-run 反馈后，只在本组目录内修正 payload / lineage / refs；收到 Phase 1B / 1C 后再接后续深补证能力。
 
@@ -59,7 +59,7 @@
 | coverage / contribution writer | `DONE` | 本组 coverage 固定 5 条，contribution 固定 6 条 |
 | local adapter seam / daily input | `DONE` | `buildProductEcosystemHandoff` 可生成本组 daily 输入草稿 |
 | 正式 handoff freeze | `DONE` | `buildProductEcosystemFormalHandoff` 可生成正式 envelope / payload / manifest / refs |
-| 中台 dry-run 接入 | `BLOCKED` | 等 `4号执行人` 接入统一 consumer runner / normalization dry-run 并回传反馈 |
+| 中台 dry-run 接入 | `DONE` | `src/industry/platform/normalization/productEcosystemDryRun.ts` 可消费 formal bundle，发布 registry runtime snapshot，并回传 `normalization-feedback.v1` dry-run payload |
 
 ## 目标
 
@@ -407,11 +407,12 @@ handoff 要求：
 | 2026-06-27 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、15 条测试通过；新增 formal handoff freeze、current / previous compatible / unknown higher major / missing ref / missing payload contract 验证 |
 | 2026-06-27 | `corepack pnpm run typecheck` | `Passed` | TypeScript 全仓类型检查通过 |
 | 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 产品生态组 implementation preflight 校验通过 |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Passed` | 中台已消费产品生态 formal bundle，返回 registry runtime snapshot、dry-run refs 与 `normalization-feedback.v1` payload |
 
 ## 下一阶段入口
 
 1. `DONE`：已消费 `4号执行人` Phase 1A 的 canonical schema、payload 正式名、artifact path 与 compatibility matrix，并将本地 seam 刷新为正式 envelope / payload / manifest handoff。
 2. `DONE`：已补 current / previous compatible / unknown higher major / missing required ref / missing payload 的本组正式消费侧 contract 验证。
-3. `NEXT`：把产品生态 formal bundle 交给 `4号执行人` 做中台 contract dry-run 与 normalization dry-run；收到失败反馈后，本组只在 product / community / news 目录内修正。
+3. `DONE`：产品生态 formal bundle 已交给 `4号执行人` 做中台 contract dry-run 与 normalization dry-run；收到失败反馈后，本组只在 product / community / news 目录内修正。
 4. `BLOCKED`：activation / budget / review / same-run 深补证能力等待 `4号执行人` 发布 Phase 1B / 1C runtime、consumer fixtures 与接线约束后再做。
 5. `BLOCKED`：最终 weekly 集成等待三组正式 handoff 齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly 三层闭环。

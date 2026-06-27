@@ -21,6 +21,8 @@
 
 只做全组共享的窄口子：schema 真源、registry snapshot、normalization、audit、tier decision、weekly 拼装。领域 seed / domain fixture / 领域 docs 已前推给前三组，不再由本组吞下。
 
+当前分支优先目标：只推进 `中台裁决组 ↔ 产品生态组` 已 freeze handoff 的接入。中台必须先提供产品生态组下一步需要的 contract dry-run、registry runtime snapshot、normalization dry-run 与成功/失败两类 `normalization-feedback.v1` 反馈 payload；政策金融、学术前沿与最终 weekly 全量集成本分支暂不扩展。
+
 ## 当前推进状态（2026-06-27）
 
 | Phase | 状态 | 已落地证据 | 未完成原因 / 下一步 |
@@ -32,7 +34,7 @@
 | `Phase 1C` dispatch / budget runtime base | `Completed` | `src/industry/platform/contracts/dispatchRuntime.ts`、`consumerFixtures.ts`；fixtures 覆盖 dispatch context、reservation、budget、async_only review gate。 | 无阻塞。命中 same-run 的 A/B/C 消息必须带 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission ref、reservation refs。 |
 | `Phase 1C+` main coordinator 边界 | `Completed` | contract test 验证没有 `main-coordinator` 新 Agent，`src/types.ts` / `src/cli.ts` 不持有 coordinator 私有状态。 | 无阻塞。后续 scheduler / middleware 只能落在 contracts / registry，不能回写 weekly 热点文件。 |
 | `Phase 2` registry snapshot 与 shared governance | `Partial` | 已新增 `src/industry/platform/registry/runtimeSnapshot.ts` 与 `src/__tests__/industry/platform/registry.test.ts`，冻结 runtime snapshot plane 与 governance review plane 不互相穿透，并验证 `manual_review_pool` 不等于 reviewer availability。 | 还缺正式 registry/tool snapshot fixture 与 A/B/C 合法 tool coverage / authority refs。中台可继续接任一已交齐组跑 snapshot / dry-run，但不能做全量 weekly 集成。 |
-| `Phase 3` normalization 与 fact snapshot | `Partial` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已能消费政策金融 current bundle，产出 dry-run refs；`src/__tests__/industry/platform/normalization.test.ts` 覆盖 positive / negative。 | 未完成 source-chain dedupe、fact resolution、owner arbitration、closed snapshot。原因：缺三组正式 handoff 的完整 event batch / coverage / contribution refs 与 owner boundary/replay refs。 |
+| `Phase 3` normalization 与 fact snapshot | `Partial` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已能消费政策金融 current bundle；`src/industry/platform/normalization/productEcosystemDryRun.ts` 已能消费产品生态 formal bundle，产出 registry runtime snapshot、normalized / rejected / coverage / contribution refs 与成功/失败两类 `normalization-feedback.v1` dry-run payload；`src/__tests__/industry/platform/normalization.test.ts` 覆盖 positive / negative。 | 产品生态对接范围内的 contract dry-run / registry snapshot / normalization dry-run 已完成；仍未进入 source-chain dedupe、fact resolution、owner arbitration、closed snapshot。原因：这些属于 closed fact snapshot / claim-builder 前置，不在本分支“只接产品生态下一步”的最小范围内。 |
 | `Phase 4` claim-builder 与 audit | `Blocked` | schema 中已有 `claim-candidate-batch.v1`、`audit-request.v1`、`audit-result.v1`、`counter-evidence-audit.v1`。 | 需要 Phase 3 的 closed fact snapshot、`FactResolutionAudit`、owner transfer artifact；还需要 A/B/C 反例 fixture。 |
 | `Phase 5` tier decision 与 weekly 三层输出 | `Blocked` | schema 中已有 `industry-trend-card.v1`、`industry-claim-ledger.v1`、`weekly-industry-trend-section.v2`、`consumer-weekly-industry-view.v1`、`public-weekly-industry-projection.v1`。 | 需要 Phase 4 audit result、decision context artifact、最近 7 日 `DailyIndustryEvidencePack.v2` 与 `RollingEvidenceWindowSnapshot.v1`。 |
 | `Phase 6` eval / replay / structure | `Blocked` | 现有 platform contract / normalization / registry tests 可跑；部分 A/B/C fixtures 已存在。 | 需要三组正式 replay/eval/gold/negative 资产冻结后拼总评测；中台不替领域组补造语义 fixture。 |
@@ -43,8 +45,8 @@
 | --- | --- | --- |
 | `1号执行人` 政策金融组 | 正式 envelope / payload / manifest / canonical artifact refs；`normalized_event_batch_refs`、`rejected_event_batch_refs?`、`source_message_ids`、`coverage_refs`、`contribution_refs`；official-first failure、anti-upgrade、owner boundary、policy/finance replay refs。 | 继续 Phase 2 group snapshot、Phase 3 dry-run -> closed fact snapshot。 |
 | `2号执行人` 学术前沿组 | 从 preparatory refs 升级为正式 `industry-signal-event-batch.v1` producer handoff；positive canonical、near-boundary、academic replay/eval refs。 | 从 preparatory review 进入正式 contract test / normalization dry-run。 |
-| `3号执行人` 产品生态 / 社区新闻组 | 产品生态与社区新闻正式 envelope / payload / manifest / refs；owner boundary、`news-pr` anti-upgrade、community noise 反例与 replay refs。 | 继续 Phase 2 group snapshot、Phase 3 dry-run，并给 Phase 6 提供负例资产。 |
-| `4号执行人` 中台裁决组 | 任一组 refs 到齐后，先按组跑 contract test、registry runtime snapshot、normalization dry-run；三组都到齐后再拼 daily pack、rolling snapshot、audit、tier、weekly 三层输出。 | 当前可独立推进到 Phase 2 runtime/governance 边界；下一步不能越过正式 handoff 脑补 Phase 3+。 |
+| `3号执行人` 产品生态 / 社区新闻组 | 产品生态与社区新闻正式 envelope / payload / manifest / refs；owner boundary、`news-pr` anti-upgrade、community noise 反例与 replay refs。 | 已解锁中台 contract dry-run 与 normalization dry-run；收到 `normalization-feedback.v1` dry-run payload 后，如有失败反馈，仅在本组目录内修正 payload / lineage / refs。 |
+| `4号执行人` 中台裁决组 | 本分支只接产品生态 formal bundle：跑 contract test、registry runtime snapshot、normalization dry-run，并回传 `normalization-feedback.v1`。 | 产品生态下一步所需 snapshot / dry-run / 反馈已落地；closed fact snapshot、audit、tier、weekly 三层输出仍等待更完整 replay/eval 与全量集成范围。 |
 
 ## 负责范围
 
@@ -542,3 +544,4 @@
 | 2026-06-27 | `pnpm install` | `Completed` | 按 lockfile 恢复本 worktree 依赖后执行验证 |
 | 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform` | `Completed` | 中台平台测试 3 files / 36 tests passed |
 | 2026-06-27 | `pnpm run typecheck` | `Completed` | `tsc --noEmit` passed |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Completed` | 产品生态 formal bundle 已接入中台 registry snapshot / normalization dry-run，4 tests passed，返回 `normalization-feedback.v1` dry-run payload |

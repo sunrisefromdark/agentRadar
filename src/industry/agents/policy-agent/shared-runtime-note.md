@@ -3,15 +3,11 @@
 ## 背景
 
 - 政策金融组 producer 已完成 canonical handoff、same-run runtime refs 透传、current/negative compatibility fixture 与 contract/negative 回归。
-- 当前 remaining gap 不在领域 producer，而在中台对这些 refs 的实际消费链路与共享治理收口。
+- 当前 remaining gap 不在领域 producer；`normalization dry-run` 已落地，剩余在中台对这些 refs 的实际 runtime 消费链路与共享治理收口。
 
 ## 需要中台上收的共享运行时能力
 
-1. normalization consumer 入口
-   - 可直接消费 `buildPolicyFinanceHandoffBundle(...)` 生成的 `messages / manifests / payloads / artifactRefs`
-   - 对 `daily-industry-evidence-pack-input.v1` 做 ref 级 materialize，而不是要求领域组额外拼接共享对象
-
-2. same-run dispatch runtime consumer
+1. same-run dispatch runtime consumer
    - 对 `claim-critical` message 正式消费以下字段：
      - `dispatch_context_ref`
      - `scheduling_key`
@@ -20,7 +16,7 @@
      - `capacity_reservation_refs`
    - 与 `validateDispatchRuntimeGate(...)` 的约束保持同一真源，不再让领域组各自复制校验逻辑
 
-3. shared governance lookup
+2. shared governance lookup
    - 将 `field-ownership-policy.v1`
    - `axis-runtime-budget-profile.v1`
    - `same-run-review-availability-policy.v1`
@@ -30,6 +26,7 @@
 
 ## 本组已交付给中台的现成输入
 
+- `normalization dry-run` 入口：`src/industry/platform/normalization/financePolicyDryRun.ts`
 - builder 入口：`src/industry/agents/policy-agent/handoff.ts`
 - producer same-run envelope seam：`src/industry/agents/policy-agent/groupProtocol.ts`
 - handoff note：`src/industry/agents/policy-agent/handoff-note.md`

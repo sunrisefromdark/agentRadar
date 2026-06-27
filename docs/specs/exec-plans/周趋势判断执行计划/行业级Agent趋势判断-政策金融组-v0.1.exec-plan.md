@@ -250,7 +250,7 @@
 
 ### 你只在这些时点必须等待
 
-- 只有在你要把本组结果正式交给别组消费时，才需要等待 `4号执行人` 的 `Phase 1A`。
+- 只有在你要把本组结果正式交给别组消费，而中台 contract 尚未冻结时，才需要等待 `4号执行人` 的对应 contract 冻结；当前这一步已经完成。
 - 只有在你要写正式 `industry-signal-event-batch.v1`、`axis-tool-coverage-report.v1`、`industry-agent-contribution.v1` 并作为跨组真交接件提交时，才需要等 canonical schema 和 payload 正式名冻结。
 - 只有在你要接 same-run 的高成本路径时，才需要等 dispatch / budget runtime 基座。
 
@@ -290,8 +290,9 @@
 
 ### 等到什么产物出来再继续
 
-- 等到 `4号执行人` 发出 canonical schema、reason/state 真源、artifact path、payload 正式名。
-- 等到 current consumer fixtures 和 compatibility matrix 可用后，再把本地 seam 收口成正式 handoff。
+- 当前不再等待 canonical schema、reason/state 真源、artifact path、payload 正式名；这些 contract 真源与 dry-run 入口已经存在。
+- 当前真正需要等待的是 `4号执行人` 把 same-run refs 与 shared governance profile 接成真实 runtime 行为。
+- 只有当 `4号执行人` 在 runtime path 上按合同给出新的明确拒收项时，本组才需要再补一次字段、样本或语义。
 
 ### 不要等什么
 
@@ -302,9 +303,9 @@
 ### 本组从开工到完工的顺序
 
 1. 先在本组目录里把 source catalog、route 草稿、fixture、local seam、测试骨架做起来。
-2. 等 `4号执行人` 发出 `Phase 1A` 的 canonical schema、payload 正式名、artifact path 后，把本地 seam 收口成正式 handoff。
+2. 在 canonical schema、payload 正式名、artifact path 冻结后，把本地 seam 收口成正式 handoff；这一步当前已完成。
 3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
-4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 activation / stop / budget / same-run 这些后接线能力接上。
+4. 当前只剩 `4号执行人` 把 activation / stop / budget / same-run 这些后接线能力接成平台 runtime 行为；本组 producer 侧已完成。
 5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
 ## 输出与 handoff
@@ -485,6 +486,7 @@ handoff 要求：
 | 2026-06-26 | `npx vitest run src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 9 个测试文件、28 条测试全部通过；已把政策金融组 producer 切到 canonical payload 名 / message kind / `industry://` artifact ref，并通过平台 handoff gate dry-run |
 | 2026-06-26 | `npx vitest run src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 9 个测试文件、28 条测试全部通过；已补齐 event batch / contribution / daily input 的 `source_message_id` 与顶层 canonical 字段，继续保持平台 handoff gate 通过 |
 | 2026-06-26 | `npx tsx scripts/execPlanPreflight.ts --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md" && npx tsx scripts/execPlanPreflight.ts --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md"` | `Passed` | 已补齐本计划对应 receipt，并通过 code-implementation preflight 校验 |
+| 2026-06-27 | `corepack pnpm tsx scripts/syncExecPlanStatus.ts` | `Passed` | 已补 exec-plan 自动同步脚本；相关代码落地并进入暂存区时，会自动同步本计划的实施阶段状态，并按需刷新对应 preflight receipt |
 
 ## 下一阶段入口
 

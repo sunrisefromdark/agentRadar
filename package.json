@@ -6,6 +6,7 @@
   "packageManager": "pnpm@9.15.9",
   "scripts": {
     "prepare": "node scripts/setupGitHooks.mjs",
+    "exec-plan:sync": "node scripts/syncExecPlanStatus.mjs",
     "build": "node scripts/buildProduction.mjs",
     "clean": "node scripts/buildProduction.mjs --clean",
     "check:mojibake": "node scripts/checkMojibake.mjs",

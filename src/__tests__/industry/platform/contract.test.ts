@@ -14,7 +14,11 @@ import {
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
 import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
-import { reviewAcademicPreparatoryHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
+import {
+  reviewAcademicPreparatoryHandoff,
+  validateAcademicHandoff,
+  type AcademicFormalHandoffBundle,
+} from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
   validateProductEcosystemHandoff,
   type ProductEcosystemHandoffBundle,
@@ -636,7 +640,110 @@ describe("industry platform contracts", () => {
       });
     });
   });
+
+  describe("academic formal handoff gate", () => {
+    const baseBundle = (): AcademicFormalHandoffBundle => ({
+      messages: [
+        academicMessage("industry-signal-event-batch.v1", "industry://internal/2026-06-26/events/research-paper"),
+        academicMessage("industry-signal-event-batch.v1", "industry://internal/2026-06-26/events/conference-academic"),
+        academicMessage("axis-tool-coverage-report.v1", "industry://internal/2026-06-26/coverage/research-paper"),
+        academicMessage("axis-tool-coverage-report.v1", "industry://internal/2026-06-26/coverage/conference-academic"),
+        academicMessage("industry-agent-contribution.v1", "industry://internal/2026-06-26/contribution/research-frontier"),
+        academicMessage("industry-agent-contribution.v1", "industry://internal/2026-06-26/contribution/conference-academic"),
+        academicMessage("daily-industry-evidence-pack-input.v1", "industry://internal/2026-06-26/daily/academic-input"),
+      ],
+      manifests: [
+        { artifact_ref: "industry://internal/2026-06-26/events/research-paper" },
+        { artifact_ref: "industry://internal/2026-06-26/events/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/events/research-paper-rejected" },
+        { artifact_ref: "industry://internal/2026-06-26/events/conference-academic-rejected" },
+        { artifact_ref: "industry://internal/2026-06-26/coverage/research-paper" },
+        { artifact_ref: "industry://internal/2026-06-26/coverage/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/contribution/research-frontier" },
+        { artifact_ref: "industry://internal/2026-06-26/contribution/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/daily/academic-input" },
+      ],
+      payloads: [
+        academicPayload("industry-signal-event-batch.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("industry-signal-event-batch.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("axis-tool-coverage-report.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("axis-tool-coverage-report.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("industry-agent-contribution.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("industry-agent-contribution.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("daily-industry-evidence-pack-input.v1", {
+          normalized_event_batch_refs: [
+            "industry://internal/2026-06-26/events/research-paper",
+            "industry://internal/2026-06-26/events/conference-academic",
+          ],
+          rejected_event_batch_refs: [
+            "industry://internal/2026-06-26/events/research-paper-rejected",
+            "industry://internal/2026-06-26/events/conference-academic-rejected",
+          ],
+          source_message_ids: ["m1", "m2"],
+          coverage_refs: [
+            "industry://internal/2026-06-26/coverage/research-paper",
+            "industry://internal/2026-06-26/coverage/conference-academic",
+          ],
+          contribution_refs: [
+            "industry://internal/2026-06-26/contribution/research-frontier",
+            "industry://internal/2026-06-26/contribution/conference-academic",
+          ],
+        }),
+      ],
+      artifactRefs: [
+        "industry://internal/2026-06-26/events/research-paper",
+        "industry://internal/2026-06-26/events/conference-academic",
+        "industry://internal/2026-06-26/events/research-paper-rejected",
+        "industry://internal/2026-06-26/events/conference-academic-rejected",
+        "industry://internal/2026-06-26/coverage/research-paper",
+        "industry://internal/2026-06-26/coverage/conference-academic",
+        "industry://internal/2026-06-26/contribution/research-frontier",
+        "industry://internal/2026-06-26/contribution/conference-academic",
+        "industry://internal/2026-06-26/daily/academic-input",
+      ],
+    });
+
+    it("accepts complete academic formal handoff for dry-run", () => {
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), baseBundle())).toEqual({
+        ok: true,
+        status: "accepted_for_dry_run",
+      });
+    });
+
+    it("rejects academic formal handoff missing the two-axis daily cardinality", () => {
+      const bundle = baseBundle();
+      const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
+      expect(daily).toBeDefined();
+      daily!.coverage_refs = ["industry://internal/2026-06-26/coverage/research-paper"];
+
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+  });
 });
+
+function academicMessage(payloadSchema: string, payloadRef: string): Record<string, unknown> {
+  return {
+    kind:
+      payloadSchema === "industry-signal-event-batch.v1"
+        ? "evidence_batch"
+        : payloadSchema === "axis-tool-coverage-report.v1"
+          ? "tool_status_report"
+          : payloadSchema === "industry-agent-contribution.v1"
+            ? "industry_agent_contribution"
+            : "daily_industry_evidence_pack_input",
+    from_agent_id: "academic-agent",
+    to_agent_id: "normalization-agent",
+    payload_schema: payloadSchema,
+    payload_ref: payloadRef,
+  };
+}
+
+function academicPayload(payload_schema: string, extra: Record<string, unknown>): Record<string, unknown> {
+  return { payload_schema, schema_version: "1.0.0", ...extra };
+}
 
 function buildProductEcosystemContractInput() {
   const base = {

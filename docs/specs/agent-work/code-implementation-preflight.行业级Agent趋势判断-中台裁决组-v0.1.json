@@ -1,0 +1,8 @@
+{
+  "skill_path": "docs/specs/agent-work/CodeImplementation_Skill.md",
+  "skill_sha256": "a15bb25d65ff2b12867a3255812d109d0821d6838a89b232392cbfaa70b7a95d",
+  "exec_plan_path": "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md",
+  "exec_plan_sha256": "c54824d0b9fca464bd1ad5de4cc8d0de31650e92a9d720cf39f5211dab266232",
+  "generated_at": "2026-06-27T11:40:44.514Z",
+  "acknowledged": true
+}

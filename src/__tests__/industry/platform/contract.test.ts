@@ -16,6 +16,10 @@ import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
 import { reviewAcademicPreparatoryHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
+  validateProductEcosystemHandoff,
+  type ProductEcosystemHandoffBundle,
+} from "../../../industry/platform/contracts/productEcosystemHandoff.ts";
+import {
   PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS,
   PHASE1_SHARED_GOVERNANCE_PROFILE_IDS,
   resolveSharedGovernanceProfile,
@@ -26,6 +30,7 @@ import {
   validateExecutionContext,
   validateSameRunConsumerRefs,
 } from "../../../industry/platform/contracts/consumerFixtures.ts";
+import { buildProductEcosystemHandoff } from "../../../industry/agents/community-news-agent/handoff.ts";
 
 describe("industry platform contracts", () => {
   function buildAcademicReplayBundle() {
@@ -486,6 +491,132 @@ describe("industry platform contracts", () => {
     });
   });
 
+  describe("product ecosystem handoff gate", () => {
+    const baseBundle = (): ProductEcosystemHandoffBundle => {
+      const handoff = buildProductEcosystemHandoff(buildProductEcosystemContractInput());
+      const axes = [
+        handoff.productPlatform,
+        handoff.developerStudio,
+        handoff.projectOss,
+        handoff.cnCommunity,
+        handoff.globalCommunity,
+        handoff.newsPr,
+      ];
+      const artifacts = [
+        ...axes.flatMap((axis) => [
+          axis.accepted,
+          axis.counter,
+          axis.diagnostic,
+          axis.rejected,
+          axis.coverage,
+          axis.contribution,
+        ]),
+        handoff.dailyInput,
+      ];
+
+      return {
+        messages: artifacts.map((artifact) => ({ ...artifact.envelope })),
+        manifests: artifacts.map((artifact) => ({ ...artifact.manifest })),
+        payloads: artifacts.map((artifact) => ({
+          payload_schema: artifact.envelope.payload_schema,
+          ...artifact.payload,
+        })),
+        artifactRefs: artifacts.map((artifact) => artifact.manifest.artifact_ref),
+      };
+    };
+
+    it("accepts a complete product ecosystem handoff for dry-run", () => {
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), baseBundle())).toEqual({
+        ok: true,
+        status: "accepted_for_dry_run",
+      });
+    });
+
+    it("rejects informal payload names", () => {
+      const bundle = baseBundle();
+      bundle.messages[0].payload_schema = "event-batch";
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "schema_mismatch",
+      });
+    });
+
+    it("rejects messages missing the formal envelope kind", () => {
+      const bundle = baseBundle();
+      delete bundle.messages[0].kind;
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "schema_mismatch",
+      });
+    });
+
+    it("rejects payload refs missing from manifest and artifact refs", () => {
+      const bundle = baseBundle();
+      const removedRef = bundle.messages[0].payload_ref;
+      bundle.manifests = bundle.manifests.filter((manifest) => manifest.artifact_ref !== removedRef);
+      bundle.artifactRefs = bundle.artifactRefs.filter((artifactRef) => artifactRef !== removedRef);
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+
+    it("rejects higher major payload versions", () => {
+      const bundle = baseBundle();
+      bundle.payloads[0].schema_version = "2.0.0";
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "unsupported_version",
+      });
+    });
+
+    it("rejects wrong daily coverage and contribution cardinality", () => {
+      const bundle = baseBundle();
+      const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
+      expect(daily).toBeDefined();
+      daily!.coverage_refs = ["c1"];
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+
+      daily!.coverage_refs = ["c1", "c2", "c3", "c4", "c5"];
+      daily!.contribution_refs = ["r1"];
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+
+    it("rejects daily input that embeds event objects", () => {
+      const bundle = baseBundle();
+      const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
+      expect(daily).toBeDefined();
+      daily!.accepted_events = [{ event_id: "e1" }];
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+
+    it("rejects claim-critical messages without dispatch context", () => {
+      const bundle = baseBundle();
+      bundle.messages[0].capability_class = "claim-critical";
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "dispatch_context_missing",
+      });
+    });
+  });
+
   describe("academic preparatory handoff gate", () => {
     it("accepts academic preparatory refs for dry-run review without promoting them to frozen handoff", () => {
       expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
@@ -506,3 +637,121 @@ describe("industry platform contracts", () => {
     });
   });
 });
+
+function buildProductEcosystemContractInput() {
+  const base = {
+    runId: "run-product-ecosystem-platform-contract",
+    threadId: "thread-product-ecosystem-platform-contract",
+    windowStart: "2026-06-20T00:00:00+08:00",
+    windowEnd: "2026-06-26T23:59:59+08:00",
+    now: "2026-06-26T17:30:00+08:00",
+    canonicalSourceAvailable: true,
+  };
+  return {
+    ...base,
+    productPlatform: {
+      ...base,
+      availableToolIds: ["vendor-release-notes-feed"],
+      sources: [
+        {
+          sourceId: "vendor-release",
+          displayName: "Release Notes",
+          sourceType: "vendor_release" as const,
+          authorityTier: "core" as const,
+          primarySourceDistance: "primary" as const,
+          bucket: "accepted" as const,
+          title: "Product release",
+          summary: "Official product release.",
+        },
+      ],
+    },
+    developerStudio: {
+      ...base,
+      availableToolIds: ["developer-docs-changelog"],
+      sources: [
+        {
+          sourceId: "sdk-release",
+          displayName: "SDK Feed",
+          sourceType: "sdk_release" as const,
+          authorityTier: "core" as const,
+          primarySourceDistance: "primary" as const,
+          bucket: "accepted" as const,
+          title: "SDK release",
+          summary: "Developer studio release.",
+        },
+      ],
+    },
+    projectOss: {
+      ...base,
+      availableToolIds: ["github-release-feed"],
+      sources: [
+        {
+          sourceId: "repo-release",
+          displayName: "GitHub Releases",
+          sourceType: "repo_release" as const,
+          authorityTier: "core" as const,
+          primarySourceDistance: "primary" as const,
+          bucket: "accepted" as const,
+          title: "Repo release",
+          summary: "Open source release.",
+        },
+      ],
+    },
+    cnCommunity: {
+      ...base,
+      responsibilityId: "cn-community" as const,
+      availableToolIds: ["cn-community-original-thread-index"],
+      sources: [
+        {
+          sourceId: "cn-thread",
+          displayName: "CN Community",
+          sourceType: "forum_post" as const,
+          authorityTier: "proven" as const,
+          primarySourceDistance: "primary" as const,
+          language: "zh" as const,
+          region: "cn",
+          bucket: "accepted" as const,
+          title: "CN community practice",
+          summary: "Original CN community signal.",
+        },
+      ],
+    },
+    globalCommunity: {
+      ...base,
+      responsibilityId: "global-community" as const,
+      availableToolIds: ["global-community-original-thread-index"],
+      sources: [
+        {
+          sourceId: "global-issue",
+          displayName: "Global Issue",
+          sourceType: "issue" as const,
+          authorityTier: "proven" as const,
+          primarySourceDistance: "primary" as const,
+          language: "en" as const,
+          region: "global",
+          bucket: "accepted" as const,
+          title: "Global community issue",
+          summary: "Original global community signal.",
+        },
+      ],
+    },
+    newsPr: {
+      ...base,
+      availableToolIds: ["news-pr-narrative-index"],
+      sources: [
+        {
+          sourceId: "news-context",
+          displayName: "Media",
+          sourceType: "media_report" as const,
+          authorityTier: "ordinary" as const,
+          primarySourceDistance: "secondary" as const,
+          language: "en" as const,
+          region: "global",
+          bucket: "diagnostic" as const,
+          title: "News narrative context",
+          summary: "News narrative stays as context.",
+        },
+      ],
+    },
+  };
+}

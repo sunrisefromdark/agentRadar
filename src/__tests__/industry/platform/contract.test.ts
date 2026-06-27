@@ -12,7 +12,7 @@ import {
   validateFinancePolicyHandoff,
   type FinancePolicyHandoffBundle,
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
-import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
+import { buildAcademicHandoffBundle } from "../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
 import { validateAcademicHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
@@ -40,7 +40,7 @@ describe("industry platform contracts", () => {
         "utf-8",
       ),
     ) as ReplayWindowFixture;
-    return buildAcademicPrepBundle(fixture);
+    return buildAcademicHandoffBundle(fixture);
   }
 
   it("keeps the parallel worktree skeleton frozen under the agreed roots", () => {
@@ -618,16 +618,30 @@ describe("industry platform contracts", () => {
   });
 
   describe("academic handoff gate", () => {
-    it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and schemas", () => {
+    it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and formal bundle packaging", () => {
       expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
         ok: true,
-        status: "handoff_ready",
+        status: "accepted_for_dry_run",
       });
     });
 
     it("rejects academic daily refs that do not resolve to handoff artifacts", () => {
       const bundle = buildAcademicReplayBundle();
-      bundle.daily_input.payload.coverage_refs = ["industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing", bundle.daily_input.payload.coverage_refs[1]!];
+      const dailyInput = bundle.payloads.find(
+        (payload) => (payload as Record<string, unknown>).payload_schema === "daily-industry-evidence-pack-input.v1",
+      ) as Record<string, unknown>;
+      const coverageRefs = dailyInput.coverage_refs as string[];
+      dailyInput.coverage_refs = ["industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing", coverageRefs[1]!];
+
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+
+    it("rejects academic formal bundles that omit owner-boundary fixture refs", () => {
+      const bundle = buildAcademicReplayBundle();
+      bundle.ownerBoundaryFixtureRefs = [];
 
       expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,

@@ -1,0 +1,1518 @@
+{
+  "messages": [
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "8d504c5e955917c61c1f7754c6c8526cbd8159a8",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "2fbe297d89d25ceb3da1c9672d0a14f47d2d96c1",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "32b2e3ae0d1178907cc5a821613f13f2d1a66632",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "511ba90e94df74f1b2a4dca32faa3f50a933fffd",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "4c35ef4d823bb3e519720db6ee74f8b9c48938ec",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "9ff0da3238f1913e1c3f0e729dbd28eb5ea65379",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "e7f55241a0d39dc5832533d1b0cd7f965f2cce45",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "ef13380670a7d47a97265186ff227fbbc03a42bb",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "tool_status_report",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "payload_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "59b419c1c16b7c1df8cfa1fea4023871de27d5f4",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "tool_status_report",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "payload_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "a8d108b18035cad88b1ea639772416d2a4ad0d4b",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "research-frontier",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "industry_agent_contribution",
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "8e7c7daa4bedb4013f63c6f6fe7b39821063ff62",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "responsibility_id": "conference-academic",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "industry_agent_contribution",
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "178eb8b0368397cba3d805ea5a50e1fdfbb5b666",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27#message",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "local-academic-thread",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "sent_at": "2026-06-26T00:00:00.000Z",
+      "from_agent_id": "academic-agent",
+      "to_agent_id": "normalization-agent",
+      "checkpoint_stage": "packaging",
+      "capability_class": "projection",
+      "kind": "daily_industry_evidence_pack_input",
+      "payload_schema": "daily-industry-evidence-pack-input.v1",
+      "payload_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27"
+      ],
+      "capacity_reservation_refs": [],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "541a1077f0781f65e148cb72cb253072a53d18df",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    }
+  ],
+  "manifests": [
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "paper-agent-memory-preprint"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "d27ab38cf08df42597acd28a78faf3b7f8dcb6d5",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c.json",
+      "summary_cn": "research_paper accepted batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "paper-agent-memory-replication-counter"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "be3cbc40db6ed052af9d243ef6182d83eaf0fa2d",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0.json",
+      "summary_cn": "research_paper counter batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "bbd9819a3c5366df3c92a960d84b7565d2cb0d48",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002.json",
+      "summary_cn": "research_paper diagnostic batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "paper-missing-citation-trace"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "d9b8c26f8713884e02175ebde7d655012641cf9e",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229.json",
+      "summary_cn": "research_paper rejected batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "conf-neurips-workshop-agents"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "042368c97d365ecd8b210231a41c994d48e799b7",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07.json",
+      "summary_cn": "conference_academic accepted batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "77970e5ca99908250845e8f00b9f60ecb8b50f9e",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044.json",
+      "summary_cn": "conference_academic counter batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "conf-acl-leaderboard-gap"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "8ae16c9a4abe36c778658a2f7aca8c1466764285",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3.json",
+      "summary_cn": "conference_academic diagnostic batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+      "artifact_kind": "event-batch",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "conf-screenshot-no-venue"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "9a86e9fa767cd789988efda1b14b83ad54e6c839",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31.json",
+      "summary_cn": "conference_academic rejected batch"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+      "artifact_kind": "tool-coverage-report",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "event_ids": [
+        "paper-agent-memory-preprint"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "95e5afd00e7b7ec07e29dfce23ca52cdf505bcc1",
+      "storage_path": "data/industry/internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618.json",
+      "summary_cn": "research_paper coverage report"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f",
+      "artifact_kind": "tool-coverage-report",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "event_ids": [
+        "conf-neurips-workshop-agents"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "da0bb7a94a09bf3e07d9296603a0d740bfac0694",
+      "storage_path": "data/industry/internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f.json",
+      "summary_cn": "conference_academic coverage report"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "artifact_kind": "agent-contribution",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "event_ids": [
+        "paper-agent-memory-preprint",
+        "paper-agent-memory-replication-counter",
+        "paper-missing-citation-trace"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "7aaa8bb1a6665955b7ac20e8089862697afb1596",
+      "storage_path": "data/industry/internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35.json",
+      "summary_cn": "research_paper contribution"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "artifact_kind": "agent-contribution",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "event_ids": [
+        "conf-neurips-workshop-agents",
+        "conf-acl-leaderboard-gap",
+        "conf-screenshot-no-venue"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "475e7684bf0665bfb3ddd35613ea87b727fb20f7",
+      "storage_path": "data/industry/internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea.json",
+      "summary_cn": "conference_academic contribution"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27",
+      "artifact_kind": "daily-pack-input",
+      "schema_version": "industry-agent-artifact-manifest.v1",
+      "produced_by_agent_id": "academic-agent",
+      "produced_at": "2026-06-26T00:00:00.000Z",
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "research_paper",
+        "conference_academic"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "e2cfdd87d069f4d3e0d656ca2abaffad965e7aca",
+      "storage_path": "data/industry/internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27.json",
+      "summary_cn": "academic daily handoff input"
+    }
+  ],
+  "payloads": [
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.research_paper.accepted",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618"
+      ],
+      "responsibility_id": "research-frontier",
+      "axis": "research_paper",
+      "bucket": "accepted",
+      "event_ids": [
+        "paper-agent-memory-preprint"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+      "events": [
+        {
+          "event_id": "paper-agent-memory-preprint",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-20T00:00:00.000Z",
+          "source_published_at": "2026-06-18T00:00:00.000Z",
+          "ingested_at": "2026-06-20T00:00:00.000Z",
+          "freshness_anchor_kind": "first_release",
+          "freshness_profile_id": "academic.paper.first_release",
+          "axis": "research_paper",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "arxiv",
+            "display_name": "arXiv",
+            "source_url": "https://arxiv.org/abs/2606.12345",
+            "source_type": "paper",
+            "authority_tier": "core",
+            "primary_source_distance": "primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "学术一手源，直接服务研究前沿判断。"
+          },
+          "evidence": {
+            "title": "Agent Memory Layers for Long-Horizon Tool Use",
+            "summary_cn": "研究提出分层 Agent memory 结构，并提供 arXiv 与代码仓库引用链。",
+            "citation_trace_refs": [
+              "arxiv:2606.12345",
+              "https://github.com/example/agent-memory-layers"
+            ],
+            "canonical_ref": "arxiv:2606.12345"
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "research-frontier",
+          "execution_context": {
+            "primary_responsibility_id": "research-frontier",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "accepted",
+            "reason_codes": [],
+            "direct_fact_owner_agent_id": "academic-agent",
+            "anti_upgrade_guard": "single_preprint_not_core"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 1,
+        "freshness_anchor_complete": 1,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.research_paper.counter",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618"
+      ],
+      "responsibility_id": "research-frontier",
+      "axis": "research_paper",
+      "bucket": "counter",
+      "event_ids": [
+        "paper-agent-memory-replication-counter"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+      "events": [
+        {
+          "event_id": "paper-agent-memory-replication-counter",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-23T00:00:00.000Z",
+          "source_published_at": "2026-06-22T00:00:00.000Z",
+          "ingested_at": "2026-06-23T00:00:00.000Z",
+          "freshness_anchor_kind": "code_or_replication_release",
+          "freshness_profile_id": "academic.paper.code_or_replication_release",
+          "axis": "research_paper",
+          "source_polarity_cue": "counter",
+          "source": {
+            "source_id": "code",
+            "display_name": "Replication or Code Release",
+            "source_url": "https://github.com/example/agent-memory-replication",
+            "source_type": "paper",
+            "authority_tier": "proven",
+            "primary_source_distance": "near_primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "学术一手源，直接服务研究前沿判断。"
+          },
+          "evidence": {
+            "title": "Replication Notes on Agent Memory Layers",
+            "summary_cn": "复现结果指出原论文在长序列工具调用场景存在性能回落，可作为 counter 事件。",
+            "citation_trace_refs": [
+              "arxiv:2606.12345",
+              "https://github.com/example/agent-memory-replication"
+            ],
+            "canonical_ref": "arxiv:2606.12345"
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "research-frontier",
+          "execution_context": {
+            "primary_responsibility_id": "research-frontier",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "counter",
+            "reason_codes": [
+              "counter_evidence_reported"
+            ],
+            "direct_fact_owner_agent_id": "academic-agent"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 1,
+        "freshness_anchor_complete": 1,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.research_paper.diagnostic",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618"
+      ],
+      "responsibility_id": "research-frontier",
+      "axis": "research_paper",
+      "bucket": "diagnostic",
+      "event_ids": [],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+      "events": [],
+      "metric_input_completeness": {
+        "citation_trace_complete": 0,
+        "freshness_anchor_complete": 0,
+        "primary_source_complete": 0
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.research_paper.rejected",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618"
+      ],
+      "responsibility_id": "research-frontier",
+      "axis": "research_paper",
+      "bucket": "rejected",
+      "event_ids": [
+        "paper-missing-citation-trace"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+      "events": [
+        {
+          "event_id": "paper-missing-citation-trace",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-24T00:00:00.000Z",
+          "source_published_at": "2026-06-23T00:00:00.000Z",
+          "ingested_at": "2026-06-24T00:00:00.000Z",
+          "freshness_anchor_kind": "first_release",
+          "freshness_profile_id": "academic.paper.first_release",
+          "axis": "research_paper",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "benchmark",
+            "display_name": "Benchmark or Dataset",
+            "source_url": "https://example.com/agent-paper-recap",
+            "source_type": "paper",
+            "authority_tier": "proven",
+            "primary_source_distance": "near_primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "学术一手源，直接服务研究前沿判断。"
+          },
+          "evidence": {
+            "title": "Untraceable Agent Paper Recap",
+            "summary_cn": "只有摘要转述，没有 DOI、arXiv、OpenReview 或 proceedings 链接，应拒绝进入 accepted。",
+            "citation_trace_refs": []
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "research-frontier",
+          "execution_context": {
+            "primary_responsibility_id": "research-frontier",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "rejected",
+            "reason_codes": [
+              "missing_citation_trace"
+            ],
+            "direct_fact_owner_agent_id": "academic-agent",
+            "anti_upgrade_guard": "single_preprint_not_core"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 0,
+        "freshness_anchor_complete": 1,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.conference_academic.accepted",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "responsibility_id": "conference-academic",
+      "axis": "conference_academic",
+      "bucket": "accepted",
+      "event_ids": [
+        "conf-neurips-workshop-agents"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+      "events": [
+        {
+          "event_id": "conf-neurips-workshop-agents",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-21T00:00:00.000Z",
+          "source_published_at": "2026-06-20T00:00:00.000Z",
+          "ingested_at": "2026-06-21T00:00:00.000Z",
+          "freshness_anchor_kind": "accepted_or_proceedings",
+          "freshness_profile_id": "academic.conference.accepted_or_proceedings",
+          "axis": "conference_academic",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "accepted_list",
+            "display_name": "Official Accepted List",
+            "source_url": "https://neurips.cc/Conferences/2026/Workshop/Agents",
+            "source_type": "conference",
+            "authority_tier": "core",
+            "primary_source_distance": "primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "会议官方材料，直接服务学术会议轴判断。"
+          },
+          "evidence": {
+            "title": "NeurIPS 2026 Agents Workshop Accepted List",
+            "summary_cn": "官方 accepted list 显示 Agent systems workshop 成为独立议题。",
+            "citation_trace_refs": [
+              "https://neurips.cc/Conferences/2026/Workshop/Agents"
+            ],
+            "canonical_ref": "https://neurips.cc/Conferences/2026/Workshop/Agents"
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "conference-academic",
+          "execution_context": {
+            "primary_responsibility_id": "conference-academic",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "accepted",
+            "reason_codes": [],
+            "direct_fact_owner_agent_id": "academic-agent"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 1,
+        "freshness_anchor_complete": 1,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.conference_academic.counter",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "responsibility_id": "conference-academic",
+      "axis": "conference_academic",
+      "bucket": "counter",
+      "event_ids": [],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+      "events": [],
+      "metric_input_completeness": {
+        "citation_trace_complete": 0,
+        "freshness_anchor_complete": 0,
+        "primary_source_complete": 0
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.conference_academic.diagnostic",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "responsibility_id": "conference-academic",
+      "axis": "conference_academic",
+      "bucket": "diagnostic",
+      "event_ids": [
+        "conf-acl-leaderboard-gap"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+      "events": [
+        {
+          "event_id": "conf-acl-leaderboard-gap",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-25T00:00:00.000Z",
+          "ingested_at": "2026-06-25T00:00:00.000Z",
+          "freshness_anchor_kind": "benchmark_or_dataset_update",
+          "freshness_profile_id": "academic.conference.benchmark_or_dataset_update",
+          "axis": "conference_academic",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "challenge",
+            "display_name": "Official Challenge or Leaderboard",
+            "source_url": "https://aclweb.org/challenges/agents-2026",
+            "source_type": "conference",
+            "authority_tier": "proven",
+            "primary_source_distance": "primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "会议官方材料，直接服务学术会议轴判断。"
+          },
+          "evidence": {
+            "title": "ACL Challenge Leaderboard Pending Snapshot",
+            "summary_cn": "官方 leaderboard 已指向挑战更新，但发布时间缺失，应进入 diagnostic 以等待中台正式接线。",
+            "citation_trace_refs": [
+              "https://aclweb.org/challenges/agents-2026/leaderboard"
+            ],
+            "canonical_ref": "https://aclweb.org/challenges/agents-2026/leaderboard"
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "conference-academic",
+          "execution_context": {
+            "primary_responsibility_id": "conference-academic",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "diagnostic",
+            "reason_codes": [
+              "missing_source_published_at"
+            ],
+            "direct_fact_owner_agent_id": "academic-agent"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 1,
+        "freshness_anchor_complete": 0,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_id": "academic-2026-06-26.conference_academic.rejected",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31#message",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "responsibility_id": "conference-academic",
+      "axis": "conference_academic",
+      "bucket": "rejected",
+      "event_ids": [
+        "conf-screenshot-no-venue"
+      ],
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+      "events": [
+        {
+          "event_id": "conf-screenshot-no-venue",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-25T00:00:00.000Z",
+          "source_published_at": "2026-06-24T00:00:00.000Z",
+          "ingested_at": "2026-06-25T00:00:00.000Z",
+          "freshness_anchor_kind": "accepted_or_proceedings",
+          "freshness_profile_id": "academic.conference.accepted_or_proceedings",
+          "axis": "conference_academic",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "schedule",
+            "display_name": "Official Schedule",
+            "source_url": "https://example.com/conf-screenshot",
+            "source_type": "conference",
+            "authority_tier": "proven",
+            "primary_source_distance": "primary"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 1,
+            "summary_cn": "会议官方材料，直接服务学术会议轴判断。"
+          },
+          "evidence": {
+            "title": "Conference Screenshot Without Venue Context",
+            "summary_cn": "只有会场截图，没有可追溯官方 venue 或 proceedings，应拒绝。",
+            "citation_trace_refs": []
+          },
+          "collected_by_agent_id": "academic-agent",
+          "responsibility_id": "conference-academic",
+          "execution_context": {
+            "primary_responsibility_id": "conference-academic",
+            "default_owner_agent_id": "academic-agent",
+            "operational_executor_id": "academic-agent",
+            "takeover_mode": "none"
+          },
+          "audit": {
+            "bucket": "rejected",
+            "reason_codes": [
+              "missing_canonical_venue"
+            ],
+            "direct_fact_owner_agent_id": "academic-agent"
+          }
+        }
+      ],
+      "metric_input_completeness": {
+        "citation_trace_complete": 0,
+        "freshness_anchor_complete": 1,
+        "primary_source_complete": 1
+      }
+    },
+    {
+      "axis": "research_paper",
+      "primary_tool_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver"
+      ],
+      "secondary_toolset_ids": [
+        "openreview-official",
+        "proceedings-catalog",
+        "benchmark-tracker",
+        "repo-source-check"
+      ],
+      "fallback_tool_ids": [],
+      "last_resort_tool_ids": [],
+      "eligible_tool_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver",
+        "openreview-official",
+        "proceedings-catalog",
+        "benchmark-tracker",
+        "repo-source-check"
+      ],
+      "selected_from_tool_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver",
+        "openreview-official",
+        "proceedings-catalog",
+        "benchmark-tracker",
+        "repo-source-check"
+      ],
+      "attempted_tool_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver",
+        "openreview-official",
+        "proceedings-catalog",
+        "benchmark-tracker",
+        "repo-source-check"
+      ],
+      "selection_scorecard_version": "academic-agent.local.v0",
+      "selection_score_total": 100,
+      "selection_score_breakdown": {
+        "authority": 40,
+        "traceability": 35,
+        "freshness": 25
+      },
+      "veto_reason_codes": [],
+      "selection_reason_codes": [
+        "official_academic_source_only"
+      ],
+      "active_route_level": "primary",
+      "active_tool_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver"
+      ],
+      "active_source_class": "official_academic",
+      "route_status": "degraded",
+      "budget_status": "within_budget",
+      "degraded": true,
+      "degradation_reason_codes": [
+        "partial_rejection_present"
+      ],
+      "candidate_ref_count": 3,
+      "accepted_ref_count": 1,
+      "citation_trace_rate": 0.33,
+      "evidence_event_ids": [
+        "paper-agent-memory-preprint"
+      ],
+      "rejected_event_ids": [
+        "paper-missing-citation-trace"
+      ],
+      "registry_snapshot_ref": "stub://industry/registry-snapshot/current",
+      "tool_registry_snapshot_ref": "stub://industry/tool-registry/current",
+      "summary_cn": "论文轴已绑定一手学术源。",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "schema_version": "1.0.0"
+    },
+    {
+      "axis": "conference_academic",
+      "primary_tool_ids": [
+        "conference-official",
+        "venue-resolver"
+      ],
+      "secondary_toolset_ids": [
+        "leaderboard-tracker"
+      ],
+      "fallback_tool_ids": [],
+      "last_resort_tool_ids": [],
+      "eligible_tool_ids": [
+        "conference-official",
+        "venue-resolver",
+        "leaderboard-tracker"
+      ],
+      "selected_from_tool_ids": [
+        "conference-official",
+        "venue-resolver",
+        "leaderboard-tracker"
+      ],
+      "attempted_tool_ids": [
+        "conference-official",
+        "venue-resolver",
+        "leaderboard-tracker"
+      ],
+      "selection_scorecard_version": "academic-agent.local.v0",
+      "selection_score_total": 100,
+      "selection_score_breakdown": {
+        "authority": 40,
+        "traceability": 35,
+        "freshness": 25
+      },
+      "veto_reason_codes": [],
+      "selection_reason_codes": [
+        "official_academic_source_only"
+      ],
+      "active_route_level": "primary",
+      "active_tool_ids": [
+        "conference-official",
+        "venue-resolver"
+      ],
+      "active_source_class": "official_academic",
+      "route_status": "degraded",
+      "budget_status": "within_budget",
+      "degraded": true,
+      "degradation_reason_codes": [
+        "partial_rejection_present"
+      ],
+      "candidate_ref_count": 3,
+      "accepted_ref_count": 1,
+      "citation_trace_rate": 0.33,
+      "evidence_event_ids": [
+        "conf-neurips-workshop-agents"
+      ],
+      "rejected_event_ids": [
+        "conf-screenshot-no-venue"
+      ],
+      "registry_snapshot_ref": "stub://industry/registry-snapshot/current",
+      "tool_registry_snapshot_ref": "stub://industry/tool-registry/current",
+      "summary_cn": "会议轴已绑定官方 accepted/proceedings/challenge 源。",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "schema_version": "1.0.0"
+    },
+    {
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_id": "academic-2026-06-26.research_paper.contribution",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35#message",
+      "actual_agent_id": "academic-agent",
+      "responsibility_id": "research-frontier",
+      "execution_context": {
+        "primary_responsibility_id": "research-frontier",
+        "default_owner_agent_id": "academic-agent",
+        "operational_executor_id": "academic-agent",
+        "takeover_mode": "none"
+      },
+      "status": "partial",
+      "covered_axes": [
+        "research_paper"
+      ],
+      "event_count": 3,
+      "accepted_event_count": 1,
+      "assisted_event_count": 0,
+      "rejected_event_count": 1,
+      "counter_event_count": 1,
+      "diagnostic_event_count": 0,
+      "metric_input_gap_count": 0,
+      "unscorable_event_count": 1,
+      "profile_blocked_event_count": 0,
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35"
+      ],
+      "tool_route_ids": [
+        "arxiv-official",
+        "paper-metadata-resolver",
+        "openreview-official",
+        "proceedings-catalog",
+        "benchmark-tracker",
+        "repo-source-check"
+      ],
+      "status_reason": "存在需中台接线前保留的 diagnostic/rejected 样本。",
+      "contribution_summary_cn": "已产出 research_paper 事件、coverage 与 replay 入口。"
+    },
+    {
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_id": "academic-2026-06-26.conference_academic.contribution",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea#message",
+      "actual_agent_id": "academic-agent",
+      "responsibility_id": "conference-academic",
+      "execution_context": {
+        "primary_responsibility_id": "conference-academic",
+        "default_owner_agent_id": "academic-agent",
+        "operational_executor_id": "academic-agent",
+        "takeover_mode": "none"
+      },
+      "status": "partial",
+      "covered_axes": [
+        "conference_academic"
+      ],
+      "event_count": 2,
+      "accepted_event_count": 1,
+      "assisted_event_count": 0,
+      "rejected_event_count": 1,
+      "counter_event_count": 0,
+      "diagnostic_event_count": 1,
+      "metric_input_gap_count": 1,
+      "unscorable_event_count": 1,
+      "profile_blocked_event_count": 0,
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+      ],
+      "tool_route_ids": [
+        "conference-official",
+        "venue-resolver",
+        "leaderboard-tracker"
+      ],
+      "status_reason": "存在需中台接线前保留的 diagnostic/rejected 样本。",
+      "contribution_summary_cn": "已产出 conference_academic 事件、coverage 与 replay 入口。"
+    },
+    {
+      "payload_schema": "daily-industry-evidence-pack-input.v1",
+      "payload_id": "academic-2026-06-26.academic.daily-input",
+      "schema_version": "1.0.0",
+      "run_id": "academic-2026-06-26",
+      "window_start": "2026-06-19T00:00:00.000Z",
+      "window_end": "2026-06-26T00:00:00.000Z",
+      "source_message_id": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27#message",
+      "normalized_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07"
+      ],
+      "rejected_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "counter_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044"
+      ],
+      "diagnostic_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3"
+      ],
+      "source_message_ids": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3#message",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31#message"
+      ],
+      "coverage_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f"
+      ],
+      "contribution_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+      ],
+      "input_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31"
+      ],
+      "summary_cn": "academic-agent 预交接 daily 输入，仅交 ref 与 lineage，不内嵌胖快照。"
+    }
+  ],
+  "artifactRefs": [
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0f8f3e1c5d0",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-923d65f1d002",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-02d9a74a0044",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+    "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+    "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f",
+    "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+    "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
+    "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27"
+  ],
+  "replayFixtureRefs": [
+    "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"
+  ],
+  "evalFixtureRefs": [
+    "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"
+  ],
+  "ownerBoundaryFixtureRefs": []
+}

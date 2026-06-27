@@ -1,8 +1,13 @@
 import fs from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
-import { buildAcademicPrepBundle } from "../../../../industry/agents/academic-agent/handoff.ts";
+import {
+  buildAcademicHandoffBundle,
+  buildAcademicPrepBundle,
+} from "../../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../../industry/agents/academic-agent/types.ts";
+import { validateAcademicHandoff } from "../../../../industry/platform/contracts/academicHandoff.ts";
+import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
 
 function readJson<T>(relativePath: string): T {
   return JSON.parse(fs.readFileSync(path.join(process.cwd(), relativePath), "utf8")) as T;
@@ -41,6 +46,31 @@ describe("academic-agent contract", () => {
       );
       expect(artifact.payload.actual_agent_id).toBe("academic-agent");
     }
+  });
+
+  it("wraps the academic artifacts as a formal bundle middle-platform can dry-run directly", () => {
+    const fixture = readJson<ReplayWindowFixture>(
+      "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+    );
+    const bundle = buildAcademicHandoffBundle(fixture);
+
+    expect(bundle.messages).toHaveLength(13);
+    expect(bundle.manifests).toHaveLength(13);
+    expect(bundle.payloads).toHaveLength(13);
+    expect(bundle.artifactRefs).toHaveLength(13);
+    expect(bundle.replayFixtureRefs).toEqual([
+      "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+    ]);
+    expect(bundle.evalFixtureRefs).toEqual([
+      "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+    ]);
+    expect(bundle.ownerBoundaryFixtureRefs).toEqual([
+      "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json",
+    ]);
+    expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toEqual({
+      ok: true,
+      status: "accepted_for_dry_run",
+    });
   });
 
   it("changes artifact refs when payload content changes within the same run", () => {

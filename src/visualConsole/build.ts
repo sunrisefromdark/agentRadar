@@ -19,6 +19,7 @@ import type {
 import { resolveDailyContext, resolveDailyTimeWindow, resolveNearestWeeklyAnchor, resolveWeeklyContext, resolveWeeklyTimeWindow } from "./context.ts";
 import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
+import { isDefaultDemotedProject } from "./projectRanking.ts";
 import {
   getDailyReport,
   getDailyNavigatorPreview,
@@ -81,6 +82,13 @@ type ProjectLibraryEnhancementEntry = {
 
 const runSnapshotCache = new Map<string, DerivedCacheEntry<RunSnapshotResult>>();
 const weeklySnapshotCache = new Map<string, DerivedCacheEntry<WeeklySnapshotResult>>();
+const OVERVIEW_HERO_SCORE_FLOOR = 75;
+const OVERVIEW_BUCKET_PRIORITY: Record<string, number> = {
+  today_pulse: 0,
+  mission_match: 1,
+  explore_ribbon: 2,
+  historical_context: 3,
+};
 
 function readDerivedCache<T>(
   cache: Map<string, DerivedCacheEntry<T>>,
@@ -192,10 +200,8 @@ const INFRA_HINT_PATTERN =
   /\b(infra|infrastructure|framework|sdk|runtime|orchestrator|toolchain|compiler|mcp|connector|platform|deployment|gateway|middleware|engine)\b/i;
 const STRONG_INFRA_HINT_PATTERN = /\b(framework|sdk|orchestrator|toolchain|compiler|mcp|connector|protocol|gateway|middleware|observability)\b/i;
 const HEAD_INFRA_HINT_PATTERN = /\b(runtime|platform|engine|deployment)\b/i;
-const RELEASE_SIGNAL_PATTERN = /\b(release|v\d+\.\d+|launch|ga|general availability)\b/i;
+const RELEASE_SIGNAL_PATTERN = /\b(release|launch|ga|general availability|beta|preview|v\d+\.\d+|\d+\.\d+\.\d+(?:[a-z]+\d*)?)\b|发版|发布|上线|公测|内测/iu;
 const BRANCH_SIGNAL_PATTERN = /\b(branch|mode|desktop|mobile|cli|copilot|plugin|extension)\b/i;
-const DOMAIN_ADOPTION_PATTERN = /\b(finance|medical|legal|commerce|education|research|workflow|support)\b/i;
-const ECOSYSTEM_SHIFT_PATTERN = /\b(ecosystem|platform|protocol|standard|runtime)\b/i;
 const OBSERVER_NEW_DIRECTION_BREAKOUT_PATTERN = /\b(breakout|rising|watch|early)\b/i;
 const OBSERVER_FRESHNESS_NEW_PATTERN = /\bnew-(24h|72h)\b/i;
 const OBSERVER_SCENARIO_DIRECTION_KEYS = new Set(
@@ -723,8 +729,6 @@ function inferHeadProjectExceptionReason(project: DailyRankedProject): HeadProje
   const text = projectSearchableText(project);
   if (RELEASE_SIGNAL_PATTERN.test(text)) return "major_new_release";
   if (BRANCH_SIGNAL_PATTERN.test(text)) return "new_branch_or_mode";
-  if (DOMAIN_ADOPTION_PATTERN.test(text) && (project.direction_matches ?? []).length > 0) return "new_domain_adoption";
-  if (ECOSYSTEM_SHIFT_PATTERN.test(text) && inferUtilityHint(project) === "infra") return "critical_ecosystem_shift";
   return null;
 }
 
@@ -786,6 +790,35 @@ function projectToProjection(project: DailyRankedProject): ProjectProjection {
   };
 }
 
+function overviewBucketPriority(project: { exposure_bucket?: string | null }): number {
+  return OVERVIEW_BUCKET_PRIORITY[project.exposure_bucket ?? "historical_context"] ?? 99;
+}
+
+function isSaturatedHeadlineProject(project: DailyRankedProject): boolean {
+  return isDefaultDemotedProject(project.project.repo_full_name) && !inferHeadProjectExceptionReason(project);
+}
+
+function compareOverviewProjects(left: DailyRankedProject, right: DailyRankedProject): number {
+  const leftSuppressed = isSaturatedHeadlineProject(left);
+  const rightSuppressed = isSaturatedHeadlineProject(right);
+  return (
+    Number(leftSuppressed) - Number(rightSuppressed)
+    || overviewBucketPriority(left) - overviewBucketPriority(right)
+    || Number(right.final_rank ?? 0) - Number(left.final_rank ?? 0)
+    || Number(right.objective_score ?? 0) - Number(left.objective_score ?? 0)
+    || left.project.repo_full_name.localeCompare(right.project.repo_full_name)
+  );
+}
+
+function selectOverviewTopDecisions(projects: ProjectProjection[]): ProjectProjection[] {
+  const sorted = [...projects].sort(compareOverviewProjects);
+  const visible = sorted.filter((project) => !isSaturatedHeadlineProject(project));
+  const heroPool = visible.length > 0 ? visible : sorted;
+  // ponytail: keep sparse days readable by falling back when we do not have enough strong candidates.
+  const qualified = heroPool.filter((project) => Number(project.final_rank ?? 0) >= OVERVIEW_HERO_SCORE_FLOOR);
+  return (qualified.length >= 4 ? qualified : heroPool).slice(0, 8);
+}
+
 function inferObserverUtilityHint(entry: ObserverProjection | NonNullable<RunSnapshot["observer_artifact"]>["entries"][number]): ProjectUtilityHint {
   const haystack = [
     entry.repo_full_name,
@@ -822,8 +855,6 @@ function inferObserverHeadExceptionReason(entry: NonNullable<RunSnapshot["observ
     .toLowerCase();
   if (RELEASE_SIGNAL_PATTERN.test(text)) return "major_new_release";
   if (BRANCH_SIGNAL_PATTERN.test(text)) return "new_branch_or_mode";
-  if (DOMAIN_ADOPTION_PATTERN.test(text) && (entry.matched_by.topic_hints ?? []).length > 0) return "new_domain_adoption";
-  if (ECOSYSTEM_SHIFT_PATTERN.test(text) && inferObserverUtilityHint(entry) === "infra") return "critical_ecosystem_shift";
   return null;
 }
 
@@ -846,29 +877,6 @@ function observerEntryToProjection(entry: NonNullable<RunSnapshot["observer_arti
     head_project_exception_reason: inferObserverHeadExceptionReason(entry),
     hard_infra: utilityHint === "infra" && observerScenarioSignals(entry).length === 0,
   };
-}
-
-function enforceDefaultLandingDiversity(projects: ProjectProjection[], limit: number, headLimit: number): ProjectProjection[] {
-  const orgCounts = new Map<string, number>();
-  let headCount = 0;
-  const accepted: ProjectProjection[] = [];
-  const deferred: ProjectProjection[] = [];
-  for (const project of projects) {
-    const org = project.project.repo_full_name.split("/")[0]?.toLowerCase() ?? "";
-    const orgCount = orgCounts.get(org) ?? 0;
-    const headProject = Boolean(project.head_project);
-    const hasException = Boolean(project.head_project_exception_reason);
-    const blockedByOrg = orgCount >= 2;
-    const blockedByHead = headProject && !hasException && headCount >= headLimit;
-    if (accepted.length < limit && !blockedByOrg && !blockedByHead) {
-      accepted.push(project);
-      orgCounts.set(org, orgCount + 1);
-      if (headProject) headCount += 1;
-    } else {
-      deferred.push(project);
-    }
-  }
-  return [...accepted, ...deferred];
 }
 
 function personalizeDailyReportForRequest(report: DailyReport, requestInterestTopics: UserInterestTopicName[] | undefined): DailyReport {
@@ -1711,14 +1719,14 @@ export function buildOverviewView(
   const pulseBand = snapshot ? uniqueByRepo(readTodayPulseProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
   const exploreBand = snapshot ? uniqueByRepo(readExploreRibbonProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
   const infraBand = snapshot
-    ? uniqueByRepo(snapshot.daily_report.context_only_projects.map((project) => projectToProjection(project)).filter((project) => project.hard_infra))
+    ? uniqueByRepo(readHistoricalContextProjects(snapshot.daily_report).map((project) => projectToProjection(project)).filter((project) => project.hard_infra))
     : [];
-  const orderedOverviewProjects = [
-    ...enforceDefaultLandingDiversity(missionBand, 2, 1),
-    ...enforceDefaultLandingDiversity(pulseBand, 3, 1),
-    ...enforceDefaultLandingDiversity(exploreBand, 2, 1),
-    ...enforceDefaultLandingDiversity(infraBand, 1, 1),
-  ];
+  const orderedOverviewProjects = uniqueByRepo([
+    ...missionBand,
+    ...pulseBand,
+    ...exploreBand,
+    ...infraBand,
+  ]);
 
   const view: OverviewViewModel = {
     context: resolved.context,
@@ -1735,7 +1743,7 @@ export function buildOverviewView(
     time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
     run_snapshot: snapshot,
-    top_decisions: orderedOverviewProjects.slice(0, 8),
+    top_decisions: selectOverviewTopDecisions(orderedOverviewProjects),
     semantic_bands: [
       { key: "mission_match", label: "与你当前方向更相关", capacity: 2, projects: missionBand.slice(0, 2), empty_state: missionBand.length === 0, collapsible: false },
       { key: "today_pulse", label: "今日最值得看", capacity: 3, projects: pulseBand.slice(0, 3), empty_state: pulseBand.length === 0, collapsible: false },
@@ -1866,7 +1874,7 @@ export function buildProjectsView(
   const allProjects = snapshot
     ? uniqueByRepo([...todayPulseProjects, ...missionMatchProjects, ...exploreRibbonProjects, ...missionScoutInventoryProjects, ...historicalContextProjects])
     : [];
-  const projectedProjects = allProjects.map((project) => projectToProjection(project));
+  const projectedProjects = allProjects.map((project) => projectToProjection(project)).sort(compareOverviewProjects);
   const presetGroups = {
     useful_first: projectedProjects.filter((project) => (project.preset_memberships ?? []).includes("useful_first")),
     by_scenario: projectedProjects.filter((project) => (project.preset_memberships ?? []).includes("by_scenario")),

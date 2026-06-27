@@ -9,7 +9,7 @@ import type {
 export type { DirectionCatalogEntry, DirectionQueryPack } from "../types.ts";
 
 export const PROJECT_SEARCH_CONSTANTS = {
-  directionCount: 16,
+  directionCount: 19,
   queryPackCountMin: 3,
   queryTemplateCountPerPackMin: 2,
   directionRawHitsMin: 20,
@@ -69,6 +69,9 @@ export const DIRECTION_CATALOG: DirectionCatalogEntry[] = [
   makeDirection("recruiting-hr-agent", "vertical-ops", "招聘与人力运营代理", "workflow-intelligence", "scout-daily", "recruiting hr agent"),
   makeDirection("supply-chain-procurement-agent", "vertical-ops", "供应链与采购代理", "workflow-intelligence", "scout-daily", "supply chain procurement agent"),
   makeDirection("industrial-field-ops-agent", "vertical-ops", "工业 / 现场运维代理", "workflow-intelligence", "scout-daily", "industrial field ops agent"),
+  makeDirection("short-drama-generation-agent", "vertical-ops", "短剧生成代理", "workflow-intelligence", "scout-daily", "short drama generation agent"),
+  makeDirection("image-generation-agent", "vertical-ops", "图片生成代理", "workflow-intelligence", "scout-daily", "image generation agent"),
+  makeDirection("time-series-forecasting-agent", "vertical-ops", "时序预测代理", "workflow-intelligence", "scout-daily", "time series forecasting agent"),
 ];
 
 const workflowAutomationDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "workflow-automation-agent");
@@ -121,6 +124,83 @@ if (researchKnowledgeDirection) {
     ...researchKnowledgeDirection.query_packs,
     { lane_type: "user-speak", templates: ["scientific research agent", "paper research agent"] },
     { lane_type: "adjacent-software", templates: ["literature review agent", "knowledge work agent"] },
+  ];
+}
+
+const shortDramaGenerationDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "short-drama-generation-agent");
+if (shortDramaGenerationDirection) {
+  shortDramaGenerationDirection.required_terms = [
+    ...shortDramaGenerationDirection.required_terms,
+    "video",
+    "story",
+    "script",
+    "character",
+    "scene",
+    "drama",
+  ];
+  shortDramaGenerationDirection.evidence_objects = [
+    ...shortDramaGenerationDirection.evidence_objects,
+    "video",
+    "script",
+    "storyboard",
+    "scene",
+    "character",
+  ];
+  shortDramaGenerationDirection.query_packs = [
+    ...shortDramaGenerationDirection.query_packs,
+    { lane_type: "user-speak", templates: ["短剧生成 agent", "ai short drama generator"] },
+    { lane_type: "adjacent-software", templates: ["story video generation agent", "script to video workflow"] },
+  ];
+}
+
+const imageGenerationDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "image-generation-agent");
+if (imageGenerationDirection) {
+  imageGenerationDirection.required_terms = [
+    ...imageGenerationDirection.required_terms,
+    "text-to-image",
+    "diffusion",
+    "visual",
+    "design",
+    "image",
+  ];
+  imageGenerationDirection.evidence_objects = [
+    ...imageGenerationDirection.evidence_objects,
+    "image",
+    "visual",
+    "poster",
+    "illustration",
+    "design",
+  ];
+  imageGenerationDirection.query_packs = [
+    ...imageGenerationDirection.query_packs,
+    { lane_type: "user-speak", templates: ["图片生成 agent", "text to image agent"] },
+    { lane_type: "adjacent-software", templates: ["diffusion workflow agent", "ai image design workflow"] },
+  ];
+}
+
+const timeSeriesForecastingDirection = DIRECTION_CATALOG.find((item) => item.direction_key === "time-series-forecasting-agent");
+if (timeSeriesForecastingDirection) {
+  timeSeriesForecastingDirection.required_terms = [
+    ...timeSeriesForecastingDirection.required_terms,
+    "forecasting",
+    "prediction",
+    "timeseries",
+    "time-series",
+    "demand",
+    "signal",
+  ];
+  timeSeriesForecastingDirection.evidence_objects = [
+    ...timeSeriesForecastingDirection.evidence_objects,
+    "forecast",
+    "timeseries",
+    "signal",
+    "demand",
+    "anomaly",
+  ];
+  timeSeriesForecastingDirection.query_packs = [
+    ...timeSeriesForecastingDirection.query_packs,
+    { lane_type: "user-speak", templates: ["时序预测 agent", "time series forecast agent"] },
+    { lane_type: "adjacent-software", templates: ["demand forecasting workflow", "predictive analytics time series"] },
   ];
 }
 

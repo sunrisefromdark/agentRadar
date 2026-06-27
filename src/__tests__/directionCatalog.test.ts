@@ -3,7 +3,7 @@ import { DIRECTION_CATALOG, PROJECT_SEARCH_CONSTANTS, getDirectionByKey } from "
 
 describe("directionCatalog", () => {
   it("freezes the v1 must-cover catalog with the expected coverage constraints", () => {
-    expect(DIRECTION_CATALOG).toHaveLength(16);
+    expect(DIRECTION_CATALOG).toHaveLength(19);
     expect(new Set(DIRECTION_CATALOG.map((item) => item.family_key)).size).toBe(4);
     expect(PROJECT_SEARCH_CONSTANTS.queryPackCountMin).toBe(3);
     expect(PROJECT_SEARCH_CONSTANTS.queryTemplateCountPerPackMin).toBe(2);
@@ -12,7 +12,7 @@ describe("directionCatalog", () => {
     expect(PROJECT_SEARCH_CONSTANTS.anchorSeatCount).toBe(2);
     expect(PROJECT_SEARCH_CONSTANTS.challengerSeatCount).toBe(2);
     expect(DIRECTION_CATALOG.filter((item) => item.search_depth === "deep-daily")).toHaveLength(9);
-    expect(DIRECTION_CATALOG.filter((item) => item.search_depth === "scout-daily")).toHaveLength(7);
+    expect(DIRECTION_CATALOG.filter((item) => item.search_depth === "scout-daily")).toHaveLength(10);
   });
 
   it("ensures every direction carries the required search lanes and evidence metadata", () => {

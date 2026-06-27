@@ -1,16 +1,15 @@
-import type { AcademicHandoffBundle, ProducedArtifact } from "../../agents/academic-agent/types.ts";
+import type {
+  AcademicHandoffBundle,
+  AcademicFormalHandoffBundle as AcademicFormalHandoffShape,
+  ProducedArtifact,
+} from "../../agents/academic-agent/types.ts";
 import { canConsumePayloadSchema } from "./payloadRegistry.ts";
 import type { IndustrySchemaRegistry } from "./schemaRegistry.ts";
 import { validatePayloadSchema } from "./schemaRegistry.ts";
 
 type HandoffRecord = Record<string, unknown>;
 
-export type AcademicFormalHandoffBundle = {
-  messages: HandoffRecord[];
-  manifests: HandoffRecord[];
-  payloads: HandoffRecord[];
-  artifactRefs: string[];
-};
+export type AcademicFormalHandoffBundle = AcademicFormalHandoffShape;
 
 type AcademicPrepReviewResult =
   | { ok: true; status: "handoff_ready" }
@@ -76,53 +75,54 @@ function validateAcademicFormalHandoff(
   registry: IndustrySchemaRegistry,
   bundle: AcademicFormalHandoffBundle,
 ): AcademicHandoffResult {
-  const manifestRefs = new Set(bundle.manifests.map((manifest) => manifest.artifact_ref).filter(hasText));
-  const artifactRefs = new Set(bundle.artifactRefs);
+  const manifestRefs = new Set(bundle.manifests.map((manifest) => (manifest as HandoffRecord).artifact_ref).filter(hasText));
+  const artifactRefs = new Set(bundle.artifactRefs.filter(hasText));
 
   for (const message of bundle.messages) {
+    const envelope = message as HandoffRecord;
     if (
-      !hasText(message.kind) ||
-      !hasText(message.payload_schema) ||
-      !hasText(message.from_agent_id) ||
-      !hasText(message.to_agent_id)
+      !hasText(envelope.kind) ||
+      !hasText(envelope.payload_schema) ||
+      !hasText(envelope.from_agent_id) ||
+      !hasText(envelope.to_agent_id)
     ) {
       return { ok: false, reasonCode: "schema_mismatch", message: "Message is missing required envelope fields." };
     }
 
-    if (!hasText(message.payload_ref)) {
+    if (!hasText(envelope.payload_ref)) {
       return { ok: false, reasonCode: "lineage_failed", message: "Message is missing payload_ref." };
     }
 
-    if (!manifestRefs.has(message.payload_ref) && !artifactRefs.has(message.payload_ref)) {
-      return { ok: false, reasonCode: "lineage_failed", message: `Unresolved payload_ref: ${message.payload_ref}` };
+    if (!manifestRefs.has(envelope.payload_ref) && !artifactRefs.has(envelope.payload_ref)) {
+      return { ok: false, reasonCode: "lineage_failed", message: `Unresolved payload_ref: ${envelope.payload_ref}` };
     }
 
-    if (!ALLOWED_HANDOFF_SCHEMAS.has(message.payload_schema)) {
+    if (!ALLOWED_HANDOFF_SCHEMAS.has(envelope.payload_schema)) {
       return {
         ok: false,
         reasonCode: "schema_mismatch",
-        message: `Unsupported academic handoff schema: ${message.payload_schema}`,
+        message: `Unsupported academic handoff schema: ${envelope.payload_schema}`,
       };
     }
 
-    if (message.kind !== ALLOWED_KIND_BY_SCHEMA[message.payload_schema]) {
+    if (envelope.kind !== ALLOWED_KIND_BY_SCHEMA[envelope.payload_schema]) {
       return {
         ok: false,
         reasonCode: "schema_mismatch",
-        message: `Message kind does not match payload_schema: ${message.payload_schema}`,
+        message: `Message kind does not match payload_schema: ${envelope.payload_schema}`,
       };
     }
 
-    const compatibilityError = canConsumeHandoffSchema(registry, message.payload_schema, "1.0.0");
+    const compatibilityError = canConsumeHandoffSchema(registry, envelope.payload_schema, "1.0.0");
     if (compatibilityError) return compatibilityError;
 
     if (
-      message.capability_class === "claim-critical" &&
-      (!hasText(message.dispatch_context_ref) ||
-        !hasText(message.scheduling_key) ||
-        (!hasText(message.claim_partition_id) && !hasText(message.candidate_group_id)) ||
-        !hasText(message.claim_admission_assessment_ref) ||
-        !hasStringArray(message.capacity_reservation_refs))
+      envelope.capability_class === "claim-critical" &&
+      (!hasText(envelope.dispatch_context_ref) ||
+        !hasText(envelope.scheduling_key) ||
+        (!hasText(envelope.claim_partition_id) && !hasText(envelope.candidate_group_id)) ||
+        !hasText(envelope.claim_admission_assessment_ref) ||
+        !hasStringArray(envelope.capacity_reservation_refs))
     ) {
       return {
         ok: false,
@@ -133,30 +133,33 @@ function validateAcademicFormalHandoff(
   }
 
   for (const payload of bundle.payloads) {
-    if (!hasText(payload.payload_schema) || !hasText(payload.schema_version)) {
+    const payloadRecord = payload as HandoffRecord;
+    if (!hasText(payloadRecord.payload_schema) || !hasText(payloadRecord.schema_version)) {
       return { ok: false, reasonCode: "schema_mismatch", message: "Payload is missing schema identity." };
     }
 
-    if (!ALLOWED_HANDOFF_SCHEMAS.has(payload.payload_schema)) {
+    if (!ALLOWED_HANDOFF_SCHEMAS.has(payloadRecord.payload_schema)) {
       return {
         ok: false,
         reasonCode: "schema_mismatch",
-        message: `Unsupported academic handoff schema: ${payload.payload_schema}`,
+        message: `Unsupported academic handoff schema: ${payloadRecord.payload_schema}`,
       };
     }
 
-    const compatibilityError = canConsumeHandoffSchema(registry, payload.payload_schema, payload.schema_version);
+    const compatibilityError = canConsumeHandoffSchema(registry, payloadRecord.payload_schema, payloadRecord.schema_version);
     if (compatibilityError) return compatibilityError;
   }
 
-  const responsibilities = new Set(bundle.payloads.map((payload) => payload.responsibility_id).filter(hasText));
+  const responsibilities = new Set(bundle.payloads.map((payload) => (payload as HandoffRecord).responsibility_id).filter(hasText));
   for (const responsibility of REQUIRED_RESPONSIBILITIES) {
     if (!responsibilities.has(responsibility)) {
       return { ok: false, reasonCode: "lineage_failed", message: `Missing academic responsibility: ${responsibility}` };
     }
   }
 
-  const dailyInput = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
+  const dailyInput = bundle.payloads.find((payload) => (payload as HandoffRecord).payload_schema === "daily-industry-evidence-pack-input.v1") as
+    | HandoffRecord
+    | undefined;
   if (!dailyInput) {
     return { ok: false, reasonCode: "lineage_failed", message: "Missing daily industry evidence pack input." };
   }
@@ -168,7 +171,11 @@ function validateAcademicFormalHandoff(
     !hasStringArray(dailyInput.coverage_refs, 2) ||
     !hasStringArray(dailyInput.contribution_refs, 2)
   ) {
-    return { ok: false, reasonCode: "lineage_failed", message: "Daily input must use academic two-axis ref arrays." };
+    return { ok: false, reasonCode: "lineage_failed", message: "Daily input must use two-axis academic ref arrays." };
+  }
+
+  if ("accepted_events" in dailyInput || "rejected_events" in dailyInput || "events" in dailyInput) {
+    return { ok: false, reasonCode: "lineage_failed", message: "Daily input must not embed event snapshots." };
   }
 
   const dailyRefs = [
@@ -177,12 +184,20 @@ function validateAcademicFormalHandoff(
     ...dailyInput.coverage_refs,
     ...dailyInput.contribution_refs,
   ];
-  if (dailyRefs.some((ref) => !manifestRefs.has(ref) && !artifactRefs.has(ref))) {
+  if (dailyRefs.some((ref) => !artifactRefs.has(ref))) {
     return { ok: false, reasonCode: "lineage_failed", message: "Academic daily input references unresolved artifacts." };
   }
 
-  if ("accepted_events" in dailyInput || "rejected_events" in dailyInput || "events" in dailyInput) {
-    return { ok: false, reasonCode: "lineage_failed", message: "Daily input must not embed event snapshots." };
+  if (
+    !hasStringArray(bundle.replayFixtureRefs) ||
+    !hasStringArray(bundle.evalFixtureRefs) ||
+    !hasStringArray(bundle.ownerBoundaryFixtureRefs)
+  ) {
+    return {
+      ok: false,
+      reasonCode: "lineage_failed",
+      message: "Academic formal handoff must include replay, eval, and owner-boundary fixture refs.",
+    };
   }
 
   return { ok: true, status: "accepted_for_dry_run" };

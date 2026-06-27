@@ -308,6 +308,16 @@ export interface AcademicHandoffBundle {
   events: IndustrySignalEvent[];
 }
 
+export interface AcademicFormalHandoffBundle {
+  messages: Array<Record<string, unknown>>;
+  manifests: Array<Record<string, unknown>>;
+  payloads: Array<Record<string, unknown>>;
+  artifactRefs: string[];
+  replayFixtureRefs: string[];
+  evalFixtureRefs: string[];
+  ownerBoundaryFixtureRefs: string[];
+}
+
 export const academicAgentId = "academic-agent";
 
 export function responsibilityForAxis(axis: IndustryEvidenceAxisKey): IndustryResponsibilityId {

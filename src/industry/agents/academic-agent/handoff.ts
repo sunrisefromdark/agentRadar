@@ -6,6 +6,7 @@ import { buildPaperEvents } from "./paperEventBuilder.ts";
 import { paperSourceCatalog } from "./paperSourceCatalog.ts";
 import { buildIndustryArtifactRef } from "../../platform/contracts/artifactPaths.ts";
 import {
+  type AcademicFormalHandoffBundle,
   sha1Json,
   type AcademicHandoffBundle,
   type EventBatchPayload,
@@ -185,6 +186,15 @@ function firstArtifactRefForAxis<TPayload>(
   return artifacts.find((artifact) => artifact.manifest.axis_keys.includes(axis))?.ref;
 }
 
+function toFormalPayload(artifact: ProducedArtifact<unknown>): Record<string, unknown> {
+  const payload = artifact.payload as Record<string, unknown>;
+  return {
+    ...payload,
+    payload_schema: artifact.payload_schema,
+    schema_version: typeof payload.schema_version === "string" ? payload.schema_version : "1.0.0",
+  };
+}
+
 export function buildAcademicPrepBundle(fixture: ReplayWindowFixture): AcademicHandoffBundle {
   const events = [...buildPaperEvents(fixture.paper_seeds), ...buildConferenceEvents(fixture.conference_seeds)];
   const eventBatches = (["research_paper", "conference_academic"] as const).flatMap((axis) =>
@@ -342,5 +352,20 @@ export function buildAcademicPrepBundle(fixture: ReplayWindowFixture): AcademicH
       message: dailyMessage,
     },
     events,
+  };
+}
+
+export function buildAcademicHandoffBundle(fixture: ReplayWindowFixture): AcademicFormalHandoffBundle {
+  const bundle = buildAcademicPrepBundle(fixture);
+  const artifacts = [...bundle.event_batches, ...bundle.coverage_reports, ...bundle.contributions, bundle.daily_input];
+
+  return {
+    messages: artifacts.map((artifact) => ({ ...artifact.message })) as Array<Record<string, unknown>>,
+    manifests: artifacts.map((artifact) => ({ ...artifact.manifest })) as Array<Record<string, unknown>>,
+    payloads: artifacts.map((artifact) => toFormalPayload(artifact)),
+    artifactRefs: artifacts.map((artifact) => artifact.ref),
+    replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
+    evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+    ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
   };
 }

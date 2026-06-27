@@ -12,7 +12,7 @@ import {
   validateFinancePolicyHandoff,
   type FinancePolicyHandoffBundle,
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
-import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
+import { buildAcademicHandoffBundle, buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
 import {
   reviewAcademicPreparatoryHandoff,
@@ -37,7 +37,7 @@ import {
 import { buildProductEcosystemHandoff } from "../../../industry/agents/community-news-agent/handoff.ts";
 
 describe("industry platform contracts", () => {
-  function buildAcademicReplayBundle() {
+  function buildAcademicPrepReplayBundle() {
     const fixture = JSON.parse(
       fs.readFileSync(
         path.join(process.cwd(), "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"),
@@ -45,6 +45,16 @@ describe("industry platform contracts", () => {
       ),
     ) as ReplayWindowFixture;
     return buildAcademicPrepBundle(fixture);
+  }
+
+  function buildAcademicFormalReplayBundle() {
+    const fixture = JSON.parse(
+      fs.readFileSync(
+        path.join(process.cwd(), "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"),
+        "utf-8",
+      ),
+    ) as ReplayWindowFixture;
+    return buildAcademicHandoffBundle(fixture);
   }
 
   it("keeps the parallel worktree skeleton frozen under the agreed roots", () => {
@@ -622,16 +632,19 @@ describe("industry platform contracts", () => {
   });
 
   describe("academic handoff gate", () => {
-    it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and schemas", () => {
-      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
+    it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and formal bundle packaging", () => {
+      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicPrepReplayBundle())).toEqual({
         ok: true,
         status: "handoff_ready",
       });
     });
 
     it("rejects academic daily refs that do not resolve to handoff artifacts", () => {
-      const bundle = buildAcademicReplayBundle();
-      bundle.daily_input.payload.coverage_refs = ["industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing", bundle.daily_input.payload.coverage_refs[1]!];
+      const bundle = buildAcademicPrepReplayBundle();
+      bundle.daily_input.payload.coverage_refs = [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing",
+        bundle.daily_input.payload.coverage_refs[1]!,
+      ];
 
       expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,
@@ -700,6 +713,9 @@ describe("industry platform contracts", () => {
         "industry://internal/2026-06-26/contribution/conference-academic",
         "industry://internal/2026-06-26/daily/academic-input",
       ],
+      replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
+      evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+      ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
     });
 
     it("accepts complete academic formal handoff for dry-run", () => {
@@ -714,6 +730,23 @@ describe("industry platform contracts", () => {
       const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
       expect(daily).toBeDefined();
       daily!.coverage_refs = ["industry://internal/2026-06-26/coverage/research-paper"];
+
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+
+    it("accepts the generated academic formal handoff fixture", () => {
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), buildAcademicFormalReplayBundle())).toEqual({
+        ok: true,
+        status: "accepted_for_dry_run",
+      });
+    });
+
+    it("rejects generated academic formal handoff when owner-boundary fixture refs are missing", () => {
+      const bundle = buildAcademicFormalReplayBundle();
+      bundle.ownerBoundaryFixtureRefs = [];
 
       expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,

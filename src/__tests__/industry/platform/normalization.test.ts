@@ -376,6 +376,9 @@ function buildAcademicFormalBundle(): AcademicFormalHandoffBundle {
         contribution_refs: contributionRefs,
       }),
     ],
+    replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
+    evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+    ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
   };
 }
 

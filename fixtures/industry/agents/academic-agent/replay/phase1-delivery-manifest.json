@@ -1,0 +1,28 @@
+{
+  "manifest_id": "academic-phase1-delivery-manifest.v1",
+  "stable_entrypoints": {
+    "academic_agent_index": "src/industry/agents/academic-agent/index.ts"
+  },
+  "bundle_fixtures": {
+    "current": "fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json",
+    "negative_missing_owner_boundary": "fixtures/industry/agents/academic-agent/replay/phase1-missing-owner-boundary-bundle.json"
+  },
+  "supporting_fixture_refs": {
+    "replay_window": [
+      "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"
+    ],
+    "eval": [
+      "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"
+    ],
+    "owner_boundary": [
+      "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"
+    ]
+  },
+  "notes": {
+    "handoff": "src/industry/agents/academic-agent/handoff-note.md"
+  },
+  "expected_platform_gates": {
+    "current_bundle": "accepted_for_dry_run",
+    "negative_bundle": "lineage_failed"
+  }
+}

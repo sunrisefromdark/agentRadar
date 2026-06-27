@@ -4,47 +4,47 @@
   "entries": [
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
-      "sha256": "7bbfc8544e06acdf132b7b4b9a53ef26570dc036506c68445020d829370f20a7"
+      "sha256": "e4f883e709a8f059e5f06951662f98817e87c170c828d813cac17f9f5646b581"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-next-platform-actions.json",
-      "sha256": "4940e5b398bcb464e75333a0a67fedb758e65d970911d65e3796b192f65fe93e"
+      "sha256": "603464b7446ad99403c194c37e4a3ef6b1117a629fc5543f6071bd52cbfbb7c2"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
-      "sha256": "e9756f4bf1d11639ff6ebce07b23b3b165145eee201001de56881434e840fcb2"
+      "sha256": "eb7e2067e5bc820d7a8a83f69bc10f3507a649326b0ac04c6893240b6bcc6377"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
-      "sha256": "04f059803e5a9d73b33243c78b1118811f59ecc2c3519f53f31dd35180a67d7a"
+      "sha256": "77d5563ed94dcadaab255f9ad72a587a6f95aab660616b6c16f7132bb6b54135"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
-      "sha256": "b9e7f10e13153ca917dccd84c1c15365a92ff22532143f8db7ee017bb3e40561"
+      "sha256": "3380031a710c34e98623b2f2988980c0488fa1c7f462a90806d561e0f08a5957"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
-      "sha256": "9d875790d271e84fa29e25d05c97a3332bee67248b73eda21e3dea10b9598855"
+      "sha256": "a98b72d1cd7e857493d5a1a3cfe33ba0c6ea1621f93032a2f862b0d6dd23d256"
     },
     {
       "path": "src/industry/agents/policy-agent/handoff-note.md",
-      "sha256": "0482ba257ef83e5634ce46caccd0f2bb7077e94e7b7fb4e40013c27fdceb0bb0"
+      "sha256": "2a8fd6675332774e68283ce2f0ee47269d52a023ca3ae67f5a40f35530f25bd9"
     },
     {
       "path": "src/industry/agents/policy-agent/shared-runtime-note.md",
-      "sha256": "760cf2506f7dee6042ae2848f59141e0269630bc212610bd3f3c566237cad0a8"
+      "sha256": "7acbb26d966d3e9624f93fb2e94e57f569285eb026682922a75ebd7724a417e5"
     },
     {
       "path": "src/industry/agents/policy-agent/index.ts",
-      "sha256": "beacb9abd994b91e42dfbcf913c187840b9b00c8fb01b003bc99610f92178a09"
+      "sha256": "8b95a98292751ae022df64d77f5e403895c0202ad29313b8d8ce4bc0bacfe4e0"
     },
     {
       "path": "src/industry/agents/finance-agent/index.ts",
-      "sha256": "5404fadd90c24819fd7c0d80fcd3370ffde7d30090f570fd3e841279faa60473"
+      "sha256": "5f8621f8a9b190f4389488d6f943d48b764e8db09af65a500860a899d8b361c0"
     },
     {
       "path": "src/industry/platform/normalization/financePolicyDryRun.ts",
-      "sha256": "6fabce56f64dc7247c5a0dfa62eaf786686766a2feb8be43d6de8c412c34f9d9"
+      "sha256": "ed21a2ee25e7162250df31f1349361a1dcc0afe570e7b574241e81b2fad2a888"
     }
   ]
 }

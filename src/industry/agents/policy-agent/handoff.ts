@@ -1,10 +1,17 @@
 import { buildCapitalFinanceHandoff, type BuildCapitalFinanceHandoffInput } from "../finance-agent/handoff.ts";
+import type { FinancePolicyHandoffBundle } from "../../platform/contracts/financePolicyHandoff.ts";
 import {
   assertConsumableEnvelope,
   buildDailyInputArtifact,
   createExecutionContext,
   type ArtifactEnvelope,
   type AxisSourceInput,
+  type AxisArtifacts,
+  type DailyIndustryEvidencePackInput,
+  type EventBatchPayload,
+  type CoveragePayload,
+  type ContributionPayload,
+  type SameRunRuntimeContext,
 } from "./groupProtocol.ts";
 import { buildPolicyAxisArtifacts } from "./eventBuilder.ts";
 import { selectPolicyRegulatoryRoute } from "./regulatoryRouteSelection.ts";
@@ -21,6 +28,7 @@ export interface BuildPolicyAxisHandoffInput {
   canonicalSourceAvailable: boolean;
   budgetExceeded?: boolean;
   stopReasonCode?: string;
+  runtimeContext?: SameRunRuntimeContext;
   sources: AxisSourceInput[];
 }
 
@@ -53,6 +61,7 @@ export function buildPolicyRegulatoryHandoff(input: BuildPolicyAxisHandoffInput)
       stopReasonCode: input.stopReasonCode,
     }),
     executionContext: createExecutionContext("policy-regulatory", "policy-agent", "policy-agent"),
+    runtimeContext: input.runtimeContext,
     sources: input.sources,
   });
 }
@@ -75,6 +84,7 @@ export function buildPolicyThinktankHandoff(input: BuildPolicyAxisHandoffInput) 
       stopReasonCode: input.stopReasonCode,
     }),
     executionContext: createExecutionContext("policy-research-thinktank", "policy-agent", "policy-agent"),
+    runtimeContext: input.runtimeContext,
     sources: input.sources,
   });
 }
@@ -101,6 +111,7 @@ export function buildPolicyFinanceGroupHandoff(input: PolicyFinanceGroupInput) {
     rejectedEventBatchRefs: [finance.rejected.manifest.artifact_ref, regulatory.rejected.manifest.artifact_ref, thinktank.rejected.manifest.artifact_ref],
     coverageRefs: [finance.coverage.manifest.artifact_ref, regulatory.coverage.manifest.artifact_ref, thinktank.coverage.manifest.artifact_ref],
     contributionRefs: [finance.contribution.manifest.artifact_ref, regulatory.contribution.manifest.artifact_ref, thinktank.contribution.manifest.artifact_ref],
+    runtimeContext: input.finance.runtimeContext ?? input.regulatory.runtimeContext ?? input.thinktank.runtimeContext,
   });
 
   return {
@@ -108,6 +119,50 @@ export function buildPolicyFinanceGroupHandoff(input: PolicyFinanceGroupInput) {
     regulatory,
     thinktank,
     dailyInput,
+  };
+}
+
+export function buildPolicyFinanceHandoffBundle(result: {
+  finance: AxisArtifacts;
+  regulatory: AxisArtifacts;
+  thinktank: AxisArtifacts;
+  dailyInput: ArtifactEnvelope<DailyIndustryEvidencePackInput>;
+}): FinancePolicyHandoffBundle {
+  const axisArtifacts = [result.finance, result.regulatory, result.thinktank];
+  const envelopes = axisArtifacts.flatMap((artifact) => [
+    artifact.accepted.envelope,
+    artifact.counter.envelope,
+    artifact.diagnostic.envelope,
+    artifact.rejected.envelope,
+    artifact.coverage.envelope,
+    artifact.contribution.envelope,
+  ]);
+  const manifests = axisArtifacts.flatMap((artifact) => [
+    artifact.accepted.manifest,
+    artifact.counter.manifest,
+    artifact.diagnostic.manifest,
+    artifact.rejected.manifest,
+    artifact.coverage.manifest,
+    artifact.contribution.manifest,
+  ]);
+  const payloads: Array<EventBatchPayload | CoveragePayload | ContributionPayload | DailyIndustryEvidencePackInput> = axisArtifacts.flatMap((artifact) => [
+    artifact.accepted.payload,
+    artifact.counter.payload,
+    artifact.diagnostic.payload,
+    artifact.rejected.payload,
+    artifact.coverage.payload,
+    artifact.contribution.payload,
+  ]);
+
+  envelopes.push(result.dailyInput.envelope);
+  manifests.push(result.dailyInput.manifest);
+  payloads.push(result.dailyInput.payload);
+
+  return {
+    messages: envelopes as unknown as Array<Record<string, unknown>>,
+    manifests: manifests as unknown as Array<Record<string, unknown>>,
+    payloads: payloads as unknown as Array<Record<string, unknown>>,
+    artifactRefs: manifests.map((manifest) => manifest.artifact_ref),
   };
 }
 

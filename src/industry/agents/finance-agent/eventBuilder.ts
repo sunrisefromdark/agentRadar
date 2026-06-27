@@ -10,6 +10,7 @@ export interface CapitalFinanceScenarioInput {
   now: string;
   routeSelection: AxisBuildInput["routeSelection"];
   executionContext: AxisBuildInput["executionContext"];
+  runtimeContext?: AxisBuildInput["runtimeContext"];
   sources: AxisSourceInput[];
 }
 
@@ -28,6 +29,7 @@ export function buildCapitalFinanceArtifacts(input: CapitalFinanceScenarioInput)
     registrySnapshotRef: capitalFinanceSeed.registry_snapshot_ref,
     toolRegistrySnapshotRef: capitalFinanceSeed.tool_registry_snapshot_ref,
     budgetProfileId: capitalFinanceSeed.budget_profile_id,
+    runtimeContext: input.runtimeContext,
     sources: input.sources,
   });
 }

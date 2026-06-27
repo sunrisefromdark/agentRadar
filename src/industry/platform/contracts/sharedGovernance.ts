@@ -75,6 +75,10 @@ type GovernanceResult =
   | { ok: true; status: "shared_governance_published"; profileIds: readonly string[] }
   | { ok: false; reasonCode: "schema_mismatch"; message: string };
 
+type GovernanceProfileResult =
+  | { ok: true; schemaId: string; profileId: string; version: string }
+  | { ok: false; reasonCode: "schema_mismatch"; message: string };
+
 export function validateSharedGovernanceBaseline(registry: IndustrySchemaRegistry): GovernanceResult {
   const schemaIds = new Set(registry.canonical.entries.map((entry) => entry.schema_id));
   const compatibleIds = new Set(registry.compatibility.entries.map((entry) => entry.schema_id));
@@ -106,5 +110,27 @@ export function validateSharedGovernanceBaseline(registry: IndustrySchemaRegistr
     ok: true,
     status: "shared_governance_published",
     profileIds: PHASE1_SHARED_GOVERNANCE_PROFILE_IDS,
+  };
+}
+
+export function resolveSharedGovernanceProfile(
+  registry: IndustrySchemaRegistry,
+  profileId: string,
+): GovernanceProfileResult {
+  const schemaId = profileId.split("/", 1)[0] ?? profileId;
+  const schema = registry.canonical.entries.find(
+    (entry) => entry.schema_id === schemaId && entry.schema_kind === "governance_profile",
+  );
+  const compatibility = registry.compatibility.entries.find((entry) => entry.schema_id === schemaId);
+
+  if (!schema || !compatibility) {
+    return { ok: false, reasonCode: "schema_mismatch", message: `Unknown governance profile: ${profileId}` };
+  }
+
+  return {
+    ok: true,
+    schemaId,
+    profileId,
+    version: compatibility.current_version,
   };
 }

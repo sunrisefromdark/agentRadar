@@ -1,0 +1,23 @@
+{
+  "manifest_id": "policy-finance-phase1-delivery-manifest.v1",
+  "stable_entrypoints": {
+    "policy_agent_index": "src/industry/agents/policy-agent/index.ts",
+    "finance_agent_index": "src/industry/agents/finance-agent/index.ts"
+  },
+  "bundle_fixtures": {
+    "current": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
+    "negative_missing_stable_claim_key": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json"
+  },
+  "same_run_fixtures": {
+    "current": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
+    "negative_missing_stable_claim_key": "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json"
+  },
+  "notes": {
+    "handoff": "src/industry/agents/policy-agent/handoff-note.md",
+    "shared_runtime": "src/industry/agents/policy-agent/shared-runtime-note.md"
+  },
+  "expected_platform_gates": {
+    "current_bundle": "accepted_for_dry_run",
+    "negative_bundle": "dispatch_context_missing"
+  }
+}

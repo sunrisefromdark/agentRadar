@@ -1,0 +1,46 @@
+{
+  "manifest_id": "policy-finance-phase1-delivery-checksums.v1",
+  "algorithm": "sha256",
+  "entries": [
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
+      "sha256": "9180945cf37b0d116d4a80ff203daa052f0f1f0a45a4c855fefb9ac8c5d0b043"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-next-platform-actions.json",
+      "sha256": "3fce218613eff7964712134ac1fe9d457943689135671f3088309b279a899233"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
+      "sha256": "eb7e2067e5bc820d7a8a83f69bc10f3507a649326b0ac04c6893240b6bcc6377"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
+      "sha256": "77d5563ed94dcadaab255f9ad72a587a6f95aab660616b6c16f7132bb6b54135"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
+      "sha256": "3380031a710c34e98623b2f2988980c0488fa1c7f462a90806d561e0f08a5957"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
+      "sha256": "a98b72d1cd7e857493d5a1a3cfe33ba0c6ea1621f93032a2f862b0d6dd23d256"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/handoff-note.md",
+      "sha256": "07cb20ac694419b22754bae75bd65ca96072b6dcf2d460671bbe374bd1476bdd"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/shared-runtime-note.md",
+      "sha256": "3b157c71bd9b0b149af75f67c6581910b06fd8683deaf523bc498e7df011daed"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/index.ts",
+      "sha256": "8b95a98292751ae022df64d77f5e403895c0202ad29313b8d8ce4bc0bacfe4e0"
+    },
+    {
+      "path": "src/industry/agents/finance-agent/index.ts",
+      "sha256": "5f8621f8a9b190f4389488d6f943d48b764e8db09af65a500860a899d8b361c0"
+    }
+  ]
+}

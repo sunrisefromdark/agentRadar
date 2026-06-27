@@ -20,7 +20,8 @@
 | Phase | 状态 | 已落地项 | 说明 |
 | --- | --- | --- | --- |
 | Phase 1-2：source / route / event / handoff 骨架 | `DONE` | `finance-agent`、`policy-agent` 目录骨架、source catalog、route selection、event builder、handoff、unit/contract/negative/replay fixture 与测试骨架 | 当前仓库内可独立落地的骨架、最小领域验证与 producer artifact 校验已闭环 |
-| Phase 3-5：shared governance / same-run / 正式 cross-group contract 冻结 | `BLOCKED` | `dispatch_context_ref`、reservation、canonical schema 真源、compatibility matrix 消费侧冻结 | 这些步骤依赖 `4号执行人` 发布中台真源，当前先维持本地 seam 与 producer fixture，不停工等待 |
+| Phase 3-4A：正式 cross-group contract 收口 | `DONE` | canonical payload 名、message kind、`industry://` artifact ref、payload 顶层 canonical 字段、finance-policy handoff gate dry-run | 已对齐中台 `Phase 1A` contract，并通过平台 handoff gate 验证 |
+| Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `IN_PROGRESS` | producer 侧 `dispatch_context_ref` / `scheduling_key` / stable claim key / admission / reservation refs 已可挂载并通过平台 runtime gate | 本组已完成 same-run consumer/runtime seam 的 producer 接线；剩余阻塞转为中台 normalization / dispatch runtime 实际消费链路与共享治理 profile 的正式收口 |
 
 ## 落地标记（截至 2026-06-26）
 
@@ -44,16 +45,21 @@
 | policy / finance fixture 细化与 replay 覆盖 | `DONE` | 已新增 finance `compatibility/`、`replay/` fixture，并补 group replay 覆盖 |
 | stop / budget 本地弱接线回归 | `DONE` | 已补 finance timeout-budget / fallback / last-resort 回归 |
 | preparatory producer fixture 整理 | `DONE` | 已用 replay/contract 测试固定 `source_message_ids`、batch refs、coverage refs、contribution refs 的包装关系 |
+| same-run runtime ref producer 接线 | `DONE` | 已补 claim-critical `capability_class`、`dispatch_context_ref`、`scheduling_key`、stable claim key、admission / reservation refs 的 envelope 透传，并通过 platform consumer/runtime gate；同轮补齐缺 stable claim key / reservation 的 negative 回归，并产出 same-run current/negative compatibility fixture |
+| shared-runtime 对接清单 | `DONE` | 已提交本组 `shared-runtime-note`，明确中台需要上收的 normalization consumer、same-run dispatch runtime consumer 与 shared governance lookup 接线点 |
+| stable export / handoff 入口 | `DONE` | 已补 `policy-agent/index.ts` 与 `finance-agent/index.ts`，对外稳定导出 handoff builder / bundle 入口，降低中台对文件内部路径的耦合 |
+| next-step 对接清单 | `DONE` | 已补 machine-readable `phase1-next-platform-actions.json`，把 4 号下一步必须落的 normalization / same-run runtime / shared governance 消费动作显式列出 |
+| delivery checksum 清单 | `DONE` | 已补 machine-readable `phase1-delivery-checksums.json`，让 4 号可对 current/negative bundle、same-run fixture、notes 与 stable entrypoint 做输入校验 |
 
 ### 必须等 4 号
 
 | 项目 | 当前判断 | 阻塞原因 |
 | --- | --- | --- |
-| 正式 cross-group handoff 收口 | `BLOCKED` | 需等待 canonical schema、payload 正式名、artifact path 真源冻结 |
-| current / previous compatible consumer fixture 最终对接闭环 | `BLOCKED` | 需等待中台组发布 consumer fixture 与 compatibility matrix 消费基线 |
-| `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `BLOCKED` | 需等待 dispatch / budget runtime 基座 |
-| activation / stop / budget 正式治理接线 | `BLOCKED` | 需等待共享治理 profile 与受控 reason/state 字典 |
-| 正式提交给中台组消费的 envelope / payload / manifest 套件 | `BLOCKED` | 当前可生成 producer 侧草稿，但不能替代中台真源命名与消费契约 |
+| 正式 cross-group handoff 收口 | `DONE` | 已切到 canonical payload 名、正式 message kind 与 `industry://` artifact ref，并通过平台 `financePolicyHandoff` gate 的 dry-run 验证 |
+| current / previous compatible consumer fixture 最终对接闭环 | `DONE` | 已对齐 compatibility matrix，并由领域 contract test + 平台 contract gate 覆盖 |
+| `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `IN_PROGRESS` | producer 侧已能生成并校验 same-run refs；剩余依赖 dispatch / budget runtime 基座的实际消费与联调 |
+| activation / stop / budget 正式治理接线 | `BLOCKED` | 本组 `shared-runtime-note` 已提交；后续需等待中台把共享治理 profile 与受控 reason/state 字典接入实际消费链路 |
+| 正式提交给中台组消费的 envelope / payload / manifest 套件 | `IN_PROGRESS` | producer 侧正式 bundle 已可生成，且 canonical payload 名、message kind、artifact ref、`source_message_id`、same-run runtime refs 等顶层字段已补齐；同轮已补 handoff note、same-run current/negative fixture、machine-readable current/negative bundle fixture，以及 delivery manifest，待中台 normalization / runtime 消费链接通后进入下一步 |
 
 ## 目标
 
@@ -417,9 +423,11 @@ handoff 要求：
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |
 | 2026-06-26 | `npx vitest run src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts` | `Passed` | 4 个测试文件、6 条测试全部通过；已覆盖 finance official-first、policy 轴拆分、negative fixture 与 daily handoff contract |
 | 2026-06-26 | `npx vitest run src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 8 个测试文件、12 条测试全部通过；已覆盖 finance/policy 的 unit、contract、negative、replay 与 producer artifact refs 闭环 |
+| 2026-06-26 | `npx vitest run src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 9 个测试文件、28 条测试全部通过；已把政策金融组 producer 切到 canonical payload 名 / message kind / `industry://` artifact ref，并通过平台 handoff gate dry-run |
+| 2026-06-26 | `npx vitest run src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 9 个测试文件、28 条测试全部通过；已补齐 event batch / contribution / daily input 的 `source_message_id` 与顶层 canonical 字段，继续保持平台 handoff gate 通过 |
 | 2026-06-26 | `npx tsx scripts/execPlanPreflight.ts --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md" && npx tsx scripts/execPlanPreflight.ts --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md"` | `Passed` | 已补齐本计划对应 receipt，并通过 code-implementation preflight 校验 |
 
 ## 下一阶段入口
 
-1. 本组在不依赖中台真源的范围内已无剩余必做项；后续仅在发现新边界样本时增补 fixture / replay。
-2. 若需要正式交付 cross-group handoff，则等待 `4号执行人` 发布 canonical schema、reason/state 真源、artifact path 与 current consumer fixture 后再收口。
+1. 本组 producer 已对齐中台 `Phase 1A` 合同；若中台开放 normalization dry-run / consumer 接口，可直接拿本组 bundle 进入下一阶段对接。
+2. 若继续推进 activation / stop / budget / same-run，则等待 `4号执行人` 发布 `Phase 1B / 1C` 的共享治理 profile 与 runtime 基座。

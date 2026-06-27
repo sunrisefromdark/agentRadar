@@ -85,6 +85,7 @@ export interface CommunityAgentContribution {
 }
 
 export interface CommunityAgentMessageEnvelope {
+  kind: "evidence_batch" | "tool_status_report" | "industry_agent_contribution" | "daily_industry_evidence_pack_input";
   message_id: string;
   schema_version: "industry-agent-message.v1";
   run_id: string;
@@ -549,6 +550,7 @@ function buildArtifactEnvelope<TPayload>(
     summary,
   };
   const envelope: CommunityAgentMessageEnvelope = {
+    kind: kindForPayloadSchema(payloadSchema),
     message_id: stableId("msg", `${input.runId}:${artifactRef}`),
     schema_version: "industry-agent-message.v1",
     run_id: input.runId,
@@ -565,6 +567,16 @@ function buildArtifactEnvelope<TPayload>(
     status: "sent",
   };
   return { envelope, manifest, payload };
+}
+
+function kindForPayloadSchema(payloadSchema: CommunityAgentMessageEnvelope["payload_schema"]): CommunityAgentMessageEnvelope["kind"] {
+  return payloadSchema === "industry-signal-event-batch.v1"
+    ? "evidence_batch"
+    : payloadSchema === "axis-tool-coverage-report.v1"
+      ? "tool_status_report"
+      : payloadSchema === "industry-agent-contribution.v1"
+        ? "industry_agent_contribution"
+        : "daily_industry_evidence_pack_input";
 }
 
 export function stableId(prefix: string, raw: string): string {

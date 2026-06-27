@@ -77,7 +77,12 @@ export function validateProductEcosystemHandoff(
   const artifactRefs = new Set(bundle.artifactRefs);
 
   for (const message of bundle.messages) {
-    if (!hasText(message.payload_schema) || !hasText(message.from_agent_id) || !hasText(message.to_agent_id)) {
+    if (
+      !hasText(message.kind) ||
+      !hasText(message.payload_schema) ||
+      !hasText(message.from_agent_id) ||
+      !hasText(message.to_agent_id)
+    ) {
       return { ok: false, reasonCode: "schema_mismatch", message: "Message is missing required envelope fields." };
     }
 
@@ -97,7 +102,7 @@ export function validateProductEcosystemHandoff(
       };
     }
 
-    if (hasText(message.kind) && message.kind !== ALLOWED_KIND_BY_SCHEMA[message.payload_schema]) {
+    if (message.kind !== ALLOWED_KIND_BY_SCHEMA[message.payload_schema]) {
       return {
         ok: false,
         reasonCode: "schema_mismatch",

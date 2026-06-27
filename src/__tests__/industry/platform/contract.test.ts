@@ -513,6 +513,16 @@ describe("industry platform contracts", () => {
       });
     });
 
+    it("rejects messages missing the formal envelope kind", () => {
+      const bundle = baseBundle();
+      delete bundle.messages[0].kind;
+
+      expect(validateProductEcosystemHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "schema_mismatch",
+      });
+    });
+
     it("rejects payload refs missing from manifest and artifact refs", () => {
       const bundle = baseBundle();
       const removedRef = bundle.messages[0].payload_ref;

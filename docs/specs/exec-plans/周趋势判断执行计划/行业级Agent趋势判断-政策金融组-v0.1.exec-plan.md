@@ -341,7 +341,7 @@ handoff 要求：
 
 ## 实施阶段
 
-### Phase 1：source class 与 route 基线
+### Phase 1（已完成）：source class 与 route 基线
 
 1. 以总控已冻结的目录模板为前提，只在本组既定工作根目录内新增文件；若根目录缺失，本组可按模板自行创建本组目录，但不得改路径命名或越界创建共享目录。
 2. 若发现实现需要直接改 `src/industry/tools/*` 或其他共享旧模块，立即停止并提交 `shared-runtime-note`；本组不得自行越界改共享热点。
@@ -355,7 +355,7 @@ handoff 要求：
 7. 一旦接入 same-run 的 route，必须显式从中台组消费 `dispatch_context_ref`、`claim_admission_assessment_ref`、`capacity_reservation_refs`、`scheduling_key` 与 `gap_scope` 语义；不得本地猜测“现在应该能跑”。
 8. 高成本扩张必须遵守固定顺序：`claim family fold -> claim admission -> claim budget -> shared capacity -> axis expansion`；finance / policy 不得因为“看起来重要”就先抢 official fetch 或 same-run 高成本配额。
 
-### Phase 2：event 生产
+### Phase 2（已完成）：event 生产
 
 1. 生成 finance / policy / thinktank 事件适配器。
 2. 每条 event 必须带：
@@ -372,7 +372,7 @@ handoff 要求：
 5. 任何 finance / policy accepted event 若存在跨职责语义，必须补 `cross_responsibility_attestation_refs` 输入位；不得等中台组事后从 prose 猜。
 6. 只有命中 `tier_blocking`、`public_output_only` 或 headline 主语义争议的跨职责事实，才要求 same-run critical attestation；其余跨域事实可先按 provisional / post-weekly 路径留痕，不得把所有长尾争议都堵在本组开工阶段。
 
-### Phase 3：activation / stop / budget 接线
+### Phase 3（本组已完成 producer 侧，待 4 号完成 runtime 侧）：activation / stop / budget 接线
 
 1. 落地高成本轴激活条件。
 2. 落地 canonical fetch 停止条件：
@@ -394,7 +394,7 @@ handoff 要求：
 
 - 本阶段只阻塞 high-cost fetch、same-run、review 和 budget 相关能力的上线，不阻塞前序 source / event / handoff producer 开发。
 
-### Phase 4：tool coverage 与 contribution
+### Phase 4（已完成）：tool coverage 与 contribution
 
 1. 三轴都要输出 `AxisToolCoverageReport`。
 2. `IndustryAgentContribution` 必须一条职责项一条记录，不得把 finance / policy 混成一条。
@@ -402,7 +402,7 @@ handoff 要求：
 4. 三轴 coverage 必须按 `axis_id` 分开；三条 contribution 必须按 `responsibility_id` 分开，不能互相代替。
 5. 若发现媒体转述、研究摘要或社区讨论命中本组事实，只能保留 provisional owner 或 attestation 输入，不得双计 accepted event。
 
-### Phase 4A：daily handoff 冻结
+### Phase 4A（已完成）：daily handoff 冻结
 
 1. 产出本组的 `daily-industry-evidence-pack-input.v1`。
 2. payload 至少能解析：
@@ -417,7 +417,7 @@ handoff 要求：
    - `normalized_event_batch_refs` 至少覆盖 `capital_finance`、`policy_regulatory`、`policy_research_thinktank`
 4. 不得把 accepted / rejected 全量 event 内嵌进 daily 输入包。
 
-### Phase 4B：owner / attestation 负例 fixture
+### Phase 4B（已完成）：owner / attestation 负例 fixture
 
 1. 产出 finance / policy 媒体转述不抢 owner 反例。
 2. 产出 official-first failure 反例。
@@ -427,7 +427,7 @@ handoff 要求：
    - 智库观点强但不是监管结论
 4. 这些 fixture 必须在本组目录下维护，由中台组只消费不重写。
 
-### Phase 5：领域测试与 handoff 冻结
+### Phase 5（已完成正式 handoff 交付，待 4 号继续平台 runtime 接线）：领域测试与 handoff 冻结
 
 1. 跑完领域测试。
 2. 产出稳定 fixture。
@@ -488,5 +488,9 @@ handoff 要求：
 
 ## 下一阶段入口
 
-1. 本组 producer 已对齐中台 `Phase 1A` 合同；若中台开放 normalization dry-run / consumer 接口，可直接拿本组 bundle 进入下一阶段对接。
-2. 若继续推进 activation / stop / budget / same-run，则等待 `4号执行人` 发布 `Phase 1B / 1C` 的共享治理 profile 与 runtime 基座。
+1. 本组正式 handoff 前提已交齐，且中台 `normalization dry-run` 已接通；`4号执行人` 可直接继续完成 policies-finance 线的 runtime 消费实现。
+2. 当前不再等待 `4号执行人` 发布 `Phase 1B / 1C` 的 schema/profile 真源；这些真源与 dry-run 入口已存在。
+3. 当前真正等待的是 `4号执行人` 把以下两类能力接成实际运行时行为：
+   - same-run refs 在真实 runtime path 中被消费，而不只停留在 dry-run 校验
+   - `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` 等 shared governance profile 驱动 activation / stop / budget / same-run
+4. 若 `4号执行人` 在 runtime 接线时给出新的明确拒收项，本组再按拒收项补一次；若没有新的拒收项，本组无需再新增政策金融输入，直接等待三组进入最终集成。

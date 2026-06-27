@@ -12,6 +12,9 @@ import {
   validateFinancePolicyHandoff,
   type FinancePolicyHandoffBundle,
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
+import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
+import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
+import { reviewAcademicPreparatoryHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
   PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS,
   PHASE1_SHARED_GOVERNANCE_PROFILE_IDS,
@@ -25,6 +28,16 @@ import {
 } from "../../../industry/platform/contracts/consumerFixtures.ts";
 
 describe("industry platform contracts", () => {
+  function buildAcademicReplayBundle() {
+    const fixture = JSON.parse(
+      fs.readFileSync(
+        path.join(process.cwd(), "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"),
+        "utf-8",
+      ),
+    ) as ReplayWindowFixture;
+    return buildAcademicPrepBundle(fixture);
+  }
+
   it("keeps the parallel worktree skeleton frozen under the agreed roots", () => {
     const root = process.cwd();
     const platformStages = ["contracts", "registry", "normalization", "audit", "trend", "output"];
@@ -469,6 +482,26 @@ describe("industry platform contracts", () => {
       expect(validateFinancePolicyHandoff(loadIndustrySchemaRegistry(), bundle)).toEqual({
         ok: true,
         status: "accepted_for_dry_run",
+      });
+    });
+  });
+
+  describe("academic preparatory handoff gate", () => {
+    it("accepts academic preparatory refs for dry-run review without promoting them to frozen handoff", () => {
+      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
+        ok: true,
+        status: "preparatory_review_ready",
+        promotionReady: false,
+      });
+    });
+
+    it("rejects academic daily refs that do not resolve to preparatory artifacts", () => {
+      const bundle = buildAcademicReplayBundle();
+      bundle.daily_input.payload.coverage_refs = ["artifact://academic-agent/missing/coverage.json", bundle.daily_input.payload.coverage_refs[1]!];
+
+      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
       });
     });
   });

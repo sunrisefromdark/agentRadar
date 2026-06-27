@@ -3,7 +3,8 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`In Progress`
+- 最近更新：`2026-06-27`
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -14,6 +15,32 @@
   - `docs/specs/design-docs/行业级Agent趋势判断设计/08-验证追溯与完成定义.md`
   - `docs/specs/design-docs/行业级Agent趋势判断设计/09-术语与审计词汇表.md`
 - 负责人：`2号执行人`
+
+### 当前推进结论
+
+- 当前主线已做到：`Step 3 / Phase 1A handoff ready`
+- 当前可交付状态：
+  - academic 两轴已能产出正式 `industry-signal-event-batch.v1`
+  - 两条 `axis-tool-coverage-report.v1`
+  - 两条 `industry-agent-contribution.v1`
+  - 一条 `daily-industry-evidence-pack-input.v1`
+  - replay / owner-boundary / anti-upgrade 基础样本已可供中台做 contract review
+- 当前未继续推进的原因：
+  - 后续 `review / budget / same-run / claim-critical` 接线属于本计划第 `4` 步，必须等待 `4号执行人` 发布 `Phase 1B / 1C`
+- 当前阻塞责任人：
+  - `4号执行人`（中台裁决组）
+
+### 阶段进度
+
+| 阶段 | 状态 | 当前结论 | 说明 |
+| --- | --- | --- | --- |
+| Phase 1：source 与 freshness 基线 | `Completed` | 已完成 | `paper/conference source`、citation trace、freshness anchor、事件 builder 已落地并有 unit / replay 测试 |
+| Phase 2：event 生产 | `Completed` | 已完成 | `research_paper` / `conference_academic` accepted / counter / diagnostic / rejected batch 已稳定产出 |
+| Phase 3：tool coverage 与 rejection | `Completed` | 已完成 | 两轴 coverage、rejection / anti-upgrade / owner-boundary 基线已落地 |
+| Phase 3A：daily handoff 冻结 | `Completed` | 已完成 | 已收口到 `daily-industry-evidence-pack-input.v1`，保持轻索引，不内嵌全量 event |
+| Phase 4：academic replay fixture | `Partial` | 基础样本已完成 | replay window、owner-boundary、anti-upgrade 已落地；更完整的 cross-group compatibility fixture 仍待中台联调节奏决定是否补充到独立 academic fixture |
+| Phase 5：review / budget / same-run / claim-critical 后接线 | `Blocked` | 等中台 Phase 1B / 1C | 该阶段不是本组单独推进即可完成，需等中台 runtime / dispatch / review 能力发布 |
+| 最终 weekly 集成与总验收 | `Not Started` | 尚未进入 | 需等三组正式 handoff 全部完成后再统一进入 |
 
 ## 目标
 
@@ -179,6 +206,21 @@
 4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 review / budget / same-run 全文抓取或深补证这类后接线能力接上。
 5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
+### 当前停点与继续条件
+
+当前停在第 `3` 步之后，原因不是本组产物未就绪，而是后续要做的能力已经进入中台依赖区。
+
+要继续推进本组下一段实现，至少需要以下外部产出：
+
+1. 需要 `4号执行人` 产出 `Phase 1B / 1C` 的中台接线能力：
+   - same-run / claim-critical 消费链路
+   - dispatch / budget runtime 实际消费入口
+   - review availability / reservation / claim admission 相关运行时契约落地
+2. 需要 `4号执行人` 明确哪些 cross-group compatibility fixture 继续由中台统一维护，哪些仍需本组补 academic 专属样本。
+3. 需要另外两组完成各自正式 handoff，之后才能进入最终 weekly 集成和总验收。
+
+在以上产出就绪前，本组不再继续扩展 `same-run`、`claim-critical`、`review`、`budget` 路径，避免在 academic 目录内提前实现中台运行时语义。
+
 ## 输出与 handoff
 
 必须交给中台组的产物：
@@ -299,3 +341,9 @@ handoff 要求：
 | --- | --- | --- | --- |
 | 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |
+| 2026-06-27 | `npm.cmd run code-review:preflight` | `Passed` | 仓库内 code review skill gate 通过 |
+| 2026-06-27 | `npm.cmd run testing-skill:preflight` | `Passed` | 仓库内 testing skill gate 通过 |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --write --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 已写入本执行计划对应的 targeted preflight receipt |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --check --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 当前 exec-plan receipt 与实现技能 hash 校验通过 |
+| 2026-06-27 | `npm.cmd test -- src/__tests__/industry/agents/academic-agent src/__tests__/industry/platform/contract.test.ts` | `Passed` | `45` 个 test files、`197` 个 tests 全部通过，包含 artifact ref identity 回归测试 |
+| 2026-06-27 | `npm.cmd run typecheck` | `Passed` | 学术 handoff 收口后的类型检查通过 |

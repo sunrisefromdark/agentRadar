@@ -24,23 +24,25 @@
 | Phase 3：tool coverage 与降级草稿 | `DONE` | 五条 axis coverage draft | daily 输入中 `coverage_refs=5` 有 contract test |
 | Phase 4：contribution 与测试 | `DONE` | 六职责项 contribution draft 与 unit / contract / negative / replay 测试 | `cn-community` 与 `global-community` contribution 分账 |
 | Phase 4A：daily handoff 草稿 | `DONE` | `daily-industry-evidence-pack-input.v1` 轻索引草稿 | 只包含 refs / lineage，不内嵌全量 event |
-| Phase 4B：正式跨组 consumer contract | `PARTIAL` | 本组 formal envelope / payload / manifest / refs 已收口，consumer contract fixture 已补齐 | 本组 producer-side freeze 已完成；等待 `4号执行人` 接入中台 contract dry-run / normalization dry-run |
+| Phase 4B：正式跨组 handoff 输入准备 | `READY_FOR_PLATFORM_DRY_RUN` | 本组 formal envelope / payload / manifest / refs 已收口，contract self-check fixture 已补齐 | 本组 producer-side 输入准备已完成；中台 contract dry-run / normalization dry-run 尚未完成，等待 `4号执行人` 接入 |
 
 ## 阶段更新（2026-06-27）
 
-当前做到：产品生态组已完成 Phase2A / formal handoff freeze。本组现在可以从第一轮 draft seam 生成正式 `ProductEcosystemFormalHandoffBundle`，包含 `IndustryAgentMessageEnvelope`、formal payload、`IndustryAgentArtifactManifest` 与 `industry://` artifact refs；并已补上 message / payload / manifest / ref 的绑定校验。
+当前做到：产品生态组实际执行到本组 producer-side formal handoff 输入准备完成，状态为 `READY_FOR_PLATFORM_DRY_RUN`。本组现在可以从第一轮 draft seam 生成正式 `ProductEcosystemFormalHandoffBundle`，包含 `IndustryAgentMessageEnvelope`、formal payload、`IndustryAgentArtifactManifest` 与 `industry://` artifact refs；并已补上 message / payload / manifest / ref 的绑定校验。这不表示中台 contract dry-run、normalization dry-run、Phase 1B / 1C 后接线或 weekly 集成已经完成。
+
+交付口径：这与其他领域组“可独立交付部分先完成，等待 `4号执行人` 接平台消费层后继续跨组收口”的形式一致。本组已完成的是产品生态 producer / fixture / manifest / handoff 输入准备；下一步由中台接收 bundle 并产出 dry-run / normalization 反馈后，产品生态组再按反馈修正本组 payload / lineage / refs。
 
 已完成：
 
 1. Phase 1 - Phase 4A：职责边界、五类 event draft、5 条 coverage draft、6 条 contribution draft、daily 轻索引草稿均已完成。
-2. Phase 4B producer-side freeze：`src/industry/agents/community-news-agent/formalHandoff.ts` 已能生成正式 handoff bundle，并保持 `coverage_refs=5`、`contribution_refs=6`。
-3. Phase 4B contract fixtures：已覆盖 current、previous compatible same-major、unknown higher major、missing required ref，以及 missing payload 负例。
+2. Phase 4B producer-side 输入准备：`src/industry/agents/community-news-agent/formalHandoff.ts` 已能生成正式 handoff bundle，并保持 `coverage_refs=5`、`contribution_refs=6`。
+3. Phase 4B formal handoff 自检 fixtures：已覆盖 current、previous compatible same-major、unknown higher major、missing required ref，以及 missing payload 负例。
 4. 审核修复：formal validator 已要求每条 message 必须有对应 payload / manifest，payload schema 必须匹配 envelope，payload `source_message_id` 必须回指 message。
 
 未完成 / 继续阻塞：
 
 1. 中台 contract dry-run / normalization dry-run 尚未完成。原因：需要 `4号执行人` 在中台运行时接收本组 formal bundle，并接入统一 consumer runner、normalization dry-run 与反馈产物。
-2. activation / budget / review / same-run 深补证尚未接入。原因：本阶段明确只做 formal handoff freeze，后续需要等待 `4号执行人` 发布 Phase 1B / 1C 的 dispatch、budget、review、same-run 运行时基座与 current fixtures。
+2. activation / budget / review / same-run 深补证尚未接入。原因：本轮只完成 producer-side formal handoff 输入准备，后续需要等待 `4号执行人` 发布 Phase 1B / 1C 的 dispatch、budget、review、same-run 运行时基座与 current fixtures。
 3. weekly 总集成尚未完成。原因：需要三组正式 handoff 全量齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly internal / consumer / public 三层闭环。
 
 继续推进所需产出：
@@ -58,7 +60,7 @@
 | producer event builder | `DONE` | 已新增 product / developer / OSS / community / news event builder 草稿 |
 | coverage / contribution writer | `DONE` | 本组 coverage 固定 5 条，contribution 固定 6 条 |
 | local adapter seam / daily input | `DONE` | `buildProductEcosystemHandoff` 可生成本组 daily 输入草稿 |
-| 正式 handoff freeze | `DONE` | `buildProductEcosystemFormalHandoff` 可生成正式 envelope / payload / manifest / refs |
+| formal handoff 输入准备 | `READY_FOR_PLATFORM_DRY_RUN` | `buildProductEcosystemFormalHandoff` 可生成正式 envelope / payload / manifest / refs；等待中台 dry-run 后才能提升为消费侧完成 |
 | 中台 dry-run 接入 | `BLOCKED` | 等 `4号执行人` 接入统一 consumer runner / normalization dry-run 并回传反馈 |
 
 ## 目标
@@ -404,14 +406,18 @@ handoff 要求：
 | 2026-06-26 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、10 条测试通过；覆盖产品/OSS、社区/新闻 owner 边界、news-pr anti-upgrade、5 coverage / 6 contribution 与 daily 轻索引 |
 | 2026-06-26 | `corepack pnpm run typecheck` | `Passed` | TypeScript 全仓类型检查通过 |
 | 2026-06-26 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 产品生态组 implementation preflight 校验通过 |
-| 2026-06-27 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、15 条测试通过；新增 formal handoff freeze、current / previous compatible / unknown higher major / missing ref / missing payload contract 验证 |
+| 2026-06-27 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、15 条测试通过；新增 formal handoff 输入准备、current / previous compatible / unknown higher major / missing ref / missing payload contract 验证 |
 | 2026-06-27 | `corepack pnpm run typecheck` | `Passed` | TypeScript 全仓类型检查通过 |
 | 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 产品生态组 implementation preflight 校验通过 |
+| 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 已将当前状态修正为 `READY_FOR_PLATFORM_DRY_RUN`，并刷新 implementation preflight receipt |
+| 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 状态口径修正后 preflight receipt 校验通过 |
+| 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 补充同类领域组“可独立交付部分完成，等待中台消费层”口径，并刷新 implementation preflight receipt |
+| 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 同类交付口径补充后 preflight receipt 校验通过 |
 
 ## 下一阶段入口
 
-1. `DONE`：已消费 `4号执行人` Phase 1A 的 canonical schema、payload 正式名、artifact path 与 compatibility matrix，并将本地 seam 刷新为正式 envelope / payload / manifest handoff。
-2. `DONE`：已补 current / previous compatible / unknown higher major / missing required ref / missing payload 的本组正式消费侧 contract 验证。
+1. `DONE`：已消费 `4号执行人` Phase 1A 的 canonical schema、payload 正式名、artifact path 与 compatibility matrix，并将本地 seam 刷新为正式 envelope / payload / manifest handoff 输入。
+2. `DONE`：已补 current / previous compatible / unknown higher major / missing required ref / missing payload 的本组 formal handoff 自检验证。
 3. `NEXT`：把产品生态 formal bundle 交给 `4号执行人` 做中台 contract dry-run 与 normalization dry-run；收到失败反馈后，本组只在 product / community / news 目录内修正。
 4. `BLOCKED`：activation / budget / review / same-run 深补证能力等待 `4号执行人` 发布 Phase 1B / 1C runtime、consumer fixtures 与接线约束后再做。
 5. `BLOCKED`：最终 weekly 集成等待三组正式 handoff 齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly 三层闭环。

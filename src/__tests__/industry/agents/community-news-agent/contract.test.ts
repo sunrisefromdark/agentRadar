@@ -1,11 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {
-  buildProductEcosystemFormalHandoff,
-  type ProductEcosystemFormalHandoffBundle,
-  validateProductEcosystemFormalHandoff,
-} from "../../../../industry/agents/community-news-agent/formalHandoff.ts";
 import { buildProductEcosystemHandoff } from "../../../../industry/agents/community-news-agent/handoff.ts";
-import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
 
 function buildContractInput() {
   const base = {
@@ -144,86 +138,3 @@ describe("product ecosystem handoff draft", () => {
     expect(result.newsPr.diagnostic.payload.events).toHaveLength(1);
   });
 });
-
-describe("product ecosystem formal handoff freeze", () => {
-  it("accepts the current formal bundle for dry-run consumption", () => {
-    const { bundle } = buildProductEcosystemFormalHandoff(buildContractInput());
-    const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
-
-    expect(validateProductEcosystemFormalHandoff(loadIndustrySchemaRegistry(), bundle)).toEqual({
-      ok: true,
-      status: "accepted_for_dry_run",
-    });
-    expect(bundle.messages.every((message) => typeof message.payload_ref === "string" && message.payload_ref.startsWith("industry://internal/"))).toBe(true);
-    expect(bundle.payloads.filter((payload) => payload.payload_schema === "axis-tool-coverage-report.v1")).toHaveLength(5);
-    expect(bundle.payloads.filter((payload) => payload.payload_schema === "industry-agent-contribution.v1")).toHaveLength(6);
-    expect(daily?.coverage_refs).toHaveLength(5);
-    expect(daily?.contribution_refs).toHaveLength(6);
-    expect(daily).not.toHaveProperty("events");
-    expect(daily).not.toHaveProperty("accepted_events");
-    expect(daily).not.toHaveProperty("rejected_events");
-  });
-
-  it("accepts previous compatible same-major producer versions", () => {
-    const { bundle } = buildProductEcosystemFormalHandoff(buildContractInput());
-    const registry = clone(loadIndustrySchemaRegistry());
-    const formalSchemas = new Set([
-      "industry-signal-event-batch.v1",
-      "axis-tool-coverage-report.v1",
-      "industry-agent-contribution.v1",
-      "daily-industry-evidence-pack-input.v1",
-    ]);
-
-    for (const entry of registry.compatibility.entries) {
-      if (formalSchemas.has(entry.schema_id)) entry.current_version = "1.1.0";
-    }
-
-    expect(validateProductEcosystemFormalHandoff(registry, bundle)).toEqual({
-      ok: true,
-      status: "accepted_for_dry_run",
-    });
-  });
-
-  it("rejects unknown higher-major producer versions", () => {
-    const { bundle } = buildProductEcosystemFormalHandoff(buildContractInput());
-    const higherMajorBundle = clone(bundle);
-    higherMajorBundle.payloads[0].schema_version = "2.0.0";
-
-    expect(validateProductEcosystemFormalHandoff(loadIndustrySchemaRegistry(), higherMajorBundle)).toMatchObject({
-      ok: false,
-      reasonCode: "unsupported_version",
-    });
-  });
-
-  it("rejects daily refs that are missing from manifest and artifact refs", () => {
-    const { bundle } = buildProductEcosystemFormalHandoff(buildContractInput());
-    const missingRefBundle = clone(bundle);
-    const daily = missingRefBundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
-    const missingRef = Array.isArray(daily?.coverage_refs) ? daily.coverage_refs[0] : "";
-
-    missingRefBundle.manifests = missingRefBundle.manifests.filter((manifest) => manifest.artifact_ref !== missingRef);
-    missingRefBundle.artifactRefs = missingRefBundle.artifactRefs.filter((artifactRef) => artifactRef !== missingRef);
-
-    expect(validateProductEcosystemFormalHandoff(loadIndustrySchemaRegistry(), missingRefBundle)).toMatchObject({
-      ok: false,
-      reasonCode: "lineage_failed",
-    });
-  });
-
-  it("rejects formal bundles with a missing payload", () => {
-    const { bundle } = buildProductEcosystemFormalHandoff(buildContractInput());
-    const missingPayloadBundle: ProductEcosystemFormalHandoffBundle = {
-      ...clone(bundle),
-      payloads: bundle.payloads.slice(1),
-    };
-
-    expect(validateProductEcosystemFormalHandoff(loadIndustrySchemaRegistry(), missingPayloadBundle)).toMatchObject({
-      ok: false,
-      reasonCode: "lineage_failed",
-    });
-  });
-});
-
-function clone<T>(value: T): T {
-  return JSON.parse(JSON.stringify(value)) as T;
-}

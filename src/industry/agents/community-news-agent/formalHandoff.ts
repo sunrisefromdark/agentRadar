@@ -502,7 +502,7 @@ function buildFormalCoveragePayload(draft: DraftArtifact, messageId: string): Ha
     active_source_class: activeSourceClass,
     route_status: routeStatus(activeRouteLevel),
     budget_status: {
-      profile_id: "product-ecosystem-formal-handoff.v1",
+      profile_id: "axis-runtime-budget-profile.v1/product_ecosystem",
       budget_exceeded: false,
       spent_summary_cn: "within budget",
     },

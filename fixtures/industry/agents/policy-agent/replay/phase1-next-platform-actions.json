@@ -1,25 +1,29 @@
 {
   "manifest_id": "policy-finance-phase1-next-platform-actions.v1",
   "status": "waiting_for_executor_4",
+  "executor_4_can_continue_phase1_without_more_policy_finance_inputs": true,
   "ready_inputs": {
     "delivery_manifest": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
     "current_bundle": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
     "negative_bundle": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
     "handoff_note": "src/industry/agents/policy-agent/handoff-note.md",
-    "shared_runtime_note": "src/industry/agents/policy-agent/shared-runtime-note.md"
+    "shared_runtime_note": "src/industry/agents/policy-agent/shared-runtime-note.md",
+    "normalization_dry_run": "src/industry/platform/normalization/financePolicyDryRun.ts"
   },
-  "required_platform_actions": [
+  "completed_platform_actions": [
     {
       "owner": "4号执行人",
       "target_area": "src/industry/platform/normalization/*",
       "action": "consume_current_bundle",
       "done_when": "phase1-current-bundle.json can be materialized by platform normalization without producer-side wrapper"
-    },
+    }
+  ],
+  "remaining_platform_actions": [
     {
       "owner": "4号执行人",
-      "target_area": "src/industry/platform/contracts|normalization|registry|trend/*",
-      "action": "consume_same_run_runtime_refs",
-      "done_when": "dispatch_context_ref, scheduling_key, stable claim key, claim admission ref, reservation refs are consumed by platform runtime path"
+      "target_area": "src/industry/platform/normalization/*",
+      "action": "consume_same_run_runtime_refs_in_runtime_path",
+      "done_when": "dispatch_context_ref, scheduling_key, stable claim key, claim admission ref, reservation refs are consumed by platform runtime path, not only dry-run validation"
     },
     {
       "owner": "4号执行人",

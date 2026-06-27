@@ -17,11 +17,36 @@
 
 ## 当前进度
 
+### 一句话状态
+
+- 本组对 `4号执行人` 的正式 handoff 前提已经交齐：
+  - `envelope`
+  - `payload`
+  - `manifest`
+  - `artifact refs`
+  - `execution_context`
+  - claim-critical 场景下的 same-run 必填 ref
+- `4号执行人` 已用这批输入接通 `normalization dry-run`。
+- 当前不再缺本组输入；剩余未完成项只在中台运行时消费层。
+
+### 对 4 号的接收条件
+
+| 条件 | 当前状态 | 说明 |
+| --- | --- | --- |
+| `envelope / payload / manifest / artifact refs` 交齐 | `DONE` | current / negative bundle fixture、delivery manifest、checksums 已提供 |
+| `execution_context` 完整 | `DONE` | current bundle 已带 `primary_responsibility_id` 与 `operational_executor_id`，并有 platform contract / dry-run 覆盖 |
+| `takeover` 语义明确 | `DONE` | 当前交付全部显式为 `takeover_mode: none`，不存在需要 4 号脑补的 takeover 空洞 |
+| claim-critical same-run 必填 ref 交齐 | `DONE` | current fixture / current bundle 已带 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission ref、reservation refs |
+| negative reject 样本交齐 | `DONE` | 已提供缺 stable claim key 的 negative fixture / negative bundle，4 号可直接按合同拒收 |
+| `normalization dry-run` 已接通 | `DONE` | 中台 `financePolicyDryRun.ts` 与 `normalization.test.ts` 已消费本组 current / negative bundle |
+| dispatch runtime 真消费 same-run refs | `WAITING_4` | 仍待 4 号把 same-run refs 从 dry-run 校验接到真实 runtime path |
+| shared governance 真运行时接线 | `WAITING_4` | 仍待 4 号把 activation / stop / budget / same-run 行为接成运行时实现 |
+
 | Phase | 状态 | 已落地项 | 说明 |
 | --- | --- | --- | --- |
 | Phase 1-2：source / route / event / handoff 骨架 | `DONE` | `finance-agent`、`policy-agent` 目录骨架、source catalog、route selection、event builder、handoff、unit/contract/negative/replay fixture 与测试骨架 | 当前仓库内可独立落地的骨架、最小领域验证与 producer artifact 校验已闭环 |
 | Phase 3-4A：正式 cross-group contract 收口 | `DONE` | canonical payload 名、message kind、`industry://` artifact ref、payload 顶层 canonical 字段、finance-policy handoff gate dry-run | 已对齐中台 `Phase 1A` contract，并通过平台 handoff gate 验证 |
-| Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `IN_PROGRESS` | producer 侧 `dispatch_context_ref` / `scheduling_key` / stable claim key / admission / reservation refs 已可挂载并通过平台 runtime gate | 本组已完成 same-run consumer/runtime seam 的 producer 接线；剩余阻塞转为中台 normalization / dispatch runtime 实际消费链路与共享治理 profile 的正式收口 |
+| Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `IN_PROGRESS` | 本组 producer 接线、正式 bundle 交付、negative 样本、normalization dry-run 前提均已完成 | 本组侧能独立完成的部分已做完；剩余只待 `4号执行人` 把 same-run / activation / stop / budget 接成平台运行时行为 |
 
 ## 落地标记（截至 2026-06-26）
 
@@ -57,9 +82,9 @@
 | --- | --- | --- |
 | 正式 cross-group handoff 收口 | `DONE` | 已切到 canonical payload 名、正式 message kind 与 `industry://` artifact ref，并通过平台 `financePolicyHandoff` gate 的 dry-run 验证 |
 | current / previous compatible consumer fixture 最终对接闭环 | `DONE` | 已对齐 compatibility matrix，并由领域 contract test + 平台 contract gate 覆盖 |
-| `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `IN_PROGRESS` | producer 侧已能生成并校验 same-run refs；剩余依赖 dispatch / budget runtime 基座的实际消费与联调 |
-| activation / stop / budget 正式治理接线 | `BLOCKED` | 本组 `shared-runtime-note` 已提交；后续需等待中台把共享治理 profile 与受控 reason/state 字典接入实际消费链路 |
-| 正式提交给中台组消费的 envelope / payload / manifest 套件 | `IN_PROGRESS` | producer 侧正式 bundle 已可生成，且 canonical payload 名、message kind、artifact ref、`source_message_id`、same-run runtime refs 等顶层字段已补齐；同轮已补 handoff note、same-run current/negative fixture、machine-readable current/negative bundle fixture，以及 delivery manifest，待中台 normalization / runtime 消费链接通后进入下一步 |
+| `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `WAITING_4` | 本组 producer 交付、fixture、bundle、dry-run 输入已交齐；剩余只待 4 号把 same-run ref 接入真实 runtime path |
+| activation / stop / budget 正式治理接线 | `WAITING_4` | 本组 `shared-runtime-note` 已提交，normalization dry-run 已落；剩余只待 4 号把共享治理 profile 与受控 reason/state 字典接入实际运行时消费链路 |
+| 正式提交给中台组消费的 envelope / payload / manifest 套件 | `DONE` | 本组已交齐 current / negative bundle、delivery manifest、checksums、handoff note、shared-runtime note、stable entrypoint；4 号不应再因缺本组输入而阻塞 |
 
 ## 目标
 
@@ -228,6 +253,40 @@
 - 只有在你要把本组结果正式交给别组消费时，才需要等待 `4号执行人` 的 `Phase 1A`。
 - 只有在你要写正式 `industry-signal-event-batch.v1`、`axis-tool-coverage-report.v1`、`industry-agent-contribution.v1` 并作为跨组真交接件提交时，才需要等 canonical schema 和 payload 正式名冻结。
 - 只有在你要接 same-run 的高成本路径时，才需要等 dispatch / budget runtime 基座。
+
+### 现在继续推进需要谁产出什么
+
+- `1号执行人（本组）`：
+  - 当前无需再补新的政策金融输入，除非 `4号执行人` 在实际 runtime 接线时给出新的合同拒收项。
+- `4号执行人`：
+  - 继续把 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission / reservation refs 接入真实 runtime path。
+  - 继续把 `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` 等 shared governance profile 接成运行时行为。
+  - 若 runtime 接线后新增拒收项，必须按合同明确指出缺的字段或语义，而不是让本组猜。
+- `2号执行人 / 3号执行人`：
+  - 不阻塞政策金融组这条线继续进入平台 runtime；只在做最终 weekly 集成时才重新形成强依赖。
+
+### 从现在到集成前的完整流程
+
+| 顺序 | 谁推进 | 要做什么 | 完成标志 | 完成后是否还需要本组回合 |
+| --- | --- | --- | --- | --- |
+| 1 | `4号执行人` | 继续在平台 runtime path 消费 same-run refs，而不只停在 `normalization dry-run` | current bundle 能走过真实 runtime path，negative bundle 能在 runtime path 按合同拒收 | `通常不需要` |
+| 2 | `4号执行人` | 把 `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` 等 shared governance profile 接成运行时行为 | activation / stop / budget / same-run 行为由运行时实现驱动，不再只是 contract/fixture 校验 | `通常不需要` |
+| 3 | `4号执行人` | 若 runtime 接线时发现本组字段或语义仍不满足合同，按拒收项明确指出缺什么 | 出现明确的字段级 / 语义级拒收单 | `需要本组补一次` |
+| 4 | `1号执行人（仅在被明确拒收时）` | 只按明确拒收项补字段、样本或契约，不扩新语义 | 拒收项被关闭，相关回归转绿 | `补完后再回到4号` |
+| 5 | `4号执行人` | 完成政策金融线的 runtime 消费闭环后，继续并行接另外两组，再做 cross-group normalization / audit / weekly 拼装 | 三组正式 handoff 都已进入中台主链路 | `此时本组无需单独推进` |
+| 6 | `4号执行人 + 全员` | 进入最终 weekly 集成与总验收 | weekly internal / consumer / public 三层产物齐备 | `进入集成阶段` |
+
+### 来回轮次预期
+
+- `最优路径`：
+  - 当前这轮之后，本组不再需要新增交付；`4号执行人` 直接完成 runtime path 与 shared governance 接线，然后进入跨组集成。
+- `保守路径`：
+  - `4号执行人` 在 runtime 接线时给出一次明确拒收单；
+  - 本组只按拒收项补一次；
+  - 补完后回到 `4号执行人` 继续完成剩余平台实现。
+- `不接受的路径`：
+  - 反复以“缺政策金融输入”为由停工，但不给出明确合同拒收项；
+  - 这不符合当前执行计划，因为本组已交齐 `envelope / payload / manifest / artifact refs / execution_context / same-run refs / current-negative bundle / manifests / checksums`。
 
 ### 等到什么产物出来再继续
 

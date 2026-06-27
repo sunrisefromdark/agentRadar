@@ -15,6 +15,7 @@ import {
 import {
   PHASE1_FEEDBACK_PAYLOAD_SCHEMA_IDS,
   PHASE1_SHARED_GOVERNANCE_PROFILE_IDS,
+  resolveSharedGovernanceProfile,
   validateSharedGovernanceBaseline,
 } from "../../../industry/platform/contracts/sharedGovernance.ts";
 import { validateDispatchRuntimeGate } from "../../../industry/platform/contracts/dispatchRuntime.ts";
@@ -151,6 +152,21 @@ describe("industry platform contracts", () => {
       expect(result.profileIds).toContain("canonical-fetch-stop-policy.v1");
       expect(result.profileIds).toContain("same-run-review-availability-policy.v1");
     }
+  });
+
+  it("resolves policy-finance governance profile ids through the shared registry", () => {
+    const registry = loadIndustrySchemaRegistry();
+
+    expect(resolveSharedGovernanceProfile(registry, "axis-runtime-budget-profile.v1/capital_finance")).toEqual({
+      ok: true,
+      schemaId: "axis-runtime-budget-profile.v1",
+      profileId: "axis-runtime-budget-profile.v1/capital_finance",
+      version: "1.0.0",
+    });
+    expect(resolveSharedGovernanceProfile(registry, "unknown-profile.v1/capital_finance")).toMatchObject({
+      ok: false,
+      reasonCode: "schema_mismatch",
+    });
   });
 
   it("gates same-run and high-cost actions on dispatch, reservation, and budget refs", () => {

@@ -9,6 +9,9 @@ import { academicAgentId, executionContextFor, responsibilityForAxis } from "./t
 export function buildContribution(
   axis: IndustryEvidenceAxisKey,
   events: IndustrySignalEvent[],
+  runId: string,
+  windowStart: string,
+  windowEnd: string,
   inputArtifactRefs: string[],
   outputArtifactRef: string,
   toolRouteIds: string[],
@@ -21,8 +24,15 @@ export function buildContribution(
   const responsibility: IndustryResponsibilityId = responsibilityForAxis(axis);
 
   return {
+    payload_schema: "industry-agent-contribution.v1",
+    payload_id: `${runId}.${axis}.contribution`,
+    schema_version: "1.0.0",
+    run_id: runId,
+    window_start: windowStart,
+    window_end: windowEnd,
+    source_message_id: `${outputArtifactRef}#message`,
+    actual_agent_id: academicAgentId,
     responsibility_id: responsibility,
-    handled_by_agent_id: academicAgentId,
     execution_context: executionContextFor(axis),
     status: diagnostic > 0 || rejected > 0 ? "partial" : "ok",
     covered_axes: [axis],
@@ -44,6 +54,5 @@ export function buildContribution(
       axis === "research_paper"
         ? "已产出 research_paper 事件、coverage 与 replay 入口。"
         : "已产出 conference_academic 事件、coverage 与 replay 入口。",
-    upstream_payload_schema: "industry-agent-contribution.v1",
   };
 }

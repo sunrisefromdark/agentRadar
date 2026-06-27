@@ -14,7 +14,7 @@ import {
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
 import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
-import { reviewAcademicPreparatoryHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
+import { validateAcademicHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
   validateProductEcosystemHandoff,
   type ProductEcosystemHandoffBundle,
@@ -617,20 +617,19 @@ describe("industry platform contracts", () => {
     });
   });
 
-  describe("academic preparatory handoff gate", () => {
-    it("accepts academic preparatory refs for dry-run review without promoting them to frozen handoff", () => {
-      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
+  describe("academic handoff gate", () => {
+    it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and schemas", () => {
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
         ok: true,
-        status: "preparatory_review_ready",
-        promotionReady: false,
+        status: "handoff_ready",
       });
     });
 
-    it("rejects academic daily refs that do not resolve to preparatory artifacts", () => {
+    it("rejects academic daily refs that do not resolve to handoff artifacts", () => {
       const bundle = buildAcademicReplayBundle();
-      bundle.daily_input.payload.coverage_refs = ["artifact://academic-agent/missing/coverage.json", bundle.daily_input.payload.coverage_refs[1]!];
+      bundle.daily_input.payload.coverage_refs = ["industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing", bundle.daily_input.payload.coverage_refs[1]!];
 
-      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,
         reasonCode: "lineage_failed",
       });

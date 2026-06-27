@@ -56,7 +56,7 @@ function makeReport(projects: ScoredProject[]): DailyReport {
 
 describe("buildMissionInventoryAudit", () => {
   it("does not count core-agent-work projects as vertical or task-oriented inventory", () => {
-    const coding = makeScoredProject("acme/coding-agent", "coding agent patch review automation");
+    const coding = makeScoredProject("acme/codex-cli", "terminal refactor patch review bugfix");
     const commerce = makeScoredProject("acme/shopping-agent", "shopping commerce agent guide conversion automation");
 
     const audit = buildMissionInventoryAudit({

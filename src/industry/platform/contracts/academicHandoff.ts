@@ -1,8 +1,19 @@
-import type { AcademicFormalHandoffBundle } from "../../agents/academic-agent/types.ts";
-import type { IndustrySchemaRegistry } from "./schemaRegistry.ts";
+import type {
+  AcademicHandoffBundle,
+  AcademicFormalHandoffBundle as AcademicFormalHandoffShape,
+  ProducedArtifact,
+} from "../../agents/academic-agent/types.ts";
 import { canConsumePayloadSchema } from "./payloadRegistry.ts";
+import type { IndustrySchemaRegistry } from "./schemaRegistry.ts";
+import { validatePayloadSchema } from "./schemaRegistry.ts";
 
 type HandoffRecord = Record<string, unknown>;
+
+export type AcademicFormalHandoffBundle = AcademicFormalHandoffShape;
+
+type AcademicPrepReviewResult =
+  | { ok: true; status: "handoff_ready" }
+  | { ok: false; reasonCode: "schema_mismatch" | "lineage_failed"; message: string };
 
 type AcademicHandoffResult =
   | { ok: true; status: "accepted_for_dry_run" }
@@ -34,6 +45,10 @@ function hasStringArray(value: unknown, length?: number): value is string[] {
   return Array.isArray(value) && value.length > 0 && value.every(hasText) && (length === undefined || value.length === length);
 }
 
+function knownSchemaExists(registry: IndustrySchemaRegistry, schemaId: string): boolean {
+  return validatePayloadSchema(registry, schemaId).ok || registry.compatibility.entries.some((entry) => entry.schema_id === schemaId);
+}
+
 function canConsumeHandoffSchema(
   registry: IndustrySchemaRegistry,
   schemaId: string,
@@ -56,7 +71,7 @@ function canConsumeHandoffSchema(
   return undefined;
 }
 
-export function validateAcademicHandoff(
+function validateAcademicFormalHandoff(
   registry: IndustrySchemaRegistry,
   bundle: AcademicFormalHandoffBundle,
 ): AcademicHandoffResult {
@@ -138,11 +153,7 @@ export function validateAcademicHandoff(
   const responsibilities = new Set(bundle.payloads.map((payload) => (payload as HandoffRecord).responsibility_id).filter(hasText));
   for (const responsibility of REQUIRED_RESPONSIBILITIES) {
     if (!responsibilities.has(responsibility)) {
-      return {
-        ok: false,
-        reasonCode: "lineage_failed",
-        message: `Missing academic responsibility: ${responsibility}`,
-      };
+      return { ok: false, reasonCode: "lineage_failed", message: `Missing academic responsibility: ${responsibility}` };
     }
   }
 
@@ -190,4 +201,113 @@ export function validateAcademicHandoff(
   }
 
   return { ok: true, status: "accepted_for_dry_run" };
+}
+
+function isAcademicFormalHandoffBundle(
+  bundle: AcademicHandoffBundle | AcademicFormalHandoffBundle,
+): bundle is AcademicFormalHandoffBundle {
+  return "messages" in bundle && "manifests" in bundle && "payloads" in bundle && "artifactRefs" in bundle;
+}
+
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicHandoffBundle,
+): AcademicPrepReviewResult;
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicFormalHandoffBundle,
+): AcademicHandoffResult;
+export function validateAcademicHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicHandoffBundle | AcademicFormalHandoffBundle,
+): AcademicPrepReviewResult | AcademicHandoffResult {
+  if (isAcademicFormalHandoffBundle(bundle)) return validateAcademicFormalHandoff(registry, bundle);
+  return reviewAcademicPreparatoryHandoff(registry, bundle);
+}
+
+export function reviewAcademicPreparatoryHandoff(
+  registry: IndustrySchemaRegistry,
+  bundle: AcademicHandoffBundle,
+): AcademicPrepReviewResult {
+  const artifacts: ProducedArtifact<unknown>[] = [
+    ...bundle.event_batches,
+    ...bundle.coverage_reports,
+    ...bundle.contributions,
+    bundle.daily_input,
+  ];
+  const refs = new Set(artifacts.map((artifact) => artifact.ref).filter(hasText));
+
+  if (
+    bundle.event_batches.length !== 8 ||
+    bundle.coverage_reports.length !== 2 ||
+    bundle.contributions.length !== 2 ||
+    refs.size !== artifacts.length
+  ) {
+    return { ok: false, reasonCode: "lineage_failed", message: "Academic preparatory bundle is missing required artifacts." };
+  }
+
+  for (const artifact of artifacts) {
+    if (!hasText(artifact.ref) || !artifact.payload || !artifact.manifest || !artifact.message) {
+      return { ok: false, reasonCode: "lineage_failed", message: "Academic artifact is missing ref, payload, manifest, or message." };
+    }
+    if (artifact.manifest.artifact_ref !== artifact.ref || artifact.message.payload_ref !== artifact.ref) {
+      return { ok: false, reasonCode: "lineage_failed", message: `Academic artifact lineage does not resolve: ${artifact.ref}` };
+    }
+    if (artifact.message.payload_schema !== artifact.payload_schema) {
+      return { ok: false, reasonCode: "schema_mismatch", message: `Academic message schema mismatch: ${artifact.ref}` };
+    }
+    const inputRefs = artifact.message.input_artifact_refs;
+    if (Array.isArray(inputRefs) && inputRefs.some((ref) => !refs.has(ref))) {
+      return { ok: false, reasonCode: "lineage_failed", message: `Academic input ref is unresolved: ${artifact.ref}` };
+    }
+  }
+
+  if (!bundle.event_batches.every((artifact) => artifact.payload_schema === "industry-signal-event-batch.v1")) {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic event batches must use industry-signal-event-batch.v1." };
+  }
+  if (!bundle.coverage_reports.every((artifact) => artifact.payload_schema === "axis-tool-coverage-report.v1")) {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic coverage reports must use axis-tool-coverage-report.v1." };
+  }
+  if (!bundle.contributions.every((artifact) => artifact.payload_schema === "industry-agent-contribution.v1")) {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic contributions must use industry-agent-contribution.v1." };
+  }
+  if (bundle.daily_input.payload_schema !== "daily-industry-evidence-pack-input.v1") {
+    return { ok: false, reasonCode: "schema_mismatch", message: "Academic daily input must use daily-industry-evidence-pack-input.v1." };
+  }
+  for (const schemaId of [
+    "industry-signal-event-batch.v1",
+    "axis-tool-coverage-report.v1",
+    "industry-agent-contribution.v1",
+    "daily-industry-evidence-pack-input.v1",
+  ]) {
+    if (!knownSchemaExists(registry, schemaId)) {
+      return { ok: false, reasonCode: "schema_mismatch", message: `Missing canonical schema for academic handoff: ${schemaId}` };
+    }
+  }
+
+  const daily = bundle.daily_input.payload;
+  if (
+    !daily ||
+    !hasStringArray(daily.normalized_event_batch_refs, 2) ||
+    !hasStringArray(daily.rejected_event_batch_refs, 2) ||
+    !hasStringArray(daily.source_message_ids) ||
+    !hasStringArray(daily.coverage_refs, 2) ||
+    !hasStringArray(daily.contribution_refs, 2) ||
+    "accepted_events" in daily ||
+    "rejected_events" in daily ||
+    "events" in daily
+  ) {
+    return { ok: false, reasonCode: "lineage_failed", message: "Academic daily input must stay a two-axis lightweight ref index." };
+  }
+  const dailyRefs = [
+    ...daily.normalized_event_batch_refs,
+    ...daily.rejected_event_batch_refs,
+    ...daily.coverage_refs,
+    ...daily.contribution_refs,
+  ];
+  if (dailyRefs.some((ref) => !refs.has(ref))) {
+    return { ok: false, reasonCode: "lineage_failed", message: "Academic daily input references unresolved artifacts." };
+  }
+
+  return { ok: true, status: "handoff_ready" };
 }

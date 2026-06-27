@@ -19,3 +19,5 @@ data/agent-memory/**
 !data/agent-memory/.gitkeep
 data/upstream/**
 !data/upstream/.gitkeep
+
+.worktrees/

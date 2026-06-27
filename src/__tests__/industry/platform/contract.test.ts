@@ -12,9 +12,13 @@ import {
   validateFinancePolicyHandoff,
   type FinancePolicyHandoffBundle,
 } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
-import { buildAcademicHandoffBundle } from "../../../industry/agents/academic-agent/handoff.ts";
+import { buildAcademicHandoffBundle, buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
 import type { ReplayWindowFixture } from "../../../industry/agents/academic-agent/types.ts";
-import { validateAcademicHandoff } from "../../../industry/platform/contracts/academicHandoff.ts";
+import {
+  reviewAcademicPreparatoryHandoff,
+  validateAcademicHandoff,
+  type AcademicFormalHandoffBundle,
+} from "../../../industry/platform/contracts/academicHandoff.ts";
 import {
   validateProductEcosystemHandoff,
   type ProductEcosystemHandoffBundle,
@@ -33,7 +37,17 @@ import {
 import { buildProductEcosystemHandoff } from "../../../industry/agents/community-news-agent/handoff.ts";
 
 describe("industry platform contracts", () => {
-  function buildAcademicReplayBundle() {
+  function buildAcademicPrepReplayBundle() {
+    const fixture = JSON.parse(
+      fs.readFileSync(
+        path.join(process.cwd(), "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"),
+        "utf-8",
+      ),
+    ) as ReplayWindowFixture;
+    return buildAcademicPrepBundle(fixture);
+  }
+
+  function buildAcademicFormalReplayBundle() {
     const fixture = JSON.parse(
       fs.readFileSync(
         path.join(process.cwd(), "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"),
@@ -619,19 +633,103 @@ describe("industry platform contracts", () => {
 
   describe("academic handoff gate", () => {
     it("accepts academic artifacts once they are aligned to Phase 1A canonical refs and formal bundle packaging", () => {
-      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), buildAcademicReplayBundle())).toEqual({
+      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), buildAcademicPrepReplayBundle())).toEqual({
+        ok: true,
+        status: "handoff_ready",
+      });
+    });
+
+    it("rejects academic daily refs that do not resolve to handoff artifacts", () => {
+      const bundle = buildAcademicPrepReplayBundle();
+      bundle.daily_input.payload.coverage_refs = [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing",
+        bundle.daily_input.payload.coverage_refs[1]!,
+      ];
+
+      expect(reviewAcademicPreparatoryHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
+        ok: false,
+        reasonCode: "lineage_failed",
+      });
+    });
+  });
+
+  describe("academic formal handoff gate", () => {
+    const baseBundle = (): AcademicFormalHandoffBundle => ({
+      messages: [
+        academicMessage("industry-signal-event-batch.v1", "industry://internal/2026-06-26/events/research-paper"),
+        academicMessage("industry-signal-event-batch.v1", "industry://internal/2026-06-26/events/conference-academic"),
+        academicMessage("axis-tool-coverage-report.v1", "industry://internal/2026-06-26/coverage/research-paper"),
+        academicMessage("axis-tool-coverage-report.v1", "industry://internal/2026-06-26/coverage/conference-academic"),
+        academicMessage("industry-agent-contribution.v1", "industry://internal/2026-06-26/contribution/research-frontier"),
+        academicMessage("industry-agent-contribution.v1", "industry://internal/2026-06-26/contribution/conference-academic"),
+        academicMessage("daily-industry-evidence-pack-input.v1", "industry://internal/2026-06-26/daily/academic-input"),
+      ],
+      manifests: [
+        { artifact_ref: "industry://internal/2026-06-26/events/research-paper" },
+        { artifact_ref: "industry://internal/2026-06-26/events/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/events/research-paper-rejected" },
+        { artifact_ref: "industry://internal/2026-06-26/events/conference-academic-rejected" },
+        { artifact_ref: "industry://internal/2026-06-26/coverage/research-paper" },
+        { artifact_ref: "industry://internal/2026-06-26/coverage/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/contribution/research-frontier" },
+        { artifact_ref: "industry://internal/2026-06-26/contribution/conference-academic" },
+        { artifact_ref: "industry://internal/2026-06-26/daily/academic-input" },
+      ],
+      payloads: [
+        academicPayload("industry-signal-event-batch.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("industry-signal-event-batch.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("axis-tool-coverage-report.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("axis-tool-coverage-report.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("industry-agent-contribution.v1", { responsibility_id: "research-frontier" }),
+        academicPayload("industry-agent-contribution.v1", { responsibility_id: "conference-academic" }),
+        academicPayload("daily-industry-evidence-pack-input.v1", {
+          normalized_event_batch_refs: [
+            "industry://internal/2026-06-26/events/research-paper",
+            "industry://internal/2026-06-26/events/conference-academic",
+          ],
+          rejected_event_batch_refs: [
+            "industry://internal/2026-06-26/events/research-paper-rejected",
+            "industry://internal/2026-06-26/events/conference-academic-rejected",
+          ],
+          source_message_ids: ["m1", "m2"],
+          coverage_refs: [
+            "industry://internal/2026-06-26/coverage/research-paper",
+            "industry://internal/2026-06-26/coverage/conference-academic",
+          ],
+          contribution_refs: [
+            "industry://internal/2026-06-26/contribution/research-frontier",
+            "industry://internal/2026-06-26/contribution/conference-academic",
+          ],
+        }),
+      ],
+      artifactRefs: [
+        "industry://internal/2026-06-26/events/research-paper",
+        "industry://internal/2026-06-26/events/conference-academic",
+        "industry://internal/2026-06-26/events/research-paper-rejected",
+        "industry://internal/2026-06-26/events/conference-academic-rejected",
+        "industry://internal/2026-06-26/coverage/research-paper",
+        "industry://internal/2026-06-26/coverage/conference-academic",
+        "industry://internal/2026-06-26/contribution/research-frontier",
+        "industry://internal/2026-06-26/contribution/conference-academic",
+        "industry://internal/2026-06-26/daily/academic-input",
+      ],
+      replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
+      evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+      ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
+    });
+
+    it("accepts complete academic formal handoff for dry-run", () => {
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), baseBundle())).toEqual({
         ok: true,
         status: "accepted_for_dry_run",
       });
     });
 
-    it("rejects academic daily refs that do not resolve to handoff artifacts", () => {
-      const bundle = buildAcademicReplayBundle();
-      const dailyInput = bundle.payloads.find(
-        (payload) => (payload as Record<string, unknown>).payload_schema === "daily-industry-evidence-pack-input.v1",
-      ) as Record<string, unknown>;
-      const coverageRefs = dailyInput.coverage_refs as string[];
-      dailyInput.coverage_refs = ["industry://internal/2026-06-26/axis-tool-coverage-report.v1/missing", coverageRefs[1]!];
+    it("rejects academic formal handoff missing the two-axis daily cardinality", () => {
+      const bundle = baseBundle();
+      const daily = bundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1");
+      expect(daily).toBeDefined();
+      daily!.coverage_refs = ["industry://internal/2026-06-26/coverage/research-paper"];
 
       expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
         ok: false,
@@ -639,8 +737,15 @@ describe("industry platform contracts", () => {
       });
     });
 
-    it("rejects academic formal bundles that omit owner-boundary fixture refs", () => {
-      const bundle = buildAcademicReplayBundle();
+    it("accepts the generated academic formal handoff fixture", () => {
+      expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), buildAcademicFormalReplayBundle())).toEqual({
+        ok: true,
+        status: "accepted_for_dry_run",
+      });
+    });
+
+    it("rejects generated academic formal handoff when owner-boundary fixture refs are missing", () => {
+      const bundle = buildAcademicFormalReplayBundle();
       bundle.ownerBoundaryFixtureRefs = [];
 
       expect(validateAcademicHandoff(loadIndustrySchemaRegistry(), bundle)).toMatchObject({
@@ -650,6 +755,27 @@ describe("industry platform contracts", () => {
     });
   });
 });
+
+function academicMessage(payloadSchema: string, payloadRef: string): Record<string, unknown> {
+  return {
+    kind:
+      payloadSchema === "industry-signal-event-batch.v1"
+        ? "evidence_batch"
+        : payloadSchema === "axis-tool-coverage-report.v1"
+          ? "tool_status_report"
+          : payloadSchema === "industry-agent-contribution.v1"
+            ? "industry_agent_contribution"
+            : "daily_industry_evidence_pack_input",
+    from_agent_id: "academic-agent",
+    to_agent_id: "normalization-agent",
+    payload_schema: payloadSchema,
+    payload_ref: payloadRef,
+  };
+}
+
+function academicPayload(payload_schema: string, extra: Record<string, unknown>): Record<string, unknown> {
+  return { payload_schema, schema_version: "1.0.0", ...extra };
+}
 
 function buildProductEcosystemContractInput() {
   const base = {

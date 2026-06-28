@@ -41,6 +41,7 @@ import type {
   DailyReport,
   DailyRunSummary,
   DirectionPressureState,
+  IndustryRuntimeSummaryArtifact,
   NormalizedProject,
   RawSignal,
   ScoredProject,
@@ -51,6 +52,8 @@ import type { RunAgentTaskWorkflowInput, TaskExecutionReceipt } from "./agentMem
 import { renderVisualConsole } from "./visualConsole/index.ts";
 import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./visualConsole/readLayer.ts";
 import { planWeeklySync } from "./weeklyCadence.ts";
+import { buildIndustryRuntimeSummaryArtifact } from "./industry/platform/normalization/industryRuntimeSummary.ts";
+import { replayPolicyFinanceRuntimeReadyFixture } from "./industry/platform/normalization/policyFinanceRuntimeReplay.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -239,6 +242,27 @@ function runSummaryMarkdownPath(date: string): string {
 function verifyDailyJsonPath(date: string): string {
   return path.join("data", "reports", `${date}.verify-daily.json`);
 }
+
+function policyFinanceRuntimeReplayJsonPath(date: string): string {
+  return path.join("data", "reports", `${date}.policy-finance-runtime-replay.json`);
+}
+
+function industryRuntimeSummaryJsonPath(date: string): string {
+  return path.join("data", "reports", `${date}.industry-runtime-summary.json`);
+}
+
+type PolicyFinanceRuntimeReplayArtifact = {
+  artifact_kind: "policy_finance_runtime_replay";
+  date: string;
+  generated_at: string;
+  fixture_id: string;
+  current_status: string;
+  negative_reason_code: string;
+  runtime_consumed_same_run_messages: number;
+  activation_profile_ids: string[];
+  stop_profile_ids: string[];
+  review_profile_ids: string[];
+};
 
 function dailyReportJsonPath(date: string): string {
   return path.join("data", "reports", `${date}.daily.json`);
@@ -512,6 +536,8 @@ type WeeklyWindowDay = {
   date: string;
   scored: ScoredProject[];
   daily: DailyReport;
+  runSummary: DailyRunSummary | null;
+  industryRuntimeSummary: IndustryRuntimeSummaryArtifact | null;
 };
 
 function hasWeeklyVisibleProjectLists(report: unknown): report is DailyReport {
@@ -527,6 +553,8 @@ function inspectWeeklyWindowDays(opts: CliOptions): { days: WeeklyWindowDay[]; m
     const date = shiftDateStr(opts.date, index - 6);
     const scoreFile = scorePath(date);
     const dailyFile = path.join("data", "reports", `${date}.daily.json`);
+    const runSummaryFile = runSummaryJsonPath(date);
+    const industryRuntimeSummaryFile = industryRuntimeSummaryJsonPath(date);
     const scoreExists = fs.existsSync(scoreFile);
     const dailyExists = fs.existsSync(dailyFile);
     let dailyReport: DailyReport | null = null;
@@ -546,6 +574,10 @@ function inspectWeeklyWindowDays(opts: CliOptions): { days: WeeklyWindowDay[]; m
       date,
       scored: scoreExists ? readJsonFile<ScoredProject[]>(scoreFile, []) : [],
       daily: (dailyReport ?? null) as unknown as DailyReport,
+      runSummary: fs.existsSync(runSummaryFile) ? readJsonFile<DailyRunSummary | null>(runSummaryFile, null) : null,
+      industryRuntimeSummary: fs.existsSync(industryRuntimeSummaryFile)
+        ? readJsonFile<IndustryRuntimeSummaryArtifact | null>(industryRuntimeSummaryFile, null)
+        : null,
     };
   });
 
@@ -726,6 +758,10 @@ export async function runDaily(opts: CliOptions): Promise<void> {
     rolling30dReports: readRolling30dReports(opts.date),
     directionCatalog: DIRECTION_CATALOG,
   });
+  const industryRuntimeSummary = buildIndustryRuntimeSummaryArtifact({
+    date: opts.date,
+    generatedAt,
+  });
 
   const runSummary = buildDailyRunSummary(raw, scored, reportWithFreshness, {
     date: opts.date,
@@ -769,12 +805,26 @@ export async function runDaily(opts: CliOptions): Promise<void> {
         source_notes: entry.source_notes,
       })),
     },
+    industryRuntimeSummary,
     missionInventoryAudit,
   });
   writeJsonFile(runSummaryJsonPath(opts.date), runSummary, dryRun);
   writeJsonFile(path.join("data", "reports", "latest.run-summary.json"), runSummary, dryRun);
   writeTextFile(runSummaryMarkdownPath(opts.date), renderDailyRunSummary(runSummary), dryRun);
   writeTextFile(path.join("data", "reports", "latest.run-summary.md"), renderDailyRunSummary(runSummary), dryRun);
+  writePolicyFinanceRuntimeReplayArtifacts(
+    buildPolicyFinanceRuntimeReplayArtifact({
+      date: opts.date,
+      generatedAt,
+    }),
+    dryRun,
+    true,
+  );
+  writeIndustryRuntimeSummaryArtifacts(
+    industryRuntimeSummary,
+    dryRun,
+    true,
+  );
 
   logger.info("daily loop completed", {
     raw: raw.length,
@@ -805,8 +855,12 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       path.join("data", "scores", "latest.json"),
       dailyReportJsonPath(opts.date),
       dailyReportMarkdownPath(opts.date),
+      industryRuntimeSummaryJsonPath(opts.date),
+      policyFinanceRuntimeReplayJsonPath(opts.date),
       runSummaryJsonPath(opts.date),
       runSummaryMarkdownPath(opts.date),
+      path.join("data", "reports", "latest.industry-runtime-summary.json"),
+      path.join("data", "reports", "latest.policy-finance-runtime-replay.json"),
       path.join("data", "reports", "latest.run-summary.json"),
       path.join("data", "reports", "latest.run-summary.md"),
     ],
@@ -883,6 +937,65 @@ function refreshLatestRecoveredArtifacts(
   writeJsonFile(path.join("data", "reports", "latest.verify-daily.json"), verifyResult, dryRun);
 }
 
+function buildPolicyFinanceRuntimeReplayArtifact(opts: {
+  date: string;
+  generatedAt?: string;
+  fixturePath?: string;
+}): PolicyFinanceRuntimeReplayArtifact {
+  const result = replayPolicyFinanceRuntimeReadyFixture({
+    rootDir: process.cwd(),
+    fixturePath: opts.fixturePath,
+  });
+
+  if (!result.current.ok || result.current.status !== result.fixture.current.expected_status) {
+    throw new Error(`policy-finance current replay mismatch: expected ${result.fixture.current.expected_status}`);
+  }
+
+  if (
+    result.negative_missing_stable_claim_key.ok ||
+    result.negative_missing_stable_claim_key.reasonCode !== result.fixture.negative_missing_stable_claim_key.expected_reason_code
+  ) {
+    throw new Error(
+      `policy-finance negative replay mismatch: expected ${result.fixture.negative_missing_stable_claim_key.expected_reason_code}`,
+    );
+  }
+
+  return {
+    artifact_kind: "policy_finance_runtime_replay",
+    date: opts.date,
+    generated_at: opts.generatedAt ?? toLocalIsoString(new Date()),
+    fixture_id: result.fixture.fixture_id,
+    current_status: result.current.status,
+    negative_reason_code: result.negative_missing_stable_claim_key.reasonCode,
+    runtime_consumed_same_run_messages: result.current.runtimeConsumedSameRunMessages,
+    activation_profile_ids: result.current.activationProfileIds,
+    stop_profile_ids: result.current.stopProfileIds,
+    review_profile_ids: result.current.reviewProfileIds,
+  };
+}
+
+function writePolicyFinanceRuntimeReplayArtifacts(
+  artifact: PolicyFinanceRuntimeReplayArtifact,
+  dryRun: boolean,
+  refreshLatest: boolean,
+): void {
+  writeJsonFile(policyFinanceRuntimeReplayJsonPath(artifact.date), artifact, dryRun);
+  if (refreshLatest) {
+    writeJsonFile(path.join("data", "reports", "latest.policy-finance-runtime-replay.json"), artifact, dryRun);
+  }
+}
+
+function writeIndustryRuntimeSummaryArtifacts(
+  artifact: ReturnType<typeof buildIndustryRuntimeSummaryArtifact>,
+  dryRun: boolean,
+  refreshLatest: boolean,
+): void {
+  writeJsonFile(industryRuntimeSummaryJsonPath(artifact.date), artifact, dryRun);
+  if (refreshLatest) {
+    writeJsonFile(path.join("data", "reports", "latest.industry-runtime-summary.json"), artifact, dryRun);
+  }
+}
+
 export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
   const config = loadConfig(opts.configPath);
   const dryRun = opts.dryRun || config.runtime.dryRunDefault;
@@ -915,15 +1028,33 @@ export async function recoverDailyArtifacts(opts: CliOptions): Promise<void> {
   });
   writeJsonFile(dailyReportJsonPath(opts.date), report, dryRun);
   writeTextFile(dailyReportMarkdownPath(opts.date), renderDailyReport(report), dryRun);
+  const industryRuntimeSummary = buildIndustryRuntimeSummaryArtifact({
+    date: opts.date,
+    generatedAt,
+  });
 
   const runSummary = buildDailyRunSummary(raw, scored, report, {
     date: opts.date,
     generatedAt,
     dryRun,
     classificationsCount: classificationArtifacts.length,
+    industryRuntimeSummary,
   });
   writeJsonFile(runSummaryJsonPath(opts.date), runSummary, dryRun);
   writeTextFile(runSummaryMarkdownPath(opts.date), renderDailyRunSummary(runSummary), dryRun);
+  writeIndustryRuntimeSummaryArtifacts(
+    industryRuntimeSummary,
+    dryRun,
+    shouldRefreshLatestDailyArtifacts(opts.date),
+  );
+  writePolicyFinanceRuntimeReplayArtifacts(
+    buildPolicyFinanceRuntimeReplayArtifact({
+      date: opts.date,
+      generatedAt,
+    }),
+    dryRun,
+    shouldRefreshLatestDailyArtifacts(opts.date),
+  );
 
   const verifyResult = buildVerifyDailyResult(opts.date);
   writeJsonFile(verifyDailyJsonPath(opts.date), verifyResult, dryRun);
@@ -1196,6 +1327,30 @@ export async function visualConsole(opts: CliOptions): Promise<void> {
   console.log(output);
 }
 
+export async function policyFinanceRuntimeReplay(opts: CliOptions): Promise<void> {
+  const config = loadConfig(opts.configPath);
+  const dryRun = opts.dryRun || config.runtime.dryRunDefault;
+  ensureDataDirs();
+  const artifact = buildPolicyFinanceRuntimeReplayArtifact({
+    date: opts.date,
+    fixturePath: opts.inputPath,
+  });
+  writePolicyFinanceRuntimeReplayArtifacts(artifact, dryRun, true);
+  console.log(JSON.stringify(artifact, null, 2));
+}
+
+export async function industryRuntimeSummary(opts: CliOptions): Promise<void> {
+  const config = loadConfig(opts.configPath);
+  const dryRun = opts.dryRun || config.runtime.dryRunDefault;
+  ensureDataDirs();
+  const artifact = buildIndustryRuntimeSummaryArtifact({
+    date: opts.date,
+    generatedAt: toLocalIsoString(new Date()),
+  });
+  writeIndustryRuntimeSummaryArtifacts(artifact, dryRun, true);
+  console.log(JSON.stringify(artifact, null, 2));
+}
+
 async function main(): Promise<void> {
   loadRuntimeEnv(process.cwd(), { overrideProcessEnv: true });
   configureGlobalNetworkProxy();
@@ -1211,11 +1366,13 @@ async function main(): Promise<void> {
     "build-kb": buildKb,
     "record-agent-task": recordAgentTask,
     "visual-console": visualConsole,
+    "industry-runtime-summary": industryRuntimeSummary,
+    "policy-finance-runtime-replay": policyFinanceRuntimeReplay,
   };
   const runner = commands[command];
   if (!runner) {
     throw new Error(
-      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, or visual-console.`,
+      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, visual-console, industry-runtime-summary, or policy-finance-runtime-replay.`,
     );
   }
   await runner(opts);

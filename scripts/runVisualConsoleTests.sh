@@ -42,6 +42,8 @@ if [[ -n "${SMOKE_DATE}" ]]; then
   echo "[visual-console-test] optional smoke: date=${SMOKE_DATE}"
 
   for required in \
+    "data/reports/${SMOKE_DATE}.industry-runtime-summary.json" \
+    "data/reports/${SMOKE_DATE}.policy-finance-runtime-replay.json" \
     "data/reports/${SMOKE_DATE}.daily.json" \
     "data/reports/${SMOKE_DATE}.run-summary.json" \
     "data/reports/${SMOKE_DATE}.weekly.md" \

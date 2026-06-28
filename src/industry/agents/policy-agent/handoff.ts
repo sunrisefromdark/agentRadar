@@ -1,6 +1,19 @@
 import { buildCapitalFinanceHandoff, type BuildCapitalFinanceHandoffInput } from "../finance-agent/handoff.ts";
 import type { FinancePolicyHandoffBundle } from "../../platform/contracts/financePolicyHandoff.ts";
 import {
+  consumeFinancePolicyHandoffForDryRun,
+  consumeFinancePolicyHandoffForRuntime,
+  type FinancePolicyDryRunInput,
+  type FinancePolicyDryRunResult,
+  type FinancePolicyRuntimeResult,
+} from "../../platform/normalization/financePolicyDryRun.ts";
+import {
+  replayPolicyFinanceRuntimeReadyFixture as replayPolicyFinanceRuntimeReadyFixtureFromPlatform,
+  type PlatformCurrentRuntimeFixture,
+  type PlatformNegativeRuntimeFixture,
+  type PolicyFinanceRuntimeReadyFixturePaths,
+} from "../../platform/normalization/policyFinanceRuntimeReplay.ts";
+import {
   assertConsumableEnvelope,
   buildDailyInputArtifact,
   createExecutionContext,
@@ -42,6 +55,8 @@ export interface PolicyFinanceGroupInput {
   regulatory: BuildPolicyAxisHandoffInput;
   thinktank: BuildPolicyAxisHandoffInput;
 }
+
+export type BuildPolicyFinanceRuntimeReadyHandoffInput = PolicyFinanceGroupInput & Omit<FinancePolicyDryRunInput, "bundle">;
 
 export function buildPolicyRegulatoryHandoff(input: BuildPolicyAxisHandoffInput) {
   return buildPolicyAxisArtifacts({
@@ -164,6 +179,61 @@ export function buildPolicyFinanceHandoffBundle(result: {
     payloads: payloads as unknown as Array<Record<string, unknown>>,
     artifactRefs: manifests.map((manifest) => manifest.artifact_ref),
   };
+}
+
+export function buildPolicyFinanceDryRunHandoff(input: BuildPolicyFinanceRuntimeReadyHandoffInput): {
+  draft: ReturnType<typeof buildPolicyFinanceGroupHandoff>;
+  bundle: FinancePolicyHandoffBundle;
+  dryRun: FinancePolicyDryRunResult;
+} {
+  const draft = buildPolicyFinanceGroupHandoff(input);
+  const bundle = buildPolicyFinanceHandoffBundle(draft);
+  const dryRun = consumeFinancePolicyHandoffForDryRun({
+    bundle,
+    dispatchContext: input.dispatchContext,
+    reservations: input.reservations,
+    budgetArbitration: input.budgetArbitration,
+    requiresCapacityReservation: input.requiresCapacityReservation,
+    requiresSameRunReview: input.requiresSameRunReview,
+    reviewAvailability: input.reviewAvailability,
+    registry: input.registry,
+  });
+
+  return { draft, bundle, dryRun };
+}
+
+export function buildPolicyFinanceRuntimeReadyHandoff(input: BuildPolicyFinanceRuntimeReadyHandoffInput): {
+  draft: ReturnType<typeof buildPolicyFinanceGroupHandoff>;
+  bundle: FinancePolicyHandoffBundle;
+  runtime: FinancePolicyRuntimeResult;
+} {
+  const draft = buildPolicyFinanceGroupHandoff(input);
+  const bundle = buildPolicyFinanceHandoffBundle(draft);
+  const runtime = consumeFinancePolicyHandoffForRuntime({
+    bundle,
+    dispatchContext: input.dispatchContext,
+    reservations: input.reservations,
+    budgetArbitration: input.budgetArbitration,
+    requiresCapacityReservation: input.requiresCapacityReservation,
+    requiresSameRunReview: input.requiresSameRunReview,
+    reviewAvailability: input.reviewAvailability,
+    registry: input.registry,
+  });
+
+  return { draft, bundle, runtime };
+}
+
+export function replayPolicyFinanceRuntimeReadyFixture(input?: {
+  rootDir?: string;
+  fixturePath?: string;
+}): {
+  fixture: PolicyFinanceRuntimeReadyFixturePaths;
+  current_runtime_contract: PlatformCurrentRuntimeFixture;
+  negative_runtime_case?: { case_id?: string; expected_reason_code?: string };
+  current: FinancePolicyRuntimeResult;
+  negative_missing_stable_claim_key: FinancePolicyRuntimeResult;
+} {
+  return replayPolicyFinanceRuntimeReadyFixtureFromPlatform(input);
 }
 
 export function assertCurrentAndCompatibleFixtures(current: ArtifactEnvelope<unknown>, previousCompatible: ArtifactEnvelope<unknown>) {

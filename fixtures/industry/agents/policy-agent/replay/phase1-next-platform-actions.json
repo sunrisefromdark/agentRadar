@@ -1,14 +1,18 @@
 {
   "manifest_id": "policy-finance-phase1-next-platform-actions.v1",
-  "status": "policy_finance_runtime_snapshot_ready",
-  "executor_4_can_continue_phase1_without_more_policy_finance_inputs": false,
+  "status": "policy_finance_runtime_integration_complete",
+  "executor_4_can_continue_phase1_without_more_policy_finance_inputs": true,
   "ready_inputs": {
     "delivery_manifest": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
     "current_bundle": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
     "negative_bundle": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
+    "runtime_ready_inputs": "fixtures/industry/agents/policy-agent/replay/phase1-runtime-ready-inputs.json",
+    "platform_runtime_replay": "src/industry/platform/normalization/policyFinanceRuntimeReplay.ts",
     "handoff_note": "src/industry/agents/policy-agent/handoff-note.md",
     "shared_runtime_note": "src/industry/agents/policy-agent/shared-runtime-note.md",
-    "normalization_runtime": "src/industry/platform/normalization/financePolicyDryRun.ts"
+    "normalization_runtime": "src/industry/platform/normalization/financePolicyDryRun.ts",
+    "platform_current_runtime_fixture": "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+    "platform_negative_runtime_fixture": "fixtures/industry/platform/negative/phase1-runtime.json"
   },
   "completed_platform_actions": [
     {

@@ -20,7 +20,8 @@
   - `validateFinancePolicyHandoff(...)`
   - `validateSameRunConsumerRefs(...)`
   - `validateDispatchRuntimeGate(...)`
-- 本组已完成的边界到此为止；`normalization dry-run` 已落，剩余待中台接线：
+- 中台已完成：
   - dispatch runtime 对 same-run refs 的实际消费链路
   - shared governance profile、reason/state 字典的正式联调收口
+- 当前这批交付物已经覆盖 producer -> dry-run -> runtime path；后续只进入最终跨组集成与总验收。
 - 本组不再新增共享 runtime；若中台消费链路需要共享 helper，请由中台上收。

@@ -4,11 +4,15 @@
   "entries": [
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
-      "sha256": "e4f883e709a8f059e5f06951662f98817e87c170c828d813cac17f9f5646b581"
+      "sha256": "4dfc96ca2be11ef9c6dd455ad6d3e244fe4954dcc8d61ed270383cc719a632ab"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-next-platform-actions.json",
-      "sha256": "603464b7446ad99403c194c37e4a3ef6b1117a629fc5543f6071bd52cbfbb7c2"
+      "sha256": "d48fe064fc42f9ef382d3d9b23b3b7186cf5e49dcd2f44a9eded14ce32a3673e"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-runtime-ready-inputs.json",
+      "sha256": "38c3a90ceb93d183582dbb2a0eb564e815fda93e8d9c96eca5d9ece1141c6801"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
@@ -28,15 +32,19 @@
     },
     {
       "path": "src/industry/agents/policy-agent/handoff-note.md",
-      "sha256": "2a8fd6675332774e68283ce2f0ee47269d52a023ca3ae67f5a40f35530f25bd9"
+      "sha256": "067bb780c777c8e16ef4fbb8837d878e2cb8654601165fa3a0069c51aa792231"
     },
     {
       "path": "src/industry/agents/policy-agent/shared-runtime-note.md",
-      "sha256": "7acbb26d966d3e9624f93fb2e94e57f569285eb026682922a75ebd7724a417e5"
+      "sha256": "0100f0b86f8bc994393554e1317e3551a443b81c39a5299ce93d82f5a1721b25"
     },
     {
       "path": "src/industry/agents/policy-agent/index.ts",
-      "sha256": "8b95a98292751ae022df64d77f5e403895c0202ad29313b8d8ce4bc0bacfe4e0"
+      "sha256": "e8956a332d781b6ce56f73316caa70b94c6860fe1d65be21633854b357a59e86"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/handoff.ts",
+      "sha256": "c5a32ac4b28f0c83eb58c67dc373e03cfc95908add97a13fed4f869b523d51f9"
     },
     {
       "path": "src/industry/agents/finance-agent/index.ts",
@@ -45,6 +53,18 @@
     {
       "path": "src/industry/platform/normalization/financePolicyDryRun.ts",
       "sha256": "ed21a2ee25e7162250df31f1349361a1dcc0afe570e7b574241e81b2fad2a888"
+    },
+    {
+      "path": "src/industry/platform/normalization/policyFinanceRuntimeReplay.ts",
+      "sha256": "ee28b24e01905c25c42df1a4e3644486084a4a96bdc575c1b5cc070235459aff"
+    },
+    {
+      "path": "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+      "sha256": "db40a4322fb207d576801b3b6bd1acb95d3e4797864ebbb720f889fdb28813d5"
+    },
+    {
+      "path": "fixtures/industry/platform/negative/phase1-runtime.json",
+      "sha256": "9ba38817d53656efcdd1b776fcb6b0bf0d906992985c5658704c4e77b45ab028"
     }
   ]
 }

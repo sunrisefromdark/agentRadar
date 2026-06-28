@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`In Progress`，截至 `2026-06-28` 已推进到 `Phase 2 partial / Phase 3 partial / product-ecosystem Phase 6 inputs accepted`；最终 `Phase 3+` 仍等待三组正式 handoff / replay 资产齐备后继续。
+- 当前状态：`In Progress`，截至 `2026-06-28` 已推进到 `Phase 3 backlog ready / ref-only daily pack + rolling snapshot ready`；最终 weekly 三层输出仍阻塞于 `closed_fact_snapshot_and_audit`。
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -21,7 +21,7 @@
 
 只做全组共享的窄口子：schema 真源、registry snapshot、normalization、audit、tier decision、weekly 拼装。领域 seed / domain fixture / 领域 docs 已前推给前三组，不再由本组吞下。
 
-当前分支优先目标：只推进 `中台裁决组 ↔ 产品生态组` 已 freeze handoff 的接入。中台必须先提供产品生态组下一步需要的 contract dry-run、registry runtime snapshot、normalization dry-run 与成功/失败两类 `normalization-feedback.v1` 反馈 payload；政策金融、学术前沿与最终 weekly 全量集成本分支暂不扩展。
+当前分支优先目标：把已就绪的政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 replay/eval 输入并入中台 readiness/backlog；只生成 ref-only daily pack、rolling snapshot、academic dry-run feedback、cross-group replay/eval backlog 与 academic-scope closed fact snapshot，不提前生成最终 weekly 三层输出。
 
 ## 当前推进状态（2026-06-28）
 
@@ -33,20 +33,20 @@
 | `Phase 1B` shared governance | `Completed` | `src/industry/platform/contracts/sharedGovernance.ts` 发布 Phase 1 profile / feedback payload 列表，验证 reason/state/profile 均存在。 | 无阻塞。A/B/C activation / budget / review 正式接线必须消费这里的 profile id。 |
 | `Phase 1C` dispatch / budget runtime base | `Completed` | `src/industry/platform/contracts/dispatchRuntime.ts`、`consumerFixtures.ts`；fixtures 覆盖 dispatch context、reservation、budget、async_only review gate。 | 无阻塞。命中 same-run 的 A/B/C 消息必须带 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission ref、reservation refs。 |
 | `Phase 1C+` main coordinator 边界 | `Completed` | contract test 验证没有 `main-coordinator` 新 Agent，`src/types.ts` / `src/cli.ts` 不持有 coordinator 私有状态。 | 无阻塞。后续 scheduler / middleware 只能落在 contracts / registry，不能回写 weekly 热点文件。 |
-| `Phase 2` registry snapshot 与 shared governance | `Partial` | 已新增 `src/industry/platform/registry/runtimeSnapshot.ts` 与 `src/__tests__/industry/platform/registry.test.ts`，冻结 runtime snapshot plane 与 governance review plane 不互相穿透；产品生态 dry-run 已发布 registry runtime snapshot；`consumeFinancePolicyHandoffForRuntime(...)` 已从政策金融 coverage refs 发布 runtime registry snapshots。 | 产品生态与政策金融的按组 snapshot 已完成；全量仍缺其他组正式 tool coverage / authority refs 与总量 fixture，不能做全量 weekly 集成。 |
-| `Phase 3` normalization 与 fact snapshot | `Partial` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已能消费政策金融 current bundle，产出 dry-run refs，并在 runtime path 消费 same-run refs、shared governance profiles 与 coverage runtime snapshots；`src/industry/platform/normalization/productEcosystemDryRun.ts` 已能消费产品生态 formal bundle，产出成功/失败两类 `normalization-feedback.v1` dry-run payload；`src/__tests__/industry/platform/normalization.test.ts` 覆盖两组 positive / negative。 | 产品生态 dry-run 与政策金融 runtime 接线已完成；全量仍未完成 source-chain dedupe、fact resolution、owner arbitration、closed snapshot。原因：缺三组正式 handoff 的完整 event batch / coverage / contribution refs 与 owner boundary/replay refs。 |
+| `Phase 2` registry snapshot 与 shared governance | `Partial` | 已新增 `src/industry/platform/registry/runtimeSnapshot.ts` 与 `src/__tests__/industry/platform/registry.test.ts`，冻结 runtime snapshot plane 与 governance review plane 不互相穿透；产品生态 dry-run 已发布 registry runtime snapshot；`consumeFinancePolicyHandoffForRuntime(...)` 已从政策金融 coverage refs 发布 runtime registry snapshots。 | 产品生态与政策金融的按组 snapshot 已完成；最终 weekly 仍需 closed fact snapshot / audit，不再等待政策金融补 runtime 基座。 |
+| `Phase 3` normalization 与 fact snapshot | `Partial` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已消费政策金融 current bundle 与 runtime refs；`src/industry/platform/normalization/academicDryRun.ts` 已消费学术 formal current bundle；`src/industry/platform/normalization/productEcosystemDryRun.ts` 已消费产品生态 formal bundle；`src/industry/platform/audit/crossGroupIntegrationReadiness.ts` 已生成 `cross_group_integration_readiness`，并写出 ref-only `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1`、academic `normalization-feedback.v1`、academic replay/eval backlog、`closed_fact_snapshot_prep` 与 academic-scope `FactResolutionAudit`。 | 中台已能独立关闭 academic formal handoff 的 fact snapshot；仍未完成三组 source-chain dedupe、fact resolution、owner arbitration 与全量 closed snapshot。 |
 | `Phase 4` claim-builder 与 audit | `Blocked` | schema 中已有 `claim-candidate-batch.v1`、`audit-request.v1`、`audit-result.v1`、`counter-evidence-audit.v1`。 | 需要 Phase 3 的 closed fact snapshot、`FactResolutionAudit`、owner transfer artifact；还需要 A/B/C 反例 fixture。 |
 | `Phase 5` tier decision 与 weekly 三层输出 | `Blocked` | schema 中已有 `industry-trend-card.v1`、`industry-claim-ledger.v1`、`weekly-industry-trend-section.v2`、`consumer-weekly-industry-view.v1`、`public-weekly-industry-projection.v1`。 | 需要 Phase 4 audit result、decision context artifact、最近 7 日 `DailyIndustryEvidencePack.v2` 与 `RollingEvidenceWindowSnapshot.v1`。 |
-| `Phase 6` eval / replay / structure | `Partial` | 新增 `src/industry/platform/audit/productEcosystemPhase6Assembly.ts` 与 `src/__tests__/industry/platform/replay.test.ts`，已接受产品生态 `phase6-delivery-manifest.json` / `phase6-replay-refs.json`，并保留 formal bundle、invalid governance profile、claim-critical same-run missing refs 三个 gate。 | 产品生态单组 Phase 6 inputs 已入账；cross-group eval / replay / diff audit、`DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1` 与 weekly 三层输出仍等待三组正式 Phase 6 资产齐备。 |
+| `Phase 6` eval / replay / structure | `Backlog ready` | 新增 `src/industry/platform/audit/productEcosystemPhase6Assembly.ts` 与 `src/industry/platform/audit/crossGroupIntegrationReadiness.ts`，已接受产品生态 `phase6-delivery-manifest.json` / `phase6-replay-refs.json`，并把政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入合入 cross-group readiness。 | cross-group replay/eval backlog 已可排队；weekly 三层输出仍等待 closed fact snapshot、audit 与 tier 决策闭环。 |
 
 ## 继续推进所需输入
 
 | 产出方 | 必须交付 | 解锁阶段 |
 | --- | --- | --- |
 | `1号执行人` 政策金融组 | 正式 envelope / payload / manifest / canonical artifact refs；`normalized_event_batch_refs`、`rejected_event_batch_refs?`、`source_message_ids`、`coverage_refs`、`contribution_refs`；official-first failure、anti-upgrade、owner boundary、policy/finance replay refs。 | 政策金融 Phase 2 snapshot 与 Phase 3 dry-run/runtime 接线已完成；closed fact snapshot 仍等三组正式输入与 owner/replay 资产。 |
-| `2号执行人` 学术前沿组 | 从 preparatory refs 升级为正式 `industry-signal-event-batch.v1` producer handoff；positive canonical、near-boundary、academic replay/eval refs。 | 从 preparatory review 进入正式 contract test / normalization dry-run。 |
+| `2号执行人` 学术前沿组 | 正式 `industry-signal-event-batch.v1` producer handoff；positive canonical、near-boundary、academic replay/eval refs。 | 当前 fixture 显示 `academic_formal_handoff_ready`；中台已消费 formal current bundle 做 dry-run，已生成 academic `normalization-feedback.v1`，并把 positive canonical / near-boundary / replay / eval / owner-boundary refs 排入 backlog。 |
 | `3号执行人` 产品生态 / 社区新闻组 | 产品生态与社区新闻正式 envelope / payload / manifest / refs；owner boundary、`news-pr` anti-upgrade、community noise 反例与 replay refs。 | 已解锁中台 contract dry-run 与 normalization dry-run；收到 `normalization-feedback.v1` dry-run payload 后，如有失败反馈，仅在本组目录内修正 payload / lineage / refs，并继续补 Phase 6 负例资产。 |
-| `4号执行人` 中台裁决组 | 任一组 refs 到齐后，先按组跑 contract test、registry runtime snapshot、normalization dry-run；三组都到齐后再拼 daily pack、rolling snapshot、audit、tier、weekly 三层输出。 | 产品生态 dry-run / 反馈、产品生态 Phase 6 inputs 接收与政策金融 runtime/snapshot 边界已落地；下一步不能越过其他组正式 handoff、owner boundary、replay/eval 资产脑补 cross-group Phase 3+。 |
+| `4号执行人` 中台裁决组 | 任一组 refs 到齐后，先按组跑 contract test、registry runtime snapshot、normalization dry-run；已就绪三组先进入 readiness/backlog、ref-only daily/rolling 壳、academic feedback、replay/eval backlog、closed snapshot prep 与 academic-scope closed snapshot。 | 下一步直接推进三组 source-chain dedupe、fact resolution、owner arbitration、全量 closed fact snapshot；不能越过 audit / tier 决策直接脑补最终 weekly 三层输出。 |
 
 ## 负责范围
 
@@ -547,3 +547,4 @@
 | 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Completed` | 产品生态 formal bundle 已接入中台 registry snapshot / normalization dry-run，4 tests passed，返回 `normalization-feedback.v1` dry-run payload |
 | 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Completed` | 政策金融线 runtime / snapshot 接线验证通过：2 files / 11 tests passed |
 | 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 中台已接收产品生态 Phase 6 delivery manifest / replay refs，固定 product-only assembly 状态为 `product_ecosystem_phase6_inputs_accepted`，并阻止提前生成 weekly 输出 |
+| 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 新增 `cross_group_integration_readiness`，确认政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入可进入 Phase 3 backlog；ref-only daily pack / rolling snapshot 已 ready，最终 weekly 仍阻塞于 `closed_fact_snapshot_and_audit` |

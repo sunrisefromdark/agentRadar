@@ -189,6 +189,8 @@ function validateAcademicFormalHandoff(
   }
 
   if (
+    !hasStringArray(bundle.positiveCanonicalFixtureRefs) ||
+    !hasStringArray(bundle.nearBoundaryFixtureRefs) ||
     !hasStringArray(bundle.replayFixtureRefs) ||
     !hasStringArray(bundle.evalFixtureRefs) ||
     !hasStringArray(bundle.ownerBoundaryFixtureRefs)
@@ -196,7 +198,7 @@ function validateAcademicFormalHandoff(
     return {
       ok: false,
       reasonCode: "lineage_failed",
-      message: "Academic formal handoff must include replay, eval, and owner-boundary fixture refs.",
+      message: "Academic formal handoff must include positive canonical, near-boundary, replay, eval, and owner-boundary fixture refs.",
     };
   }
 

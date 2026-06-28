@@ -1508,11 +1508,19 @@
     "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea",
     "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27"
   ],
+  "positiveCanonicalFixtureRefs": [
+    "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json"
+  ],
+  "nearBoundaryFixtureRefs": [
+    "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json"
+  ],
   "replayFixtureRefs": [
     "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"
   ],
   "evalFixtureRefs": [
-    "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"
+    "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+    "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+    "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json"
   ],
   "ownerBoundaryFixtureRefs": [
     "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"

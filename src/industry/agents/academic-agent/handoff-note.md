@@ -12,5 +12,10 @@
   - `fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json`
   - `fixtures/industry/agents/academic-agent/replay/phase1-missing-owner-boundary-bundle.json`
   - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json`
-- delivery manifest 已显式带出 replay / eval / owner-boundary fixture refs。
-- 学术组当前仍只做 `projection` 路径，不接 same-run / claim-critical dispatch 字段。
+  - `fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json`
+  - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-checksums.json`
+- delivery manifest 与 formal bundle 已显式带出：
+  - positive canonical fixture ref
+  - near-boundary fixture ref
+  - replay / eval / owner-boundary fixture refs
+- 学术组当前仍只做 `projection` 路径，不接 `same-run / claim-critical` dispatch 字段。

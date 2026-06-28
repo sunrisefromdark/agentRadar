@@ -22,6 +22,15 @@ import {
 } from "./types.ts";
 
 const batchOrder: EventBucket[] = ["accepted", "counter", "diagnostic", "rejected"];
+const positiveCanonicalFixtureRefs = ["fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json"];
+const nearBoundaryFixtureRefs = ["fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json"];
+const replayFixtureRefs = ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"];
+const evalFixtureRefs = [
+  "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+  ...positiveCanonicalFixtureRefs,
+  ...nearBoundaryFixtureRefs,
+];
+const ownerBoundaryFixtureRefs = ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"];
 
 function makeManifest(
   ref: string,
@@ -364,8 +373,10 @@ export function buildAcademicHandoffBundle(fixture: ReplayWindowFixture): Academ
     manifests: artifacts.map((artifact) => ({ ...artifact.manifest })) as Array<Record<string, unknown>>,
     payloads: artifacts.map((artifact) => toFormalPayload(artifact)),
     artifactRefs: artifacts.map((artifact) => artifact.ref),
-    replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
-    evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
-    ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
+    positiveCanonicalFixtureRefs,
+    nearBoundaryFixtureRefs,
+    replayFixtureRefs,
+    evalFixtureRefs,
+    ownerBoundaryFixtureRefs,
   };
 }

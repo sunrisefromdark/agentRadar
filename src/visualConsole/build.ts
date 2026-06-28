@@ -16,7 +16,15 @@ import type {
   WeeklyJudgmentReport,
   WeeklyReport,
 } from "../types.ts";
-import { resolveDailyContext, resolveDailyTimeWindow, resolveNearestWeeklyAnchor, resolveWeeklyContext, resolveWeeklyTimeWindow } from "./context.ts";
+import {
+  resolveDailyContext,
+  resolveDailyTimeWindow,
+  resolveNearestWeeklyAnchor,
+  resolveRunHealthContext,
+  resolveRunHealthTimeWindow,
+  resolveWeeklyContext,
+  resolveWeeklyTimeWindow,
+} from "./context.ts";
 import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
 import { isDefaultDemotedProject } from "./projectRanking.ts";
@@ -24,12 +32,15 @@ import {
   getDailyReport,
   getDailyNavigatorPreview,
   getGithubEnrichmentAudit,
+  getIndustryRuntimeSummary,
   getKbCard,
   getKbIndex,
   getMissionScoutArtifact,
   getMissionScoutEnhancementArtifact,
   getObserverArtifact,
+  getPolicyFinanceRuntimeReplay,
   getProjectLibraryEnhancementArtifact,
+  getRunHealthNavigatorPreview,
   getRunSummary,
   getVerifyDailyResult,
   getWeeklyAudit,
@@ -918,6 +929,8 @@ function buildRunSnapshot(
   const signature = getFilesystemStateSignature([
     `data/reports/${date}.daily.json`,
     `data/reports/${date}.run-summary.json`,
+    `data/reports/${date}.industry-runtime-summary.json`,
+    `data/reports/${date}.policy-finance-runtime-replay.json`,
     `data/reports/${date}.verify-daily.json`,
     `data/raw/github/${date}.enrichment.json`,
     `data/observer/ecosystem-focus/${date}.json`,
@@ -927,6 +940,8 @@ function buildRunSnapshot(
     if (daily.status !== "ok") return { snapshot: null, auditNotes: [], githubStatus: "unknown" };
 
     const summary = getRunSummary(date);
+    const industryRuntimeSummary = getIndustryRuntimeSummary(date);
+    const policyFinanceRuntimeReplay = getPolicyFinanceRuntimeReplay(date);
     const verify = getVerifyDailyResult(date);
     const githubAudit = getGithubEnrichmentAudit(date);
     const observer = getObserverArtifact(date);
@@ -938,18 +953,38 @@ function buildRunSnapshot(
         : githubAudit.status === "not_found"
           ? "missing"
           : "failed";
+    const hydratedRunSummary =
+      summary.status === "ok" && !summary.value.industry_runtime_summary && industryRuntimeSummary.status === "ok"
+        ? { ...summary.value, industry_runtime_summary: industryRuntimeSummary.value }
+        : summary.status === "ok"
+          ? summary.value
+          : null;
 
     const notes: string[] = [];
     if (summary.status === "not_found") notes.push("健康上下文缺失");
     if (summary.status === "parse_error") notes.push("run-summary 解析失败");
     if (verify.status === "not_found") notes.push("verify 上下文缺失");
     if (githubAudit.status === "not_found") notes.push("GitHub enrichment 审计缺失");
+    if (summary.status === "ok" && !hydratedRunSummary?.industry_runtime_summary) {
+      notes.push("industry runtime 摘要缺失");
+    }
+    if (summary.status !== "ok" && industryRuntimeSummary.status !== "ok" && policyFinanceRuntimeReplay.status === "ok") {
+      notes.push("policy-finance runtime replay 已作为独立 artifact 暴露");
+    }
+    if (summary.status === "ok" && hydratedRunSummary?.industry_runtime_summary?.academic_preparatory.blocked_until) {
+      notes.push(`academic runtime 仍阻塞于 ${hydratedRunSummary.industry_runtime_summary.academic_preparatory.blocked_until}`);
+    }
+    if (summary.status === "ok" && !summary.value.industry_runtime_summary && industryRuntimeSummary.status === "ok") {
+      notes.push("industry runtime 已从独立 artifact 回填到 run health");
+    }
 
     return {
       snapshot: {
         date,
         daily_report: daily.value,
-        run_summary: summary.status === "ok" ? summary.value : null,
+        run_summary: hydratedRunSummary,
+        industry_runtime_summary: hydratedRunSummary?.industry_runtime_summary ?? (industryRuntimeSummary.status === "ok" ? industryRuntimeSummary.value : null),
+        policy_finance_runtime_replay: policyFinanceRuntimeReplay.status === "ok" ? policyFinanceRuntimeReplay.value : null,
         verify_result: verify.status === "ok" ? verify.value : null,
         github_audit: githubAudit.status === "ok" ? githubAudit.value : null,
         observer_artifact: observer.status === "ok" ? observer.value : null,
@@ -974,6 +1009,94 @@ function buildRunSnapshot(
   }
 
   return base;
+}
+
+function syntheticDailyReport(date: string): DailyReport {
+  return {
+    date,
+    generated_at: `${date}T00:00:00.000Z`,
+    enhancement_status: "rules-only",
+    enhancement_audit: { rejected_outputs: [] },
+    personalized_relevance_applicable: false,
+    overall_daily_status: "数据部分回退，谨慎参考",
+    freshness_sources: [],
+    today_fresh_candidate_count: 0,
+    context_candidate_count: 0,
+    pending_confirmation_count: 0,
+    main_board_mode: "no_fresh_main_board",
+    today_star_projects: [],
+    context_only_projects: [],
+    today_pulse_projects: [],
+    mission_match_projects: [],
+    explore_ribbon_projects: [],
+    coverage_atlas: [],
+    gap_ledger: [],
+    mission_discovery_status: "degraded",
+    mission_degraded_reason_codes: ["daily_report_missing"],
+    global_hot_projects: [],
+    demand_relevant_projects: [],
+    searched_direction_statuses: [],
+    new_projects: [],
+    high_score_projects: [],
+    anomaly_projects: [],
+    all_projects: [],
+  };
+}
+
+function buildRunHealthSnapshotWithoutDaily(
+  date: string,
+): { snapshot: RunSnapshot | null; auditNotes: string[]; githubStatus: string } {
+  const summary = getRunSummary(date);
+  const industryRuntimeSummary = getIndustryRuntimeSummary(date);
+  const policyFinanceRuntimeReplay = getPolicyFinanceRuntimeReplay(date);
+  const verify = getVerifyDailyResult(date);
+  const githubAudit = getGithubEnrichmentAudit(date);
+  const observer = getObserverArtifact(date);
+  const githubStatus =
+    githubAudit.status === "ok"
+      ? githubAudit.value.some((entry) => entry.status === "unavailable" || entry.status === "invalid_repo")
+        ? "fallback/partial"
+        : "ok"
+      : githubAudit.status === "not_found"
+        ? "missing"
+        : "failed";
+  const hydratedRunSummary =
+    summary.status === "ok" && !summary.value.industry_runtime_summary && industryRuntimeSummary.status === "ok"
+      ? { ...summary.value, industry_runtime_summary: industryRuntimeSummary.value }
+      : summary.status === "ok"
+        ? summary.value
+        : null;
+  const runtimeArtifact = hydratedRunSummary?.industry_runtime_summary ?? (industryRuntimeSummary.status === "ok" ? industryRuntimeSummary.value : null);
+
+  if (!hydratedRunSummary && !runtimeArtifact && policyFinanceRuntimeReplay.status !== "ok" && verify.status !== "ok" && githubAudit.status !== "ok") {
+    return { snapshot: null, auditNotes: [], githubStatus: "unknown" };
+  }
+
+  const notes = ["daily 结果缺失，run health 使用 partial fallback"];
+  if (summary.status === "not_found") notes.push("run-summary 缺失");
+  if (!runtimeArtifact) notes.push("industry runtime 摘要缺失");
+  if (!runtimeArtifact && policyFinanceRuntimeReplay.status === "ok") notes.push("policy-finance runtime replay 仅来自独立 artifact");
+  if (runtimeArtifact?.academic_preparatory.blocked_until) {
+    notes.push(`academic runtime 仍阻塞于 ${runtimeArtifact.academic_preparatory.blocked_until}`);
+  }
+  if (summary.status !== "ok" && industryRuntimeSummary.status === "ok") {
+    notes.push("industry runtime 仅来自独立 artifact");
+  }
+
+  return {
+    snapshot: {
+      date,
+      daily_report: syntheticDailyReport(date),
+      run_summary: hydratedRunSummary,
+      industry_runtime_summary: runtimeArtifact,
+      policy_finance_runtime_replay: policyFinanceRuntimeReplay.status === "ok" ? policyFinanceRuntimeReplay.value : null,
+      verify_result: verify.status === "ok" ? verify.value : null,
+      github_audit: githubAudit.status === "ok" ? githubAudit.value : null,
+      observer_artifact: observer.status === "ok" ? observer.value : null,
+    },
+    auditNotes: notes,
+    githubStatus,
+  };
 }
 
 function reportEvidenceMatrixToParsed(
@@ -1254,10 +1377,20 @@ function buildWeeklySnapshot(anchorDate: string): { snapshot: WeeklySnapshot | n
     if (judgment.status === "parse_error") notes.push("weekly judgment JSON 解析失败");
     if (audit.status === "not_found") notes.push("审计上下文缺失");
     if (audit.status === "parse_error") notes.push("weekly audit 解析失败");
+    const industryRuntimeWindowSummary =
+      structured.status === "ok"
+        ? structured.value.industry_runtime_window_summary ?? null
+        : judgment.status === "ok"
+          ? judgment.value.industry_runtime_window_summary ?? null
+          : null;
+    if (industryRuntimeWindowSummary?.latest_academic_blocked_until) {
+      notes.push(`weekly runtime 仍阻塞于 ${industryRuntimeWindowSummary.latest_academic_blocked_until}`);
+    }
     return {
       snapshot: {
         anchor_date: anchorDate,
         markdown: parsed,
+        industry_runtime_window_summary: industryRuntimeWindowSummary,
         judgment_status: judgment.status,
         judgment_enhancement_status: judgment.status === "ok" ? judgment.value.enhancement_status : null,
         judgment_rule_candidate_count: judgment.status === "ok" ? judgment.value.rule_materials.trend_candidates.length : 0,
@@ -1339,6 +1472,59 @@ function buildDailyNavigator(date: string | null, stale: boolean, snapshot: RunS
     previous_key: window.previous,
     next_key: window.next,
     current_label: window.current ?? "daily-unavailable",
+    stale,
+    window,
+    previews,
+  };
+}
+
+function buildRunHealthCurrentPreview(date: string, snapshot: RunSnapshot | null): DailyTimeNavigatorPreview {
+  if (!snapshot) return getRunHealthNavigatorPreview(date);
+  const sourceStatus = snapshot.run_summary?.source_status ?? [];
+  const hasRuntimeArtifact = Boolean(snapshot.run_summary?.industry_runtime_summary ?? snapshot.industry_runtime_summary ?? snapshot.policy_finance_runtime_replay);
+  const topLevelState =
+    snapshot.daily_report.all_projects.length === 0
+      ? hasRuntimeArtifact
+        ? "degraded"
+        : "empty"
+      : !snapshot.daily_report.overall_daily_status
+        ? "not-judgeable"
+        : !snapshot.run_summary || !snapshot.verify_result || snapshot.daily_report.enhancement_status === "rules-only"
+          ? "degraded"
+          : "ready";
+
+  return {
+    kind: "daily",
+    slice_key: date,
+    generated_at:
+      snapshot.run_summary?.generated_at ??
+      snapshot.industry_runtime_summary?.generated_at ??
+      snapshot.policy_finance_runtime_replay?.generated_at ??
+      snapshot.daily_report.generated_at,
+    top_level_state: topLevelState,
+    enhancement_status: snapshot.daily_report.enhancement_status,
+    top_decision_count: readTodayPulseProjects(snapshot.daily_report).length,
+    source_active_count: sourceStatus.filter((entry) => entry.status === "active").length,
+    failed_count: sourceStatus.filter((entry) => entry.status === "failed").length,
+    empty_count: sourceStatus.filter((entry) => entry.status === "empty").length,
+    verify_status: snapshot.verify_result?.status ?? null,
+  };
+}
+
+function buildRunHealthNavigator(date: string | null, stale: boolean, snapshot: RunSnapshot | null): TimeNavigatorModel {
+  const window = resolveRunHealthTimeWindow(date);
+  const previews = [];
+  if (window.previous) previews.push(getRunHealthNavigatorPreview(window.previous));
+  if (window.current) previews.push(buildRunHealthCurrentPreview(window.current, snapshot));
+  if (window.next) previews.push(getRunHealthNavigatorPreview(window.next));
+
+  return {
+    mode: "daily",
+    current_key: window.current,
+    latest_key: window.latest,
+    previous_key: window.previous,
+    next_key: window.next,
+    current_label: window.current ?? "run-health-unavailable",
     stale,
     window,
     previews,
@@ -1432,6 +1618,9 @@ function buildWeeklyStateEntries(snapshot: WeeklySnapshot | null, stale: boolean
   if (stale) statuses.push({ status: "stale" as const, reason: "latest 已解析到非最新 weekly" });
   if (snapshot.audit_status === "not_found") statuses.push({ status: "degraded" as const, reason: "审计上下文缺失" });
   if (snapshot.markdown.enhancement_status === "rules-only") statuses.push({ status: "degraded" as const, reason: "当前为 rules-only weekly" });
+  if (snapshot.industry_runtime_window_summary?.latest_academic_blocked_until) {
+    statuses.push({ status: "degraded" as const, reason: `weekly runtime 阻塞于 ${snapshot.industry_runtime_window_summary.latest_academic_blocked_until}` });
+  }
   if (snapshot.markdown.core_trend_cards.length === 0 && snapshot.markdown.weak_signal_cards.length > 0) {
     statuses.push({ status: "not-judgeable" as const, reason: "尚未形成稳定趋势" });
   }
@@ -1684,7 +1873,15 @@ export function buildOverviewView(
   dateOrLatest: string,
   options?: { requestInterestTopics?: UserInterestTopicName[] },
 ): OverviewViewModel {
-  const resolved = resolveDailyContext(dateOrLatest);
+  let resolved = resolveDailyContext(dateOrLatest);
+  let useRunHealthFallback = false;
+  if (resolved.status === "failed" || !resolved.context.selected_date) {
+    const runtimeResolved = resolveRunHealthContext(dateOrLatest);
+    if (runtimeResolved.status === "ok" && runtimeResolved.context.selected_date) {
+      resolved = runtimeResolved;
+      useRunHealthFallback = true;
+    }
+  }
   if (resolved.status === "failed" || !resolved.context.selected_date) {
     const state = makeState([{ status: "failed", reason: resolved.status === "failed" ? resolved.message : "daily 上下文缺失" }]);
     const view: OverviewViewModel = {
@@ -1696,7 +1893,9 @@ export function buildOverviewView(
         notes: state.reasons,
       }),
       state,
-      time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
+      time_navigator: useRunHealthFallback
+        ? buildRunHealthNavigator(resolved.context.selected_date, resolved.context.stale, null)
+        : buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
       route_frame: {} as RouteFrameModel,
       run_snapshot: null,
       top_decisions: [],
@@ -1708,13 +1907,39 @@ export function buildOverviewView(
     return view;
   }
 
-  const { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date, options);
-  resolved.context.generated_at = snapshot?.daily_report.generated_at ?? null;
+  const selectedDate = resolved.context.selected_date;
+  let { snapshot, auditNotes, githubStatus } = buildRunSnapshot(selectedDate, options);
+  if (!snapshot) {
+    const runtimeResolved = resolveRunHealthContext(selectedDate);
+    if (runtimeResolved.status === "ok" && runtimeResolved.context.selected_date) {
+      resolved = runtimeResolved;
+      useRunHealthFallback = true;
+    }
+  }
+  if (!snapshot && useRunHealthFallback) {
+    const fallback = buildRunHealthSnapshotWithoutDaily(resolved.context.selected_date ?? selectedDate);
+    snapshot = fallback.snapshot;
+    auditNotes = fallback.auditNotes;
+    githubStatus = fallback.githubStatus;
+  }
+  resolved.context.generated_at =
+    snapshot?.run_summary?.generated_at ??
+    snapshot?.industry_runtime_summary?.generated_at ??
+    snapshot?.policy_finance_runtime_replay?.generated_at ??
+    snapshot?.daily_report.generated_at ??
+    null;
   const state = makeState(buildOverviewStateEntries(snapshot, resolved.context.stale));
+  const runtimeBlockedUntil = snapshot?.run_summary?.industry_runtime_summary?.academic_preparatory.blocked_until ?? snapshot?.industry_runtime_summary?.academic_preparatory.blocked_until;
   const risksAndActions = snapshot?.run_summary
-    ? [...snapshot.run_summary.watchouts, ...snapshot.run_summary.recommended_actions]
-    : auditNotes;
-  const weeklyAnchor = resolveNearestWeeklyAnchor(resolved.context.selected_date);
+    ? [
+        ...snapshot.run_summary.watchouts,
+        ...(runtimeBlockedUntil ? [`industry runtime 仍阻塞于 ${runtimeBlockedUntil}`] : []),
+        ...snapshot.run_summary.recommended_actions,
+      ]
+    : runtimeBlockedUntil
+      ? [...auditNotes, `industry runtime 仍阻塞于 ${runtimeBlockedUntil}`]
+      : auditNotes;
+  const weeklyAnchor = resolveNearestWeeklyAnchor(resolved.context.selected_date ?? selectedDate);
   const missionBand = snapshot ? uniqueByRepo(readMissionProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
   const pulseBand = snapshot ? uniqueByRepo(readTodayPulseProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
   const exploreBand = snapshot ? uniqueByRepo(readExploreRibbonProjects(snapshot.daily_report).map((project) => projectToProjection(project))) : [];
@@ -1732,7 +1957,7 @@ export function buildOverviewView(
     context: resolved.context,
     banner: makeBanner({
       title: "Overview",
-      contextLabel: resolved.context.selected_date,
+      contextLabel: resolved.context.selected_date ?? selectedDate,
       generatedAt: snapshot?.daily_report.generated_at ?? null,
       enhancementStatus: snapshot?.daily_report.enhancement_status ?? null,
       githubStatus,
@@ -1740,7 +1965,9 @@ export function buildOverviewView(
       notes: auditNotes,
     }),
     state,
-    time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
+    time_navigator: useRunHealthFallback
+      ? buildRunHealthNavigator(resolved.context.selected_date, resolved.context.stale, snapshot)
+      : buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
     run_snapshot: snapshot,
     top_decisions: selectOverviewTopDecisions(orderedOverviewProjects),
@@ -1971,14 +2198,14 @@ export function buildWeeklyView(anchorDateOrLatest: string): WeeklyViewModel {
 }
 
 export function buildRunHealthView(dateOrLatest: string): RunHealthViewModel {
-  const resolved = resolveDailyContext(dateOrLatest);
+  const resolved = resolveRunHealthContext(dateOrLatest);
   if (resolved.status === "failed" || !resolved.context.selected_date) {
     const state = makeState([{ status: "failed", reason: resolved.status === "failed" ? resolved.message : "daily 上下文缺失" }]);
     const view: RunHealthViewModel = {
       context: resolved.context,
       banner: makeBanner({ title: "Run Health", contextLabel: "daily", generatedAt: null, notes: state.reasons }),
       state,
-      time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
+      time_navigator: buildRunHealthNavigator(resolved.context.selected_date, resolved.context.stale, null),
       route_frame: {} as RouteFrameModel,
       run_snapshot: null,
     };
@@ -1986,13 +2213,33 @@ export function buildRunHealthView(dateOrLatest: string): RunHealthViewModel {
     return view;
   }
 
-  const { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date);
-  resolved.context.generated_at = snapshot?.run_summary?.generated_at ?? snapshot?.daily_report.generated_at ?? null;
+  let { snapshot, auditNotes, githubStatus } = buildRunSnapshot(resolved.context.selected_date);
+  if (!snapshot) {
+    const fallback = buildRunHealthSnapshotWithoutDaily(resolved.context.selected_date);
+    snapshot = fallback.snapshot;
+    auditNotes = fallback.auditNotes;
+    githubStatus = fallback.githubStatus;
+  }
+  resolved.context.generated_at =
+    snapshot?.run_summary?.generated_at ??
+    snapshot?.industry_runtime_summary?.generated_at ??
+    snapshot?.policy_finance_runtime_replay?.generated_at ??
+    snapshot?.daily_report.generated_at ??
+    null;
   const state = makeState(
     snapshot
       ? [
-          snapshot.run_summary ? { status: "ready" as const, reason: null } : { status: "failed" as const, reason: "健康上下文缺失" },
-          snapshot.verify_result ? { status: "ready" as const, reason: null } : { status: "failed" as const, reason: "verify 上下文缺失" },
+          snapshot.run_summary || snapshot.industry_runtime_summary || snapshot.policy_finance_runtime_replay
+            ? {
+                status: snapshot.run_summary ? ("ready" as const) : ("degraded" as const),
+                reason: snapshot.run_summary
+                  ? null
+                  : snapshot.industry_runtime_summary
+                    ? "daily 缺失，已回退到 runtime artifact"
+                    : "daily 缺失，已回退到 policy-finance runtime replay",
+              }
+            : { status: "failed" as const, reason: "健康上下文缺失" },
+          snapshot.verify_result ? { status: "ready" as const, reason: null } : { status: "degraded" as const, reason: "verify 上下文缺失" },
           resolved.context.stale ? { status: "stale" as const, reason: "latest 已解析到非当天结果" } : { status: "ready" as const, reason: null },
         ]
       : [{ status: "failed" as const, reason: "当前日期 daily 结果不存在" }],
@@ -2010,7 +2257,7 @@ export function buildRunHealthView(dateOrLatest: string): RunHealthViewModel {
       notes: auditNotes,
     }),
     state,
-    time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
+    time_navigator: buildRunHealthNavigator(resolved.context.selected_date, resolved.context.stale, snapshot),
     route_frame: {} as RouteFrameModel,
     run_snapshot: snapshot,
   };

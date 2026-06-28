@@ -93,6 +93,8 @@ export type RunHealthViewProps = {
   compatibilityAuditTitle: string;
   compatibilityVerifyTitle: string;
   compatibilityActionTitle: string;
+  runtimeSummaryTitle?: string;
+  runtimeSummaryLines?: string[];
   sourceTableRows: SourceTableRow[];
   auditRows: AuditTableRow[];
 };
@@ -149,6 +151,8 @@ const DEFAULT_PROPS: RunHealthViewProps = {
   compatibilityAuditTitle: "",
   compatibilityVerifyTitle: "",
   compatibilityActionTitle: "",
+  runtimeSummaryTitle: "",
+  runtimeSummaryLines: [],
   sourceTableRows: [],
   auditRows: [],
 };
@@ -363,6 +367,7 @@ export function parseRunHealthViewPayload(): RunHealthViewProps {
     verifyChecks: payload.verifyChecks ?? DEFAULT_PROPS.verifyChecks,
     failureNotes: payload.failureNotes ?? DEFAULT_PROPS.failureNotes,
     initialTelemetry: payload.initialTelemetry ?? DEFAULT_PROPS.initialTelemetry,
+    runtimeSummaryLines: payload.runtimeSummaryLines ?? DEFAULT_PROPS.runtimeSummaryLines,
     sourceTableRows: payload.sourceTableRows ?? DEFAULT_PROPS.sourceTableRows,
     auditRows: payload.auditRows ?? DEFAULT_PROPS.auditRows,
   };
@@ -537,6 +542,21 @@ export default function RunHealthView(props: RunHealthViewProps): React.ReactEle
                 </div>
 
                 <div className="mt-7 pt-6 border-t border-neutral-200/50 dark:border-neutral-800/60 space-y-4">
+                  {props.runtimeSummaryLines && props.runtimeSummaryLines.length > 0 ? (
+                    <div className="rounded-[24px] border border-neutral-200/70 dark:border-neutral-800 bg-white/35 dark:bg-slate-950/30 px-4 py-4">
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-[10px] uppercase tracking-[0.18em] font-black font-mono text-cyan-600 dark:text-cyan-400 bg-cyan-500/10 dark:bg-cyan-500/20 px-2 py-1 rounded-md">
+                          {props.runtimeSummaryTitle || (lang === "en" ? "Runtime Contract" : "Runtime Contract")}
+                        </span>
+                      </div>
+                      <div className="space-y-2 text-[11px] leading-6 text-neutral-600 dark:text-neutral-300 font-mono break-all">
+                        {props.runtimeSummaryLines.map((line, index) => (
+                          <div key={`${index}-${line.slice(0, 16)}`}>{line}</div>
+                        ))}
+                      </div>
+                    </div>
+                  ) : null}
+
                   <div className="flex items-center gap-2">
                     <span className="text-[10px] uppercase tracking-[0.18em] font-black font-mono text-amber-600 dark:text-amber-400 bg-amber-500/10 dark:bg-amber-500/20 px-2 py-1 rounded-md">
                       {props.telemetryLabel}

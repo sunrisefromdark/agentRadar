@@ -14,9 +14,10 @@ const POLICY_FINANCE_PLAN = {
     "src/__tests__/industry/agents/finance-agent/",
     "src/__tests__/industry/agents/policy-agent/",
     "src/__tests__/industry/platform/",
-    "src/industry/platform/normalization/",
+    "src/industry/platform/",
     "fixtures/industry/agents/finance-agent/",
     "fixtures/industry/agents/policy-agent/",
+    "fixtures/industry/platform/",
     "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md",
   ],
 };
@@ -112,7 +113,12 @@ function syncPolicyFinanceExecPlan(content) {
     "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
     "src/industry/agents/policy-agent/shared-runtime-note.md",
   ].every(exists);
-  const phase3RuntimeDryRunDone = exists("src/industry/platform/normalization/financePolicyDryRun.ts");
+  const phase3RuntimeDone = [
+    "src/industry/platform/normalization/financePolicyDryRun.ts",
+    "src/industry/platform/contracts/dispatchRuntime.ts",
+    "src/industry/platform/registry/runtimeSnapshot.ts",
+    "src/__tests__/industry/platform/normalization.test.ts",
+  ].every(exists);
   const phase4Done = [
     "src/industry/agents/finance-agent/coverageReport.ts",
     "src/industry/agents/finance-agent/contributionLedger.ts",
@@ -141,8 +147,8 @@ function syncPolicyFinanceExecPlan(content) {
   next = replaceHeadingStatus(
     next,
     "Phase 3",
-    phase3RuntimeDryRunDone
-      ? "本组已完成 producer 侧，待 4 号完成 runtime 侧"
+    phase3RuntimeDone
+      ? "已完成"
       : phase3ProducerDone
         ? "本组已完成 producer 侧，待 4 号接通 dry-run"
         : "进行中",
@@ -154,7 +160,7 @@ function syncPolicyFinanceExecPlan(content) {
   next = replaceHeadingStatus(
     next,
     "Phase 5",
-    phase5Done ? "已完成正式 handoff 交付，待 4 号继续平台 runtime 接线" : "进行中",
+    phase5Done && phase3RuntimeDone ? "已完成" : "进行中",
     "领域测试与 handoff 冻结",
   );
   return next;
@@ -180,7 +186,7 @@ function affectedPlans(files) {
 
 function stageFiles(pathsToStage) {
   if (pathsToStage.length === 0) return;
-  execFileSync("git", ["update-index", "--again", "--", ...pathsToStage], { cwd: ROOT, stdio: "ignore" });
+  execFileSync("git", ["add", "--", ...pathsToStage], { cwd: ROOT, stdio: "ignore" });
 }
 
 function main() {

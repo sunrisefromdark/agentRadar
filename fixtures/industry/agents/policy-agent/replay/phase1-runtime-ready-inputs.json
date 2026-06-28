@@ -1,0 +1,23 @@
+{
+  "fixture_id": "policy-finance-phase1-runtime-ready-inputs.v1",
+  "helper_entrypoints": {
+    "dry_run": "src/industry/agents/policy-agent/index.ts",
+    "runtime_ready": "src/industry/agents/policy-agent/index.ts",
+    "runtime_ready_fixture_replay": "src/industry/agents/policy-agent/index.ts",
+    "platform_runtime_replay": "src/industry/platform/normalization/policyFinanceRuntimeReplay.ts",
+    "platform_runtime_consumer": "src/industry/platform/normalization/financePolicyDryRun.ts"
+  },
+  "current": {
+    "bundle": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
+    "same_run_fixture": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
+    "platform_current_runtime_fixture": "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+    "expected_status": "policy_finance_runtime_ready"
+  },
+  "negative_missing_stable_claim_key": {
+    "bundle": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
+    "same_run_fixture": "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
+    "platform_negative_runtime_fixture": "fixtures/industry/platform/negative/phase1-runtime.json",
+    "expected_case_id": "same-run-missing-stable-claim-key",
+    "expected_reason_code": "dispatch_context_missing"
+  }
+}

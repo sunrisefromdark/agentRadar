@@ -5,6 +5,7 @@ const baseDailyReport = {
   enhancement_status: "agent-full",
   overall_daily_status: "ready",
   personalized_relevance_applicable: false,
+  freshness_sources: [],
   all_projects: [],
   global_hot_projects: [],
   today_star_projects: [],
@@ -76,6 +77,21 @@ vi.mock("../visualConsole/context.ts", () => ({
     previous: null,
     next: null,
   }),
+  resolveRunHealthContext: () => ({
+    status: "failed",
+    context: {
+      selected_date: null,
+      stale: false,
+      generated_at: null,
+      selected_window: null,
+    },
+  }),
+  resolveRunHealthTimeWindow: () => ({
+    current: null,
+    latest: null,
+    previous: null,
+    next: null,
+  }),
   resolveNearestWeeklyAnchor: () => null,
   resolveWeeklyContext: () => ({
     status: "failed",
@@ -104,13 +120,69 @@ vi.mock("../visualConsole/readLayer.ts", () => ({
   getDailyReport: () => ({ status: "ok", value: structuredClone(mockDailyReport) }),
   getDailyNavigatorPreview: (date: string) => ({ kind: "daily", slice_key: date }),
   getGithubEnrichmentAudit: () => ({ status: "ok", value: [] }),
+  getIndustryRuntimeSummary: () => ({ status: "not_found" }),
+  getPolicyFinanceRuntimeReplay: () => ({ status: "not_found" }),
   getKbCard: () => ({ status: "not_found" }),
   getKbIndex: () => ({ status: "ok", value: [] }),
   getMissionScoutArtifact: () => ({ status: "not_found" }),
   getMissionScoutEnhancementArtifact: () => ({ status: "not_found" }),
   getObserverArtifact: () => ({ status: "not_found" }),
   getProjectLibraryEnhancementArtifact: () => ({ status: "not_found" }),
-  getRunSummary: () => ({ status: "ok", value: { source_status: [], watchouts: [], recommended_actions: [] } }),
+  getRunHealthNavigatorPreview: (date: string) => ({ kind: "daily", slice_key: date }),
+  getRunSummary: () => ({
+    status: "ok",
+    value: {
+      source_status: [],
+      watchouts: [],
+      recommended_actions: [],
+      industry_runtime_summary: {
+        artifact_kind: "industry_runtime_summary",
+        date: "2026-06-27",
+        generated_at: "2026-06-27T08:00:00.000Z",
+        overall_status: "industry_runtime_contracts_ready",
+        platform_contract: {
+          fixture_id: "platform-phase1-current-consumer.v1",
+          published_for: ["finance-agent", "policy-agent"],
+          handoff_payload_schema_count: 4,
+          feedback_payload_schema_count: 3,
+          runtime_artifact_schema_count: 6,
+          shared_governance_published: true,
+          shared_governance_profile_count: 33,
+          dispatch_gate: {
+            same_run_requires_count: 5,
+            high_cost_requires_reservation_state: "granted",
+            budget_rejected_blocks_start: true,
+            async_only_review_is_not_same_run_available: true,
+          },
+          event_consumer_gate: {
+            execution_context_primary_responsibility_matches_responsibility: true,
+            operational_executor_id_required: true,
+            takeover_requires_takeover_audit_ref: true,
+          },
+        },
+        policy_finance: {
+          status: "policy_finance_runtime_ready",
+          negative_reason_code: "dispatch_context_missing",
+          runtime_consumed_same_run_messages: 19,
+          activation_profile_ids: ["axis-activation-policy.v1/finance_capital"],
+          stop_profile_ids: ["canonical-fetch-stop-policy.v1/finance_capital"],
+          review_profile_ids: ["same-run-review-availability-policy.v1/policy_finance"],
+        },
+        product_ecosystem: {
+          status: "normalization_dry_run_ready",
+          normalized_event_batch_refs_count: 6,
+          coverage_refs_count: 5,
+          contribution_refs_count: 6,
+        },
+        academic_preparatory: {
+          status: "academic_preparatory_normalization_dry_run_ready",
+          blocked_until: "formal_academic_handoff",
+          promotion_ready: false,
+          normalized_event_batch_refs_count: 2,
+        },
+      },
+    },
+  }),
   getVerifyDailyResult: () => ({ status: "ok", value: { status: "pass" } }),
   getWeeklyAudit: () => ({ status: "not_found" }),
   getWeeklyJudgmentReport: () => ({ status: "not_found" }),
@@ -230,5 +302,19 @@ describe("overview top decision ranking", () => {
     expect(overviewRepos).not.toContain("openai/codex");
     expect(projectRepos[0]).toBe("acme/task-agent");
     expect(projectRepos.indexOf("openai/codex")).toBeGreaterThan(projectRepos.indexOf("acme/research-copilot"));
+  });
+
+  it("surfaces runtime blockage in overview risks and snapshot", async () => {
+    const { buildOverviewView } = await import("../visualConsole/build.ts");
+    const { renderOverviewView } = await import("../visualConsole/render.ts");
+
+    const view = buildOverviewView("2026-06-27");
+    const rendered = renderOverviewView(view);
+
+    expect(view.risks_and_actions).toContain("industry runtime 仍阻塞于 formal_academic_handoff");
+    expect(rendered).toContain("## Industry Runtime Snapshot");
+    expect(rendered).toContain("academic_blocked_until: formal_academic_handoff");
+    expect(rendered).toContain("platform_contract_fixture: platform-phase1-current-consumer.v1");
+    expect(rendered).toContain("policy_finance_profiles: activation=");
   });
 });

@@ -1,0 +1,290 @@
+{
+  "enhancement_status": "rules-only",
+  "industry_runtime_window_summary": {
+    "window_day_count": 7,
+    "days_with_run_summary": 7,
+    "days_with_industry_runtime_summary": 1,
+    "missing_run_summary_dates": [],
+    "missing_industry_runtime_summary_dates": [
+      "2026-06-07",
+      "2026-06-08",
+      "2026-06-09",
+      "2026-06-10",
+      "2026-06-11",
+      "2026-06-12"
+    ],
+    "policy_finance_runtime_ready_days": [
+      "2026-06-13"
+    ],
+    "product_ecosystem_dry_run_ready_days": [
+      "2026-06-13"
+    ],
+    "academic_preparatory_ready_days": [
+      "2026-06-13"
+    ],
+    "latest_summary_date": "2026-06-13",
+    "latest_overall_status": "industry_runtime_contracts_ready",
+    "latest_academic_blocked_until": "formal_academic_handoff",
+    "latest_platform_contract_fixture": "platform-phase1-current-consumer.v1",
+    "latest_policy_finance_activation_profile_ids": [
+      "axis-activation-policy.v1/capital_finance",
+      "axis-activation-policy.v1/policy_regulatory",
+      "axis-activation-policy.v1/policy_research_thinktank",
+      "axis-runtime-budget-profile.v1/capital_finance",
+      "axis-runtime-budget-profile.v1/policy_regulatory",
+      "axis-runtime-budget-profile.v1/policy_research_thinktank"
+    ],
+    "latest_policy_finance_stop_profile_ids": [
+      "canonical-fetch-stop-policy.v1/capital_finance",
+      "canonical-fetch-stop-policy.v1/policy_regulatory",
+      "canonical-fetch-stop-policy.v1/policy_research_thinktank"
+    ],
+    "latest_policy_finance_review_profile_ids": [
+      "same-run-review-availability-policy.v1/policy_finance"
+    ]
+  },
+  "personalized_weekly_focus": [
+    {
+      "trend_key": "ai-skills",
+      "matched_interest_topics": [
+        "skills"
+      ],
+      "personalization_reason_cn": "命中 skills，和你当前关注方向一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "repo_full_name": "anthropics/skills"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        }
+      ]
+    },
+    {
+      "trend_key": "memory",
+      "matched_interest_topics": [
+        "memory"
+      ],
+      "personalization_reason_cn": "命中 memory，和你当前关注方向一致。",
+      "supporting_project_refs": [
+        {
+          "repo_url": "https://github.com/NousResearch/hermes-agent",
+          "repo_full_name": "NousResearch/hermes-agent"
+        },
+        {
+          "repo_url": "https://github.com/anthropics/skills",
+          "repo_full_name": "anthropics/skills"
+        },
+        {
+          "repo_url": "https://github.com/affaan-m/ECC",
+          "repo_full_name": "affaan-m/ECC"
+        }
+      ]
+    }
+  ],
+  "rejected_outputs": [
+    {
+      "layer": "weekly_summary",
+      "target_key": "2026-06-13",
+      "reason_code": "template_fallback",
+      "reason_detail": "overall_summary_cn was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "tool-use",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "ai-skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "core_trend_card",
+      "target_key": "agent-runtime",
+      "reason_code": "template_fallback",
+      "reason_detail": "core trend card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "llm-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "ai-memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "coding-agents",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weak_signal_card",
+      "target_key": "design-tools",
+      "reason_code": "template_fallback",
+      "reason_detail": "weak signal card text was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/anthropics/skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/anthropics/skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/anthropics/skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/affaan-m/ECC",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/NousResearch/hermes-agent",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/openai/codex",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/anthropics/skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/Panniantong/Agent-Reach",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/agentscope-ai/QwenPaw",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/Coinversaa/mcp-server",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/MemPalace/mempalace",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/thedotmack/claude-mem",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/topoteretes/cognee",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/nexu-io/open-design",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/charliee1w/consolidation-memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/manishiitg/mcp-agent-builder-go",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "weekly_focus_project",
+      "target_key": "https://github.com/nexu-io/open-design",
+      "reason_code": "template_fallback",
+      "reason_detail": "weekly project explanation was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "personalized_weekly_focus",
+      "target_key": "ai-skills",
+      "reason_code": "template_fallback",
+      "reason_detail": "personalization_reason_cn was generated from template rules rather than an agent output."
+    },
+    {
+      "layer": "personalized_weekly_focus",
+      "target_key": "memory",
+      "reason_code": "template_fallback",
+      "reason_detail": "personalization_reason_cn was generated from template rules rather than an agent output."
+    }
+  ]
+}

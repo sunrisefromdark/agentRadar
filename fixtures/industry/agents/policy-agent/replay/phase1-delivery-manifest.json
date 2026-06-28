@@ -3,11 +3,18 @@
   "policy_finance_inputs_complete_for_executor_4": true,
   "stable_entrypoints": {
     "policy_agent_index": "src/industry/agents/policy-agent/index.ts",
-    "finance_agent_index": "src/industry/agents/finance-agent/index.ts"
+    "finance_agent_index": "src/industry/agents/finance-agent/index.ts",
+    "policy_finance_dry_run_helper": "src/industry/agents/policy-agent/index.ts",
+    "policy_finance_runtime_ready_helper": "src/industry/agents/policy-agent/index.ts",
+    "policy_finance_runtime_ready_fixture_replay": "src/industry/agents/policy-agent/index.ts",
+    "policy_finance_runtime_ready_impl": "src/industry/agents/policy-agent/handoff.ts",
+    "policy_finance_platform_runtime_replay": "src/industry/platform/normalization/policyFinanceRuntimeReplay.ts"
   },
   "platform_consumers": {
     "normalization_dry_run": "src/industry/platform/normalization/financePolicyDryRun.ts",
-    "normalization_runtime": "src/industry/platform/normalization/financePolicyDryRun.ts"
+    "normalization_runtime": "src/industry/platform/normalization/financePolicyDryRun.ts",
+    "current_runtime_contract": "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+    "negative_runtime_contract": "fixtures/industry/platform/negative/phase1-runtime.json"
   },
   "bundle_fixtures": {
     "current": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
@@ -20,6 +27,9 @@
   "notes": {
     "handoff": "src/industry/agents/policy-agent/handoff-note.md",
     "shared_runtime": "src/industry/agents/policy-agent/shared-runtime-note.md"
+  },
+  "runtime_ready_inputs": {
+    "current_and_negative": "fixtures/industry/agents/policy-agent/replay/phase1-runtime-ready-inputs.json"
   },
   "expected_platform_gates": {
     "current_bundle": "accepted_for_dry_run",

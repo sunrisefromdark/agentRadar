@@ -63,6 +63,8 @@ echo "[live-smoke] running verify-daily"
 corepack pnpm verify-daily -- --date "${DATE_VALUE}"
 
 echo "[live-smoke] generated artifacts:"
+echo "  - data/reports/${DATE_VALUE}.industry-runtime-summary.json"
+echo "  - data/reports/${DATE_VALUE}.policy-finance-runtime-replay.json"
 echo "  - data/reports/${DATE_VALUE}.daily.md"
 echo "  - data/reports/${DATE_VALUE}.llm-smoke.json"
 echo "  - data/reports/${DATE_VALUE}.run-summary.md"

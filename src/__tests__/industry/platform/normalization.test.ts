@@ -9,6 +9,8 @@ import {
   consumeFinancePolicyHandoffForDryRun,
   consumeFinancePolicyHandoffForRuntime,
 } from "../../../industry/platform/normalization/financePolicyDryRun.ts";
+import { replayPolicyFinanceRuntimeReadyFixture } from "../../../industry/platform/normalization/policyFinanceRuntimeReplay.ts";
+import { buildIndustryRuntimeSummaryArtifact } from "../../../industry/platform/normalization/industryRuntimeSummary.ts";
 import { buildProductEcosystemFormalHandoff } from "../../../industry/agents/community-news-agent/formalHandoff.ts";
 import { consumeProductEcosystemHandoffForDryRun } from "../../../industry/platform/normalization/productEcosystemDryRun.ts";
 import { buildAcademicPrepBundle } from "../../../industry/agents/academic-agent/handoff.ts";
@@ -227,6 +229,20 @@ describe("industry platform normalization dry-run", () => {
     });
   });
 
+  it("replays the policy-finance runtime-ready fixture through the platform module", () => {
+    const result = replayPolicyFinanceRuntimeReadyFixture();
+
+    expect(result.current).toMatchObject({
+      ok: true,
+      status: "policy_finance_runtime_ready",
+    });
+    expect(result.negative_missing_stable_claim_key).toMatchObject({
+      ok: false,
+      reasonCode: "dispatch_context_missing",
+    });
+    expect(result.current_runtime_contract.dispatch_gate?.high_cost_requires_reservation_state).toBe("granted");
+  });
+
   it("rejects policy-finance runtime handoff when coverage refs cannot publish runtime snapshots", () => {
     const brokenBundle = structuredClone(currentBundle);
     const dailyInput = brokenBundle.payloads.find((payload) => payload.payload_schema === "daily-industry-evidence-pack-input.v1") as {
@@ -322,6 +338,61 @@ describe("industry platform normalization dry-run", () => {
       expect(result.coverageRefs).toHaveLength(2);
       expect(result.contributionRefs).toHaveLength(2);
     }
+  });
+
+  it("builds a multi-group industry runtime summary artifact from current available seams", () => {
+    const result = buildIndustryRuntimeSummaryArtifact({
+      date: "2026-06-26",
+      generatedAt: "2026-06-26T23:59:59+08:00",
+    });
+
+    expect(result).toMatchObject({
+      artifact_kind: "industry_runtime_summary",
+      date: "2026-06-26",
+      overall_status: "industry_runtime_contracts_ready",
+      platform_contract: {
+        fixture_id: "platform-phase1-current-consumer.v1",
+        shared_governance_published: true,
+        shared_governance_profile_count: 33,
+        handoff_payload_schema_count: 4,
+        feedback_payload_schema_count: 3,
+        runtime_artifact_schema_count: 6,
+        dispatch_gate: {
+          same_run_requires_count: 5,
+          high_cost_requires_reservation_state: "granted",
+          budget_rejected_blocks_start: true,
+          async_only_review_is_not_same_run_available: true,
+        },
+        event_consumer_gate: {
+          execution_context_primary_responsibility_matches_responsibility: true,
+          operational_executor_id_required: true,
+          takeover_requires_takeover_audit_ref: true,
+        },
+      },
+      policy_finance: {
+        status: "policy_finance_runtime_ready",
+        negative_reason_code: "dispatch_context_missing",
+        runtime_consumed_same_run_messages: 19,
+        activation_profile_ids: expect.arrayContaining([
+          "axis-activation-policy.v1/capital_finance",
+          "axis-runtime-budget-profile.v1/capital_finance",
+        ]),
+        stop_profile_ids: expect.arrayContaining(["canonical-fetch-stop-policy.v1/capital_finance"]),
+        review_profile_ids: expect.arrayContaining(["same-run-review-availability-policy.v1/policy_finance"]),
+      },
+      product_ecosystem: {
+        status: "normalization_dry_run_ready",
+        normalized_event_batch_refs_count: 6,
+        coverage_refs_count: 5,
+        contribution_refs_count: 6,
+      },
+      academic_preparatory: {
+        status: "academic_preparatory_normalization_dry_run_ready",
+        blocked_until: "formal_academic_handoff",
+        promotion_ready: false,
+        normalized_event_batch_refs_count: 2,
+      },
+    });
   });
 });
 

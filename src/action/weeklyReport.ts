@@ -1,4 +1,4 @@
-import type { ScoredProject, WeeklyEvidenceMatrix, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
+import type { IndustryRuntimeWindowSummary, ScoredProject, WeeklyEvidenceMatrix, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
 import { renderCoreTrendCard, renderWeakSignalCard } from "./weeklyEnhancement.ts";
 
 function countByParadigm(items: ScoredProject[]): Array<[string, number]> {
@@ -105,6 +105,30 @@ function renderAuditConclusion(judgment?: WeeklyJudgmentReport): string[] {
   ];
 }
 
+function renderIndustryRuntimeWindowSummary(summary?: IndustryRuntimeWindowSummary): string[] {
+  if (!summary) {
+    return ["- industry runtime window summary unavailable"];
+  }
+
+  return [
+    `- window_day_count: ${summary.window_day_count}`,
+    `- days_with_run_summary: ${summary.days_with_run_summary}`,
+    `- days_with_industry_runtime_summary: ${summary.days_with_industry_runtime_summary}`,
+    `- latest_summary_date: ${summary.latest_summary_date ?? "none"}`,
+    `- latest_overall_status: ${summary.latest_overall_status ?? "none"}`,
+    `- latest_academic_blocked_until: ${summary.latest_academic_blocked_until ?? "none"}`,
+    `- latest_platform_contract_fixture: ${summary.latest_platform_contract_fixture ?? "none"}`,
+    `- missing_run_summary_dates: ${summary.missing_run_summary_dates.join(", ") || "none"}`,
+    `- missing_industry_runtime_summary_dates: ${summary.missing_industry_runtime_summary_dates.join(", ") || "none"}`,
+    `- policy_finance_runtime_ready_days: ${summary.policy_finance_runtime_ready_days.join(", ") || "none"}`,
+    `- latest_policy_finance_activation_profiles: ${summary.latest_policy_finance_activation_profile_ids.join(", ") || "none"}`,
+    `- latest_policy_finance_stop_profiles: ${summary.latest_policy_finance_stop_profile_ids.join(", ") || "none"}`,
+    `- latest_policy_finance_review_profiles: ${summary.latest_policy_finance_review_profile_ids.join(", ") || "none"}`,
+    `- product_ecosystem_dry_run_ready_days: ${summary.product_ecosystem_dry_run_ready_days.join(", ") || "none"}`,
+    `- academic_preparatory_ready_days: ${summary.academic_preparatory_ready_days.join(", ") || "none"}`,
+  ];
+}
+
 function renderEnhancedWeeklyReport(report: WeeklyReport, judgment?: WeeklyJudgmentReport): string {
   const personalizedSection = report.personalized_weekly_focus_applicable
     ? [
@@ -133,6 +157,10 @@ function renderEnhancedWeeklyReport(report: WeeklyReport, judgment?: WeeklyJudgm
     `- ${report.overall_summary_cn}`,
     `- enhancement_status: ${report.enhancement_status}`,
     `- supporting_trend_keys: ${report.supporting_trend_keys.length > 0 ? report.supporting_trend_keys.join(", ") : "none"}`,
+    "",
+    "## Industry Runtime Window",
+    "",
+    ...renderIndustryRuntimeWindowSummary(report.industry_runtime_window_summary ?? judgment?.industry_runtime_window_summary),
     "",
     "## 结构化证据矩阵",
     "",

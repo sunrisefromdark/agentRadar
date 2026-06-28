@@ -62,6 +62,8 @@ assert_daily_outputs() {
   local missing=()
 
   for filepath in \
+    "data/reports/${date_value}.industry-runtime-summary.json" \
+    "data/reports/${date_value}.policy-finance-runtime-replay.json" \
     "data/reports/${date_value}.daily.json" \
     "data/reports/${date_value}.daily.md" \
     "data/reports/${date_value}.run-summary.json" \

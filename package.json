@@ -7,6 +7,8 @@
   "scripts": {
     "prepare": "node scripts/setupGitHooks.mjs",
     "exec-plan:sync": "node scripts/syncExecPlanStatus.mjs",
+    "industry-runtime-summary": "tsx src/cli.ts industry-runtime-summary",
+    "policy-finance:runtime-replay": "tsx src/cli.ts policy-finance-runtime-replay",
     "build": "node scripts/buildProduction.mjs",
     "clean": "node scripts/buildProduction.mjs --clean",
     "check:mojibake": "node scripts/checkMojibake.mjs",

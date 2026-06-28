@@ -124,6 +124,8 @@ export type WeeklyViewProps = {
   telemetryWindowValue: string;
   telemetryStatusLabel: string;
   telemetryStatusValue: string;
+  runtimeSummaryTitle?: string;
+  runtimeSummaryLines?: string[];
   matrixEyebrow: string;
   matrixTitle: string;
   matrixSubtitle: string;
@@ -198,6 +200,8 @@ const DEFAULT_PROPS: WeeklyViewProps = {
   telemetryWindowValue: "",
   telemetryStatusLabel: "",
   telemetryStatusValue: "",
+  runtimeSummaryTitle: "",
+  runtimeSummaryLines: [],
   matrixEyebrow: "",
   matrixTitle: "",
   matrixSubtitle: "",
@@ -1633,6 +1637,7 @@ export function parseWeeklyViewPayload(): WeeklyViewProps {
     languageOptions: payload.languageOptions ?? DEFAULT_PROPS.languageOptions,
     themeOptions: payload.themeOptions ?? DEFAULT_PROPS.themeOptions,
     briefingBody: payload.briefingBody ?? DEFAULT_PROPS.briefingBody,
+    runtimeSummaryLines: payload.runtimeSummaryLines ?? DEFAULT_PROPS.runtimeSummaryLines,
     trends: payload.trends ?? DEFAULT_PROPS.trends,
     weakSignals: payload.weakSignals ?? DEFAULT_PROPS.weakSignals,
     watchpoints: payload.watchpoints ?? DEFAULT_PROPS.watchpoints,
@@ -2245,6 +2250,16 @@ export default function WeeklyView(rawProps: WeeklyViewProps): React.ReactElemen
                 <span className="text-neutral-500 dark:text-neutral-400 font-mono">
                   {props.telemetryStatusLabel}: {props.telemetryStatusValue}
                 </span>
+                {props.runtimeSummaryLines && props.runtimeSummaryLines.length > 0 ? (
+                  <div className="mt-2 pt-2 border-t border-neutral-200/50 dark:border-neutral-800/50 space-y-1">
+                    <span className="text-neutral-400 block font-mono">{props.runtimeSummaryTitle || "Runtime Contract"}</span>
+                    {props.runtimeSummaryLines.map((line, index) => (
+                      <span key={`${index}-${line.slice(0, 16)}`} className="text-neutral-500 dark:text-neutral-400 font-mono block break-all">
+                        {line}
+                      </span>
+                    ))}
+                  </div>
+                ) : null}
               </div>
             </div>
           </section>

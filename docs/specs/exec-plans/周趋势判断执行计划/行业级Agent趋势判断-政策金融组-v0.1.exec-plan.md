@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`In Progress`
+- 当前状态：`Implementation Complete / Integration Pending`
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -27,7 +27,32 @@
   - `execution_context`
   - claim-critical 场景下的 same-run 必填 ref
 - `4号执行人` 已用这批输入接通 `normalization dry-run`。
-- 当前不再缺本组输入；剩余未完成项只在中台运行时消费层。
+- 当前不再缺本组输入；政策金融组 `Phase 1 ~ Phase 5` 可独立落地部分已完成。
+- 本轮已把 `industry_runtime_summary / policy_finance_runtime_replay` 继续接到 `run-summary`、`verify-daily`、`weekly`、CLI/Web `run-health`、Web/SSR `overview` 与 `weekly`，高层消费入口已收口。
+- 本计划无 `Phase 6`；`Phase 5` 之后直接进入跨组集成与总验收。
+
+### 计划完成情况（按实际代码）
+
+| 范围 | 当前状态 | 说明 |
+| --- | --- | --- |
+| Phase 1 ~ Phase 5 | `DONE` | producer、handoff、same-run refs、shared governance、runtime snapshot、negative fixture、contract/replay/test 均已闭环 |
+| 政策金融组本地可继续独立推进的核心功能 | `DONE` | 当前已无仅靠本组继续实现就能新增的关键主链能力 |
+| 对 4 号的正式交付前提 | `DONE` | current/negative bundle、manifest、checksums、shared-runtime note、runtime-ready inputs、stable entrypoint 已交齐 |
+| 高层消费入口收口 | `DONE` | daily / weekly / CLI / Web / SSR 已能看到 runtime summary 与 replay-only fallback |
+| 跨组集成与总验收 | `PENDING` | 需 `4号执行人` 继续完成三组集成；academic 侧仍阻塞于 `formal_academic_handoff` |
+
+### 本轮实际新增（供 4 号对接）
+
+- 已把 `industry_runtime_summary` 回填到 `run-summary`，并在 `verify-daily` 增加 runtime contract 检查。
+- 已把 `policy_finance_runtime_replay` 接入 `run-health` 高层视图；即使缺 `industry-runtime-summary` 也能展示 replay-only runtime 信号。
+- 已把 weekly window summary 接到 runtime 汇总，显式暴露：
+  - `latest_platform_contract_fixture`
+  - `latest_policy_finance_activation_profile_ids`
+  - `latest_policy_finance_stop_profile_ids`
+  - `latest_policy_finance_review_profile_ids`
+  - `latest_academic_blocked_until`
+- 已补 `overview` 的 replay-only fallback；现在在没有 `daily` 产物时，SSR HTML 仍能展示 `platform-phase1-current-consumer.v1`、activation / stop / review profile 与 negative reason。
+- 已补页面级与 ranking/mock 回归，确认不是“只在中台层通”，而是到高层展示层也通。
 
 ### 对 4 号的接收条件
 
@@ -42,6 +67,7 @@
 | dispatch runtime 真消费 same-run refs | `DONE` | 中台 `consumeFinancePolicyHandoffForRuntime(...)` 已在 runtime path 消费 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission ref、reservation refs；current / negative 均有测试覆盖 |
 | shared governance 真运行时接线 | `DONE` | 中台 runtime 已解析并校验 `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` |
 | policy-finance runtime registry snapshot | `DONE` | 中台 runtime 已从本组 `coverage_refs` 解析三轴 coverage payload，发布 finance / policy / thinktank runtime registry snapshots，并拒收无法解析的 coverage ref |
+| runtime summary / replay 高层可见性 | `DONE` | daily / weekly / CLI / Web / SSR 已可直接看到 policy-finance runtime contract、profile ids、negative reason 与 academic blocked 状态 |
 
 | Phase | 状态 | 已落地项 | 说明 |
 | --- | --- | --- | --- |
@@ -49,7 +75,7 @@
 | Phase 3-4A：正式 cross-group contract 收口 | `DONE` | canonical payload 名、message kind、`industry://` artifact ref、payload 顶层 canonical 字段、finance-policy handoff gate dry-run | 已对齐中台 `Phase 1A` contract，并通过平台 handoff gate 验证 |
 | Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `DONE` | 本组 producer 接线、正式 bundle 交付、negative 样本、normalization dry-run 前提均已完成；中台 runtime 接线已补齐 | 政策金融线不再需要新增本组输入；后续只随三组最终集成进入总体验收 |
 
-## 落地标记（截至 2026-06-26）
+## 落地标记（截至 2026-06-28）
 
 ### 已完成
 
@@ -86,6 +112,14 @@
 | `dispatch_context_ref` / reservation / admission 等 same-run 接线 | `DONE` | `consumeFinancePolicyHandoffForRuntime(...)` 已把 same-run ref 接入平台 runtime path，并复用 `validateDispatchRuntimeGate(...)` 拒收缺 stable claim key 的 negative bundle |
 | activation / stop / budget 正式治理接线 | `DONE` | runtime 已解析 policy-finance 三轴 activation / stop / budget profile 与 same-run review profile；不再只停留在 contract/fixture 校验 |
 | 正式提交给中台组消费的 envelope / payload / manifest 套件 | `DONE` | 本组已交齐 current / negative bundle、delivery manifest、checksums、handoff note、shared-runtime note、stable entrypoint；4 号不应再因缺本组输入而阻塞 |
+| `overview / run-health / weekly` 高层 runtime 消费收口 | `DONE` | 本轮已把 runtime summary / replay-only fallback 接到高层入口；4 号无需再等政策金融侧补展示层前置 |
+
+### 4 号下一步必须推进什么
+
+1. 把政策金融线已经交齐的 current / negative bundle、runtime summary、runtime replay、registry snapshot 一起并入三组最终 weekly 主链，不再只停在 policy-finance 单线验证。
+2. 继续接 `2号 / 3号` 的正式 handoff，完成 cross-group normalization / audit / weekly internal / consumer / public 三层产物拼装。
+3. 推进 academic 侧从 `academic_preparatory_normalization_dry_run_ready` 进入正式 handoff；当前代码里该阻塞被明确暴露为 `blocked_until=formal_academic_handoff`，这不是政策金融组还能单独消除的问题。
+4. 若最终集成时发现字段或语义不满足合同，必须给出明确 reject list；本组只按 reject list 补一次，不接受无字段级说明的“继续等等政策金融输入”。
 
 ## 目标
 
@@ -275,13 +309,13 @@
 | 3 | `4号执行人` | 从本组 coverage refs 发布 runtime registry snapshots | `DONE`：三条 coverage ref 均发布 runtime snapshot，缺失 coverage ref 会按 lineage 拒收 | `不需要` |
 | 4 | `4号执行人` | 若最终集成时发现本组字段或语义仍不满足合同，按拒收项明确指出缺什么 | 出现明确的字段级 / 语义级拒收单 | `需要本组补一次` |
 | 5 | `1号执行人（仅在被明确拒收时）` | 只按明确拒收项补字段、样本或契约，不扩新语义 | 拒收项被关闭，相关回归转绿 | `补完后再回到4号` |
-| 6 | `4号执行人` | 完成政策金融线的 runtime / snapshot 消费闭环后，继续并行接另外两组，再做 cross-group normalization / audit / weekly 拼装 | 三组正式 handoff 都已进入中台主链路 | `此时本组无需单独推进` |
+| 6 | `4号执行人` | 完成政策金融线的 runtime / snapshot / high-level consumer 消费闭环后，继续并行接另外两组，再做 cross-group normalization / audit / weekly 拼装 | 三组正式 handoff 都已进入中台主链路 | `此时本组无需单独推进` |
 | 7 | `4号执行人 + 全员` | 进入最终 weekly 集成与总验收 | weekly internal / consumer / public 三层产物齐备 | `进入集成阶段` |
 
 ### 来回轮次预期
 
 - `最优路径`：
-  - 当前这轮之后，本组不再需要新增交付；policy-finance runtime path 与 shared governance 接线已完成，后续进入跨组集成时再按明确拒收项补充。
+  - 当前这轮之后，本组不再需要新增交付；policy-finance runtime path、shared governance 接线与高层消费收口均已完成，后续进入跨组集成时再按明确拒收项补充。
 - `保守路径`：
   - `4号执行人` 在 runtime 接线时给出一次明确拒收单；
   - 本组只按拒收项补一次；
@@ -294,6 +328,7 @@
 
 - 当前不再等待 canonical schema、reason/state 真源、artifact path、payload 正式名；这些 contract 真源与 dry-run 入口已经存在。
 - 当前不再等待 `4号执行人` 把 same-run refs 与 shared governance profile 接成真实 runtime 行为；该入口已落在 `consumeFinancePolicyHandoffForRuntime(...)`。
+- 当前不再等待政策金融线补 `overview / run-health / weekly` 的 runtime 展示入口；这些入口已经按代码实况接通。
 - 只有当最终集成或总体验收按合同给出新的明确拒收项时，本组才需要再补一次字段、样本或语义。
 
 ### 不要等什么
@@ -307,7 +342,7 @@
 1. 先在本组目录里把 source catalog、route 草稿、fixture、local seam、测试骨架做起来。
 2. 在 canonical schema、payload 正式名、artifact path 冻结后，把本地 seam 收口成正式 handoff；这一步当前已完成。
 3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
-4. 当前只剩 `4号执行人` 把 activation / stop / budget / same-run 这些后接线能力接成平台 runtime 行为；本组 producer 侧已完成。
+4. activation / stop / budget / same-run 的后接线能力已由中台 runtime 接通；本组 producer 与平台 consumer 两侧当前均已闭环。
 5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
 ## 输出与 handoff
@@ -344,6 +379,8 @@ handoff 要求：
 
 ## 实施阶段
 
+> 说明：本计划只定义 `Phase 1 ~ Phase 5`，不存在 `Phase 6`。当前代码状态下，五个阶段都已完成；后续工作转为跨组集成与总验收，不再新增本组独立实施阶段。
+
 ### Phase 1（已完成）：source class 与 route 基线
 
 1. 以总控已冻结的目录模板为前提，只在本组既定工作根目录内新增文件；若根目录缺失，本组可按模板自行创建本组目录，但不得改路径命名或越界创建共享目录。
@@ -375,7 +412,7 @@ handoff 要求：
 5. 任何 finance / policy accepted event 若存在跨职责语义，必须补 `cross_responsibility_attestation_refs` 输入位；不得等中台组事后从 prose 猜。
 6. 只有命中 `tier_blocking`、`public_output_only` 或 headline 主语义争议的跨职责事实，才要求 same-run critical attestation；其余跨域事实可先按 provisional / post-weekly 路径留痕，不得把所有长尾争议都堵在本组开工阶段。
 
-### Phase 3（本组已完成 producer 侧，待 4 号完成 runtime 侧）：activation / stop / budget 接线
+### Phase 3（已完成）：activation / stop / budget 接线
 
 1. 落地高成本轴激活条件。
 2. 落地 canonical fetch 停止条件：
@@ -430,7 +467,7 @@ handoff 要求：
    - 智库观点强但不是监管结论
 4. 这些 fixture 必须在本组目录下维护，由中台组只消费不重写。
 
-### Phase 5（已完成正式 handoff 交付，待 4 号继续平台 runtime 接线）：领域测试与 handoff 冻结
+### Phase 5（已完成）：领域测试与 handoff 冻结
 
 1. 跑完领域测试。
 2. 产出稳定 fixture。
@@ -490,10 +527,15 @@ handoff 要求：
 | 2026-06-26 | `npx tsx scripts/execPlanPreflight.ts --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md" && npx tsx scripts/execPlanPreflight.ts --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-政策金融组-v0.1.exec-plan.md"` | `Passed` | 已补齐本计划对应 receipt，并通过 code-implementation preflight 校验 |
 | 2026-06-27 | `corepack pnpm tsx scripts/syncExecPlanStatus.ts` | `Passed` | 已补 exec-plan 自动同步脚本；相关代码落地并进入暂存区时，会自动同步本计划的实施阶段状态，并按需刷新对应 preflight receipt |
 | 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 2 个测试文件、11 条测试通过；中台 `consumeFinancePolicyHandoffForRuntime(...)` 已消费政策金融 same-run refs、shared governance profiles 与 runtime registry snapshots，并拒收 missing stable claim key / unresolved coverage ref negative path |
+| 2026-06-28 | `pnpm exec vitest run src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/platform/normalization.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Passed` | 再次确认 policy-finance handoff 的 shared governance、dispatch runtime gate、runtime snapshot 与 replay 路径均已闭环；当前仅等待三组最终集成 |
+| 2026-06-28 | `corepack pnpm vitest run src/__tests__/visualConsoleWebRuntimeRender.test.ts src/__tests__/visualConsoleReactRuntimeProps.test.ts src/__tests__/visualConsoleMissionViews.test.ts src/__tests__/visualConsoleWeeklyRuntime.test.ts` | `Passed` | 已确认 runtime summary / replay-only fallback 不只停在中台层，而是已经进入 weekly、run-health 与 overview 的 Web/SSR 高层入口 |
+| 2026-06-28 | `corepack pnpm vitest run src/__tests__/overviewTopDecisionRanking.test.ts src/__tests__/industry/platform/normalization.test.ts src/__tests__/weeklyIndustryRuntime.test.ts src/__tests__/runSummaryObserver.test.ts src/__tests__/dailyVerificationProjectSearch.test.ts` | `Passed` | 已补齐 ranking/mock 回归与 runtime blockage 展示校验，确认 overview 风险面板、run-summary、verify-daily、weekly runtime 汇总全部闭环 |
+| 2026-06-28 | `corepack pnpm typecheck` | `Passed` | 当前变更在类型层已通过；本计划五个阶段对应实现均可按代码实况视为完成 |
 
 ## 下一阶段入口
 
-1. 本组正式 handoff 前提已交齐，且中台 `normalization dry-run`、`consumeFinancePolicyHandoffForRuntime(...)` runtime 消费入口与 policy-finance runtime registry snapshots 均已接通。
-2. 当前不再等待 `4号执行人` 发布 `Phase 1B / 1C` 的 schema/profile 真源；这些真源、dry-run 入口与 runtime 入口均已存在。
-3. 当前政策金融线不再等待 `4号执行人` 的 runtime / shared governance / registry snapshot 接线；same-run refs、shared governance profile 与 coverage refs 已由中台 runtime 入口消费。
-4. 若最终集成时出现新的明确合同拒收项，本组再按拒收项补一次；若没有新的拒收项，本组无需再新增政策金融输入，直接等待三组进入最终集成。
+1. 本计划 `Phase 1 ~ Phase 5` 已全部完成，且不存在 `Phase 6`；后续不再新增政策金融组独立实施阶段。
+2. 本组正式 handoff 前提已交齐，且中台 `normalization dry-run`、`consumeFinancePolicyHandoffForRuntime(...)` runtime 消费入口、runtime registry snapshots 与高层消费入口均已接通。
+3. `4号执行人` 下一步应直接推进三组最终集成，而不是继续等待政策金融侧补 contract/runtime 基座前置。
+4. 当前最明确的外部剩余阻塞是 academic 侧 `formal_academic_handoff`；代码中已显式暴露这一状态，需由跨组集成继续向前推进。
+5. 若最终集成时出现新的明确合同拒收项，本组再按拒收项补一次；若没有新的拒收项，本组无需再新增政策金融输入。

@@ -1,6 +1,6 @@
 import path from "node:path";
 import { toLocalDateStr } from "../date.ts";
-import { getRunSummary, listAvailableDailyDates, listAvailableWeeklyAnchors } from "./readLayer.ts";
+import { getRunSummary, listAvailableDailyDates, listAvailableRunHealthDates, listAvailableWeeklyAnchors } from "./readLayer.ts";
 import type { ArtifactRef, ContextResolution, TimeSliceWindow, ViewContext, WeeklyWindow } from "./types.ts";
 
 const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
@@ -100,6 +100,18 @@ function resolvePreferredLatestDailyDate(): string | null {
   return dates.at(-1) ?? null;
 }
 
+function resolvePreferredLatestRunHealthDate(): string | null {
+  const dates = listAvailableRunHealthDates();
+  if (dates.length === 0) return null;
+
+  const preferredDaily = resolvePreferredLatestDailyDate();
+  const latestRunHealthDate = dates.at(-1) ?? null;
+  if (preferredDaily && latestRunHealthDate) {
+    return preferredDaily >= latestRunHealthDate ? preferredDaily : latestRunHealthDate;
+  }
+  return preferredDaily ?? latestRunHealthDate;
+}
+
 export function resolveNearestWeeklyAnchor(referenceDate: string | null | undefined): string | null {
   const anchors = listAvailableWeeklyAnchors();
   if (anchors.length === 0) return null;
@@ -123,6 +135,26 @@ export function resolveDailyContext(dateOrLatest: string): ContextResolution {
   return { status: "ok", context };
 }
 
+export function resolveRunHealthContext(dateOrLatest: string): ContextResolution {
+  const context = baseContext("daily", dateOrLatest === "latest" ? "latest-shortcut" : "explicit-date");
+  if (dateOrLatest !== "latest" && !DATE_RE.test(dateOrLatest)) {
+    return { status: "failed", context, message: `unsupported daily date "${dateOrLatest}"` };
+  }
+
+  const availableDates = listAvailableRunHealthDates();
+  const resolvedDate = dateOrLatest === "latest" ? resolvePreferredLatestRunHealthDate() : dateOrLatest;
+  if (!resolvedDate) return { status: "failed", context, message: "latest 快捷入口无法解析" };
+
+  context.selected_date = resolvedDate;
+  context.resolved_artifacts = expectedDailyArtifacts(resolvedDate);
+  context.resolved_artifacts.push({ kind: "industry-runtime-summary", path: path.join("data", "reports", `${resolvedDate}.industry-runtime-summary.json`) });
+  context.resolved_artifacts.push({ kind: "policy-finance-runtime-replay", path: path.join("data", "reports", `${resolvedDate}.policy-finance-runtime-replay.json`) });
+  context.stale =
+    (dateOrLatest === "latest" && resolvedDate !== toLocalDateStr(new Date())) ||
+    (dateOrLatest !== "latest" && availableDates.length > 0 && !availableDates.includes(resolvedDate));
+  return { status: "ok", context };
+}
+
 export function resolveWeeklyContext(anchorDateOrLatest: string): ContextResolution {
   const context = baseContext("weekly", anchorDateOrLatest === "latest" ? "latest-shortcut" : "explicit-date");
   if (anchorDateOrLatest !== "latest" && !DATE_RE.test(anchorDateOrLatest)) {
@@ -143,6 +175,10 @@ export function resolveWeeklyContext(anchorDateOrLatest: string): ContextResolut
 
 export function resolveDailyTimeWindow(date: string | null): TimeSliceWindow {
   return resolveTimeSliceWindow(listAvailableDailyDates(), date);
+}
+
+export function resolveRunHealthTimeWindow(date: string | null): TimeSliceWindow {
+  return resolveTimeSliceWindow(listAvailableRunHealthDates(), date);
 }
 
 export function resolveWeeklyTimeWindow(anchorDate: string | null): TimeSliceWindow {

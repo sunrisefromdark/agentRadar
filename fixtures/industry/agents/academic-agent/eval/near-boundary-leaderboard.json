@@ -1,0 +1,12 @@
+{
+  "case_id": "academic-near-boundary-leaderboard.v1",
+  "responsibility_id": "conference-academic",
+  "axis": "conference_academic",
+  "expected_bucket": "diagnostic",
+  "expected_event_id": "conf-acl-leaderboard-gap",
+  "expected_artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a4f1373b7aa3",
+  "reason_code": "missing_source_published_at",
+  "source_fixture_ref": "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+  "bundle_fixture_ref": "fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json",
+  "summary_cn": "边界例要求保留在 diagnostic，直到 challenge 或 leaderboard 的正式发布时间补齐后才能评估是否提升。"
+}

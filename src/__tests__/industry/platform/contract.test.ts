@@ -713,8 +713,14 @@ describe("industry platform contracts", () => {
         "industry://internal/2026-06-26/contribution/conference-academic",
         "industry://internal/2026-06-26/daily/academic-input",
       ],
+      positiveCanonicalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json"],
+      nearBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json"],
       replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
-      evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+      evalFixtureRefs: [
+        "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+        "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+        "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+      ],
       ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
     });
 

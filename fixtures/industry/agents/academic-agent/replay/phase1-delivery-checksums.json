@@ -1,0 +1,50 @@
+{
+  "manifest_id": "academic-phase1-delivery-checksums.v1",
+  "algorithm": "sha256",
+  "entries": [
+    {
+      "path": "fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json",
+      "sha256": "2d97f4ac2bbb787ae0fe292d9df0c75f8cad76d1ddd39ca0480ed9af5951e023"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json",
+      "sha256": "1ed64f7caa50de48651b5119552ade0c04e38d1c1651cf1b27a53ec4d3a47583"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json",
+      "sha256": "1bccb885f23fd2d21877522b754daec24495cd9650ef5d5763a0ba0d316f9f0c"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/replay/phase1-missing-owner-boundary-bundle.json",
+      "sha256": "f0ae0d9a3237243087f11dd426f4c28f88621785ed4795813ee9ccb044ed0847"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+      "sha256": "dfe0502e64a2faf6dd9b6c41fa5643f126f9b465b6bc81b460f3fb4e6fc43083"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+      "sha256": "e3b9b108ef3a6cea375bc2a85dc84fb13fb83f95fbe8c1496076ea8b5221da63"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+      "sha256": "f3eb923b9e679cd2b4080281f2be1ae5db466fc7464932cbef4f54597980111a"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+      "sha256": "ef91fa7bd73350e9bae21b9fc5d0224fe1a64e24b890f653927f3e6d93df858b"
+    },
+    {
+      "path": "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json",
+      "sha256": "4c753ac94e0df98412bac6f5fd8718c6f9b8ac13c6f5a713d3fc4124b78be2be"
+    },
+    {
+      "path": "src/industry/agents/academic-agent/handoff-note.md",
+      "sha256": "06a478d5b7e5654ee343b58e6d19035e8f62c60d2a51a039e947148160e34975"
+    },
+    {
+      "path": "src/industry/platform/normalization/academicDryRun.ts",
+      "sha256": "a62603b3dea3de61ac8289ede944575797f11d6d502118dd01ed7a5dc45a6941"
+    }
+  ]
+}

@@ -357,6 +357,8 @@ function buildAcademicFormalBundle(): AcademicFormalHandoffBundle {
     messages: refs.map((ref) => academicMessage(ref)),
     manifests: refs.map((artifact_ref) => ({ artifact_ref })),
     artifactRefs: refs,
+    positiveCanonicalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json"],
+    nearBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json"],
     payloads: [
       academicPayload("industry-signal-event-batch.v1", { responsibility_id: "research-frontier" }),
       academicPayload("industry-signal-event-batch.v1", { responsibility_id: "conference-academic" }),
@@ -377,7 +379,11 @@ function buildAcademicFormalBundle(): AcademicFormalHandoffBundle {
       }),
     ],
     replayFixtureRefs: ["fixtures/industry/agents/academic-agent/replay/academic-replay-window.json"],
-    evalFixtureRefs: ["fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json"],
+    evalFixtureRefs: [
+      "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+      "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+      "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+    ],
     ownerBoundaryFixtureRefs: ["fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"],
   };
 }

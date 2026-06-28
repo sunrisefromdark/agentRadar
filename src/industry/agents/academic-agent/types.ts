@@ -313,6 +313,8 @@ export interface AcademicFormalHandoffBundle {
   manifests: Array<Record<string, unknown>>;
   payloads: Array<Record<string, unknown>>;
   artifactRefs: string[];
+  positiveCanonicalFixtureRefs: string[];
+  nearBoundaryFixtureRefs: string[];
   replayFixtureRefs: string[];
   evalFixtureRefs: string[];
   ownerBoundaryFixtureRefs: string[];

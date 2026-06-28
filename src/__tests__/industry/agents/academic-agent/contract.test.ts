@@ -58,11 +58,19 @@ describe("academic-agent contract", () => {
     expect(bundle.manifests).toHaveLength(13);
     expect(bundle.payloads).toHaveLength(13);
     expect(bundle.artifactRefs).toHaveLength(13);
+    expect(bundle.positiveCanonicalFixtureRefs).toEqual([
+      "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+    ]);
+    expect(bundle.nearBoundaryFixtureRefs).toEqual([
+      "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+    ]);
     expect(bundle.replayFixtureRefs).toEqual([
       "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
     ]);
     expect(bundle.evalFixtureRefs).toEqual([
       "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+      "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+      "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
     ]);
     expect(bundle.ownerBoundaryFixtureRefs).toEqual([
       "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json",

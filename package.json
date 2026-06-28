@@ -34,6 +34,7 @@
     "record-agent-task": "tsx src/cli.ts record-agent-task",
     "visual-console": "tsx src/cli.ts visual-console",
     "visual-console:web": "tsx app/server.ts",
+    "visual-console:codex": "set HOST=127.0.0.1&& set PORT=3211&& tsx app/server.ts",
     "start:prod:web": "node dist/app/server.js",
     "typecheck": "tsc --noEmit",
     "test": "vitest run src/__tests__",

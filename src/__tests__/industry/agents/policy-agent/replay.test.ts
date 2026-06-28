@@ -318,17 +318,21 @@ describe("policy-finance group replay handoff", () => {
   it("replays the machine-readable runtime-ready fixture through the executable script", () => {
     const artifactPath = path.join(process.cwd(), "data", "reports", "2026-06-26.policy-finance-runtime-replay.json");
     const latestArtifactPath = path.join(process.cwd(), "data", "reports", "latest.policy-finance-runtime-replay.json");
-    const originalArtifacts = [artifactPath, latestArtifactPath].map((filePath) => ({
-      filePath,
-      contents: fs.existsSync(filePath) ? fs.readFileSync(filePath) : undefined,
-    }));
+    const previousArtifact = fs.existsSync(artifactPath) ? fs.readFileSync(artifactPath, "utf8") : null;
+    const previousLatestArtifact = fs.existsSync(latestArtifactPath) ? fs.readFileSync(latestArtifactPath, "utf8") : null;
 
     try {
       fs.rmSync(artifactPath, { force: true });
       fs.rmSync(latestArtifactPath, { force: true });
       const output = execFileSync(
         process.execPath,
-        ["--import", "tsx", "src/cli.ts", "policy-finance-runtime-replay", "--date", "2026-06-26"],
+        [
+          path.join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs"),
+          "src/cli.ts",
+          "policy-finance-runtime-replay",
+          "--date",
+          "2026-06-26",
+        ],
         { cwd: process.cwd(), encoding: "utf8" },
       );
       const jsonStart = output.indexOf("{");
@@ -357,13 +361,10 @@ describe("policy-finance group replay handoff", () => {
         current_status: "policy_finance_runtime_ready",
       });
     } finally {
-      for (const artifact of originalArtifacts) {
-        if (artifact.contents === undefined) {
-          fs.rmSync(artifact.filePath, { force: true });
-        } else {
-          fs.writeFileSync(artifact.filePath, artifact.contents);
-        }
-      }
+      previousArtifact === null ? fs.rmSync(artifactPath, { force: true }) : fs.writeFileSync(artifactPath, previousArtifact);
+      previousLatestArtifact === null
+        ? fs.rmSync(latestArtifactPath, { force: true })
+        : fs.writeFileSync(latestArtifactPath, previousLatestArtifact);
     }
   });
 });

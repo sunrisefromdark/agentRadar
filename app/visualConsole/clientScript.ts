@@ -74,6 +74,11 @@ export interface SideAssistantActiveMainResult {
   scope_key: string;
 }
 
+export interface SideAssistantPlacementState {
+  left: number;
+  top: number;
+}
+
 export interface SideAssistantSearchSession {
   panel_open: boolean;
   messages: SideAssistantMessage[];
@@ -138,6 +143,36 @@ export function buildSideAssistantScopeKey(input: {
 
 export function canRestoreSideAssistantMainResult(scopeKey: string | null | undefined, currentScopeKey: string): boolean {
   return Boolean(scopeKey) && scopeKey === currentScopeKey;
+}
+
+export function normalizeSideAssistantPlacement(value: unknown): SideAssistantPlacementState | null {
+  if (!value || typeof value !== "object") return null;
+  const record = value as Record<string, unknown>;
+  const left = Number(record.left);
+  const top = Number(record.top);
+  if (!Number.isFinite(left) || !Number.isFinite(top)) return null;
+  return { left, top };
+}
+
+export function clampSideAssistantPlacement(
+  placement: SideAssistantPlacementState,
+  viewport: { width: number; height: number },
+  bounds: { width: number; height: number },
+  margin = 8,
+): SideAssistantPlacementState {
+  const maxLeft = Math.max(margin, Math.floor(viewport.width - bounds.width - margin));
+  const maxTop = Math.max(margin, Math.floor(viewport.height - bounds.height - margin));
+  return {
+    left: Math.min(Math.max(Math.floor(placement.left), margin), maxLeft),
+    top: Math.min(Math.max(Math.floor(placement.top), margin), maxTop),
+  };
+}
+
+export function shouldStartSideAssistantDrag(
+  delta: { x: number; y: number },
+  threshold = 4,
+): boolean {
+  return Math.hypot(delta.x, delta.y) >= threshold;
 }
 
 export function resetSideAssistantConversation(session: SideAssistantSearchSession, keepPanelOpen = true): SideAssistantSearchSession {
@@ -237,6 +272,9 @@ export function renderClientScriptSource(): string {
         const pickSideAssistantPreviewIds = ${pickSideAssistantPreviewIds.toString()};
         const buildSideAssistantScopeKey = ${buildSideAssistantScopeKey.toString()};
         const canRestoreSideAssistantMainResult = ${canRestoreSideAssistantMainResult.toString()};
+        const normalizeSideAssistantPlacement = ${normalizeSideAssistantPlacement.toString()};
+        const clampSideAssistantPlacement = ${clampSideAssistantPlacement.toString()};
+        const shouldStartSideAssistantDrag = ${shouldStartSideAssistantDrag.toString()};
         const createEmptySideAssistantSession = ${createEmptySideAssistantSession.toString()};
         const normalizeSideAssistantSession = ${normalizeSideAssistantSession.toString()};
         const directSearchLooksNaturalLanguage = ${directSearchLooksNaturalLanguage.toString()};
@@ -260,6 +298,7 @@ export function renderClientScriptSource(): string {
           return normalized.replace(/\\s+/g, "").length >= FUZZY_SEARCH_MIN_ENGLISH_CHARS;
         };
         const sideAssistantSessionStorageKey = "visual-console-side-assistant-search";
+        const sideAssistantPlacementStorageKey = "visual-console-side-assistant-placement-v4";
         const readSideAssistantSession = () => {
           try {
             return normalizeSideAssistantSession(JSON.parse(sessionStorage.getItem(sideAssistantSessionStorageKey) || "null"));
@@ -271,6 +310,188 @@ export function renderClientScriptSource(): string {
           try {
             sessionStorage.setItem(sideAssistantSessionStorageKey, JSON.stringify(session));
           } catch {}
+        };
+        const readSideAssistantPlacement = () => {
+          try {
+            return normalizeSideAssistantPlacement(JSON.parse(sessionStorage.getItem(sideAssistantPlacementStorageKey) || "null"));
+          } catch {
+            return null;
+          }
+        };
+        const writeSideAssistantPlacement = (placement) => {
+          try {
+            if (!placement) {
+              sessionStorage.removeItem(sideAssistantPlacementStorageKey);
+              return;
+            }
+            sessionStorage.setItem(sideAssistantPlacementStorageKey, JSON.stringify(placement));
+          } catch {}
+        };
+        const clearSideAssistantPlacement = () => writeSideAssistantPlacement(null);
+        const applySideAssistantPlacement = (assistantHost, boundsOverride) => {
+          if (!(assistantHost instanceof HTMLElement)) return null;
+          const placement = readSideAssistantPlacement();
+          if (!placement) {
+            assistantHost.classList.remove("is-floating");
+            assistantHost.style.left = "";
+            assistantHost.style.top = "";
+            assistantHost.style.right = "";
+            assistantHost.style.transform = "";
+            return null;
+          }
+          const rect = boundsOverride || assistantHost.getBoundingClientRect();
+          const clamped = clampSideAssistantPlacement(
+            placement,
+            { width: window.innerWidth, height: window.innerHeight },
+            { width: Math.max(1, Math.round(rect.width)), height: Math.max(1, Math.round(rect.height)) },
+          );
+          assistantHost.classList.add("is-floating");
+          assistantHost.style.left = clamped.left + "px";
+          assistantHost.style.top = clamped.top + "px";
+          assistantHost.style.right = "auto";
+          assistantHost.style.transform = "";
+          if (clamped.left !== placement.left || clamped.top !== placement.top) {
+            writeSideAssistantPlacement(clamped);
+          }
+          return clamped;
+        };
+        const bindSideAssistantPlacement = ({ assistantHost, assistantLauncher, assistantPanel }) => {
+          if (!(assistantHost instanceof HTMLElement) || assistantHost.dataset.projectsAiPlacementBound === "true") return;
+          assistantHost.dataset.projectsAiPlacementBound = "true";
+          const shouldSuppressAssistantClick = () => Number(assistantHost.dataset.projectsAiSuppressClickUntil || "0") > Date.now();
+          let dragPointerId = null;
+          let dragHandle = null;
+          let dragOffsetX = 0;
+          let dragOffsetY = 0;
+          let dragBounds = null;
+          let dragPlacement = null;
+          let dragPendingPlacement = null;
+          let dragBaseLeft = 0;
+          let dragBaseTop = 0;
+          let dragFrameId = 0;
+          let dragStartClientX = 0;
+          let dragStartClientY = 0;
+          let dragMoved = false;
+          const renderDragFrame = () => {
+            dragFrameId = 0;
+            if (!dragPendingPlacement) return;
+            assistantHost.style.transform = "translate3d(" + String(dragPendingPlacement.left - dragBaseLeft) + "px, " + String(dragPendingPlacement.top - dragBaseTop) + "px, 0)";
+          };
+          const scheduleDragFrame = () => {
+            if (dragFrameId === 0) dragFrameId = requestAnimationFrame(renderDragFrame);
+          };
+          const clearDrag = () => {
+            if (dragFrameId !== 0) cancelAnimationFrame(dragFrameId);
+            dragPointerId = null;
+            dragHandle = null;
+            dragBounds = null;
+            dragPlacement = null;
+            dragPendingPlacement = null;
+            dragBaseLeft = 0;
+            dragBaseTop = 0;
+            dragFrameId = 0;
+            dragStartClientX = 0;
+            dragStartClientY = 0;
+            dragMoved = false;
+            document.body?.classList.remove("projects-ai-dragging");
+            assistantHost.classList.remove("is-dragging");
+          };
+          const startDrag = (event, handle) => {
+            if (!(handle instanceof HTMLElement)) return;
+            const interactiveTarget = event.target instanceof Element
+              ? event.target.closest("button, a, input, textarea, select, label, [data-projects-ai-option-query], [data-projects-ai-view-all='true'], [data-projects-ai-quickstart-toggle='true'], [data-projects-ai-project-link='true']")
+              : null;
+            if (interactiveTarget && interactiveTarget !== handle) return;
+            if (event.button !== 0 || event.isPrimary === false) return;
+            const hostBounds = assistantHost.getBoundingClientRect();
+            dragBounds = { width: Math.max(1, Math.round(hostBounds.width)), height: Math.max(1, Math.round(hostBounds.height)) };
+            dragPlacement = applySideAssistantPlacement(assistantHost, hostBounds) || {
+              left: Math.round(hostBounds.left),
+              top: Math.round(hostBounds.top),
+            };
+            dragBaseLeft = dragPlacement.left;
+            dragBaseTop = dragPlacement.top;
+            dragPointerId = event.pointerId;
+            dragHandle = handle;
+            dragStartClientX = event.clientX;
+            dragStartClientY = event.clientY;
+            dragOffsetX = event.clientX - hostBounds.left;
+            dragOffsetY = event.clientY - hostBounds.top;
+            dragHandle?.setPointerCapture?.(event.pointerId);
+          };
+          const launcherHandle = assistantLauncher instanceof HTMLElement ? assistantLauncher : null;
+          const panelHandle = assistantPanel instanceof HTMLElement ? assistantPanel.querySelector(".projects-ai-panel-head") : null;
+          launcherHandle instanceof HTMLElement &&
+            launcherHandle.addEventListener("pointerdown", (event) => {
+              if (assistantPanel instanceof HTMLElement && !assistantPanel.hidden) return;
+              startDrag(event, launcherHandle);
+            });
+          launcherHandle instanceof HTMLElement && launcherHandle.addEventListener("dragstart", (event) => event.preventDefault());
+          const restoreDefaultPlacement = () => {
+            clearSideAssistantPlacement();
+            applySideAssistantPlacement(assistantHost);
+          };
+          panelHandle instanceof HTMLElement && panelHandle.addEventListener("dblclick", restoreDefaultPlacement);
+          document.addEventListener("pointermove", (event) => {
+            if (dragPointerId !== event.pointerId || !dragBounds) return;
+            if (
+              !dragMoved &&
+              !shouldStartSideAssistantDrag({ x: event.clientX - dragStartClientX, y: event.clientY - dragStartClientY })
+            ) {
+              return;
+            }
+            if (!dragMoved) {
+              dragMoved = true;
+              document.body?.classList.add("projects-ai-dragging");
+              assistantHost.classList.add("is-dragging");
+              assistantHost.classList.add("is-floating");
+              assistantHost.style.left = dragBaseLeft + "px";
+              assistantHost.style.top = dragBaseTop + "px";
+              assistantHost.style.right = "auto";
+              assistantHost.style.transform = "";
+            }
+            dragPlacement = clampSideAssistantPlacement(
+              { left: event.clientX - dragOffsetX, top: event.clientY - dragOffsetY },
+              { width: window.innerWidth, height: window.innerHeight },
+              dragBounds,
+            );
+            dragPendingPlacement = dragPlacement;
+            scheduleDragFrame();
+            event.preventDefault();
+          });
+          const stopDrag = (event) => {
+            if (dragPointerId !== event.pointerId) return;
+            if (dragMoved && dragPlacement) {
+              assistantHost.dataset.projectsAiSuppressClickUntil = String(Date.now() + 800);
+              assistantHost.style.transform = "";
+              assistantHost.style.left = dragPlacement.left + "px";
+              assistantHost.style.top = dragPlacement.top + "px";
+              assistantHost.style.right = "auto";
+              writeSideAssistantPlacement(dragPlacement);
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            dragHandle?.releasePointerCapture?.(event.pointerId);
+            clearDrag();
+          };
+          document.addEventListener("pointerup", stopDrag);
+          document.addEventListener("pointercancel", stopDrag);
+          window.addEventListener("resize", () => {
+            applySideAssistantPlacement(assistantHost);
+          });
+          launcherHandle instanceof HTMLElement &&
+            launcherHandle.addEventListener("click", (event) => {
+              if (!shouldSuppressAssistantClick()) return;
+              event.preventDefault();
+              event.stopPropagation();
+            }, true);
+          panelHandle instanceof HTMLElement &&
+            panelHandle.addEventListener("click", (event) => {
+              if (!shouldSuppressAssistantClick()) return;
+              event.preventDefault();
+              event.stopPropagation();
+            }, true);
+          applySideAssistantPlacement(assistantHost);
         };
         const syncSideAssistantShell = () => {
           const session = readSideAssistantSession();
@@ -297,6 +518,9 @@ export function renderClientScriptSource(): string {
           session.panel_open = isOpen;
           writeSideAssistantSession(session);
           syncSideAssistantShell();
+          if (isOpen) {
+            applySideAssistantPlacement(document.querySelector("[data-projects-ai-assistant-host='true']"));
+          }
         };
 
         const scrollKey = "visual-console-scroll-target";
@@ -1534,9 +1758,11 @@ export function renderClientScriptSource(): string {
             setAssistantStatus(assistantPending ? "正在搜索站内项目库…" : "");
           };
           const openAssistantPanel = () => {
+            if (Number(assistantHost?.dataset.projectsAiSuppressClickUntil || "0") > Date.now()) return;
             assistantSession.panel_open = true;
             writeSideAssistantSession(assistantSession);
             renderAssistantPanel();
+            applySideAssistantPlacement(assistantHost);
           };
           const closeAssistantPanel = () => {
             assistantSession.panel_open = false;
@@ -1687,6 +1913,7 @@ export function renderClientScriptSource(): string {
                 navigateToProjectsResults(viewAll.dataset.projectsAiViewAllQuery || assistantSession.search_context?.last_user_query || "AI 搜项目", projectIds);
               }
             });
+          bindSideAssistantPlacement({ assistantHost, assistantLauncher, assistantPanel });
           renderAssistantPanel();
         };
         const bindProjectsWorkbench = () => {
@@ -1894,9 +2121,11 @@ export function renderClientScriptSource(): string {
             return target.toString();
           };
           const openAssistantPanel = () => {
+            if (Number(assistantHost?.dataset.projectsAiSuppressClickUntil || "0") > Date.now()) return;
             assistantSession.panel_open = true;
             writeAssistantSession();
             renderAssistantPanel();
+            applySideAssistantPlacement(assistantHost);
           };
           const closeAssistantPanel = () => {
             assistantSession.panel_open = false;
@@ -2455,6 +2684,7 @@ export function renderClientScriptSource(): string {
                 apply();
               }
             });
+          bindSideAssistantPlacement({ assistantHost, assistantLauncher, assistantPanel });
           previousPageButtons.forEach((button) => {
             button.addEventListener("click", () => {
               if (button.disabled) return;
@@ -2771,6 +3001,8 @@ export function renderClientScriptSource(): string {
           const target = event.target;
           if (!(target instanceof Element)) return;
           if (target.closest("[data-projects-ai-launch='true']")) {
+            const assistantHost = document.querySelector("[data-projects-ai-assistant-host='true']");
+            if (Number(assistantHost?.dataset.projectsAiSuppressClickUntil || "0") > Date.now()) return;
             setSideAssistantPanelOpen(true);
             return;
           }

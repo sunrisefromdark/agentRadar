@@ -722,6 +722,8 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
   const ui = copy(lang);
   const snapshot = model.run_snapshot;
   const summary = snapshot?.run_summary;
+  const runtime = snapshot?.run_summary?.industry_runtime_summary ?? snapshot?.industry_runtime_summary ?? null;
+  const policyFinanceReplay = snapshot?.policy_finance_runtime_replay ?? null;
   const verifyResult = snapshot?.verify_result;
   const sourceStatus = summary?.source_status ?? [];
   const allProjects = snapshot?.daily_report.all_projects ?? [];
@@ -980,6 +982,26 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
     compatibilityAuditTitle: uiText(lang, "校验 / 审计 / 失败回退", "Verify / Audit / Failure Fallback"),
     compatibilityVerifyTitle: uiText(lang, "异常面板映射", "Telemetry Mappings"),
     compatibilityActionTitle: uiText(lang, "建议动作", "Recommended Actions"),
+    runtimeSummaryTitle: uiText(lang, "Runtime Contract", "Runtime Contract"),
+    runtimeSummaryLines: runtime
+      ? [
+          `overall_status=${runtime.overall_status}`,
+          `fixture=${runtime.platform_contract.fixture_id}`,
+          `activation=${runtime.policy_finance.activation_profile_ids?.join(", ") || "none"}`,
+          `stop=${runtime.policy_finance.stop_profile_ids?.join(", ") || "none"}`,
+          `review=${runtime.policy_finance.review_profile_ids?.join(", ") || "none"}`,
+          `blocked_until=${runtime.academic_preparatory.blocked_until}`,
+        ]
+      : policyFinanceReplay
+        ? [
+            `overall_status=${policyFinanceReplay.current_status}`,
+            `fixture=${policyFinanceReplay.fixture_id}`,
+            `activation=${policyFinanceReplay.activation_profile_ids.join(", ") || "none"}`,
+            `stop=${policyFinanceReplay.stop_profile_ids.join(", ") || "none"}`,
+            `review=${policyFinanceReplay.review_profile_ids.join(", ") || "none"}`,
+            `negative_reason=${policyFinanceReplay.negative_reason_code}`,
+          ]
+        : [],
     sourceTableRows: sourceStatus.map((item) => ({
       source: item.source,
       enabledLabel: item.enabled ? uiText(lang, "是", "Yes") : uiText(lang, "否", "No"),
@@ -1008,6 +1030,8 @@ export function buildRunHealthReactProps(model: RunHealthViewModel, lang: UiLang
 
 export function buildOverviewReactProps(model: OverviewViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): OverviewReactAppProps {
   const ui = copy(lang);
+  const runtime = model.run_snapshot?.run_summary?.industry_runtime_summary ?? model.run_snapshot?.industry_runtime_summary ?? null;
+  const policyFinanceReplay = model.run_snapshot?.policy_finance_runtime_replay ?? null;
   const selectedDate = model.context.selected_date ?? requestUrl.searchParams.get("date") ?? "latest";
   const weeklyAnchor = model.weekly_entry?.anchor_date ?? selectedDate;
   const sourceItems = model.run_snapshot?.run_summary?.source_status ?? [];
@@ -1113,6 +1137,29 @@ export function buildOverviewReactProps(model: OverviewViewModel, requestUrl: UR
       ]),
     })),
     riskDiagnostics: [
+      ...(runtime ? [{
+        key: "runtime-contract",
+        title: "Runtime Contract",
+        tone: "warning" as const,
+        body: uiText(
+          lang,
+          `${runtime.platform_contract.fixture_id} 已接通；activation=${runtime.policy_finance.activation_profile_ids?.join(", ") || "none"}；review=${runtime.policy_finance.review_profile_ids?.join(", ") || "none"}；blocked_until=${runtime.academic_preparatory.blocked_until}`,
+          `${runtime.platform_contract.fixture_id} is live; activation=${runtime.policy_finance.activation_profile_ids?.join(", ") || "none"}; review=${runtime.policy_finance.review_profile_ids?.join(", ") || "none"}; blocked_until=${runtime.academic_preparatory.blocked_until}`,
+        ),
+        actionHref: runHealthHref,
+        actionLabel: uiText(lang, "查看运行契约", "Open Runtime Contract"),
+      }] : policyFinanceReplay ? [{
+        key: "runtime-contract",
+        title: "Runtime Contract",
+        tone: "warning" as const,
+        body: uiText(
+          lang,
+          `${policyFinanceReplay.fixture_id} 已接通；activation=${policyFinanceReplay.activation_profile_ids.join(", ") || "none"}；review=${policyFinanceReplay.review_profile_ids.join(", ") || "none"}；negative_reason=${policyFinanceReplay.negative_reason_code}`,
+          `${policyFinanceReplay.fixture_id} is live; activation=${policyFinanceReplay.activation_profile_ids.join(", ") || "none"}; review=${policyFinanceReplay.review_profile_ids.join(", ") || "none"}; negative_reason=${policyFinanceReplay.negative_reason_code}`,
+        ),
+        actionHref: runHealthHref,
+        actionLabel: uiText(lang, "查看运行契约", "Open Runtime Contract"),
+      }] : []),
       ...(model.risks_and_actions.length > 0 ? [{
         key: "risk-summary",
         title: "Telemetry Alert",
@@ -1561,6 +1608,7 @@ function renderSelectedProjectDetail(project: ProjectsViewModel["projects"][numb
 export function buildWeeklyReactProps(model: WeeklyViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): WeeklyViewProps {
   const ui = copy(lang);
   const snapshot = model.weekly_snapshot;
+  const runtimeWindow = snapshot?.industry_runtime_window_summary ?? null;
   const matrix = snapshot?.markdown.evidence_matrix ?? null;
   const coreCards = snapshot?.markdown.core_trend_cards ?? [];
   const weakSignalCards = snapshot?.markdown.weak_signal_cards ?? [];
@@ -1744,6 +1792,16 @@ export function buildWeeklyReactProps(model: WeeklyViewModel, requestUrl: URL, l
     telemetryWindowValue: weeklyWindowLabel,
     telemetryStatusLabel: "Status",
     telemetryStatusValue: snapshot?.audit_status === "ok" ? uiText(lang, "已校验并签署", "Verified & Signed") : uiText(lang, "缺少审计", "Audit Missing"),
+    runtimeSummaryTitle: uiText(lang, "Runtime Contract", "Runtime Contract"),
+    runtimeSummaryLines: runtimeWindow
+      ? [
+          `fixture=${runtimeWindow.latest_platform_contract_fixture ?? "none"}`,
+          `activation=${runtimeWindow.latest_policy_finance_activation_profile_ids.join(", ") || "none"}`,
+          `stop=${runtimeWindow.latest_policy_finance_stop_profile_ids.join(", ") || "none"}`,
+          `review=${runtimeWindow.latest_policy_finance_review_profile_ids.join(", ") || "none"}`,
+          `blocked_until=${runtimeWindow.latest_academic_blocked_until ?? "none"}`,
+        ]
+      : [],
     matrixEyebrow: uiText(lang, "证据矩阵", "Evidence Matrix"),
     matrixTitle: uiText(lang, "为什么会得出这个判断", "Why This Trend Emerged"),
     matrixSubtitle: uiText(lang, "选中趋势", "Focused Trend"),

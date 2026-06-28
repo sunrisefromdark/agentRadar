@@ -54,6 +54,7 @@ import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./visualCon
 import { planWeeklySync } from "./weeklyCadence.ts";
 import { buildIndustryRuntimeSummaryArtifact } from "./industry/platform/normalization/industryRuntimeSummary.ts";
 import { replayPolicyFinanceRuntimeReadyFixture } from "./industry/platform/normalization/policyFinanceRuntimeReplay.ts";
+import { buildCrossGroupIntegrationReadiness } from "./industry/platform/audit/crossGroupIntegrationReadiness.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -249,6 +250,10 @@ function policyFinanceRuntimeReplayJsonPath(date: string): string {
 
 function industryRuntimeSummaryJsonPath(date: string): string {
   return path.join("data", "reports", `${date}.industry-runtime-summary.json`);
+}
+
+function crossGroupIntegrationReadinessJsonPath(date: string): string {
+  return path.join("data", "reports", `${date}.cross-group-integration-readiness.json`);
 }
 
 type PolicyFinanceRuntimeReplayArtifact = {
@@ -1351,6 +1356,29 @@ export async function industryRuntimeSummary(opts: CliOptions): Promise<void> {
   console.log(JSON.stringify(artifact, null, 2));
 }
 
+export async function crossGroupIntegrationReadiness(opts: CliOptions): Promise<void> {
+  const config = loadConfig(opts.configPath);
+  const dryRun = opts.dryRun || config.runtime.dryRunDefault;
+  ensureDataDirs();
+  const artifact = buildCrossGroupIntegrationReadiness({
+    date: opts.date,
+    generatedAt: toLocalIsoString(new Date()),
+    rootDir: process.cwd(),
+    academic: {
+      bundle: readJsonFile("fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json", {}),
+      deliveryManifest: readJsonFile("fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json", {}),
+      nextActions: readJsonFile("fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json", {}),
+    },
+    productEcosystem: {
+      deliveryManifest: readJsonFile("fixtures/industry/agents/community-news-agent/replay/phase6-delivery-manifest.json", {}),
+      replayRefs: readJsonFile("fixtures/industry/agents/community-news-agent/replay/phase6-replay-refs.json", {}),
+    },
+  });
+  writeJsonFile(crossGroupIntegrationReadinessJsonPath(opts.date), artifact, dryRun);
+  writeJsonFile(path.join("data", "reports", "latest.cross-group-integration-readiness.json"), artifact, dryRun);
+  console.log(JSON.stringify(artifact, null, 2));
+}
+
 async function main(): Promise<void> {
   loadRuntimeEnv(process.cwd(), { overrideProcessEnv: true });
   configureGlobalNetworkProxy();
@@ -1368,11 +1396,12 @@ async function main(): Promise<void> {
     "visual-console": visualConsole,
     "industry-runtime-summary": industryRuntimeSummary,
     "policy-finance-runtime-replay": policyFinanceRuntimeReplay,
+    "cross-group-integration-readiness": crossGroupIntegrationReadiness,
   };
   const runner = commands[command];
   if (!runner) {
     throw new Error(
-      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, visual-console, industry-runtime-summary, or policy-finance-runtime-replay.`,
+      `Unknown command "${command}". Use run-daily, recover-daily, score, run-weekly, sync-weekly, verify-daily, capture-github-stars, build-kb, record-agent-task, visual-console, industry-runtime-summary, policy-finance-runtime-replay, or cross-group-integration-readiness.`,
     );
   }
   await runner(opts);

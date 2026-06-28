@@ -1,0 +1,78 @@
+{
+  "artifact_kind": "cross_group_integration_readiness",
+  "date": "2026-06-26",
+  "generated_at": "2026-06-28T13:58:30+08:00",
+  "status": "phase3_backlog_ready",
+  "ready_group_count": 3,
+  "weekly_output_ready": false,
+  "blocked_until": "closed_fact_snapshot_and_audit",
+  "daily_pack_v2_ready": true,
+  "rolling_snapshot_ready": true,
+  "daily_pack_v2": {
+    "schema_version": "daily-industry-evidence-pack.v2",
+    "date": "2026-06-26",
+    "source_message_ids": [
+      "industry://internal/2026-06-26/policy-finance-runtime-replay",
+      "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27#message",
+      "industry://internal/2026-06-26/product-ecosystem-phase6-replay-refs"
+    ],
+    "input_artifact_refs": [
+      "data/reports/2026-06-26.policy-finance-runtime-replay.json",
+      "data/reports/2026-06-26.industry-runtime-summary.json",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+      "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+      "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f",
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+    ],
+    "normalized_event_batch_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/normalized-ref-index",
+    "rejected_event_batch_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/rejected-ref-index",
+    "agent_contributions": [
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+    ],
+    "accepted_event_count": 21,
+    "rejected_event_count": 2,
+    "registry_snapshot_ref": "platform-phase1-current-consumer.v1",
+    "tool_registry_snapshot_ref": "industry://internal/tool-registry/cross-group-ready",
+    "public_projection": "blocked_until_audit",
+    "cost_and_degradation_summary": "ref-only aggregation; no final weekly output",
+    "coverage_summary": "policy-finance runtime ready; academic formal dry-run ready; product ecosystem phase6 backlog ready"
+  },
+  "rolling_snapshot": {
+    "snapshot_id": "rolling-evidence-window-2026-06-26",
+    "schema_version": "rolling-evidence-window-snapshot.v1",
+    "window_end": "2026-06-26T23:59:59+08:00",
+    "carry_forward_horizon_days": 7,
+    "derived_from_daily_pack_refs": [
+      "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/ref-only"
+    ],
+    "derived_from_claim_ledger_refs": [],
+    "carry_forward_entries": [],
+    "expired_entry_ids": [],
+    "fact_snapshot_ref": "blocked_until_closed_fact_snapshot",
+    "registry_snapshot_ref": "platform-phase1-current-consumer.v1"
+  },
+  "policy_finance": {
+    "status": "policy_finance_runtime_ready",
+    "candidate_pool_ready": true,
+    "negative_reason_code": "dispatch_context_missing"
+  },
+  "academic": {
+    "status": "normalization_dry_run_ready",
+    "formal_handoff_ready": true,
+    "eval_backlog_ready": true
+  },
+  "product_ecosystem": {
+    "status": "product_ecosystem_phase6_inputs_accepted",
+    "eval_backlog_ready": true
+  },
+  "next_platform_actions": [
+    "assemble_cross_group_replay_eval_backlog",
+    "start_closed_fact_snapshot"
+  ],
+  "reject_list": []
+}

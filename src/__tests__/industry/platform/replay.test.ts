@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
+import academicCurrentBundle from "../../../../fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json" with { type: "json" };
+import academicDeliveryManifest from "../../../../fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json" with { type: "json" };
+import academicNextActions from "../../../../fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json" with { type: "json" };
 import deliveryManifest from "../../../../fixtures/industry/agents/community-news-agent/replay/phase6-delivery-manifest.json" with { type: "json" };
 import replayRefs from "../../../../fixtures/industry/agents/community-news-agent/replay/phase6-replay-refs.json" with { type: "json" };
+import { crossGroupIntegrationReadiness } from "../../../cli.ts";
+import { buildCrossGroupIntegrationReadiness } from "../../../industry/platform/audit/crossGroupIntegrationReadiness.ts";
 import { assembleProductEcosystemPhase6Inputs } from "../../../industry/platform/audit/productEcosystemPhase6Assembly.ts";
 
 describe("industry platform Phase 6 replay assembly", () => {
@@ -51,6 +56,80 @@ describe("industry platform Phase 6 replay assembly", () => {
     ).toMatchObject({
       ok: false,
       reasonCode: "schema_mismatch",
+    });
+  });
+
+  it("advances ready groups into the cross-group integration backlog without unlocking weekly output", () => {
+    const result = buildCrossGroupIntegrationReadiness({
+      date: "2026-06-26",
+      generatedAt: "2026-06-28T12:00:00+08:00",
+      rootDir: process.cwd(),
+      academic: {
+        bundle: academicCurrentBundle,
+        deliveryManifest: academicDeliveryManifest,
+        nextActions: academicNextActions,
+      },
+      productEcosystem: {
+        deliveryManifest,
+        replayRefs,
+      },
+    });
+
+    expect(result).toMatchObject({
+      artifact_kind: "cross_group_integration_readiness",
+      status: "phase3_backlog_ready",
+      ready_group_count: 3,
+      weekly_output_ready: false,
+      blocked_until: "closed_fact_snapshot_and_audit",
+      daily_pack_v2_ready: true,
+      rolling_snapshot_ready: true,
+      policy_finance: {
+        status: "policy_finance_runtime_ready",
+        candidate_pool_ready: true,
+        negative_reason_code: "dispatch_context_missing",
+      },
+      academic: {
+        status: "normalization_dry_run_ready",
+        formal_handoff_ready: true,
+        eval_backlog_ready: true,
+      },
+      product_ecosystem: {
+        status: "product_ecosystem_phase6_inputs_accepted",
+        eval_backlog_ready: true,
+      },
+      next_platform_actions: [
+        "assemble_cross_group_replay_eval_backlog",
+        "start_closed_fact_snapshot",
+      ],
+      reject_list: [],
+    });
+  });
+
+  it("exposes cross-group integration readiness through the CLI artifact command", async () => {
+    const writes: string[] = [];
+    const originalLog = console.log;
+    console.log = (text?: unknown) => {
+      if (typeof text === "string") writes.push(text);
+    };
+    try {
+      await crossGroupIntegrationReadiness({
+        date: "2026-06-26",
+        dryRun: true,
+        enrichGithub: true,
+        includeAgentsRadar: true,
+        includeTrendshift: true,
+        configPath: "config.yaml",
+      });
+    } finally {
+      console.log = originalLog;
+    }
+
+    expect(JSON.parse(writes.at(-1) ?? "{}")).toMatchObject({
+      artifact_kind: "cross_group_integration_readiness",
+      status: "phase3_backlog_ready",
+      weekly_output_ready: false,
+      daily_pack_v2_ready: true,
+      rolling_snapshot_ready: true,
     });
   });
 });

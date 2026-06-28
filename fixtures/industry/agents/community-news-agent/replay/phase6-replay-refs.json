@@ -1,0 +1,48 @@
+{
+  "refs_id": "product-ecosystem-phase6-replay-refs.v1",
+  "owner": "executor_3",
+  "scope": "product-ecosystem-community-news",
+  "status": "ready_for_platform_phase6_assembly",
+  "replay_windows": [
+    {
+      "window_id": "product-oss-release-owner-boundary",
+      "test_entrypoint": "src/__tests__/industry/agents/product-oss-agent/replay.test.ts",
+      "fixture_refs": [
+        "fixtures/industry/agents/product-oss-agent/owner-boundary/vendor-blog-repo-update.json",
+        "fixtures/industry/agents/product-oss-agent/anti-upgrade/vendor-blog-mentioned-repo.json",
+        "fixtures/industry/agents/product-oss-agent/propagation/official-release-news-retell.json"
+      ],
+      "expected_platform_use": "owner boundary and propagation replay input for product-platform / project-oss separation"
+    },
+    {
+      "window_id": "community-news-owner-boundary",
+      "test_entrypoint": "src/__tests__/industry/agents/community-news-agent/replay.test.ts",
+      "fixture_refs": [
+        "fixtures/industry/agents/community-news-agent/owner-boundary/community-post-news-retell.json",
+        "fixtures/industry/agents/community-news-agent/propagation/news-retells-community-thread.json"
+      ],
+      "expected_platform_use": "community original owner preservation when news retells the thread"
+    },
+    {
+      "window_id": "community-news-pr-anti-upgrade",
+      "test_entrypoint": "src/__tests__/industry/agents/community-news-agent/replay.test.ts",
+      "fixture_refs": [
+        "fixtures/industry/agents/community-news-agent/anti-upgrade/news-pr-heat-without-core.json"
+      ],
+      "expected_platform_use": "replay input for news-pr heat without core upgrade checks"
+    },
+    {
+      "window_id": "community-noise-anti-upgrade",
+      "test_entrypoint": "src/__tests__/industry/agents/community-news-agent/negative.test.ts",
+      "fixture_refs": [
+        "fixtures/industry/agents/community-news-agent/anti-upgrade/community-noise-seo-content.json"
+      ],
+      "expected_platform_use": "negative eval input for community noise anti-upgrade checks"
+    }
+  ],
+  "expected_platform_gates": {
+    "formal_bundle": "normalization_dry_run_ready",
+    "invalid_governance_profile": "dry_run_rejected",
+    "claim_critical_missing_same_run_refs": "dispatch_context_missing"
+  }
+}

@@ -25,12 +25,37 @@
 | Phase 4：contribution 与测试 | `DONE` | 六职责项 contribution draft 与 unit / contract / negative / replay 测试 | `cn-community` 与 `global-community` contribution 分账 |
 | Phase 4A：daily handoff 草稿 | `DONE` | `daily-industry-evidence-pack-input.v1` 轻索引草稿 | 只包含 refs / lineage，不内嵌全量 event |
 | Phase 4B：正式跨组 consumer contract | `DONE` | 本组 formal envelope / payload / manifest / refs 已收口，consumer contract fixture 已补齐；中台已接入 contract dry-run / registry snapshot / normalization dry-run | 本组 producer-side freeze 与中台 dry-run 对接已完成；后续只根据 `normalization-feedback.v1` 失败反馈在本组目录内修正。 |
+| Phase 6 输入资产：负例 / replay / eval refs 收口 | `READY_FOR_PLATFORM_PHASE6_ASSEMBLY` | 产品生态 `phase6-delivery-manifest.json` 与 `phase6-replay-refs.json` 已收口 owner boundary、`news-pr` anti-upgrade、community noise、propagation / replay refs | 本组 Phase 6 输入资产已可交中台统一组装；cross-group eval / replay / diff audit 仍由中台在三组资产齐备后收口。 |
+
+## 阶段更新（2026-06-28）
+
+当前做到：产品生态组已完成中台 dry-run 后续的 Phase 6 输入资产收口。本组新增 `fixtures/industry/agents/community-news-agent/replay/phase6-delivery-manifest.json` 与 `phase6-replay-refs.json`，将 owner boundary、`news-pr` anti-upgrade、community noise negative、propagation / replay refs 汇总为中台可消费清单；formal bundle 仍可被 `src/industry/platform/normalization/productEcosystemDryRun.ts` 消费，并保留 `normalization-feedback.v1` 成功 / 失败反馈路径。
+
+交付口径：中台 Phase 1B / 1C shared governance、dispatch / budget runtime base 已在主线可用；产品生态本轮只做按需消费口径与负例验证，不新增本组 runtime。claim-critical 场景若缺 `dispatch_context_ref`、`scheduling_key`、`claim_admission_assessment_ref` 或 reservation refs，仍必须被拒收。
+
+本轮已完成：
+
+1. Phase 6 delivery manifest：补齐产品生态交付清单，显式列出 stable entrypoints、platform consumer、supporting fixture refs、test entrypoints 与 expected platform gates。
+2. Phase 6 replay refs：补齐产品/OSS owner-boundary、vendor blog anti-upgrade、新闻转述传播链、社区原帖 owner 保留、`news-pr` 热度不升 core、community SEO noise 反例 refs。
+3. 后接线口径验证：产品生态 formal bundle 仍通过中台 dry-run；invalid governance profile 仍返回 `dry_run_rejected`；claim-critical 缺 same-run refs 仍返回 `dispatch_context_missing`。
+
+仍未完成 / 继续阻塞：
+
+1. closed fact snapshot、owner arbitration、audit、tier decision 尚未完成。原因：需要三组正式 handoff 的完整 event batch / coverage / contribution refs 与 owner-boundary / replay 资产由中台统一消费。
+2. weekly 总集成尚未完成。原因：仍需中台 materialize `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1` 与 weekly internal / consumer / public 三层闭环。
+3. 若后续中台返回新的 `normalization-feedback.v1` 失败反馈，产品生态组只在本组目录内修正 payload / lineage / refs，不绕过 feedback 直接改 weekly 结论。
+
+继续推进所需产出（截至 2026-06-28）：
+
+1. `1/2/3号执行人`：三组正式 handoff 的完整 event batch / coverage / contribution refs，以及各自 owner-boundary / replay / anti-upgrade 资产齐备后，才能进入中台统一 cross-group eval / replay / diff audit。
+2. `4号执行人`：统一消费三组 Phase 6 输入资产，产出 cross-group eval / replay / diff audit 结果，并 materialize `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1` 与 weekly internal / consumer / public 三层闭环。
+3. 产品生态组：后续只根据 `normalization-feedback.v1`、schema-governance-notice 或中台 cross-group audit 反馈，在 product / community / news 本组目录内修正 payload / lineage / refs；不直接改 weekly、tier、public projection 结论。
 
 ## 阶段更新（2026-06-27）
 
 当前做到：产品生态组 formal handoff 已完成中台 dry-run 接入。本组可以从第一轮 draft seam 生成正式 `ProductEcosystemFormalHandoffBundle`，包含 `IndustryAgentMessageEnvelope`、formal payload、`IndustryAgentArtifactManifest` 与 `industry://` artifact refs；中台已能消费该 bundle 并返回 registry runtime snapshot、normalized / rejected / coverage / contribution refs 与成功/失败两类 `normalization-feedback.v1` dry-run payload。
 
-交付口径：本轮只完成产品生态 formal bundle 与中台最小 dry-run 闭环；activation / budget / review / same-run 深补证，以及 weekly 总集成仍等待 `4号执行人` 后续 Phase 1B / 1C 与全量集成范围。
+交付口径（2026-06-27 历史状态）：本轮只完成产品生态 formal bundle 与中台最小 dry-run 闭环；当日 activation / budget / review / same-run 深补证，以及 weekly 总集成仍等待 `4号执行人` 后续 Phase 1B / 1C 与全量集成范围。2026-06-28 起以最新阶段更新为准：Phase 1B / 1C 中台基座已可用，本组仅按需消费。
 
 已完成：
 
@@ -43,16 +68,16 @@
 未完成 / 继续阻塞：
 
 1. 中台 contract dry-run / registry snapshot / normalization dry-run 已完成最小接入。`4号执行人` 现在可接收本组 formal bundle，并返回 runtime snapshot、normalized / rejected / coverage / contribution refs 与成功/失败两类 `normalization-feedback.v1` dry-run payload。
-2. activation / budget / review / same-run 深补证尚未接入。原因：本阶段明确只做 formal handoff freeze，后续需要等待 `4号执行人` 发布 Phase 1B / 1C 的 dispatch、budget、review、same-run 运行时基座与 current fixtures。
+2. activation / budget / review / same-run 深补证截至 2026-06-27 尚未接入。2026-06-28 起，`4号执行人` Phase 1B / 1C shared governance、dispatch / budget runtime base 已可用；本组只按需消费 budget profile 与 same-run negative gate，不新增本地 runtime。
 3. weekly 总集成尚未完成。原因：需要三组正式 handoff 全量齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly internal / consumer / public 三层闭环。
 
 继续推进所需产出：
 
 1. `4号执行人`：已接收产品生态 formal bundle，并提供 contract dry-run / registry snapshot / normalization dry-run 结果与 `normalization-feedback.v1` 反馈格式。
-2. `4号执行人`：发布 Phase 1B / 1C 的 activation、budget、review、same-run consumer fixtures 与 runtime 接线约束。
-3. 产品生态组：收到中台 dry-run 反馈后，只在本组目录内修正 payload / lineage / refs；收到 Phase 1B / 1C 后再接后续深补证能力。
+2. `4号执行人`：Phase 1B / 1C 的 activation、budget、review、same-run consumer fixtures 与 runtime 接线约束已发布到主线；后续若有 schema-governance-notice，再由本组按 notice 消费。
+3. 产品生态组：收到中台 dry-run 反馈后，只在本组目录内修正 payload / lineage / refs；Phase 1B / 1C 仅按需消费，不在本组新增独立 runtime。
 
-## 落地标记（截至 2026-06-27）
+## 落地标记（截至 2026-06-28）
 
 | 项目 | 当前判断 | 依据 |
 | --- | --- | --- |
@@ -63,6 +88,8 @@
 | local adapter seam / daily input | `DONE` | `buildProductEcosystemHandoff` 可生成本组 daily 输入草稿 |
 | 正式 handoff freeze | `DONE` | `buildProductEcosystemFormalHandoff` 可生成正式 envelope / payload / manifest / refs |
 | 中台 dry-run 接入 | `DONE` | `src/industry/platform/normalization/productEcosystemDryRun.ts` 可消费 formal bundle，发布 registry runtime snapshot，并回传 `normalization-feedback.v1` dry-run payload |
+| Phase 1B / 1C 中台基座消费口径 | `AVAILABLE` | shared governance、dispatch / budget runtime base 已在主线可用；本组通过 budget profile 与 claim-critical negative gate 按需消费，不新增本地 runtime |
+| Phase 6 delivery manifest / replay refs | `READY_FOR_PLATFORM_PHASE6_ASSEMBLY` | `phase6-delivery-manifest.json` 与 `phase6-replay-refs.json` 已汇总 owner boundary、anti-upgrade、community noise、propagation / replay refs |
 
 ## 目标
 
@@ -245,7 +272,7 @@
 1. 先在本组目录里把五类 source catalog、owner-boundary / propagation / anti-upgrade 样本、coverage / contribution 草稿、local seam、测试骨架做起来。
 2. 等 `4号执行人` 发出 `Phase 1A` 的 canonical schema、payload 正式名、artifact path、compatibility matrix 后，把本地 seam 收口成正式 handoff。
 3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
-4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 activation / budget / same-run 深补证这类后接线能力接上。
+4. `Phase 1B / 1C` 未发布时等待 `4号执行人`；当前主线已发布 shared governance、dispatch / budget runtime base，产品生态只按需消费 budget profile 与 same-run negative gate，不新增本地 runtime。
 5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
 
 ## 输出与 handoff
@@ -415,11 +442,17 @@ handoff 要求：
 | 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 补充同类领域组“可独立交付部分完成，等待中台消费层”口径，并刷新 implementation preflight receipt |
 | 2026-06-27 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 同类交付口径补充后 preflight receipt 校验通过 |
 | 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Passed` | 中台已消费产品生态 formal bundle，返回 registry runtime snapshot、dry-run refs 与 `normalization-feedback.v1` payload |
+| 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/agents/product-oss-agent src/__tests__/industry/agents/community-news-agent` | `Passed` | 8 个测试文件、22 条测试通过；新增 Phase 6 delivery manifest / replay refs、真实 replay fixture 消费、平台 dry-run、rejected feedback 与 claim-critical same-run negative 验证 |
+| 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Passed` | 1 个测试文件、10 条测试通过；产品生态 formal bundle 平台 normalization dry-run 仍通过 |
+| 2026-06-28 | `corepack pnpm run typecheck` | `Passed` | TypeScript 全仓类型检查通过 |
+| 2026-06-28 | `corepack pnpm run code-implementation:preflight -- --write --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 刷新产品生态组 implementation preflight receipt |
+| 2026-06-28 | `corepack pnpm run code-implementation:preflight -- --exec-plan "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md"` | `Passed` | 产品生态 Phase 6 输入资产收口后 preflight receipt 校验通过 |
 
 ## 下一阶段入口
 
 1. `DONE`：已消费 `4号执行人` Phase 1A 的 canonical schema、payload 正式名、artifact path 与 compatibility matrix，并将本地 seam 刷新为正式 envelope / payload / manifest handoff。
 2. `DONE`：已补 current / previous compatible / unknown higher major / missing required ref / missing payload 的本组正式消费侧 contract 验证。
 3. `DONE`：产品生态 formal bundle 已交给 `4号执行人` 做中台 contract dry-run 与 normalization dry-run；收到失败反馈后，本组只在 product / community / news 目录内修正。
-4. `BLOCKED`：activation / budget / review / same-run 深补证能力等待 `4号执行人` 发布 Phase 1B / 1C runtime、consumer fixtures 与接线约束后再做。
-5. `BLOCKED`：最终 weekly 集成等待三组正式 handoff 齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2` 与 weekly 三层闭环。
+4. `AVAILABLE`：`4号执行人` Phase 1B / 1C shared governance、dispatch / budget runtime base 已可用；产品生态本组只按需消费 budget profile 与 same-run negative gate，不新增本地 runtime。
+5. `READY_FOR_PLATFORM_PHASE6_ASSEMBLY`：产品生态 Phase 6 delivery manifest / replay refs 已收口，可交中台组装 cross-group eval / replay / diff audit。
+6. `BLOCKED`：最终 weekly 集成等待三组正式 handoff 与 Phase 6 资产齐备，并由中台组 materialize `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1` 与 weekly 三层闭环。

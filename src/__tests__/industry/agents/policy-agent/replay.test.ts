@@ -318,40 +318,53 @@ describe("policy-finance group replay handoff", () => {
   it("replays the machine-readable runtime-ready fixture through the executable script", () => {
     const artifactPath = path.join(process.cwd(), "data", "reports", "2026-06-26.policy-finance-runtime-replay.json");
     const latestArtifactPath = path.join(process.cwd(), "data", "reports", "latest.policy-finance-runtime-replay.json");
-    fs.rmSync(artifactPath, { force: true });
-    fs.rmSync(latestArtifactPath, { force: true });
-    const output = execFileSync(
-      "corepack",
-      ["pnpm", "policy-finance:runtime-replay", "--", "--date", "2026-06-26"],
-      { cwd: process.cwd(), encoding: "utf8" },
-    );
-    const jsonStart = output.indexOf("{");
-    const result = JSON.parse(output.slice(jsonStart)) as {
-      artifact_kind: string;
-      date: string;
-      fixture_id: string;
-      current_status: string;
-      negative_reason_code: string;
-      runtime_consumed_same_run_messages: number;
-    };
+    const originalArtifacts = [artifactPath, latestArtifactPath].map((filePath) => ({
+      filePath,
+      contents: fs.existsSync(filePath) ? fs.readFileSync(filePath) : undefined,
+    }));
 
-    expect(result).toMatchObject({
-      artifact_kind: "policy_finance_runtime_replay",
-      date: "2026-06-26",
-      fixture_id: "policy-finance-phase1-runtime-ready-inputs.v1",
-      current_status: "policy_finance_runtime_ready",
-      negative_reason_code: "dispatch_context_missing",
-      runtime_consumed_same_run_messages: 19,
-    });
-    expect(fs.existsSync(artifactPath)).toBe(true);
-    expect(fs.existsSync(latestArtifactPath)).toBe(true);
-    expect(JSON.parse(fs.readFileSync(artifactPath, "utf8"))).toMatchObject({
-      artifact_kind: "policy_finance_runtime_replay",
-      date: "2026-06-26",
-      current_status: "policy_finance_runtime_ready",
-    });
-    fs.rmSync(artifactPath, { force: true });
-    fs.rmSync(latestArtifactPath, { force: true });
+    try {
+      fs.rmSync(artifactPath, { force: true });
+      fs.rmSync(latestArtifactPath, { force: true });
+      const output = execFileSync(
+        process.execPath,
+        ["--import", "tsx", "src/cli.ts", "policy-finance-runtime-replay", "--date", "2026-06-26"],
+        { cwd: process.cwd(), encoding: "utf8" },
+      );
+      const jsonStart = output.indexOf("{");
+      const result = JSON.parse(output.slice(jsonStart)) as {
+        artifact_kind: string;
+        date: string;
+        fixture_id: string;
+        current_status: string;
+        negative_reason_code: string;
+        runtime_consumed_same_run_messages: number;
+      };
+
+      expect(result).toMatchObject({
+        artifact_kind: "policy_finance_runtime_replay",
+        date: "2026-06-26",
+        fixture_id: "policy-finance-phase1-runtime-ready-inputs.v1",
+        current_status: "policy_finance_runtime_ready",
+        negative_reason_code: "dispatch_context_missing",
+        runtime_consumed_same_run_messages: 19,
+      });
+      expect(fs.existsSync(artifactPath)).toBe(true);
+      expect(fs.existsSync(latestArtifactPath)).toBe(true);
+      expect(JSON.parse(fs.readFileSync(artifactPath, "utf8"))).toMatchObject({
+        artifact_kind: "policy_finance_runtime_replay",
+        date: "2026-06-26",
+        current_status: "policy_finance_runtime_ready",
+      });
+    } finally {
+      for (const artifact of originalArtifacts) {
+        if (artifact.contents === undefined) {
+          fs.rmSync(artifact.filePath, { force: true });
+        } else {
+          fs.writeFileSync(artifact.filePath, artifact.contents);
+        }
+      }
+    }
   });
 });
 

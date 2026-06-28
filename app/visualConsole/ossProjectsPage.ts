@@ -554,7 +554,7 @@ export function renderProjectsAssistantShell(lang: UiLang): string {
         aria-label="${escapeHtml(uiText(lang, "打开 AI 搜项目", "Open AI Project Search"))}"
       >
         <span class="projects-ai-launch-avatar" aria-hidden="true">
-          <img class="projects-ai-launch-image" src="/app-assets/projects-ai-avatar.png?v=2" alt="" />
+          <img class="projects-ai-launch-image" src="/app-assets/projects-ai-avatar.png?v=2" alt="" draggable="false" />
         </span>
       </button>
       <section

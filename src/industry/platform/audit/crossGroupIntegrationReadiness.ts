@@ -60,6 +60,43 @@ export type CrossGroupIntegrationReadiness = {
     status: string;
     eval_backlog_ready: boolean;
   };
+  platform_continuation: {
+    can_continue_without_more_academic_inputs: boolean;
+    blocked_until: "closed_fact_snapshot_and_audit";
+    next_required_owner: "executor_4";
+  };
+  academic_feedback: RecordLike;
+  replay_eval_backlog: {
+    status: "ready" | "blocked";
+    academic_fixture_refs: string[];
+  };
+  closed_fact_snapshot_prep: {
+    status: "ready_to_start" | "blocked";
+    fact_snapshot_ref: string;
+    fact_resolution_audit_ref: string;
+    input_artifact_refs: string[];
+  };
+  closed_fact_snapshot: {
+    status: "closed" | "blocked";
+    snapshot_id: string;
+    claim_builder_input_ready: boolean;
+    weekly_output_ready: false;
+    fact_resolution_audit: {
+      audit_id: string;
+      schema_version: "fact-resolution-audit.v1";
+      snapshot_id: string;
+      event_fact_assignments: Array<{
+        event_id: string;
+        fact_id: string;
+        fact_resolution_state: "canonical";
+        resolution_basis_codes: string[];
+        confidence: "high";
+        requires_manual_review: false;
+      }>;
+      relation_edges: [];
+      high_impact_unresolved_groups: [];
+    };
+  };
   next_platform_actions: string[];
   reject_list: Array<{
     group: "policy_finance" | "academic" | "product_ecosystem";
@@ -96,6 +133,7 @@ export function buildCrossGroupIntegrationReadiness(input: {
   });
   const dailyPack = buildDailyPackV2(input.date, input.generatedAt, runtimeSummary, academic);
   const rollingSnapshot = buildRollingSnapshot(input.date, dailyPack);
+  const academicFixtureRefs = academicReplayEvalRefs(input.academic.deliveryManifest);
 
   const reject_list = [
     ...(runtimeSummary.policy_finance.status === "policy_finance_runtime_ready"
@@ -141,9 +179,34 @@ export function buildCrossGroupIntegrationReadiness(input: {
       status: product.ok ? product.status : product.reasonCode,
       eval_backlog_ready: product.ok,
     },
+    platform_continuation: {
+      can_continue_without_more_academic_inputs:
+        academic.ok &&
+        input.academic.nextActions.executor_4_can_continue_phase2_partial_without_more_academic_inputs === true,
+      blocked_until: "closed_fact_snapshot_and_audit",
+      next_required_owner: "executor_4",
+    },
+    academic_feedback: academic.feedbackPayload,
+    replay_eval_backlog: {
+      status: academic.ok && academicFixtureRefs.length > 0 ? "ready" : "blocked",
+      academic_fixture_refs: academicFixtureRefs,
+    },
+    closed_fact_snapshot_prep: buildClosedFactSnapshotPrep(input.date, academic.feedbackPayload, dailyPack, reject_list.length === 0),
+    closed_fact_snapshot: buildClosedFactSnapshot(input.date, input.academic.bundle, reject_list.length === 0),
     next_platform_actions: nextPlatformActions(product),
     reject_list,
   };
+}
+
+function academicReplayEvalRefs(deliveryManifest: RecordLike): string[] {
+  const supporting = record(deliveryManifest.supporting_fixture_refs);
+  return [
+    ...strings(supporting.positive_canonical),
+    ...strings(supporting.near_boundary),
+    ...strings(supporting.replay_window),
+    ...strings(supporting.eval),
+    ...strings(supporting.owner_boundary),
+  ];
 }
 
 function nextPlatformActions(product: ProductEcosystemPhase6AssemblyResult): string[] {
@@ -209,4 +272,82 @@ function buildRollingSnapshot(
     fact_snapshot_ref: "blocked_until_closed_fact_snapshot",
     registry_snapshot_ref: dailyPack.registry_snapshot_ref,
   };
+}
+
+function buildClosedFactSnapshotPrep(
+  date: string,
+  academicFeedback: RecordLike,
+  dailyPack: CrossGroupIntegrationReadiness["daily_pack_v2"],
+  ready: boolean,
+): CrossGroupIntegrationReadiness["closed_fact_snapshot_prep"] {
+  return {
+    status: ready ? "ready_to_start" : "blocked",
+    fact_snapshot_ref: `industry://internal/${date}/fact-snapshot.v1/pending`,
+    fact_resolution_audit_ref:
+      text(academicFeedback.fact_resolution_audit_ref) || `industry://internal/${date}/fact-resolution-audit.v1/pending`,
+    input_artifact_refs: dailyPack.input_artifact_refs,
+  };
+}
+
+function buildClosedFactSnapshot(
+  date: string,
+  academicBundle: unknown,
+  ready: boolean,
+): CrossGroupIntegrationReadiness["closed_fact_snapshot"] {
+  const snapshotId = `fact-snapshot-${date}`;
+  // ponytail: closes the accepted academic formal handoff only; fold policy/product events here when their event-level bundles are wired.
+  const assignments = ready
+    ? eventIdsFromBundle(academicBundle).map((eventId) => ({
+        event_id: eventId,
+        fact_id: `fact-${eventId}`,
+        fact_resolution_state: "canonical" as const,
+        resolution_basis_codes: ["single_owner_formal_handoff"],
+        confidence: "high" as const,
+        requires_manual_review: false as const,
+      }))
+    : [];
+
+  return {
+    status: ready && assignments.length > 0 ? "closed" : "blocked",
+    snapshot_id: snapshotId,
+    claim_builder_input_ready: ready && assignments.length > 0,
+    weekly_output_ready: false,
+    fact_resolution_audit: {
+      audit_id: `fact-resolution-audit-${date}`,
+      schema_version: "fact-resolution-audit.v1",
+      snapshot_id: snapshotId,
+      event_fact_assignments: assignments,
+      relation_edges: [],
+      high_impact_unresolved_groups: [],
+    },
+  };
+}
+
+function eventIdsFromBundle(bundle: unknown): string[] {
+  const bundlePayloads = record(bundle).payloads;
+  const payloads: unknown[] = Array.isArray(bundlePayloads) ? bundlePayloads : [];
+  return [
+    ...new Set(
+      payloads
+        .filter((payload) => record(payload).payload_schema === "industry-signal-event-batch.v1")
+        .flatMap((payload) => {
+          const events = record(payload).events;
+          return Array.isArray(events) ? events : [];
+        })
+        .map((event) => text(record(event).event_id))
+        .filter((eventId): eventId is string => eventId.length > 0),
+    ),
+  ];
+}
+
+function record(value: unknown): RecordLike {
+  return value && typeof value === "object" && !Array.isArray(value) ? (value as RecordLike) : {};
+}
+
+function strings(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string" && item.length > 0) : [];
+}
+
+function text(value: unknown): string {
+  return typeof value === "string" ? value : "";
 }

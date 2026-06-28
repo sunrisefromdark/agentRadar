@@ -97,6 +97,47 @@ describe("industry platform Phase 6 replay assembly", () => {
         status: "product_ecosystem_phase6_inputs_accepted",
         eval_backlog_ready: true,
       },
+      platform_continuation: {
+        can_continue_without_more_academic_inputs: true,
+        blocked_until: "closed_fact_snapshot_and_audit",
+        next_required_owner: "executor_4",
+      },
+      academic_feedback: {
+        payload_schema: "normalization-feedback.v1",
+        feedback_status: "dry_run_ready",
+      },
+      replay_eval_backlog: {
+        status: "ready",
+        academic_fixture_refs: [
+          "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+          "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+          "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+          "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+          "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json",
+        ],
+      },
+      closed_fact_snapshot_prep: {
+        status: "ready_to_start",
+        fact_snapshot_ref: "industry://internal/2026-06-26/fact-snapshot.v1/pending",
+        fact_resolution_audit_ref: expect.stringContaining("fact-resolution-audit.v1"),
+      },
+      closed_fact_snapshot: {
+        status: "closed",
+        claim_builder_input_ready: true,
+        weekly_output_ready: false,
+        fact_resolution_audit: {
+          schema_version: "fact-resolution-audit.v1",
+          snapshot_id: "fact-snapshot-2026-06-26",
+          event_fact_assignments: expect.arrayContaining([
+            expect.objectContaining({
+              event_id: "paper-agent-memory-preprint",
+              fact_resolution_state: "canonical",
+            }),
+          ]),
+          relation_edges: [],
+          high_impact_unresolved_groups: expect.any(Array),
+        },
+      },
       next_platform_actions: [
         "assemble_cross_group_replay_eval_backlog",
         "start_closed_fact_snapshot",

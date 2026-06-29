@@ -10,15 +10,16 @@ import {
   assembleProductEcosystemPhase6Inputs,
   type ProductEcosystemPhase6AssemblyResult,
 } from "./productEcosystemPhase6Assembly.ts";
+import {
+  buildDecisionDiffAudit,
+  buildEvalCaseCoverage,
+  type DecisionDiffAudit,
+  type EvalCaseCoverage,
+  type EvalCaseFamily,
+} from "./decisionDiffAudit.ts";
 import { writeJsonFile } from "../../../storage/files.ts";
 
 type RecordLike = Record<string, unknown>;
-type EvalCaseFamily =
-  | "positive_canonical_case"
-  | "near_boundary_case"
-  | "anti_upgrade_case"
-  | "coverage_vs_tier_case"
-  | "counter_override_case";
 
 export type CrossGroupIntegrationReadiness = {
   artifact_kind: "cross_group_integration_readiness";
@@ -26,10 +27,11 @@ export type CrossGroupIntegrationReadiness = {
   generated_at: string;
   status: "phase3_backlog_ready" | "phase5_internal_weekly_ready" | "blocked";
   ready_group_count: number;
-  weekly_output_ready: false;
+  weekly_output_ready: boolean;
   blocked_until:
     | "closed_fact_snapshot_and_audit"
     | "tier_decision_and_weekly_packaging"
+    | "ready_for_publication"
     | "public_projection_after_evidence_window_recovery";
   daily_pack_v2_ready: boolean;
   rolling_snapshot_ready: boolean;
@@ -80,6 +82,7 @@ export type CrossGroupIntegrationReadiness = {
     blocked_until:
       | "closed_fact_snapshot_and_audit"
       | "tier_decision_and_weekly_packaging"
+      | "ready_for_publication"
       | "public_projection_after_evidence_window_recovery";
     next_required_owner: "executor_4";
   };
@@ -91,14 +94,10 @@ export type CrossGroupIntegrationReadiness = {
     academic_fixture_refs: string[];
     product_ecosystem_fixture_refs: string[];
     product_replay_window_ids: string[];
-    eval_case_coverage: Array<{
-      case_family: EvalCaseFamily;
-      status: "ready" | "missing";
-      fixture_refs: string[];
-      missing_reason_code?: "requires_frozen_eval_case" | "requires_replay_eval_execution";
-    }>;
+    eval_case_coverage: EvalCaseCoverage;
     blocked_eval_case_families: EvalCaseFamily[];
-    decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result";
+    decision_diff_audit_status: "ready" | "blocked_pending_profile_change_or_replay_result";
+    decision_diff_audit?: DecisionDiffAudit;
   };
   closed_fact_snapshot_prep: {
     status: "ready_to_start" | "blocked";
@@ -416,14 +415,18 @@ export function buildCrossGroupIntegrationReadiness(input: {
   const decisionContextArtifact = buildDecisionContextArtifact(input.date, dailyPack, closedFactSnapshot, claimBuilder, counterEvidenceAudit, tierDecisionPrep);
   const tierDecisionInput = buildTierDecisionInput(input.date, claimBuilder, decisionContextArtifact, tierDecisionPrep);
   const weeklyPackaging = buildWeeklyPackaging(input.date, dailyPack, rollingSnapshot, claimBuilder, counterEvidenceAudit, tierDecisionInput, recent7dEvidenceWindow);
+  const weeklyOutputReady = weeklyPackaging.status === "ready" && weeklyPackaging.public_projection.blocked_reason_codes.length === 0;
   const replayEvalBacklog = buildReplayEvalBacklog({
+    date: input.date,
     academicOk: academic.ok,
     academicFixtureRefs,
     policyFinanceReady: runtimeSummary.policy_finance.status === "policy_finance_runtime_ready",
     product,
   });
   const blockedUntil =
-    weeklyPackaging.public_projection.blocked_reason_codes.length > 0
+    weeklyOutputReady
+      ? "ready_for_publication"
+      : weeklyPackaging.public_projection.blocked_reason_codes.length > 0
       ? "public_projection_after_evidence_window_recovery"
       : "tier_decision_and_weekly_packaging";
 
@@ -437,7 +440,7 @@ export function buildCrossGroupIntegrationReadiness(input: {
       academic.ok,
       product.ok,
     ].filter(Boolean).length,
-    weekly_output_ready: false,
+    weekly_output_ready: weeklyOutputReady,
     blocked_until: blockedUntil,
     daily_pack_v2_ready: true,
     rolling_snapshot_ready: true,
@@ -478,7 +481,7 @@ export function buildCrossGroupIntegrationReadiness(input: {
     decision_context_artifact: decisionContextArtifact,
     tier_decision_input: tierDecisionInput,
     weekly_packaging: weeklyPackaging,
-    next_platform_actions: nextPlatformActions(product, closedFactSnapshot, tierDecisionPrep, recent7dEvidenceWindow),
+    next_platform_actions: nextPlatformActions(product, closedFactSnapshot, tierDecisionPrep, recent7dEvidenceWindow, weeklyOutputReady),
     reject_list,
   };
 }
@@ -490,6 +493,9 @@ export function materializeCrossGroupIntegrationArtifacts(input: {
 }): {
   dailyPack: { artifactRef: string; storagePath: string };
   rollingSnapshot: { artifactRef: string; storagePath: string };
+  weeklySection: { artifactRef: string; storagePath: string };
+  consumerView: { artifactRef: string; storagePath: string };
+  publicProjection: { artifactRef: string; storagePath: string };
 } {
   const dailyPack = buildIndustryArtifactRef({
     visibility: "internal",
@@ -503,11 +509,32 @@ export function materializeCrossGroupIntegrationArtifacts(input: {
     schemaId: "rolling-evidence-window-snapshot.v1",
     artifactId: "snapshot-001",
   });
+  const weeklySection = buildIndustryArtifactRef({
+    visibility: "internal",
+    date: input.artifact.date,
+    schemaId: "weekly-industry-trend-section.v2",
+    artifactId: "cross-group",
+  });
+  const consumerView = buildIndustryArtifactRef({
+    visibility: "consumer",
+    date: input.artifact.date,
+    schemaId: "consumer-weekly-industry-view.v1",
+    artifactId: "cross-group",
+  });
+  const publicProjection = buildIndustryArtifactRef({
+    visibility: "public",
+    date: input.artifact.date,
+    schemaId: "public-weekly-industry-projection.v1",
+    artifactId: "cross-group",
+  });
 
   writeJsonFile(path.join(input.rootDir, dailyPack.storagePath), input.artifact.daily_pack_v2, input.dryRun);
   writeJsonFile(path.join(input.rootDir, rollingSnapshot.storagePath), input.artifact.rolling_snapshot, input.dryRun);
+  writeJsonFile(path.join(input.rootDir, weeklySection.storagePath), input.artifact.weekly_packaging.internal_weekly_section, input.dryRun);
+  writeJsonFile(path.join(input.rootDir, consumerView.storagePath), input.artifact.weekly_packaging.consumer_view, input.dryRun);
+  writeJsonFile(path.join(input.rootDir, publicProjection.storagePath), input.artifact.weekly_packaging.public_projection, input.dryRun);
 
-  return { dailyPack, rollingSnapshot };
+  return { dailyPack, rollingSnapshot, weeklySection, consumerView, publicProjection };
 }
 
 function academicReplayEvalRefs(deliveryManifest: RecordLike): string[] {
@@ -536,6 +563,7 @@ function productReplayEvalRefs(product: ProductEcosystemPhase6AssemblyResult): s
 }
 
 function buildReplayEvalBacklog(input: {
+  date: string;
   academicOk: boolean;
   academicFixtureRefs: string[];
   policyFinanceReady: boolean;
@@ -549,6 +577,11 @@ function buildReplayEvalBacklog(input: {
     input.product.ok && productFixtureRefs.length > 0,
   ];
 
+  const evalCaseCoverage = buildEvalCaseCoverage(input.academicFixtureRefs, policyFixtureRefs, productFixtureRefs);
+  const blockedEvalCaseFamilies = evalCaseCoverage
+    .filter((coverage) => coverage.status === "missing")
+    .map((coverage) => coverage.case_family);
+  const decisionDiffAudit = blockedEvalCaseFamilies.length === 0 ? buildDecisionDiffAudit(input.date, evalCaseCoverage) : undefined;
   return {
     status: groupsReady.every(Boolean) ? "ready" : "blocked",
     group_count: groupsReady.filter(Boolean).length,
@@ -556,47 +589,11 @@ function buildReplayEvalBacklog(input: {
     academic_fixture_refs: input.academicFixtureRefs,
     product_ecosystem_fixture_refs: productFixtureRefs,
     product_replay_window_ids: input.product.ok ? input.product.replayWindowIds : [],
-    eval_case_coverage: buildEvalCaseCoverage(input.academicFixtureRefs, policyFixtureRefs, productFixtureRefs),
-    blocked_eval_case_families: ["coverage_vs_tier_case", "counter_override_case"],
-    decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result",
+    eval_case_coverage: evalCaseCoverage,
+    blocked_eval_case_families: blockedEvalCaseFamilies,
+    decision_diff_audit_status: decisionDiffAudit ? "ready" : "blocked_pending_profile_change_or_replay_result",
+    ...(decisionDiffAudit ? { decision_diff_audit: decisionDiffAudit } : {}),
   };
-}
-
-function buildEvalCaseCoverage(
-  academicFixtureRefs: string[],
-  policyFixtureRefs: string[],
-  productFixtureRefs: string[],
-): CrossGroupIntegrationReadiness["replay_eval_backlog"]["eval_case_coverage"] {
-  const allRefs = [...academicFixtureRefs, ...policyFixtureRefs, ...productFixtureRefs];
-  return [
-    {
-      case_family: "positive_canonical_case",
-      status: academicFixtureRefs.some((ref) => ref.includes("positive-canonical")) ? "ready" : "missing",
-      fixture_refs: academicFixtureRefs.filter((ref) => ref.includes("positive-canonical")),
-    },
-    {
-      case_family: "near_boundary_case",
-      status: academicFixtureRefs.some((ref) => ref.includes("near-boundary")) ? "ready" : "missing",
-      fixture_refs: academicFixtureRefs.filter((ref) => ref.includes("near-boundary")),
-    },
-    {
-      case_family: "anti_upgrade_case",
-      status: allRefs.some((ref) => ref.includes("anti-upgrade")) ? "ready" : "missing",
-      fixture_refs: allRefs.filter((ref) => ref.includes("anti-upgrade")),
-    },
-    {
-      case_family: "coverage_vs_tier_case",
-      status: "missing",
-      fixture_refs: [],
-      missing_reason_code: "requires_frozen_eval_case",
-    },
-    {
-      case_family: "counter_override_case",
-      status: "missing",
-      fixture_refs: [],
-      missing_reason_code: "requires_replay_eval_execution",
-    },
-  ];
 }
 
 function nextPlatformActions(
@@ -604,7 +601,11 @@ function nextPlatformActions(
   closedFactSnapshot: CrossGroupIntegrationReadiness["closed_fact_snapshot"],
   tierDecisionPrep: CrossGroupIntegrationReadiness["tier_decision_prep"],
   recent7dEvidenceWindow: CrossGroupIntegrationReadiness["recent_7d_evidence_window"],
+  weeklyOutputReady: boolean,
 ): string[] {
+  if (weeklyOutputReady) {
+    return [];
+  }
   if (tierDecisionPrep.status === "ready_to_start") {
     return recent7dEvidenceWindow.status === "ok"
       ? ["run_tier_decision_and_weekly_packaging"]
@@ -1007,8 +1008,12 @@ function buildWeeklyPackaging(
   recent7dEvidenceWindow: CrossGroupIntegrationReadiness["recent_7d_evidence_window"],
 ): CrossGroupIntegrationReadiness["weekly_packaging"] {
   const candidateCardIds = claimBuilder.candidate_batch.generated_claim_ids.map((claimId) => `card-${claimId}`);
+  const claimLedgerRefs = claimBuilder.candidate_batch.generated_claim_ids.map(
+    (claimId) => `industry://internal/${date}/industry-claim-ledger.v1/${claimId}`,
+  );
   const evidenceWindowBlocksPublic = recent7dEvidenceWindow.status !== "ok";
   const blockedCardIds = evidenceWindowBlocksPublic ? candidateCardIds : [];
+  const visibleCardIds = evidenceWindowBlocksPublic ? [] : candidateCardIds;
   const weeklySectionRef = `industry://internal/${date}/weekly-industry-trend-section.v2/cross-group`;
   const evidenceWindowReason =
     recent7dEvidenceWindow.status === "ok" ? [] : [`evidence_window_${recent7dEvidenceWindow.status}`];
@@ -1057,7 +1062,7 @@ function buildWeeklyPackaging(
       },
       display_index: {
         headline_core_card_ids: [],
-        provisional_core_watchlist_card_ids: [],
+        provisional_core_watchlist_card_ids: visibleCardIds,
         needs_review_card_ids: [],
         blocked_public_output_card_ids: blockedCardIds,
         suppressed_card_ids: [],
@@ -1068,16 +1073,16 @@ function buildWeeklyPackaging(
         claim_candidate_batch_ref: claimBuilder.candidate_batch.claim_candidate_batch_ref,
         audit_result_refs: [counterEvidenceAudit.audit_result.payload_id],
         trend_decision_input_ref: tierDecisionInput.payload.payload_id,
-        claim_ledger_refs: [],
+        claim_ledger_refs: claimLedgerRefs,
       },
     },
     consumer_view: {
       view_id: `consumer-weekly-industry-view-${date}`,
       schema_version: "consumer-weekly-industry-view.v1",
       source_weekly_section_ref: weeklySectionRef,
-      visible_card_ids: [],
+      visible_card_ids: visibleCardIds,
       headline_card_ids: [],
-      watchlist_card_ids: [],
+      watchlist_card_ids: visibleCardIds,
       needs_review_card_ids: [],
       hidden_card_ids: blockedCardIds,
       ordering_basis: ["consumer_readiness_state", "consumer_display_priority", "decision_tier", "decision_confidence", "coverage_audit_state"],
@@ -1089,10 +1094,10 @@ function buildWeeklyPackaging(
       schema_version: "public-weekly-industry-projection.v1",
       source_weekly_section_ref: weeklySectionRef,
       headline_core_card_ids: [],
-      tier_visible_card_ids: [],
+      tier_visible_card_ids: visibleCardIds,
       redacted_card_ids: [],
       blocked_card_ids: blockedCardIds,
-      public_card_projection_refs: [],
+      public_card_projection_refs: visibleCardIds.map((cardId) => `industry://public/${date}/industry-trend-card.v1/${cardId}`),
       blocked_reason_codes: publicBlockReasons,
     },
   };

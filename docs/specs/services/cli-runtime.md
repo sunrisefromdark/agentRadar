@@ -15,7 +15,7 @@ CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加�
 | `score` | 对指定日期或指定输入进行分类 + 评分 |
 | `run-weekly` | 生成 weekly 工件 |
 | `sync-weekly` | 在补齐 daily 窗口后重新同步 weekly 工件 |
-| `cross-group-integration-readiness` | 生成中台收口工件，materialize internal daily pack / rolling snapshot / weekly 壳；只消费已接收的跨组输入，不回填历史 raw |
+| `cross-group-integration-readiness` | 生成中台收口工件；证据窗口完整时 materialize internal / consumer / public 三层 weekly artifacts，窗口缺失时保持 public blocked；只消费已接收的跨组输入，不回填历史 raw |
 | `verify-daily` | 校验 daily 工件完整性与健康度 |
 | `capture-github-stars` | 记录 tracked repo star 快照 |
 | `build-kb` | 刷新知识库工件 |
@@ -39,7 +39,7 @@ CLI Runtime 负责统一仓库入口的命令语义、参数解析、配置加�
 - `--config` 必须允许覆盖默认 `config.yaml`。
 - `run-daily`、`score`、`run-weekly`、`verify-daily`、`build-kb` 必须支持 `--dry-run` 或等价低副作用验证路径。
 - `run-weekly` 不得在缺少 canonical 7 日窗口时静默生成伪周报；需要补齐时应提示 `run-daily` 或 `sync-weekly --backfill-missing-days`。
-- `cross-group-integration-readiness` 只能 materialize 已接收的跨组输入与 internal readiness 工件；当最近 7 日 evidence window 缺失时，必须显式保留 `public_projection_after_evidence_window_recovery`，不得伪造历史补窗。
+- `cross-group-integration-readiness` 只能 materialize 已接收的跨组输入与中台 readiness 工件；当最近 7 日 evidence window 完整时，可以写出 internal / consumer / public 三层 weekly artifacts；当 evidence window 缺失时，必须显式保留 `public_projection_after_evidence_window_recovery`，不得伪造历史补窗。
 - `recover-daily` 只能消费本地已缓存的 raw 工件，不得伪装成重新抓取。
 - `record-agent-task` 必须要求显式 `--input <task-json-path>`，并把 receipt 写入 agent-memory canonical 入口。
 - `visual-console:web` 与 `visual-console:web:auth` 属于 package script 暴露的 Web 入口，规范上同样受 CLI Runtime 约束。

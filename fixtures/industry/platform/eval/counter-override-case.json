@@ -1,0 +1,17 @@
+{
+  "schema_version": "trend-decision-eval-case.v1",
+  "case_id": "counter-override-platform-fixture",
+  "case_family": "counter_override_case",
+  "input_claim_or_events_ref": "industry://internal/2026-06-26/counter-evidence-audit.v1/cross-group#counter-override",
+  "expected_decision_tier": "insufficient_evidence",
+  "expected_decision_confidence_range": ["low"],
+  "expected_main_pillar_axes": ["product-platform", "project-oss"],
+  "expected_independent_confirmation_axes": ["community_discussion"],
+  "expected_missing_axes": [],
+  "expected_counter_outcome": "blocking",
+  "must_not_be": ["core_industry_trend", "observing_industry_trend"],
+  "explanation_assertions": [
+    "blocking counter evidence overrides otherwise strong supporting evidence",
+    "counter evidence must be represented as a tier-blocking audit outcome instead of a prose-only caveat"
+  ]
+}

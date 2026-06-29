@@ -1,0 +1,81 @@
+{
+  "section_id": "weekly-industry-trend-section-2026-06-26",
+  "schema_version": "weekly-industry-trend-section.v2",
+  "window_start": "2026-06-26T00:00:00+08:00",
+  "window_end": "2026-06-26T23:59:59+08:00",
+  "evidence_window_status": {
+    "status": "ok",
+    "usable_day_count": 7,
+    "missing_day_count": 0,
+    "recent_3d_usable_day_count": 3,
+    "missing_day_dates": [],
+    "notes_cn": []
+  },
+  "publication_readiness_status": {
+    "status": "ready",
+    "blocked_card_count": 0,
+    "blocked_public_artifact_count": 0,
+    "blocking_reason_codes": [],
+    "notes_cn": []
+  },
+  "governance_load_status": {
+    "status": "nominal",
+    "degraded_axis_count": 0,
+    "budget_exceeded_axis_count": 0,
+    "review_backlog_p1_or_higher": 0
+  },
+  "industry_window_status": {
+    "status": "ok",
+    "reason_codes": []
+  },
+  "run_snapshot": {
+    "fact_partition_snapshot_refs": [
+      "industry://internal/2026-06-26/fact-snapshot.v1/fact-snapshot-2026-06-26"
+    ],
+    "audit_result_refs": [
+      "audit-result-2026-06-26"
+    ],
+    "publication_cutoff_at": "2026-06-26T23:59:59+08:00"
+  },
+  "display_index": {
+    "headline_core_card_ids": [],
+    "provisional_core_watchlist_card_ids": [
+      "card-claim-evt-51541b7359b8",
+      "card-claim-evt-44a47b338da8",
+      "card-claim-evt-cc11dd8959d2",
+      "card-claim-paper-agent-memory-preprint",
+      "card-claim-conf-neurips-workshop-agents",
+      "card-claim-evt-d5de86b0981d",
+      "card-claim-evt-b0fe5f8da165",
+      "card-claim-evt-609ea9dd545b",
+      "card-claim-evt-150547a98a8f",
+      "card-claim-evt-b58e55e3847e"
+    ],
+    "needs_review_card_ids": [],
+    "blocked_public_output_card_ids": [],
+    "suppressed_card_ids": []
+  },
+  "lineage_refs": {
+    "daily_pack_refs": [
+      "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/ref-only"
+    ],
+    "rolling_evidence_snapshot_ref": "rolling-evidence-window-2026-06-26",
+    "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+    "audit_result_refs": [
+      "audit-result-2026-06-26"
+    ],
+    "trend_decision_input_ref": "trend-decision-input-2026-06-26",
+    "claim_ledger_refs": [
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-51541b7359b8",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-44a47b338da8",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-cc11dd8959d2",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-paper-agent-memory-preprint",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-conf-neurips-workshop-agents",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-d5de86b0981d",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-b0fe5f8da165",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-609ea9dd545b",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-150547a98a8f",
+      "industry://internal/2026-06-26/industry-claim-ledger.v1/claim-evt-b58e55e3847e"
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schema_version": "trend-decision-eval-case.v1",
+  "case_id": "coverage-vs-tier-platform-fixture",
+  "case_family": "coverage_vs_tier_case",
+  "input_claim_or_events_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group#coverage-vs-tier",
+  "expected_decision_tier": "observing_industry_trend",
+  "expected_decision_confidence_range": ["low", "medium"],
+  "expected_main_pillar_axes": ["research-frontier", "product-platform"],
+  "expected_independent_confirmation_axes": ["project-oss"],
+  "expected_missing_axes": ["capital-finance", "policy-regulatory"],
+  "expected_counter_outcome": "none",
+  "must_not_be": ["insufficient_evidence", "core_industry_trend"],
+  "explanation_assertions": [
+    "coverage gaps lower decision_confidence rather than forcing a tier downgrade",
+    "missing optional axes remain coverage gaps and do not erase accepted canonical evidence"
+  ]
+}

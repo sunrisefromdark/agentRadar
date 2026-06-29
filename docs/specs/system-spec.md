@@ -46,7 +46,7 @@
 | daily recovery | `recover-daily` | 基于已缓存 raw 数据重建 daily 工件 | 活跃 |
 | weekly loop | `run-weekly` | 读取 canonical 7 日窗口并输出 weekly 工件 | 活跃 |
 | weekly sync | `sync-weekly` | 在缺口修复后补齐 weekly 工件 | 活跃 |
-| cross-group readiness | `cross-group-integration-readiness` | 收口已接收的跨组输入，materialize internal daily pack / rolling snapshot / weekly 壳 | 活跃 |
+| cross-group readiness | `cross-group-integration-readiness` | 收口已接收的跨组输入；证据窗口完整时 materialize internal / consumer / public 三层 weekly artifacts，窗口缺失时保持 public blocked | 活跃 |
 | verification | `verify-daily` | 校验 daily 输出完整性与健康度 | 活跃 |
 | enrichment | `capture-github-stars` | 写入 tracked repo star 快照 | 活跃 |
 | knowledge refresh | `build-kb` | 刷新知识库工件 | 活跃 |
@@ -64,7 +64,7 @@
 - 当前 daily GitHub Actions 会额外准备 producer workspace 做兼容 / 恢复级校验，但不会把默认 source 悄悄切换成 `repo-sync`。
 - `data/raw/`、`data/normalized/`、`data/scores/`、`data/classifications/`、`data/reports/`、`data/kb/`、`data/observer/` 是主工件目录。
 - `run-daily` / `run-weekly` / `score` / `verify-daily` / `build-kb` 保持可脚本验证，并支持 dry-run 或等价低副作用验证路径。
-- `cross-group-integration-readiness` 只负责 materialize 已接收的跨组输入与内部收口工件；它不回填历史 raw，也不在证据窗口缺失时伪造公开 weekly。
+- `cross-group-integration-readiness` 只负责 materialize 已接收的跨组输入与中台收口工件；证据窗口完整时可写出 internal / consumer / public 三层 weekly artifacts，但不回填历史 raw，也不在证据窗口缺失时伪造公开 weekly。
 - 认证默认不是 fresh clone 的前置条件；`visual-console:web` 应允许在未启用 auth 的情况下浏览已提交工件。
 - 启用认证后，Web 服务可消费数据库、偏好与账户绑定能力，但这不改变核心数据产物契约。
 
@@ -75,7 +75,7 @@
 | upstream digest unavailable | 无法通过默认 public path 读取上游 | daily 链路失败或进入显式恢复路径 |
 | partial source outage | Trendshift / GitHub 补充信号缺失 | 允许降级，但必须保留状态与证据 |
 | stale daily window | weekly 缺少 canonical 7 日窗口 | `run-weekly` 不得静默拼装假窗口 |
-| missing evidence window | 最近 7 日 `DailyIndustryEvidencePack.v2` 不完整 | `cross-group-integration-readiness` 保持 internal ready / public blocked，不伪造历史 |
+| missing evidence window | 最近 7 日 `DailyIndustryEvidencePack.v2` 不完整 | `cross-group-integration-readiness` 保持 internal ready / public blocked，不伪造历史；窗口完整后才生成公开投影 |
 | verify failure | daily 工件不完整或质量门禁未通过 | 必须输出 verify 结果并让自动化显式失败 |
 | auth readiness blocked | 数据库或认证配置不可用 | `visual-console:web:auth` 失败，默认只读 web 仍可存在 |
 | dry-run | 用户要求低副作用演练 | 不得写入持久化主工件 |
@@ -84,6 +84,6 @@
 
 - 当用户运行 `run-daily` 时，系统必须能落出完整 daily 工件集，或清晰给出失败原因。
 - 当用户运行 `run-weekly` 时，系统必须基于完整窗口生成 weekly 工件，而不是拿残缺数据硬拼趋势。
-- 当用户运行 `cross-group-integration-readiness` 时，系统必须只 materialize 已接收的跨组输入，不得把它包装成历史回填能力。
+- 当用户运行 `cross-group-integration-readiness` 时，系统必须只 materialize 已接收的跨组输入；证据窗口完整时可生成三层 weekly artifacts，证据窗口缺失时不得把它包装成历史回填能力。
 - 当用户运行 `visual-console:web` 时，系统必须能浏览当前仓库已提交工件，不要求本地先完成 auth setup。
 - 当用户运行 `visual-console:web:auth` 时，系统必须把认证 readiness、数据库连通性和账户入口显式暴露出来，而不是静默降级。

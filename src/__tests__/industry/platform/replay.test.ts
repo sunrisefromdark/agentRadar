@@ -15,6 +15,30 @@ import {
 import { assembleProductEcosystemPhase6Inputs } from "../../../industry/platform/audit/productEcosystemPhase6Assembly.ts";
 
 describe("industry platform Phase 6 replay assembly", () => {
+  it("freezes the platform-owned Phase 6 eval cases required by the diff audit", () => {
+    for (const relativePath of [
+      "fixtures/industry/platform/eval/coverage-vs-tier-case.json",
+      "fixtures/industry/platform/eval/counter-override-case.json",
+    ]) {
+      const fixture = JSON.parse(fs.readFileSync(path.join(process.cwd(), relativePath), "utf8"));
+
+      expect(fixture).toMatchObject({
+        schema_version: "trend-decision-eval-case.v1",
+        input_claim_or_events_ref: expect.any(String),
+        expected_decision_tier: expect.any(String),
+        expected_main_pillar_axes: expect.any(Array),
+        expected_independent_confirmation_axes: expect.any(Array),
+        expected_missing_axes: expect.any(Array),
+        expected_counter_outcome: expect.any(String),
+        must_not_be: expect.any(Array),
+        explanation_assertions: expect.any(Array),
+      });
+      expect(["coverage_vs_tier_case", "counter_override_case"]).toContain(fixture.case_family);
+      expect(fixture.must_not_be.length).toBeGreaterThan(0);
+      expect(fixture.explanation_assertions.length).toBeGreaterThan(0);
+    }
+  });
+
   it("accepts product ecosystem Phase 6 assets while blocking weekly output until cross-group inputs arrive", () => {
     const result = assembleProductEcosystemPhase6Inputs({
       deliveryManifest,
@@ -166,17 +190,33 @@ describe("industry platform Phase 6 replay assembly", () => {
           }),
           expect.objectContaining({
             case_family: "coverage_vs_tier_case",
-            status: "missing",
-            missing_reason_code: "requires_frozen_eval_case",
+            status: "ready",
+            fixture_refs: ["fixtures/industry/platform/eval/coverage-vs-tier-case.json"],
           }),
           expect.objectContaining({
             case_family: "counter_override_case",
-            status: "missing",
-            missing_reason_code: "requires_replay_eval_execution",
+            status: "ready",
+            fixture_refs: ["fixtures/industry/platform/eval/counter-override-case.json"],
           }),
         ]),
-        blocked_eval_case_families: ["coverage_vs_tier_case", "counter_override_case"],
-        decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result",
+        blocked_eval_case_families: [],
+        decision_diff_audit_status: "ready",
+        decision_diff_audit: {
+          audit_id: "decision-diff-audit-2026-06-26",
+          schema_version: "decision-diff-audit.v1",
+          profile_change_set: ["phase6-eval-coverage-freeze.v1"],
+          compared_run_ids: ["cross-group-2026-06-26-baseline", "cross-group-2026-06-26-phase6-eval"],
+          tier_changed_claim_ids: [],
+          confidence_changed_claim_ids: ["claim-coverage-vs-tier-platform-fixture"],
+          coverage_state_changed_claim_ids: ["claim-coverage-vs-tier-platform-fixture"],
+          expected_repairs: [
+            "coverage_vs_tier_case keeps tier stable while lowering confidence when coverage is incomplete",
+            "counter_override_case blocks over-promotion when strong counter evidence exists",
+          ],
+          unexpected_regressions: [],
+          anti_overpromotion_regressions: [],
+          stability_regressions: [],
+        },
       },
       closed_fact_snapshot_prep: {
         status: "ready_to_start",
@@ -323,12 +363,13 @@ describe("industry platform Phase 6 replay assembly", () => {
         },
         consumer_view: {
           schema_version: "consumer-weekly-industry-view.v1",
-          visible_card_ids: [],
+          visible_card_ids: expect.any(Array),
           hidden_card_ids: expect.any(Array),
         },
         public_projection: {
           schema_version: "public-weekly-industry-projection.v1",
           headline_core_card_ids: [],
+          tier_visible_card_ids: [],
           blocked_card_ids: expect.any(Array),
           blocked_reason_codes: expect.arrayContaining(["public_blocked_until_evidence_window_recovery"]),
         },
@@ -362,7 +403,7 @@ describe("industry platform Phase 6 replay assembly", () => {
     expect(JSON.parse(writes.at(-1) ?? "{}")).toMatchObject({
       artifact_kind: "cross_group_integration_readiness",
       status: "phase5_internal_weekly_ready",
-      weekly_output_ready: false,
+      weekly_output_ready: true,
       daily_pack_v2_ready: true,
       rolling_snapshot_ready: true,
     });
@@ -373,6 +414,16 @@ describe("industry platform Phase 6 replay assembly", () => {
     const dates = ["2026-06-20", "2026-06-21", "2026-06-22", "2026-06-24"];
     try {
       fs.cpSync(path.join(process.cwd(), "fixtures"), path.join(rootDir, "fixtures"), { recursive: true });
+      const sourceRefs = [
+        ...Object.values(deliveryManifest.stable_entrypoints),
+        ...Object.values(deliveryManifest.platform_consumers),
+        ...Object.values(deliveryManifest.test_entrypoints),
+      ].filter((ref): ref is string => typeof ref === "string");
+      for (const ref of sourceRefs) {
+        const filepath = path.join(rootDir, ref);
+        fs.mkdirSync(path.dirname(filepath), { recursive: true });
+        fs.writeFileSync(filepath, "");
+      }
       for (const date of dates) {
         const dir = path.join(rootDir, "data", "industry", "internal", date, "daily-industry-evidence-pack.v2");
         fs.mkdirSync(dir, { recursive: true });
@@ -413,7 +464,14 @@ describe("industry platform Phase 6 replay assembly", () => {
         blocked_public_artifact_count: 0,
         blocking_reason_codes: [],
       });
+      expect(result.weekly_output_ready).toBe(true);
+      expect(result.blocked_until).toBe("ready_for_publication");
+      expect(result.platform_continuation.blocked_until).toBe("ready_for_publication");
+      expect(result.weekly_packaging.internal_weekly_section.lineage_refs.claim_ledger_refs.length).toBeGreaterThan(0);
+      expect(result.weekly_packaging.consumer_view.visible_card_ids.length).toBeGreaterThan(0);
+      expect(result.weekly_packaging.public_projection.tier_visible_card_ids.length).toBeGreaterThan(0);
       expect(result.weekly_packaging.public_projection.blocked_reason_codes).toEqual([]);
+      expect(result.next_platform_actions).toEqual([]);
 
       const materialized = materializeCrossGroupIntegrationArtifacts({
         rootDir,
@@ -426,6 +484,18 @@ describe("industry platform Phase 6 replay assembly", () => {
       expect(materialized.rollingSnapshot).toEqual({
         artifactRef: "industry://internal/2026-06-26/rolling-evidence-window-snapshot.v1/snapshot-001",
         storagePath: "data/industry/internal/2026-06-26/rolling-evidence-window-snapshot.v1/snapshot-001.json",
+      });
+      expect(materialized.weeklySection).toEqual({
+        artifactRef: "industry://internal/2026-06-26/weekly-industry-trend-section.v2/cross-group",
+        storagePath: "data/industry/internal/2026-06-26/weekly-industry-trend-section.v2/cross-group.json",
+      });
+      expect(materialized.consumerView).toEqual({
+        artifactRef: "industry://consumer/2026-06-26/consumer-weekly-industry-view.v1/cross-group",
+        storagePath: "data/industry/consumer/2026-06-26/consumer-weekly-industry-view.v1/cross-group.json",
+      });
+      expect(materialized.publicProjection).toEqual({
+        artifactRef: "industry://public/2026-06-26/public-weekly-industry-projection.v1/cross-group",
+        storagePath: "data/industry/public/2026-06-26/public-weekly-industry-projection.v1/cross-group.json",
       });
       expect(
         JSON.parse(
@@ -456,6 +526,46 @@ describe("industry platform Phase 6 replay assembly", () => {
       ).toMatchObject({
         schema_version: "rolling-evidence-window-snapshot.v1",
         snapshot_id: "rolling-evidence-window-2026-06-26",
+      });
+      expect(
+        JSON.parse(
+          fs.readFileSync(
+            path.join(
+              rootDir,
+              "data",
+              "industry",
+              "internal",
+              "2026-06-26",
+              "weekly-industry-trend-section.v2",
+              "cross-group.json",
+            ),
+            "utf8",
+          ),
+        ),
+      ).toMatchObject({
+        schema_version: "weekly-industry-trend-section.v2",
+        lineage_refs: {
+          claim_ledger_refs: expect.any(Array),
+        },
+      });
+      expect(
+        JSON.parse(
+          fs.readFileSync(
+            path.join(
+              rootDir,
+              "data",
+              "industry",
+              "public",
+              "2026-06-26",
+              "public-weekly-industry-projection.v1",
+              "cross-group.json",
+            ),
+            "utf8",
+          ),
+        ),
+      ).toMatchObject({
+        schema_version: "public-weekly-industry-projection.v1",
+        blocked_reason_codes: [],
       });
     } finally {
       fs.rmSync(rootDir, { force: true, recursive: true });

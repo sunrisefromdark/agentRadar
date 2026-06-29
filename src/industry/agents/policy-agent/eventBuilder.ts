@@ -29,6 +29,7 @@ export function buildPolicyAxisArtifacts(input: PolicyAxisScenarioInput) {
     producerAgentId: "policy-agent",
     executionContext: input.executionContext,
     routeSelection: input.routeSelection,
+    seed,
     registrySnapshotRef: seed.registry_snapshot_ref,
     toolRegistrySnapshotRef: seed.tool_registry_snapshot_ref,
     budgetProfileId: seed.budget_profile_id,

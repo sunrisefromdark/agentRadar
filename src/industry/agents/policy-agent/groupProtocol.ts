@@ -6,6 +6,9 @@ export type IndustryResponsibilityId = "capital-finance" | "policy-regulatory" |
 export type IndustryEvidenceAxisKey = "capital_finance" | "policy_regulatory" | "policy_research_thinktank";
 export type EvidenceBucket = "accepted" | "counter" | "diagnostic" | "rejected";
 export type RouteLevel = "primary_tool" | "secondary_toolset" | "fallback_tools" | "last_resort_mode" | "none";
+export type AccessMode = "public" | "api" | "rss" | "crawler" | "optional_paid" | "human_exception" | "unavailable";
+export type CostTier = "free" | "low" | "medium" | "high" | "unknown";
+export type ReviewStatus = "active" | "watch" | "needs_review" | "deprecated" | "unavailable";
 export type SourceClass =
   | "official_structured_api"
   | "official_owned_feed_or_doc"
@@ -14,6 +17,45 @@ export type SourceClass =
   | "general_web_search"
   | "manual_or_local_only"
   | "none";
+export type SourceFamily =
+  | "finance_funding_news"
+  | "finance_earnings_report"
+  | "finance_sec_filing"
+  | "finance_fund_report"
+  | "finance_merger_acquisition"
+  | "finance_public_company_announcement"
+  | "finance_investor_relations"
+  | "finance_earnings_call_transcript"
+  | "finance_industry_data"
+  | "policy_regulatory_filing"
+  | "policy_government_announcement"
+  | "policy_approval"
+  | "policy_public_procurement"
+  | "policy_standards_body"
+  | "policy_official_project"
+  | "thinktank_oecd_ai"
+  | "thinktank_cset"
+  | "thinktank_stanford_ai_index"
+  | "thinktank_brookings"
+  | "thinktank_rand"
+  | "thinktank_institutional_report"
+  | "generic_news"
+  | "generic_context";
+export type FinanceSignalKind =
+  | "financing_heat"
+  | "capital_allocation"
+  | "organizational_investment"
+  | "merger_integration"
+  | "public_company_tilt"
+  | "industry_research_narrative";
+export type PolicySignalKind =
+  | "regulatory_attention"
+  | "policy_window"
+  | "official_support"
+  | "confirmed_approval"
+  | "public_procurement"
+  | "risk_warning"
+  | "thinktank_viewpoint";
 
 export interface ExecutionContext {
   primary_responsibility_id: IndustryResponsibilityId;
@@ -38,10 +80,16 @@ export interface IndustrySignalEvent {
     display_name: string;
     source_url?: string;
     source_type: "financial_filing" | "funding" | "policy" | "thinktank_report" | "news";
+    source_family?: SourceFamily;
     authority_tier: "core" | "proven" | "watch" | "ordinary" | "excluded";
     language?: "zh" | "en" | "multi" | "unknown";
     region?: string;
     primary_source_distance: "primary" | "near_primary" | "secondary" | "rumor" | "unknown";
+    access_mode?: AccessMode;
+    cost_tier?: CostTier;
+    review_status?: ReviewStatus;
+    human_exception_required?: boolean;
+    named_source?: string;
   };
   actor?: {
     entity_id?: string;
@@ -67,6 +115,10 @@ export interface IndustrySignalEvent {
     raw_ref?: string;
     citation_ref?: string;
     metrics?: Record<string, number>;
+    finance_signal_kind?: FinanceSignalKind;
+    policy_signal_kind?: PolicySignalKind;
+    missing_source_families?: SourceFamily[];
+    optional_paid_source_families?: SourceFamily[];
   };
   collected_by_agent_id: IndustryAgentId;
   responsibility_id: IndustryResponsibilityId;
@@ -136,6 +188,14 @@ export interface AxisToolCoverageReport {
   max_source_lag_days?: number;
   evidence_event_ids: string[];
   rejected_event_ids: string[];
+  source_tiers_present: Array<IndustrySignalEvent["source"]["authority_tier"]>;
+  access_modes_present: AccessMode[];
+  review_statuses_present: ReviewStatus[];
+  source_families_present: SourceFamily[];
+  named_sources_present: string[];
+  missing_source_families: SourceFamily[];
+  optional_paid_source_families: SourceFamily[];
+  human_exception_required: boolean;
   registry_snapshot_ref: string;
   tool_registry_snapshot_ref: string;
   summary_cn: string;
@@ -368,6 +428,7 @@ export interface AxisBuildInput {
   producerAgentId: IndustryAgentId;
   executionContext: ExecutionContext;
   routeSelection: RouteSelectionResult;
+  seed: AxisSeedConfig;
   registrySnapshotRef: string;
   toolRegistrySnapshotRef: string;
   budgetProfileId: string;
@@ -380,12 +441,22 @@ export interface AxisSourceInput {
   displayName: string;
   url?: string;
   sourceType: IndustrySignalEvent["source"]["source_type"];
+  sourceFamily?: SourceFamily;
   authorityTier: IndustrySignalEvent["source"]["authority_tier"];
   primarySourceDistance: IndustrySignalEvent["source"]["primary_source_distance"];
+  accessMode?: AccessMode;
+  costTier?: CostTier;
+  reviewStatus?: ReviewStatus;
+  humanExceptionRequired?: boolean;
+  namedSource?: string;
   publishedAt?: string;
   bucket: EvidenceBucket;
   title: string;
   summaryCn: string;
+  financeSignalKind?: FinanceSignalKind;
+  policySignalKind?: PolicySignalKind;
+  missingSourceFamilies?: SourceFamily[];
+  optionalPaidSourceFamilies?: SourceFamily[];
   actorName?: string;
   actorType?: "company" | "investor" | "regulator" | "thinktank" | "media";
   agentRelevanceScore: number;
@@ -501,6 +572,14 @@ function availabilityState(tools: ToolRouteDefinition[], available: Set<string>)
 }
 
 export function buildAxisArtifacts(input: AxisBuildInput): AxisArtifacts {
+  if (input.routeSelection.routeLevel === "none" && input.sources.some((item) => item.bucket === "accepted" || item.bucket === "counter")) {
+    throw new Error(`${input.axis} cannot emit accepted/counter evidence when no route is available`);
+  }
+  if (input.routeSelection.routeLevel === "last_resort_mode"
+    && input.sources.some((item) => item.bucket === "accepted" || item.bucket === "counter")) {
+    throw new Error(`${input.axis} cannot emit accepted/counter evidence in last_resort_mode`);
+  }
+  for (const source of input.sources) validateAxisSourceInput(input.axis, source);
   const acceptedEvents = input.sources.filter((item) => item.bucket === "accepted").map((item) => buildEvent(input, item));
   const counterEvents = input.sources.filter((item) => item.bucket === "counter").map((item) => buildEvent(input, item));
   const diagnosticEvents = input.sources.filter((item) => item.bucket === "diagnostic").map((item) => buildEvent(input, item));
@@ -548,8 +627,14 @@ function buildEvent(input: AxisBuildInput, source: AxisSourceInput): IndustrySig
       display_name: source.displayName,
       source_url: source.url,
       source_type: source.sourceType,
+      source_family: source.sourceFamily,
       authority_tier: source.authorityTier,
       primary_source_distance: source.primarySourceDistance,
+      access_mode: source.accessMode,
+      cost_tier: source.costTier,
+      review_status: source.reviewStatus,
+      human_exception_required: source.humanExceptionRequired,
+      named_source: source.namedSource,
       language: "zh",
       region: "global",
     },
@@ -571,6 +656,10 @@ function buildEvent(input: AxisBuildInput, source: AxisSourceInput): IndustrySig
       citation_ref: source.url ? `citation://${stableId("cite", source.url)}` : undefined,
       raw_ref: `raw://${stableId("raw", eventBase)}`,
       metrics: source.metrics,
+      finance_signal_kind: source.financeSignalKind,
+      policy_signal_kind: source.policySignalKind,
+      missing_source_families: source.missingSourceFamilies,
+      optional_paid_source_families: source.optionalPaidSourceFamilies,
     },
     collected_by_agent_id: input.producerAgentId,
     responsibility_id: input.responsibilityId,
@@ -639,12 +728,21 @@ function buildCoverageArtifact(
   acceptedEvents: IndustrySignalEvent[],
   rejectedEvents: IndustrySignalEvent[],
 ): ArtifactEnvelope<CoveragePayload> {
+  const sourceTiersPresent = unique(input.sources.map((item) => item.authorityTier));
+  const accessModesPresent = unique(input.sources.map((item) => item.accessMode).filter(isDefined));
+  const reviewStatusesPresent = unique(input.sources.map((item) => item.reviewStatus).filter(isDefined));
+  const sourceFamiliesPresent = unique(input.sources.map((item) => item.sourceFamily).filter(isDefined));
+  const namedSourcesPresent = unique(input.sources.map((item) => item.namedSource).filter(isDefined));
+  const missingSourceFamilies = unique(input.sources.flatMap((item) => item.missingSourceFamilies ?? []));
+  const optionalPaidSourceFamilies = unique(input.sources.flatMap((item) => item.optionalPaidSourceFamilies ?? []));
+  const humanExceptionRequired = input.sources.some((item) => item.humanExceptionRequired === true)
+    || input.routeSelection.stopReasonCode === "human_exception_required";
   const coverage: AxisToolCoverageReport = {
     axis: input.axis,
-    primary_tool_ids: [],
-    secondary_toolset_ids: [],
-    fallback_tool_ids: [],
-    last_resort_tool_ids: [],
+    primary_tool_ids: input.seed.primary.map((tool) => tool.tool_id),
+    secondary_toolset_ids: input.seed.secondary.map((tool) => tool.tool_id),
+    fallback_tool_ids: input.seed.fallback.map((tool) => tool.tool_id),
+    last_resort_tool_ids: input.seed.last_resort.map((tool) => tool.tool_id),
     eligible_tool_ids: input.routeSelection.eligibleToolIds,
     selected_from_tool_ids: input.routeSelection.selectedFromToolIds,
     attempted_tool_ids: input.routeSelection.attemptedToolIds,
@@ -689,6 +787,14 @@ function buildCoverageArtifact(
     citation_trace_rate: acceptedEvents.length === 0 ? 0 : 1,
     evidence_event_ids: acceptedEvents.map((item) => item.event_id),
     rejected_event_ids: rejectedEvents.map((item) => item.event_id),
+    source_tiers_present: sourceTiersPresent,
+    access_modes_present: accessModesPresent,
+    review_statuses_present: reviewStatusesPresent,
+    source_families_present: sourceFamiliesPresent,
+    named_sources_present: namedSourcesPresent,
+    missing_source_families: missingSourceFamilies,
+    optional_paid_source_families: optionalPaidSourceFamilies,
+    human_exception_required: humanExceptionRequired,
     registry_snapshot_ref: input.registrySnapshotRef,
     tool_registry_snapshot_ref: input.toolRegistrySnapshotRef,
     summary_cn:
@@ -742,7 +848,6 @@ function buildCoverageArtifact(
     runtimeContext: input.runtimeContext,
   });
 
-  envelope.payload.report.primary_tool_ids = input.routeSelection.routeStatus.primary_tool.state === "unavailable" ? [] : input.routeSelection.selectedFromToolIds;
   return envelope;
 }
 
@@ -1002,3 +1107,255 @@ export function stableId(prefix: string, raw: string): string {
 function sha256(raw: string): string {
   return crypto.createHash("sha256").update(raw).digest("hex");
 }
+
+function isDefined<T>(value: T | undefined): value is T {
+  return value !== undefined;
+}
+
+function unique<T>(values: T[]): T[] {
+  return Array.from(new Set(values));
+}
+
+function isMappedSourceFamily(family: SourceFamily): family is keyof typeof SOURCE_FAMILY_EXPECTATIONS {
+  return !family.startsWith("generic_");
+}
+
+function validateAxisSourceInput(axis: IndustryEvidenceAxisKey, source: AxisSourceInput): void {
+  if (source.bucket !== "accepted" && source.bucket !== "counter") return;
+
+  const sourceFamily = source.sourceFamily;
+  if (!sourceFamily || sourceFamily.startsWith("generic_")) {
+    throw new Error(`${axis} source ${source.sourceId} must use an axis-specific sourceFamily for accepted/counter evidence`);
+  }
+  if (!source.accessMode || !source.costTier || !source.reviewStatus) {
+    throw new Error(`${axis} source ${source.sourceId} missing required audit fields accessMode/costTier/reviewStatus`);
+  }
+  if (source.rejectedReason) {
+    throw new Error(`${axis} source ${source.sourceId} cannot carry rejectedReason for accepted/counter evidence`);
+  }
+  if (source.reviewStatus === "deprecated") {
+    throw new Error(`${axis} source ${source.sourceId} cannot use reviewStatus=deprecated for accepted/counter evidence`);
+  }
+  if (source.humanExceptionRequired) {
+    throw new Error(`${axis} source ${source.sourceId} cannot use humanExceptionRequired=true for accepted/counter evidence`);
+  }
+  if (source.accessMode === "unavailable") {
+    throw new Error(`${axis} source ${source.sourceId} cannot use accessMode=unavailable for accepted/counter evidence`);
+  }
+  if (source.authorityTier === "excluded") {
+    throw new Error(`${axis} source ${source.sourceId} cannot use authorityTier=excluded for accepted/counter evidence`);
+  }
+  if (source.primarySourceDistance === "rumor") {
+    throw new Error(`${axis} source ${source.sourceId} cannot use primarySourceDistance=rumor for accepted/counter evidence`);
+  }
+  validateAuditFieldConsistency(source);
+  switch (axis) {
+    case "capital_finance":
+      if (!source.financeSignalKind) throw new Error(`capital_finance source ${source.sourceId} missing financeSignalKind`);
+      if (source.policySignalKind) throw new Error(`capital_finance source ${source.sourceId} cannot carry policySignalKind`);
+      if (sourceFamily && !sourceFamily.startsWith("finance_") && !sourceFamily.startsWith("generic_")) {
+        throw new Error(`capital_finance source ${source.sourceId} has misaligned sourceFamily ${sourceFamily}`);
+      }
+      validateSourceTypeAndSemanticMapping(axis, source);
+      return;
+    case "policy_regulatory":
+      validatePolicyGradeAuthority(axis, source);
+      if (!source.policySignalKind) throw new Error(`policy_regulatory source ${source.sourceId} missing policySignalKind`);
+      if (source.policySignalKind === "thinktank_viewpoint") {
+        throw new Error(`policy_regulatory source ${source.sourceId} cannot use thinktank_viewpoint`);
+      }
+      if (source.financeSignalKind) throw new Error(`policy_regulatory source ${source.sourceId} cannot carry financeSignalKind`);
+      if (sourceFamily && !sourceFamily.startsWith("policy_") && !sourceFamily.startsWith("generic_")) {
+        throw new Error(`policy_regulatory source ${source.sourceId} has misaligned sourceFamily ${sourceFamily}`);
+      }
+      validateSourceTypeAndSemanticMapping(axis, source);
+      return;
+    case "policy_research_thinktank":
+      validatePolicyGradeAuthority(axis, source);
+      if (source.policySignalKind !== "thinktank_viewpoint") {
+        throw new Error(`policy_research_thinktank source ${source.sourceId} must use thinktank_viewpoint`);
+      }
+      if (source.financeSignalKind) throw new Error(`policy_research_thinktank source ${source.sourceId} cannot carry financeSignalKind`);
+      if (sourceFamily && !sourceFamily.startsWith("thinktank_") && !sourceFamily.startsWith("generic_")) {
+        throw new Error(`policy_research_thinktank source ${source.sourceId} has misaligned sourceFamily ${sourceFamily}`);
+      }
+      validateSourceTypeAndSemanticMapping(axis, source);
+  }
+}
+
+function validatePolicyGradeAuthority(axis: Extract<IndustryEvidenceAxisKey, "policy_regulatory" | "policy_research_thinktank">, source: AxisSourceInput): void {
+  if (source.authorityTier === "ordinary") {
+    throw new Error(`${axis} source ${source.sourceId} cannot use authorityTier=ordinary for accepted/counter evidence`);
+  }
+  if (source.primarySourceDistance === "secondary" || source.primarySourceDistance === "unknown") {
+    throw new Error(`${axis} source ${source.sourceId} must stay primary/near_primary for accepted/counter evidence`);
+  }
+}
+
+function validateAuditFieldConsistency(source: AxisSourceInput): void {
+  if (source.humanExceptionRequired && source.accessMode !== "human_exception") {
+    throw new Error(`source ${source.sourceId} requires accessMode=human_exception when humanExceptionRequired=true`);
+  }
+  if (source.accessMode === "optional_paid" && source.optionalPaidSourceFamilies?.length === 0) {
+    throw new Error(`source ${source.sourceId} with accessMode=optional_paid must declare optionalPaidSourceFamilies`);
+  }
+  if (source.accessMode === "optional_paid" && source.reviewStatus && source.reviewStatus !== "needs_review" && source.reviewStatus !== "watch") {
+    throw new Error(`source ${source.sourceId} optional_paid should stay in needs_review/watch state`);
+  }
+  if (source.accessMode === "unavailable" && source.reviewStatus && source.reviewStatus !== "unavailable") {
+    throw new Error(`source ${source.sourceId} unavailable access must use reviewStatus=unavailable when provided`);
+  }
+}
+
+function validateSourceTypeAndSemanticMapping(axis: IndustryEvidenceAxisKey, source: AxisSourceInput): void {
+  const family = source.sourceFamily;
+  if (!family || family.startsWith("generic_")) return;
+
+  if (!isMappedSourceFamily(family)) return;
+  const expected = SOURCE_FAMILY_EXPECTATIONS[family];
+  if (!expected.axes.includes(axis)) {
+    throw new Error(`source ${source.sourceId} family ${family} does not belong to axis ${axis}`);
+  }
+  if (!expected.sourceTypes.includes(source.sourceType)) {
+    throw new Error(`source ${source.sourceId} family ${family} cannot use sourceType ${source.sourceType}`);
+  }
+  if (expected.financeSignalKinds && (!source.financeSignalKind || !expected.financeSignalKinds.includes(source.financeSignalKind))) {
+    throw new Error(`source ${source.sourceId} family ${family} requires financeSignalKind in ${expected.financeSignalKinds.join(",")}`);
+  }
+  if (expected.policySignalKinds && (!source.policySignalKind || !expected.policySignalKinds.includes(source.policySignalKind))) {
+    throw new Error(`source ${source.sourceId} family ${family} requires policySignalKind in ${expected.policySignalKinds.join(",")}`);
+  }
+  if (expected.namedSourceRequired && !source.namedSource) {
+    throw new Error(`source ${source.sourceId} family ${family} requires namedSource`);
+  }
+}
+
+const SOURCE_FAMILY_EXPECTATIONS: Record<
+  Exclude<SourceFamily, "generic_news" | "generic_context">,
+  {
+    axes: IndustryEvidenceAxisKey[];
+    sourceTypes: Array<IndustrySignalEvent["source"]["source_type"]>;
+    financeSignalKinds?: FinanceSignalKind[];
+    policySignalKinds?: PolicySignalKind[];
+    namedSourceRequired?: boolean;
+  }
+> = {
+  finance_funding_news: {
+    axes: ["capital_finance"],
+    sourceTypes: ["news", "funding"],
+    financeSignalKinds: ["financing_heat"],
+  },
+  finance_earnings_report: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing"],
+    financeSignalKinds: ["capital_allocation", "public_company_tilt"],
+  },
+  finance_sec_filing: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing"],
+    financeSignalKinds: ["capital_allocation", "organizational_investment", "public_company_tilt"],
+    namedSourceRequired: true,
+  },
+  finance_fund_report: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing", "funding"],
+    financeSignalKinds: ["capital_allocation", "industry_research_narrative"],
+  },
+  finance_merger_acquisition: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing", "funding", "news"],
+    financeSignalKinds: ["merger_integration"],
+  },
+  finance_public_company_announcement: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing"],
+    financeSignalKinds: ["public_company_tilt", "organizational_investment"],
+  },
+  finance_investor_relations: {
+    axes: ["capital_finance"],
+    sourceTypes: ["funding", "financial_filing"],
+    financeSignalKinds: ["capital_allocation", "organizational_investment", "public_company_tilt"],
+    namedSourceRequired: true,
+  },
+  finance_earnings_call_transcript: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing", "news"],
+    financeSignalKinds: ["organizational_investment", "public_company_tilt"],
+  },
+  finance_industry_data: {
+    axes: ["capital_finance"],
+    sourceTypes: ["financial_filing", "news"],
+    financeSignalKinds: ["industry_research_narrative", "capital_allocation"],
+  },
+  policy_regulatory_filing: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["regulatory_attention", "policy_window", "risk_warning", "confirmed_approval"],
+    namedSourceRequired: true,
+  },
+  policy_government_announcement: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["regulatory_attention", "policy_window", "official_support", "risk_warning"],
+    namedSourceRequired: true,
+  },
+  policy_approval: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["confirmed_approval"],
+    namedSourceRequired: true,
+  },
+  policy_public_procurement: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["public_procurement", "official_support"],
+    namedSourceRequired: true,
+  },
+  policy_standards_body: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["policy_window", "regulatory_attention", "risk_warning"],
+    namedSourceRequired: true,
+  },
+  policy_official_project: {
+    axes: ["policy_regulatory"],
+    sourceTypes: ["policy"],
+    policySignalKinds: ["official_support", "policy_window", "public_procurement"],
+    namedSourceRequired: true,
+  },
+  thinktank_oecd_ai: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+    namedSourceRequired: true,
+  },
+  thinktank_cset: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+    namedSourceRequired: true,
+  },
+  thinktank_stanford_ai_index: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+    namedSourceRequired: true,
+  },
+  thinktank_brookings: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+    namedSourceRequired: true,
+  },
+  thinktank_rand: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+    namedSourceRequired: true,
+  },
+  thinktank_institutional_report: {
+    axes: ["policy_research_thinktank"],
+    sourceTypes: ["thinktank_report"],
+    policySignalKinds: ["thinktank_viewpoint"],
+  },
+};

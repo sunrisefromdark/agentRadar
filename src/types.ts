@@ -36,7 +36,9 @@ export type DirectionCoverageOutcome =
   | "matched"
   | "weak_signal"
   | "noise_only"
+  | "partial_remote_failure"
   | "zero_candidate"
+  | "circuit_open"
   | "search_failed"
   | "disabled";
 export type DailyExposureBucket = "today_pulse" | "mission_match" | "explore_ribbon" | "historical_context";

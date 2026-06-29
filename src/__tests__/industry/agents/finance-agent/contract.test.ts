@@ -1,10 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { buildCapitalFinanceHandoff } from "../../../../industry/agents/finance-agent/handoff.ts";
+import { capitalFinanceSeed } from "../../../../industry/agents/finance-agent/sourceCatalog.ts";
 import { assertConsumableEnvelope } from "../../../../industry/agents/policy-agent/groupProtocol.ts";
 import currentConsumerFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/current-consumer.json" with { type: "json" };
 import previousCompatibleFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/previous-compatible-consumer.json" with { type: "json" };
 import missingRequiredRefFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/missing-required-ref-negative.json" with { type: "json" };
 import unknownHigherMajorFixture from "../../../../../fixtures/industry/agents/finance-agent/compatibility/unknown-higher-major-negative.json" with { type: "json" };
+import sourceCatalogFixture from "../../../../../data/industry-seeds/agents/finance-agent/source-catalog.json" with { type: "json" };
 
 describe("finance-agent compatibility contract", () => {
   it("matches current and previous compatible consumer expectations", () => {
@@ -21,11 +23,17 @@ describe("finance-agent compatibility contract", () => {
           sourceId: "sec-filing",
           displayName: "SEC Filing",
           sourceType: "financial_filing",
+          sourceFamily: "finance_sec_filing",
           authorityTier: "core",
           primarySourceDistance: "primary",
+          accessMode: "api",
+          costTier: "free",
+          reviewStatus: "active",
+          namedSource: "SEC EDGAR",
           bucket: "accepted",
           title: "官方融资文件",
           summaryCn: "finance official-first 主证。",
+          financeSignalKind: "capital_allocation",
           agentRelevanceScore: 0.93,
           agentRelevanceReasons: ["capital-core"],
         },
@@ -35,6 +43,11 @@ describe("finance-agent compatibility contract", () => {
     expect(result.accepted.envelope.schema_version).toBe(currentConsumerFixture.schema_version);
     expect(result.accepted.manifest.schema_version).toBe(currentConsumerFixture.manifest_schema_version);
     expect(assertConsumableEnvelope(result.accepted.envelope, result.accepted.manifest.schema_version)).toEqual({ ok: true });
+    expect(result.coverage.payload.report.primary_tool_ids).toEqual(
+      expect.arrayContaining(["sec-edgar-api", "public-company-filings", "earnings-call-transcripts"]),
+    );
+    expect(result.coverage.payload.report.source_tiers_present).toEqual(["core"]);
+    expect(result.coverage.payload.report.named_sources_present).toEqual(["SEC EDGAR"]);
 
     expect(result.accepted.envelope.schema_version).toBe(previousCompatibleFixture.schema_version);
     expect(result.accepted.manifest.schema_version).toBe(previousCompatibleFixture.manifest_schema_version);
@@ -71,6 +84,19 @@ describe("finance-agent compatibility contract", () => {
     expect(assertConsumableEnvelope(higherMajor, result.accepted.manifest.schema_version)).toEqual({
       ok: false,
       reason: unknownHigherMajorFixture.expected_reason,
+    });
+  });
+
+  it("keeps the TS finance seed aligned with the machine-readable source catalog", () => {
+    expect(sourceCatalogFixture).toEqual({
+      agent_id: capitalFinanceSeed.agent_id,
+      responsibility_id: capitalFinanceSeed.responsibility_id,
+      axis: capitalFinanceSeed.axis,
+      official_first: true,
+      primary_tool_ids: capitalFinanceSeed.primary.map((tool) => tool.tool_id),
+      secondary_tool_ids: capitalFinanceSeed.secondary.map((tool) => tool.tool_id),
+      fallback_tool_ids: capitalFinanceSeed.fallback.map((tool) => tool.tool_id),
+      last_resort_tool_ids: capitalFinanceSeed.last_resort.map((tool) => tool.tool_id),
     });
   });
 });

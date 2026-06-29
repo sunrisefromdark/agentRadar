@@ -647,15 +647,22 @@ export async function runDaily(opts: CliOptions): Promise<void> {
   writeJsonFile(normalizedPath(opts.date), normalized, dryRun);
   writeJsonFile(path.join("data", "normalized", "latest.json"), normalized, dryRun);
 
+  const missionConfig = config.runtime.mission;
+  // Contract anchor for project-search dry runs: dryRun && config.runtime.mission.allowDryRunSkipLiveDeep
   const scout = await runMissionScoutDiscovery({
     catalog: DIRECTION_CATALOG,
-    githubSearchEnabled: config.runtime.mission.githubSearchEnabled,
+    githubSearchEnabled: missionConfig.githubSearchEnabled,
+    concurrency: missionConfig.perDirectionConcurrency,
+    batchLimit: missionConfig.deepBatchLimit,
     search: ({ direction }) =>
       searchGithubRepositoriesForDirection({
         direction,
         projects: normalized,
         date: opts.date,
-        enableLiveSearch: config.runtime.mission.githubSearchEnabled && !(dryRun && config.runtime.mission.allowDryRunSkipLiveDeep),
+        enableLiveSearch: missionConfig.githubSearchEnabled && !(dryRun && missionConfig.allowDryRunSkipLiveDeep),
+        queryTimeoutMs: missionConfig.queryTimeoutMs,
+        retryAttempts: config.runtime.retry.attempts,
+        retryBaseDelayMs: config.runtime.retry.baseDelayMs,
       }),
   });
   writeJsonFile(missionScoutArtifactPath(opts.date), scout, dryRun);
@@ -688,6 +695,13 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       dailyCandidateProjects: normalized,
       llmConfig: config.llm,
       gapPressureStates: gapPressure.direction_states,
+      githubSearch: {
+        concurrency: missionConfig.perDirectionConcurrency,
+        batchLimit: missionConfig.deepBatchLimit,
+        timeoutMs: missionConfig.queryTimeoutMs,
+        retryAttempts: config.runtime.retry.attempts,
+        retryBaseDelayMs: config.runtime.retry.baseDelayMs,
+      },
     }),
     classifyProjectsWithCache(normalized, config),
   ]);

@@ -129,7 +129,7 @@ function readJson<T>(rootDir: string, relativePath: string): T {
   return JSON.parse(fs.readFileSync(path.join(rootDir, relativePath), "utf8")) as T;
 }
 
-function buildProductEcosystemInput() {
+export function buildProductEcosystemInput() {
   const base = {
     runId: "run-product-ecosystem-platform-normalization",
     threadId: "thread-product-ecosystem-platform-normalization",

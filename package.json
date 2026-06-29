@@ -27,6 +27,7 @@
     "llm:smoke": "tsx scripts/llmProviderSmoke.ts",
     "run-weekly": "tsx src/cli.ts run-weekly",
     "sync-weekly": "tsx src/cli.ts sync-weekly",
+    "cross-group-integration-readiness": "tsx src/cli.ts cross-group-integration-readiness",
     "verify-daily": "tsx src/cli.ts verify-daily",
     "capture-github-stars": "tsx src/cli.ts capture-github-stars",
     "score": "tsx src/cli.ts score",

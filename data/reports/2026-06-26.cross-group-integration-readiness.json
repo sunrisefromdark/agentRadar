@@ -1,11 +1,11 @@
 {
   "artifact_kind": "cross_group_integration_readiness",
   "date": "2026-06-26",
-  "generated_at": "2026-06-28T13:58:30+08:00",
-  "status": "phase3_backlog_ready",
+  "generated_at": "2026-06-29T15:42:15+08:00",
+  "status": "phase5_internal_weekly_ready",
   "ready_group_count": 3,
   "weekly_output_ready": false,
-  "blocked_until": "closed_fact_snapshot_and_audit",
+  "blocked_until": "tier_decision_and_weekly_packaging",
   "daily_pack_v2_ready": true,
   "rolling_snapshot_ready": true,
   "daily_pack_v2": {
@@ -70,9 +70,733 @@
     "status": "product_ecosystem_phase6_inputs_accepted",
     "eval_backlog_ready": true
   },
+  "platform_continuation": {
+    "can_continue_without_more_academic_inputs": true,
+    "blocked_until": "tier_decision_and_weekly_packaging",
+    "next_required_owner": "executor_4"
+  },
+  "academic_feedback": {
+    "payload_schema": "normalization-feedback.v1",
+    "schema_version": "1.0.0",
+    "payload_id": "feedback-academic-2026-06-26-academic-daily-input",
+    "run_id": "academic-2026-06-26",
+    "source_message_id": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-d9660564ef27#message",
+    "fact_resolution_audit_ref": "industry://internal/2026-06-26/fact-resolution-audit.v1/feedback-academic-2026-06-26-academic-daily-input",
+    "producer_agent_id": "normalization-agent",
+    "feedback_status": "dry_run_ready"
+  },
+  "replay_eval_backlog": {
+    "status": "ready",
+    "policy_finance_fixture_refs": [
+      "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
+      "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json"
+    ],
+    "academic_fixture_refs": [
+      "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+      "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+      "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+      "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+      "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json"
+    ],
+    "product_ecosystem_fixture_refs": [
+      "fixtures/industry/agents/product-oss-agent/owner-boundary/vendor-blog-repo-update.json",
+      "fixtures/industry/agents/community-news-agent/owner-boundary/community-post-news-retell.json",
+      "fixtures/industry/agents/product-oss-agent/anti-upgrade/vendor-blog-mentioned-repo.json",
+      "fixtures/industry/agents/community-news-agent/anti-upgrade/news-pr-heat-without-core.json",
+      "fixtures/industry/agents/community-news-agent/anti-upgrade/community-noise-seo-content.json",
+      "fixtures/industry/agents/product-oss-agent/propagation/official-release-news-retell.json",
+      "fixtures/industry/agents/community-news-agent/propagation/news-retells-community-thread.json",
+      "fixtures/industry/agents/community-news-agent/replay/phase6-replay-refs.json"
+    ]
+  },
+  "closed_fact_snapshot_prep": {
+    "status": "ready_to_start",
+    "fact_snapshot_ref": "industry://internal/2026-06-26/fact-snapshot.v1/pending",
+    "fact_resolution_audit_ref": "industry://internal/2026-06-26/fact-resolution-audit.v1/feedback-academic-2026-06-26-academic-daily-input",
+    "input_artifact_refs": [
+      "data/reports/2026-06-26.policy-finance-runtime-replay.json",
+      "data/reports/2026-06-26.industry-runtime-summary.json",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f1d7fd1dac07",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d0b11ad6b229",
+      "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a0b27826ed31",
+      "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-29b786461618",
+      "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-3c175178319f",
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+      "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+    ]
+  },
+  "closed_fact_snapshot": {
+    "status": "closed",
+    "snapshot_id": "fact-snapshot-2026-06-26",
+    "claim_builder_input_ready": true,
+    "weekly_output_ready": false,
+    "fact_resolution_audit": {
+      "audit_id": "fact-resolution-audit-2026-06-26",
+      "schema_version": "fact-resolution-audit.v1",
+      "snapshot_id": "fact-snapshot-2026-06-26",
+      "event_fact_assignments": [
+        {
+          "event_id": "evt-06ba611ba98a",
+          "fact_id": "fact-evt-06ba611ba98a",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "policy_finance_runtime_ready"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-359daca15821",
+          "fact_id": "fact-evt-359daca15821",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "policy_finance_runtime_ready"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-3731433a2226",
+          "fact_id": "fact-evt-3731433a2226",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "policy_finance_runtime_ready"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "paper-agent-memory-preprint",
+          "fact_id": "fact-paper-agent-memory-preprint",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "academic_formal_handoff"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "conf-neurips-workshop-agents",
+          "fact_id": "fact-conf-neurips-workshop-agents",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "academic_formal_handoff"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-d5de86b0981d",
+          "fact_id": "fact-evt-d5de86b0981d",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "product_ecosystem_phase6_inputs_accepted"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-b0fe5f8da165",
+          "fact_id": "fact-evt-b0fe5f8da165",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "product_ecosystem_phase6_inputs_accepted"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-609ea9dd545b",
+          "fact_id": "fact-evt-609ea9dd545b",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "product_ecosystem_phase6_inputs_accepted"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-150547a98a8f",
+          "fact_id": "fact-evt-150547a98a8f",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "product_ecosystem_phase6_inputs_accepted"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        },
+        {
+          "event_id": "evt-b58e55e3847e",
+          "fact_id": "fact-evt-b58e55e3847e",
+          "fact_resolution_state": "canonical",
+          "resolution_basis_codes": [
+            "product_ecosystem_phase6_inputs_accepted"
+          ],
+          "confidence": "high",
+          "requires_manual_review": false
+        }
+      ],
+      "relation_edges": [],
+      "high_impact_unresolved_groups": []
+    }
+  },
+  "claim_builder": {
+    "status": "ready",
+    "candidate_batch": {
+      "payload_schema": "claim-candidate-batch.v1",
+      "payload_id": "claim-candidate-batch-2026-06-26",
+      "schema_version": "1.0.0",
+      "run_id": "cross-group-2026-06-26",
+      "window_start": "2026-06-26T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "industry://internal/2026-06-26/fact-snapshot.v1/fact-snapshot-2026-06-26",
+      "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+      "claim_evidence_link_batch_ref": "industry://internal/2026-06-26/industry-claim-evidence-link.v1/cross-group",
+      "claim_builder_audit_refs": [
+        "fact-resolution-audit-2026-06-26"
+      ],
+      "candidate_group_ids": [
+        "candidate-group-evt-06ba611ba98a",
+        "candidate-group-evt-359daca15821",
+        "candidate-group-evt-3731433a2226",
+        "candidate-group-paper-agent-memory-preprint",
+        "candidate-group-conf-neurips-workshop-agents",
+        "candidate-group-evt-d5de86b0981d",
+        "candidate-group-evt-b0fe5f8da165",
+        "candidate-group-evt-609ea9dd545b",
+        "candidate-group-evt-150547a98a8f",
+        "candidate-group-evt-b58e55e3847e"
+      ],
+      "input_event_ids": [
+        "evt-06ba611ba98a",
+        "evt-359daca15821",
+        "evt-3731433a2226",
+        "paper-agent-memory-preprint",
+        "conf-neurips-workshop-agents",
+        "evt-d5de86b0981d",
+        "evt-b0fe5f8da165",
+        "evt-609ea9dd545b",
+        "evt-150547a98a8f",
+        "evt-b58e55e3847e"
+      ],
+      "generated_claim_ids": [
+        "claim-evt-06ba611ba98a",
+        "claim-evt-359daca15821",
+        "claim-evt-3731433a2226",
+        "claim-paper-agent-memory-preprint",
+        "claim-conf-neurips-workshop-agents",
+        "claim-evt-d5de86b0981d",
+        "claim-evt-b0fe5f8da165",
+        "claim-evt-609ea9dd545b",
+        "claim-evt-150547a98a8f",
+        "claim-evt-b58e55e3847e"
+      ],
+      "deferred_event_ids": [],
+      "rejected_event_ids": []
+    },
+    "evidence_links": [
+      {
+        "link_id": "link-evt-06ba611ba98a",
+        "claim_id": "claim-evt-06ba611ba98a",
+        "event_id": "evt-06ba611ba98a",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-359daca15821",
+        "claim_id": "claim-evt-359daca15821",
+        "event_id": "evt-359daca15821",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-3731433a2226",
+        "claim_id": "claim-evt-3731433a2226",
+        "event_id": "evt-3731433a2226",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-paper-agent-memory-preprint",
+        "claim_id": "claim-paper-agent-memory-preprint",
+        "event_id": "paper-agent-memory-preprint",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-conf-neurips-workshop-agents",
+        "claim_id": "claim-conf-neurips-workshop-agents",
+        "event_id": "conf-neurips-workshop-agents",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-d5de86b0981d",
+        "claim_id": "claim-evt-d5de86b0981d",
+        "event_id": "evt-d5de86b0981d",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-b0fe5f8da165",
+        "claim_id": "claim-evt-b0fe5f8da165",
+        "event_id": "evt-b0fe5f8da165",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-609ea9dd545b",
+        "claim_id": "claim-evt-609ea9dd545b",
+        "event_id": "evt-609ea9dd545b",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-150547a98a8f",
+        "claim_id": "claim-evt-150547a98a8f",
+        "event_id": "evt-150547a98a8f",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      },
+      {
+        "link_id": "link-evt-b58e55e3847e",
+        "claim_id": "claim-evt-b58e55e3847e",
+        "event_id": "evt-b58e55e3847e",
+        "axis": "cross_group",
+        "role": "supporting",
+        "dependency_strength": "primary",
+        "materiality_class": "tier_material",
+        "is_tier_material": true,
+        "materiality_reason_codes": [
+          "closed_fact_snapshot"
+        ],
+        "derived_from_source_polarity_cue": false,
+        "reason_codes": [
+          "accepted_event"
+        ],
+        "created_by_agent_id": "trend-agent",
+        "reviewed_by_agent_ids": [
+          "audit-agent"
+        ]
+      }
+    ]
+  },
+  "counter_evidence_audit": {
+    "status": "passed",
+    "audit_request": {
+      "payload_schema": "audit-request.v1",
+      "payload_id": "audit-request-2026-06-26",
+      "schema_version": "1.0.0",
+      "run_id": "cross-group-2026-06-26",
+      "window_start": "2026-06-26T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group#message",
+      "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+      "claim_evidence_link_batch_ref": "industry://internal/2026-06-26/industry-claim-evidence-link.v1/cross-group",
+      "normalized_event_batch_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/normalized-ref-index",
+      "registry_review_result_refs": [
+        "platform-phase1-current-consumer.v1",
+        "industry://internal/tool-registry/cross-group-ready"
+      ],
+      "supporting_event_ids": [
+        "evt-06ba611ba98a",
+        "evt-359daca15821",
+        "evt-3731433a2226",
+        "paper-agent-memory-preprint",
+        "conf-neurips-workshop-agents",
+        "evt-d5de86b0981d",
+        "evt-b0fe5f8da165",
+        "evt-609ea9dd545b",
+        "evt-150547a98a8f",
+        "evt-b58e55e3847e"
+      ],
+      "counter_event_ids": [],
+      "fact_resolution_audit_ref": "fact-resolution-audit-2026-06-26",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/cross-group",
+      "runtime_budget_profile_id": "claim-runtime-budget-profile.v1/cross-group",
+      "cost_budget_profile_id": "claim-admission-budget-profile.v1/cross-group",
+      "critical_path_class": "same_run",
+      "estimated_cost_units": 10
+    },
+    "audit_result": {
+      "payload_schema": "audit-result.v1",
+      "payload_id": "audit-result-2026-06-26",
+      "schema_version": "1.0.0",
+      "run_id": "cross-group-2026-06-26",
+      "window_start": "2026-06-26T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "industry://internal/2026-06-26/audit-request.v1/cross-group#message",
+      "counter_evidence_audit_ref": "industry://internal/2026-06-26/counter-evidence-audit.v1/cross-group",
+      "audited_claim_candidate_ids": [
+        "claim-evt-06ba611ba98a",
+        "claim-evt-359daca15821",
+        "claim-evt-3731433a2226",
+        "claim-paper-agent-memory-preprint",
+        "claim-conf-neurips-workshop-agents",
+        "claim-evt-d5de86b0981d",
+        "claim-evt-b0fe5f8da165",
+        "claim-evt-609ea9dd545b",
+        "claim-evt-150547a98a8f",
+        "claim-evt-b58e55e3847e"
+      ],
+      "blocking_claim_candidate_ids": [],
+      "downgrade_recommendations": [],
+      "high_impact_unresolved_group_ids": [],
+      "actual_latency_ms": 0
+    },
+    "counter_evidence_audit": {
+      "schema_version": "counter-evidence-audit.v1",
+      "audited_by_agent_id": "audit-agent",
+      "audited_at": "2026-06-26T23:59:59+08:00",
+      "audit_mode": "same_run_closed_snapshot",
+      "audit_priority": "tier_blocking",
+      "blocking_counter_evidence": [],
+      "counter_evidence_severity": "none",
+      "blocking_scopes": [],
+      "supporting_event_ids_reviewed": [
+        "evt-06ba611ba98a",
+        "evt-359daca15821",
+        "evt-3731433a2226",
+        "paper-agent-memory-preprint",
+        "conf-neurips-workshop-agents",
+        "evt-d5de86b0981d",
+        "evt-b0fe5f8da165",
+        "evt-609ea9dd545b",
+        "evt-150547a98a8f",
+        "evt-b58e55e3847e"
+      ],
+      "reviewed_claim_evidence_link_ids": [
+        "link-evt-06ba611ba98a",
+        "link-evt-359daca15821",
+        "link-evt-3731433a2226",
+        "link-paper-agent-memory-preprint",
+        "link-conf-neurips-workshop-agents",
+        "link-evt-d5de86b0981d",
+        "link-evt-b0fe5f8da165",
+        "link-evt-609ea9dd545b",
+        "link-evt-150547a98a8f",
+        "link-evt-b58e55e3847e"
+      ],
+      "unchecked_supporting_event_ids": [],
+      "sampling_reason_codes": [
+        "full_closed_snapshot"
+      ],
+      "counter_event_ids": [],
+      "missing_axis_keys": [],
+      "source_bias_notes": [],
+      "conflict_groups": [],
+      "decision_state": "passed",
+      "contested_by_agent_ids": [],
+      "escalation_reason_codes": [],
+      "unresolved_questions": []
+    }
+  },
+  "tier_decision_prep": {
+    "status": "ready_to_start",
+    "blocked_until": "tier_decision_and_weekly_packaging",
+    "missing_required_group_params": []
+  },
+  "recent_7d_evidence_window": {
+    "status": "ok",
+    "required_dates": [
+      "2026-06-20",
+      "2026-06-21",
+      "2026-06-22",
+      "2026-06-23",
+      "2026-06-24",
+      "2026-06-25",
+      "2026-06-26"
+    ],
+    "present_daily_pack_refs": [
+      "industry://internal/2026-06-20/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-21/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-22/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-23/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-24/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-25/daily-industry-evidence-pack.v2/pack-001",
+      "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/pack-001"
+    ],
+    "missing_daily_pack_dates": [],
+    "usable_day_count": 7,
+    "missing_day_count": 0,
+    "recent_3d_usable_day_count": 3
+  },
+  "tier_profile_rules": {
+    "status": "ready",
+    "profile_refs": [
+      "docs/specs/design-docs/行业级Agent趋势判断设计/04-评分裁决与证据归一.md#claim-archetype-decision-profile.v1",
+      "docs/specs/design-docs/行业级Agent趋势判断设计/03-数据模型契约.md#axis-status-threshold-profile.v1",
+      "docs/specs/design-docs/行业级Agent趋势判断设计/04-评分裁决与证据归一.md#independence-credit-profile.v1"
+    ]
+  },
+  "decision_context_artifact": {
+    "status": "ready",
+    "artifact": {
+      "context_id": "decision-context-2026-06-26",
+      "schema_version": "decision-context-artifact.v1",
+      "run_id": "cross-group-2026-06-26",
+      "claim_id": "claim-evt-06ba611ba98a",
+      "candidate_group_id": "candidate-group-evt-06ba611ba98a",
+      "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+      "claim_evidence_link_batch_ref": "industry://internal/2026-06-26/industry-claim-evidence-link.v1/cross-group",
+      "merge_audit_ref": "industry://internal/2026-06-26/industry-merge-audit.v1/not-materialized",
+      "fact_resolution_audit_ref": "fact-resolution-audit-2026-06-26",
+      "registry_review_result_refs": [
+        "platform-phase1-current-consumer.v1",
+        "industry://internal/tool-registry/cross-group-ready"
+      ],
+      "audit_result_refs": [
+        "audit-result-2026-06-26"
+      ],
+      "evidence_gap_result_refs": [],
+      "tool_coverage_report_refs": [],
+      "agent_contribution_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-e5ae3396fd35",
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-2e93c27875ea"
+      ],
+      "capacity_reservation_refs": [],
+      "missing_context_reason_codes": [],
+      "context_snapshot_cutoff_at": "2026-06-26T23:59:59+08:00"
+    }
+  },
+  "tier_decision_input": {
+    "status": "ready",
+    "payload": {
+      "payload_schema": "trend-decision-input.v1",
+      "payload_id": "trend-decision-input-2026-06-26",
+      "schema_version": "1.0.0",
+      "run_id": "cross-group-2026-06-26",
+      "window_start": "2026-06-26T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "industry://internal/2026-06-26/audit-result.v1/cross-group#message",
+      "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+      "claim_evidence_link_batch_ref": "industry://internal/2026-06-26/industry-claim-evidence-link.v1/cross-group",
+      "decision_context_artifact_ref": "industry://internal/2026-06-26/decision-context-artifact.v1/decision-context-2026-06-26",
+      "missing_context_reason_codes": [],
+      "project_weekly_artifact_refs": []
+    }
+  },
+  "weekly_packaging": {
+    "status": "ready",
+    "internal_weekly_section": {
+      "section_id": "weekly-industry-trend-section-2026-06-26",
+      "schema_version": "weekly-industry-trend-section.v2",
+      "window_start": "2026-06-26T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "evidence_window_status": {
+        "status": "ok",
+        "usable_day_count": 7,
+        "missing_day_count": 0,
+        "recent_3d_usable_day_count": 3,
+        "missing_day_dates": [],
+        "notes_cn": []
+      },
+      "publication_readiness_status": {
+        "status": "ready",
+        "blocked_card_count": 0,
+        "blocked_public_artifact_count": 0,
+        "blocking_reason_codes": [],
+        "notes_cn": []
+      },
+      "governance_load_status": {
+        "status": "nominal",
+        "degraded_axis_count": 0,
+        "budget_exceeded_axis_count": 0,
+        "review_backlog_p1_or_higher": 0
+      },
+      "industry_window_status": {
+        "status": "ok",
+        "reason_codes": []
+      },
+      "run_snapshot": {
+        "fact_partition_snapshot_refs": [
+          "industry://internal/2026-06-26/fact-snapshot.v1/fact-snapshot-2026-06-26"
+        ],
+        "audit_result_refs": [
+          "audit-result-2026-06-26"
+        ],
+        "publication_cutoff_at": "2026-06-26T23:59:59+08:00"
+      },
+      "display_index": {
+        "headline_core_card_ids": [],
+        "provisional_core_watchlist_card_ids": [],
+        "needs_review_card_ids": [],
+        "blocked_public_output_card_ids": [],
+        "suppressed_card_ids": []
+      },
+      "lineage_refs": {
+        "daily_pack_refs": [
+          "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/ref-only"
+        ],
+        "rolling_evidence_snapshot_ref": "rolling-evidence-window-2026-06-26",
+        "claim_candidate_batch_ref": "industry://internal/2026-06-26/claim-candidate-batch.v1/cross-group",
+        "audit_result_refs": [
+          "audit-result-2026-06-26"
+        ],
+        "trend_decision_input_ref": "trend-decision-input-2026-06-26",
+        "claim_ledger_refs": []
+      }
+    },
+    "consumer_view": {
+      "view_id": "consumer-weekly-industry-view-2026-06-26",
+      "schema_version": "consumer-weekly-industry-view.v1",
+      "source_weekly_section_ref": "industry://internal/2026-06-26/weekly-industry-trend-section.v2/cross-group",
+      "visible_card_ids": [],
+      "headline_card_ids": [],
+      "watchlist_card_ids": [],
+      "needs_review_card_ids": [],
+      "hidden_card_ids": [],
+      "ordering_basis": [
+        "consumer_readiness_state",
+        "consumer_display_priority",
+        "decision_tier",
+        "decision_confidence",
+        "coverage_audit_state"
+      ],
+      "card_projection_refs": [],
+      "blocked_reason_codes": []
+    },
+    "public_projection": {
+      "projection_id": "public-weekly-industry-projection-2026-06-26",
+      "schema_version": "public-weekly-industry-projection.v1",
+      "source_weekly_section_ref": "industry://internal/2026-06-26/weekly-industry-trend-section.v2/cross-group",
+      "headline_core_card_ids": [],
+      "tier_visible_card_ids": [],
+      "redacted_card_ids": [],
+      "blocked_card_ids": [],
+      "public_card_projection_refs": [],
+      "blocked_reason_codes": []
+    }
+  },
   "next_platform_actions": [
-    "assemble_cross_group_replay_eval_backlog",
-    "start_closed_fact_snapshot"
+    "run_tier_decision_and_weekly_packaging"
   ],
   "reject_list": []
 }

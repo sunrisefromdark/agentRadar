@@ -1,0 +1,14 @@
+{
+  "snapshot_id": "rolling-evidence-window-2026-06-26",
+  "schema_version": "rolling-evidence-window-snapshot.v1",
+  "window_end": "2026-06-26T23:59:59+08:00",
+  "carry_forward_horizon_days": 7,
+  "derived_from_daily_pack_refs": [
+    "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/ref-only"
+  ],
+  "derived_from_claim_ledger_refs": [],
+  "carry_forward_entries": [],
+  "expired_entry_ids": [],
+  "fact_snapshot_ref": "blocked_until_closed_fact_snapshot",
+  "registry_snapshot_ref": "platform-phase1-current-consumer.v1"
+}

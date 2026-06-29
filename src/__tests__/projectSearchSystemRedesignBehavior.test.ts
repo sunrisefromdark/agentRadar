@@ -1,9 +1,13 @@
-import { describe, expect, it } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { DIRECTION_CATALOG, PROJECT_SEARCH_CONSTANTS } from "../signal/directionCatalog.ts";
 import { MISSION_GITHUB_PER_DIRECTION_LIMIT, directionGithubSearchTemplates, missionGithubPerDirectionLimit } from "../signal/githubRepositorySearch.ts";
+import { resetGitHubSearchRuntimeState } from "../signal/githubSearchRuntime.ts";
+import { searchGithubRepositoriesForDirection } from "../signal/githubRepositorySearch.ts";
 import { runMissionDeepDiscovery } from "../signal/missionDeepDiscovery.ts";
 import { runMissionScoutDiscovery, type MissionScoutSearchResult } from "../signal/missionScoutDiscovery.ts";
 import type { DirectionCatalogEntry, ScoredProject } from "../types.ts";
+
+const originalGithubToken = process.env.GITHUB_TOKEN;
 
 function makeScoutResult(overrides: Partial<MissionScoutSearchResult>): MissionScoutSearchResult {
   return {
@@ -67,6 +71,13 @@ function makeScoredProject(args: {
     },
   };
 }
+
+afterEach(() => {
+  if (originalGithubToken === undefined) delete process.env.GITHUB_TOKEN;
+  else process.env.GITHUB_TOKEN = originalGithubToken;
+  resetGitHubSearchRuntimeState();
+  vi.unstubAllGlobals();
+});
 
 describe("project search system redesign behavior", () => {
   it("freezes the V1 catalog to the approved 19 must-cover directions from the design doc", () => {
@@ -154,6 +165,114 @@ describe("project search system redesign behavior", () => {
     expect(workflowTemplates).toContain("office productivity agent");
     expect(workflowTemplates).toContain("email calendar workflow agent");
     expect(workflowTemplates).toContain("document spreadsheet automation");
+  });
+
+  it("keeps local direction matches when GitHub live search fails mid-query", async () => {
+    process.env.GITHUB_TOKEN = "test-token";
+    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("github search down")));
+
+    const result = await searchGithubRepositoriesForDirection({
+      direction: DIRECTION_CATALOG.find((item) => item.direction_key === "time-series-forecasting-agent")!,
+      projects: [
+        makeScoredProject({
+          projectName: "Demand Forecast Agent",
+          repoFullName: "acme/demand-forecast-agent",
+          description: "time series forecasting agent for demand prediction and anomaly signal workflows",
+          tags: ["forecasting", "time-series", "demand"],
+        }).project,
+      ],
+      date: "2026-06-28",
+      enableLiveSearch: true,
+      retryAttempts: 1,
+      retryBaseDelayMs: 1,
+      queryTimeoutMs: 50,
+    });
+
+    expect(result.status).toBe("ok");
+    expect(result.normalized_hits).toBe(1);
+    expect(result.repo_candidates).toHaveLength(1);
+    expect(result.error).toContain("github search down");
+  });
+
+  it("retries transient GitHub search failures before giving up", async () => {
+    process.env.GITHUB_TOKEN = "test-token";
+    let attempt = 0;
+    const successResponse = new Response(
+      JSON.stringify({
+        items: [
+          {
+            full_name: "acme/demand-forecast-agent",
+            html_url: "https://github.com/acme/demand-forecast-agent",
+            description: "time series forecasting agent",
+            stargazers_count: 42,
+            forks_count: 3,
+            open_issues_count: 1,
+            topics: ["forecasting"],
+          },
+        ],
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } },
+    );
+    const fetchMock = vi.fn(async () => {
+      attempt += 1;
+      return attempt === 1 ? new Response("temporary unavailable", { status: 503 }) : successResponse.clone();
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const result = await searchGithubRepositoriesForDirection({
+      direction: DIRECTION_CATALOG.find((item) => item.direction_key === "time-series-forecasting-agent")!,
+      projects: [],
+      date: "2026-06-28",
+      enableLiveSearch: true,
+    });
+
+    expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2);
+    expect(result.status).toBe("ok");
+    expect(result.repo_candidates).toHaveLength(1);
+    expect(result.error).toBeUndefined();
+  });
+
+  it("retries GitHub search without auth after a 401 token failure", async () => {
+    process.env.GITHUB_TOKEN = "bad-token";
+    const successResponse = new Response(
+      JSON.stringify({
+        items: [
+          {
+            full_name: "acme/short-drama-agent",
+            html_url: "https://github.com/acme/short-drama-agent",
+            description: "short drama agent",
+            stargazers_count: 18,
+            forks_count: 2,
+            open_issues_count: 0,
+            topics: ["video"],
+          },
+        ],
+      }),
+      { status: 200, headers: { "Content-Type": "application/json" } },
+    );
+    let sawUnauthorized = false;
+    const fetchMock = vi.fn(async (_input, init?: RequestInit) => {
+      const headers = (init?.headers ?? {}) as Record<string, string>;
+      if (!sawUnauthorized && headers.Authorization === "Bearer bad-token") {
+        sawUnauthorized = true;
+        return new Response("unauthorized", { status: 401 });
+      }
+      return successResponse.clone();
+    });
+    vi.stubGlobal("fetch", fetchMock);
+
+    const result = await searchGithubRepositoriesForDirection({
+      direction: DIRECTION_CATALOG.find((item) => item.direction_key === "short-drama-generation-agent")!,
+      projects: [],
+      date: "2026-06-28",
+      enableLiveSearch: true,
+    });
+
+    expect(fetchMock.mock.calls.length).toBeGreaterThanOrEqual(2);
+    expect(fetchMock.mock.calls[0]?.[1]?.headers).toMatchObject({ Authorization: "Bearer bad-token" });
+    expect(fetchMock.mock.calls.some((call) => !("Authorization" in (((call[1]?.headers as Record<string, string>) ?? {}))))).toBe(true);
+    expect(result.status).toBe("ok");
+    expect(result.repo_candidates).toHaveLength(1);
   });
 
   it("keeps mission matches out of the task section when a direction never reached matched", async () => {

@@ -4,6 +4,7 @@ import { PROJECT_SEARCH_CONSTANTS } from "./directionCatalog.ts";
 import type { MissionScoutSearchResult } from "./missionScoutDiscovery.ts";
 import { directionLaneHits, directionMatchesProject } from "./directionMatching.ts";
 import { extractGitHubRepoFullName } from "./githubMetrics.ts";
+import { executeGitHubSearchRequest, type GitHubSearchFailureReason, type GitHubSearchRuntimeOptions } from "./githubSearchRuntime.ts";
 
 interface GitHubSearchRepository {
   full_name?: string;
@@ -73,21 +74,6 @@ export function missionGithubPerDirectionLimit(direction: DirectionCatalogEntry)
   return MISSION_GITHUB_PER_DIRECTION_LIMIT_OVERRIDES[direction.direction_key] ?? MISSION_GITHUB_PER_DIRECTION_LIMIT;
 }
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-function githubApiHeaders(): Record<string, string> {
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent": "agent-radar/0.1",
-  };
-  const token = process.env["GITHUB_TOKEN"];
-  if (token) headers.Authorization = `Bearer ${token}`;
-  return headers;
-}
-
 function timestampForDate(date: string | undefined): string {
   return `${date ?? new Date().toISOString().slice(0, 10)}T00:00:00.000Z`;
 }
@@ -130,12 +116,26 @@ export function directionGithubSearchTemplates(direction: DirectionCatalogEntry)
 async function fetchDirectionSignalsFromGitHub(
   direction: DirectionCatalogEntry,
   date: string | undefined,
-): Promise<{ signals: RawSignal[]; attemptedQueryCount: number }> {
+  runtime: GitHubSearchRuntimeOptions,
+): Promise<{
+  signals: RawSignal[];
+  attemptedQueryCount: number;
+  successfulQueryCount: number;
+  failedQueryCount: number;
+  failureReasons: GitHubSearchFailureReason[];
+  failureMessages: string[];
+  circuitOpened: boolean;
+}> {
   const seen = new Set<string>();
   const signals: RawSignal[] = [];
   const templates = directionGithubSearchTemplates(direction);
   const directionLimit = missionGithubPerDirectionLimit(direction);
   let attemptedQueryCount = 0;
+  let successfulQueryCount = 0;
+  let failedQueryCount = 0;
+  let circuitOpened = false;
+  const failureReasons: GitHubSearchFailureReason[] = [];
+  const failureMessages: string[] = [];
 
   for (const template of templates) {
     if (signals.length >= directionLimit) break;
@@ -146,12 +146,22 @@ async function fetchDirectionSignalsFromGitHub(
     url.searchParams.set("order", "desc");
     url.searchParams.set("per_page", "20");
 
-    const response = await fetch(url, { headers: githubApiHeaders() });
-    if (!process.env["GITHUB_TOKEN"]) await sleep(6500);
-    if (!response.ok) {
-      throw new Error(`GitHub Search returned HTTP ${response.status} for ${direction.direction_key}`);
+    const result = await executeGitHubSearchRequest(url.toString(), `mission-github-search:${direction.direction_key}`, runtime);
+    if (result.status !== "ok") {
+      if (result.status === "circuit_open") {
+        circuitOpened = true;
+        failureReasons.push("circuit_open");
+        failureMessages.push(result.error);
+        break;
+      }
+      failedQueryCount += 1;
+      failureReasons.push(result.reason);
+      failureMessages.push(result.error);
+      continue;
     }
-    const body = (await response.json()) as GitHubSearchResponse;
+
+    successfulQueryCount += 1;
+    const body = (await result.response.json()) as GitHubSearchResponse;
     for (const repo of body.items ?? []) {
       const signal = repoToRawSignal(repo, direction, date);
       if (!signal) continue;
@@ -163,7 +173,15 @@ async function fetchDirectionSignalsFromGitHub(
     }
   }
 
-  return { signals, attemptedQueryCount };
+  return {
+    signals,
+    attemptedQueryCount,
+    successfulQueryCount,
+    failedQueryCount,
+    failureReasons,
+    failureMessages,
+    circuitOpened,
+  };
 }
 
 export async function searchGithubRepositoriesForDirection(input: {
@@ -171,6 +189,9 @@ export async function searchGithubRepositoriesForDirection(input: {
   projects: Array<NormalizedProject | ScoredProject["project"]>;
   date?: string;
   enableLiveSearch?: boolean;
+  queryTimeoutMs?: number;
+  retryAttempts?: number;
+  retryBaseDelayMs?: number;
 }): Promise<MissionScoutSearchResult> {
   const lane_hits: MissionScoutSearchResult["lane_hits"] = {
     canonical: 0,
@@ -186,6 +207,11 @@ export async function searchGithubRepositoriesForDirection(input: {
   let normalizedHits = 0;
   let qualityPassedHits = 0;
   let liveQueryCount = 0;
+  let liveSearchError: string | undefined;
+  let remoteStatus: MissionScoutSearchResult["remote_status"] = "not_requested";
+  let remoteFailureReasons: string[] = [];
+  let successfulRemoteQueryCount = 0;
+  let failedRemoteQueryCount = 0;
 
   for (const project of input.projects) {
     if (!directionMatchesProject(project, input.direction)) continue;
@@ -205,22 +231,42 @@ export async function searchGithubRepositoriesForDirection(input: {
   }
 
   if (input.enableLiveSearch) {
-    const liveSearch = await fetchDirectionSignalsFromGitHub(input.direction, input.date);
-    liveQueryCount = liveSearch.attemptedQueryCount;
-    const liveSignals = liveSearch.signals;
-    for (const signal of liveSignals) {
-      const repoFullName = extractGitHubRepoFullName(signal.repo_url);
-      if (!repoFullName) continue;
-      const key = repoFullName.toLowerCase();
-      if (repo_candidates.some((candidate) => candidate.repo_full_name.toLowerCase() === key)) continue;
-      rawHits += 1;
-      normalizedHits += 1;
-      qualityPassedHits += 1;
-      raw_signals.push(signal);
-      repo_candidates.push({
-        repo_full_name: repoFullName,
-        repo_url: signal.repo_url,
+    try {
+      const liveSearch = await fetchDirectionSignalsFromGitHub(input.direction, input.date, {
+        timeoutMs: input.queryTimeoutMs ?? 12_000,
+        retryAttempts: input.retryAttempts ?? 3,
+        retryBaseDelayMs: input.retryBaseDelayMs ?? 1_000,
       });
+      liveQueryCount = liveSearch.attemptedQueryCount;
+      successfulRemoteQueryCount = liveSearch.successfulQueryCount;
+      failedRemoteQueryCount = liveSearch.failedQueryCount;
+      remoteFailureReasons = liveSearch.failureReasons;
+      liveSearchError = liveSearch.failureMessages[0];
+      remoteStatus = liveSearch.circuitOpened
+        ? "circuit_open"
+        : liveSearch.failedQueryCount > 0
+          ? liveSearch.successfulQueryCount > 0
+            ? "partial_failure"
+            : "failed"
+          : "healthy";
+      const liveSignals = liveSearch.signals;
+      for (const signal of liveSignals) {
+        const repoFullName = extractGitHubRepoFullName(signal.repo_url);
+        if (!repoFullName) continue;
+        const key = repoFullName.toLowerCase();
+        if (repo_candidates.some((candidate) => candidate.repo_full_name.toLowerCase() === key)) continue;
+        rawHits += 1;
+        normalizedHits += 1;
+        qualityPassedHits += 1;
+        raw_signals.push(signal);
+        repo_candidates.push({
+          repo_full_name: repoFullName,
+          repo_url: signal.repo_url,
+        });
+      }
+    } catch (error) {
+      remoteStatus = "failed";
+      liveSearchError = String(error);
     }
   }
 
@@ -230,7 +276,7 @@ export async function searchGithubRepositoriesForDirection(input: {
     qualityPassedHits >= PROJECT_SEARCH_CONSTANTS.directionQualityPassedHitsMin;
 
   return {
-    status: "ok",
+    status: (remoteStatus === "failed" || remoteStatus === "circuit_open") && repo_candidates.length === 0 ? "failed" : "ok",
     raw_hits: rawHits,
     normalized_hits: normalizedHits,
     quality_passed_hits: qualityPassedHits,
@@ -239,5 +285,10 @@ export async function searchGithubRepositoriesForDirection(input: {
     raw_signals,
     query_count: Math.max(input.direction.query_packs.reduce((sum, pack) => sum + pack.templates.length, 0), liveQueryCount),
     search_exhausted: Boolean(input.enableLiveSearch && !quantityTargetMet),
+    error: liveSearchError,
+    remote_status: remoteStatus,
+    remote_failure_reasons: remoteFailureReasons,
+    successful_query_count: successfulRemoteQueryCount,
+    failed_query_count: failedRemoteQueryCount,
   };
 }

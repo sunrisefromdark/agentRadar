@@ -804,6 +804,7 @@ export interface IndustryRuntimeSummaryArtifact {
   overall_status: "industry_runtime_contracts_ready";
   platform_contract: {
     fixture_id: string;
+    registry_snapshot_fixture_id?: string;
     published_for: string[];
     handoff_payload_schema_count: number;
     feedback_payload_schema_count: number;

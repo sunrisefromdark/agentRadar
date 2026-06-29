@@ -1,7 +1,7 @@
 {
   "artifact_kind": "cross_group_integration_readiness",
   "date": "2026-06-26",
-  "generated_at": "2026-06-29T18:54:47+08:00",
+  "generated_at": "2026-06-29T21:03:25+08:00",
   "status": "phase5_internal_weekly_ready",
   "ready_group_count": 3,
   "weekly_output_ready": true,
@@ -36,8 +36,8 @@
     ],
     "accepted_event_count": 21,
     "rejected_event_count": 2,
-    "registry_snapshot_ref": "platform-phase1-current-consumer.v1",
-    "tool_registry_snapshot_ref": "industry://internal/tool-registry/cross-group-ready",
+    "registry_snapshot_ref": "platform-phase2-registry-snapshot-current.v1",
+    "tool_registry_snapshot_ref": "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group",
     "public_projection": "blocked_until_audit",
     "cost_and_degradation_summary": "ref-only aggregation; no final weekly output",
     "coverage_summary": "policy-finance runtime ready; academic formal dry-run ready; product ecosystem phase6 backlog ready"
@@ -54,7 +54,7 @@
     "carry_forward_entries": [],
     "expired_entry_ids": [],
     "fact_snapshot_ref": "blocked_until_closed_fact_snapshot",
-    "registry_snapshot_ref": "platform-phase1-current-consumer.v1"
+    "registry_snapshot_ref": "platform-phase2-registry-snapshot-current.v1"
   },
   "policy_finance": {
     "status": "policy_finance_runtime_ready",
@@ -612,8 +612,8 @@
       "claim_evidence_link_batch_ref": "industry://internal/2026-06-26/industry-claim-evidence-link.v1/cross-group",
       "normalized_event_batch_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack.v2/normalized-ref-index",
       "registry_review_result_refs": [
-        "platform-phase1-current-consumer.v1",
-        "industry://internal/tool-registry/cross-group-ready"
+        "platform-phase2-registry-snapshot-current.v1",
+        "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group"
       ],
       "supporting_event_ids": [
         "evt-51541b7359b8",
@@ -759,8 +759,8 @@
       "merge_audit_ref": "industry://internal/2026-06-26/industry-merge-audit.v1/not-materialized",
       "fact_resolution_audit_ref": "fact-resolution-audit-2026-06-26",
       "registry_review_result_refs": [
-        "platform-phase1-current-consumer.v1",
-        "industry://internal/tool-registry/cross-group-ready"
+        "platform-phase2-registry-snapshot-current.v1",
+        "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group"
       ],
       "audit_result_refs": [
         "audit-result-2026-06-26"

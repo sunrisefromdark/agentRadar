@@ -6,7 +6,7 @@ import {
 } from "../contracts/financePolicyHandoff.ts";
 import { loadIndustrySchemaRegistry, type IndustrySchemaRegistry } from "../contracts/schemaRegistry.ts";
 import { resolveSharedGovernanceProfile } from "../contracts/sharedGovernance.ts";
-import { publishRuntimeRegistrySnapshot } from "../registry/runtimeSnapshot.ts";
+import { getPlatformRegistrySnapshotGroup, publishRuntimeRegistrySnapshot } from "../registry/runtimeSnapshot.ts";
 
 type RecordLike = Record<string, unknown>;
 type RuntimeProfiles = {
@@ -106,6 +106,7 @@ function policyFinanceRuntimeProfileIds(bundle: FinancePolicyHandoffBundle): Run
 }
 
 function policyFinanceRuntimeSnapshots(bundle: FinancePolicyHandoffBundle, coverageRefs: string[]): RuntimeSnapshotResult[] {
+  const phase2Snapshot = getPlatformRegistrySnapshotGroup("policy_finance");
   return coverageRefs.map((coverageRef) => {
     const message = bundle.messages.find((item) => (item as RecordLike).payload_ref === coverageRef) as RecordLike | undefined;
     const coverage = message
@@ -117,7 +118,8 @@ function policyFinanceRuntimeSnapshots(bundle: FinancePolicyHandoffBundle, cover
       registrySnapshotRef: String(coverage.registry_snapshot_ref ?? ""),
       toolRegistrySnapshotRef: String(coverage.tool_registry_snapshot_ref ?? ""),
       toolCoverageRefs: [coverageRef],
-      authorityRefs: String(coverage.registry_snapshot_ref ?? "") ? [String(coverage.registry_snapshot_ref)] : [],
+      seedRefs: phase2Snapshot.seed_refs,
+      authorityRefs: phase2Snapshot.authority_refs,
       manualReviewPoolSlots: 0,
       reviewAvailability: { same_run_review_mode: "async_only", reviewer_on_duty_count: 0 },
     });

@@ -126,6 +126,13 @@ describe("industry platform Phase 6 replay assembly", () => {
       blocked_until: "public_projection_after_evidence_window_recovery",
       daily_pack_v2_ready: true,
       rolling_snapshot_ready: true,
+      daily_pack_v2: {
+        registry_snapshot_ref: "platform-phase2-registry-snapshot-current.v1",
+        tool_registry_snapshot_ref: "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group",
+      },
+      rolling_snapshot: {
+        registry_snapshot_ref: "platform-phase2-registry-snapshot-current.v1",
+      },
       policy_finance: {
         status: "policy_finance_runtime_ready",
         candidate_pool_ready: true,
@@ -507,6 +514,8 @@ describe("industry platform Phase 6 replay assembly", () => {
       ).toMatchObject({
         schema_version: "daily-industry-evidence-pack.v2",
         date: "2026-06-26",
+        registry_snapshot_ref: "platform-phase2-registry-snapshot-current.v1",
+        tool_registry_snapshot_ref: "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group",
       });
       expect(
         JSON.parse(

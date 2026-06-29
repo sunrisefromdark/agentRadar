@@ -1,10 +1,11 @@
 {
   "artifact_kind": "industry_runtime_summary",
   "date": "2026-06-26",
-  "generated_at": "2026-06-28T02:28:59+08:00",
+  "generated_at": "2026-06-29T21:03:24+08:00",
   "overall_status": "industry_runtime_contracts_ready",
   "platform_contract": {
     "fixture_id": "platform-phase1-current-consumer.v1",
+    "registry_snapshot_fixture_id": "platform-phase2-registry-snapshot-current.v1",
     "published_for": [
       "finance-agent",
       "policy-agent",

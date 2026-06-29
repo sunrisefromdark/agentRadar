@@ -5,6 +5,7 @@ import {
   type AcademicFormalHandoffBundle,
 } from "../contracts/academicHandoff.ts";
 import { loadIndustrySchemaRegistry, type IndustrySchemaRegistry } from "../contracts/schemaRegistry.ts";
+import { buildRuntimeRegistrySnapshotFromFixture } from "../registry/runtimeSnapshot.ts";
 
 type RecordLike = Record<string, unknown>;
 type ReadyFeedbackPayload = {
@@ -65,6 +66,7 @@ export type AcademicDryRunResult =
       rejectedEventBatchRefs: string[];
       coverageRefs: string[];
       contributionRefs: string[];
+      runtimeSnapshot: ReturnType<typeof buildRuntimeRegistrySnapshotFromFixture>;
       feedbackPayloadSchema: "normalization-feedback.v1";
       feedbackPayload: ReadyFeedbackPayload;
     }
@@ -149,13 +151,27 @@ export function consumeAcademicHandoffForDryRun(input: AcademicDryRunInput): Aca
   }
 
   const daily = dailyInputPayload(input.bundle);
+  const coverageRefs = stringArray(daily.coverage_refs);
+  const runtimeSnapshot = buildRuntimeRegistrySnapshotFromFixture({
+    groupId: "academic",
+    toolCoverageRefs: coverageRefs,
+  });
+  if (!runtimeSnapshot.ok) {
+    return {
+      ...runtimeSnapshot,
+      feedbackPayloadSchema: "normalization-feedback.v1",
+      feedbackPayload: feedbackPayload(input.bundle, runtimeSnapshot) as RejectedFeedbackPayload,
+    };
+  }
+
   return {
     ok: true,
     status: "normalization_dry_run_ready",
     normalizedEventBatchRefs: stringArray(daily.normalized_event_batch_refs),
     rejectedEventBatchRefs: stringArray(daily.rejected_event_batch_refs),
-    coverageRefs: stringArray(daily.coverage_refs),
+    coverageRefs,
     contributionRefs: stringArray(daily.contribution_refs),
+    runtimeSnapshot,
     feedbackPayloadSchema: "normalization-feedback.v1",
     feedbackPayload: feedbackPayload(input.bundle) as ReadyFeedbackPayload,
   };

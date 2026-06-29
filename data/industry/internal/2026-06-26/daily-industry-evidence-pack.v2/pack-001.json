@@ -26,8 +26,8 @@
   ],
   "accepted_event_count": 21,
   "rejected_event_count": 2,
-  "registry_snapshot_ref": "platform-phase1-current-consumer.v1",
-  "tool_registry_snapshot_ref": "industry://internal/tool-registry/cross-group-ready",
+  "registry_snapshot_ref": "platform-phase2-registry-snapshot-current.v1",
+  "tool_registry_snapshot_ref": "industry://internal/2026-06-26/tool-registry-snapshot.v1/cross-group",
   "public_projection": "blocked_until_audit",
   "cost_and_degradation_summary": "ref-only aggregation; no final weekly output",
   "coverage_summary": "policy-finance runtime ready; academic formal dry-run ready; product ecosystem phase6 backlog ready"

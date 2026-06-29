@@ -6,6 +6,7 @@ import type { FinancePolicyHandoffBundle } from "../contracts/financePolicyHando
 import { buildProductEcosystemFormalHandoff } from "../../agents/community-news-agent/formalHandoff.ts";
 import { consumeAcademicHandoffForDryRun } from "../normalization/academicDryRun.ts";
 import { buildIndustryRuntimeSummaryArtifact, buildProductEcosystemInput } from "../normalization/industryRuntimeSummary.ts";
+import { loadPlatformRegistrySnapshotFixture } from "../registry/runtimeSnapshot.ts";
 import {
   assembleProductEcosystemPhase6Inputs,
   type ProductEcosystemPhase6AssemblyResult,
@@ -638,6 +639,7 @@ function buildDailyPackV2(
   runtimeSummary: ReturnType<typeof buildIndustryRuntimeSummaryArtifact>,
   academic: ReturnType<typeof consumeAcademicHandoffForDryRun>,
 ): CrossGroupIntegrationReadiness["daily_pack_v2"] {
+  const phase2RegistrySnapshot = loadPlatformRegistrySnapshotFixture();
   const academicRefs = academic.ok
     ? [
         ...academic.normalizedEventBatchRefs,
@@ -664,8 +666,8 @@ function buildDailyPackV2(
     agent_contributions: academic.ok ? academic.contributionRefs : [],
     accepted_event_count: runtimeSummary.policy_finance.runtime_consumed_same_run_messages + (academic.ok ? academic.normalizedEventBatchRefs.length : 0),
     rejected_event_count: academic.ok ? academic.rejectedEventBatchRefs.length : 0,
-    registry_snapshot_ref: runtimeSummary.platform_contract.fixture_id,
-    tool_registry_snapshot_ref: "industry://internal/tool-registry/cross-group-ready",
+    registry_snapshot_ref: phase2RegistrySnapshot.fixture_id,
+    tool_registry_snapshot_ref: `industry://internal/${date}/tool-registry-snapshot.v1/cross-group`,
     public_projection: "blocked_until_audit",
     cost_and_degradation_summary: "ref-only aggregation; no final weekly output",
     coverage_summary: "policy-finance runtime ready; academic formal dry-run ready; product ecosystem phase6 backlog ready",

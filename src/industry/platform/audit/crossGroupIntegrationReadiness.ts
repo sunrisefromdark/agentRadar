@@ -13,6 +13,12 @@ import {
 import { writeJsonFile } from "../../../storage/files.ts";
 
 type RecordLike = Record<string, unknown>;
+type EvalCaseFamily =
+  | "positive_canonical_case"
+  | "near_boundary_case"
+  | "anti_upgrade_case"
+  | "coverage_vs_tier_case"
+  | "counter_override_case";
 
 export type CrossGroupIntegrationReadiness = {
   artifact_kind: "cross_group_integration_readiness";
@@ -80,9 +86,19 @@ export type CrossGroupIntegrationReadiness = {
   academic_feedback: RecordLike;
   replay_eval_backlog: {
     status: "ready" | "blocked";
+    group_count: number;
     policy_finance_fixture_refs: string[];
     academic_fixture_refs: string[];
     product_ecosystem_fixture_refs: string[];
+    product_replay_window_ids: string[];
+    eval_case_coverage: Array<{
+      case_family: EvalCaseFamily;
+      status: "ready" | "missing";
+      fixture_refs: string[];
+      missing_reason_code?: "requires_frozen_eval_case" | "requires_replay_eval_execution";
+    }>;
+    blocked_eval_case_families: EvalCaseFamily[];
+    decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result";
   };
   closed_fact_snapshot_prep: {
     status: "ready_to_start" | "blocked";
@@ -400,6 +416,12 @@ export function buildCrossGroupIntegrationReadiness(input: {
   const decisionContextArtifact = buildDecisionContextArtifact(input.date, dailyPack, closedFactSnapshot, claimBuilder, counterEvidenceAudit, tierDecisionPrep);
   const tierDecisionInput = buildTierDecisionInput(input.date, claimBuilder, decisionContextArtifact, tierDecisionPrep);
   const weeklyPackaging = buildWeeklyPackaging(input.date, dailyPack, rollingSnapshot, claimBuilder, counterEvidenceAudit, tierDecisionInput, recent7dEvidenceWindow);
+  const replayEvalBacklog = buildReplayEvalBacklog({
+    academicOk: academic.ok,
+    academicFixtureRefs,
+    policyFinanceReady: runtimeSummary.policy_finance.status === "policy_finance_runtime_ready",
+    product,
+  });
   const blockedUntil =
     weeklyPackaging.public_projection.blocked_reason_codes.length > 0
       ? "public_projection_after_evidence_window_recovery"
@@ -445,12 +467,7 @@ export function buildCrossGroupIntegrationReadiness(input: {
       next_required_owner: "executor_4",
     },
     academic_feedback: academic.feedbackPayload,
-    replay_eval_backlog: {
-      status: academic.ok && academicFixtureRefs.length > 0 && product.ok ? "ready" : "blocked",
-      policy_finance_fixture_refs: POLICY_FINANCE_FIXTURE_REFS,
-      academic_fixture_refs: academicFixtureRefs,
-      product_ecosystem_fixture_refs: productReplayEvalRefs(product),
-    },
+    replay_eval_backlog: replayEvalBacklog,
     closed_fact_snapshot_prep: buildClosedFactSnapshotPrep(input.date, academic.feedbackPayload, dailyPack, reject_list.length === 0),
     closed_fact_snapshot: closedFactSnapshot,
     claim_builder: claimBuilder,
@@ -507,10 +524,79 @@ function academicReplayEvalRefs(deliveryManifest: RecordLike): string[] {
 const POLICY_FINANCE_FIXTURE_REFS = [
   "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
   "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
+  "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
+  "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
+  "fixtures/industry/agents/policy-agent/replay/phase1-runtime-ready-inputs.json",
+  "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+  "fixtures/industry/platform/negative/phase1-runtime.json",
 ];
 
 function productReplayEvalRefs(product: ProductEcosystemPhase6AssemblyResult): string[] {
   return product.ok ? [...new Set([...product.supportingFixtureRefs, ...product.replayFixtureRefs])] : [];
+}
+
+function buildReplayEvalBacklog(input: {
+  academicOk: boolean;
+  academicFixtureRefs: string[];
+  policyFinanceReady: boolean;
+  product: ProductEcosystemPhase6AssemblyResult;
+}): CrossGroupIntegrationReadiness["replay_eval_backlog"] {
+  const policyFixtureRefs = unique(POLICY_FINANCE_FIXTURE_REFS);
+  const productFixtureRefs = productReplayEvalRefs(input.product);
+  const groupsReady = [
+    input.academicOk && input.academicFixtureRefs.length > 0,
+    input.policyFinanceReady && policyFixtureRefs.length > 0,
+    input.product.ok && productFixtureRefs.length > 0,
+  ];
+
+  return {
+    status: groupsReady.every(Boolean) ? "ready" : "blocked",
+    group_count: groupsReady.filter(Boolean).length,
+    policy_finance_fixture_refs: policyFixtureRefs,
+    academic_fixture_refs: input.academicFixtureRefs,
+    product_ecosystem_fixture_refs: productFixtureRefs,
+    product_replay_window_ids: input.product.ok ? input.product.replayWindowIds : [],
+    eval_case_coverage: buildEvalCaseCoverage(input.academicFixtureRefs, policyFixtureRefs, productFixtureRefs),
+    blocked_eval_case_families: ["coverage_vs_tier_case", "counter_override_case"],
+    decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result",
+  };
+}
+
+function buildEvalCaseCoverage(
+  academicFixtureRefs: string[],
+  policyFixtureRefs: string[],
+  productFixtureRefs: string[],
+): CrossGroupIntegrationReadiness["replay_eval_backlog"]["eval_case_coverage"] {
+  const allRefs = [...academicFixtureRefs, ...policyFixtureRefs, ...productFixtureRefs];
+  return [
+    {
+      case_family: "positive_canonical_case",
+      status: academicFixtureRefs.some((ref) => ref.includes("positive-canonical")) ? "ready" : "missing",
+      fixture_refs: academicFixtureRefs.filter((ref) => ref.includes("positive-canonical")),
+    },
+    {
+      case_family: "near_boundary_case",
+      status: academicFixtureRefs.some((ref) => ref.includes("near-boundary")) ? "ready" : "missing",
+      fixture_refs: academicFixtureRefs.filter((ref) => ref.includes("near-boundary")),
+    },
+    {
+      case_family: "anti_upgrade_case",
+      status: allRefs.some((ref) => ref.includes("anti-upgrade")) ? "ready" : "missing",
+      fixture_refs: allRefs.filter((ref) => ref.includes("anti-upgrade")),
+    },
+    {
+      case_family: "coverage_vs_tier_case",
+      status: "missing",
+      fixture_refs: [],
+      missing_reason_code: "requires_frozen_eval_case",
+    },
+    {
+      case_family: "counter_override_case",
+      status: "missing",
+      fixture_refs: [],
+      missing_reason_code: "requires_replay_eval_execution",
+    },
+  ];
 }
 
 function nextPlatformActions(
@@ -1062,6 +1148,10 @@ function record(value: unknown): RecordLike {
 
 function strings(value: unknown): string[] {
   return Array.isArray(value) ? value.filter((item): item is string => typeof item === "string" && item.length > 0) : [];
+}
+
+function unique(items: string[]): string[] {
+  return [...new Set(items)];
 }
 
 function text(value: unknown): string {

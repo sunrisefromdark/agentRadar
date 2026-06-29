@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import crypto from "node:crypto";
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
 import path from "node:path";
 import {
   buildPolicyFinanceDryRunHandoff,
@@ -21,6 +22,10 @@ import { validateFinancePolicyHandoff } from "../../../../industry/platform/cont
 import { loadIndustrySchemaRegistry } from "../../../../industry/platform/contracts/schemaRegistry.ts";
 import { consumeFinancePolicyHandoffForRuntime } from "../../../../industry/platform/normalization/financePolicyDryRun.ts";
 import type { IndustryAgentMessageEnvelope } from "../../../../industry/agents/policy-agent/groupProtocol.ts";
+
+const repoRoot = process.cwd();
+const tsxCliPath = path.join(repoRoot, "node_modules", "tsx", "dist", "cli.mjs");
+const cliPath = path.join(repoRoot, "src", "cli.ts");
 
 describe("policy-finance group replay handoff", () => {
   const replayMessages = replayBundleFixture.messages as IndustryAgentMessageEnvelope[];
@@ -316,42 +321,44 @@ describe("policy-finance group replay handoff", () => {
   });
 
   it("replays the machine-readable runtime-ready fixture through the executable script", () => {
-    const artifactPath = path.join(process.cwd(), "data", "reports", "2026-06-26.policy-finance-runtime-replay.json");
-    const latestArtifactPath = path.join(process.cwd(), "data", "reports", "latest.policy-finance-runtime-replay.json");
-    fs.rmSync(artifactPath, { force: true });
-    fs.rmSync(latestArtifactPath, { force: true });
-    const output = execFileSync(
-      "corepack",
-      ["pnpm", "policy-finance:runtime-replay", "--", "--date", "2026-06-26"],
-      { cwd: process.cwd(), encoding: "utf8" },
-    );
-    const jsonStart = output.indexOf("{");
-    const result = JSON.parse(output.slice(jsonStart)) as {
-      artifact_kind: string;
-      date: string;
-      fixture_id: string;
-      current_status: string;
-      negative_reason_code: string;
-      runtime_consumed_same_run_messages: number;
-    };
+    const tempRoot = fs.mkdtempSync(path.join(os.tmpdir(), "policy-runtime-cli-"));
+    const artifactPath = path.join(tempRoot, "data", "reports", "2026-06-26.policy-finance-runtime-replay.json");
+    const latestArtifactPath = path.join(tempRoot, "data", "reports", "latest.policy-finance-runtime-replay.json");
+    try {
+      fs.cpSync(path.join(repoRoot, "fixtures"), path.join(tempRoot, "fixtures"), { recursive: true });
+      const output = execFileSync(
+        process.execPath,
+        [tsxCliPath, cliPath, "policy-finance-runtime-replay", "--date", "2026-06-26"],
+        { cwd: tempRoot, encoding: "utf8" },
+      );
+      const jsonStart = output.indexOf("{");
+      const result = JSON.parse(output.slice(jsonStart)) as {
+        artifact_kind: string;
+        date: string;
+        fixture_id: string;
+        current_status: string;
+        negative_reason_code: string;
+        runtime_consumed_same_run_messages: number;
+      };
 
-    expect(result).toMatchObject({
-      artifact_kind: "policy_finance_runtime_replay",
-      date: "2026-06-26",
-      fixture_id: "policy-finance-phase1-runtime-ready-inputs.v1",
-      current_status: "policy_finance_runtime_ready",
-      negative_reason_code: "dispatch_context_missing",
-      runtime_consumed_same_run_messages: 19,
-    });
-    expect(fs.existsSync(artifactPath)).toBe(true);
-    expect(fs.existsSync(latestArtifactPath)).toBe(true);
-    expect(JSON.parse(fs.readFileSync(artifactPath, "utf8"))).toMatchObject({
-      artifact_kind: "policy_finance_runtime_replay",
-      date: "2026-06-26",
-      current_status: "policy_finance_runtime_ready",
-    });
-    fs.rmSync(artifactPath, { force: true });
-    fs.rmSync(latestArtifactPath, { force: true });
+      expect(result).toMatchObject({
+        artifact_kind: "policy_finance_runtime_replay",
+        date: "2026-06-26",
+        fixture_id: "policy-finance-phase1-runtime-ready-inputs.v1",
+        current_status: "policy_finance_runtime_ready",
+        negative_reason_code: "dispatch_context_missing",
+        runtime_consumed_same_run_messages: 19,
+      });
+      expect(fs.existsSync(artifactPath)).toBe(true);
+      expect(fs.existsSync(latestArtifactPath)).toBe(true);
+      expect(JSON.parse(fs.readFileSync(artifactPath, "utf8"))).toMatchObject({
+        artifact_kind: "policy_finance_runtime_replay",
+        date: "2026-06-26",
+        current_status: "policy_finance_runtime_ready",
+      });
+    } finally {
+      fs.rmSync(tempRoot, { force: true, recursive: true });
+    }
   });
 });
 

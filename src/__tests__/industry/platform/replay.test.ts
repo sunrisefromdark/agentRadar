@@ -127,10 +127,13 @@ describe("industry platform Phase 6 replay assembly", () => {
       },
       replay_eval_backlog: {
         status: "ready",
-        policy_finance_fixture_refs: [
+        group_count: 3,
+        policy_finance_fixture_refs: expect.arrayContaining([
           "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
           "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
-        ],
+          "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
+          "fixtures/industry/platform/negative/phase1-runtime.json",
+        ]),
         academic_fixture_refs: [
           "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
           "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
@@ -142,6 +145,38 @@ describe("industry platform Phase 6 replay assembly", () => {
           "fixtures/industry/agents/product-oss-agent/owner-boundary/vendor-blog-repo-update.json",
           "fixtures/industry/agents/community-news-agent/anti-upgrade/news-pr-heat-without-core.json",
         ]),
+        product_replay_window_ids: [
+          "product-oss-release-owner-boundary",
+          "community-news-owner-boundary",
+          "community-news-pr-anti-upgrade",
+          "community-noise-anti-upgrade",
+        ],
+        eval_case_coverage: expect.arrayContaining([
+          expect.objectContaining({
+            case_family: "positive_canonical_case",
+            status: "ready",
+          }),
+          expect.objectContaining({
+            case_family: "near_boundary_case",
+            status: "ready",
+          }),
+          expect.objectContaining({
+            case_family: "anti_upgrade_case",
+            status: "ready",
+          }),
+          expect.objectContaining({
+            case_family: "coverage_vs_tier_case",
+            status: "missing",
+            missing_reason_code: "requires_frozen_eval_case",
+          }),
+          expect.objectContaining({
+            case_family: "counter_override_case",
+            status: "missing",
+            missing_reason_code: "requires_replay_eval_execution",
+          }),
+        ]),
+        blocked_eval_case_families: ["coverage_vs_tier_case", "counter_override_case"],
+        decision_diff_audit_status: "blocked_pending_profile_change_or_replay_result",
       },
       closed_fact_snapshot_prep: {
         status: "ready_to_start",

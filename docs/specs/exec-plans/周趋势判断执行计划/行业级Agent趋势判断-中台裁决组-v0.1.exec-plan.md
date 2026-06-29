@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`In Progress`，截至 `2026-06-28` 已推进到 `Phase 5 internal weekly ready / public projection blocked`；三组输入已被中台接收，`reject_list=[]`，internal tier input 可继续，公开投影仍等待最近 7 日 evidence window 恢复。
+- 当前状态：`In Progress`，截至 `2026-06-29` 已推进到 `Phase 5 internal weekly ready / public projection blocked`；三组输入已被中台接收，`reject_list=[]`，internal tier input 可继续，并已补齐三组 replay/eval backlog 与 eval coverage audit；公开投影仍等待最近 7 日 evidence window 恢复，`coverage_vs_tier_case` / `counter_override_case` 与 DecisionDiffAudit 仍作为 Phase 6 评测缺口显式暴露。
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -21,9 +21,9 @@
 
 只做全组共享的窄口子：schema 真源、registry snapshot、normalization、audit、tier decision、weekly 拼装。领域 seed / domain fixture / 领域 docs 已前推给前三组，不再由本组吞下。
 
-当前分支优先目标：把已就绪的政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 replay/eval 输入并入中台 readiness/backlog；生成 ref-only daily pack、rolling snapshot、academic dry-run feedback、cross-group replay/eval backlog、全量 accepted closed fact snapshot、claim candidate batch、counter-evidence audit、decision-context artifact 与 internal weekly section 壳。最近 7 日 `DailyIndustryEvidencePack.v2` 缺失按设计降级为 `evidence_window_status=missing`，不阻断 internal tier input；公开投影继续 blocked。
+当前分支优先目标：把已就绪的政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 replay/eval 输入并入中台 readiness/backlog；生成 ref-only daily pack、rolling snapshot、academic dry-run feedback、cross-group replay/eval backlog、eval coverage audit、全量 accepted closed fact snapshot、claim candidate batch、counter-evidence audit、decision-context artifact 与 internal weekly section 壳。最近 7 日 `DailyIndustryEvidencePack.v2` 缺失按设计降级为 `evidence_window_status=missing`，不阻断 internal tier input；公开投影继续 blocked。
 
-## 当前推进状态（2026-06-28）
+## 当前推进状态（2026-06-29）
 
 | Phase | 状态 | 已落地证据 | 未完成原因 / 下一步 |
 | --- | --- | --- | --- |
@@ -37,7 +37,7 @@
 | `Phase 3` normalization 与 fact snapshot | `Completed for current accepted inputs` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已消费政策金融 current bundle 与 runtime refs；`src/industry/platform/normalization/academicDryRun.ts` 已消费学术 formal current bundle；`src/industry/platform/normalization/productEcosystemDryRun.ts` 已消费产品生态 formal bundle；`cross_group_integration_readiness` 已写出 ref-only `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1`、academic `normalization-feedback.v1`、cross-group replay/eval backlog、`closed_fact_snapshot_prep` 与覆盖政策金融、学术、产品生态 accepted events 的 `FactResolutionAudit`。 | 三组当前输入已收口，`reject_list=[]`；无须三组继续迭代，除非后续出现新的 normalization / schema / audit 失败反馈。 |
 | `Phase 4` claim-builder 与 audit | `Passed for current closed snapshot` | `cross_group_integration_readiness` 已 materialize `claim-candidate-batch.v1`、claim evidence links、`audit-request.v1`、`audit-result.v1` 与 `counter-evidence-audit.v1`；`blocking_claim_candidate_ids=[]`、`high_impact_unresolved_group_ids=[]`。 | 当前闭环无审计阻塞；继续保留 public output block，等待 tier 输入完整。 |
 | `Phase 5` tier decision 与 weekly 三层输出 | `Internal ready / public blocked` | `tier_profile_rules.status=ready`，`decision_context_artifact.status=ready`；`tier_decision_input.status=ready`，`weekly_packaging.status=ready`，但 `publication_readiness_status.status=blocked`。 | 最近 7 日 `DailyIndustryEvidencePack.v2` 仅有 `2026-06-26`，`2026-06-20` 至 `2026-06-25` 缺失，按设计进入 `evidence_window_status=missing` / `industry_window_status=missing`；不得用普通日报或 raw provider input 脑补公开 weekly。 |
-| `Phase 6` eval / replay / structure | `Backlog ready` | `src/industry/platform/audit/productEcosystemPhase6Assembly.ts` 与 `src/industry/platform/audit/crossGroupIntegrationReadiness.ts` 已接受产品生态 `phase6-delivery-manifest.json` / `phase6-replay-refs.json`，并把政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入合入 cross-group readiness。 | cross-group replay/eval backlog 已可排队；weekly 三层输出只等待最近 7 日 evidence window，不再等待产品生态、政策金融或学术新增输入。 |
+| `Phase 6` eval / replay / structure | `Backlog ready; eval coverage partially blocked` | `src/industry/platform/audit/productEcosystemPhase6Assembly.ts` 与 `src/industry/platform/audit/crossGroupIntegrationReadiness.ts` 已接受产品生态 `phase6-delivery-manifest.json` / `phase6-replay-refs.json`，并把政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入合入 cross-group readiness；`replay_eval_backlog` 已含 policy / academic / product 三组 fixture refs、product replay window ids、`positive_canonical_case` / `near_boundary_case` / `anti_upgrade_case` coverage audit。 | cross-group replay/eval backlog 已可排队；`coverage_vs_tier_case` / `counter_override_case` 与 DecisionDiffAudit 仍显式 blocked；weekly 三层输出不再等待产品生态、政策金融或学术新增输入，但最终 public weekly 仍等待最近 7 日 evidence window 与 public-safe gating。 |
 
 ## 继续推进所需输入
 
@@ -46,7 +46,7 @@
 | `1号执行人` 政策金融组 | 当前无需新增输入。 | 已进入 closed fact snapshot、claim builder 与 audit；只有后续出现新的 normalization / schema / audit 失败反馈时才需要回改本组资产。 |
 | `2号执行人` 学术前沿组 | 当前无需新增输入。 | `academic_formal_handoff_ready` 已被中台消费，`normalization-feedback.v1` 为 dry-run ready；positive canonical / near-boundary / replay / eval / owner-boundary refs 已排入 backlog。 |
 | `3号执行人` 产品生态 / 社区新闻组 | 当前无需新增输入。 | `product_ecosystem_phase6_inputs_accepted` 已进入 cross-group readiness，`eval_backlog_ready=true`；只有后续出现新的 normalization / schema / audit 失败反馈时才需要回改本组资产。 |
-| `4号执行人` 中台裁决组 | 若要解除公开投影阻断，需恢复最近 7 日 `DailyIndustryEvidencePack.v2` refs，至少补齐 `2026-06-20`、`2026-06-21`、`2026-06-22`、`2026-06-23`、`2026-06-24`、`2026-06-25`。 | internal tier input 与 weekly section 壳已可继续；在合法 ref 不齐前保持 public projection blocked，并显式暴露 `evidence_window_status=missing`。 |
+| `4号执行人` 中台裁决组 | 若要解除公开投影阻断，需恢复最近 7 日 `DailyIndustryEvidencePack.v2` refs，至少补齐 `2026-06-20`、`2026-06-21`、`2026-06-22`、`2026-06-23`、`2026-06-24`、`2026-06-25`；若要解除 Phase 6 replay/diff audit 阻塞，还需冻结 `coverage_vs_tier_case`、`counter_override_case` 与 DecisionDiffAudit 执行结果。 | internal tier input 与 weekly section 壳已可继续；在合法 ref 不齐前保持 public projection blocked，并显式暴露 `evidence_window_status=missing` 与 replay/eval backlog 缺口。 |
 
 ## 负责范围
 
@@ -549,3 +549,5 @@
 | 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 中台已接收产品生态 Phase 6 delivery manifest / replay refs，固定 product-only assembly 状态为 `product_ecosystem_phase6_inputs_accepted`，并阻止提前生成 weekly 输出 |
 | 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 新增 `cross_group_integration_readiness`，确认政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入可进入 Phase 3 backlog；ref-only daily pack / rolling snapshot 已 ready。 |
 | 2026-06-28 | `corepack pnpm exec tsx src/cli.ts cross-group-integration-readiness --date 2026-06-26` | `Passed` | 刷新 `data/reports/2026-06-26.cross-group-integration-readiness.json` 与 latest；`reject_list=[]`，`claim_builder.status=ready`，`counter_evidence_audit.status=passed`，`decision_context_artifact.status=ready`，仅缺 `recent_7d_daily_pack_refs`。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | `replay_eval_backlog` 已扩展为 policy / academic / product 三组 refs、product replay window ids 与 eval coverage audit；`positive_canonical_case` / `near_boundary_case` / `anti_upgrade_case` 已有 refs，`coverage_vs_tier_case` / `counter_override_case` 与 DecisionDiffAudit 仍显式 blocked。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform` / `pnpm run typecheck` / `pnpm test` | `Passed` | 同步到 `main` 前完成回归：中台平台测试 7 files / 61 tests passed，`tsc --noEmit` passed，全量测试 55 files / 265 tests passed。 |

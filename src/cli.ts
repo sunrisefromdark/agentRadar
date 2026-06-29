@@ -54,7 +54,10 @@ import { listAvailableDailyDates, listAvailableWeeklyAnchors } from "./visualCon
 import { planWeeklySync } from "./weeklyCadence.ts";
 import { buildIndustryRuntimeSummaryArtifact } from "./industry/platform/normalization/industryRuntimeSummary.ts";
 import { replayPolicyFinanceRuntimeReadyFixture } from "./industry/platform/normalization/policyFinanceRuntimeReplay.ts";
-import { buildCrossGroupIntegrationReadiness } from "./industry/platform/audit/crossGroupIntegrationReadiness.ts";
+import {
+  buildCrossGroupIntegrationReadiness,
+  materializeCrossGroupIntegrationArtifacts,
+} from "./industry/platform/audit/crossGroupIntegrationReadiness.ts";
 import {
   buildInitialManualRegistry,
   buildProjectFacts,
@@ -1387,6 +1390,11 @@ export async function crossGroupIntegrationReadiness(opts: CliOptions): Promise<
       deliveryManifest: readJsonFile("fixtures/industry/agents/community-news-agent/replay/phase6-delivery-manifest.json", {}),
       replayRefs: readJsonFile("fixtures/industry/agents/community-news-agent/replay/phase6-replay-refs.json", {}),
     },
+  });
+  materializeCrossGroupIntegrationArtifacts({
+    rootDir: process.cwd(),
+    artifact,
+    dryRun,
   });
   writeJsonFile(crossGroupIntegrationReadinessJsonPath(opts.date), artifact, dryRun);
   writeJsonFile(path.join("data", "reports", "latest.cross-group-integration-readiness.json"), artifact, dryRun);

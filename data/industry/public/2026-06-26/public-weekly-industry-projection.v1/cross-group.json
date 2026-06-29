@@ -1,0 +1,33 @@
+{
+  "projection_id": "public-weekly-industry-projection-2026-06-26",
+  "schema_version": "public-weekly-industry-projection.v1",
+  "source_weekly_section_ref": "industry://internal/2026-06-26/weekly-industry-trend-section.v2/cross-group",
+  "headline_core_card_ids": [],
+  "tier_visible_card_ids": [
+    "card-claim-evt-51541b7359b8",
+    "card-claim-evt-44a47b338da8",
+    "card-claim-evt-cc11dd8959d2",
+    "card-claim-paper-agent-memory-preprint",
+    "card-claim-conf-neurips-workshop-agents",
+    "card-claim-evt-d5de86b0981d",
+    "card-claim-evt-b0fe5f8da165",
+    "card-claim-evt-609ea9dd545b",
+    "card-claim-evt-150547a98a8f",
+    "card-claim-evt-b58e55e3847e"
+  ],
+  "redacted_card_ids": [],
+  "blocked_card_ids": [],
+  "public_card_projection_refs": [
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-51541b7359b8",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-44a47b338da8",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-cc11dd8959d2",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-paper-agent-memory-preprint",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-conf-neurips-workshop-agents",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-d5de86b0981d",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-b0fe5f8da165",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-609ea9dd545b",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-150547a98a8f",
+    "industry://public/2026-06-26/industry-trend-card.v1/card-claim-evt-b58e55e3847e"
+  ],
+  "blocked_reason_codes": []
+}

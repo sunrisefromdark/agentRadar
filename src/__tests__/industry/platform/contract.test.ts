@@ -35,6 +35,7 @@ import {
   validateSameRunConsumerRefs,
 } from "../../../industry/platform/contracts/consumerFixtures.ts";
 import { buildProductEcosystemHandoff } from "../../../industry/agents/community-news-agent/handoff.ts";
+import { getPlatformRegistrySnapshotGroup } from "../../../industry/platform/registry/runtimeSnapshot.ts";
 
 describe("industry platform contracts", () => {
   function buildAcademicPrepReplayBundle() {
@@ -97,6 +98,38 @@ describe("industry platform contracts", () => {
       registry.compatibility.entries
         .every((entry) => registry.canonical.entries.some((schema) => schema.schema_id === entry.schema_id)),
     ).toBe(true);
+  });
+
+  it("keeps platform completion status and governance files within frozen acceptance constraints", () => {
+    const root = process.cwd();
+    const execPlan = fs.readFileSync(
+      path.join(
+        root,
+        "docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md",
+      ),
+      "utf-8",
+    );
+    const constrainedRoots = [
+      "schemas/industry",
+      "src/industry/platform",
+      "src/__tests__/industry/platform",
+      "fixtures/industry/platform",
+    ];
+    const oversizedFiles: Array<{ relativePath: string; lineCount: number }> = [];
+
+    expect(execPlan).toContain("当前状态：`Completed`");
+    expect(execPlan).not.toContain("当前状态：`In Progress`");
+
+    for (const constrainedRoot of constrainedRoots) {
+      collectFiles(path.join(root, constrainedRoot)).forEach((filePath) => {
+        const lineCount = fs.readFileSync(filePath, "utf-8").split(/\r?\n/).length;
+        if (lineCount >= 2000) {
+          oversizedFiles.push({ relativePath: path.relative(root, filePath), lineCount });
+        }
+      });
+    }
+
+    expect(oversizedFiles).toEqual([]);
   });
 
   it("rejects informal payload names before other groups build producer payloads", () => {
@@ -651,6 +684,24 @@ describe("industry platform contracts", () => {
         reasonCode: "lineage_failed",
       });
     });
+
+    it("uses the shared Phase 2 registry snapshot refs in academic coverage reports", () => {
+      const bundle = buildAcademicPrepReplayBundle();
+      const academicSnapshot = getPlatformRegistrySnapshotGroup("academic");
+
+      expect(bundle.coverage_reports.map((report) => report.payload.registry_snapshot_ref)).toEqual([
+        academicSnapshot.registry_snapshot_ref,
+        academicSnapshot.registry_snapshot_ref,
+      ]);
+      expect(bundle.coverage_reports.map((report) => report.payload.tool_registry_snapshot_ref)).toEqual([
+        academicSnapshot.tool_registry_snapshot_ref,
+        academicSnapshot.tool_registry_snapshot_ref,
+      ]);
+      for (const report of bundle.coverage_reports) {
+        expect(report.payload.registry_snapshot_ref).not.toContain("stub://");
+        expect(report.payload.tool_registry_snapshot_ref).not.toContain("stub://");
+      }
+    });
   });
 
   describe("academic formal handoff gate", () => {
@@ -899,4 +950,12 @@ function buildProductEcosystemContractInput() {
       ],
     },
   };
+}
+
+function collectFiles(root: string): string[] {
+  const entries = fs.readdirSync(root, { withFileTypes: true });
+  return entries.flatMap((entry) => {
+    const fullPath = path.join(root, entry.name);
+    return entry.isDirectory() ? collectFiles(fullPath) : [fullPath];
+  });
 }

@@ -32,6 +32,7 @@ export type ProductEcosystemDryRunInput = Omit<DispatchRuntimeInput, "message"> 
   registry?: IndustrySchemaRegistry;
   registrySnapshotRef?: string;
   toolRegistrySnapshotRef?: string;
+  seedRefs?: string[];
   authorityRefs?: string[];
   manualReviewPoolSlots?: number;
   reviewAvailability?: {
@@ -179,6 +180,7 @@ export function consumeProductEcosystemHandoffForDryRun(input: ProductEcosystemD
       registrySnapshotRef: input.registrySnapshotRef,
       toolRegistrySnapshotRef: input.toolRegistrySnapshotRef,
       toolCoverageRefs: stringArray(dailyInput.coverage_refs),
+      seedRefs: input.seedRefs ?? [],
       authorityRefs: input.authorityRefs ?? [],
       manualReviewPoolSlots: input.manualReviewPoolSlots ?? 0,
       reviewAvailability: input.reviewAvailability ?? { same_run_review_mode: "async_only", reviewer_on_duty_count: 0 },

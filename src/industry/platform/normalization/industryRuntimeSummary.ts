@@ -9,6 +9,10 @@ import { loadIndustrySchemaRegistry } from "../contracts/schemaRegistry.ts";
 import { consumeAcademicPreparatoryHandoffForDryRun } from "./academicDryRun.ts";
 import { replayPolicyFinanceRuntimeReadyFixture } from "./policyFinanceRuntimeReplay.ts";
 import { consumeProductEcosystemHandoffForDryRun } from "./productEcosystemDryRun.ts";
+import {
+  getPlatformRegistrySnapshotGroup,
+  loadPlatformRegistrySnapshotFixture,
+} from "../registry/runtimeSnapshot.ts";
 
 export function buildIndustryRuntimeSummaryArtifact(input: {
   date: string;
@@ -36,6 +40,7 @@ export function buildIndustryRuntimeSummaryArtifact(input: {
     };
   }>(rootDir, "fixtures/industry/platform/current-consumer/phase1-runtime.json");
   const sharedGovernance = validateSharedGovernanceBaseline(loadIndustrySchemaRegistry());
+  const phase2RegistrySnapshot = loadPlatformRegistrySnapshotFixture();
 
   const policyFinance = replayPolicyFinanceRuntimeReadyFixture({ rootDir });
   if (!policyFinance.current.ok || policyFinance.current.status !== policyFinance.fixture.current.expected_status) {
@@ -63,13 +68,18 @@ export function buildIndustryRuntimeSummaryArtifact(input: {
   }
 
   const { bundle } = buildProductEcosystemFormalHandoff(buildProductEcosystemInput());
+  const productSnapshot = getPlatformRegistrySnapshotGroup("product_ecosystem", phase2RegistrySnapshot);
   const product = consumeProductEcosystemHandoffForDryRun({
     bundle,
-    registrySnapshotRef: "industry://internal/2026-06-26/registry-snapshot.v1/product-ecosystem",
-    toolRegistrySnapshotRef: "industry://internal/2026-06-26/tool-registry-snapshot.v1/product-ecosystem",
-    authorityRefs: ["industry://internal/2026-06-26/source-authority-context.v1/product-ecosystem"],
-    manualReviewPoolSlots: 2,
-    reviewAvailability: { same_run_review_mode: "async_only", reviewer_on_duty_count: 0 },
+    registrySnapshotRef: productSnapshot.registry_snapshot_ref,
+    toolRegistrySnapshotRef: productSnapshot.tool_registry_snapshot_ref,
+    seedRefs: productSnapshot.seed_refs,
+    authorityRefs: productSnapshot.authority_refs,
+    manualReviewPoolSlots: phase2RegistrySnapshot.review_availability.manual_review_pool_slots,
+    reviewAvailability: {
+      same_run_review_mode: phase2RegistrySnapshot.review_availability.same_run_review_mode,
+      reviewer_on_duty_count: phase2RegistrySnapshot.review_availability.reviewer_on_duty_count,
+    },
   });
   if (!product.ok) {
     throw new Error(`product ecosystem summary mismatch: ${product.reasonCode}`);
@@ -82,6 +92,7 @@ export function buildIndustryRuntimeSummaryArtifact(input: {
     overall_status: "industry_runtime_contracts_ready",
     platform_contract: {
       fixture_id: platformContract.fixture_id,
+      registry_snapshot_fixture_id: phase2RegistrySnapshot.fixture_id,
       published_for: platformContract.published_for,
       handoff_payload_schema_count: platformContract.handoff_payload_schemas.length,
       feedback_payload_schema_count: platformContract.feedback_payload_schemas.length,
@@ -129,7 +140,7 @@ function readJson<T>(rootDir: string, relativePath: string): T {
   return JSON.parse(fs.readFileSync(path.join(rootDir, relativePath), "utf8")) as T;
 }
 
-function buildProductEcosystemInput() {
+export function buildProductEcosystemInput() {
   const base = {
     runId: "run-product-ecosystem-platform-normalization",
     threadId: "thread-product-ecosystem-platform-normalization",

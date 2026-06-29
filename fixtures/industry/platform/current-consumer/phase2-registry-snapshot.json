@@ -1,0 +1,53 @@
+{
+  "fixture_id": "platform-phase2-registry-snapshot-current.v1",
+  "schema_version": "platform-registry-snapshot-fixture.v1",
+  "published_for": ["policy_finance", "academic", "product_ecosystem"],
+  "review_availability": {
+    "manual_review_pool_slots": 2,
+    "same_run_review_mode": "async_only",
+    "reviewer_on_duty_count": 0,
+    "default_gate_action": "conservative_consumption"
+  },
+  "groups": [
+    {
+      "group_id": "policy_finance",
+      "registry_snapshot_ref": "industry://internal/2026-06-26/registry-snapshot.v1/policy-finance",
+      "tool_registry_snapshot_ref": "industry://internal/2026-06-26/tool-registry-snapshot.v1/policy-finance",
+      "seed_refs": [
+        "data/industry-seeds/agents/finance-agent/source-catalog.json",
+        "data/industry-seeds/agents/policy-agent/regulatory-source-catalog.json",
+        "data/industry-seeds/agents/policy-agent/thinktank-source-catalog.json"
+      ],
+      "authority_refs": [
+        "industry://internal/2026-06-26/source-authority-context.v1/policy-finance"
+      ]
+    },
+    {
+      "group_id": "academic",
+      "registry_snapshot_ref": "industry://internal/2026-06-26/registry-snapshot.v1/academic",
+      "tool_registry_snapshot_ref": "industry://internal/2026-06-26/tool-registry-snapshot.v1/academic",
+      "seed_refs": [
+        "data/industry-seeds/agents/academic-agent/paper.seeds.json",
+        "data/industry-seeds/agents/academic-agent/conference.seeds.json"
+      ],
+      "authority_refs": [
+        "industry://internal/2026-06-26/source-authority-context.v1/academic"
+      ]
+    },
+    {
+      "group_id": "product_ecosystem",
+      "registry_snapshot_ref": "industry://internal/2026-06-26/registry-snapshot.v1/product-ecosystem",
+      "tool_registry_snapshot_ref": "industry://internal/2026-06-26/tool-registry-snapshot.v1/product-ecosystem",
+      "seed_refs": [
+        "data/industry-seeds/agents/product-oss-agent/product-platform-source-catalog.json",
+        "data/industry-seeds/agents/product-oss-agent/developer-studio-source-catalog.json",
+        "data/industry-seeds/agents/product-oss-agent/project-oss-source-catalog.json",
+        "data/industry-seeds/agents/community-news-agent/community-source-catalog.json",
+        "data/industry-seeds/agents/community-news-agent/news-narrative-source-catalog.json"
+      ],
+      "authority_refs": [
+        "industry://internal/2026-06-26/source-authority-context.v1/product-ecosystem"
+      ]
+    }
+  ]
+}

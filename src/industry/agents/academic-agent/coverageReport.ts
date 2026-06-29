@@ -1,6 +1,7 @@
 import { conferenceSourceCatalog } from "./conferenceSourceCatalog.ts";
 import { paperSourceCatalog } from "./paperSourceCatalog.ts";
 import type { AxisToolCoverageReport, IndustryEvidenceAxisKey, IndustrySignalEvent } from "./types.ts";
+import { getPlatformRegistrySnapshotGroup } from "../../platform/registry/runtimeSnapshot.ts";
 
 function toolIdsForAxis(axis: IndustryEvidenceAxisKey): string[] {
   const catalog = axis === "research_paper" ? Object.values(paperSourceCatalog) : Object.values(conferenceSourceCatalog);
@@ -11,6 +12,7 @@ export function buildCoverageReport(
   axis: IndustryEvidenceAxisKey,
   events: IndustrySignalEvent[],
 ): AxisToolCoverageReport {
+  const phase2Snapshot = getPlatformRegistrySnapshotGroup("academic");
   const axisEvents = events.filter((event) => event.axis === axis);
   const accepted = axisEvents.filter((event) => event.audit.bucket === "accepted");
   const rejected = axisEvents.filter((event) => event.audit.bucket === "rejected");
@@ -43,8 +45,8 @@ export function buildCoverageReport(
     citation_trace_rate: Number(citationTraceRate.toFixed(2)),
     evidence_event_ids: accepted.map((event) => event.event_id),
     rejected_event_ids: rejected.map((event) => event.event_id),
-    registry_snapshot_ref: "stub://industry/registry-snapshot/current",
-    tool_registry_snapshot_ref: "stub://industry/tool-registry/current",
+    registry_snapshot_ref: phase2Snapshot.registry_snapshot_ref,
+    tool_registry_snapshot_ref: phase2Snapshot.tool_registry_snapshot_ref,
     summary_cn: axis === "research_paper" ? "论文轴已绑定一手学术源。" : "会议轴已绑定官方 accepted/proceedings/challenge 源。",
   };
 }

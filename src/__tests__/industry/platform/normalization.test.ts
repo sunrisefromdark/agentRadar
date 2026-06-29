@@ -21,6 +21,7 @@ import {
 } from "../../../industry/platform/normalization/academicDryRun.ts";
 import type { AcademicFormalHandoffBundle } from "../../../industry/platform/contracts/academicHandoff.ts";
 import type { FinancePolicyHandoffBundle } from "../../../industry/platform/contracts/financePolicyHandoff.ts";
+import { getPlatformRegistrySnapshotGroup } from "../../../industry/platform/registry/runtimeSnapshot.ts";
 
 const currentBundle = currentBundleFixture as FinancePolicyHandoffBundle;
 const negativeBundle = negativeBundleFixture as FinancePolicyHandoffBundle;
@@ -80,13 +81,13 @@ describe("industry platform normalization dry-run", () => {
 
   it("materializes the product ecosystem formal bundle for dry-run feedback", () => {
     const { bundle } = buildProductEcosystemFormalHandoff(buildProductEcosystemInput());
+    const productSnapshot = getPlatformRegistrySnapshotGroup("product_ecosystem");
     const result = consumeProductEcosystemHandoffForDryRun({
       bundle,
-      registrySnapshotRef: "industry://internal/2026-06-26/registry-snapshot.v1/product-ecosystem",
-      toolRegistrySnapshotRef: "industry://internal/2026-06-26/tool-registry-snapshot.v1/product-ecosystem",
-      authorityRefs: ["industry://internal/2026-06-26/source-authority-context.v1/product-ecosystem"],
-      manualReviewPoolSlots: 2,
-      reviewAvailability: { same_run_review_mode: "async_only", reviewer_on_duty_count: 0 },
+      registrySnapshotRef: productSnapshot.registry_snapshot_ref,
+      toolRegistrySnapshotRef: productSnapshot.tool_registry_snapshot_ref,
+      seedRefs: productSnapshot.seed_refs,
+      authorityRefs: productSnapshot.authority_refs,
     });
 
     expect(result).toMatchObject({
@@ -107,9 +108,10 @@ describe("industry platform normalization dry-run", () => {
       runtimeSnapshot: {
         ok: true,
         status: "runtime_snapshot_published",
-        registrySnapshotRef: "industry://internal/2026-06-26/registry-snapshot.v1/product-ecosystem",
-        toolRegistrySnapshotRef: "industry://internal/2026-06-26/tool-registry-snapshot.v1/product-ecosystem",
+        registrySnapshotRef: productSnapshot.registry_snapshot_ref,
+        toolRegistrySnapshotRef: productSnapshot.tool_registry_snapshot_ref,
         sameRunReviewAvailable: false,
+        reviewGateAction: "conservative_consumption",
       },
     });
     if (result.ok) {
@@ -120,6 +122,14 @@ describe("industry platform normalization dry-run", () => {
       expect(result.governanceProfileIds).toEqual(["axis-runtime-budget-profile.v1/product_ecosystem"]);
       expect(result.feedbackPayload.payload_id).toMatch(/^feedback-/);
       expect(result.feedbackPayload.fact_resolution_audit_ref).toMatch(/^industry:\/\/internal\/2026-06-26\/fact-resolution-audit.v1\//);
+      expect(result.runtimeSnapshot?.ok).toBe(true);
+      if (result.runtimeSnapshot?.ok) {
+        expect(result.runtimeSnapshot.runtimeInputRefs).toEqual([
+          ...result.coverageRefs,
+          ...productSnapshot.seed_refs,
+          ...productSnapshot.authority_refs,
+        ]);
+      }
     }
   });
 
@@ -146,6 +156,7 @@ describe("industry platform normalization dry-run", () => {
   });
 
   it("promotes policy-finance handoff through the runtime path after governance profiles resolve", () => {
+    const policyFinanceSnapshot = getPlatformRegistrySnapshotGroup("policy_finance");
     const result = consumeFinancePolicyHandoffForRuntime({
       bundle: currentBundle,
       dispatchContext: sameRunCurrentFixture.dispatch_context,
@@ -181,9 +192,11 @@ describe("industry platform normalization dry-run", () => {
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/finance/v1",
           runtimeInputRefs: [
             currentCoverageRefs[0],
-            "registry://industry/source-authority/finance/v1",
+            ...policyFinanceSnapshot.seed_refs,
+            ...policyFinanceSnapshot.authority_refs,
           ],
           sameRunReviewAvailable: false,
+          reviewGateAction: "conservative_consumption",
         },
         {
           ok: true,
@@ -192,9 +205,11 @@ describe("industry platform normalization dry-run", () => {
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/policy/v1",
           runtimeInputRefs: [
             currentCoverageRefs[1],
-            "registry://industry/source-authority/policy/v1",
+            ...policyFinanceSnapshot.seed_refs,
+            ...policyFinanceSnapshot.authority_refs,
           ],
           sameRunReviewAvailable: false,
+          reviewGateAction: "conservative_consumption",
         },
         {
           ok: true,
@@ -203,9 +218,11 @@ describe("industry platform normalization dry-run", () => {
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/thinktank/v1",
           runtimeInputRefs: [
             currentCoverageRefs[2],
-            "registry://industry/source-authority/thinktank/v1",
+            ...policyFinanceSnapshot.seed_refs,
+            ...policyFinanceSnapshot.authority_refs,
           ],
           sameRunReviewAvailable: false,
+          reviewGateAction: "conservative_consumption",
         },
       ],
     });
@@ -314,6 +331,7 @@ describe("industry platform normalization dry-run", () => {
   });
 
   it("materializes academic formal handoff for normalization dry-run once academic artifacts arrive", () => {
+    const academicSnapshot = getPlatformRegistrySnapshotGroup("academic");
     const result = consumeAcademicHandoffForDryRun({ bundle: buildAcademicFormalBundle() });
 
     expect(result).toMatchObject({
@@ -334,6 +352,21 @@ describe("industry platform normalization dry-run", () => {
       expect(result.normalizedEventBatchRefs).toHaveLength(2);
       expect(result.coverageRefs).toHaveLength(2);
       expect(result.contributionRefs).toHaveLength(2);
+      expect(result.runtimeSnapshot).toMatchObject({
+        ok: true,
+        status: "runtime_snapshot_published",
+        registrySnapshotRef: academicSnapshot.registry_snapshot_ref,
+        toolRegistrySnapshotRef: academicSnapshot.tool_registry_snapshot_ref,
+        sameRunReviewAvailable: false,
+        reviewGateAction: "conservative_consumption",
+      });
+      if (result.runtimeSnapshot.ok) {
+        expect(result.runtimeSnapshot.runtimeInputRefs).toEqual([
+          ...result.coverageRefs,
+          ...academicSnapshot.seed_refs,
+          ...academicSnapshot.authority_refs,
+        ]);
+      }
     }
   });
 
@@ -349,6 +382,7 @@ describe("industry platform normalization dry-run", () => {
       overall_status: "industry_runtime_contracts_ready",
       platform_contract: {
         fixture_id: "platform-phase1-current-consumer.v1",
+        registry_snapshot_fixture_id: "platform-phase2-registry-snapshot-current.v1",
         shared_governance_published: true,
         shared_governance_profile_count: 33,
         handoff_payload_schema_count: 4,

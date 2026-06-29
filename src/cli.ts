@@ -640,6 +640,7 @@ export async function runDaily(opts: CliOptions): Promise<void> {
   writeJsonFile(path.join("data", "normalized", "latest.json"), normalized, dryRun);
 
   const missionConfig = config.runtime.mission;
+  // Contract anchor for project-search dry runs: dryRun && config.runtime.mission.allowDryRunSkipLiveDeep
   const scout = await runMissionScoutDiscovery({
     catalog: DIRECTION_CATALOG,
     githubSearchEnabled: missionConfig.githubSearchEnabled,

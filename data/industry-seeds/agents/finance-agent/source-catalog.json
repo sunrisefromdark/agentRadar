@@ -3,8 +3,18 @@
   "responsibility_id": "capital-finance",
   "axis": "capital_finance",
   "official_first": true,
-  "primary_tool_ids": ["sec-edgar-api", "portfolio-company-ir-feed"],
-  "secondary_tool_ids": ["company-investor-relations-docs"],
-  "fallback_tool_ids": ["licensed-market-discovery"],
+  "primary_tool_ids": [
+    "sec-edgar-api",
+    "portfolio-company-ir-feed",
+    "public-company-filings",
+    "earnings-call-transcripts",
+    "public-ma-announcements"
+  ],
+  "secondary_tool_ids": [
+    "company-investor-relations-docs",
+    "public-fund-reports",
+    "industry-finance-data"
+  ],
+  "fallback_tool_ids": ["licensed-market-discovery", "market-report-research"],
   "last_resort_tool_ids": ["manual-finance-triage"]
 }

@@ -16,11 +16,11 @@
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
-      "sha256": "eb7e2067e5bc820d7a8a83f69bc10f3507a649326b0ac04c6893240b6bcc6377"
+      "sha256": "34c4994415b21d87f919b3ea0b959ca021a963a8ef103dfbb730a787ea433f39"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
-      "sha256": "77d5563ed94dcadaab255f9ad72a587a6f95aab660616b6c16f7132bb6b54135"
+      "sha256": "ca5f6140a836ac00a4c8539c42ce81da60a7d48ffe80156e7d445bc4ff5c8a64"
     },
     {
       "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",

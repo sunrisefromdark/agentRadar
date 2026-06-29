@@ -24,6 +24,19 @@ import type { FinancePolicyHandoffBundle } from "../../../industry/platform/cont
 
 const currentBundle = currentBundleFixture as FinancePolicyHandoffBundle;
 const negativeBundle = negativeBundleFixture as FinancePolicyHandoffBundle;
+const currentNormalizedEventBatchRefs = collectArtifactRefs(
+  currentBundle,
+  (payload) => payload.payload_schema === "industry-signal-event-batch.v1" && payload.bucket === "accepted",
+);
+const currentRejectedEventBatchRefs = collectArtifactRefs(
+  currentBundle,
+  (payload) => payload.payload_schema === "industry-signal-event-batch.v1" && payload.bucket === "rejected",
+);
+const currentCoverageRefs = collectArtifactRefs(currentBundle, (payload) => payload.payload_schema === "axis-tool-coverage-report.v1");
+const currentContributionRefs = collectArtifactRefs(
+  currentBundle,
+  (payload) => payload.payload_schema === "industry-agent-contribution.v1",
+);
 
 describe("industry platform normalization dry-run", () => {
   it("materializes the policy-finance current bundle without a producer wrapper", () => {
@@ -38,26 +51,10 @@ describe("industry platform normalization dry-run", () => {
     expect(result).toEqual({
       ok: true,
       status: "normalization_dry_run_ready",
-      normalizedEventBatchRefs: [
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-db38e9289fd9",
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f060994f979f",
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-08e24477f2f6",
-      ],
-      rejectedEventBatchRefs: [
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-a1d50f3eef0c",
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-84c26a2cdf7b",
-        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-f9f411bbf48c",
-      ],
-      coverageRefs: [
-        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-a5d9b9371f3d",
-        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-e6203625b947",
-        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-fcfa36416828",
-      ],
-      contributionRefs: [
-        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-26f2355c0b55",
-        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-22d14bc3c145",
-        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-c4823b591078",
-      ],
+      normalizedEventBatchRefs: currentNormalizedEventBatchRefs,
+      rejectedEventBatchRefs: currentRejectedEventBatchRefs,
+      coverageRefs: currentCoverageRefs,
+      contributionRefs: currentContributionRefs,
       governanceProfileIds: [
         "axis-runtime-budget-profile.v1/capital_finance",
         "axis-runtime-budget-profile.v1/policy_regulatory",
@@ -183,7 +180,7 @@ describe("industry platform normalization dry-run", () => {
           registrySnapshotRef: "registry://industry/source-authority/finance/v1",
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/finance/v1",
           runtimeInputRefs: [
-            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-a5d9b9371f3d",
+            currentCoverageRefs[0],
             "registry://industry/source-authority/finance/v1",
           ],
           sameRunReviewAvailable: false,
@@ -194,7 +191,7 @@ describe("industry platform normalization dry-run", () => {
           registrySnapshotRef: "registry://industry/source-authority/policy/v1",
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/policy/v1",
           runtimeInputRefs: [
-            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-e6203625b947",
+            currentCoverageRefs[1],
             "registry://industry/source-authority/policy/v1",
           ],
           sameRunReviewAvailable: false,
@@ -205,7 +202,7 @@ describe("industry platform normalization dry-run", () => {
           registrySnapshotRef: "registry://industry/source-authority/thinktank/v1",
           toolRegistrySnapshotRef: "registry://industry/tool-catalog/thinktank/v1",
           runtimeInputRefs: [
-            "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-fcfa36416828",
+            currentCoverageRefs[2],
             "registry://industry/source-authority/thinktank/v1",
           ],
           sameRunReviewAvailable: false,
@@ -603,4 +600,15 @@ function buildProductEcosystemInput() {
       ],
     },
   };
+}
+
+function collectArtifactRefs(
+  bundle: FinancePolicyHandoffBundle,
+  predicate: (payload: Record<string, unknown>) => boolean,
+): string[] {
+  return bundle.payloads.flatMap((payload, index) => {
+    if (!predicate(payload)) return [];
+    const manifest = bundle.manifests[index];
+    return typeof manifest?.artifact_ref === "string" ? [manifest.artifact_ref] : [];
+  });
 }

@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Implementation Complete / Integration Pending`
+- 当前状态：`Producer Scope Design Complete / Waiting Executor 4 For Cross-Axis Integration`
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -27,16 +27,17 @@
   - `execution_context`
   - claim-critical 场景下的 same-run 必填 ref
 - `4号执行人` 已用这批输入接通 `normalization dry-run`。
-- 当前不再缺本组输入；政策金融组 `Phase 1 ~ Phase 5` 可独立落地部分已完成。
+- 政策金融组 `Phase 1 ~ Phase 5` 的 producer / handoff / runtime 接线部分已完成。
 - 本轮已把 `industry_runtime_summary / policy_finance_runtime_replay` 继续接到 `run-summary`、`verify-daily`、`weekly`、CLI/Web `run-health`、Web/SSR `overview` 与 `weekly`，高层消费入口已收口。
-- 本计划无 `Phase 6`；`Phase 5` 之后直接进入跨组集成与总验收。
+- 经 2026-06-29 设计对照复核，需新增 `Phase 6` 补齐 Finance / Policy 的设计复杂度、审计输出与工具注册；这不是 `4号执行人` 单靠中台集成可以替代的工作。
 
 ### 计划完成情况（按实际代码）
 
 | 范围 | 当前状态 | 说明 |
 | --- | --- | --- |
 | Phase 1 ~ Phase 5 | `DONE` | producer、handoff、same-run refs、shared governance、runtime snapshot、negative fixture、contract/replay/test 均已闭环 |
-| 政策金融组本地可继续独立推进的核心功能 | `DONE` | 当前已无仅靠本组继续实现就能新增的关键主链能力 |
+| Phase 6：领域复杂度补齐与工具注册校正 | `DONE` | 本组 producer / seed / fixture / test 范围内的来源覆盖、语义分层、审计字段与 coverage 工具注册准确性已补齐 |
+| 政策金融组本地可继续独立推进的核心功能 | `DONE` | 本组本地可独立完成的领域语义与 producer 输出补齐项已完成；剩余是 4 号负责的 cross-axis 裁决与总集成验收 |
 | 对 4 号的正式交付前提 | `DONE` | current/negative bundle、manifest、checksums、shared-runtime note、runtime-ready inputs、stable entrypoint 已交齐 |
 | 高层消费入口收口 | `DONE` | daily / weekly / CLI / Web / SSR 已能看到 runtime summary 与 replay-only fallback |
 | 跨组集成与总验收 | `PENDING` | 需 `4号执行人` 继续完成三组集成；academic 侧仍阻塞于 `formal_academic_handoff` |
@@ -73,7 +74,8 @@
 | --- | --- | --- | --- |
 | Phase 1-2：source / route / event / handoff 骨架 | `DONE` | `finance-agent`、`policy-agent` 目录骨架、source catalog、route selection、event builder、handoff、unit/contract/negative/replay fixture 与测试骨架 | 当前仓库内可独立落地的骨架、最小领域验证与 producer artifact 校验已闭环 |
 | Phase 3-4A：正式 cross-group contract 收口 | `DONE` | canonical payload 名、message kind、`industry://` artifact ref、payload 顶层 canonical 字段、finance-policy handoff gate dry-run | 已对齐中台 `Phase 1A` contract，并通过平台 handoff gate 验证 |
-| Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `DONE` | 本组 producer 接线、正式 bundle 交付、negative 样本、normalization dry-run 前提均已完成；中台 runtime 接线已补齐 | 政策金融线不再需要新增本组输入；后续只随三组最终集成进入总体验收 |
+| Phase 3-5：shared governance / same-run / activation-budget 正式接线 | `DONE` | 本组 producer 接线、正式 bundle 交付、negative 样本、normalization dry-run 前提均已完成；中台 runtime 接线已补齐 | producer/runtime 基座已闭环，但不等于 Finance / Policy 设计复杂度已补齐 |
+| Phase 6：领域复杂度补齐与工具注册校正 | `DONE` | Finance / Policy 设计复杂度、来源覆盖、审计字段与 coverage 注册准确性已补齐 | 本组状态可标记为 `design-complete for producer scope` |
 
 ## 落地标记（截至 2026-06-28）
 
@@ -103,6 +105,18 @@
 | next-step 对接清单 | `DONE` | 已补 machine-readable `phase1-next-platform-actions.json`，把 4 号下一步必须落的 normalization / same-run runtime / shared governance 消费动作显式列出 |
 | delivery checksum 清单 | `DONE` | 已补 machine-readable `phase1-delivery-checksums.json`，让 4 号可对 current/negative bundle、same-run fixture、notes 与 stable entrypoint 做输入校验 |
 
+### 复核新增待补齐（2026-06-29）
+
+| 项目 | 当前判断 | 说明 |
+| --- | --- | --- |
+| Finance 来源面覆盖补齐 | `DONE` | 已把财报、基金报告、并购、上市公司公告、电话会 transcript、可信金融/产业数据源落到 `source_family`、seed route 与 unit coverage |
+| Finance 语义分层补齐 | `DONE` | 已显式冻结并校验融资热度、资本配置、组织投入、并购整合、上市公司业务倾斜、产业研究叙事，accepted/counter 缺语义会被 producer 拒绝 |
+| Policy / Thinktank 来源面覆盖补齐 | `DONE` | 已补齐审批、公共采购、标准组织、官方项目，以及 OECD.AI、CSET、Stanford AI Index、Brookings、RAND 等来源族、命名源与测试覆盖 |
+| 审计输出补齐 | `DONE` | 来源层级、成本/授权状态、`primary_source_distance`、缺失来源、可选付费来源、`human_exception_required` 已结构化进入 event/coverage artifact |
+| tool coverage 注册准确性补齐 | `DONE` | `primary / secondary / fallback / last_resort` 已在 coverage payload 按 seed 与 route 真实落账，并由 contract / replay / unit 回归校验 |
+| 设计复杂度验收回归 | `DONE` | 已新增 finance / policy / thinktank 的 unit / negative / replay / contract 回归，证明本组 producer 语义而非仅 handoff contract 已闭环 |
+| `wind_probe` 上限的最终裁决验收 | `WAITING_4` | 本组已补 anti-upgrade 反例与 owner-boundary / official-first 拒收；但“无 research/product/community/open-source 交叉确认时最多 `wind_probe`”属于 4 号中台 tier decision 规则生效与 weekly 总验收范围 |
+
 ### 必须等 4 号
 
 | 项目 | 当前判断 | 阻塞原因 |
@@ -119,7 +133,9 @@
 1. 把政策金融线已经交齐的 current / negative bundle、runtime summary、runtime replay、registry snapshot 一起并入三组最终 weekly 主链，不再只停在 policy-finance 单线验证。
 2. 继续接 `2号 / 3号` 的正式 handoff，完成 cross-group normalization / audit / weekly internal / consumer / public 三层产物拼装。
 3. 推进 academic 侧从 `academic_preparatory_normalization_dry_run_ready` 进入正式 handoff；当前代码里该阻塞被明确暴露为 `blocked_until=formal_academic_handoff`，这不是政策金融组还能单独消除的问题。
-4. 若最终集成时发现字段或语义不满足合同，必须给出明确 reject list；本组只按 reject list 补一次，不接受无字段级说明的“继续等等政策金融输入”。
+4. 与本组新增 `Phase 6` 并行推进：4 号不得把“当前能集成”误记为“本组设计已完整实现”；在 weekly 总验收前需消费本组 refreshed bundle / coverage / fixture。
+5. 若 `Phase 6` 仅改本组 producer 字段填充、来源族注册和 fixture，4 号只需刷新 runtime snapshot、replay fixture 与 weekly 消费，不得要求本组重走一次 shared runtime 基座建设。
+6. 若 `Phase 6` 暴露共享 contract / schema 缺口，4 号必须把缺口收敛成明确字段级 reject / uplift list；本组负责补 producer 语义，4 号负责 shared contract、runtime materialize 与跨组消费面的接线。
 
 ## 目标
 
@@ -292,11 +308,14 @@
 ### 现在继续推进需要谁产出什么
 
 - `1号执行人（本组）`：
-  - 当前无需再补新的政策金融输入，除非 `4号执行人` 在实际 runtime 接线时给出新的合同拒收项。
+  - 先完成新增 `Phase 6`：补齐 Finance / Policy 设计复杂度、工具注册准确性与审计输出。
+  - 若 `Phase 6` 只涉及本组目录内 producer / fixture / test，直接独立推进，不等待 4 号。
+  - 若 `Phase 6` 发现共享 contract 缺字段，只提交 machine-readable `docs-change-note` / reject list 给 `4号执行人`，不越界改共享真源。
 - `4号执行人`：
   - 已把 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission / reservation refs 接入中台 runtime path。
   - 已把 `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` 等 shared governance profile 接成中台 runtime 消费。
-  - 若 runtime 接线后新增拒收项，必须按合同明确指出缺的字段或语义，而不是让本组猜。
+  - 继续推进跨组集成，但需把本组 `Phase 6` 产物视为后续 refresh 输入，而不是把当前 current bundle 当成最终 design-complete 版本。
+  - 若 runtime / weekly 消费面因 `Phase 6` 暴露新共享缺口，必须按合同明确指出缺的字段或语义，而不是让本组猜。
 - `2号执行人 / 3号执行人`：
   - 不阻塞政策金融组这条线继续进入平台 runtime；只在做最终 weekly 集成时才重新形成强依赖。
 
@@ -304,32 +323,35 @@
 
 | 顺序 | 谁推进 | 要做什么 | 完成标志 | 完成后是否还需要本组回合 |
 | --- | --- | --- | --- | --- |
-| 1 | `4号执行人` | 在平台 runtime path 消费 same-run refs，而不只停在 `normalization dry-run` | `DONE`：current bundle 能走过 `consumeFinancePolicyHandoffForRuntime(...)`，negative bundle 能在 runtime path 按合同拒收 | `不需要` |
-| 2 | `4号执行人` | 把 `axis-activation-policy.v1`、`canonical-fetch-stop-policy.v1`、`axis-runtime-budget-profile.v1`、`same-run-review-availability-policy.v1` 等 shared governance profile 接成运行时行为 | `DONE`：runtime 入口解析并校验 policy-finance 三轴 activation / stop / budget 与 same-run review profile | `不需要` |
-| 3 | `4号执行人` | 从本组 coverage refs 发布 runtime registry snapshots | `DONE`：三条 coverage ref 均发布 runtime snapshot，缺失 coverage ref 会按 lineage 拒收 | `不需要` |
-| 4 | `4号执行人` | 若最终集成时发现本组字段或语义仍不满足合同，按拒收项明确指出缺什么 | 出现明确的字段级 / 语义级拒收单 | `需要本组补一次` |
-| 5 | `1号执行人（仅在被明确拒收时）` | 只按明确拒收项补字段、样本或契约，不扩新语义 | 拒收项被关闭，相关回归转绿 | `补完后再回到4号` |
-| 6 | `4号执行人` | 完成政策金融线的 runtime / snapshot / high-level consumer 消费闭环后，继续并行接另外两组，再做 cross-group normalization / audit / weekly 拼装 | 三组正式 handoff 都已进入中台主链路 | `此时本组无需单独推进` |
-| 7 | `4号执行人 + 全员` | 进入最终 weekly 集成与总验收 | weekly internal / consumer / public 三层产物齐备 | `进入集成阶段` |
+| 1 | `1号执行人（本组）` | 完成 `Phase 6` 的本组领域补齐：来源覆盖、语义分层、审计输出、coverage 工具注册准确性、回归 fixture | 新增设计复杂度条目全部有代码 / fixture / 测试落点，且 refreshed bundle 可生成 | `完成后交给4号刷新消费` |
+| 2 | `1号执行人（如需要） + 4号执行人` | 若 `Phase 6` 暴露共享字段缺口，收敛成明确 uplift / reject list，由 4 号接共享 contract 与 runtime materialize | 字段级缺口被明文化；shared 侧 owner 明确 | `需要，直到 shared 缺口关闭` |
+| 3 | `4号执行人` | 用 refreshed policy-finance bundle 刷新 runtime snapshot、replay / normalization / weekly 消费，不回退本组既有 same-run/runtime 基座 | refreshed bundle 能走过平台 contract/runtime/weekly 消费 | `若无 reject 则不需要` |
+| 4 | `4号执行人` | 继续接 `2号 / 3号` 的正式 handoff，完成 cross-group normalization / audit / weekly internal / consumer / public 三层产物拼装 | 三组正式 handoff 都已进入中台主链路 | `此时本组只在被明确拒收时回合` |
+| 5 | `4号执行人 + 全员` | 进入最终 weekly 集成与总验收；政策金融线必须以 `Phase 6` 后产物参加验收 | weekly internal / consumer / public 三层产物齐备，且政策金融线 design-complete | `进入集成阶段` |
 
 ### 来回轮次预期
 
 - `最优路径`：
-  - 当前这轮之后，本组不再需要新增交付；policy-finance runtime path、shared governance 接线与高层消费收口均已完成，后续进入跨组集成时再按明确拒收项补充。
+  - 本组先独立完成 `Phase 6`；
+  - 4 号只刷新消费与 snapshot，不再要求重做 runtime 基座；
+  - 随后三组一起进入最终 weekly 集成与总验收。
 - `保守路径`：
-  - `4号执行人` 在 runtime 接线时给出一次明确拒收单；
-  - 本组只按拒收项补一次；
+  - 本组完成 `Phase 6` 后，暴露出一轮共享字段 uplift；
+  - `4号执行人` 给出一次明确 reject / uplift list；
+  - 本组只补本组 producer 语义，4 号补 shared runtime / contract；
   - 补完后回到 `4号执行人` 继续完成剩余平台实现。
 - `不接受的路径`：
+  - 把当前 current bundle 直接当作“Finance / Policy 设计复杂度已完成”的最终版本；
   - 反复以“缺政策金融输入”为由停工，但不给出明确合同拒收项；
-  - 这不符合当前执行计划，因为本组已交齐 `envelope / payload / manifest / artifact refs / execution_context / same-run refs / current-negative bundle / manifests / checksums`。
+  - 这不符合当前执行计划，因为本组已交齐集成前提，同时仍有明确列出的 `Phase 6` 领域补齐项。
 
 ### 等到什么产物出来再继续
 
 - 当前不再等待 canonical schema、reason/state 真源、artifact path、payload 正式名；这些 contract 真源与 dry-run 入口已经存在。
 - 当前不再等待 `4号执行人` 把 same-run refs 与 shared governance profile 接成真实 runtime 行为；该入口已落在 `consumeFinancePolicyHandoffForRuntime(...)`。
 - 当前不再等待政策金融线补 `overview / run-health / weekly` 的 runtime 展示入口；这些入口已经按代码实况接通。
-- 只有当最终集成或总体验收按合同给出新的明确拒收项时，本组才需要再补一次字段、样本或语义。
+- 当前不等待 4 号先完成三组最终集成后再回头补 Finance / Policy 设计复杂度；`Phase 6` 由本组直接推进。
+- 只有当 `Phase 6` 触发共享字段 uplift 或最终集成按合同给出新的明确拒收项时，本组才需要与 4 号形成额外来回。
 
 ### 不要等什么
 
@@ -379,7 +401,7 @@ handoff 要求：
 
 ## 实施阶段
 
-> 说明：本计划只定义 `Phase 1 ~ Phase 5`，不存在 `Phase 6`。当前代码状态下，五个阶段都已完成；后续工作转为跨组集成与总验收，不再新增本组独立实施阶段。
+> 说明：原计划只定义 `Phase 1 ~ Phase 5`。经 2026-06-29 设计对照复核，新增 `Phase 6` 用于补齐 Finance / Policy 设计复杂度、审计输出与工具注册准确性；`Phase 1 ~ Phase 5` 的完成不再等同于本组已 design-complete。
 
 ### Phase 1（已完成）：source class 与 route 基线
 
@@ -480,6 +502,69 @@ handoff 要求：
 5. 把 owner / attestation / anti-upgrade / official-first failure fixtures 一并交给中台组接入 replay/eval。
 6. 若中台 current consumer fixture 尚未发布，本组先提交 producer fixture 与 artifact refs；待中台发布后再补兼容消费用例，不回头改本组领域语义。
 
+### Phase 6（新增，已完成 producer scope）：领域复杂度补齐与工具注册校正
+
+1. 补齐 Finance 来源族与 route：
+   - 融资新闻
+   - 财报 / 10-K / 10-Q / 8-K / 上市公司公告
+   - SEC 披露
+   - investor relations
+   - 基金报告
+   - 并购
+   - 财报电话会 transcript
+   - 可信金融 / 产业数据源
+2. 补齐 Finance 语义分层，至少显式区分：
+   - 融资热度
+   - 资本配置
+   - 组织投入
+   - 并购整合
+   - 上市公司业务倾斜
+   - 产业研究叙事
+3. 补齐 Policy / Thinktank 来源族与 route：
+   - 政策 / 监管文件
+   - 政府公告
+   - 审批
+   - 公共采购
+   - 标准组织文件
+   - 官方项目
+   - OECD.AI
+   - CSET
+   - Stanford AI Index
+   - Brookings
+   - RAND
+4. 补齐 Policy 语义分层，至少显式区分：
+   - 监管关注
+   - 政策空间
+   - 官方支持
+   - 确定审批
+   - 公共采购
+   - 风险提示
+   - 智库观点
+5. 把下列审计信息结构化落到 producer artifact，不得只靠 prose / reason code：
+   - 来源层级
+   - 成本 / 授权状态
+   - `primary_source_distance`
+   - 缺失来源
+   - 可选付费来源
+   - `human_exception_required`
+6. 修正 `AxisToolCoverageReport` 的工具注册落账：
+   - `primary_tool_ids`
+   - `secondary_toolset_ids`
+   - `fallback_tool_ids`
+   - `last_resort_tool_ids`
+   - `eligible_tool_ids`
+   - `selected_from_tool_ids`
+   必须与 seed 和实际 route 一致，不能只在 seed 中声明、在 payload 中留空或错写。
+7. 新增回归：
+   - finance / policy 来源覆盖 fixture
+   - finance / policy 语义分层 unit test
+   - `optional_paid / human_exception / missing-source` 审计输出 fixture
+   - coverage 工具注册准确性测试
+8. 与 4 号的交接边界：
+   - 若只改本组 producer / fixture / 测试，本组直接交 refreshed bundle 给 4 号刷新消费。
+   - 若需要 shared contract / schema uplift，本组只提交字段级缺口说明，由 4 号承接 shared 真源、runtime materialize 与跨组消费面的修改。
+9. 本阶段完成前，政策金融组状态只能算 `handoff-ready`，不能算 `design-complete`。
+
 ## 验收标准
 
 1. 三轴都能独立产出 canonical event。
@@ -493,6 +578,11 @@ handoff 要求：
 9. finance / policy 媒体转述不会抢走 direct fact owner。
 10. official-first failure、anti-upgrade 反例可直接进入统一 eval/replay。
 11. 本组全部源码、测试、fixture builder 文件都小于 `2000` 行，且 finance / regulatory / thinktank 没有堆进单文件实现。
+12. Finance 来源族已显式覆盖融资新闻、财报、SEC、基金报告、并购、上市公司公告、IR、电话会 transcript 与可信金融 / 产业数据源。
+13. Policy / Thinktank 来源族已显式覆盖政策文件、政府公告、审批、公共采购、标准组织、官方项目，以及 OECD.AI、CSET、Stanford AI Index、Brookings、RAND 等命名来源。
+14. coverage / event / diagnostic 产物能结构化输出来源层级、成本 / 授权状态、`primary_source_distance`、缺失来源、可选付费来源与 `human_exception_required`。
+15. `AxisToolCoverageReport` 中的 `primary / secondary / fallback / last_resort` 工具注册与 seed、route 和实际降级路径一致。
+16. 本组只对 `wind_probe` 上限提供 anti-upgrade 证据与拒收语义；最终 tier 上限需由 4 号在 cross-axis 裁决链中验收，不得反向记成“本组未实现”。
 
 ## 验证矩阵
 
@@ -508,6 +598,10 @@ handoff 要求：
 | cross-group contract | envelope / manifest / payload / compatibility | contract fixture | 中台组无需口头补字段即可消费 |
 | owner boundary | 转述源不抢 owner | negative fixture | 新闻/摘要不会双计 accepted |
 | anti-upgrade | 资本/政策/智库单轴热度 | eval fixture | 不会误升 core |
+| finance semantic coverage | 融资热度 / 资本配置 / 组织投入 / 并购整合 / 业务倾斜 / 研究叙事 | unit + fixture test | 不同 finance 语义不会混成一个通用 accepted |
+| policy semantic coverage | 监管关注 / 政策空间 / 官方支持 / 确定审批 / 公共采购 / 风险提示 / 智库观点 | unit + fixture test | 政策关注不会冒充确定支持，智库观点不会冒充监管结论 |
+| audit output completeness | access / paid / human exception / missing source | fixture + contract test | 审计字段结构化可消费，不靠 prose 猜 |
+| tool registration accuracy | primary / secondary / fallback / last_resort 落账 | unit + replay test | coverage payload 与 seed / route 一致 |
 
 ## 回滚策略
 
@@ -531,11 +625,13 @@ handoff 要求：
 | 2026-06-28 | `corepack pnpm vitest run src/__tests__/visualConsoleWebRuntimeRender.test.ts src/__tests__/visualConsoleReactRuntimeProps.test.ts src/__tests__/visualConsoleMissionViews.test.ts src/__tests__/visualConsoleWeeklyRuntime.test.ts` | `Passed` | 已确认 runtime summary / replay-only fallback 不只停在中台层，而是已经进入 weekly、run-health 与 overview 的 Web/SSR 高层入口 |
 | 2026-06-28 | `corepack pnpm vitest run src/__tests__/overviewTopDecisionRanking.test.ts src/__tests__/industry/platform/normalization.test.ts src/__tests__/weeklyIndustryRuntime.test.ts src/__tests__/runSummaryObserver.test.ts src/__tests__/dailyVerificationProjectSearch.test.ts` | `Passed` | 已补齐 ranking/mock 回归与 runtime blockage 展示校验，确认 overview 风险面板、run-summary、verify-daily、weekly runtime 汇总全部闭环 |
 | 2026-06-28 | `corepack pnpm typecheck` | `Passed` | 当前变更在类型层已通过；本计划五个阶段对应实现均可按代码实况视为完成 |
+| 2026-06-29 | `corepack pnpm typecheck` | `Passed` | 已在补齐领域复杂度字段与 source-family 语义校验后再次确认类型通过 |
+| 2026-06-29 | `corepack pnpm exec vitest run src/__tests__/industry/agents/finance-agent/unit.test.ts src/__tests__/industry/agents/finance-agent/contract.test.ts src/__tests__/industry/agents/finance-agent/negative.test.ts src/__tests__/industry/agents/finance-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/unit.test.ts src/__tests__/industry/agents/policy-agent/contract.test.ts src/__tests__/industry/agents/policy-agent/negative.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts src/__tests__/industry/platform/normalization.test.ts src/__tests__/industry/platform/contract.test.ts` | `Passed` | 10 个测试文件、97 条测试通过；确认本组 producer 复杂度补齐后仍可被平台消费 |
 
 ## 下一阶段入口
 
-1. 本计划 `Phase 1 ~ Phase 5` 已全部完成，且不存在 `Phase 6`；后续不再新增政策金融组独立实施阶段。
-2. 本组正式 handoff 前提已交齐，且中台 `normalization dry-run`、`consumeFinancePolicyHandoffForRuntime(...)` runtime 消费入口、runtime registry snapshots 与高层消费入口均已接通。
-3. `4号执行人` 下一步应直接推进三组最终集成，而不是继续等待政策金融侧补 contract/runtime 基座前置。
-4. 当前最明确的外部剩余阻塞是 academic 侧 `formal_academic_handoff`；代码中已显式暴露这一状态，需由跨组集成继续向前推进。
-5. 若最终集成时出现新的明确合同拒收项，本组再按拒收项补一次；若没有新的拒收项，本组无需再新增政策金融输入。
+1. 本计划 `Phase 1 ~ Phase 6` 中，属于本组 producer / seed / fixture / test 的部分已完成；当前状态应记为 `design-complete for producer scope`，而不是仅 `handoff-ready`。
+2. `4号执行人` 下一步不需要再等本组补字段，可直接刷新 policy-finance 的 runtime snapshot、replay fixture 与 weekly 消费。
+3. “资本/政策单轴没有 research / product / community / open-source 交叉确认时最多 `wind_probe`” 的最终生效，仍需 4 号在 cross-axis tier decision 与 weekly 总验收中确认；这是裁决链责任，不是本组 producer 漏做。
+4. 当前最明确的外部剩余阻塞仍包括 academic 侧 `formal_academic_handoff` 与三组最终集成，这两项都不再是政策金融组单独可消除的问题。
+5. 若后续 weekly 集成暴露的是 shared contract / runtime materialize 缺口，则由 4 号承接 uplift；本组只回补字段级语义或新增反例 fixture。

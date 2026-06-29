@@ -4,6 +4,7 @@ import type { LlmConfig, SourceConfig } from "../config.ts";
 import { buildProjectBrief } from "../action/projectBriefs.ts";
 import { parseJsonObjectFromText } from "../jsonObject.ts";
 import { callLlm } from "../llm.ts";
+import { executeGitHubSearchRequest, mapInBatchesOrdered, type GitHubSearchRuntimeOptions } from "./githubSearchRuntime.ts";
 import type { NormalizedProject } from "../types.ts";
 import type {
   DirectionPressureState,
@@ -48,6 +49,10 @@ interface ObserverOptions {
   dailyCandidateProjects?: NormalizedProject[];
   llmConfig?: LlmConfig;
   gapPressureStates?: Record<string, { pressure_state: DirectionPressureState; counts: Record<string, number> }>;
+  githubSearch?: GitHubSearchRuntimeOptions & {
+    concurrency?: number;
+    batchLimit?: number;
+  };
 }
 
 interface ObserverCollectionResult {
@@ -89,30 +94,6 @@ function textHasKeyword(text: string, keyword: string): boolean {
   if (!normalizedKeyword) return false;
   const escaped = escapeRegExp(normalizedKeyword).replace(/\\ /g, "\\s+");
   return new RegExp(`(^|[^a-z0-9])${escaped}([^a-z0-9]|$)`, "i").test(text);
-}
-
-function githubApiHeaders(includeAuth: boolean): Record<string, string> {
-  const headers: Record<string, string> = {
-    Accept: "application/vnd.github+json",
-    "X-GitHub-Api-Version": "2022-11-28",
-    "User-Agent": "agent-radar/0.1",
-  };
-  const token = process.env["GITHUB_TOKEN"];
-  if (includeAuth && token) headers["Authorization"] = `Bearer ${token}`;
-  return headers;
-}
-
-async function fetchGitHubApiWithAuthFallback(url: string): Promise<{
-  response: Response;
-  usedUnauthenticatedRetry: boolean;
-}> {
-  const first = await fetch(url, { headers: githubApiHeaders(true) });
-  if (first.status !== 401 || !process.env["GITHUB_TOKEN"]) {
-    return { response: first, usedUnauthenticatedRetry: false };
-  }
-
-  const second = await fetch(url, { headers: githubApiHeaders(false) });
-  return { response: second, usedUnauthenticatedRetry: true };
 }
 
 function unique(values: string[]): string[] {
@@ -544,6 +525,7 @@ async function fetchGitHubSearchResults(
   queryLabel: string,
   query: string,
   perPage: number,
+  runtime: GitHubSearchRuntimeOptions,
 ): Promise<{ repos: GitHubSearchRepository[]; notes: string[] }> {
   const url = new URL("https://api.github.com/search/repositories");
   url.searchParams.set("q", query);
@@ -551,17 +533,22 @@ async function fetchGitHubSearchResults(
   url.searchParams.set("order", "desc");
   url.searchParams.set("per_page", String(perPage));
 
-  const { response, usedUnauthenticatedRetry } = await fetchGitHubApiWithAuthFallback(url.toString());
-  if (!response.ok) {
-    throw new Error(`GitHub Search returned HTTP ${response.status} for ${ecosystemName}`);
+  const result = await executeGitHubSearchRequest(url.toString(), `observer-github-search:${ecosystemName}:${queryLabel}`, runtime);
+  if (result.status !== "ok") {
+    if (result.status === "circuit_open") {
+      throw new Error(`GitHub Search circuit open for ${ecosystemName}`);
+    }
+    throw new Error(
+      result.http_status ? `GitHub Search returned HTTP ${result.http_status} for ${ecosystemName}` : result.error,
+    );
   }
 
-  const body = (await response.json()) as { items?: GitHubSearchRepository[] };
+  const body = (await result.response.json()) as { items?: GitHubSearchRepository[] };
   return {
     repos: Array.isArray(body.items) ? body.items : [],
     notes: [
       `query ecosystem=${ecosystemName} source=${queryLabel}`,
-      ...(usedUnauthenticatedRetry ? ["github api token returned 401; retried successfully without auth"] : []),
+      ...(result.usedUnauthenticatedRetry ? ["github api token returned 401; retried successfully without auth"] : []),
     ],
   };
 }
@@ -1771,9 +1758,20 @@ export async function collectEcosystemFocusObserver(
     const queryFailures: string[] = [];
     let attemptedQueryCount = 0;
     let successfulQueryCount = 0;
+    const githubSearchRuntime = {
+      timeoutMs: opts.githubSearch?.timeoutMs ?? 12_000,
+      retryAttempts: opts.githubSearch?.retryAttempts ?? 3,
+      retryBaseDelayMs: opts.githubSearch?.retryBaseDelayMs ?? 1_000,
+    };
+    const observerConcurrency = Math.max(1, opts.githubSearch?.concurrency ?? 2);
+    const observerBatchLimit = Math.max(observerConcurrency, opts.githubSearch?.batchLimit ?? enabledEcosystems.length);
 
-    for (const ecosystem of enabledEcosystems) {
-      for (const searchQuery of buildObserverSearchQueries(ecosystem, opts.date, config.recentDays)) {
+    for (let start = 0; start < enabledEcosystems.length; start += observerBatchLimit) {
+      const ecosystemBatch = enabledEcosystems.slice(start, start + observerBatchLimit);
+      const searchTasks = ecosystemBatch.flatMap((ecosystem) =>
+        buildObserverSearchQueries(ecosystem, opts.date, config.recentDays).map((searchQuery) => ({ ecosystem, searchQuery }))
+      );
+      const searchResults = await mapInBatchesOrdered(searchTasks, observerConcurrency, async ({ ecosystem, searchQuery }) => {
         attemptedQueryCount += 1;
         try {
           const result = await fetchGitHubSearchResults(
@@ -1781,33 +1779,50 @@ export async function collectEcosystemFocusObserver(
             searchQuery.label,
             searchQuery.query,
             config.perEcosystemLimit,
+            githubSearchRuntime,
           );
-          successfulQueryCount += 1;
-          notes.push(...result.notes);
-          for (const repo of result.repos) {
-            if (!isLongTailRepoCandidate(repo, opts.date)) continue;
-            const matched = matchRepositoryToEcosystem(repo, ecosystem);
-            if (!matched) continue;
-            const project = findProjectByRepoFullName(opts.dailyCandidateProjects ?? [], repo.full_name);
-            const metrics = completeMetrics(repo, project);
-            if (!metrics) continue;
-            matched.observed_at = opts.generatedAt;
-            matched.stars = metrics.stars;
-            matched.forks = metrics.forks;
-            matched.issues = metrics.issues;
-            matched.PR = metrics.PR;
-            matched.source_notes = unique([
-              `candidate_pool=github-search`,
-              `query=${searchQuery.label}`,
-              ...result.notes,
-            ]);
-            collected.push(matched);
-          }
+          return { ecosystem, searchQuery, result, error: null as string | null };
         } catch (error) {
-          const message = error instanceof Error ? error.message : String(error);
-          queryFailures.push(`query failed ecosystem=${ecosystem.name} source=${searchQuery.label}: ${message}`);
+          return {
+            ecosystem,
+            searchQuery,
+            result: null as { repos: GitHubSearchRepository[]; notes: string[] } | null,
+            error: error instanceof Error ? error.message : String(error),
+          };
+        }
+      });
+
+      for (const item of searchResults) {
+        if (item.error) {
+          queryFailures.push(`query failed ecosystem=${item.ecosystem.name} source=${item.searchQuery.label}: ${item.error}`);
+          continue;
+        }
+        if (!item.result) continue;
+        successfulQueryCount += 1;
+        notes.push(...item.result.notes);
+        for (const repo of item.result.repos) {
+          if (!isLongTailRepoCandidate(repo, opts.date)) continue;
+          const matched = matchRepositoryToEcosystem(repo, item.ecosystem);
+          if (!matched) continue;
+          const project = findProjectByRepoFullName(opts.dailyCandidateProjects ?? [], repo.full_name);
+          const metrics = completeMetrics(repo, project);
+          if (!metrics) continue;
+          matched.observed_at = opts.generatedAt;
+          matched.stars = metrics.stars;
+          matched.forks = metrics.forks;
+          matched.issues = metrics.issues;
+          matched.PR = metrics.PR;
+          matched.source_notes = unique([
+            `candidate_pool=github-search`,
+            `query=${item.searchQuery.label}`,
+            ...item.result.notes,
+          ]);
+          collected.push(matched);
         }
       }
+    }
+
+    for (const ecosystem of enabledEcosystems) {
 
       const dailyPoolMatches = collectDailyPoolMatches(
         opts.dailyCandidateProjects ?? [],

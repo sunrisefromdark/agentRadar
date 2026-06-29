@@ -3,8 +3,16 @@
   "responsibility_id": "policy-research-thinktank",
   "axis": "policy_research_thinktank",
   "official_first": true,
-  "primary_tool_ids": ["thinktank-report-registry", "institution-research-briefs"],
-  "secondary_tool_ids": ["research-library-index"],
-  "fallback_tool_ids": ["thinktank-domain-search"],
+  "primary_tool_ids": [
+    "thinktank-report-registry",
+    "institution-research-briefs",
+    "oecd-ai-policy-observatory",
+    "cset-policy-briefs",
+    "stanford-ai-index",
+    "brookings-ai-research",
+    "rand-ai-research"
+  ],
+  "secondary_tool_ids": ["research-library-index", "policy-research-series-index"],
+  "fallback_tool_ids": ["thinktank-domain-search", "institution-report-search"],
   "last_resort_tool_ids": ["manual-thinktank-triage"]
 }

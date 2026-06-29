@@ -112,4 +112,46 @@ describe("runMissionScoutDiscovery", () => {
     expect(result.gap_ledger[0]?.family_key).toBe("agent-stack");
     expect(result.gap_ledger[0]?.candidate_counts.raw_hits).toBe(0);
   });
+
+  it("surfaces partial remote failures and circuit-open degradations separately", async () => {
+    const result = await runMissionScoutDiscovery({
+      catalog: [
+        catalogEntry,
+        { ...catalogEntry, direction_key: "memory", display_name_cn: "记忆系统" },
+      ],
+      githubSearchEnabled: true,
+      concurrency: 2,
+      batchLimit: 2,
+      search: async ({ direction }) => {
+        if (direction.direction_key === "coding-agent") {
+          return {
+            status: "ok",
+            raw_hits: 4,
+            normalized_hits: 1,
+            quality_passed_hits: 0,
+            lane_hits: {},
+            repo_candidates: [{ repo_full_name: "acme/coder", repo_url: "https://github.com/acme/coder" }],
+            query_count: 6,
+            remote_status: "partial_failure",
+            remote_failure_reasons: ["network_or_5xx"],
+          };
+        }
+        return {
+          status: "failed",
+          raw_hits: 0,
+          normalized_hits: 0,
+          quality_passed_hits: 0,
+          lane_hits: {},
+          repo_candidates: [],
+          query_count: 6,
+          remote_status: "circuit_open",
+          remote_failure_reasons: ["circuit_open"],
+        };
+      },
+    });
+
+    expect(result.coverage_atlas.map((item) => item.outcome)).toEqual(["partial_remote_failure", "circuit_open"]);
+    expect(result.gap_ledger[0]?.reason_codes).toContain("partial_remote_failure");
+    expect(result.gap_ledger[1]?.reason_codes).toContain("circuit_open");
+  });
 });

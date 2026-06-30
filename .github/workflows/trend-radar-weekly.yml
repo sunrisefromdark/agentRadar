@@ -109,5 +109,6 @@ jobs:
             data/reports/${{ steps.options.outputs.target_date }}.weekly.json
             data/reports/${{ steps.options.outputs.target_date }}.weekly.md
             data/reports/${{ steps.options.outputs.target_date }}.weekly.audit.json
+            data/external-discovery/*.aggregate.json
             data/kb/latest.json
           if-no-files-found: warn

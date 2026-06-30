@@ -3,11 +3,26 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`Approved for Implementation`
 - 设计来源：
   - `docs/specs/product-specs/外部发现与补证信号层需求分析.md`
   - `docs/specs/design-docs/agent-reach-external-discovery-and-evidence-design.md`
+  - `docs/specs/design-docs/trend-radar-ui-v3-stage-redesign-design.md`
 - 说明：本计划只负责把已获批设计落到可执行实现阶段，不新增产品行为，不直接调用外部平台 API，不创建登录、OAuth、session 或账号配置能力。
+
+## 设计复审记录
+
+- 复审日期：`2026-06-30`
+- 复审结论：AgentReach external discovery 设计与 UI V3 外部发现页补充设计均已更新为 `Approved for ExecPlan`。
+- 本次合入范围：`ExternalEvidence.named_registry_actors`、`ExternalNamedRegistryActor`、registry/public-safe 具名讨论者生成规则、匿名降级规则，以及 daily / weekly / 项目详情 / 外部发现页复用同一“谁在讨论”契约。
+- 边界：本合入不引入新的 provider、平台采集、账号态、登录态、主评分公式或 UI 侧重算逻辑；UI 只能消费 public aggregate 中的 `named_registry_actors` 与匿名统计，不得从 provider raw actor 字段、未脱敏事件或自由文本临时拼接身份。本文中的“项目详情 / 外部发现页复用”指本计划必须产出同一 public contract 和消费语义，具体 visual console 页面代码若不在本计划触达面内，应由后续 UI exec-plan 承接，不得在本计划内顺手扩权。
+
+## ExecPlan 复审记录
+
+- 复审日期：`2026-06-30`
+- 复审结论：`APPROVE`
+- 风险等级：`High`，原因是 external discovery 涉及 public artifact、redaction、registry tier、daily / weekly 消费和 verify 门禁；当前计划已用 Phase 0 结构测试、contract-first 类型、public-safe 验证、负例测试和回滚策略约束风险。
+- 无阻塞项：计划已基于批准设计，承接 `named_registry_actors` 具名讨论者契约，明确禁止 provider raw actor 身份拼接，并保留 preflight-sync 未完成前不得开始生产代码实现的入口门禁。
 
 ## 任务信息
 
@@ -33,6 +48,7 @@
   - 冻结 `ExternalPlatform = "x_twitter" | "reddit" | "hacker_news" | "official_web" | "official_blog"`。
   - 冻结 `ExternalTargetType = "project" | "paper" | "product" | "topic"`；`direction` 只能作为 `scope` / consumption 语义，不得作为 target type。
   - 冻结 `derived_signal_kinds: ExternalSignalKind[]`，允许同一事件同时具备 `discovery` 与 `evidence`。
+  - 定义 `ExternalNamedRegistryActor`，并要求 `ExternalEvidence.named_registry_actors` 作为“谁在讨论”的唯一 public-safe 具名数据入口。
   - 定义 `ObservationCandidate`，并固定 `cannot_be_primary_conclusion: true`。
   - 只承接 external layer，不扩展 `RawSignal.source`。
 
@@ -43,6 +59,7 @@
 
 - `src/externalDiscovery/redaction.ts`
   - 实现 public-safe 字段扫描、raw text/profile URL/token/cookie/session/password/OAuth 字样拦截、public aggregate 验证。
+  - 验证 `named_registry_actors` 只包含 `entity_id`、`display_name`、`actor_type`、`registry_tier`、`event_count`、`platforms`、`first_seen_at`、`last_seen_at`，不得包含 raw handle、profile URL、raw social text、provider diagnostics 或 private metadata。
   - 输出稳定 reason code，供 adapter、aggregate、verify 和结构测试复用。
 
 - `src/externalDiscovery/agentReachProvider.ts`
@@ -56,6 +73,7 @@
 - `src/externalDiscovery/entityRegistry.ts`
   - 读取 `data/external-discovery/entity-registry.json`，registry 可空启动。
   - 只有 registry 命中的实体可产生 `registry_tier=core/proven/watch` 与 `effective_tier=core/proven/watch`。
+  - 只有 `tier_basis="registry"` 且存在 `registry_entity_id` / `registry_tier` 的 canonical event，可参与后续 `named_registry_actors` 生成。
   - 空 registry 或 registry miss 不阻塞 external layer，但必须记录 `registry_empty` / `registry_miss` warning，且 `top_tier_actor_count=0`。
   - 覆盖机构、团队、个人三类主体，不得收缩为仅机构账号。
 
@@ -72,6 +90,7 @@
   - 固定 `public_safe=true`、`contains_raw_text=false`、`contains_profile_urls=false`、`redaction_policy_version` 和 `source_input_hash`。
   - 只写 public aggregate 与 latest 指针；V1 不写 public `events.jsonl`。
   - 拒绝把 `content_text`、provider raw `text`、`profile_url`、未脱敏 handle 或 private diagnostics 写入 public aggregate。
+  - 为每个 `ExternalEvidence(scope + target_key)` 聚合 `named_registry_actors`，只使用 registry/public-safe canonical entity 的 `display_name`，并按 `registry_tier` 优先级、`event_count`、`display_name` 稳定排序。
 
 - `src/externalDiscovery/dailyIntegration.ts`
   - 封装 `run-daily` / `recover-daily` 的 external discovery orchestration。
@@ -99,6 +118,7 @@
 
 - `src/action/dailyReport.ts`
   - 增加 `external_discovery` section 到 daily JSON / Markdown。
+  - daily external section 展示“具名讨论者 + 匿名/未命中汇总”，具名讨论者只能来自 `ExternalEvidence.named_registry_actors`。
   - 外部候选和补证只作为次级观察展示，不进入 `today_star_projects` 的主源确认语义。
 
 - `src/action/runSummary.ts`
@@ -108,6 +128,7 @@
 - `src/action/weeklyEnhancement.ts`、`src/action/weeklyReport.ts`
   - weekly 只消费 7 日 aggregate window。
   - 输出 direction observation、project evidence summary 和 external window status。
+  - weekly direction / project evidence summary 复用同一 `named_registry_actors` 契约，不新增第二套具名讨论者字段。
 
 - `src/action/dailyVerification.ts`
   - skipped / failed 作为 warn。
@@ -174,22 +195,22 @@
 
 - 需求分析：`Approved`
 - 设计文档：`Approved`
-- 实施：`Not Started`
-- 验证：`Not Started`
+- 实施：`Phase 0-2 Done; Phase 3/4/8 In Progress`
+- 验证：`Phase 0-4 named_registry_actors 基座通过 targeted tests / typecheck / preflight check`
 
 ## 阶段进度
 
 | 阶段 | 状态 | 目标 | 完成标志 |
 | --- | --- | --- | --- |
-| Phase 0：执行前对齐 | `Pending` | 固定文件边界、fixture 规则、preflight-sync 和测试入口 | 结构测试先失败，且实现前 preflight-sync 已完成并记录结果 |
-| Phase 1：类型、路径与 redaction 基座 | `Pending` | 建立 frozen enum、类型、路径和 public-safe 验证 | redaction / path / type 单测通过 |
-| Phase 2：AgentReach 本地 artifact adapter | `Pending` | 只消费本地 JSON artifact，输出 canonical event/audit/status | adapter 单测覆盖 provider schema 与 ok / skipped / partial / failed |
-| Phase 3：entity registry、matching 与 topic canonicalization | `Pending` | 落地 tier 维护、项目匹配与方向 topic 归一 | registry / matching / topic 测试通过 |
-| Phase 4：aggregate 与 public artifact 写入 | `Pending` | 生成 public daily aggregate 和 latest 指针，不落盘 public events JSONL | aggregate 不含 raw social text 且 public-safe 测试通过 |
+| Phase 0：执行前对齐 | `DONE` | 固定文件边界、fixture 规则、preflight-sync 和测试入口 | preflight receipt 已刷新并校验；structure test 通过 |
+| Phase 1：类型、路径与 redaction 基座 | `DONE` | 建立 frozen enum、类型、路径和 public-safe 验证 | redaction / path / type 单测通过 |
+| Phase 2：AgentReach 本地 artifact adapter | `DONE` | 只消费本地 JSON artifact，输出 canonical event/audit/status | adapter 单测覆盖 provider schema、顶层审计字段、非空 `derived_signal_kinds` 与 ok / skipped / partial / failed |
+| Phase 3：entity registry、matching 与 topic canonicalization | `IN_PROGRESS` | 落地 tier 维护、项目匹配与方向 topic 归一 | 本轮已完成 registry named actor eligibility、repo 精确匹配和 topic key 基座；低置信 audit 细化留后续 |
+| Phase 4：aggregate 与 public artifact 写入 | `IN_PROGRESS` | 生成 public daily aggregate 和 latest 指针，不落盘 public events JSONL | 本轮已完成 in-memory public aggregate 与 `named_registry_actors` 聚合；文件写入/latest 指针接入留后续 |
 | Phase 5：CLI command matrix | `Pending` | 落地 `run-daily`、`recover-daily`、`run-weekly`、`verify-daily` flags 语义 | CLI 单测覆盖 flags、fail-fast、dry-run |
 | Phase 6：daily / run-summary / verify 输出 | `Pending` | daily 展示、run-summary 审计、verify warn/fail 与污染检测 | action output 与 verification 测试通过 |
 | Phase 7：weekly 7 日窗口消费 | `Pending` | weekly 只读 `DailyExternalAggregate[]`，direction gate 4 选 2 | weekly 与 direction gate 测试通过 |
-| Phase 8：OSS 文档、gitignore、workflow、spec 同步 | `Pending` | 公共 artifact 策略在文档、spec 和自动化中一致 | structure test 与人工 diff review 通过 |
+| Phase 8：OSS 文档、gitignore、workflow、spec 同步 | `IN_PROGRESS` | 公共 artifact 策略在文档、spec 和自动化中一致 | 本轮已完成 `.gitignore`、README、data README、workflow 的 external raw/public aggregate 边界；spec 全量同步留后续 |
 | Phase 9：总体验收 | `Pending` | typecheck、test、preflight 和关键 CLI dry-run 全部通过 | 验证记录更新到本计划 |
 
 ## 实施阶段
@@ -233,6 +254,7 @@
    - `ExternalRegistryTier = "core" | "proven" | "watch"`
    - `ExternalProviderTierHint = "core" | "proven" | "watch" | "ordinary" | "unknown"`
    - `ExternalSignalEvent`
+   - `ExternalNamedRegistryActor`
    - `ExternalEvidence`
    - `ObservationCandidate`
    - `DailyExternalAggregate`
@@ -241,6 +263,8 @@
    - `derived_signal_kinds` 必须是非空数组，允许同时包含 `discovery` 与 `evidence`。
    - `direction` 不得出现在 `ExternalTargetType`，方向级表达只能来自 `scope="direction"` 与 `target_type="topic"`。
    - `ObservationCandidate.cannot_be_primary_conclusion` 固定为 `true`。
+   - `ExternalNamedRegistryActor.actor_type` 只能是 `"institution" | "team" | "person"`，不得包含 `community` 或 `unknown`。
+   - `ExternalEvidence.named_registry_actors` 必须存在；为空数组表示没有可 public-safe 具名展示的 registry 命中讨论者，不代表没有外部讨论。
 3. 在 `src/types.ts` 只追加公开消费类型或 re-export，不改变 `RawSignal`、`ScoreBreakdown`、`ScoreComponentName`。
 4. 在 `src/externalDiscovery/paths.ts` 定义：
    - `externalRawInputPath(date: string): string`
@@ -262,6 +286,8 @@
    - raw `content_text` 被 public aggregate redaction 拒绝。
    - provider raw `text` 被 public aggregate redaction 拒绝。
    - `profile_url` 被 public aggregate redaction 拒绝。
+   - `named_registry_actors` 中出现 raw handle、profile URL、raw social text、provider diagnostics 或 private metadata 时被拒绝。
+   - `named_registry_actors.display_name` 只能来自 registry/public-safe canonical entity，测试 fixture 不得使用 provider raw `actor.display_name` 作为可信身份来源。
    - cookie/session/token/password/OAuth 字样被 public aggregate redaction 拒绝。
    - sanitized aggregate 包含 `public_safe=true`、`contains_raw_text=false`、`contains_profile_urls=false`、`redaction_policy_version`、`source_input_hash` 时通过。
 9. 运行：
@@ -331,6 +357,8 @@
    - 未命中 actor 产生 `registry_miss` warning。
    - 空 registry 或 miss 时，actor 只能计入 `ordinary` 或 `unknown`。
    - `top_tier_actor_count` 必须为 0，除非 registry 命中 `core/proven/watch`。
+   - 只有 `tier_basis="registry"` 且具备 `registry_entity_id` / `registry_tier` 的 canonical event，可进入后续 `named_registry_actors` 聚合。
+   - provider `actor.display_name`、`provider_tier_hint`、handle 或 profile URL 不得替代 registry 命中。
 2. Registry entry 必须覆盖：
    - `entity_id`
    - `display_name`
@@ -343,35 +371,39 @@
    - `handles` 与 `profile_urls` 只能保存 curated public entity reference。
    - registry 不得包含私有账号态字段、cookie、token、session、OAuth、私有 diagnostics 或 provider raw profile dump。
    - registry 中的 handle / profile URL 不得复制进 `DailyExternalAggregate` 或 public aggregate。
-   - public aggregate 只能保留计数、脱敏 actor summary、tier 统计和 audit 状态。
+   - public aggregate 只能保留计数、脱敏 actor summary、tier 统计、`named_registry_actors` 中的 public-safe registry identity 和 audit 状态。
    - 若 `data/external-discovery/entity-registry.json` 作为公开 artifact 维护，必须被 structure / public-safe 测试覆盖。
 4. 在 `src/externalDiscovery/matching.ts` 实现项目与方向匹配：
    - repo URL 精确命中现有 `NormalizedProject.repo_url` 时，生成 `ExternalEvidence(scope=project)`。
    - paper / product 明确 URL 可以生成 project-scope 或 evidence candidate，但不得伪造 repo。
    - 低置信名称匹配默认不进入 daily 主展示，只能 rejected 或保留为 low-confidence audit evidence。
    - 未命中但有明确 repo / paper / product 时，生成 `ObservationCandidate(scope=project, qualification=needs_primary_confirmation)`。
-4. 固定 topic canonicalization：
+5. 固定 topic canonicalization：
    - 优先命中 `userInterestProfile.topics[].name`。
    - 再命中现有 weekly trend key / paradigm label。
    - 再使用 provider `topic_hint` 的小写 kebab-case。
    - 无稳定 `topic_key` 的 topic event 不得进入 weekly direction observation。
-5. 固定 `ObservationCandidate` 字段：
+6. 固定 `ObservationCandidate` 字段：
    - `candidate_kind`
    - `qualification`
    - `can_enter_daily`
    - `can_enter_weekly`
    - `cannot_be_primary_conclusion=true`
    - direction candidate 必须说明“尚未绑定明确 repo / paper”。
-6. 写测试覆盖：
+7. 写测试覆盖：
    - 空 registry 不阻塞 external layer。
    - 空 registry 时 `top_tier_actor_count=0`。
    - provider tier hint 不得产生 `effective_tier=core/proven/watch`。
    - registry miss 记录 warning。
+   - registry 命中 actor 可进入 `named_registry_actors`，且 `display_name` 来自 registry。
+   - registry miss 或仅 provider hint actor 不得进入 `named_registry_actors`。
+   - mixed hit/miss 时，命中 actor 仍可进入 `named_registry_actors` 和 top-tier 统计，miss actor 只进入匿名统计。
+   - raw display name / handle / profile URL 不得进入具名身份输出。
    - repo URL 精确匹配生成 project evidence。
    - low-confidence name match 不进入 daily 主展示。
    - topic event 必须有稳定 `topic_key`。
    - 无稳定 `topic_key` 的 topic event 不进入 weekly direction observation。
-7. 运行：
+8. 运行：
    - `pnpm test -- externalDiscoveryEntityRegistry.test.ts`
    - `pnpm test -- externalDiscoveryMatching.test.ts`
    - `pnpm typecheck`
@@ -402,26 +434,39 @@
    - `observation_candidates`
    - `audit.rejected_events`
    - `audit.warnings`
-3. Aggregate 不得包含：
+3. 每个 `ExternalEvidence` 必须包含 `named_registry_actors`：
+   - 同一 `ExternalEvidence(scope + target_key)` 内按 `entity_id` 合并。
+   - `event_count` 统计该 entity 对当前 evidence 的参与事件数。
+   - `platforms` 去重排序。
+   - `first_seen_at` / `last_seen_at` 来自该 entity 在当前 evidence 内的事件时间窗口。
+   - 输出按 `registry_tier` 优先级 `core -> proven -> watch`、再按 `event_count` 降序、再按 `display_name` 稳定排序。
+   - 字段为空数组时只表示没有可具名展示的 registry 命中 actor，不表示没有外部讨论。
+4. Aggregate 不得包含：
    - raw social text
    - full provider text
    - profile URL
+   - raw handle
+   - provider raw `actor.display_name` 作为可信身份来源
    - cookie/token/session/password/OAuth
    - private diagnostics
-4. V1 artifact 策略：
+5. V1 artifact 策略：
    - 只写 `data/external-discovery/YYYY-MM-DD.aggregate.json`。
    - 只写 `data/external-discovery/latest.aggregate.json`。
    - 不写 `data/external-discovery/YYYY-MM-DD.events.jsonl`。
    - 如果未来需要 canonical events JSONL，必须另开设计或 exec-plan 修订。
-5. 在 `src/storage/files.ts` 增加 `data/external-discovery` 到 `DATA_DIRS`。
-6. 在 daily integration 中只写 public aggregate 和 latest 指针，不写 raw input。
-7. 写测试覆盖：
+6. 在 `src/storage/files.ts` 增加 `data/external-discovery` 到 `DATA_DIRS`。
+7. 在 daily integration 中只写 public aggregate 和 latest 指针，不写 raw input。
+8. 写测试覆盖：
    - public aggregate 通过 redaction check。
    - aggregate 包含 `source_input_hash`，但不包含 raw input 原文。
    - aggregate 不生成 events JSONL。
    - dry-run 只报告 planned writes，不创建 aggregate/latest 文件。
    - actor tier counts 使用 `effective_tier`，不使用 `provider_tier_hint`。
-8. 运行：
+   - `named_registry_actors` 只由 registry 命中 actor 生成。
+   - 空 registry、registry miss、仅 provider hint 时 `named_registry_actors=[]`。
+   - mixed hit/miss 时命中 actor 保留，miss actor 只进入匿名统计。
+   - raw display name / handle / profile URL / raw social text 不得进入 `named_registry_actors` 或 public aggregate。
+9. 运行：
    - `pnpm test -- externalDiscoveryAggregate.test.ts`
    - `pnpm test -- externalDiscoveryRedaction.test.ts`
    - `pnpm typecheck`
@@ -470,11 +515,14 @@
    - `external_project_evidence_summaries`
    - `external_direction_signal_summary`
    - `external_audit_summary`
+   - `who_is_discussing` 或等价消费字段，来源只能是 `ExternalEvidence.named_registry_actors` 与匿名 actor summary。
 3. Daily 输出语义：
    - `external_observation_candidates` 只放 `scope=project` 且 `can_enter_daily=true` 的外部观察候选。
    - external project candidate 不得进入 `today_star_projects`。
    - direction candidate 不得伪装成“今日新项目”。
    - skipped / failed 时列表字段为空数组，`status_reason` 必须说明原因。
+   - `named_registry_actors` 非空时展示具名讨论者；为空时只展示 `actor_type / effective_tier / count` 匿名摘要。
+   - Daily Markdown 不得从 provider raw actor 字段、未脱敏事件或自由文本里拼接具名讨论者。
 4. 在 `DailyRunSummary` 中追加 external secondary layer 状态：
    - provider status
    - aggregate path
@@ -487,6 +535,8 @@
    - daily 声称使用 external layer 但 audit 缺失：fail。
    - public aggregate 含未脱敏 raw 字段：fail。
    - public aggregate 缺少 required public-safe 字段：fail。
+   - `named_registry_actors` 含 raw handle、profile URL、raw social text、provider diagnostics、private metadata 或 provider raw display name：fail。
+   - daily / run-summary 输出出现非 `named_registry_actors` 来源的具名讨论者：fail。
    - skipped / failed external layer：warn。
 6. Verify score contamination 检测必须覆盖：
    - `RawSignal.source` 没有新增 external provider。
@@ -500,6 +550,8 @@
    - verify 对 redaction violation fail。
    - verify 对 score contamination fail。
    - provider tier hint 不参与头部讨论统计。
+   - daily external section 能同时表达具名讨论者和匿名/未命中汇总。
+   - 未命中 registry 的普通账号只进入匿名汇总，不得显示成具体个人或机构。
 8. 运行：
    - `pnpm test -- externalDiscoveryActionOutput.test.ts`
    - `pnpm test -- externalDiscoveryVerification.test.ts`
@@ -517,6 +569,7 @@
    - `weekly_direction_observations`
    - `external_project_evidence_summaries`
    - `external_cross_platform_confirmations`
+   - 基于 `named_registry_actors` 派生的 `who_is_discussing` 摘要，字段来源和 daily 保持一致。
 4. Weekly direction gate 固定为 4 个收敛条件至少满足 2 个：
    - `cross_platform_confirmation`：同一 `topic_key` 在至少 2 个 V1 平台出现。
    - `multi_actor_confirmation`：同一 `topic_key` 至少有 2 个独立 actor 讨论。
@@ -530,12 +583,16 @@
    - 方向级 observation 不成为项目级结论。
    - external cross-platform confirmation 不等同主源多源确认。
    - external evidence 不创建高置信主趋势。
+   - weekly direction / project evidence summary 中的具名讨论者只能来自 `ExternalEvidence.named_registry_actors`。
+   - `named_registry_actors=[]` 时保留匿名 actor summary，不得把空列表解释成“没有讨论”。
 7. 写测试覆盖：
    - weekly 只读 aggregate paths。
    - weekly 不访问 `data/raw/external-discovery/`。
    - 7 日窗口部分缺失仍生成 weekly，并标记 usable day count。
    - direction observation 必须满足 4 个收敛条件中的至少 2 个。
    - 仅 provider tier hint 不满足 registry tier participation。
+   - weekly 复用 daily aggregate 中的 `named_registry_actors`，不读取 provider raw input 重新拼接身份。
+   - registry miss actor 在 weekly 中只进入匿名汇总。
 8. 运行：
    - `pnpm test -- externalDiscoveryWeekly.test.ts`
    - `pnpm test -- externalDiscoveryDirectionGate.test.ts`
@@ -621,25 +678,30 @@
 12. `ExternalPlatform`、`ExternalTargetType`、`derived_signal_kinds` 与设计冻结契约一致。
 13. Entity registry 可空启动；空 registry 不产生 top-tier 统计。
 14. Provider tier hint 不得产生 core / proven / watch 头部判断。
-15. Weekly direction observation 必须满足 4 个收敛条件中的至少 2 个。
-16. V1 不默认落盘 public canonical events JSONL。
-17. Phase 8 列出的 specs、README、`data/README.md`、`.gitignore` 与 workflows 全部同步。
-18. 实现前 preflight-sync 已完成并记录结果，不再悬空。
+15. `ExternalEvidence.named_registry_actors` 必须存在，且只由 registry/public-safe canonical entity 命中的 actor 生成。
+16. `named_registry_actors` 不得包含 raw handle、profile URL、raw social text、provider diagnostics、private metadata 或 provider raw display name。
+17. 空 registry、registry miss、仅 provider tier hint 时，UI / daily / weekly 只能展示匿名 actor summary，不得展示具名讨论者。
+18. mixed hit/miss 时，registry 命中 actor 仍可进入具名列表和 top-tier 统计，miss actor 只进入匿名统计。
+19. Daily / weekly / 项目详情 / 外部发现页复用同一 `named_registry_actors` public contract；本计划只保证 artifact / report / summary 层提供统一消费语义，不新增第二套具名讨论者字段或 UI 侧拼接逻辑。
+20. Weekly direction observation 必须满足 4 个收敛条件中的至少 2 个。
+21. V1 不默认落盘 public canonical events JSONL。
+22. Phase 8 列出的 specs、README、`data/README.md`、`.gitignore` 与 workflows 全部同步。
+23. 实现前 preflight-sync 已完成并记录结果，不再悬空。
 
 ## 验证矩阵
 
 | 文件位置或类型 | 验证内容 | 验证方式或命令 | 对应 Spec | 通过标准 |
 | --- | --- | --- | --- | --- |
-| `src/externalDiscovery/types.ts` | frozen enum / target / derived signal contract | `pnpm test -- externalDiscoveryTypeContract.test.ts` | 设计 4.1、18 | 平台、target、derived signal 与设计一致 |
-| `src/externalDiscovery/redaction.ts` | public-safe / redaction 规则 | `pnpm test -- externalDiscoveryRedaction.test.ts` | 设计 3.6、11、12、14 | 禁止字段全部 fail，sanitized aggregate pass |
+| `src/externalDiscovery/types.ts` | frozen enum / target / derived signal / `named_registry_actors` contract | `pnpm test -- externalDiscoveryTypeContract.test.ts` | 设计 4.1、4.2、18 | 平台、target、derived signal 与具名讨论者字段契约一致 |
+| `src/externalDiscovery/redaction.ts` | public-safe / redaction / named actor safety 规则 | `pnpm test -- externalDiscoveryRedaction.test.ts` | 设计 3.6、4.2、11、12、14 | 禁止字段全部 fail，sanitized aggregate 和 registry 命中具名 actor pass |
 | `src/externalDiscovery/agentReachProvider.ts` | 本地 JSON adapter 状态机与 provider schema | `pnpm test -- externalDiscoveryAdapter.test.ts` | 设计 3.2、3.3、3.4 | ok/skipped/partial/failed 全覆盖 |
-| `src/externalDiscovery/entityRegistry.ts` | registry 空启动与 tier 维护 | `pnpm test -- externalDiscoveryEntityRegistry.test.ts` | 需求 3、设计 7 | 空 registry 不阻塞，provider hint 不产生 top-tier |
+| `src/externalDiscovery/entityRegistry.ts` | registry 空启动、tier 维护与 named actor eligibility | `pnpm test -- externalDiscoveryEntityRegistry.test.ts` | 需求 3、设计 4.2、7 | 空 registry 不阻塞，provider hint 不产生 top-tier，只有 registry 命中进入具名列表 |
 | `src/externalDiscovery/matching.ts` | repo matching 与 topic canonicalization | `pnpm test -- externalDiscoveryMatching.test.ts` | 需求 7、设计 6 | repo 精确匹配、topic_key、低置信降级全覆盖 |
-| `src/externalDiscovery/aggregate.ts` | public daily aggregate contract | `pnpm test -- externalDiscoveryAggregate.test.ts` | 设计 4、8、12 | aggregate 字段齐全、无 raw text、不写 events JSONL |
+| `src/externalDiscovery/aggregate.ts` | public daily aggregate 与 `named_registry_actors` 聚合 contract | `pnpm test -- externalDiscoveryAggregate.test.ts` | 设计 4、8、12 | aggregate 字段齐全、无 raw text、不写 events JSONL，具名列表仅来自 registry 命中 |
 | `src/cli.ts` | CLI command matrix | `pnpm test -- externalDiscoveryCli.test.ts` | 设计 3.5 | 四个命令 flag 语义一致 |
-| `src/action/dailyReport.ts`、`src/action/runSummary.ts` | daily 与 run-summary external section | `pnpm test -- externalDiscoveryActionOutput.test.ts` | 设计 9、11 | 输出 secondary layer 审计，不污染主榜单 |
-| `src/action/dailyVerification.ts` | verify warn/fail 与 contamination 检测 | `pnpm test -- externalDiscoveryVerification.test.ts` | 设计 11.4、13 | skipped/failed warn，redaction/score contamination fail |
-| `src/action/weeklyEnhancement.ts`、`src/externalDiscovery/weeklyWindow.ts` | weekly 7 日 aggregate window | `pnpm test -- externalDiscoveryWeekly.test.ts` | 设计 10 | weekly 不读 raw input |
+| `src/action/dailyReport.ts`、`src/action/runSummary.ts` | daily 与 run-summary external section / 谁在讨论消费 | `pnpm test -- externalDiscoveryActionOutput.test.ts` | 设计 4.2、9、11 | 输出 secondary layer 审计，不污染主榜单，具名讨论者和匿名汇总分层 |
+| `src/action/dailyVerification.ts` | verify warn/fail、contamination 与 named actor safety 检测 | `pnpm test -- externalDiscoveryVerification.test.ts` | 设计 4.2、11.4、13 | skipped/failed warn，redaction/score/named actor safety violation fail |
+| `src/action/weeklyEnhancement.ts`、`src/externalDiscovery/weeklyWindow.ts` | weekly 7 日 aggregate window 与具名讨论者复用 | `pnpm test -- externalDiscoveryWeekly.test.ts` | 设计 4.2、10 | weekly 不读 raw input，复用 daily aggregate 的 `named_registry_actors` |
 | `src/externalDiscovery/weeklyWindow.ts` | direction gate 4 选 2 | `pnpm test -- externalDiscoveryDirectionGate.test.ts` | 需求 7、设计 6.2 | 未达 2 个条件不得进入 weekly direction observation |
 | README / data README / gitignore / workflows / specs | OSS public artifact 与 spec 同步 | `pnpm test -- externalDiscoveryStructure.test.ts` | 设计 3.6、12、14 | raw input 不默认 commit/upload，spec 同步项齐全 |
 | 全仓 | 类型与回归 | `pnpm typecheck`、`pnpm test` | 全设计 | 全部通过 |
@@ -654,16 +716,34 @@
 
 ## 当前残余风险
 
-- 当前仓库测试目录较薄，Phase 0 必须先补结构测试，否则后续容易漏掉 workflow / data README / gitignore 同步。
-- 现有 `scripts/execPlanPreflight.ts` 仍绑定旧的 `github-star-delta-trust-v0.1.exec-plan.md`；本计划已要求实现前必须完成 preflight-sync 并记录结果，未完成前不得开始生产代码实现。
-- README 当前仍描述托管版登录能力；实现阶段需要精确区分 hosted app 与 OSS local console，避免把 hosted 登录说明误删。
+- Phase 3 仍需在后续实现中补齐 low-confidence name match 的 rejected / audit evidence 细化，不能让低置信名称匹配进入 daily 主展示。
+- Phase 4 仍需接入 public aggregate / latest 指针文件写入；当前只完成 in-memory aggregate 和 public-safe 校验。
+- Phase 5-7 尚未开始，CLI、daily / run-summary / verify、weekly 7 日窗口仍未接入 external discovery。
+- `scripts/execPlanPreflight.ts` 默认路径仍是旧计划；当前已通过显式 `--exec-plan` 方式完成本计划 receipt。若后续要依赖默认命令，仍需通用化。
 
 ## 下一阶段入口
 
-进入实现前，先完成 ExecPlan Review。审核通过后，从 Phase 0 开始执行，并在每个 Phase 完成后更新本计划的阶段状态与验证记录。
+ExecPlan Review 已通过。进入实现时从 Phase 0 开始执行，并在每个 Phase 完成后更新本计划的阶段状态与验证记录；未完成 preflight-sync 并记录结果前，不得开始生产代码实现。
 
 ## 验证记录
 
 | 日期 | 命令 | 结果 | 备注 |
 | --- | --- | --- | --- |
 | 2026-06-13 | 未运行 | `Not Started` | 本轮修订 exec-plan 初稿；未改实现代码 |
+| 2026-06-30 | `corepack pnpm run code-implementation:preflight -- --exec-plan docs/specs/exec-plans/agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md --write` | `Passed` | 生成当前 exec-plan 对应 receipt：`docs/specs/agent-work/code-implementation-preflight.agent-reach-external-discovery-and-evidence-v0.1.json` |
+| 2026-06-30 | `.\\node_modules\\.bin\\vitest.cmd run src/__tests__/externalDiscoveryTypeContract.test.ts src/__tests__/externalDiscoveryRedaction.test.ts src/__tests__/externalDiscoveryAdapter.test.ts src/__tests__/externalDiscoveryEntityRegistry.test.ts src/__tests__/externalDiscoveryMatching.test.ts src/__tests__/externalDiscoveryAggregate.test.ts src/__tests__/externalDiscoveryStructure.test.ts` | `Passed` | 7 files / 21 tests passed；覆盖 Phase 0-4 的 named_registry_actors 基座 |
+| 2026-06-30 | `.\\node_modules\\.bin\\tsc.cmd --noEmit` | `Passed` | 类型检查通过 |
+| 2026-06-30 | `.\\node_modules\\.bin\\tsx.cmd scripts\\execPlanPreflight.ts --exec-plan docs/specs/exec-plans/agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md --check` | `Passed` | preflight receipt 校验通过 |
+| 2026-06-30 | `.\\node_modules\\.bin\\vitest.cmd run src/__tests__/externalDiscoveryAdapter.test.ts` | `Passed` | 1 file / 5 tests passed；修复 Phase 2 审核问题后，adapter 负例覆盖缺失顶层审计字段与空 `derived_signal_kinds` |
+| 2026-06-30 | `.\\node_modules\\.bin\\vitest.cmd run src/__tests__/externalDiscoveryTypeContract.test.ts src/__tests__/externalDiscoveryRedaction.test.ts src/__tests__/externalDiscoveryAdapter.test.ts src/__tests__/externalDiscoveryEntityRegistry.test.ts src/__tests__/externalDiscoveryMatching.test.ts src/__tests__/externalDiscoveryAggregate.test.ts src/__tests__/externalDiscoveryStructure.test.ts` | `Passed` | 7 files / 23 tests passed；Phase 2 adapter 合同校验重新通过 |
+| 2026-06-30 | `.\\node_modules\\.bin\\tsc.cmd --noEmit` | `Passed` | Phase 2 adapter 类型收窄修复后类型检查通过 |
+
+## 本轮实现记录
+
+| 阶段 | 状态 | 文件 | 说明 |
+| --- | --- | --- | --- |
+| Phase 0 | `DONE` | `docs/specs/agent-work/code-implementation-preflight.agent-reach-external-discovery-and-evidence-v0.1.json`、`src/__tests__/externalDiscoveryStructure.test.ts`、`.gitignore`、`data/README.md`、`.github/workflows/trend-radar-daily.yml`、`.github/workflows/trend-radar-weekly.yml`、`README.md`、`README.en.md` | 完成 preflight receipt、external raw local-only、public aggregate 上传边界和 OSS no-account 说明 |
+| Phase 1 | `DONE` | `src/externalDiscovery/types.ts`、`src/externalDiscovery/paths.ts`、`src/externalDiscovery/redaction.ts`、`src/__tests__/externalDiscoveryTypeContract.test.ts`、`src/__tests__/externalDiscoveryRedaction.test.ts` | 建立 V1 enum、路径、`ExternalNamedRegistryActor`、`ExternalEvidence.named_registry_actors` 与 public-safe redaction |
+| Phase 2 | `DONE` | `src/externalDiscovery/agentReachProvider.ts`、`src/__tests__/externalDiscoveryAdapter.test.ts` | 实现本地 JSON adapter 的 missing/default skipped、explicit failed、ok、partial 语义；已补齐顶层 provider contract 校验与空 `derived_signal_kinds` 负例 |
+| Phase 3 | `IN_PROGRESS` | `src/externalDiscovery/entityRegistry.ts`、`src/externalDiscovery/matching.ts`、`src/__tests__/externalDiscoveryEntityRegistry.test.ts`、`src/__tests__/externalDiscoveryMatching.test.ts` | 完成 registry hit/miss、provider hint 不升级、repo 精确匹配和 topic key 基座 |
+| Phase 4 | `IN_PROGRESS` | `src/externalDiscovery/aggregate.ts`、`src/__tests__/externalDiscoveryAggregate.test.ts` | 完成 in-memory public aggregate、`named_registry_actors` 聚合、空 registry/miss/provider hint 匿名降级和 mixed hit/miss 统计 |

@@ -2,7 +2,8 @@
 
 ## 文档状态
 
-- 状态：`Draft for Review`
+- 状态：`Approved for ExecPlan`
+- 批准备注：`2026-06-30 design review 通过；需求文档已冻结 V1 平台、按日/7 日窗口、头部人群机构/团队/个人三类主体、次级信号边界和降级语义。本文已冻结 AgentReach 本地 artifact 消费、public-safe aggregate、entity registry tier、named_registry_actors 具名讨论者契约、daily / weekly / verify 消费边界，可进入 ExecPlan。`
 - 对应需求：`docs/specs/product-specs/外部发现与补证信号层需求分析.md`
 - 需求状态：`Frozen for Design`
 - 设计范围：外部发现与补证信号层，即 `external discovery & evidence layer`
@@ -357,6 +358,17 @@ interface ExternalSignalEvent {
 `ExternalEvidence` 是给项目级或方向级消费的外部证据摘要。该模型只表达外部讨论与补证信号，不等同于 `ScoreComponent.evidence`、`WeeklyEvidenceProject` 或项目成熟度事实。
 
 ```ts
+interface ExternalNamedRegistryActor {
+  entity_id: string;
+  display_name: string;
+  actor_type: "institution" | "team" | "person";
+  registry_tier: ExternalRegistryTier;
+  event_count: number;
+  platforms: ExternalPlatform[];
+  first_seen_at: string;
+  last_seen_at: string;
+}
+
 interface ExternalEvidence {
   evidence_id: string;
   event_ids: string[];
@@ -364,6 +376,7 @@ interface ExternalEvidence {
   target_key: string;
   derived_signal_kinds: ExternalSignalKind[];
   platforms: ExternalPlatform[];
+  named_registry_actors: ExternalNamedRegistryActor[];
   actor_tiers: Partial<Record<ExternalActorTier, number>>;
   actor_types: Partial<Record<ExternalActorType, number>>;
   mention_count: number;
@@ -380,6 +393,15 @@ interface ExternalEvidence {
 ```
 
 `actor_tiers` 必须按事件 actor 的 `effective_tier` 聚合，不能按 `provider_tier_hint` 聚合。若 registry 未命中，作者只能计入 `ordinary` 或 `unknown`。
+
+`named_registry_actors` 是 UI 展示“谁在讨论”的唯一具名数据入口。该字段只能由满足以下条件的事件聚合生成：
+
+- 事件 actor 存在 `registry_entity_id`、`registry_tier`，且 `tier_basis=registry`。
+- `display_name` 来自 entity registry 或等价 public-safe canonical entity，不得直接复制 provider 原始 `actor.display_name`。
+- 字段内不得包含 handle、profile URL、raw social text 或私有 diagnostics。
+- 未命中 registry 的 actor 不得进入该列表，只能进入 `actor_tiers` / `actor_types` / `distinct_actor_count` 等匿名统计。
+
+消费层展示时应优先使用 `named_registry_actors` 渲染 `具名讨论者`；当该列表为空时，只展示 `actor_tiers`、`actor_types` 和 `distinct_actor_count` 形成的匿名摘要。
 
 ### 4.3 `ObservationCandidate`
 
@@ -1011,7 +1033,7 @@ data/external-discovery/entities/   # entity registry 或 tier registry，若拆
 - 不改变现有主 score 公式。
 - 不新增未同步 spec / config / tests 的 score component。
 - 不让 LLM 直接决定外部层是否构成主趋势。
-- 不创建或更新 exec-plan，直到设计获得明确批准。
+- 未获新的设计批准前，不创建或更新超出本文冻结范围的 exec-plan。
 
 ## 18. 设计自检清单
 

@@ -104,7 +104,11 @@ AgentRadar connects those steps into one workflow and stores the results as insp
 
 The repository includes a lightweight local read-only web console for browsing generated artifacts.
 
-### 6. Hosted online app
+### 6. AgentReach external discovery boundary
+
+The open-source edition only consumes local AgentReach JSON artifacts. It does not include platform login, account state, cookies, sessions, OAuth, or private provider diagnostics. `data/raw/external-discovery/` is local-only input by default; only public-safe `data/external-discovery/*.aggregate.json` files may be committed.
+
+### 7. Hosted online app
 
 - Hosted URL: [`https://app.agentradar.top/`](https://app.agentradar.top/)
 - Browse the homepage, project library, weekly trends, run health, and emerging-project views directly

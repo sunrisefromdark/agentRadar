@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-import { applyEntityRegistry, readEntityRegistry, type ExternalEntityRegistryEntry } from "./entityRegistry.ts";
+import { applyEntityRegistry, readEntityRegistryWithWarnings, type ExternalEntityRegistryEntry } from "./entityRegistry.ts";
 import { externalEntityRegistryPath } from "./paths.ts";
 import { stableSourceInputHash } from "./redaction.ts";
 import type {
@@ -64,7 +64,7 @@ export function readAgentReachProviderArtifact(filepath: string, options: ReadOp
   const events: ExternalSignalEvent[] = [];
   const rejectedEvents: AgentReachProviderReadResult["rejected_events"] = [];
   const registry = resolveEntityRegistry(options);
-  const warnings: AgentReachProviderReadResult["warnings"] = [];
+  const warnings: AgentReachProviderReadResult["warnings"] = [...registry.warnings];
 
   for (const item of artifact.items) {
     const event = parseEvent(item);
@@ -96,36 +96,47 @@ export function readAgentReachProviderArtifact(filepath: string, options: ReadOp
 }
 
 function resolveEntityRegistry(options: ReadOptions):
-  | {
-      shouldApply: true;
-      entries: ExternalEntityRegistryEntry[];
-    }
-  | {
+    | {
+        shouldApply: true;
+        entries: ExternalEntityRegistryEntry[];
+        warnings: AgentReachProviderReadResult["warnings"];
+      }
+    | {
       shouldApply: false;
       entries: [];
+      warnings: [];
     } {
-  if (options.entityRegistry) return { shouldApply: true, entries: options.entityRegistry };
+  if (options.entityRegistry) return { shouldApply: true, entries: options.entityRegistry, warnings: [] };
 
   const registryPath = options.entityRegistryPath ?? externalEntityRegistryPath();
-  if (!fs.existsSync(registryPath)) return { shouldApply: false, entries: [] };
-  return { shouldApply: true, entries: readEntityRegistry(registryPath) };
+  if (!fs.existsSync(registryPath)) return { shouldApply: false, entries: [], warnings: [] };
+  const registry = readEntityRegistryWithWarnings(registryPath);
+  return { shouldApply: true, entries: registry.entries, warnings: registry.warnings };
 }
 
 function enrichEventActor(
   event: ExternalSignalEvent,
   registry:
     | {
-        shouldApply: true;
-        entries: ExternalEntityRegistryEntry[];
-      }
+      shouldApply: true;
+      entries: ExternalEntityRegistryEntry[];
+      warnings: AgentReachProviderReadResult["warnings"];
+    }
     | {
         shouldApply: false;
         entries: [];
+        warnings: [];
       },
 ): { event: ExternalSignalEvent; warnings: AgentReachProviderReadResult["warnings"] } {
   if (!registry.shouldApply) return { event, warnings: [] };
 
-  const lookup = applyEntityRegistry(event.actor, registry.entries);
+  const lookup = applyEntityRegistry(event.actor, registry.entries, {
+    platform: event.platform,
+    raw_event_kind: event.raw_event_kind,
+    url: event.url,
+    target_url: event.target_url,
+    target_repo_url: event.target_repo_url,
+  });
   return {
     event: {
       ...event,
@@ -200,6 +211,10 @@ function parseEvent(value: unknown):
         effective_tier: isActorTier(actor.effective_tier) ? actor.effective_tier : "unknown",
         tier_basis: actor.tier_basis === "registry" || actor.tier_basis === "provider_hint" ? actor.tier_basis : isProviderTierHint(actor.provider_tier_hint) || isProviderTierHint(actor.tier_hint) ? "provider_hint" : "none",
         provider_actor_id: providerActorId(actor),
+        identity_hash: identityHash(actor),
+        display_name: typeof actor.display_name === "string" ? actor.display_name : undefined,
+        handle: typeof actor.handle === "string" ? actor.handle : undefined,
+        platform_profile_url: typeof actor.platform_profile_url === "string" ? actor.platform_profile_url : typeof actor.profile_url === "string" ? actor.profile_url : undefined,
         provider_tier_hint: isProviderTierHint(actor.provider_tier_hint) ? actor.provider_tier_hint : isProviderTierHint(actor.tier_hint) ? actor.tier_hint : undefined,
         registry_entity_id: typeof actor.registry_entity_id === "string" ? actor.registry_entity_id : undefined,
         registry_display_name: typeof actor.registry_display_name === "string" ? actor.registry_display_name : undefined,
@@ -209,6 +224,8 @@ function parseEvent(value: unknown):
       source_published_at: typeof value.source_published_at === "string" ? value.source_published_at : undefined,
       ingested_at: typeof value.ingested_at === "string" ? value.ingested_at : undefined,
       url,
+      target_url: typeof target?.url === "string" ? target.url : undefined,
+      target_repo_url: typeof target?.repo_url === "string" ? target.repo_url : undefined,
       raw_ref: rawRef,
     },
   };
@@ -250,7 +267,12 @@ function inferTargetKey(value: Record<string, unknown>, target: Record<string, u
 }
 
 function providerActorId(actor: Record<string, unknown>): string | undefined {
-  const candidates = [actor.provider_actor_id, actor.identity_hash, actor.identity_id];
+  const candidates = [actor.provider_actor_id];
+  return candidates.find((candidate): candidate is string => typeof candidate === "string" && candidate.trim().length > 0)?.trim();
+}
+
+function identityHash(actor: Record<string, unknown>): string | undefined {
+  const candidates = [actor.identity_hash, actor.identity_id];
   return candidates.find((candidate): candidate is string => typeof candidate === "string" && candidate.trim().length > 0)?.trim();
 }
 

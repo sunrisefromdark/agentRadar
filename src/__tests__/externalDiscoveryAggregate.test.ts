@@ -18,6 +18,7 @@ function event(overrides: Partial<ExternalSignalEvent>): ExternalSignalEvent {
       registry_entity_id: "entity-openai",
       registry_display_name: "OpenAI",
       registry_tier: "core",
+      source_roles: ["social_discussant"],
     },
     observed_at: "2026-06-30T00:00:00.000Z",
     raw_ref: "provider:event:1",
@@ -54,6 +55,7 @@ describe("external discovery aggregate", () => {
         display_name: "OpenAI",
         actor_type: "institution",
         registry_tier: "core",
+        source_roles: ["social_discussant"],
         event_count: 1,
         platforms: ["x_twitter"],
         first_seen_at: "2026-06-30T00:00:00.000Z",
@@ -101,14 +103,47 @@ describe("external discovery aggregate", () => {
             registry_entity_id: "entity-zeta",
             registry_display_name: "Zeta Lab",
             registry_tier: "watch",
+            source_roles: ["official_owner"],
           },
         }),
         event({ event_id: "evt-core-1" }),
-        event({ event_id: "evt-core-2", platform: "official_blog", observed_at: "2026-06-30T03:00:00.000Z" }),
+        event({ event_id: "evt-core-2", platform: "official_blog", observed_at: "2026-06-30T03:00:00.000Z", actor: {
+          actor_type: "institution",
+          effective_tier: "core",
+          tier_basis: "registry",
+          registry_entity_id: "entity-openai",
+          registry_display_name: "OpenAI",
+          registry_tier: "core",
+          source_roles: ["official_publisher"],
+        } }),
       ],
     });
 
     expect(aggregate.project_evidence[0]?.named_registry_actors.map((actor) => actor.display_name)).toEqual(["OpenAI", "Zeta Lab"]);
     expect(aggregate.project_evidence[0]?.named_registry_actors[0]?.event_count).toBe(2);
+    expect(aggregate.project_evidence[0]?.named_registry_actors[0]?.source_roles).toEqual(["social_discussant", "official_publisher"]);
+  });
+
+  it("does not publish registry actors that miss source roles", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          actor: {
+            actor_type: "institution",
+            effective_tier: "core",
+            tier_basis: "registry",
+            registry_entity_id: "entity-openai",
+            registry_display_name: "OpenAI",
+            registry_tier: "core",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.project_evidence[0]?.named_registry_actors).toEqual([]);
+    expect(aggregate.project_evidence[0]?.top_tier_actor_count).toBe(0);
+    expect(aggregate.audit.warnings[0]?.reason_code).toBe("named_actor_missing_source_roles");
   });
 });

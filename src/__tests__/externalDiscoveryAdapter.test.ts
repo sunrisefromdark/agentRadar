@@ -131,12 +131,215 @@ describe("agent reach provider artifact adapter", () => {
         display_name: "OpenAI",
         actor_type: "institution",
         registry_tier: "core",
+        source_roles: ["social_discussant"],
         event_count: 1,
         platforms: ["x_twitter"],
         first_seen_at: "2026-06-30T00:00:00.000Z",
         last_seen_at: "2026-06-30T00:00:00.000Z",
       },
     ]);
+  });
+
+  it("does not turn social display names into named actors without a strong identifier", () => {
+    const filepath = tempFile("agent-reach-display-name-only.json");
+    fs.writeFileSync(
+      filepath,
+      JSON.stringify({
+        provider: "agent-reach",
+        schema_version: "agent-reach.external-discovery.v1",
+        provider_run_id: "run-display-name-only",
+        generated_at: "2026-06-30T00:00:00.000Z",
+        query: { keyword: "agents sdk" },
+        platforms: ["x_twitter"],
+        status: "ok",
+        items: [
+          {
+            event_id: "evt-display-name-only",
+            platform: "x_twitter",
+            raw_event_kind: "discussion",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: {
+              actor_type: "institution",
+              display_name: "OpenAI",
+              provider_tier_hint: "core",
+            },
+            observed_at: "2026-06-30T00:00:00.000Z",
+            raw_ref: "provider:event:display-name-only",
+          },
+        ],
+      }),
+      "utf-8",
+    );
+
+    const result = readAgentReachProviderArtifact(filepath, {
+      explicitInput: true,
+      entityRegistry: [
+        {
+          entity_id: "entity-openai",
+          display_name: "OpenAI",
+          actor_type: "institution",
+          tier: "core",
+          handles: ["openai"],
+          profile_urls: ["https://x.com/openai"],
+          updated_at: "2026-06-30T00:00:00.000Z",
+        },
+      ],
+    });
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      provider_result: result,
+    });
+
+    expect(result.warnings[0]?.reason_code).toBe("registry_miss");
+    expect(aggregate.project_evidence[0]?.named_registry_actors).toEqual([]);
+  });
+
+  it("keeps identity hashes out of registry actor matching", () => {
+    const filepath = tempFile("agent-reach-identity-hash-not-registry.json");
+    fs.writeFileSync(
+      filepath,
+      JSON.stringify({
+        provider: "agent-reach",
+        schema_version: "agent-reach.external-discovery.v1",
+        provider_run_id: "run-identity-hash",
+        generated_at: "2026-06-30T00:00:00.000Z",
+        query: { keyword: "agents sdk" },
+        platforms: ["x_twitter"],
+        status: "ok",
+        items: [
+          {
+            event_id: "evt-identity-hash",
+            platform: "x_twitter",
+            raw_event_kind: "discussion",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: {
+              actor_type: "community",
+              identity_hash: "openai",
+              provider_tier_hint: "core",
+            },
+            observed_at: "2026-06-30T00:00:00.000Z",
+            raw_ref: "provider:event:identity-hash",
+          },
+        ],
+      }),
+      "utf-8",
+    );
+
+    const result = readAgentReachProviderArtifact(filepath, {
+      explicitInput: true,
+      entityRegistry: [
+        {
+          entity_id: "entity-openai",
+          display_name: "OpenAI",
+          actor_type: "institution",
+          tier: "core",
+          handles: ["openai"],
+          profile_urls: ["https://x.com/openai"],
+          updated_at: "2026-06-30T00:00:00.000Z",
+        },
+      ],
+    });
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      provider_result: result,
+    });
+
+    expect(result.events[0]?.actor).toMatchObject({
+      identity_hash: "openai",
+      tier_basis: "provider_hint",
+    });
+    expect(result.events[0]?.actor.provider_actor_id).toBeUndefined();
+    expect(result.warnings[0]?.reason_code).toBe("registry_miss");
+    expect(aggregate.project_evidence[0]?.named_registry_actors).toEqual([]);
+    expect(aggregate.project_evidence[0]?.distinct_actor_count).toBe(1);
+  });
+
+  it("uses profile URLs and official owner context as registry-positive inputs", () => {
+    const filepath = tempFile("agent-reach-profile-and-owner.json");
+    fs.writeFileSync(
+      filepath,
+      JSON.stringify({
+        provider: "agent-reach",
+        schema_version: "agent-reach.external-discovery.v1",
+        provider_run_id: "run-profile-owner",
+        generated_at: "2026-06-30T00:00:00.000Z",
+        query: { keyword: "agents sdk" },
+        platforms: ["x_twitter", "official_web"],
+        status: "ok",
+        items: [
+          {
+            event_id: "evt-profile-url",
+            platform: "x_twitter",
+            raw_event_kind: "discussion",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: {
+              actor_type: "institution",
+              platform_profile_url: "https://x.com/OpenAI",
+            },
+            observed_at: "2026-06-30T00:00:00.000Z",
+            raw_ref: "provider:event:profile-url",
+          },
+          {
+            event_id: "evt-github-owner",
+            platform: "official_web",
+            raw_event_kind: "official_release",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: {
+              actor_type: "institution",
+              registry_entity_id: "entity-openai",
+            },
+            target: {
+              repo_url: "https://github.com/openai/agents-sdk",
+            },
+            observed_at: "2026-06-30T01:00:00.000Z",
+            url: "https://github.com/openai/agents-sdk/releases/tag/v1",
+          },
+        ],
+      }),
+      "utf-8",
+    );
+
+    const result = readAgentReachProviderArtifact(filepath, {
+      explicitInput: true,
+      entityRegistry: [
+        {
+          entity_id: "entity-openai",
+          display_name: "OpenAI",
+          actor_type: "institution",
+          tier: "core",
+          handles: ["openai"],
+          profile_urls: ["https://x.com/openai"],
+          domains: ["openai.com"],
+          github_owners: ["openai"],
+          updated_at: "2026-06-30T00:00:00.000Z",
+        },
+      ],
+    });
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      provider_result: result,
+    });
+
+    expect(aggregate.project_evidence[0]?.named_registry_actors[0]).toMatchObject({
+      display_name: "OpenAI",
+      event_count: 2,
+      source_roles: ["social_discussant", "official_publisher", "official_owner"],
+    });
   });
 
   it("accepts nested target and identity hash fields from real AgentReach artifacts", () => {
@@ -184,7 +387,7 @@ describe("agent reach provider artifact adapter", () => {
       target_key: "new agent memory framework",
       actor: {
         actor_type: "community",
-        provider_actor_id: "sha256:community-actor",
+        identity_hash: "sha256:community-actor",
       },
     });
     expect(result.events[0]?.event_id).toMatch(/^agent-reach:/);

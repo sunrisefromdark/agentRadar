@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { externalAggregateLatestPath, externalAggregatePath, externalEntityRegistryPath, externalRawInputPath, externalSanitizedFixtureDirPath } from "../externalDiscovery/paths.ts";
-import { EXTERNAL_PLATFORMS, EXTERNAL_TARGET_TYPES } from "../externalDiscovery/types.ts";
+import { EXTERNAL_NAMED_ACTOR_SOURCE_ROLES, EXTERNAL_PLATFORMS, EXTERNAL_TARGET_TYPES } from "../externalDiscovery/types.ts";
 
 describe("external discovery type and path contract", () => {
   it("freezes the V1 platform and target enums", () => {
@@ -9,6 +9,7 @@ describe("external discovery type and path contract", () => {
     expect(EXTERNAL_TARGET_TYPES).toEqual(["project", "paper", "product", "topic"]);
     expect(EXTERNAL_TARGET_TYPES).not.toContain("direction");
     expect(EXTERNAL_TARGET_TYPES).not.toContain("unknown");
+    expect(EXTERNAL_NAMED_ACTOR_SOURCE_ROLES).toEqual(["social_discussant", "official_publisher", "official_owner"]);
   });
 
   it("keeps external discovery raw input and public aggregate paths separate", () => {

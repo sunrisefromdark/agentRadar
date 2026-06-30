@@ -1,4 +1,7 @@
+import fs from "node:fs";
 import path from "node:path";
+import { externalAggregatePath } from "../externalDiscovery/paths.ts";
+import { assertPublicSafeAggregate } from "../externalDiscovery/redaction.ts";
 import { readJsonFile } from "../storage/files.ts";
 import type {
   DailyReport,
@@ -20,6 +23,12 @@ function githubAuditPath(date: string): string {
 
 function dailyReportPath(date: string): string {
   return path.join("data", "reports", `${date}.daily.json`);
+}
+
+interface OptionalJsonRead {
+  exists: boolean;
+  value?: unknown;
+  error?: string;
 }
 
 function aggregateStatus(checks: VerificationCheck[]): VerifyDailyResult["status"] {
@@ -433,6 +442,113 @@ function projectSearchContractChecks(summary: DailyRunSummary, report: DailyRepo
   ];
 }
 
+function externalAggregateContractChecks(filepath: string, aggregateRead: OptionalJsonRead): VerificationCheck[] {
+  if (!aggregateRead.exists) {
+    return [
+      buildCheck(
+        "external_discovery_aggregate_contract",
+        "pass",
+        `external aggregate not present at ${filepath}; external layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (aggregateRead.error) {
+    return [buildCheck("external_discovery_aggregate_contract", "fail", `external aggregate unreadable: ${aggregateRead.error}`)];
+  }
+
+  const aggregate = aggregateRead.value;
+  const redaction = assertPublicSafeAggregate(aggregate);
+  const inspection = inspectExternalAggregateContract(aggregate);
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...inspection.issues,
+  ];
+
+  return [
+    buildCheck(
+      "external_discovery_aggregate_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `external aggregate public-safe; project_evidence=${inspection.projectEvidenceCount}; direction_evidence=${inspection.directionEvidenceCount}; named_actor_rows=${inspection.namedActorRows}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
+function inspectExternalAggregateContract(value: unknown): {
+  projectEvidenceCount: number;
+  directionEvidenceCount: number;
+  namedActorRows: number;
+  issues: string[];
+} {
+  const issues: string[] = [];
+  if (!isRecord(value)) {
+    return { projectEvidenceCount: 0, directionEvidenceCount: 0, namedActorRows: 0, issues: ["external aggregate must be an object"] };
+  }
+
+  if (value.schema_version !== "external-discovery.aggregate.v1") {
+    issues.push("schema_version must be external-discovery.aggregate.v1");
+  }
+
+  const projectEvidence = evidenceArray(value.project_evidence, "project_evidence", issues);
+  const directionEvidence = evidenceArray(value.direction_evidence, "direction_evidence", issues);
+  let namedActorRows = 0;
+
+  for (const [sectionName, evidenceRows] of [
+    ["project_evidence", projectEvidence],
+    ["direction_evidence", directionEvidence],
+  ] as const) {
+    evidenceRows.forEach((evidence, evidenceIndex) => {
+      if (!isRecord(evidence)) {
+        issues.push(`${sectionName}[${evidenceIndex}] must be an object`);
+        return;
+      }
+      if (!Array.isArray(evidence.named_registry_actors)) {
+        issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors must be an array`);
+        return;
+      }
+      evidence.named_registry_actors.forEach((actor, actorIndex) => {
+        namedActorRows += 1;
+        if (!isRecord(actor)) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}] must be an object`);
+          return;
+        }
+        const sourceRoles = actor.source_roles;
+        if (!Array.isArray(sourceRoles) || sourceRoles.length === 0) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}].source_roles must be non-empty`);
+          return;
+        }
+        const invalidRoles = sourceRoles.filter((role) => !isNamedActorSourceRole(role));
+        if (invalidRoles.length > 0) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}].source_roles has invalid roles`);
+        }
+      });
+    });
+  }
+
+  return {
+    projectEvidenceCount: projectEvidence.length,
+    directionEvidenceCount: directionEvidence.length,
+    namedActorRows,
+    issues,
+  };
+}
+
+function evidenceArray(value: unknown, name: string, issues: string[]): unknown[] {
+  if (Array.isArray(value)) return value;
+  issues.push(`${name} must be an array`);
+  return [];
+}
+
+function isNamedActorSourceRole(value: unknown): boolean {
+  return value === "social_discussant" || value === "official_publisher" || value === "official_owner";
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
 function defaultDiagnostics(): NonNullable<DailyRunSummary["diagnostics"]> {
   return {
     anomaly_share: 0,
@@ -492,7 +608,13 @@ function normalizeSummaryDiagnostics(summary: DailyRunSummary): DailyRunSummary 
   };
 }
 
-function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAuditEntry[], report: DailyReport | null): VerificationCheck[] {
+function buildChecks(
+  summary: DailyRunSummary,
+  githubAudit: GitHubEnrichmentAuditEntry[],
+  report: DailyReport | null,
+  externalAggregateFilepath: string,
+  externalAggregate: OptionalJsonRead,
+): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
     ...sourceChecks(summary),
@@ -500,10 +622,23 @@ function buildChecks(summary: DailyRunSummary, githubAudit: GitHubEnrichmentAudi
     ...llmChecks(summary),
     ...freshnessChecks(summary),
     ...projectSearchContractChecks(summary, report),
+    ...externalAggregateContractChecks(externalAggregateFilepath, externalAggregate),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
   return checks;
+}
+
+function readOptionalJson(filepath: string): OptionalJsonRead {
+  if (!fs.existsSync(filepath)) return { exists: false };
+  try {
+    return { exists: true, value: readJsonFile<unknown>(filepath, null) };
+  } catch (error) {
+    return {
+      exists: true,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
 
 /**
@@ -514,16 +649,18 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const runSummaryPath = summaryPath(date);
   const githubEnrichmentPath = githubAuditPath(date);
   const reportPath = dailyReportPath(date);
+  const externalAggregateFilepath = externalAggregatePath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
   const report = readJsonFile<DailyReport | null>(reportPath, null);
+  const externalAggregate = readOptionalJson(externalAggregateFilepath);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
   }
 
   const normalizedSummary = normalizeSummaryDiagnostics(summary);
-  const checks = buildChecks(normalizedSummary, githubAudit, report);
+  const checks = buildChecks(normalizedSummary, githubAudit, report, externalAggregateFilepath, externalAggregate);
   return {
     date,
     status: aggregateStatus(checks),

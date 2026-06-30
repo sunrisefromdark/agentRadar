@@ -6,6 +6,7 @@ import type {
   ExternalActorType,
   ExternalEvidence,
   ExternalNamedRegistryActor,
+  ExternalNamedActorSourceRole,
   ExternalPlatform,
   ExternalSignalEvent,
   ExternalSignalKind,
@@ -53,7 +54,7 @@ export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateIn
     observation_candidates: input.observation_candidates ?? [],
     audit: {
       rejected_events: rejectedEvents,
-      warnings: input.provider_result?.warnings ?? [],
+      warnings: [...(input.provider_result?.warnings ?? []), ...namedActorRoleWarnings(events)],
     },
   };
 
@@ -110,6 +111,8 @@ function buildNamedRegistryActors(events: ExternalSignalEvent[]): ExternalNamedR
       !actor.registry_entity_id ||
       !actor.registry_display_name ||
       !actor.registry_tier ||
+      !actor.source_roles ||
+      actor.source_roles.length === 0 ||
       (actor.actor_type !== "institution" && actor.actor_type !== "team" && actor.actor_type !== "person")
     ) {
       continue;
@@ -123,6 +126,7 @@ function buildNamedRegistryActors(events: ExternalSignalEvent[]): ExternalNamedR
           display_name: actor.registry_display_name,
           actor_type: actor.actor_type,
           registry_tier: actor.registry_tier,
+          source_roles: uniqueRoles(actor.source_roles),
           event_count: 1,
           platforms: [event.platform],
           first_seen_at: event.observed_at,
@@ -135,6 +139,7 @@ function buildNamedRegistryActors(events: ExternalSignalEvent[]): ExternalNamedR
 
     existing.actor.event_count += 1;
     existing.actor.platforms = unique([...existing.actor.platforms, event.platform]).sort() as ExternalPlatform[];
+    existing.actor.source_roles = uniqueRoles([...existing.actor.source_roles, ...actor.source_roles]);
     existing.dates.push(event.observed_at);
     existing.dates.sort();
     existing.actor.first_seen_at = existing.dates[0]!;
@@ -149,6 +154,22 @@ function buildNamedRegistryActors(events: ExternalSignalEvent[]): ExternalNamedR
         b.event_count - a.event_count ||
         a.display_name.localeCompare(b.display_name),
     );
+}
+
+function namedActorRoleWarnings(events: ExternalSignalEvent[]): Array<{ reason_code: string; reason_detail: string }> {
+  return events
+    .filter(
+      (event) =>
+        event.actor.tier_basis === "registry" &&
+        event.actor.registry_entity_id &&
+        event.actor.registry_display_name &&
+        event.actor.registry_tier &&
+        (!event.actor.source_roles || event.actor.source_roles.length === 0),
+    )
+    .map((event) => ({
+      reason_code: "named_actor_missing_source_roles",
+      reason_detail: `registry actor ${event.actor.registry_entity_id} on event ${event.event_id} was not published as a named actor`,
+    }));
 }
 
 function countPlatforms(events: ExternalSignalEvent[]): Partial<Record<ExternalPlatform, number>> {
@@ -169,18 +190,34 @@ function countBy<T extends string>(values: T[]): Partial<Record<T, number>> {
 
 function distinctActorIds(events: ExternalSignalEvent[]): Set<string> {
   return new Set(
-    events.map((event, index) => event.actor.registry_entity_id ?? event.actor.provider_actor_id ?? `${event.actor.actor_type}:${index}`),
+    events.map((event, index) => event.actor.registry_entity_id ?? event.actor.identity_hash ?? event.actor.provider_actor_id ?? `${event.actor.actor_type}:${index}`),
   );
 }
 
 function topTierActorIds(events: ExternalSignalEvent[]): Set<string> {
   return new Set(
     events
-      .filter((event) => event.actor.tier_basis === "registry" && event.actor.registry_entity_id && event.actor.registry_tier)
+      .filter((event) => isPublishableNamedRegistryActor(event.actor))
       .map((event) => event.actor.registry_entity_id!),
+  );
+}
+
+function isPublishableNamedRegistryActor(actor: ExternalSignalEvent["actor"]): boolean {
+  return (
+    actor.tier_basis === "registry" &&
+    Boolean(actor.registry_entity_id) &&
+    Boolean(actor.registry_display_name) &&
+    Boolean(actor.registry_tier) &&
+    Boolean(actor.source_roles?.length) &&
+    (actor.actor_type === "institution" || actor.actor_type === "team" || actor.actor_type === "person")
   );
 }
 
 function unique<T>(values: T[]): T[] {
   return Array.from(new Set(values));
+}
+
+function uniqueRoles(values: ExternalNamedActorSourceRole[]): ExternalNamedActorSourceRole[] {
+  const order: ExternalNamedActorSourceRole[] = ["social_discussant", "official_publisher", "official_owner"];
+  return order.filter((role) => values.includes(role));
 }

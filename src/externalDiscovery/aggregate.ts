@@ -28,9 +28,14 @@ const registryTierRank: Record<ExternalNamedRegistryActor["registry_tier"], numb
   watch: 2,
 };
 
+const SOCIAL_RECENCY_WINDOW_DAYS = 30;
+const SOCIAL_RECENCY_PLATFORMS = new Set<ExternalPlatform>(["x_twitter", "reddit"]);
+
 export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateInput): DailyExternalAggregate {
-  const events = input.events ?? input.provider_result?.events ?? [];
-  const rejectedEvents = input.provider_result?.rejected_events ?? [];
+  const rawEvents = input.events ?? input.provider_result?.events ?? [];
+  const recentEvents = filterRecentSocialEvents(rawEvents, input.date);
+  const events = recentEvents.events;
+  const rejectedEvents = [...(input.provider_result?.rejected_events ?? []), ...recentEvents.rejected_events];
   const aggregate: DailyExternalAggregate = {
     schema_version: "external-discovery.aggregate.v1",
     date: input.date,
@@ -54,7 +59,7 @@ export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateIn
     observation_candidates: input.observation_candidates ?? [],
     audit: {
       rejected_events: rejectedEvents,
-      warnings: [...(input.provider_result?.warnings ?? []), ...namedActorRoleWarnings(events)],
+      warnings: [...(input.provider_result?.warnings ?? []), ...recentEvents.warnings, ...namedActorRoleWarnings(events)],
     },
   };
 
@@ -64,6 +69,65 @@ export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateIn
   }
 
   return aggregate;
+}
+
+function filterRecentSocialEvents(events: ExternalSignalEvent[], date: string): {
+  events: ExternalSignalEvent[];
+  rejected_events: Array<{ event_id?: string; reason_code: string; reason_detail: string }>;
+  warnings: Array<{ reason_code: string; reason_detail: string }>;
+} {
+  const cutoff = socialRecencyCutoff(date);
+  if (!cutoff) return { events, rejected_events: [], warnings: [] };
+
+  const accepted: ExternalSignalEvent[] = [];
+  const rejected: Array<{ event_id?: string; reason_code: string; reason_detail: string }> = [];
+  const invalidTimestampWarnings: Array<{ reason_code: string; reason_detail: string }> = [];
+
+  for (const event of events) {
+    if (!SOCIAL_RECENCY_PLATFORMS.has(event.platform)) {
+      accepted.push(event);
+      continue;
+    }
+
+    const eventTime = socialEventPublishedTime(event);
+    if (!eventTime) {
+      accepted.push(event);
+      invalidTimestampWarnings.push({
+        reason_code: "social_event_recency_timestamp_invalid",
+        reason_detail: `${event.event_id} did not provide a parseable source_published_at or observed_at; kept for review`,
+      });
+      continue;
+    }
+
+    if (eventTime < cutoff) {
+      rejected.push({
+        event_id: event.event_id,
+        reason_code: "event_outside_recent_social_window",
+        reason_detail: `${event.platform} event is older than ${SOCIAL_RECENCY_WINDOW_DAYS} days for aggregate date ${date}`,
+      });
+      continue;
+    }
+
+    accepted.push(event);
+  }
+
+  return { events: accepted, rejected_events: rejected, warnings: uniqueWarnings(invalidTimestampWarnings) };
+}
+
+function socialRecencyCutoff(date: string): number | null {
+  const anchor = Date.parse(`${date}T00:00:00.000Z`);
+  if (!Number.isFinite(anchor)) return null;
+  return anchor - SOCIAL_RECENCY_WINDOW_DAYS * 24 * 60 * 60 * 1000;
+}
+
+function socialEventPublishedTime(event: ExternalSignalEvent): number | null {
+  const candidates = [event.source_published_at, event.observed_at];
+  for (const candidate of candidates) {
+    if (!candidate) continue;
+    const parsed = Date.parse(candidate);
+    if (Number.isFinite(parsed)) return parsed;
+  }
+  return null;
 }
 
 function buildEvidence(events: ExternalSignalEvent[]): ExternalEvidence[] {
@@ -215,6 +279,14 @@ function isPublishableNamedRegistryActor(actor: ExternalSignalEvent["actor"]): b
 
 function unique<T>(values: T[]): T[] {
   return Array.from(new Set(values));
+}
+
+function uniqueWarnings<T extends { reason_code: string; reason_detail: string }>(warnings: T[]): T[] {
+  const byKey = new Map<string, T>();
+  for (const warning of warnings) {
+    byKey.set(`${warning.reason_code}:${warning.reason_detail}`, warning);
+  }
+  return [...byKey.values()];
 }
 
 function uniqueRoles(values: ExternalNamedActorSourceRole[]): ExternalNamedActorSourceRole[] {

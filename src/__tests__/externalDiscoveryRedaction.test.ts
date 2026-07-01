@@ -36,6 +36,16 @@ describe("external discovery redaction", () => {
     expect(containsForbiddenPublicArtifactText({ handle: "@raw" })).toBe(true);
     expect(containsForbiddenPublicArtifactText({ provider_diagnostics: { trace: "private" } })).toBe(true);
     expect(containsForbiddenPublicArtifactText({ status_reason: "oauth token leaked" })).toBe(true);
+    expect(containsForbiddenPublicArtifactText({ status_reason: "api token: leaked" })).toBe(true);
+    expect(containsForbiddenPublicArtifactText({ status_reason: "token=leaked" })).toBe(true);
+  });
+
+  it("allows public project identifiers that contain token as a domain term", () => {
+    expect(
+      containsForbiddenPublicArtifactText({
+        target_key: "https://github.com/swaranshu-borgaonkar/token-budget-contracts",
+      }),
+    ).toBe(false);
   });
 
   it("rejects named_registry_actors that carry raw identity fields", () => {

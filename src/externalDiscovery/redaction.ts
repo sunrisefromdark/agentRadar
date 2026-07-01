@@ -22,7 +22,9 @@ const forbiddenKeys = new Set([
   "provider_diagnostics",
 ]);
 
-const secretPattern = /\b(cookie|session|token|password|oauth)\b/i;
+const secretPattern = /\b(cookie|session|password|oauth)\b/i;
+const tokenSecretPattern =
+  /\b(?:access|api|bearer|oauth|refresh)\s+token\b|\btoken\s+(?:credential|leak(?:ed)?|secret|value)\b|\btoken\s*[:=]/i;
 const profileUrlPattern = /^https?:\/\/(?:www\.)?(?:twitter\.com|x\.com|reddit\.com|news\.ycombinator\.com)\/[^\s/]+/i;
 
 export function stableSourceInputHash(input: string | Buffer): string {
@@ -62,7 +64,7 @@ function collectRedactionReasonCodes(value: unknown): string[] {
       reasonCodes.push(`forbidden_key:${key}`);
     }
     if (typeof currentValue === "string") {
-      if (secretPattern.test(currentValue)) reasonCodes.push("forbidden_secret_text");
+      if (secretPattern.test(currentValue) || tokenSecretPattern.test(currentValue)) reasonCodes.push("forbidden_secret_text");
       if (profileUrlPattern.test(currentValue)) reasonCodes.push("forbidden_profile_url_text");
     }
   });

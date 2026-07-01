@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-16T18:30:00.000Z",
+  "generated_at": "2026-06-30T00:00:00.000Z",
   "source_docs": [
     {
       "path": "docs/specs/agent-work/CodeImplementation_Skill.md",
@@ -25,5 +25,12 @@
         "manual.artifact-review.code-review.code-review"
       ]
     }
-  ]
+    ,{
+      "path": "docs/specs/agent-work/RefactorSkill.md",
+      "content_sha256": "008e211efae6810908e7f1677038969878115030b2ab3b27f0f70461a9bae775",
+      "observed_at": "2026-06-30T00:00:00.000Z",
+      "skill_ids": [
+        "manual.refactor.incremental-decoupling.owner-migration"
+      ]
+    }  ]
 }

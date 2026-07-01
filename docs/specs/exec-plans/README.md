@@ -1,4 +1,4 @@
-# 执行计划索引
+﻿# 执行计划索引
 
 执行计划不是一次性 TODO，而是 Agent 的进度账本。任何代码、测试、数据产物或 Spec 行为发生变化后，相关 exec-plan 都必须同步更新当前状态、验证记录和下一阶段入口。
 
@@ -22,6 +22,13 @@
 | `周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Draft` | 学术前沿子计划，负责 `research_paper`、`conference_academic` 两轴与 replay/eval 学术输入 | 设计评审通过后由第 2 人实施 |
 | `周趋势判断执行计划/行业级Agent趋势判断-产品生态组-v0.1.exec-plan.md` | `Draft` | 产品生态子计划，负责产品、开源、开发者、社区、新闻五类输入面 | 设计评审通过后由第 3 人实施 |
 | `周趋势判断执行计划/行业级Agent趋势判断-中台裁决组-v0.1.exec-plan.md` | `Draft` | 中台裁决子计划，负责 schema 真源、dispatch/budget runtime、normalization、audit、tier decision 与 weekly 三层输出 | 设计评审通过后由第 4 人实施；不再独吞领域 seed/fixture/docs |
+| `分层解耦重构执行计划/00-并行协作总控.md` | `Draft` | 六个解耦重构计划的 owner、公共合同、Phase 4 切换排队与删旧规则 | 分发给 6 人前先确认 Phase 0 交付模板 |
+| `分层解耦重构执行计划/前端样式分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 token / base / layout / component / state / route 拆分 `app/styles.css` | 先做 selector owner / cascade 风险盘点 |
+| `分层解耦重构执行计划/WebSSR与静态页面分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 shell / route / shared components / OSS 页面拆分 Web SSR 与静态页面 | 先盘点 `ossPages.ts` 和 route render 职责块 |
+| `分层解耦重构执行计划/前端客户端交互分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 hydration / events / route state / shared components 拆分客户端交互和 React 大页面 | 先盘点 selector、handler、route state、React props |
+| `分层解耦重构执行计划/VisualConsole读取层与ViewModel分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 read / status / models / mappers / renderers / routes 拆分 `src/visualConsole` | 先生成函数 owner、调用方和测试映射表 |
+| `分层解耦重构执行计划/Action报告输出分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 daily / weekly / run-summary / verification / project-library 拆分 action 报告输出 | 先盘点 report builder、policy、render、status 职责 |
+| `分层解耦重构执行计划/CLI与Runtime编排分层解耦重构-v0.1.exec-plan.md` | `Draft` | 按 cli / commands / planning / writers / resume 拆分 `src/cli.ts` 和 runtime 编排 | 先盘点 command -> action -> writer -> artifact -> tests 调用链 |
 | `project-search-system-redesign-v0.1.exec-plan.md` | `Proposed` | 为 `project-search-system-redesign-design.md` 落地双栈发现、16 个 must-cover 目录、mission scout/deep、coverage atlas、gap ledger、gap pressure、observer incubator 与新日报/控制台契约 | 进入 exec-plan review，通过后实施 |
 | `side-assistant-natural-language-search-v0.1.exec-plan.md` | `Proposed` | 为 `side-assistant-natural-language-search-design.md` 落地右侧 `AI 搜项目` 助手、主搜索框剥离 fuzzy、会话级多轮记忆、3 条预览链接、详情联动与完整结果切换 | 进入 exec-plan review，通过后实施 |
 | `natural-language-fuzzy-search-recommendation-v0.1.exec-plan.md` | `Proposed` | 为 `natural-language-fuzzy-search-recommendation-design.md` 落地 direct search gate、zero-result LLM routing、7 类语义分类、敏感领域关键词搜索、fuzzy endpoint、前端状态与审计诊断 | 进入 exec-plan review，通过后实施 |
@@ -72,3 +79,6 @@
 - `signal-filter-action-v0.2` 已按 MVP 口径完成收口；当前仓库已具备可实测主链路。
 - GitHub star 日增可信链路也已完成独立收口；后续增强应以新 exec-plan 继续推进，而不是回填已完成计划。
 - daily report 的新鲜度与可读性重构已进入独立 exec-plan 设计评审阶段，当前尚未实施代码变更。
+
+
+

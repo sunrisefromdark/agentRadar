@@ -147,4 +147,53 @@
     ],
     "updated_at": "2026-05-16T18:30:00.000Z"
   }
-]
+  ,{
+    "skill_id": "manual.refactor.incremental-decoupling.owner-migration",
+    "title": "Refactor Skill",
+    "origin": "manual",
+    "trust_tier": "manual",
+    "lifecycle_status": "stable",
+    "drift_status": "trusted",
+    "source_doc_path": "docs/specs/agent-work/RefactorSkill.md",
+    "source_doc_sha256": "008e211efae6810908e7f1677038969878115030b2ab3b27f0f70461a9bae775",
+    "domain": "refactor",
+    "subdomain": "incremental-decoupling",
+    "task_kinds": [
+      "plan",
+      "implement",
+      "verify"
+    ],
+    "artifact_types": [
+      "source-code",
+      "test-code",
+      "exec-plan",
+      "spec"
+    ],
+    "target_paths": [
+      "docs/specs/agent-work/RefactorSkill.md",
+      "docs/specs/exec-plans/",
+      "src/",
+      "app/"
+    ],
+    "constraint_tags": [
+      "incremental-refactor",
+      "owner-boundary",
+      "contract-preserving"
+    ],
+    "goal_terms": [
+      "重构",
+      "解耦",
+      "技术债治理",
+      "业务 owner 迁移",
+      "旧逻辑替换"
+    ],
+    "required_gates": [],
+    "script_refs": [],
+    "watch_paths": [
+      "docs/specs/agent-work/RefactorSkill.md",
+      "docs/specs/exec-plans/",
+      "src/",
+      "app/"
+    ],
+    "updated_at": "2026-06-30T00:00:00.000Z"
+  }]

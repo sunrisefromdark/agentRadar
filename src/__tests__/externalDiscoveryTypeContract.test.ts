@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { externalAggregateLatestPath, externalAggregatePath, externalEntityRegistryPath, externalRawInputPath, externalSanitizedFixtureDirPath } from "../externalDiscovery/paths.ts";
+import {
+  externalAggregateLatestPath,
+  externalAggregatePath,
+  externalCandidateExplanationsLatestPath,
+  externalCandidateExplanationsPath,
+  externalEntityRegistryPath,
+  externalRawInputPath,
+  externalSanitizedFixtureDirPath,
+} from "../externalDiscovery/paths.ts";
 import { EXTERNAL_NAMED_ACTOR_SOURCE_ROLES, EXTERNAL_PLATFORMS, EXTERNAL_TARGET_TYPES } from "../externalDiscovery/types.ts";
 
 describe("external discovery type and path contract", () => {
@@ -16,6 +24,8 @@ describe("external discovery type and path contract", () => {
     expect(slash(externalRawInputPath("2026-06-30"))).toBe("data/raw/external-discovery/2026-06-30.agent-reach.json");
     expect(slash(externalAggregatePath("2026-06-30"))).toBe("data/external-discovery/2026-06-30.aggregate.json");
     expect(slash(externalAggregateLatestPath())).toBe("data/external-discovery/latest.aggregate.json");
+    expect(slash(externalCandidateExplanationsPath("2026-06-30"))).toBe("data/external-discovery/2026-06-30.candidate-explanations.json");
+    expect(slash(externalCandidateExplanationsLatestPath())).toBe("data/external-discovery/latest.candidate-explanations.json");
     expect(slash(externalEntityRegistryPath())).toBe("data/external-discovery/entity-registry.json");
     expect(slash(externalSanitizedFixtureDirPath())).toBe("data/raw/external-discovery/fixtures");
   });

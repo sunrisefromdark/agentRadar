@@ -5,6 +5,7 @@ import { externalEntityRegistryPath } from "./paths.ts";
 import { stableSourceInputHash } from "./redaction.ts";
 import type {
   AgentReachProviderReadResult,
+  ExternalCandidateExplanationTitleContext,
   ExternalPlatform,
   ExternalProviderStatus,
   ExternalRawEventKind,
@@ -62,6 +63,7 @@ export function readAgentReachProviderArtifact(filepath: string, options: ReadOp
   const status = artifact.status;
   const platforms = artifact.platforms;
   const events: ExternalSignalEvent[] = [];
+  const titleContext: ExternalCandidateExplanationTitleContext[] = [];
   const rejectedEvents: AgentReachProviderReadResult["rejected_events"] = [];
   const registry = resolveEntityRegistry(options);
   const warnings: AgentReachProviderReadResult["warnings"] = [...registry.warnings];
@@ -71,6 +73,8 @@ export function readAgentReachProviderArtifact(filepath: string, options: ReadOp
     if (event.ok) {
       const enriched = enrichEventActor(event.value, registry);
       events.push(enriched.event);
+      const context = extractTitleContext(item, enriched.event);
+      if (context) titleContext.push(context);
       warnings.push(...enriched.warnings);
     } else {
       rejectedEvents.push(event.rejected);
@@ -92,6 +96,7 @@ export function readAgentReachProviderArtifact(filepath: string, options: ReadOp
     rejected_events: rejectedEvents,
     warnings: uniqueWarnings(warnings),
     source_input_hash: stableSourceInputHash(raw),
+    title_context: uniqueTitleContext(titleContext),
   };
 }
 
@@ -231,6 +236,61 @@ function parseEvent(value: unknown):
   };
 }
 
+function extractTitleContext(value: unknown, event: ExternalSignalEvent): ExternalCandidateExplanationTitleContext | undefined {
+  if (!isRecord(value)) return undefined;
+  const target = isRecord(value.target) ? value.target : undefined;
+  const targetDisplayName = firstSafeShortText([target?.name, target?.display_name, value.target_display_name]);
+  const publicEvidenceTitle = firstSafeShortText([value.title, value.name, target?.title]);
+  const publicSourceTitle = firstSafeShortText([value.source_title, value.page_title]);
+
+  if (!targetDisplayName && !publicEvidenceTitle && !publicSourceTitle) return undefined;
+  return {
+    event_id: event.event_id,
+    target_key: event.target_key,
+    target_display_name: targetDisplayName,
+    public_evidence_title: publicEvidenceTitle,
+    public_source_title: publicSourceTitle,
+    source_platform: event.platform,
+  };
+}
+
+function firstSafeShortText(values: unknown[]): string | undefined {
+  for (const value of values) {
+    const normalized = safeShortText(value);
+    if (normalized) return normalized;
+  }
+  return undefined;
+}
+
+function safeShortText(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const normalized = value.replace(/\s+/g, " ").trim();
+  if (normalized.length === 0 || normalized.length > 160) return undefined;
+  if (/https?:\/\//i.test(normalized)) return undefined;
+  if (/\[[^\]]+\]\([^)]+\)/.test(normalized)) return undefined;
+  if (/(^|\s)@[\w.-]{2,}/.test(normalized)) return undefined;
+  if (/\b(cookie|session|oauth|bearer|token|api[_ -]?key|password)\b/i.test(normalized)) return undefined;
+  return normalized;
+}
+
+function uniqueTitleContext(contexts: ExternalCandidateExplanationTitleContext[]): ExternalCandidateExplanationTitleContext[] {
+  const byKey = new Map<string, ExternalCandidateExplanationTitleContext>();
+  for (const context of contexts) {
+    byKey.set(
+      [
+        context.event_id ?? "",
+        context.target_key,
+        context.source_platform,
+        context.target_display_name ?? "",
+        context.public_evidence_title ?? "",
+        context.public_source_title ?? "",
+      ].join("\u0000"),
+      context,
+    );
+  }
+  return [...byKey.values()];
+}
+
 function generatedEventId(input: { rawRef?: string; url?: string; observedAt?: string }): string | undefined {
   const seed = input.rawRef ?? input.url;
   if (!seed || !input.observedAt) return undefined;
@@ -287,6 +347,7 @@ function emptyResult(status: ExternalProviderStatus, statusReason: string, sourc
     rejected_events: [],
     warnings: [],
     source_input_hash: sourceInputHash,
+    title_context: [],
   };
 }
 

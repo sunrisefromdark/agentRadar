@@ -23,3 +23,4 @@ data/raw/external-discovery/**
 !data/raw/external-discovery/
 !data/raw/external-discovery/fixtures/
 !data/raw/external-discovery/fixtures/**
+data/external-discovery/*.candidate-explanations.json

@@ -791,6 +791,25 @@ export interface DailyRunSummaryTopProject {
   risks: string[];
 }
 
+export interface DailyRunSummaryExternalDiscovery {
+  aggregate_status: "ok" | "skipped" | "partial" | "failed";
+  aggregate_status_reason?: string;
+  accepted_event_count: number;
+  rejected_event_count: number;
+  observation_candidate_count: number;
+  project_evidence_count: number;
+  direction_evidence_count: number;
+  explanation_status: "ok" | "partial" | "skipped" | "failed";
+  explanation_status_reason?: string;
+  explanation_eligible_count: number;
+  explanation_attempted_count: number;
+  explanation_enhanced_count: number;
+  explanation_fallback_count: number;
+  explanation_rejected_count: number;
+  warning_count: number;
+  warnings: string[];
+}
+
 export interface DailyRunSummary {
   date: string;
   generated_at: string;
@@ -829,6 +848,7 @@ export interface DailyRunSummary {
   quality: DailyRunSummaryQuality;
   diagnostics: DailyRunSummaryDiagnostics;
   top_projects: DailyRunSummaryTopProject[];
+  external_discovery?: DailyRunSummaryExternalDiscovery;
   observer_status?: {
     ecosystem_focus: ObserverStatus;
   };

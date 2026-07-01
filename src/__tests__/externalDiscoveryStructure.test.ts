@@ -12,9 +12,11 @@ describe("external discovery structure boundaries", () => {
 
     expect(gitignore).toContain("data/raw/external-discovery/**");
     expect(gitignore).toContain("!data/raw/external-discovery/fixtures/**");
+    expect(gitignore).toContain("data/external-discovery/*.candidate-explanations.json");
     expect(dataReadme).toContain("data/raw/external-discovery/");
     expect(dataReadme).toContain("local-only");
     expect(dataReadme).toContain("data/external-discovery/*.aggregate.json");
+    expect(dataReadme).toContain("data/external-discovery/*.candidate-explanations.json");
     expect(dataReadme).toContain("no public `*.events.jsonl` default artifact");
   });
 

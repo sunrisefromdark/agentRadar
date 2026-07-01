@@ -1,7 +1,9 @@
 import fs from "node:fs";
 import path from "node:path";
-import { externalAggregatePath } from "../externalDiscovery/paths.ts";
+import { externalAggregatePath, externalCandidateExplanationsPath } from "../externalDiscovery/paths.ts";
 import { assertPublicSafeAggregate } from "../externalDiscovery/redaction.ts";
+import { assertPublicSafeCandidateExplanations } from "../externalDiscovery/explanationRedaction.ts";
+import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
 import { readJsonFile } from "../storage/files.ts";
 import type {
   DailyReport,
@@ -476,6 +478,103 @@ function externalAggregateContractChecks(filepath: string, aggregateRead: Option
   ];
 }
 
+function externalCandidateExplanationContractChecks(
+  filepath: string,
+  aggregateRead: OptionalJsonRead,
+  explanationsRead: OptionalJsonRead,
+): VerificationCheck[] {
+  if (!explanationsRead.exists) {
+    const needsExplanationArtifact = aggregateNeedsCandidateExplanations(aggregateRead.value);
+    return [
+      buildCheck(
+        "external_candidate_explanations_contract",
+        needsExplanationArtifact ? "fail" : "pass",
+        needsExplanationArtifact
+          ? `candidate explanations missing at ${filepath}; external aggregate has accepted events or candidates`
+          : `candidate explanations not present at ${filepath}; external explanation layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (explanationsRead.error) {
+    return [buildCheck("external_candidate_explanations_contract", "fail", `candidate explanations unreadable: ${explanationsRead.error}`)];
+  }
+
+  const artifact = explanationsRead.value as ExternalCandidateExplanationArtifact;
+  const redaction = assertPublicSafeCandidateExplanations(artifact);
+  const inspection = inspectExternalCandidateExplanationContract(artifact, aggregateRead.value);
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...inspection.issues,
+  ];
+
+  return [
+    buildCheck(
+      "external_candidate_explanations_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `candidate explanations public-safe; status=${inspection.status}; eligible=${inspection.eligibleCount}; enhanced=${inspection.enhancedCount}; fallback=${inspection.fallbackCount}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
+function aggregateNeedsCandidateExplanations(aggregate: unknown): boolean {
+  if (!isRecord(aggregate)) return false;
+  const acceptedEventCount = typeof aggregate.accepted_event_count === "number" ? aggregate.accepted_event_count : 0;
+  const candidates = Array.isArray(aggregate.observation_candidates) ? aggregate.observation_candidates : [];
+  return acceptedEventCount > 0 || candidates.length > 0;
+}
+
+function inspectExternalCandidateExplanationContract(value: unknown, aggregate: unknown): {
+  status: string;
+  eligibleCount: number;
+  enhancedCount: number;
+  fallbackCount: number;
+  issues: string[];
+} {
+  const issues: string[] = [];
+  if (!isRecord(value)) {
+    return { status: "unknown", eligibleCount: 0, enhancedCount: 0, fallbackCount: 0, issues: ["candidate explanations must be an object"] };
+  }
+
+  if (value.schema_version !== "external-discovery.candidate-explanations.v1") {
+    issues.push("schema_version must be external-discovery.candidate-explanations.v1");
+  }
+  if (value.public_safe !== true || value.contains_raw_text !== false || value.contains_profile_urls !== false) {
+    issues.push("candidate explanations must carry public_safe=true, contains_raw_text=false, contains_profile_urls=false");
+  }
+  if (isRecord(aggregate) && typeof aggregate.source_input_hash === "string" && value.aggregate_source_input_hash !== aggregate.source_input_hash) {
+    issues.push("aggregate_source_input_hash does not match external aggregate source_input_hash");
+  }
+  if (typeof value.input_context_hash !== "string" || value.input_context_hash.length === 0) {
+    issues.push("input_context_hash missing");
+  }
+
+  const explanations = Array.isArray(value.explanations) ? value.explanations : [];
+  const audit = isRecord(value.audit) ? value.audit : {};
+  const eligibleCount = Number(audit.eligible_count ?? 0);
+  const enhancedCount = Number(audit.enhanced_count ?? 0);
+  const fallbackCount = Number(audit.fallback_count ?? 0);
+  const status = typeof value.status === "string" ? value.status : "unknown";
+  const fallbackCountFromRows = explanations.filter((item) => isRecord(item) && item.summary_source === "rules_fallback").length;
+
+  if (fallbackCount !== fallbackCountFromRows) {
+    issues.push("fallback_count does not match rules_fallback rows");
+  }
+  if (status === "ok" && eligibleCount > 0 && enhancedCount / eligibleCount < 0.7) {
+    issues.push("status ok requires enhanced coverage >= 70%");
+  }
+
+  return {
+    status,
+    eligibleCount,
+    enhancedCount,
+    fallbackCount,
+    issues,
+  };
+}
+
 function inspectExternalAggregateContract(value: unknown): {
   projectEvidenceCount: number;
   directionEvidenceCount: number;
@@ -614,6 +713,8 @@ function buildChecks(
   report: DailyReport | null,
   externalAggregateFilepath: string,
   externalAggregate: OptionalJsonRead,
+  externalCandidateExplanationsFilepath: string,
+  externalCandidateExplanations: OptionalJsonRead,
 ): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
@@ -623,6 +724,7 @@ function buildChecks(
     ...freshnessChecks(summary),
     ...projectSearchContractChecks(summary, report),
     ...externalAggregateContractChecks(externalAggregateFilepath, externalAggregate),
+    ...externalCandidateExplanationContractChecks(externalCandidateExplanationsFilepath, externalAggregate, externalCandidateExplanations),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
@@ -650,17 +752,27 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const githubEnrichmentPath = githubAuditPath(date);
   const reportPath = dailyReportPath(date);
   const externalAggregateFilepath = externalAggregatePath(date);
+  const externalCandidateExplanationsFilepath = externalCandidateExplanationsPath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
   const report = readJsonFile<DailyReport | null>(reportPath, null);
   const externalAggregate = readOptionalJson(externalAggregateFilepath);
+  const externalCandidateExplanations = readOptionalJson(externalCandidateExplanationsFilepath);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
   }
 
   const normalizedSummary = normalizeSummaryDiagnostics(summary);
-  const checks = buildChecks(normalizedSummary, githubAudit, report, externalAggregateFilepath, externalAggregate);
+  const checks = buildChecks(
+    normalizedSummary,
+    githubAudit,
+    report,
+    externalAggregateFilepath,
+    externalAggregate,
+    externalCandidateExplanationsFilepath,
+    externalCandidateExplanations,
+  );
   return {
     date,
     status: aggregateStatus(checks),

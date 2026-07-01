@@ -12,6 +12,14 @@ export function externalAggregateLatestPath(): string {
   return path.join("data", "external-discovery", "latest.aggregate.json");
 }
 
+export function externalCandidateExplanationsPath(date: string): string {
+  return path.join("data", "external-discovery", `${date}.candidate-explanations.json`);
+}
+
+export function externalCandidateExplanationsLatestPath(): string {
+  return path.join("data", "external-discovery", "latest.candidate-explanations.json");
+}
+
 export function externalEntityRegistryPath(): string {
   return path.join("data", "external-discovery", "entity-registry.json");
 }

@@ -181,11 +181,59 @@ function makeExternalAggregate(namedActorOverrides: Record<string, unknown> = {}
   };
 }
 
-function writeDailyInputs(root: string, externalAggregate: Record<string, unknown>): void {
+function makeCandidateExplanations(overrides: Record<string, unknown> = {}): Record<string, unknown> {
+  return {
+    schema_version: "external-discovery.candidate-explanations.v1",
+    date,
+    generated_at: "2026-06-30T08:00:00.000Z",
+    provider: "rules",
+    explanation_policy_version: "candidate-explanations.v1",
+    aggregate_source_input_hash: "abc123",
+    aggregate_generated_at: "2026-06-30T08:00:00.000Z",
+    input_context_hash: "input-hash",
+    public_safe: true,
+    redaction_policy_version: "external-discovery-explanation-redaction.v1",
+    contains_raw_text: false,
+    contains_profile_urls: false,
+    status: "partial",
+    status_reason: "partial_llm_failure",
+    explanations: [
+      {
+        candidate_key: "project:openai/agents-sdk",
+        candidate_kind: "project",
+        target_key: "openai/agents-sdk",
+        explanation_scope: "external_evidence_boost",
+        what_it_is_cn: "OpenAI Agents SDK 是已有候选获得外部补证的对象，目前只确认它在外部来源中再次出现。",
+        why_watch_cn: "X 出现该对象的外部讨论，可作为日报或周报的次级证据，适合继续查看证据来源。",
+        summary_confidence: "medium",
+        summary_source: "rules_fallback",
+        evidence_ids: ["project:openai/agents-sdk"],
+        platforms: ["x_twitter"],
+        caveats: ["外部层不能作为主榜结论，仍需 GitHub / Trendshift 主链路确认。"],
+        generated_at: "2026-06-30T08:00:00.000Z",
+      },
+    ],
+    audit: {
+      eligible_count: 1,
+      attempted_count: 0,
+      accepted_count: 1,
+      enhanced_count: 0,
+      rejected_count: 0,
+      fallback_count: 1,
+      warnings: [],
+    },
+    ...overrides,
+  };
+}
+
+function writeDailyInputs(root: string, externalAggregate: Record<string, unknown>, candidateExplanations?: Record<string, unknown>): void {
   writeJson(path.join(root, "data", "reports", `${date}.run-summary.json`), makeSummary());
   writeJson(path.join(root, "data", "reports", `${date}.daily.json`), makeReport());
   writeJson(path.join(root, "data", "raw", "github", `${date}.enrichment.json`), []);
   writeJson(path.join(root, "data", "external-discovery", `${date}.aggregate.json`), externalAggregate);
+  if (candidateExplanations) {
+    writeJson(path.join(root, "data", "external-discovery", `${date}.candidate-explanations.json`), candidateExplanations);
+  }
 }
 
 describe("external discovery daily verification contract", () => {
@@ -211,5 +259,27 @@ describe("external discovery daily verification contract", () => {
     expect(check?.status).toBe("fail");
     expect(check?.detail).toContain("source_roles must be non-empty");
     expect(result.status).toBe("fail");
+  });
+
+  it("fails when candidate explanations are missing for an aggregate with accepted events", () => {
+    const root = setupWorkspace();
+    writeDailyInputs(root, makeExternalAggregate());
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_candidate_explanations_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("candidate explanations missing");
+  });
+
+  it("fails stale candidate explanations with mismatched aggregate hash", () => {
+    const root = setupWorkspace();
+    writeDailyInputs(root, makeExternalAggregate(), makeCandidateExplanations({ aggregate_source_input_hash: "stale-hash" }));
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_candidate_explanations_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("aggregate_source_input_hash does not match");
   });
 });

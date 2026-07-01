@@ -131,6 +131,15 @@ export interface ProviderRejectedEvent {
   reason_detail: string;
 }
 
+export interface ExternalCandidateExplanationTitleContext {
+  event_id?: string;
+  target_key: string;
+  target_display_name?: string;
+  public_evidence_title?: string;
+  public_source_title?: string;
+  source_platform: ExternalPlatform;
+}
+
 export interface AgentReachProviderReadResult {
   provider: "agent-reach";
   schema_version: "agent-reach.external-discovery.v1";
@@ -143,4 +152,5 @@ export interface AgentReachProviderReadResult {
   rejected_events: ProviderRejectedEvent[];
   warnings: ExternalDiscoveryAudit["warnings"];
   source_input_hash: string;
+  title_context: ExternalCandidateExplanationTitleContext[];
 }

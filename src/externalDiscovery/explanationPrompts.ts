@@ -1,0 +1,36 @@
+import type { CandidateExplanationInput } from "./explanations.ts";
+
+export function buildCandidateExplanationPrompt(inputs: CandidateExplanationInput[]): string {
+  return [
+    "你是 AgentRadar 的 AgentReach 外部发现解释层。",
+    "请只根据输入 JSON，把外部发现候选解释成普通用户能读懂的中文。",
+    "返回 exactly one JSON object and nothing else。",
+    "不要使用 markdown，不要输出 URL，不要访问互联网，不要补充输入中没有的功能、机构或趋势结论。",
+    "",
+    "输出 JSON schema:",
+    "{",
+    '  "explanations": [',
+    "    {",
+    '      "candidate_key": string,',
+    '      "what_it_is_cn": string,',
+    '      "why_watch_cn": string,',
+    '      "summary_confidence": "high" | "medium" | "low",',
+    '      "caveats": string[]',
+    "    }",
+    "  ]",
+    "}",
+    "",
+    "硬性规则:",
+    "- what_it_is_cn 回答“它是什么”，优先使用 existing_project_brief_cn、repo_description、public_evidence_titles、public_source_titles。",
+    "- why_watch_cn 回答“为什么今天值得看”，只能表达外部层原因，例如平台讨论、跨平台出现、具名讨论者、可作为日报/周报次级证据。",
+    "- direction_signal 必须写成“方向线索”，不得写成明确 GitHub 项目。",
+    "- bound_object / external_evidence_boost / candidate_kind=project 必须写成“项目候选”或“已有候选获得外部补证”，不得写成“方向线索”或“尚未绑定明确 GitHub 项目”。",
+    "- 证据不足时必须写“仍需 GitHub / Trendshift 主链路确认”。",
+    "- 不得出现“主榜结论”“高置信推荐”“确定爆发”“已经形成趋势”等过度结论。",
+    "- 没有 description 或 brief 时，不得编造具体功能；只能说明当前可确认对象存在或作为方向线索。",
+    "- 每个中文字段建议 30-140 个中文字符，不同候选不要复用同一句话。",
+    "",
+    "输入 JSON:",
+    JSON.stringify({ candidates: inputs }, null, 2),
+  ].join("\n");
+}

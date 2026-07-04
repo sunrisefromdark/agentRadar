@@ -57,6 +57,28 @@ export function assertPublicSafeAggregate(value: unknown): RedactionCheckResult 
   };
 }
 
+export function assertPublicSafeTrendWindow(value: unknown): RedactionCheckResult {
+  const reasonCodes = collectRedactionReasonCodes(value);
+  if (!isRecord(value)) {
+    reasonCodes.push("not_object");
+  } else {
+    if (value.public_safe !== true) reasonCodes.push("public_safe_not_true");
+    if (value.contains_raw_text !== false) reasonCodes.push("contains_raw_text_not_false");
+    if (value.contains_profile_urls !== false) reasonCodes.push("contains_profile_urls_not_false");
+    if (typeof value.redaction_policy_version !== "string" || value.redaction_policy_version.length === 0) {
+      reasonCodes.push("missing_redaction_policy_version");
+    }
+    if (value.schema_version !== "external-discussion-trend-window.v1") {
+      reasonCodes.push("invalid_trend_window_schema_version");
+    }
+  }
+
+  return {
+    ok: reasonCodes.length === 0,
+    reason_codes: Array.from(new Set(reasonCodes)).sort(),
+  };
+}
+
 function collectRedactionReasonCodes(value: unknown): string[] {
   const reasonCodes: string[] = [];
   visit(value, (currentValue, key) => {

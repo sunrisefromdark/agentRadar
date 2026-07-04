@@ -1,4 +1,11 @@
-import type { ScoredProject, WeeklyEvidenceMatrix, WeeklyJudgmentReport, WeeklyReport } from "../types.ts";
+import type {
+  ScoredProject,
+  WeeklyEvidenceMatrix,
+  WeeklyExternalDiscussionTrendItem,
+  WeeklyExternalDiscussionTrendSummary,
+  WeeklyJudgmentReport,
+  WeeklyReport,
+} from "../types.ts";
 import { renderCoreTrendCard, renderWeakSignalCard } from "./weeklyEnhancement.ts";
 
 function countByParadigm(items: ScoredProject[]): Array<[string, number]> {
@@ -85,6 +92,34 @@ function renderWeeklyEvidenceMatrix(matrix?: WeeklyEvidenceMatrix): string[] {
   ];
 }
 
+function renderExternalDiscussionTrendItems(items: WeeklyExternalDiscussionTrendItem[], emptyText: string): string[] {
+  if (items.length === 0) return [`- ${emptyText}`];
+  return items.slice(0, 8).map(
+    (item) =>
+      `- ${item.display_name} [${item.scope}] verdict=${item.verdict}; momentum=${item.momentum}; mentions=${item.mention_count_total}; active_days=${item.active_day_count}; platforms=${item.platform_count}; named_actors=${item.named_registry_actor_count}`,
+  );
+}
+
+function renderExternalDiscussionTrends(summary?: WeeklyExternalDiscussionTrendSummary): string[] {
+  if (!summary) {
+    return ["- external_discussion_trends: unavailable"];
+  }
+
+  return [
+    `- read_status: ${summary.read_status}`,
+    `- status: ${summary.status ?? "unavailable"}`,
+    `- path: ${summary.path}`,
+    `- coverage: usable_days=${summary.usable_day_count}; failed_dates=${summary.failed_date_count}; missing_dates=${summary.missing_date_count}`,
+    `- trend_counts: project=${summary.project_trend_count}; direction=${summary.direction_trend_count}`,
+    "- secondary_evidence:",
+    ...renderExternalDiscussionTrendItems(summary.secondary_evidence, "none"),
+    "- direction_observations:",
+    ...renderExternalDiscussionTrendItems(summary.direction_observations, "none"),
+    "- noise_items:",
+    ...renderExternalDiscussionTrendItems(summary.noise_items, "none"),
+  ];
+}
+
 function renderAuditConclusion(judgment?: WeeklyJudgmentReport): string[] {
   if (!judgment) {
     return [
@@ -137,6 +172,10 @@ function renderEnhancedWeeklyReport(report: WeeklyReport, judgment?: WeeklyJudgm
     "## 结构化证据矩阵",
     "",
     ...renderWeeklyEvidenceMatrix(report.evidence_matrix),
+    "",
+    "## AgentReach 外部讨论趋势",
+    "",
+    ...renderExternalDiscussionTrends(report.external_discussion_trends),
     "",
     "## 已成立趋势",
     "",

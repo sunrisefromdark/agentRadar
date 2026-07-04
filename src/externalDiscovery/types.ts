@@ -10,12 +10,52 @@ export type ExternalProviderTierHint = "core" | "proven" | "watch" | "ordinary" 
 export type ExternalEvidenceScope = "project" | "direction";
 export type ExternalTierBasis = "registry" | "provider_hint" | "none";
 export type ExternalNamedActorSourceRole = "social_discussant" | "official_publisher" | "official_owner";
+export type ExternalTrendWindowStatus = "ok" | "partial" | "failed" | "insufficient" | "skipped";
+export type ExternalTrendWindowReadStatus =
+  | "ok"
+  | "not_found"
+  | "parse_error"
+  | "partial"
+  | "insufficient"
+  | "failed"
+  | "skipped";
+export type ExternalTrendBindingConfidence = "high" | "medium" | "low" | "none";
+export type ExternalTrendMomentum = "spike" | "rising" | "stable" | "fading" | "insufficient";
+export type ExternalTrendVerdict = "external_reinforcement" | "watch_signal" | "noise_spike" | "insufficient";
+export type ExternalWeeklyGateReason =
+  | "cross_platform_confirmation"
+  | "multi_actor_confirmation"
+  | "multi_day_persistence"
+  | "registry_tier_participation";
+export type ExternalTrendComponentName =
+  | "discussion_volume"
+  | "persistence"
+  | "cross_platform_confirmation"
+  | "actor_authority"
+  | "binding_confidence"
+  | "noise_risk";
+export type ExternalTrendComponentLevel = "none" | "low" | "medium" | "high";
 
 export const EXTERNAL_PLATFORMS = ["x_twitter", "reddit", "hacker_news", "official_web", "official_blog"] as const;
 export const EXTERNAL_TARGET_TYPES = ["project", "paper", "product", "topic"] as const;
 export const EXTERNAL_ACTOR_TYPES = ["institution", "team", "person", "community", "unknown"] as const;
 export const EXTERNAL_REGISTRY_TIERS = ["core", "proven", "watch"] as const;
 export const EXTERNAL_NAMED_ACTOR_SOURCE_ROLES = ["social_discussant", "official_publisher", "official_owner"] as const;
+export const EXTERNAL_TREND_WINDOW_READ_STATUSES = ["ok", "not_found", "parse_error", "partial", "insufficient", "failed", "skipped"] as const;
+export const EXTERNAL_WEEKLY_GATE_REASONS = [
+  "cross_platform_confirmation",
+  "multi_actor_confirmation",
+  "multi_day_persistence",
+  "registry_tier_participation",
+] as const;
+export const EXTERNAL_TREND_COMPONENT_NAMES = [
+  "discussion_volume",
+  "persistence",
+  "cross_platform_confirmation",
+  "actor_authority",
+  "binding_confidence",
+  "noise_risk",
+] as const;
 
 export interface ExternalSignalActor {
   actor_type: ExternalActorType;
@@ -123,6 +163,94 @@ export interface DailyExternalAggregate {
   direction_evidence: ExternalEvidence[];
   observation_candidates: ObservationCandidate[];
   audit: ExternalDiscoveryAudit;
+}
+
+export interface ExternalTrendDailyCount {
+  date: string;
+  mention_count: number;
+  source_count: number;
+  platform_count: number;
+}
+
+export interface ExternalTrendComponent {
+  name: ExternalTrendComponentName;
+  level: ExternalTrendComponentLevel;
+  evidence: string[];
+}
+
+export interface ExternalTrendItem {
+  trend_id: string;
+  scope: ExternalEvidenceScope;
+  target_key: string;
+  display_name: string;
+  target_url?: string;
+  binding_confidence: ExternalTrendBindingConfidence;
+  official_signal: boolean;
+  weekly_eligible: boolean;
+  weekly_gate_reasons: ExternalWeeklyGateReason[];
+  weekly_gate_missing_reasons: ExternalWeeklyGateReason[];
+  daily_counts: ExternalTrendDailyCount[];
+  mention_count_total: number;
+  source_count: number;
+  active_day_count: number;
+  platform_count: number;
+  cross_platform_days: number;
+  distinct_actor_count: number;
+  top_tier_actor_count: number;
+  named_registry_actors: ExternalNamedRegistryActor[];
+  components: ExternalTrendComponent[];
+  momentum: ExternalTrendMomentum;
+  verdict: ExternalTrendVerdict;
+  cannot_be_primary_conclusion: true;
+  evidence_ids: string[];
+  source_aggregate_dates: string[];
+  caveats: string[];
+}
+
+export interface ExternalTrendCoverage {
+  expected_dates: string[];
+  loaded_dates: string[];
+  missing_dates: string[];
+  failed_dates: Array<{
+    date: string;
+    reason_code: string;
+    reason_detail: string;
+  }>;
+  usable_day_count: number;
+  platform_counts: Partial<Record<ExternalPlatform, number>>;
+  partial_platforms: ExternalPlatform[];
+}
+
+export interface ExternalTrendAudit {
+  rejected_items: Array<{
+    scope?: ExternalEvidenceScope;
+    target_key?: string;
+    reason_code: string;
+    reason_detail: string;
+  }>;
+  warnings: Array<{
+    reason_code: string;
+    reason_detail: string;
+  }>;
+}
+
+export interface ExternalDiscussionTrendWindow {
+  schema_version: "external-discussion-trend-window.v1";
+  anchor_date: string;
+  window_start: string;
+  window_end: string;
+  window_days: 7;
+  generated_at: string;
+  status: ExternalTrendWindowStatus;
+  status_reason?: string;
+  project_trends: ExternalTrendItem[];
+  direction_trends: ExternalTrendItem[];
+  coverage: ExternalTrendCoverage;
+  audit: ExternalTrendAudit;
+  public_safe: true;
+  redaction_policy_version: string;
+  contains_raw_text: false;
+  contains_profile_urls: false;
 }
 
 export interface ProviderRejectedEvent {

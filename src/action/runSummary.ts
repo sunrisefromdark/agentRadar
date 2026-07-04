@@ -841,6 +841,11 @@ function renderExternalDiscoverySummary(summary: DailyRunSummary): string[] {
     `- evidence: project=${external.project_evidence_count}; direction=${external.direction_evidence_count}`,
     `- explanation_status: ${external.explanation_status}${external.explanation_status_reason ? ` (${external.explanation_status_reason})` : ""}`,
     `- explanations: eligible=${external.explanation_eligible_count}; attempted=${external.explanation_attempted_count}; enhanced=${external.explanation_enhanced_count}; fallback=${external.explanation_fallback_count}; rejected=${external.explanation_rejected_count}`,
+    `- trend_window_read_status: ${external.trend_window_read_status}`,
+    `- trend_window_status: ${external.trend_window_status ?? "unavailable"}`,
+    `- trend_window_path: ${external.trend_window_path}`,
+    `- trend_window_coverage: usable_days=${external.trend_window_usable_day_count}; failed_dates=${external.trend_window_failed_date_count}; missing_dates=${external.trend_window_missing_date_count}`,
+    `- trend_window_items: project=${external.trend_window_project_trend_count}; direction=${external.trend_window_direction_trend_count}`,
     ...(warnings.length > 0 ? warnings.slice(0, 8).map((warning) => `- warning: ${warning}`) : ["- warnings: none"]),
   ];
 }

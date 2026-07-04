@@ -8,6 +8,7 @@ import {
   externalRawInputPath,
 } from "./paths.ts";
 import { assertPublicSafeAggregate, stableSourceInputHash } from "./redaction.ts";
+import { runDailyExternalTrendWindowIntegration, type DailyExternalTrendWindowIntegrationResult } from "./trendWindowIntegration.ts";
 import {
   buildCandidateExplanationInputs,
   generateExternalCandidateExplanations,
@@ -24,11 +25,14 @@ export interface DailyExternalDiscoveryIntegrationResult {
   aggregate: DailyExternalAggregate;
   explanations: ExternalCandidateExplanationArtifact;
   input_build: CandidateExplanationBuildResult;
+  trend_window: DailyExternalTrendWindowIntegrationResult["trend_window"];
   paths: {
     aggregate: string;
     aggregate_latest: string;
     explanations: string;
     explanations_latest: string;
+    trend_window: string;
+    trend_window_latest: string;
   };
 }
 
@@ -163,16 +167,25 @@ export async function runDailyExternalDiscoveryIntegration(args: {
   const explanationsLatest = externalCandidateExplanationsLatestPath();
   writeJsonFile(explanationsPath, explanations, args.dryRun);
   writeJsonFile(explanationsLatest, explanations, args.dryRun);
+  const trendWindow = runDailyExternalTrendWindowIntegration({
+    date: args.date,
+    generatedAt: args.generatedAt,
+    dryRun: args.dryRun,
+    currentAggregate: aggregate,
+  });
 
   return {
     aggregate,
     explanations,
     input_build: inputBuild,
+    trend_window: trendWindow.trend_window,
     paths: {
       aggregate: aggregatePath,
       aggregate_latest: aggregateLatest,
       explanations: explanationsPath,
       explanations_latest: explanationsLatest,
+      trend_window: trendWindow.paths.trend_window,
+      trend_window_latest: trendWindow.paths.trend_window_latest,
     },
   };
 }

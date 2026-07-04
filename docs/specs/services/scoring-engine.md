@@ -61,6 +61,7 @@ Score = w1 * star_velocity
 - rules-only 模式 MUST 在无 LLM key 时仍可运行。
 - 如果启用 LLM，Scoring Engine MUST 只消费强类型 classification 字段，不得消费自由文本结论来直接判定分数。
 - `autonomy_score`、`compounding_capability`、`architecture_shift` 的最终分数 MUST 由 TS 规则层根据 structured evidence 计算。
+- AgentReach 外部讨论趋势窗口只能作为展示层和 weekly secondary evidence；不得写入 `RawSignal[]`、不得改写 `discussion_score`、不得改变主榜排序或 `ScoreBreakdown.total_score`。
 
 ## Fake Star 防护
 

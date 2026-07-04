@@ -28,6 +28,10 @@ Public external discovery history belongs in `data/external-discovery/*.aggregat
 
 `data/external-discovery/*.candidate-explanations.json` is a cached display-only AgentReach explanation artifact. Local real-run files are ignored by default; only sanitized fixtures used by tests should be committed.
 
+`data/external-discovery/windows/*.discussion-trend-window.json` is the derived AgentReach external discussion trend window. It is public-safe by contract and is generated from sanitized daily aggregates, not from raw provider input. It must not contain raw social text, profile URLs, raw handles, cookies, sessions, OAuth material, private runner diagnostics, or platform tokens.
+
+Local real-run trend window artifacts should be reviewed before committing. The source raw input under `data/raw/external-discovery/` remains local-only even when the derived window is safe to inspect.
+
 ## Automation behavior
 
 The daily and weekly GitHub Actions workflows update the tracked public artifacts and commit them back into this repository. This is intentional: the repo is both code and a public historical data log.

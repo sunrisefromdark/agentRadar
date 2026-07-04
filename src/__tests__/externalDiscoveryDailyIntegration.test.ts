@@ -91,8 +91,11 @@ describe("external discovery daily integration", () => {
     expect(result.aggregate.accepted_event_count).toBe(1);
     expect(result.input_build.eligible_count).toBe(1);
     expect(result.explanations.status).toBe("skipped");
+    expect(result.trend_window.status).toBe("insufficient");
     expect(fs.existsSync(path.join(root, "data", "external-discovery", "2026-06-30.aggregate.json"))).toBe(true);
     expect(fs.existsSync(path.join(root, "data", "external-discovery", "2026-06-30.candidate-explanations.json"))).toBe(true);
+    expect(fs.existsSync(path.join(root, "data", "external-discovery", "windows", "2026-06-30.discussion-trend-window.json"))).toBe(true);
+    expect(fs.existsSync(path.join(root, "data", "external-discovery", "windows", "latest.discussion-trend-window.json"))).toBe(true);
     expect(result.explanations.explanations[0]?.why_watch_cn).toContain("HN");
   });
 
@@ -116,7 +119,9 @@ describe("external discovery daily integration", () => {
     expect(result.aggregate.accepted_event_count).toBe(1);
     expect(result.explanations.status).toBe("failed");
     expect(result.explanations.status_reason).toBe("candidate_explanation_generation_failed");
+    expect(result.trend_window.status).toBe("insufficient");
     expect(fs.existsSync(path.join(root, "data", "external-discovery", "2026-06-30.aggregate.json"))).toBe(true);
     expect(fs.existsSync(path.join(root, "data", "external-discovery", "2026-06-30.candidate-explanations.json"))).toBe(true);
+    expect(fs.existsSync(path.join(root, "data", "external-discovery", "windows", "2026-06-30.discussion-trend-window.json"))).toBe(true);
   });
 });

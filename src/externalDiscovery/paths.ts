@@ -20,6 +20,14 @@ export function externalCandidateExplanationsLatestPath(): string {
   return path.join("data", "external-discovery", "latest.candidate-explanations.json");
 }
 
+export function externalTrendWindowPath(date: string): string {
+  return path.join("data", "external-discovery", "windows", `${date}.discussion-trend-window.json`);
+}
+
+export function externalTrendWindowLatestPath(): string {
+  return path.join("data", "external-discovery", "windows", "latest.discussion-trend-window.json");
+}
+
 export function externalEntityRegistryPath(): string {
   return path.join("data", "external-discovery", "entity-registry.json");
 }

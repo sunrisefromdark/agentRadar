@@ -1,9 +1,10 @@
 import fs from "node:fs";
 import path from "node:path";
 import { externalAggregatePath, externalCandidateExplanationsPath } from "../externalDiscovery/paths.ts";
-import { assertPublicSafeAggregate } from "../externalDiscovery/redaction.ts";
+import { assertPublicSafeAggregate, assertPublicSafeTrendWindow } from "../externalDiscovery/redaction.ts";
 import { assertPublicSafeCandidateExplanations } from "../externalDiscovery/explanationRedaction.ts";
 import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
+import { readExternalDiscussionTrendWindowByDate, type ExternalDiscussionTrendWindowReadResult } from "../externalDiscovery/trendWindowIntegration.ts";
 import { readJsonFile } from "../storage/files.ts";
 import type {
   DailyReport,
@@ -519,6 +520,83 @@ function externalCandidateExplanationContractChecks(
   ];
 }
 
+function externalTrendWindowContractChecks(
+  summary: DailyRunSummary,
+  trendWindowRead: ExternalDiscussionTrendWindowReadResult,
+): VerificationCheck[] {
+  const externalSummary = summary.external_discovery;
+  if (trendWindowRead.read_status === "not_found") {
+    const status = externalSummary ? "warn" : "pass";
+    return [
+      buildCheck(
+        "external_discussion_trend_window_contract",
+        status,
+        externalSummary
+          ? `trend window missing at ${trendWindowRead.path}; external discovery summary expected a trend artifact`
+          : `trend window not present at ${trendWindowRead.path}; external layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (trendWindowRead.read_status === "parse_error" || !trendWindowRead.trend_window) {
+    return [
+      buildCheck(
+        "external_discussion_trend_window_contract",
+        "fail",
+        `trend window unreadable at ${trendWindowRead.path}: ${trendWindowRead.error ?? "parse_error"}`,
+      ),
+    ];
+  }
+
+  const trendWindow = trendWindowRead.trend_window;
+  const redaction = assertPublicSafeTrendWindow(trendWindow);
+  const itemIssues = [
+    ...trendWindow.project_trends
+      .filter((item) => item.scope !== "project")
+      .map((item) => `project_trends contains non-project item ${item.trend_id}`),
+    ...trendWindow.direction_trends
+      .filter((item) => item.scope !== "direction")
+      .map((item) => `direction_trends contains non-direction item ${item.trend_id}`),
+    ...[...trendWindow.project_trends, ...trendWindow.direction_trends]
+      .filter((item) => item.cannot_be_primary_conclusion !== true)
+      .map((item) => `${item.trend_id} missing cannot_be_primary_conclusion=true`),
+    ...trendWindow.direction_trends
+      .filter((item) => item.weekly_eligible && item.weekly_gate_reasons.length < 2)
+      .map((item) => `${item.trend_id} direction weekly eligibility does not satisfy 4-choose-2 gate`),
+    ...[...trendWindow.project_trends, ...trendWindow.direction_trends]
+      .filter((item) => item.verdict === "noise_spike" && item.weekly_eligible)
+      .map((item) => `${item.trend_id} noise_spike must not be weekly eligible`),
+  ];
+  const summaryIssues = externalSummary
+    ? [
+        ...(externalSummary.trend_window_read_status !== trendWindowRead.read_status
+          ? [`summary read status ${externalSummary.trend_window_read_status} does not match artifact read status ${trendWindowRead.read_status}`]
+          : []),
+        ...(externalSummary.trend_window_status !== trendWindow.status
+          ? [`summary trend status ${externalSummary.trend_window_status ?? "missing"} does not match artifact status ${trendWindow.status}`]
+          : []),
+        ...(externalSummary.trend_window_path.replace(/\\/g, "/") !== trendWindowRead.path.replace(/\\/g, "/")
+          ? [`summary trend path ${externalSummary.trend_window_path} does not match ${trendWindowRead.path}`]
+          : []),
+      ]
+    : [];
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...itemIssues,
+    ...summaryIssues,
+  ];
+
+  return [
+    buildCheck(
+      "external_discussion_trend_window_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `trend window ${trendWindowRead.read_status}; usable_days=${trendWindow.coverage.usable_day_count}; project_trends=${trendWindow.project_trends.length}; direction_trends=${trendWindow.direction_trends.length}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
 function aggregateNeedsCandidateExplanations(aggregate: unknown): boolean {
   if (!isRecord(aggregate)) return false;
   const acceptedEventCount = typeof aggregate.accepted_event_count === "number" ? aggregate.accepted_event_count : 0;
@@ -715,6 +793,7 @@ function buildChecks(
   externalAggregate: OptionalJsonRead,
   externalCandidateExplanationsFilepath: string,
   externalCandidateExplanations: OptionalJsonRead,
+  externalTrendWindow: ExternalDiscussionTrendWindowReadResult,
 ): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
@@ -725,6 +804,7 @@ function buildChecks(
     ...projectSearchContractChecks(summary, report),
     ...externalAggregateContractChecks(externalAggregateFilepath, externalAggregate),
     ...externalCandidateExplanationContractChecks(externalCandidateExplanationsFilepath, externalAggregate, externalCandidateExplanations),
+    ...externalTrendWindowContractChecks(summary, externalTrendWindow),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
@@ -758,6 +838,7 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const report = readJsonFile<DailyReport | null>(reportPath, null);
   const externalAggregate = readOptionalJson(externalAggregateFilepath);
   const externalCandidateExplanations = readOptionalJson(externalCandidateExplanationsFilepath);
+  const externalTrendWindow = readExternalDiscussionTrendWindowByDate(date);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
@@ -772,6 +853,7 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
     externalAggregate,
     externalCandidateExplanationsFilepath,
     externalCandidateExplanations,
+    externalTrendWindow,
   );
   return {
     date,

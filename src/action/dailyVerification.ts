@@ -5,6 +5,7 @@ import { assertPublicSafeAggregate, assertPublicSafeTrendWindow } from "../exter
 import { assertPublicSafeCandidateExplanations } from "../externalDiscovery/explanationRedaction.ts";
 import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
 import { readExternalDiscussionTrendWindowByDate, type ExternalDiscussionTrendWindowReadResult } from "../externalDiscovery/trendWindowIntegration.ts";
+import { isExternalPlatform } from "../externalDiscovery/types.ts";
 import { readJsonFile } from "../storage/files.ts";
 import type {
   DailyReport,
@@ -851,10 +852,6 @@ function inspectPublicActorAudit(value: unknown, prefix: string): string[] {
     if (typeof audit.event_count !== "number" || audit.event_count <= 0) issues.push(`${auditPrefix}.event_count invalid`);
   });
   return issues;
-}
-
-function isExternalPlatform(value: unknown): boolean {
-  return value === "x_twitter" || value === "reddit" || value === "hacker_news" || value === "official_web" || value === "official_blog";
 }
 
 function isExternalActorType(value: unknown): boolean {

@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { isExternalPlatform } from "./types.ts";
 
 export const REDACTION_POLICY_VERSION = "external-discovery-redaction.v1";
 
@@ -155,7 +156,7 @@ function inspectPublicActors(value: unknown): string[] {
       reasonCodes.push("public_actor_official_or_project_head_invalid");
     }
     if (typeof actor.event_count !== "number" || actor.event_count <= 0) reasonCodes.push("public_actor_event_count_invalid");
-    if (!Array.isArray(actor.platforms) || actor.platforms.some((platform) => !isPlatform(platform))) {
+    if (!Array.isArray(actor.platforms) || actor.platforms.some((platform) => !isExternalPlatform(platform))) {
       reasonCodes.push("public_actor_platforms_invalid");
     }
     if (typeof actor.first_seen_at !== "string" || actor.first_seen_at.length === 0) reasonCodes.push("public_actor_first_seen_missing");
@@ -175,7 +176,7 @@ function inspectPublicActorAudit(value: unknown): string[] {
     }
     const extraKeys = Object.keys(audit).filter((key) => !["platform", "status", "reason", "event_count"].includes(key));
     if (extraKeys.length > 0) reasonCodes.push("public_actor_audit_extra_keys");
-    if (!isPlatform(audit.platform)) reasonCodes.push("public_actor_audit_platform_invalid");
+    if (!isExternalPlatform(audit.platform)) reasonCodes.push("public_actor_audit_platform_invalid");
     if (!isIdentityStatus(audit.status)) reasonCodes.push("public_actor_audit_status_invalid");
     if (!isIdentityReason(audit.reason)) reasonCodes.push("public_actor_audit_reason_invalid");
     if (audit.status === "available" && audit.reason !== "actor_public_identity_available") {
@@ -189,10 +190,6 @@ function inspectPublicActorAudit(value: unknown): string[] {
     }
   }
   return reasonCodes;
-}
-
-function isPlatform(value: unknown): boolean {
-  return value === "x_twitter" || value === "reddit" || value === "hacker_news" || value === "official_web" || value === "official_blog";
 }
 
 function isActorType(value: unknown): boolean {

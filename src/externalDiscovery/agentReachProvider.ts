@@ -4,6 +4,7 @@ import { applyEntityRegistry, readEntityRegistryWithWarnings, type ExternalEntit
 import { externalEntityRegistryPath } from "./paths.ts";
 import { publicActorIdentityForEvent } from "./publicActors.ts";
 import { stableSourceInputHash } from "./redaction.ts";
+import { isExternalPlatform } from "./types.ts";
 import type {
   AgentReachProviderReadResult,
   ExternalCandidateExplanationTitleContext,
@@ -415,10 +416,6 @@ function validateTopLevelContract(value: Record<string, unknown>):
     return { ok: false, reason_code: "items_invalid" };
   }
   return { ok: true };
-}
-
-function isExternalPlatform(value: unknown): value is ExternalPlatform {
-  return value === "x_twitter" || value === "reddit" || value === "hacker_news" || value === "official_web" || value === "official_blog";
 }
 
 function isProviderStatus(value: unknown): value is ExternalProviderStatus {

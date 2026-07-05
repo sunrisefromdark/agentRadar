@@ -114,6 +114,10 @@ export const EXTERNAL_TREND_COMPONENT_NAMES = [
   "noise_risk",
 ] as const;
 
+export function isExternalPlatform(value: unknown): value is ExternalPlatform {
+  return EXTERNAL_PLATFORMS.includes(value as ExternalPlatform);
+}
+
 export interface ExternalSignalActor {
   actor_type: ExternalActorType;
   effective_tier: ExternalActorTier;

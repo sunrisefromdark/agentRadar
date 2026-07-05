@@ -282,4 +282,55 @@ describe("external discovery daily verification contract", () => {
     expect(check?.status).toBe("fail");
     expect(check?.detail).toContain("aggregate_source_input_hash does not match");
   });
+
+  it("fails persisted aggregates with invalid public actor audit reason", () => {
+    const root = setupWorkspace();
+    const aggregate = makeExternalAggregate();
+    const firstEvidence = (aggregate.project_evidence as Record<string, unknown>[])[0]!;
+    firstEvidence.public_actor_audit = [
+      {
+        platform: "x_twitter",
+        status: "missing",
+        reason: "actor_public_identity_available",
+        event_count: 1,
+      },
+    ];
+    writeDailyInputs(root, aggregate, makeCandidateExplanations());
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_discovery_aggregate_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("non-available status must not use actor_public_identity_available");
+  });
+
+  it("fails persisted aggregates that mark project owners as head discussion actors", () => {
+    const root = setupWorkspace();
+    const aggregate = makeExternalAggregate();
+    const firstEvidence = (aggregate.project_evidence as Record<string, unknown>[])[0]!;
+    firstEvidence.public_actors = [
+      {
+        public_actor_id: "github:anthropics",
+        display_name: "GitHub anthropics",
+        actor_type: "team",
+        actor_role: "project_owner",
+        authority_tier: "core",
+        tier_basis: "provider_hint",
+        is_head_actor: true,
+        source_kind: "github_owner",
+        source_basis: "target_official_url",
+        event_count: 1,
+        platforms: ["official_web"],
+        first_seen_at: "2026-06-30T00:00:00.000Z",
+        last_seen_at: "2026-06-30T00:00:00.000Z",
+      },
+    ];
+    writeDailyInputs(root, aggregate, makeCandidateExplanations());
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_discovery_aggregate_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("official/project sources cannot be head discussion actors");
+  });
 });

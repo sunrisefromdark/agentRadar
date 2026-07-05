@@ -10,6 +10,28 @@ export type ExternalProviderTierHint = "core" | "proven" | "watch" | "ordinary" 
 export type ExternalEvidenceScope = "project" | "direction";
 export type ExternalTierBasis = "registry" | "provider_hint" | "none";
 export type ExternalNamedActorSourceRole = "social_discussant" | "official_publisher" | "official_owner";
+export type ExternalPublicActorRole =
+  | "discussion_actor"
+  | "community_source"
+  | "official_publisher"
+  | "project_owner"
+  | "registry_entity";
+export type ExternalPublicActorSourceBasis =
+  | "registry_match"
+  | "explicit_actor_field"
+  | "source_url_path"
+  | "official_source_url"
+  | "target_official_url";
+export type ExternalPublicActorAuthorityTier = "core" | "proven" | "watch" | "ordinary" | "unknown";
+export type ExternalPublicActorTierBasis = "registry_match" | "provider_hint" | "none";
+export type ExternalPublicActorIdentityStatus = "available" | "missing" | "invalid_reserved_path" | "redacted";
+export type ExternalPublicActorIdentityReason =
+  | "actor_public_identity_available"
+  | "actor_public_identity_missing"
+  | "x_reserved_or_indirect_url"
+  | "official_source_url_missing"
+  | "registry_entity_not_matched"
+  | "redacted_for_public_safety";
 export type ExternalTrendWindowStatus = "ok" | "partial" | "failed" | "insufficient" | "skipped";
 export type ExternalTrendWindowReadStatus =
   | "ok"
@@ -41,6 +63,41 @@ export const EXTERNAL_TARGET_TYPES = ["project", "paper", "product", "topic"] as
 export const EXTERNAL_ACTOR_TYPES = ["institution", "team", "person", "community", "unknown"] as const;
 export const EXTERNAL_REGISTRY_TIERS = ["core", "proven", "watch"] as const;
 export const EXTERNAL_NAMED_ACTOR_SOURCE_ROLES = ["social_discussant", "official_publisher", "official_owner"] as const;
+export const EXTERNAL_PUBLIC_ACTOR_ROLES = [
+  "discussion_actor",
+  "community_source",
+  "official_publisher",
+  "project_owner",
+  "registry_entity",
+] as const;
+export const EXTERNAL_PUBLIC_ACTOR_SOURCE_KINDS = [
+  "registry_entity",
+  "x_handle",
+  "reddit_community",
+  "reddit_user",
+  "hn_user",
+  "github_owner",
+  "official_domain",
+  "provider_actor",
+] as const;
+export const EXTERNAL_PUBLIC_ACTOR_SOURCE_BASES = [
+  "registry_match",
+  "explicit_actor_field",
+  "source_url_path",
+  "official_source_url",
+  "target_official_url",
+] as const;
+export const EXTERNAL_PUBLIC_ACTOR_AUTHORITY_TIERS = ["core", "proven", "watch", "ordinary", "unknown"] as const;
+export const EXTERNAL_PUBLIC_ACTOR_TIER_BASES = ["registry_match", "provider_hint", "none"] as const;
+export const EXTERNAL_PUBLIC_ACTOR_IDENTITY_STATUSES = ["available", "missing", "invalid_reserved_path", "redacted"] as const;
+export const EXTERNAL_PUBLIC_ACTOR_IDENTITY_REASONS = [
+  "actor_public_identity_available",
+  "actor_public_identity_missing",
+  "x_reserved_or_indirect_url",
+  "official_source_url_missing",
+  "registry_entity_not_matched",
+  "redacted_for_public_safety",
+] as const;
 export const EXTERNAL_TREND_WINDOW_READ_STATUSES = ["ok", "not_found", "parse_error", "partial", "insufficient", "failed", "skipped"] as const;
 export const EXTERNAL_WEEKLY_GATE_REASONS = [
   "cross_platform_confirmation",
@@ -65,6 +122,12 @@ export interface ExternalSignalActor {
   identity_hash?: string;
   display_name?: string;
   handle?: string;
+  author?: string;
+  username?: string;
+  user?: string;
+  subreddit?: string;
+  community?: string;
+  hn_user?: string;
   platform_profile_url?: string;
   provider_tier_hint?: ExternalProviderTierHint;
   registry_entity_id?: string;
@@ -86,9 +149,14 @@ export interface ExternalSignalEvent {
   source_published_at?: string;
   ingested_at?: string;
   url?: string;
+  source_url?: string;
+  permalink?: string;
+  discussion_url?: string;
   target_url?: string;
   target_repo_url?: string;
   raw_ref?: string;
+  actor_public_identity_status?: ExternalPublicActorIdentityStatus;
+  actor_public_identity_reason?: ExternalPublicActorIdentityReason;
 }
 
 export interface ExternalNamedRegistryActor {
@@ -103,6 +171,39 @@ export interface ExternalNamedRegistryActor {
   last_seen_at: string;
 }
 
+export type ExternalPublicActorSourceKind =
+  | "registry_entity"
+  | "x_handle"
+  | "reddit_community"
+  | "reddit_user"
+  | "hn_user"
+  | "github_owner"
+  | "official_domain"
+  | "provider_actor";
+
+export interface ExternalPublicActor {
+  public_actor_id: string;
+  display_name: string;
+  actor_type: ExternalActorType;
+  actor_role: ExternalPublicActorRole;
+  authority_tier?: ExternalPublicActorAuthorityTier;
+  tier_basis: ExternalPublicActorTierBasis;
+  is_head_actor: boolean;
+  source_kind: ExternalPublicActorSourceKind;
+  source_basis: ExternalPublicActorSourceBasis;
+  event_count: number;
+  platforms: ExternalPlatform[];
+  first_seen_at: string;
+  last_seen_at: string;
+}
+
+export interface ExternalPublicActorAudit {
+  platform: ExternalPlatform;
+  status: ExternalPublicActorIdentityStatus;
+  reason: ExternalPublicActorIdentityReason;
+  event_count: number;
+}
+
 export interface ExternalEvidence {
   evidence_id: string;
   event_ids: string[];
@@ -111,6 +212,8 @@ export interface ExternalEvidence {
   derived_signal_kinds: ExternalSignalKind[];
   platforms: ExternalPlatform[];
   named_registry_actors: ExternalNamedRegistryActor[];
+  public_actors?: ExternalPublicActor[];
+  public_actor_audit?: ExternalPublicActorAudit[];
   actor_tiers: Partial<Record<ExternalActorTier, number>>;
   actor_types: Partial<Record<ExternalActorType, number>>;
   mention_count: number;

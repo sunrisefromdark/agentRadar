@@ -701,6 +701,7 @@ function inspectExternalAggregateContract(value: unknown): {
           issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}].source_roles has invalid roles`);
         }
       });
+      issues.push(...inspectPublicActorContract(evidence, `${sectionName}[${evidenceIndex}]`));
     });
   }
 
@@ -720,6 +721,135 @@ function evidenceArray(value: unknown, name: string, issues: string[]): unknown[
 
 function isNamedActorSourceRole(value: unknown): boolean {
   return value === "social_discussant" || value === "official_publisher" || value === "official_owner";
+}
+
+function inspectPublicActorContract(evidence: Record<string, unknown>, prefix: string): string[] {
+  return [
+    ...inspectPublicActors(evidence.public_actors, `${prefix}.public_actors`),
+    ...inspectPublicActorAudit(evidence.public_actor_audit, `${prefix}.public_actor_audit`),
+  ];
+}
+
+function inspectPublicActors(value: unknown, prefix: string): string[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return [`${prefix} must be an array`];
+  const issues: string[] = [];
+  value.forEach((actor, index) => {
+    const actorPrefix = `${prefix}[${index}]`;
+    if (!isRecord(actor)) {
+      issues.push(`${actorPrefix} must be an object`);
+      return;
+    }
+    if (typeof actor.public_actor_id !== "string" || actor.public_actor_id.length === 0) {
+      issues.push(`${actorPrefix}.public_actor_id missing`);
+    } else if (/^https?:\/\//i.test(actor.public_actor_id) || /[?#\s\u0000-\u001F\u007F]/.test(actor.public_actor_id)) {
+      issues.push(`${actorPrefix}.public_actor_id must be a safe non-URL id`);
+    }
+    if (typeof actor.display_name !== "string" || actor.display_name.length === 0) {
+      issues.push(`${actorPrefix}.display_name missing`);
+    } else if (
+      actor.display_name.length > 80 ||
+      /https?:\/\//i.test(actor.display_name) ||
+      /[\u0000-\u001F\u007F]/.test(actor.display_name) ||
+      /\b(cookie|session|oauth|bearer|token|api[_ -]?key|password)\b/i.test(actor.display_name)
+    ) {
+      issues.push(`${actorPrefix}.display_name must be public-safe`);
+    }
+    if (!isExternalActorType(actor.actor_type)) issues.push(`${actorPrefix}.actor_type invalid`);
+    if (!isPublicActorRole(actor.actor_role)) issues.push(`${actorPrefix}.actor_role invalid`);
+    if (!isPublicActorSourceKind(actor.source_kind)) issues.push(`${actorPrefix}.source_kind invalid`);
+    if (!isPublicActorSourceBasis(actor.source_basis)) issues.push(`${actorPrefix}.source_basis invalid`);
+    if (!isPublicActorTierBasis(actor.tier_basis)) issues.push(`${actorPrefix}.tier_basis invalid`);
+    if (actor.authority_tier !== undefined && !isPublicActorAuthorityTier(actor.authority_tier)) {
+      issues.push(`${actorPrefix}.authority_tier invalid`);
+    }
+    if (typeof actor.is_head_actor !== "boolean") {
+      issues.push(`${actorPrefix}.is_head_actor must be boolean`);
+    }
+    if (actor.is_head_actor === true && actor.tier_basis !== "registry_match") {
+      issues.push(`${actorPrefix}.is_head_actor requires registry_match tier_basis`);
+    }
+    if (actor.is_head_actor === true && actor.actor_role !== "registry_entity") {
+      issues.push(`${actorPrefix}.is_head_actor requires registry_entity role`);
+    }
+    if ((actor.actor_role === "official_publisher" || actor.actor_role === "project_owner") && actor.is_head_actor === true) {
+      issues.push(`${actorPrefix}.official/project sources cannot be head discussion actors`);
+    }
+    if (typeof actor.event_count !== "number" || actor.event_count <= 0) issues.push(`${actorPrefix}.event_count invalid`);
+    if (!Array.isArray(actor.platforms) || actor.platforms.some((platform) => !isExternalPlatform(platform))) {
+      issues.push(`${actorPrefix}.platforms invalid`);
+    }
+  });
+  return issues;
+}
+
+function inspectPublicActorAudit(value: unknown, prefix: string): string[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return [`${prefix} must be an array`];
+  const issues: string[] = [];
+  value.forEach((audit, index) => {
+    const auditPrefix = `${prefix}[${index}]`;
+    if (!isRecord(audit)) {
+      issues.push(`${auditPrefix} must be an object`);
+      return;
+    }
+    const extraKeys = Object.keys(audit).filter((key) => !["platform", "status", "reason", "event_count"].includes(key));
+    if (extraKeys.length > 0) issues.push(`${auditPrefix} must not contain raw or extra fields`);
+    if (!isExternalPlatform(audit.platform)) issues.push(`${auditPrefix}.platform invalid`);
+    if (!isIdentityStatus(audit.status)) issues.push(`${auditPrefix}.status invalid`);
+    if (!isIdentityReason(audit.reason)) issues.push(`${auditPrefix}.reason invalid`);
+    if (audit.status === "available" && audit.reason !== "actor_public_identity_available") {
+      issues.push(`${auditPrefix}.available status must use actor_public_identity_available`);
+    }
+    if (audit.status !== "available" && audit.reason === "actor_public_identity_available") {
+      issues.push(`${auditPrefix}.non-available status must not use actor_public_identity_available`);
+    }
+    if (typeof audit.event_count !== "number" || audit.event_count <= 0) issues.push(`${auditPrefix}.event_count invalid`);
+  });
+  return issues;
+}
+
+function isExternalPlatform(value: unknown): boolean {
+  return value === "x_twitter" || value === "reddit" || value === "hacker_news" || value === "official_web" || value === "official_blog";
+}
+
+function isExternalActorType(value: unknown): boolean {
+  return value === "institution" || value === "team" || value === "person" || value === "community" || value === "unknown";
+}
+
+function isPublicActorRole(value: unknown): boolean {
+  return value === "discussion_actor" || value === "community_source" || value === "official_publisher" || value === "project_owner" || value === "registry_entity";
+}
+
+function isPublicActorSourceKind(value: unknown): boolean {
+  return value === "registry_entity" || value === "x_handle" || value === "reddit_community" || value === "reddit_user" || value === "hn_user" || value === "github_owner" || value === "official_domain" || value === "provider_actor";
+}
+
+function isPublicActorSourceBasis(value: unknown): boolean {
+  return value === "registry_match" || value === "explicit_actor_field" || value === "source_url_path" || value === "official_source_url" || value === "target_official_url";
+}
+
+function isPublicActorTierBasis(value: unknown): boolean {
+  return value === "registry_match" || value === "provider_hint" || value === "none";
+}
+
+function isPublicActorAuthorityTier(value: unknown): boolean {
+  return value === "core" || value === "proven" || value === "watch" || value === "ordinary" || value === "unknown";
+}
+
+function isIdentityStatus(value: unknown): boolean {
+  return value === "available" || value === "missing" || value === "invalid_reserved_path" || value === "redacted";
+}
+
+function isIdentityReason(value: unknown): boolean {
+  return (
+    value === "actor_public_identity_available" ||
+    value === "actor_public_identity_missing" ||
+    value === "x_reserved_or_indirect_url" ||
+    value === "official_source_url_missing" ||
+    value === "registry_entity_not_matched" ||
+    value === "redacted_for_public_safety"
+  );
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

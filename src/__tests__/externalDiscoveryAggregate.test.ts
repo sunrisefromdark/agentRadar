@@ -89,6 +89,63 @@ describe("external discovery aggregate", () => {
     expect(evidence.actor_types).toMatchObject({ person: 1 });
   });
 
+  it("publishes public actors only when they are explicit provider fields or URL-derived sources", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "evt-x",
+          platform: "x_twitter",
+          url: "https://x.com/openai/status/1",
+          actor: {
+            actor_type: "institution",
+            effective_tier: "proven",
+            tier_basis: "provider_hint",
+            handle: "openai",
+          },
+        }),
+        event({
+          event_id: "evt-reddit",
+          platform: "reddit",
+          url: "https://www.reddit.com/r/LocalLLaMA/comments/abc/project_discussion/",
+          actor: {
+            actor_type: "community",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+          },
+          observed_at: "2026-06-30T02:00:00.000Z",
+        }),
+        event({
+          event_id: "evt-github",
+          platform: "official_web",
+          raw_event_kind: "official_release",
+          url: "https://github.com/anthropics/claude-code/releases/tag/v1",
+          target_repo_url: "https://github.com/anthropics/claude-code",
+          actor: {
+            actor_type: "team",
+            effective_tier: "watch",
+            tier_basis: "none",
+          },
+          observed_at: "2026-06-30T03:00:00.000Z",
+        }),
+      ],
+    });
+
+    const evidence = aggregate.project_evidence[0]!;
+    expect((evidence.public_actors ?? []).map((actor) => ({
+      id: actor.public_actor_id,
+      name: actor.display_name,
+      kind: actor.source_kind,
+      platforms: actor.platforms,
+    }))).toEqual(expect.arrayContaining([
+      { id: "github:anthropics", name: "GitHub anthropics", kind: "github_owner", platforms: ["official_web"] },
+      { id: "reddit:r:localllama", name: "r/LocalLLaMA", kind: "reddit_community", platforms: ["reddit"] },
+      { id: "x:openai", name: "@openai", kind: "x_handle", platforms: ["x_twitter"] },
+    ]));
+    expect(JSON.stringify(evidence.public_actors ?? [])).not.toContain("x.com/openai");
+  });
+
   it("sorts named registry actors by tier, count, then name", () => {
     const aggregate = buildDailyExternalAggregate({
       date: "2026-06-30",

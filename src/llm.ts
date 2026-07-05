@@ -3,12 +3,14 @@ import {
   createProvider,
   formatProviderError,
   isRetryableProviderError,
+  ProviderCallError,
   type LlmProvider,
 } from "./providers/index.ts";
 
 export const LLM_TOKENS_CLASSIFICATION = 1024;
 
 const DEFAULT_LLM_CONCURRENCY = 2;
+const DEFAULT_LLM_CALL_TIMEOUT_MS = 120_000;
 const DEFAULT_LLM_MAX_RETRIES = 1;
 const DEFAULT_LLM_RETRY_BASE_MS = 1000;
 const REDACTED_SECRET = "[REDACTED_SECRET]";
@@ -132,6 +134,30 @@ function releaseSlot(): void {
   }
 }
 
+function withLlmTimeout<T>(operation: Promise<T>, providerName: string, timeoutMs: number): Promise<T> {
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  const timeoutPromise = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(() => {
+      reject(
+        new ProviderCallError(`Provider timeout for ${providerName}`, {
+          providerName,
+          kind: "timeout",
+          retryable: true,
+          code: "LLM_CALL_TIMEOUT",
+        }),
+      );
+    }, timeoutMs);
+  });
+
+  return Promise.race([operation, timeoutPromise]).finally(() => {
+    if (timeout) clearTimeout(timeout);
+  });
+}
+
+function shouldLogLlmProgress(): boolean {
+  return process.env["LLM_DEBUG_PROGRESS"] === "1";
+}
+
 /**
  * LLM 调用层只消费 provider 归一化后的错误语义。
  * 这样重试策略不再依赖 SDK 原始字符串细节，后续接更多 provider 也能复用。
@@ -141,16 +167,40 @@ export async function callLlm(
   opts: { providerName?: string; maxTokens?: number; maxRetries?: number; retryBaseMs?: number } = {},
 ): Promise<string> {
   const provider = resolveProvider(opts.providerName);
-  const sanitizedPrompt = sanitizePromptForLlm(prompt).prompt;
+  if (shouldLogLlmProgress()) {
+    console.error(`[llm] preparing provider=${provider.name} prompt_chars=${prompt.length}`);
+  }
+  const sanitizeStartedAt = Date.now();
+  const sanitized = sanitizePromptForLlm(prompt);
+  const sanitizedPrompt = sanitized.prompt;
   const maxTokens = opts.maxTokens ?? LLM_TOKENS_CLASSIFICATION;
+  const callTimeoutMs = readPositiveInt(
+    process.env["LLM_CALL_TIMEOUT_MS"] ?? process.env["LLM_PROVIDER_TIMEOUT_MS"] ?? process.env["LLM_TIMEOUT_MS"],
+    DEFAULT_LLM_CALL_TIMEOUT_MS,
+  );
   const maxRetries = opts.maxRetries ?? readPositiveInt(process.env["LLM_MAX_RETRIES"], DEFAULT_LLM_MAX_RETRIES);
   const retryBaseMs = opts.retryBaseMs ?? readPositiveInt(process.env["LLM_RETRY_BASE_MS"], DEFAULT_LLM_RETRY_BASE_MS);
+  if (shouldLogLlmProgress()) {
+    console.error(
+      `[llm] sanitized provider=${provider.name} prompt_chars=${sanitizedPrompt.length} redactions=${sanitized.redactionCount} elapsed_ms=${Date.now() - sanitizeStartedAt}`,
+    );
+  }
 
   for (let attempt = 0; ; attempt++) {
     await acquireSlot();
     let released = false;
     try {
-      return await provider.call(sanitizedPrompt, maxTokens);
+      if (shouldLogLlmProgress()) {
+        console.error(
+          `[llm] call start provider=${provider.name} attempt=${attempt + 1} max_tokens=${maxTokens} timeout_ms=${callTimeoutMs}`,
+        );
+      }
+      const callStartedAt = Date.now();
+      const response = await withLlmTimeout(provider.call(sanitizedPrompt, maxTokens), provider.name, callTimeoutMs);
+      if (shouldLogLlmProgress()) {
+        console.error(`[llm] call done provider=${provider.name} elapsed_ms=${Date.now() - callStartedAt}`);
+      }
+      return response;
     } catch (err) {
       if (attempt < maxRetries && isRetryableProviderError(err)) {
         releaseSlot();

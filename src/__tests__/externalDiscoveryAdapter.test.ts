@@ -433,6 +433,87 @@ describe("agent reach provider artifact adapter", () => {
     expect(result.rejected_events[0]?.reason_code).toBe("event_schema_invalid");
   });
 
+  it("preserves public actor aliases and canonical identity status", () => {
+    const filepath = tempFile("agent-reach-public-actor-aliases.json");
+    fs.writeFileSync(
+      filepath,
+      JSON.stringify({
+        provider: "agent-reach",
+        schema_version: "agent-reach.external-discovery.v1",
+        provider_run_id: "run-public-actor-aliases",
+        generated_at: "2026-07-05T00:00:00.000Z",
+        query: { keyword: "agents sdk" },
+        platforms: ["reddit"],
+        status: "ok",
+        items: [
+          {
+            event_id: "evt-reddit-aliases",
+            platform: "reddit",
+            raw_event_kind: "discussion",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: {
+              actor_type: "community",
+              username: "agentbuilder",
+              subreddit: "LocalLLaMA",
+            },
+            observed_at: "2026-07-05T00:00:00.000Z",
+            source_url: "https://www.reddit.com/r/LocalLLaMA/comments/abc/project_discussion/",
+          },
+        ],
+      }),
+      "utf-8",
+    );
+
+    const result = readAgentReachProviderArtifact(filepath, { explicitInput: true });
+    const event = result.events[0]!;
+
+    expect(event.url).toBe("https://www.reddit.com/r/LocalLLaMA/comments/abc/project_discussion/");
+    expect(event.source_url).toBe("https://www.reddit.com/r/LocalLLaMA/comments/abc/project_discussion/");
+    expect(event.actor.username).toBe("agentbuilder");
+    expect(event.actor.subreddit).toBe("LocalLLaMA");
+    expect(event.actor_public_identity_status).toBe("available");
+    expect(event.actor_public_identity_reason).toBe("actor_public_identity_available");
+  });
+
+  it("marks reserved X status URLs as invalid public identity inputs", () => {
+    const filepath = tempFile("agent-reach-reserved-x-url.json");
+    fs.writeFileSync(
+      filepath,
+      JSON.stringify({
+        provider: "agent-reach",
+        schema_version: "agent-reach.external-discovery.v1",
+        provider_run_id: "run-reserved-x-url",
+        generated_at: "2026-07-05T00:00:00.000Z",
+        query: { keyword: "agents sdk" },
+        platforms: ["x_twitter"],
+        status: "ok",
+        items: [
+          {
+            event_id: "evt-reserved-x-url",
+            platform: "x_twitter",
+            raw_event_kind: "discussion",
+            derived_signal_kinds: ["evidence"],
+            scope: "project",
+            target_type: "project",
+            target_key: "openai/agents-sdk",
+            actor: { actor_type: "unknown" },
+            observed_at: "2026-07-05T00:00:00.000Z",
+            url: "https://x.com/i/status/123",
+          },
+        ],
+      }),
+      "utf-8",
+    );
+
+    const result = readAgentReachProviderArtifact(filepath, { explicitInput: true });
+
+    expect(result.events[0]?.actor_public_identity_status).toBe("invalid_reserved_path");
+    expect(result.events[0]?.actor_public_identity_reason).toBe("x_reserved_or_indirect_url");
+  });
+
   it("fails ok artifacts that miss required top-level audit fields", () => {
     const filepath = tempFile("agent-reach-missing-audit.json");
     fs.writeFileSync(

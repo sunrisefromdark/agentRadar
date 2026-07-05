@@ -16,6 +16,7 @@ export type ExternalCandidateExplanationStatus = "ok" | "partial" | "skipped" | 
 export type ExternalCandidateExplanationScope = "bound_object" | "direction_signal" | "external_evidence_boost";
 export type ExternalCandidateExplanationConfidence = "high" | "medium" | "low";
 export type ExternalCandidateExplanationSource = "llm" | "rules_fallback" | "existing_project_brief";
+type CandidateExplanationSelectionBucket = "project_evidence" | "new_discovery" | "direction_signal" | "official_signal";
 
 export interface CandidateExplanationInput {
   candidate_key: string;
@@ -117,8 +118,21 @@ type LlmExplanationDraft = {
 };
 
 const POLICY_VERSION = "candidate-explanations.v1";
-const DEFAULT_TOP_N = 30;
+const DEFAULT_TOP_N = 50;
 const ENHANCED_COVERAGE_THRESHOLD = 0.7;
+const QUOTA_BASE_TOTAL = 50;
+const DEFAULT_SELECTION_QUOTAS: Record<CandidateExplanationSelectionBucket, number> = {
+  project_evidence: 16,
+  new_discovery: 16,
+  direction_signal: 12,
+  official_signal: 6,
+};
+const SELECTION_BUCKET_ORDER: CandidateExplanationSelectionBucket[] = ["project_evidence", "new_discovery", "direction_signal", "official_signal"];
+const OFFICIAL_PLATFORMS = new Set<ExternalPlatform>(["official_web", "official_blog"]);
+const textUrlPattern = /https?:\/\/\S+/gi;
+const markdownLinkPattern = /\[([^\]]+)\]\([^)]+\)/g;
+const rawHandlePattern = /(^|\s)@[\w.-]{2,}/g;
+const sensitiveTermPattern = /\b(cookie|session|oauth|bearer|token|api[_ -]?key|password)\b/gi;
 
 const platformNames: Record<ExternalPlatform, string> = {
   x_twitter: "X",
@@ -142,17 +156,17 @@ export function buildCandidateExplanationInputs(args: BuildInputsArgs): Candidat
     const evidenceIds = unique(evidenceRows.map((evidence) => evidence.evidence_id)).sort();
     const platforms = unique(evidenceRows.flatMap((evidence) => evidence.platforms)).sort() as ExternalPlatform[];
     const scored = findScoredProject(scoredProjects, candidate.target_key);
-    const projectBrief = findProjectBrief(projectBriefs, candidate.target_key, scored?.project.repo_full_name);
+    const projectBrief = cleanPublicText(findProjectBrief(projectBriefs, candidate.target_key, scored?.project.repo_full_name));
     const repoUrl = scored?.project.repo_url ?? repoUrlFromTargetKey(candidate.target_key);
-    const repoDescription = scored?.project.description?.trim() || undefined;
+    const repoDescription = cleanPublicText(scored?.project.description);
     const targetUrl = candidate.target_key.startsWith("http") ? candidate.target_key : repoUrl;
-    const publicEvidenceTitles = unique(titleRows.map((item) => item.public_evidence_title).filter(isNonEmptyString)).slice(0, 5);
-    const publicSourceTitles = unique(titleRows.map((item) => item.public_source_title).filter(isNonEmptyString)).slice(0, 5);
+    const publicEvidenceTitles = unique(titleRows.map((item) => cleanPublicText(item.public_evidence_title)).filter(isNonEmptyString)).slice(0, 5);
+    const publicSourceTitles = unique(titleRows.map((item) => cleanPublicText(item.public_source_title)).filter(isNonEmptyString)).slice(0, 5);
     const targetDisplayName = firstNonEmpty([
       ...titleRows.map((item) => item.target_display_name),
       scored?.project.project_name,
       displayNameFromTargetKey(candidate.target_key),
-    ]);
+    ].map((item) => cleanPublicText(item)));
     const explanationScope = explanationScopeFor(candidate, evidenceRows, Boolean(repoUrl || projectBrief));
     const inputWarnings = inputWarningsFor({
       projectBrief,
@@ -173,7 +187,7 @@ export function buildCandidateExplanationInputs(args: BuildInputsArgs): Candidat
       candidate_key: `${candidate.candidate_kind}:${candidate.target_key}`,
       candidate_kind: candidate.candidate_kind,
       target_key: candidate.target_key,
-      display_name: targetDisplayName ?? candidate.target_key,
+      display_name: targetDisplayName ?? safeDisplayNameFromTargetKey(candidate.target_key),
       explanation_scope: explanationScope,
       target_url: targetUrl,
       repo_url: repoUrl,
@@ -182,14 +196,14 @@ export function buildCandidateExplanationInputs(args: BuildInputsArgs): Candidat
       repo_description: repoDescription,
       public_evidence_titles: publicEvidenceTitles,
       public_source_titles: publicSourceTitles,
-      evidence_reason_facts: evidenceReasonFacts(candidate, evidenceRows),
+      evidence_reason_facts: evidenceReasonFacts(candidate, evidenceRows).map((item) => cleanPublicText(item)).filter(isNonEmptyString),
       evidence_ids: evidenceIds,
       platforms,
       mention_count: sum(evidenceRows.map((evidence) => evidence.mention_count)),
       distinct_actor_count: sum(evidenceRows.map((evidence) => evidence.distinct_actor_count)),
       top_tier_actor_count: sum(evidenceRows.map((evidence) => evidence.top_tier_actor_count)),
       named_registry_actor_names: unique(
-        evidenceRows.flatMap((evidence) => evidence.named_registry_actors.map((actor) => actor.display_name)),
+        evidenceRows.flatMap((evidence) => evidence.named_registry_actors.map((actor) => cleanPublicText(actor.display_name)).filter(isNonEmptyString)),
       ).slice(0, 8),
       can_enter_daily: candidate.can_enter_daily,
       can_enter_weekly: candidate.can_enter_weekly,
@@ -207,7 +221,7 @@ export function buildCandidateExplanationInputs(args: BuildInputsArgs): Candidat
     };
   });
 
-  const sortedInputs = sortInputs(inputs).slice(0, Math.max(1, args.topN ?? DEFAULT_TOP_N));
+  const sortedInputs = selectInputsWithQuotas(inputs, Math.max(1, args.topN ?? DEFAULT_TOP_N));
   const redaction = assertPublicSafeCandidateExplanationInputs(sortedInputs);
   if (!redaction.ok) {
     warnings.push({
@@ -300,9 +314,9 @@ export async function generateExternalCandidateExplanations(args: GenerateArgs):
   }
 
   const fallback = [...fallbackInputs.values()].map((input) => rulesFallbackExplanation(input, args.generatedAt));
-  const explanations = [...existing, ...llmExplanations, ...fallback].sort((left, right) =>
-    left.candidate_key.localeCompare(right.candidate_key),
-  );
+  const deduped = dedupeEnhancedSummaries([...existing, ...llmExplanations, ...fallback], inputs, args.generatedAt);
+  warnings.push(...deduped.warnings);
+  const explanations = deduped.explanations.sort((left, right) => left.candidate_key.localeCompare(right.candidate_key));
   const enhancedCount = explanations.filter((item) => item.summary_source === "llm" || item.summary_source === "existing_project_brief").length;
   const status = explanationStatus({
     enabled,
@@ -509,6 +523,39 @@ function normalizeCaveats(caveats: unknown, input: CandidateExplanationInput): s
   return unique([...fromDraft, ...caveatsFor(input)]).slice(0, 5);
 }
 
+function dedupeEnhancedSummaries(
+  explanations: ExternalCandidateExplanation[],
+  inputs: CandidateExplanationInput[],
+  generatedAt: string,
+): {
+  explanations: ExternalCandidateExplanation[];
+  warnings: Array<{ reason_code: string; reason_detail: string }>;
+} {
+  const inputByKey = new Map(inputs.map((input) => [input.candidate_key, input] as const));
+  const seen = new Set<string>();
+  const warnings: Array<{ reason_code: string; reason_detail: string }> = [];
+
+  return {
+    explanations: explanations.map((explanation) => {
+      if (explanation.summary_source === "rules_fallback") return explanation;
+      const summaryKey = normalizeSummaryText(`${explanation.what_it_is_cn}${explanation.why_watch_cn}`);
+      if (!seen.has(summaryKey)) {
+        seen.add(summaryKey);
+        return explanation;
+      }
+
+      const input = inputByKey.get(explanation.candidate_key);
+      if (!input) return explanation;
+      warnings.push({
+        reason_code: "duplicate_summary_fallback",
+        reason_detail: explanation.candidate_key,
+      });
+      return rulesFallbackExplanation(input, generatedAt);
+    }),
+    warnings,
+  };
+}
+
 function buildDraftMap(raw: unknown): Map<string, LlmExplanationDraft> {
   if (!raw || typeof raw !== "object") return new Map();
   const record = raw as Record<string, unknown>;
@@ -663,6 +710,53 @@ function evidenceReasonFacts(candidate: ObservationCandidate, evidenceRows: Exte
   return facts.filter(isNonEmptyString);
 }
 
+function selectInputsWithQuotas(inputs: CandidateExplanationInput[], limit: number): CandidateExplanationInput[] {
+  const sorted = sortInputs(inputs);
+  const quotas = quotasForLimit(limit);
+  const selected = new Map<string, CandidateExplanationInput>();
+  const selectedCounts = new Map<CandidateExplanationSelectionBucket, number>();
+
+  for (const bucket of SELECTION_BUCKET_ORDER) {
+    const quota = quotas[bucket];
+    if (quota <= 0) continue;
+    for (const input of sorted) {
+      if (selected.size >= limit) break;
+      if (selectionBucketFor(input) !== bucket || selected.has(input.candidate_key)) continue;
+      selected.set(input.candidate_key, input);
+      selectedCounts.set(bucket, (selectedCounts.get(bucket) ?? 0) + 1);
+      if ((selectedCounts.get(bucket) ?? 0) >= quota) break;
+    }
+  }
+
+  for (const input of sorted) {
+    if (selected.size >= limit) break;
+    if (!selected.has(input.candidate_key)) selected.set(input.candidate_key, input);
+  }
+
+  return sortInputs([...selected.values()]);
+}
+
+function quotasForLimit(limit: number): Record<CandidateExplanationSelectionBucket, number> {
+  return {
+    project_evidence: scaledQuota(DEFAULT_SELECTION_QUOTAS.project_evidence, limit),
+    new_discovery: scaledQuota(DEFAULT_SELECTION_QUOTAS.new_discovery, limit),
+    direction_signal: scaledQuota(DEFAULT_SELECTION_QUOTAS.direction_signal, limit),
+    official_signal: scaledQuota(DEFAULT_SELECTION_QUOTAS.official_signal, limit),
+  };
+}
+
+function scaledQuota(quota: number, limit: number): number {
+  if (limit >= QUOTA_BASE_TOTAL) return quota;
+  return Math.max(1, Math.floor((quota * limit) / QUOTA_BASE_TOTAL));
+}
+
+function selectionBucketFor(input: CandidateExplanationInput): CandidateExplanationSelectionBucket {
+  if (input.platforms.some((platform) => OFFICIAL_PLATFORMS.has(platform))) return "official_signal";
+  if (input.explanation_scope === "direction_signal") return "direction_signal";
+  if (input.explanation_scope === "external_evidence_boost") return "project_evidence";
+  return "new_discovery";
+}
+
 function sortInputs(inputs: CandidateExplanationInput[]): CandidateExplanationInput[] {
   const rank: Record<ExternalCandidateExplanationScope, number> = {
     external_evidence_boost: 0,
@@ -683,6 +777,27 @@ function sortInputs(inputs: CandidateExplanationInput[]): CandidateExplanationIn
 function trimSentence(value: string): string {
   const normalized = value.replace(/\s+/g, " ").trim();
   return normalized.length > 80 ? `${normalized.slice(0, 80)}...` : normalized;
+}
+
+function cleanPublicText(value: string | undefined): string | undefined {
+  const cleaned = value
+    ?.replace(markdownLinkPattern, "$1")
+    .replace(textUrlPattern, "")
+    .replace(rawHandlePattern, "$1")
+    .replace(sensitiveTermPattern, "credential")
+    .replace(/\s+/g, " ")
+    .replace(/\s+([,.;:!?])/g, "$1")
+    .replace(/\b(?:demo|link|url|website)\s*:\s*$/i, "")
+    .trim();
+  return cleaned || undefined;
+}
+
+function safeDisplayNameFromTargetKey(value: string): string {
+  return cleanPublicText(displayNameFromTargetKey(value)) ?? cleanPublicText(value) ?? "external object";
+}
+
+function normalizeSummaryText(value: string): string {
+  return value.replace(/\s+/g, "").replace(/[锛屻€傘€佲€溾€?'锛涳細:,.!?锛侊紵()锛堬級\-\s]/g, "").toLowerCase();
 }
 
 function firstNonEmpty(values: Array<string | undefined>): string | undefined {

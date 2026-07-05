@@ -1,4 +1,5 @@
 import { REDACTION_POLICY_VERSION, assertPublicSafeAggregate, stableSourceInputHash } from "./redaction.ts";
+import { buildPublicActorsForEvidence } from "./publicActors.ts";
 import type {
   AgentReachProviderReadResult,
   DailyExternalAggregate,
@@ -146,6 +147,7 @@ function evidenceFromEvents(events: ExternalSignalEvent[]): ExternalEvidence {
   const firstEvent = events[0];
   if (!firstEvent) throw new Error("cannot build external evidence from empty events");
   const observedTimes = events.map((event) => event.observed_at).sort();
+  const publicActors = buildPublicActorsForEvidence(events);
 
   return {
     evidence_id: `${firstEvent.scope}:${firstEvent.target_key}`,
@@ -155,6 +157,8 @@ function evidenceFromEvents(events: ExternalSignalEvent[]): ExternalEvidence {
     derived_signal_kinds: unique(events.flatMap((event) => event.derived_signal_kinds)).sort() as ExternalSignalKind[],
     platforms: unique(events.map((event) => event.platform)).sort() as ExternalPlatform[],
     named_registry_actors: buildNamedRegistryActors(events),
+    public_actors: publicActors.public_actors,
+    public_actor_audit: publicActors.public_actor_audit,
     actor_tiers: countBy(events.map((event) => event.actor.effective_tier)),
     actor_types: countBy(events.map((event) => event.actor.actor_type)),
     mention_count: events.length,

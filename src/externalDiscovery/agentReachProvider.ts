@@ -2,6 +2,7 @@ import fs from "node:fs";
 
 import { applyEntityRegistry, readEntityRegistryWithWarnings, type ExternalEntityRegistryEntry } from "./entityRegistry.ts";
 import { externalEntityRegistryPath } from "./paths.ts";
+import { publicActorIdentityForEvent } from "./publicActors.ts";
 import { stableSourceInputHash } from "./redaction.ts";
 import type {
   AgentReachProviderReadResult,
@@ -142,10 +143,18 @@ function enrichEventActor(
     target_url: event.target_url,
     target_repo_url: event.target_repo_url,
   });
+  const enrichedEvent = {
+    ...event,
+    actor: lookup.actor,
+    actor_public_identity_status: undefined,
+    actor_public_identity_reason: undefined,
+  };
+  const identity = publicActorIdentityForEvent(enrichedEvent);
   return {
     event: {
-      ...event,
-      actor: lookup.actor,
+      ...enrichedEvent,
+      actor_public_identity_status: identity.status,
+      actor_public_identity_reason: identity.reason,
     },
     warnings: lookup.warnings,
   };
@@ -167,7 +176,10 @@ function parseEvent(value: unknown):
   }
 
   const rawRef = typeof value.raw_ref === "string" ? value.raw_ref : undefined;
-  const url = typeof value.url === "string" ? value.url : undefined;
+  const sourceUrl = firstString([value.source_url]);
+  const permalink = firstString([value.permalink]);
+  const discussionUrl = firstString([value.discussion_url]);
+  const url = firstString([value.url, sourceUrl, permalink, discussionUrl]);
   const observedAt = typeof value.observed_at === "string" ? value.observed_at : undefined;
   const eventId = typeof value.event_id === "string" ? value.event_id : generatedEventId({ rawRef, url, observedAt });
   const actor = isRecord(value.actor) ? value.actor : undefined;
@@ -201,37 +213,54 @@ function parseEvent(value: unknown):
     };
   }
 
+  const canonicalEvent: ExternalSignalEvent = {
+    event_id: eventId,
+    platform: value.platform,
+    raw_event_kind: value.raw_event_kind,
+    derived_signal_kinds: value.derived_signal_kinds,
+    scope,
+    target_type: targetType,
+    target_key: targetKey,
+    actor: {
+      actor_type: isActorType(actor.actor_type) ? actor.actor_type : "unknown",
+      effective_tier: isActorTier(actor.effective_tier) ? actor.effective_tier : "unknown",
+      tier_basis: actor.tier_basis === "registry" || actor.tier_basis === "provider_hint" ? actor.tier_basis : isProviderTierHint(actor.provider_tier_hint) || isProviderTierHint(actor.tier_hint) ? "provider_hint" : "none",
+      provider_actor_id: providerActorId(actor),
+      identity_hash: identityHash(actor),
+      display_name: firstString([actor.display_name]),
+      handle: firstString([actor.handle, actor.author, actor.username, actor.user, actor.hn_user]),
+      author: firstString([actor.author, value.author]),
+      username: firstString([actor.username, value.username]),
+      user: firstString([actor.user, value.user]),
+      subreddit: firstString([actor.subreddit, value.subreddit]),
+      community: firstString([actor.community, value.community]),
+      hn_user: firstString([actor.hn_user, value.hn_user]),
+      platform_profile_url: firstString([actor.platform_profile_url, actor.profile_url]),
+      provider_tier_hint: isProviderTierHint(actor.provider_tier_hint) ? actor.provider_tier_hint : isProviderTierHint(actor.tier_hint) ? actor.tier_hint : undefined,
+      registry_entity_id: typeof actor.registry_entity_id === "string" ? actor.registry_entity_id : undefined,
+      registry_display_name: typeof actor.registry_display_name === "string" ? actor.registry_display_name : undefined,
+      registry_tier: isRegistryTier(actor.registry_tier) ? actor.registry_tier : undefined,
+    },
+    observed_at: observedAt,
+    source_published_at: typeof value.source_published_at === "string" ? value.source_published_at : undefined,
+    ingested_at: typeof value.ingested_at === "string" ? value.ingested_at : undefined,
+    url,
+    source_url: sourceUrl,
+    permalink,
+    discussion_url: discussionUrl,
+    target_url: typeof target?.url === "string" ? target.url : undefined,
+    target_repo_url: typeof target?.repo_url === "string" ? target.repo_url : undefined,
+    raw_ref: rawRef,
+  };
+
+  const identity = publicActorIdentityForEvent(canonicalEvent);
+
   return {
     ok: true,
     value: {
-      event_id: eventId,
-      platform: value.platform,
-      raw_event_kind: value.raw_event_kind,
-      derived_signal_kinds: value.derived_signal_kinds,
-      scope,
-      target_type: targetType,
-      target_key: targetKey,
-      actor: {
-        actor_type: isActorType(actor.actor_type) ? actor.actor_type : "unknown",
-        effective_tier: isActorTier(actor.effective_tier) ? actor.effective_tier : "unknown",
-        tier_basis: actor.tier_basis === "registry" || actor.tier_basis === "provider_hint" ? actor.tier_basis : isProviderTierHint(actor.provider_tier_hint) || isProviderTierHint(actor.tier_hint) ? "provider_hint" : "none",
-        provider_actor_id: providerActorId(actor),
-        identity_hash: identityHash(actor),
-        display_name: typeof actor.display_name === "string" ? actor.display_name : undefined,
-        handle: typeof actor.handle === "string" ? actor.handle : undefined,
-        platform_profile_url: typeof actor.platform_profile_url === "string" ? actor.platform_profile_url : typeof actor.profile_url === "string" ? actor.profile_url : undefined,
-        provider_tier_hint: isProviderTierHint(actor.provider_tier_hint) ? actor.provider_tier_hint : isProviderTierHint(actor.tier_hint) ? actor.tier_hint : undefined,
-        registry_entity_id: typeof actor.registry_entity_id === "string" ? actor.registry_entity_id : undefined,
-        registry_display_name: typeof actor.registry_display_name === "string" ? actor.registry_display_name : undefined,
-        registry_tier: isRegistryTier(actor.registry_tier) ? actor.registry_tier : undefined,
-      },
-      observed_at: observedAt,
-      source_published_at: typeof value.source_published_at === "string" ? value.source_published_at : undefined,
-      ingested_at: typeof value.ingested_at === "string" ? value.ingested_at : undefined,
-      url,
-      target_url: typeof target?.url === "string" ? target.url : undefined,
-      target_repo_url: typeof target?.repo_url === "string" ? target.repo_url : undefined,
-      raw_ref: rawRef,
+      ...canonicalEvent,
+      actor_public_identity_status: identity.status,
+      actor_public_identity_reason: identity.reason,
     },
   };
 }
@@ -349,6 +378,10 @@ function emptyResult(status: ExternalProviderStatus, statusReason: string, sourc
     source_input_hash: sourceInputHash,
     title_context: [],
   };
+}
+
+function firstString(values: unknown[]): string | undefined {
+  return values.find((candidate): candidate is string => typeof candidate === "string" && candidate.trim().length > 0)?.trim();
 }
 
 function isRecord(value: unknown): value is Record<string, unknown> {

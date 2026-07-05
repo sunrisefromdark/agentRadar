@@ -84,4 +84,90 @@ describe("external discovery redaction", () => {
     expect(result.reason_codes).toContain("public_safe_not_true");
     expect(result.reason_codes).toContain("contains_raw_text_not_false");
   });
+
+  it("validates public actor safety and head actor semantics", () => {
+    const result = assertPublicSafeAggregate(
+      safeAggregate({
+        project_evidence: [
+          {
+            public_actors: [
+              {
+                public_actor_id: "x:openai",
+                display_name: "@openai",
+                actor_type: "institution",
+                actor_role: "discussion_actor",
+                authority_tier: "core",
+                tier_basis: "provider_hint",
+                is_head_actor: true,
+                source_kind: "x_handle",
+                source_basis: "explicit_actor_field",
+                event_count: 1,
+                platforms: ["x_twitter"],
+                first_seen_at: "2026-07-05T00:00:00.000Z",
+                last_seen_at: "2026-07-05T00:00:00.000Z",
+              },
+            ],
+          },
+        ],
+        direction_evidence: [],
+      }),
+    );
+
+    expect(result.ok).toBe(false);
+    expect(result.reason_codes).toContain("public_actor_head_without_registry_match");
+  });
+
+  it("rejects public actor ids that are URLs", () => {
+    const result = assertPublicSafeAggregate(
+      safeAggregate({
+        project_evidence: [
+          {
+            public_actors: [
+              {
+                public_actor_id: "https://x.com/openai",
+                display_name: "@openai",
+                actor_type: "institution",
+                actor_role: "discussion_actor",
+                tier_basis: "none",
+                is_head_actor: false,
+                source_kind: "x_handle",
+                source_basis: "source_url_path",
+                event_count: 1,
+                platforms: ["x_twitter"],
+                first_seen_at: "2026-07-05T00:00:00.000Z",
+                last_seen_at: "2026-07-05T00:00:00.000Z",
+              },
+            ],
+          },
+        ],
+        direction_evidence: [],
+      }),
+    );
+
+    expect(result.ok).toBe(false);
+    expect(result.reason_codes).toContain("public_actor_id_url");
+  });
+
+  it("rejects public actor audit status and reason mismatches", () => {
+    const result = assertPublicSafeAggregate(
+      safeAggregate({
+        project_evidence: [
+          {
+            public_actor_audit: [
+              {
+                platform: "x_twitter",
+                status: "missing",
+                reason: "actor_public_identity_available",
+                event_count: 1,
+              },
+            ],
+          },
+        ],
+        direction_evidence: [],
+      }),
+    );
+
+    expect(result.ok).toBe(false);
+    expect(result.reason_codes).toContain("public_actor_audit_non_available_reason_mismatch");
+  });
 });

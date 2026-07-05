@@ -57,6 +57,45 @@ export type ExternalTrendComponentName =
   | "binding_confidence"
   | "noise_risk";
 export type ExternalTrendComponentLevel = "none" | "low" | "medium" | "high";
+export type ExternalCoverageStatus =
+  | "ok"
+  | "partial"
+  | "failed"
+  | "skipped"
+  | "not_configured"
+  | "zero_relevant_results"
+  | "manual_import_only"
+  | "unavailable";
+export type ExternalBindingConfidence = ExternalTrendBindingConfidence | "unbound";
+export type ExternalCandidateQualification =
+  | "observe"
+  | "needs_primary_confirmation"
+  | "supporting_evidence_only"
+  | "direction_observation";
+export type ExternalDisplayCandidateKind =
+  | "project"
+  | "paper"
+  | "product"
+  | "direction"
+  | "new_external_discovery"
+  | "needs_confirmation"
+  | "external_evidence_boost"
+  | "direction_watch";
+export type ExternalDisplayBucket =
+  | "new_discoveries"
+  | "project_evidence"
+  | "direction_observations"
+  | "official_releases"
+  | "community_discussions"
+  | "needs_followup";
+
+export interface ExternalPlatformCoverage {
+  status: ExternalCoverageStatus;
+  reason?: string;
+  warnings?: string[];
+}
+
+export type ExternalDiscoveryCoverage = Partial<Record<ExternalPlatform, ExternalPlatformCoverage>>;
 
 export const EXTERNAL_PLATFORMS = ["x_twitter", "reddit", "hacker_news", "official_web", "official_blog"] as const;
 export const EXTERNAL_TARGET_TYPES = ["project", "paper", "product", "topic"] as const;
@@ -117,6 +156,11 @@ export const EXTERNAL_TREND_COMPONENT_NAMES = [
 export function isExternalPlatform(value: unknown): value is ExternalPlatform {
   return EXTERNAL_PLATFORMS.includes(value as ExternalPlatform);
 }
+
+export type {
+  ExternalCandidateExplanation,
+  ExternalCandidateExplanationArtifact,
+} from "./explanations.ts";
 
 export interface ExternalSignalActor {
   actor_type: ExternalActorType;
@@ -214,6 +258,7 @@ export interface ExternalEvidence {
   scope: ExternalEvidenceScope;
   target_key: string;
   derived_signal_kinds: ExternalSignalKind[];
+  direction_labels?: string[];
   platforms: ExternalPlatform[];
   named_registry_actors: ExternalNamedRegistryActor[];
   public_actors?: ExternalPublicActor[];
@@ -225,18 +270,51 @@ export interface ExternalEvidence {
   top_tier_actor_count: number;
   first_seen_at: string;
   last_seen_at: string;
+  active_day_count?: number;
+  cross_platform?: boolean;
+  authority_summary_cn?: string;
+  intensity_summary_cn?: string;
+  persistence_summary_cn?: string;
+  caveats?: string[];
 }
 
 export interface ObservationCandidate {
-  candidate_kind: "project" | "paper" | "product" | "direction";
+  candidate_id?: string;
+  scope?: ExternalEvidenceScope;
+  candidate_kind: ExternalDisplayCandidateKind;
+  target_type?: ExternalTargetType;
   target_key: string;
-  qualification: "needs_primary_confirmation" | "direction_observation";
+  display_name?: string;
+  target_url?: string;
+  repo_url?: string;
+  paper_url?: string;
+  topic_key?: string;
+  direction_labels?: string[];
+  binding_confidence?: ExternalBindingConfidence;
+  evidence_ids?: string[];
+  evidence_summary_cn?: string;
+  qualification: ExternalCandidateQualification;
   can_enter_daily: boolean;
   can_enter_weekly: boolean;
   cannot_be_primary_conclusion: true;
+  caveats?: string[];
+  external_attention_score?: number;
+  attention_score_components?: {
+    relevance?: number;
+    binding?: number;
+    platform_weight?: number;
+    engagement?: number;
+    freshness?: number;
+    persistence?: number;
+    authority?: number;
+  };
+  display_bucket?: ExternalDisplayBucket;
+  display_reasons?: string[];
 }
 
 export interface ExternalDiscoveryAudit {
+  coverage?: ExternalDiscoveryCoverage;
+  target_extraction_diagnostics?: Record<string, number>;
   rejected_events: Array<{
     event_id?: string;
     reason_code: string;
@@ -256,6 +334,7 @@ export interface DailyExternalAggregate {
   provider_run_id?: string;
   status: ExternalProviderStatus;
   status_reason?: string;
+  source_input_ref?: string;
   source_input_hash: string;
   public_safe: true;
   redaction_policy_version: string;
@@ -266,10 +345,37 @@ export interface DailyExternalAggregate {
   rejected_event_count: number;
   platform_counts: Partial<Record<ExternalPlatform, number>>;
   derived_signal_kind_counts: Partial<Record<ExternalSignalKind, number>>;
+  direction_label_counts?: Partial<Record<string, number>>;
+  evidence_sources?: ExternalEvidenceSource[];
   project_evidence: ExternalEvidence[];
   direction_evidence: ExternalEvidence[];
   observation_candidates: ObservationCandidate[];
   audit: ExternalDiscoveryAudit;
+}
+
+export interface ExternalEvidenceSource {
+  source_id: string;
+  event_id: string;
+  platform: ExternalPlatform;
+  raw_event_kind: ExternalRawEventKind;
+  derived_signal_kinds: ExternalSignalKind[];
+  direction_labels?: string[];
+  source_url?: string;
+  source_title?: string;
+  source_published_at?: string;
+  observed_at: string;
+  target_type: ExternalTargetType;
+  target_name: string;
+  target_url?: string;
+  actor_type: ExternalActorType;
+  actor_tier: ExternalActorTier;
+  metrics?: {
+    likes?: number;
+    reposts?: number;
+    comments?: number;
+    upvotes?: number;
+    replies?: number;
+  };
 }
 
 export interface ExternalTrendDailyCount {

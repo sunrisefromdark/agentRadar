@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot, hydrateRoot, type Root } from "react-dom/client";
+import AgentReachView, { parseAgentReachViewPayload } from "./AgentReachView.tsx";
 import App, { parseOverviewAppPayload } from "./App.tsx";
 import ObserverView, { parseObserverViewPayload } from "./ObserverView.tsx";
 import RunHealthView, { parseRunHealthViewPayload } from "./RunHealth.tsx";
@@ -21,6 +22,7 @@ declare global {
     __mountVisualConsoleApps?: () => void;
     __visualConsoleMountedRoots?: {
       overview?: MountedRoot;
+      agentreach?: MountedRoot;
       observer?: MountedRoot;
       runHealth?: MountedRoot;
       weekly?: MountedRoot;
@@ -61,7 +63,7 @@ async function ensureClientPayload(container: Element, payloadConfig: ClientPayl
 }
 
 function mountIntoRoot(
-  key: "overview" | "observer" | "runHealth" | "weekly",
+  key: "overview" | "agentreach" | "observer" | "runHealth" | "weekly",
   containerId: string,
   elementFactory: () => React.ReactElement,
   payloadConfig?: ClientPayloadConfig,
@@ -111,6 +113,10 @@ function mountIntoRoot(
 
 export function mountVisualConsoleApps(): void {
   mountIntoRoot("overview", "overview-react-root", () => <App {...parseOverviewAppPayload()} />);
+  mountIntoRoot("agentreach", "agentreach-react-root", () => <AgentReachView {...parseAgentReachViewPayload()} />, {
+    scriptId: "agentreach-react-payload",
+    windowKey: "__AGENTREACH_INITIAL_DATA__",
+  });
   mountIntoRoot("observer", "observer-react-root", () => <ObserverView {...parseObserverViewPayload()} />, {
     scriptId: "observer-react-payload",
     windowKey: "__OBSERVER_INITIAL_DATA__",

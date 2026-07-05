@@ -13,6 +13,7 @@ import { buildProjectsView } from "../src/visualConsole/build.ts";
 import { renderDocument } from "./visualConsole/ossDocument.ts";
 import { buildProjectsLocalDetailPayload } from "./visualConsole/ossProjectsPage.ts";
 import {
+  buildAgentReachReactProps,
   buildObserverReactProps,
   buildOverviewReactProps,
   buildRunHealthReactProps,
@@ -28,6 +29,7 @@ const APP_DIR = path.dirname(fileURLToPath(import.meta.url));
 const CLIENT_DIR = path.join(APP_DIR, "client");
 const APP_ASSET_DIR = path.join(APP_DIR, "assets");
 const STYLE_PATH = path.join(APP_DIR, "styles.css");
+const AGENTREACH_STYLE_PATH = path.join(APP_DIR, "styles", "agentreach.css");
 const STYLE_CACHE_CONTROL = "public, max-age=300";
 const APP_ASSET_ROUTE_PREFIX = "/app-assets/";
 const CLIENT_ROUTE_PREFIX = "/app-client/";
@@ -54,7 +56,9 @@ const cachedClientModules = new Map<string, CachedClientModule>();
 const fuzzySearchCache: FuzzySearchCache = new Map();
 
 function renderStyleAsset(): string {
-  return fs.readFileSync(STYLE_PATH, "utf-8");
+  return [STYLE_PATH, AGENTREACH_STYLE_PATH]
+    .map((stylePath) => fs.readFileSync(stylePath, "utf-8"))
+    .join("\n");
 }
 
 function serializeJsonForHtml(value: unknown): string {
@@ -67,7 +71,7 @@ function serializeJsonForHtml(value: unknown): string {
 }
 
 function routeRequiresClientReactRuntime(route: RenderedRoute["route"]): boolean {
-  return route === "overview" || route === "observer" || route === "weekly" || route === "run-health";
+  return route === "overview" || route === "observer" || route === "agentreach" || route === "weekly" || route === "run-health";
 }
 
 function renderReactImportMap(): string {
@@ -201,6 +205,10 @@ function resolveHydrationPayloadScripts(rendered: RenderedRoute, requestUrl: URL
     {
       id: "observer-react-payload",
       value: rendered.route === "observer" ? buildObserverReactProps(rendered.model, requestUrl, lang, theme) : null,
+    },
+    {
+      id: "agentreach-react-payload",
+      value: rendered.route === "agentreach" ? buildAgentReachReactProps(rendered.model, requestUrl, lang, theme) : null,
     },
   ];
 

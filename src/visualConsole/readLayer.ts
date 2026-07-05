@@ -15,8 +15,14 @@ import type {
   WeeklyJudgmentReport,
   WeeklyReport,
 } from "../types.ts";
+import type { DailyExternalAggregate, ExternalCandidateExplanationArtifact } from "../externalDiscovery/types.ts";
+import {
+  externalAggregateLatestPath,
+  externalAggregatePath,
+  externalCandidateExplanationsLatestPath,
+  externalCandidateExplanationsPath,
+} from "../externalDiscovery/paths.ts";
 import type { MissionScoutEnhancementArtifact } from "../signal/missionScoutEnhancement.ts";
-import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
 import { getFilesystemStateSignature, readCachedDirectoryEntries, readCachedJsonFile, readCachedTextFile } from "./fileCache.ts";
 import { parseWeeklyMarkdown } from "./weeklyMarkdown.ts";
 import type { DailyTimeNavigatorPreview, ReadResult, TopLevelViewStatus, WeeklyTimeNavigatorPreview } from "./types.ts";
@@ -185,14 +191,27 @@ export function getObserverArtifact(date: string): ReadResult<EcosystemObserverA
   return validateDateInput(date, filepath) ?? readJsonStrict<EcosystemObserverArtifact>(filepath);
 }
 
-export function getProjectLibraryEnhancementArtifact(date: string): ReadResult<ProjectLibraryEnhancementArtifact> {
-  const filepath = path.join("data", "reports", `${date}.project-library.json`);
-  return validateDateInput(date, filepath) ?? readJsonStrict<ProjectLibraryEnhancementArtifact>(filepath);
+export function getDailyExternalAggregate(date: string): ReadResult<DailyExternalAggregate> {
+  const filepath = externalAggregatePath(date);
+  return validateDateInput(date, filepath) ?? readJsonStrict<DailyExternalAggregate>(filepath);
+}
+
+export function getLatestDailyExternalAggregate(): ReadResult<DailyExternalAggregate> {
+  return readJsonStrict<DailyExternalAggregate>(externalAggregateLatestPath());
 }
 
 export function getExternalCandidateExplanationsArtifact(date: string): ReadResult<ExternalCandidateExplanationArtifact> {
-  const filepath = path.join("data", "external-discovery", `${date}.candidate-explanations.json`);
+  const filepath = externalCandidateExplanationsPath(date);
   return validateDateInput(date, filepath) ?? readJsonStrict<ExternalCandidateExplanationArtifact>(filepath);
+}
+
+export function getLatestExternalCandidateExplanationsArtifact(): ReadResult<ExternalCandidateExplanationArtifact> {
+  return readJsonStrict<ExternalCandidateExplanationArtifact>(externalCandidateExplanationsLatestPath());
+}
+
+export function getProjectLibraryEnhancementArtifact(date: string): ReadResult<ProjectLibraryEnhancementArtifact> {
+  const filepath = path.join("data", "reports", `${date}.project-library.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<ProjectLibraryEnhancementArtifact>(filepath);
 }
 
 export function getMissionScoutArtifact(date: string): ReadResult<{ raw_signals?: RawSignal[] }> {

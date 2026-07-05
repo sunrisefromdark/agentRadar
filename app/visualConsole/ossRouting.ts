@@ -1,5 +1,6 @@
 import {
   buildKnowledgeBaseView,
+  buildAgentReachView,
   buildObserverView,
   buildOverviewView,
   buildProjectsView,
@@ -29,6 +30,8 @@ export function normalizeRoutePath(pathname: string): WebRoute | null {
       return "run-health";
     case "/observer":
       return "observer";
+    case "/agentreach":
+      return "agentreach";
     case "/kb":
       return "kb";
     default:
@@ -63,6 +66,8 @@ export function toViewHref(
       return `/run-health${encodeParams(baseParams)}`;
     case "observer":
       return `/observer${encodeParams(baseParams)}`;
+    case "agentreach":
+      return `/agentreach${encodeParams(baseParams)}`;
     case "kb":
       return `/kb${encodeParams(baseParams)}`;
   }
@@ -90,6 +95,8 @@ export function routeTitle(route: WebRoute, lang: UiLang): string {
       return ui.navRunHealth;
     case "observer":
       return ui.navObserver;
+    case "agentreach":
+      return ui.navAgentReach;
     case "kb":
       return ui.navKb;
     default:
@@ -126,6 +133,8 @@ export function buildRoute(route: WebRoute, requestUrl: URL): RenderedRoute {
       return { route, model: buildRunHealthView(date) };
     case "observer":
       return { route, model: buildObserverView(date) };
+    case "agentreach":
+      return { route, model: buildAgentReachView(date) };
     case "kb":
       return {
         route,

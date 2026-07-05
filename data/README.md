@@ -34,4 +34,4 @@ Local real-run trend window artifacts should be reviewed before committing. The 
 
 ## Automation behavior
 
-The daily and weekly GitHub Actions workflows update the tracked public artifacts and commit them back into this repository. This is intentional: the repo is both code and a public historical data log.
+The daily and weekly GitHub Actions workflows update the tracked public artifacts and commit them back into this repository. This is intentional: the repo is both code and a public historical data log

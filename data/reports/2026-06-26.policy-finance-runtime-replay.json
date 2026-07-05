@@ -1,0 +1,25 @@
+{
+  "artifact_kind": "policy_finance_runtime_replay",
+  "date": "2026-06-26",
+  "generated_at": "2026-06-28T02:29:12+08:00",
+  "fixture_id": "policy-finance-phase1-runtime-ready-inputs.v1",
+  "current_status": "policy_finance_runtime_ready",
+  "negative_reason_code": "dispatch_context_missing",
+  "runtime_consumed_same_run_messages": 19,
+  "activation_profile_ids": [
+    "axis-activation-policy.v1/capital_finance",
+    "axis-activation-policy.v1/policy_regulatory",
+    "axis-activation-policy.v1/policy_research_thinktank",
+    "axis-runtime-budget-profile.v1/capital_finance",
+    "axis-runtime-budget-profile.v1/policy_regulatory",
+    "axis-runtime-budget-profile.v1/policy_research_thinktank"
+  ],
+  "stop_profile_ids": [
+    "canonical-fetch-stop-policy.v1/capital_finance",
+    "canonical-fetch-stop-policy.v1/policy_regulatory",
+    "canonical-fetch-stop-policy.v1/policy_research_thinktank"
+  ],
+  "review_profile_ids": [
+    "same-run-review-availability-policy.v1/policy_finance"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "case_id": "academic-positive-canonical-paper.v1",
+  "responsibility_id": "research-frontier",
+  "axis": "research_paper",
+  "expected_bucket": "accepted",
+  "expected_event_id": "paper-agent-memory-preprint",
+  "expected_artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4d73a5d48b0c",
+  "source_fixture_ref": "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+  "bundle_fixture_ref": "fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json",
+  "summary_cn": "正例要求保留 canonical 学术来源与引用链，论文主事件可以进入 accepted batch。"
+}

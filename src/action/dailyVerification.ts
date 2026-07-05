@@ -11,6 +11,7 @@ import type {
   DailyRunSummary,
   DailyFreshnessSource,
   GitHubEnrichmentAuditEntry,
+  IndustryRuntimeSummaryArtifact,
   VerificationCheck,
   VerifyDailyResult,
 } from "../types.ts";
@@ -26,6 +27,21 @@ function githubAuditPath(date: string): string {
 
 function dailyReportPath(date: string): string {
   return path.join("data", "reports", `${date}.daily.json`);
+}
+
+function policyFinanceRuntimeReplayPath(date: string): string {
+  return path.join("data", "reports", `${date}.policy-finance-runtime-replay.json`);
+}
+
+type PolicyFinanceRuntimeReplayArtifact = {
+  artifact_kind?: string;
+  current_status?: string;
+  negative_reason_code?: string;
+  runtime_consumed_same_run_messages?: number;
+};
+
+function industryRuntimeSummaryPath(date: string): string {
+  return path.join("data", "reports", `${date}.industry-runtime-summary.json`);
 }
 
 interface OptionalJsonRead {
@@ -520,6 +536,34 @@ function externalCandidateExplanationContractChecks(
   ];
 }
 
+function policyFinanceRuntimeReplayChecks(
+  artifact: PolicyFinanceRuntimeReplayArtifact | null,
+  artifactPath: string,
+): VerificationCheck[] {
+  if (!artifact) {
+    return [buildCheck("policy_finance_runtime_replay_artifact", "fail", `missing ${artifactPath}`)];
+  }
+
+  return [
+    buildCheck(
+      "policy_finance_runtime_replay_artifact",
+      artifact.artifact_kind === "policy_finance_runtime_replay" &&
+      artifact.current_status === "policy_finance_runtime_ready" &&
+      artifact.negative_reason_code === "dispatch_context_missing"
+        ? "pass"
+        : "fail",
+      `artifact_kind=${artifact.artifact_kind ?? "missing"}; current_status=${artifact.current_status ?? "missing"}; negative_reason_code=${artifact.negative_reason_code ?? "missing"}`,
+    ),
+    buildCheck(
+      "policy_finance_runtime_same_run_messages",
+      typeof artifact.runtime_consumed_same_run_messages === "number" && artifact.runtime_consumed_same_run_messages > 0
+        ? "pass"
+        : "fail",
+      `runtime_consumed_same_run_messages=${artifact.runtime_consumed_same_run_messages ?? "missing"}`,
+    ),
+  ];
+}
+
 function externalTrendWindowContractChecks(
   summary: DailyRunSummary,
   trendWindowRead: ExternalDiscussionTrendWindowReadResult,
@@ -856,6 +900,56 @@ function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
+function industryRuntimeSummaryChecks(
+  artifact: IndustryRuntimeSummaryArtifact | null,
+  artifactPath: string,
+): VerificationCheck[] {
+  if (!artifact) {
+    return [buildCheck("industry_runtime_summary_artifact", "fail", `missing ${artifactPath}`)];
+  }
+
+  return [
+    buildCheck(
+      "industry_runtime_summary_artifact",
+      artifact.artifact_kind === "industry_runtime_summary" &&
+      artifact.overall_status === "industry_runtime_contracts_ready"
+        ? "pass"
+        : "fail",
+      `artifact_kind=${artifact.artifact_kind ?? "missing"}; overall_status=${artifact.overall_status ?? "missing"}`,
+    ),
+    buildCheck(
+      "industry_runtime_group_statuses",
+      artifact.policy_finance?.status === "policy_finance_runtime_ready" &&
+      artifact.product_ecosystem?.status === "normalization_dry_run_ready" &&
+      artifact.academic_preparatory?.status === "academic_preparatory_normalization_dry_run_ready"
+        ? "pass"
+        : "fail",
+      `policy_finance=${artifact.policy_finance?.status ?? "missing"}; product_ecosystem=${artifact.product_ecosystem?.status ?? "missing"}; academic_preparatory=${artifact.academic_preparatory?.status ?? "missing"}`,
+    ),
+    buildCheck(
+      "industry_runtime_platform_contract",
+      artifact.platform_contract?.shared_governance_published === true &&
+      artifact.platform_contract?.dispatch_gate?.high_cost_requires_reservation_state === "granted" &&
+      artifact.platform_contract?.event_consumer_gate?.takeover_requires_takeover_audit_ref === true
+        ? "pass"
+        : "fail",
+      `governance_published=${artifact.platform_contract?.shared_governance_published ?? "missing"}; reservation_state=${artifact.platform_contract?.dispatch_gate?.high_cost_requires_reservation_state ?? "missing"}; takeover_requires_audit_ref=${artifact.platform_contract?.event_consumer_gate?.takeover_requires_takeover_audit_ref ?? "missing"}`,
+    ),
+    buildCheck(
+      "industry_runtime_policy_finance_profiles",
+      Array.isArray(artifact.policy_finance?.activation_profile_ids) &&
+      artifact.policy_finance.activation_profile_ids.length > 0 &&
+      Array.isArray(artifact.policy_finance?.stop_profile_ids) &&
+      artifact.policy_finance.stop_profile_ids.length > 0 &&
+      Array.isArray(artifact.policy_finance?.review_profile_ids) &&
+      artifact.policy_finance.review_profile_ids.length > 0
+        ? "pass"
+        : "fail",
+      `activation_profiles=${artifact.policy_finance?.activation_profile_ids?.join(",") || "missing"}; stop_profiles=${artifact.policy_finance?.stop_profile_ids?.join(",") || "missing"}; review_profiles=${artifact.policy_finance?.review_profile_ids?.join(",") || "missing"}`,
+    ),
+  ];
+}
+
 function defaultDiagnostics(): NonNullable<DailyRunSummary["diagnostics"]> {
   return {
     anomaly_share: 0,
@@ -924,6 +1018,10 @@ function buildChecks(
   externalCandidateExplanationsFilepath: string,
   externalCandidateExplanations: OptionalJsonRead,
   externalTrendWindow: ExternalDiscussionTrendWindowReadResult,
+  policyFinanceRuntimeReplay: PolicyFinanceRuntimeReplayArtifact | null,
+  policyFinanceRuntimeReplayArtifactPath: string,
+  industryRuntimeSummary: IndustryRuntimeSummaryArtifact | null,
+  industryRuntimeSummaryArtifactPath: string,
 ): VerificationCheck[] {
   const checks = [
     ...completionChecks(summary),
@@ -935,6 +1033,8 @@ function buildChecks(
     ...externalAggregateContractChecks(externalAggregateFilepath, externalAggregate),
     ...externalCandidateExplanationContractChecks(externalCandidateExplanationsFilepath, externalAggregate, externalCandidateExplanations),
     ...externalTrendWindowContractChecks(summary, externalTrendWindow),
+    ...policyFinanceRuntimeReplayChecks(policyFinanceRuntimeReplay, policyFinanceRuntimeReplayArtifactPath),
+    ...industryRuntimeSummaryChecks(industryRuntimeSummary, industryRuntimeSummaryArtifactPath),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
@@ -963,12 +1063,19 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const reportPath = dailyReportPath(date);
   const externalAggregateFilepath = externalAggregatePath(date);
   const externalCandidateExplanationsFilepath = externalCandidateExplanationsPath(date);
+  const policyFinanceRuntimeReplayArtifactPath = policyFinanceRuntimeReplayPath(date);
+  const industryRuntimeSummaryArtifactPath = industryRuntimeSummaryPath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
   const report = readJsonFile<DailyReport | null>(reportPath, null);
   const externalAggregate = readOptionalJson(externalAggregateFilepath);
   const externalCandidateExplanations = readOptionalJson(externalCandidateExplanationsFilepath);
   const externalTrendWindow = readExternalDiscussionTrendWindowByDate(date);
+  const policyFinanceRuntimeReplay = readJsonFile<PolicyFinanceRuntimeReplayArtifact | null>(
+    policyFinanceRuntimeReplayArtifactPath,
+    null,
+  );
+  const industryRuntimeSummary = readJsonFile<IndustryRuntimeSummaryArtifact | null>(industryRuntimeSummaryArtifactPath, null);
 
   if (!summary) {
     return missingSummaryResult(date, runSummaryPath, githubEnrichmentPath);
@@ -984,6 +1091,10 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
     externalCandidateExplanationsFilepath,
     externalCandidateExplanations,
     externalTrendWindow,
+    policyFinanceRuntimeReplay,
+    policyFinanceRuntimeReplayArtifactPath,
+    industryRuntimeSummary,
+    industryRuntimeSummaryArtifactPath,
   );
   return {
     date,

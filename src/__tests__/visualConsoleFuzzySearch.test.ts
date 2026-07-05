@@ -1,11 +1,14 @@
 import { describe, expect, it } from "vitest";
 import {
+  clampSideAssistantPlacement,
   canRestoreSideAssistantMainResult,
   composeSideAssistantQuery,
   createEmptySideAssistantSession,
+  normalizeSideAssistantPlacement,
   pickSideAssistantPreviewIds,
   renderClientScriptSource,
   resetSideAssistantConversation,
+  shouldStartSideAssistantDrag,
 } from "../../app/visualConsole/clientScript.ts";
 import { renderPrimary } from "../../app/visualConsole/ossPages.ts";
 import { buildOverviewView, buildProjectsView } from "../visualConsole/build.ts";
@@ -21,6 +24,7 @@ describe("visual console fuzzy project search", () => {
 
     expect(html).toContain('data-projects-ai-assistant-host="true"');
     expect(html).toContain('data-projects-ai-launch="true"');
+    expect(html).toContain('draggable="false"');
     expect(html).toContain('data-projects-ai-panel="true"');
     expect(html).toContain('data-projects-ai-input="true"');
     expect(html).toContain('data-projects-ai-main-result="true"');
@@ -47,6 +51,16 @@ describe("visual console fuzzy project search", () => {
     expect(source).toContain("/api/projects/fuzzy-search");
     expect(source).toContain("const bindGlobalSideAssistant = () =>");
     expect(source).toContain("const submitAssistantQuery = async (rawQuery) =>");
+    expect(source).toContain("visual-console-side-assistant-placement-v4");
+    expect(source).toContain('panelHandle instanceof HTMLElement && panelHandle.addEventListener("dblclick", restoreDefaultPlacement)');
+    expect(source).toContain('window.addEventListener("resize", () =>');
+    expect(source).toContain('launcherHandle.addEventListener("dragstart"');
+    expect(source).toContain("requestAnimationFrame(renderDragFrame)");
+    expect(source).toContain("translate3d(");
+    expect(source).not.toContain("assistantHost.style.width");
+    expect(source).not.toContain("onLauncherTap");
+    expect(source.match(/clearSideAssistantPlacement\(\);/g)).toHaveLength(1);
+    expect(source).toContain("renderAssistantPanel();\n            applySideAssistantPlacement(assistantHost);");
     expect(source).toContain("assistantForm instanceof HTMLFormElement");
     expect(source).toContain("composeSideAssistantQuery(assistantSession.search_context, trimmed)");
     expect(source).not.toContain("shouldUseDirectProjectSearch(cards, state.search, directCards) === false");
@@ -77,6 +91,27 @@ describe("visual console fuzzy project search", () => {
     expect(canRestoreSideAssistantMainResult("same", "same")).toBe(true);
     expect(canRestoreSideAssistantMainResult("old", "new")).toBe(false);
     expect(canRestoreSideAssistantMainResult("", "new")).toBe(false);
+  });
+
+  it("normalizes and clamps side assistant placement inside the viewport", () => {
+    expect(normalizeSideAssistantPlacement({ left: 12, top: 24 })).toEqual({ left: 12, top: 24 });
+    expect(normalizeSideAssistantPlacement({ left: "12", top: 24 })).toEqual({ left: 12, top: 24 });
+    expect(normalizeSideAssistantPlacement({ left: "x", top: 24 })).toBeNull();
+
+    expect(
+      clampSideAssistantPlacement(
+        { left: -40, top: 800 },
+        { width: 400, height: 300 },
+        { width: 120, height: 80 },
+      ),
+    ).toEqual({ left: 8, top: 212 });
+  });
+
+  it("starts dragging only after movement clears the threshold", () => {
+    expect(shouldStartSideAssistantDrag({ x: 1, y: 1 })).toBe(false);
+    expect(shouldStartSideAssistantDrag({ x: 2, y: 0 })).toBe(false);
+    expect(shouldStartSideAssistantDrag({ x: 4, y: 0 })).toBe(true);
+    expect(shouldStartSideAssistantDrag({ x: 0, y: -5 })).toBe(true);
   });
 
   it("resets new chat without forcing the panel closed", () => {

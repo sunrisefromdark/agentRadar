@@ -21,3 +21,6 @@ export { DIRECTION_CATALOG, PROJECT_SEARCH_CONSTANTS, getDirectionByKey } from "
 // recruiting-hr-agent
 // supply-chain-procurement-agent
 // industrial-field-ops-agent
+// short-drama-generation-agent
+// image-generation-agent
+// time-series-forecasting-agent

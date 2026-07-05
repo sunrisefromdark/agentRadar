@@ -1,0 +1,4 @@
+{
+  "scenario": "news analysis cannot replace regulator owner",
+  "expected_rejected_reason": "news_cannot_replace_regulator_primary"
+}

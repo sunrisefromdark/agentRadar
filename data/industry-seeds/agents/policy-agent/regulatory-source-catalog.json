@@ -1,0 +1,16 @@
+{
+  "agent_id": "policy-agent",
+  "responsibility_id": "policy-regulatory",
+  "axis": "policy_regulatory",
+  "official_first": true,
+  "primary_tool_ids": [
+    "official-regulator-rss",
+    "government-policy-library",
+    "standards-body-docs",
+    "public-procurement-notices",
+    "official-project-announcements"
+  ],
+  "secondary_tool_ids": ["regulator-open-data", "approval-bulletins"],
+  "fallback_tool_ids": ["policy-domain-search", "official-policy-document-search"],
+  "last_resort_tool_ids": ["manual-regulatory-triage"]
+}

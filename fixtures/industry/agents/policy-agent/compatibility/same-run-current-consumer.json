@@ -1,0 +1,26 @@
+{
+  "capability_class": "claim-critical",
+  "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-001",
+  "scheduling_key": "claim:policy-finance",
+  "candidate_group_id": "candidate:policy-finance",
+  "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-001",
+  "capacity_reservation_refs": [
+    "industry://internal/2026-06-26/capacity-reservation.v1/res-001"
+  ],
+  "dispatch_context": {
+    "scheduling_key": "claim:policy-finance"
+  },
+  "reservations": [
+    {
+      "reservation_state": "granted"
+    }
+  ],
+  "budget_arbitration": {
+    "decision": "approved"
+  },
+  "expected": {
+    "consumer_gate": "current_consumer_ready",
+    "dispatch_gate": "accepted_for_dispatch",
+    "handoff_gate": "accepted_for_dry_run"
+  }
+}

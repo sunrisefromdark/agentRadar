@@ -1,12 +1,15 @@
 ﻿import type { AppConfig } from "../config.ts";
 import type {
   CoreTrendCard,
+  DailyRunSummary,
   DailyReport,
   DailyReportProjectDetail,
   EnhancementAudit,
   EnhancementStatus,
   FinalWeeklyTrend,
   FinalWeeklyTrendObservation,
+  IndustryRuntimeSummaryArtifact,
+  IndustryRuntimeWindowSummary,
   PersonalizedWeeklyFocus,
   RejectedOutput,
   ScoreComponentName,
@@ -47,6 +50,8 @@ type WindowDay = {
   date: string;
   scored: ScoredProject[];
   daily: DailyReport;
+  runSummary?: DailyRunSummary | null;
+  industryRuntimeSummary?: IndustryRuntimeSummaryArtifact | null;
 };
 
 type VisibleProject = ScoredProject & DailyReportProjectDetail;
@@ -1006,12 +1011,50 @@ function evidenceSummaryFromRefs(evidenceRefs: string[], fallback: string): stri
   return evidenceRefs.length > 0 ? evidenceRefs.slice(0, 2).join("；") : fallback;
 }
 
+function runtimeSummaryForDay(day: Pick<WindowDay, "runSummary" | "industryRuntimeSummary">): IndustryRuntimeSummaryArtifact | null {
+  return day.runSummary?.industry_runtime_summary ?? day.industryRuntimeSummary ?? null;
+}
+
+function buildIndustryRuntimeWindowSummary(days: WindowDay[]): IndustryRuntimeWindowSummary {
+  const latestWithIndustrySummary = [...days]
+    .reverse()
+    .find((day) => Boolean(runtimeSummaryForDay(day)));
+  const latestRuntimeSummary = latestWithIndustrySummary ? runtimeSummaryForDay(latestWithIndustrySummary) : null;
+
+  return {
+    window_day_count: days.length,
+    days_with_run_summary: days.filter((day) => Boolean(day.runSummary)).length,
+    days_with_industry_runtime_summary: days.filter((day) => Boolean(runtimeSummaryForDay(day))).length,
+    missing_run_summary_dates: days.filter((day) => !day.runSummary).map((day) => day.date),
+    missing_industry_runtime_summary_dates: days.filter((day) => !runtimeSummaryForDay(day)).map((day) => day.date),
+    policy_finance_runtime_ready_days: days
+      .filter((day) => runtimeSummaryForDay(day)?.policy_finance.status === "policy_finance_runtime_ready")
+      .map((day) => day.date),
+    product_ecosystem_dry_run_ready_days: days
+      .filter((day) => runtimeSummaryForDay(day)?.product_ecosystem.status === "normalization_dry_run_ready")
+      .map((day) => day.date),
+    academic_preparatory_ready_days: days
+      .filter(
+        (day) => runtimeSummaryForDay(day)?.academic_preparatory.status === "academic_preparatory_normalization_dry_run_ready",
+      )
+      .map((day) => day.date),
+    latest_summary_date: latestWithIndustrySummary?.date ?? null,
+    latest_overall_status: latestRuntimeSummary?.overall_status ?? null,
+    latest_academic_blocked_until: latestRuntimeSummary?.academic_preparatory.blocked_until ?? null,
+    latest_platform_contract_fixture: latestRuntimeSummary?.platform_contract.fixture_id ?? null,
+    latest_policy_finance_activation_profile_ids: latestRuntimeSummary?.policy_finance.activation_profile_ids ?? [],
+    latest_policy_finance_stop_profile_ids: latestRuntimeSummary?.policy_finance.stop_profile_ids ?? [],
+    latest_policy_finance_review_profile_ids: latestRuntimeSummary?.policy_finance.review_profile_ids ?? [],
+  };
+}
+
 function buildCompatibilityWeeklyReport(
   days: WindowDay[],
   judgment: WeeklyJudgmentReport,
   config: AppConfig,
 ): { report: WeeklyReport; audit: WeeklyAuditReport; weeklyFocusProjects: WeeklySemanticInputProject[] } {
   const visibleProjects = buildVisibleProjectIndex(days);
+  const industryRuntimeWindowSummary = buildIndustryRuntimeWindowSummary(days);
   const weeklyFocusProjects: WeeklySemanticInputProject[] = [];
   const coreCards = judgment.established_trends.map((trend) => {
     const trendKey = compatibilityTrendKey(trend.trend_id, trend.trend_name_cn);
@@ -1056,6 +1099,7 @@ function buildCompatibilityWeeklyReport(
     window_start: judgment.window_start,
     window_end: judgment.window_end,
     enhancement_status: judgment.enhancement_status,
+    industry_runtime_window_summary: industryRuntimeWindowSummary,
     personalized_weekly_focus_applicable: Boolean(config.sources.userInterestProfile?.enabled),
     personalized_weekly_focus_note_cn:
       config.sources.userInterestProfile?.enabled && personalized.length === 0
@@ -1079,6 +1123,7 @@ function buildCompatibilityWeeklyReport(
   };
   const audit: WeeklyAuditReport = {
     enhancement_status: report.enhancement_status,
+    industry_runtime_window_summary: industryRuntimeWindowSummary,
     personalized_weekly_focus: report.personalized_weekly_focus,
     rejected_outputs: report.enhancement_audit.rejected_outputs,
   };
@@ -1096,12 +1141,14 @@ function buildWeeklyJudgmentReport(
     trendCandidates: WeeklyTrendCandidateV2[];
   },
 ): WeeklyJudgmentReport {
+  const industryRuntimeWindowSummary = buildIndustryRuntimeWindowSummary(days);
   return {
     date: days[days.length - 1]?.date ?? "",
     generated_at: days[days.length - 1]?.daily.generated_at ?? "",
     window_start: days[0]?.date ?? "",
     window_end: days[days.length - 1]?.date ?? "",
     enhancement_status: enhancementStatus,
+    industry_runtime_window_summary: industryRuntimeWindowSummary,
     executive_summary_cn: review.executive_summary_cn,
     rule_materials: {
       evidence_projects: materials.evidenceProjects,
@@ -1216,6 +1263,7 @@ export function buildWeeklyArtifacts(days: WindowDay[], config: AppConfig): {
   const semanticInput: WeeklySemanticInputBundle = {
     window_start: compatibility.report.window_start,
     window_end: compatibility.report.window_end,
+    industry_runtime_window_summary: compatibility.report.industry_runtime_window_summary,
     scored_project_windows: days.map((day) => ({
       date: day.date,
       scored_projects: day.scored,
@@ -1402,6 +1450,7 @@ function buildCompactWeeklyEnhancementBundle(bundle: WeeklySemanticInputBundle) 
   return {
     window_start: bundle.window_start,
     window_end: bundle.window_end,
+    industry_runtime_window_summary: bundle.industry_runtime_window_summary,
     agent_mode: bundle.agent_mode,
     user_interest_profile: bundle.user_interest_profile,
     trend_candidates: bundle.trend_candidates.map((candidate) => ({
@@ -1471,6 +1520,7 @@ function buildCompactWeeklyEnhancementReport(report: WeeklyReport) {
     window_start: report.window_start,
     window_end: report.window_end,
     enhancement_status: report.enhancement_status,
+    industry_runtime_window_summary: report.industry_runtime_window_summary,
     overall_summary_cn: report.overall_summary_cn,
     supporting_trend_keys: report.supporting_trend_keys,
     core_trend_cards: report.core_trend_cards.map((card) => ({
@@ -2022,6 +2072,7 @@ async function applyWeeklyNarrativeEnhancement(
   artifacts.judgment.enhancement_audit = { rejected_outputs: mergedRejectedOutputs };
   artifacts.audit = {
     enhancement_status: mergedStatus,
+    industry_runtime_window_summary: artifacts.report.industry_runtime_window_summary,
     personalized_weekly_focus: artifacts.report.personalized_weekly_focus,
     rejected_outputs: mergedRejectedOutputs,
   };

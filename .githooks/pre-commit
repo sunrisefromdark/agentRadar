@@ -1,0 +1,32 @@
+#!/bin/sh
+set -eu
+
+repo_root="$(git rev-parse --show-toplevel)"
+cd "$repo_root"
+
+resolve_node() {
+  if command -v node >/dev/null 2>&1; then
+    command -v node
+    return 0
+  fi
+
+  if command -v where.exe >/dev/null 2>&1; then
+    node_win_path="$(where.exe node 2>/dev/null | tr -d '\r' | head -n 1 || true)"
+    if [ -n "$node_win_path" ]; then
+      if command -v cygpath >/dev/null 2>&1; then
+        cygpath -u "$node_win_path"
+      else
+        printf '%s\n' "$node_win_path"
+      fi
+      return 0
+    fi
+  fi
+
+  return 1
+}
+
+node_bin="$(resolve_node)" || {
+  exit 0
+}
+
+"$node_bin" scripts/syncExecPlanStatus.mjs >/dev/null 2>&1 || true

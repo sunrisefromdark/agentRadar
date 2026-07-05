@@ -1,0 +1,6 @@
+{
+  "case_id": "community-noise-seo-content",
+  "source_type": "seo_content",
+  "expected_bucket": "rejected",
+  "expected_reason": "community_noise_or_seo_content"
+}

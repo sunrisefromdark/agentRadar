@@ -56,6 +56,8 @@ function renderBanner(model: {
 }
 
 export function renderOverviewView(model: OverviewViewModel): string {
+  const runtime = model.run_snapshot?.run_summary?.industry_runtime_summary ?? model.run_snapshot?.industry_runtime_summary ?? null;
+  const policyFinanceReplay = model.run_snapshot?.policy_finance_runtime_replay ?? null;
   const lines = [
     ...renderBanner(model),
     "## Run Trust Summary",
@@ -74,6 +76,29 @@ export function renderOverviewView(model: OverviewViewModel): string {
     ...(model.run_snapshot?.run_summary?.source_status.map(
       (item) => `- ${item.source}: status=${item.status}, enabled=${item.enabled}, count=${item.item_count}`,
     ) ?? ["- run-summary missing"]),
+    "",
+    "## Industry Runtime Snapshot",
+    "",
+    runtime ? `- overall_status: ${runtime.overall_status}` : "- overall_status: missing",
+    runtime
+      ? `- policy_finance_status: ${runtime.policy_finance.status}`
+      : policyFinanceReplay
+        ? `- policy_finance_status: ${policyFinanceReplay.current_status}`
+        : "- policy_finance_status: missing",
+    runtime
+      ? `- policy_finance_profiles: activation=${runtime.policy_finance.activation_profile_ids?.join(", ") || "none"}; stop=${runtime.policy_finance.stop_profile_ids?.join(", ") || "none"}; review=${runtime.policy_finance.review_profile_ids?.join(", ") || "none"}`
+      : policyFinanceReplay
+        ? `- policy_finance_profiles: activation=${policyFinanceReplay.activation_profile_ids.join(", ") || "none"}; stop=${policyFinanceReplay.stop_profile_ids.join(", ") || "none"}; review=${policyFinanceReplay.review_profile_ids.join(", ") || "none"}`
+        : "- policy_finance_profiles: missing",
+    runtime ? `- product_ecosystem_status: ${runtime.product_ecosystem.status}` : "- product_ecosystem_status: missing",
+    runtime
+      ? `- academic_blocked_until: ${runtime.academic_preparatory.blocked_until}`
+      : "- academic_blocked_until: missing",
+    runtime
+      ? `- platform_contract_fixture: ${runtime.platform_contract.fixture_id}`
+      : policyFinanceReplay
+        ? `- platform_contract_fixture: ${policyFinanceReplay.fixture_id}`
+        : "- platform_contract_fixture: missing",
     "",
     "## Top Decisions",
     "",
@@ -170,6 +195,7 @@ export function renderProjectsView(model: ProjectsViewModel): string {
 }
 
 export function renderWeeklyView(model: WeeklyViewModel): string {
+  const runtimeWindow = model.weekly_snapshot?.industry_runtime_window_summary ?? null;
   const lines = [
     ...renderBanner(model),
     "## Weekly Trust Summary",
@@ -178,6 +204,19 @@ export function renderWeeklyView(model: WeeklyViewModel): string {
     `- enhancement_status: ${model.banner.enhancement_status}`,
     `- rules_mode: ${model.banner.mode_label}`,
     `- audit_context: ${model.weekly_snapshot?.audit_status ?? "missing"}`,
+    "",
+    "## Industry Runtime Window",
+    "",
+    runtimeWindow ? `- latest_overall_status: ${runtimeWindow.latest_overall_status ?? "none"}` : "- latest_overall_status: missing",
+    runtimeWindow ? `- latest_academic_blocked_until: ${runtimeWindow.latest_academic_blocked_until ?? "none"}` : "- latest_academic_blocked_until: missing",
+    runtimeWindow ? `- latest_platform_contract_fixture: ${runtimeWindow.latest_platform_contract_fixture ?? "none"}` : "- latest_platform_contract_fixture: missing",
+    runtimeWindow ? `- days_with_industry_runtime_summary: ${runtimeWindow.days_with_industry_runtime_summary}` : "- days_with_industry_runtime_summary: 0",
+    runtimeWindow ? `- policy_finance_runtime_ready_days: ${runtimeWindow.policy_finance_runtime_ready_days.join(", ") || "none"}` : "- policy_finance_runtime_ready_days: none",
+    runtimeWindow ? `- latest_policy_finance_activation_profiles: ${runtimeWindow.latest_policy_finance_activation_profile_ids.join(", ") || "none"}` : "- latest_policy_finance_activation_profiles: none",
+    runtimeWindow ? `- latest_policy_finance_stop_profiles: ${runtimeWindow.latest_policy_finance_stop_profile_ids.join(", ") || "none"}` : "- latest_policy_finance_stop_profiles: none",
+    runtimeWindow ? `- latest_policy_finance_review_profiles: ${runtimeWindow.latest_policy_finance_review_profile_ids.join(", ") || "none"}` : "- latest_policy_finance_review_profiles: none",
+    runtimeWindow ? `- product_ecosystem_dry_run_ready_days: ${runtimeWindow.product_ecosystem_dry_run_ready_days.join(", ") || "none"}` : "- product_ecosystem_dry_run_ready_days: none",
+    runtimeWindow ? `- academic_preparatory_ready_days: ${runtimeWindow.academic_preparatory_ready_days.join(", ") || "none"}` : "- academic_preparatory_ready_days: none",
     "",
     "## Overall Weekly Judgment",
     "",
@@ -230,8 +269,46 @@ export function renderWeeklyView(model: WeeklyViewModel): string {
 export function renderRunHealthView(model: RunHealthViewModel): string {
   const coverageAtlas = model.run_snapshot?.run_summary?.coverage_atlas ?? [];
   const gapLedger = model.run_snapshot?.run_summary?.gap_ledger ?? [];
+  const runtime = model.run_snapshot?.run_summary?.industry_runtime_summary ?? model.run_snapshot?.industry_runtime_summary ?? null;
+  const policyFinanceReplay = model.run_snapshot?.policy_finance_runtime_replay ?? null;
+  const recommendedActions = [
+    ...(runtime?.academic_preparatory.blocked_until
+      ? [`等待 academic 侧交付 ${runtime.academic_preparatory.blocked_until} 后再继续推进 formal runtime 集成`]
+      : []),
+    ...(model.run_snapshot?.verify_result?.recommended_actions ?? []),
+  ];
   const lines = [
     ...renderBanner(model),
+    "## Industry Runtime",
+    "",
+    runtime
+      ? `- overall_status: ${runtime.overall_status}`
+      : policyFinanceReplay
+        ? `- overall_status: ${policyFinanceReplay.current_status}`
+        : "- overall_status: missing",
+    runtime
+      ? `- policy_finance: status=${runtime.policy_finance.status}, negative_reason=${runtime.policy_finance.negative_reason_code}, same_run_messages=${runtime.policy_finance.runtime_consumed_same_run_messages}, activation_profiles=${runtime.policy_finance.activation_profile_ids?.join(", ") || "none"}, stop_profiles=${runtime.policy_finance.stop_profile_ids?.join(", ") || "none"}, review_profiles=${runtime.policy_finance.review_profile_ids?.join(", ") || "none"}`
+      : policyFinanceReplay
+        ? `- policy_finance: status=${policyFinanceReplay.current_status}, negative_reason=${policyFinanceReplay.negative_reason_code}, same_run_messages=${policyFinanceReplay.runtime_consumed_same_run_messages}, activation_profiles=${policyFinanceReplay.activation_profile_ids.join(", ") || "none"}, stop_profiles=${policyFinanceReplay.stop_profile_ids.join(", ") || "none"}, review_profiles=${policyFinanceReplay.review_profile_ids.join(", ") || "none"}`
+        : "- policy_finance: missing",
+    runtime
+      ? `- product_ecosystem: status=${runtime.product_ecosystem.status}, normalized_refs=${runtime.product_ecosystem.normalized_event_batch_refs_count}, coverage_refs=${runtime.product_ecosystem.coverage_refs_count}, contribution_refs=${runtime.product_ecosystem.contribution_refs_count}`
+      : "- product_ecosystem: missing",
+    runtime
+      ? `- academic_preparatory: status=${runtime.academic_preparatory.status}, blocked_until=${runtime.academic_preparatory.blocked_until}, promotion_ready=${runtime.academic_preparatory.promotion_ready ? "true" : "false"}`
+      : "- academic_preparatory: missing",
+    runtime
+      ? `- platform_contract: fixture=${runtime.platform_contract.fixture_id}, governance_published=${runtime.platform_contract.shared_governance_published ? "true" : "false"}, governance_profiles=${runtime.platform_contract.shared_governance_profile_count}, published_for=${runtime.platform_contract.published_for.join(", ") || "none"}`
+      : policyFinanceReplay
+        ? `- platform_contract: fixture=${policyFinanceReplay.fixture_id}, governance_published=unknown, governance_profiles=unknown, published_for=unknown`
+        : "- platform_contract: missing",
+    runtime
+      ? `- dispatch_gate: same_run_requires=${runtime.platform_contract.dispatch_gate.same_run_requires_count}, reservation_state=${runtime.platform_contract.dispatch_gate.high_cost_requires_reservation_state}, budget_rejected_blocks_start=${runtime.platform_contract.dispatch_gate.budget_rejected_blocks_start ? "true" : "false"}, async_only_review_blocks_same_run=${runtime.platform_contract.dispatch_gate.async_only_review_is_not_same_run_available ? "true" : "false"}`
+      : "- dispatch_gate: missing",
+    runtime
+      ? `- event_consumer_gate: responsibility_match=${runtime.platform_contract.event_consumer_gate.execution_context_primary_responsibility_matches_responsibility ? "true" : "false"}, operational_executor_required=${runtime.platform_contract.event_consumer_gate.operational_executor_id_required ? "true" : "false"}, takeover_requires_audit_ref=${runtime.platform_contract.event_consumer_gate.takeover_requires_takeover_audit_ref ? "true" : "false"}`
+      : "- event_consumer_gate: missing",
+    "",
     "## Mission Health",
     "",
     `- mission_discovery_status: ${model.run_snapshot?.run_summary?.mission_discovery_status ?? "missing"}`,
@@ -280,7 +357,7 @@ export function renderRunHealthView(model: RunHealthViewModel): string {
     "",
     "## Recommended Actions",
     "",
-    ...(model.run_snapshot?.verify_result?.recommended_actions.map((action) => `- ${action}`) ?? ["- none"]),
+    ...(recommendedActions.length > 0 ? recommendedActions.map((action) => `- ${action}`) : ["- none"]),
     "",
   ];
   return lines.join("\n");

@@ -1,0 +1,2286 @@
+{
+  "messages": [
+    {
+      "message_id": "msg-dc23e9644909",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-e4358d10ae0f",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-cc93f4d299a6",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-ad7d54dc49c1",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-28428ba82df0",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-ace237faec27",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-d24a04222b9f",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-7635ef8eacbf",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-6229d35c5dbe",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "tool_status_report",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "payload_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-8f5ad1a13b4f",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-aa3e67c07eb4",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "finance-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "capital-finance",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "industry_agent_contribution",
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-f092dbef673b",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-ae9d96b776d4",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-0d8552dde3ac",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-3c8ab552e3e0",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-383175638cdb",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-f1e4a9a5564f",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-fa647b391917",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-8d638fae8878",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-1bbff68e486c",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-375b8dd7b4cb",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "tool_status_report",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "payload_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-3046bdca1101",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-2e568336150e",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-regulatory",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "industry_agent_contribution",
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-79653d22ccd7",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-f7ce21c825fa",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-174df2d6a1dc",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-170e9cc33cb3",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-3f2b0e6cf43a",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-f8cba9119c1c",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-d173707068f5",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-2bbc3a42db6e",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "evidence_batch",
+      "payload_schema": "industry-signal-event-batch.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-67819751069a",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-492d15261888",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "tool_status_report",
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "payload_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-80872600df18",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-144f17f808d4",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "responsibility_id": "policy-research-thinktank",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "industry_agent_contribution",
+      "payload_schema": "industry-agent-contribution.v1",
+      "payload_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-b5524303aa72",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    },
+    {
+      "message_id": "msg-8d7037364d29",
+      "schema_version": "industry-agent-message.v1",
+      "thread_id": "thread-group-runtime-helper-1",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "sent_at": "2026-06-26T17:30:00+08:00",
+      "from_agent_id": "policy-agent",
+      "to_agent_id": "broadcast",
+      "checkpoint_stage": "packaging",
+      "capability_class": "claim-critical",
+      "kind": "daily_industry_evidence_pack_input",
+      "payload_schema": "daily-industry-evidence-pack-input.v1",
+      "payload_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-57f74fa81e92",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-57f74fa81e92"
+      ],
+      "dispatch_context_ref": "industry://internal/2026-06-26/same-run-dispatch-context.v1/dispatch-002",
+      "scheduling_key": "claim:missing-stable-key",
+      "claim_admission_assessment_ref": "industry://internal/2026-06-26/claim-admission-assessment.v1/admit-002",
+      "capacity_reservation_refs": [
+        "industry://internal/2026-06-26/capacity-reservation.v1/res-002"
+      ],
+      "required_depends_on_message_ids": [],
+      "advisory_depends_on_message_ids": [],
+      "idempotency_key": "idem-e1876fa4a737",
+      "status": "sent",
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false
+    }
+  ],
+  "manifests": [
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-51541b7359b8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "f019963af50dde59a2682bfdd0a23fa40909bdf3de21dc06639f64071dacf5fb",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e.json",
+      "summary_cn": "capital-finance accepted 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "9b1264ab6a75633c46c870b643d0f0ecb2d919eb45899d34e6a6a951635a24de",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46.json",
+      "summary_cn": "capital-finance counter 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "03cfe9a6d94d5a702aa39549a7bc539501b39c1356aba53259462bf042b57e72",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610.json",
+      "summary_cn": "capital-finance diagnostic 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "22cfa7510d6da84cf6dd044a8b3efd19eabfc8e701af6983f4ef395e9b80d8d8",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79.json",
+      "summary_cn": "capital-finance rejected 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5",
+      "artifact_kind": "tool-coverage-report",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-51541b7359b8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "36803cd00fc1a03e51ba19fe3ad9b0ed2d72f01716fa1747e8ba32df21a2ffa8",
+      "storage_path": "data/industry/internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5.json",
+      "summary_cn": "capital-finance 工具覆盖报告"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "artifact_kind": "agent-contribution",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-51541b7359b8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "0803f5246ffa05a9594e09cb192a57423195151ec7f108ad58d814e82b580d09",
+      "storage_path": "data/industry/internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33.json",
+      "summary_cn": "capital-finance contribution"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-44a47b338da8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "87d34b02db17503f13bbb8341b5086b604c6a6cde7e69a9ebd10d8506bb3fc7a",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22.json",
+      "summary_cn": "policy-regulatory accepted 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "d4a1b2a5830ed0a5b6d5e5a5093cfdfca5a9472c999e739bae4c5b081c033f72",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f.json",
+      "summary_cn": "policy-regulatory counter 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "e3fa5b6669642bc884ea927d04c9b5cd8099402d2db5c08b8770ee0b416f665b",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975.json",
+      "summary_cn": "policy-regulatory diagnostic 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "f68f23039481ac08a2094fd13b305990b5c7aaea66f2b88a9d3526171f701170",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd.json",
+      "summary_cn": "policy-regulatory rejected 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b",
+      "artifact_kind": "tool-coverage-report",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-44a47b338da8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "9d441ee1ad9664d8ddd657c7b4a2b15349e576baa2708fa38972b8b1360a53d1",
+      "storage_path": "data/industry/internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b.json",
+      "summary_cn": "policy-regulatory 工具覆盖报告"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "artifact_kind": "agent-contribution",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-44a47b338da8"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_regulatory"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "efc4a7d166954d9f895741f6ae729eb24f08a435ff5dfecdf9cf6844c7619da5",
+      "storage_path": "data/industry/internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6.json",
+      "summary_cn": "policy-regulatory contribution"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-cc11dd8959d2"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "58b36466fc1e2151f557752488e1b449b860faeac3d819a531a75fbccc6a2983",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3.json",
+      "summary_cn": "policy-research-thinktank accepted 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "7c05074a6f08ce512054dc37186655c3b8db9634f7a56364041baefa46a44f79",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139.json",
+      "summary_cn": "policy-research-thinktank counter 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "acb08ec8eb07fc86a6a89591dd765f8161ecefab00a9b3273902389ebe52587f",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53.json",
+      "summary_cn": "policy-research-thinktank diagnostic 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960",
+      "artifact_kind": "event-batch",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "f98da8c3720a92348aeb16a9a923f646d3c427d179118782f3362eddf2868369",
+      "storage_path": "data/industry/internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960.json",
+      "summary_cn": "policy-research-thinktank rejected 事件批次"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9",
+      "artifact_kind": "tool-coverage-report",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-cc11dd8959d2"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "399818458314a96376be56ef131c7c981e2fff989d7d7f2f80376af5e0288aff",
+      "storage_path": "data/industry/internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9.json",
+      "summary_cn": "policy-research-thinktank 工具覆盖报告"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "artifact_kind": "agent-contribution",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [
+        "evt-cc11dd8959d2"
+      ],
+      "claim_ids": [],
+      "axis_keys": [
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "a1e830316269de5488236f4853c88cc8eceed24eca9c51cdea113eed6509e844",
+      "storage_path": "data/industry/internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6.json",
+      "summary_cn": "policy-research-thinktank contribution"
+    },
+    {
+      "artifact_ref": "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-57f74fa81e92",
+      "artifact_kind": "daily-pack-input",
+      "schema_version": "1.0.0",
+      "produced_by_agent_id": "policy-agent",
+      "produced_at": "2026-06-26T17:30:00+08:00",
+      "input_artifact_refs": [],
+      "event_ids": [],
+      "claim_ids": [],
+      "axis_keys": [
+        "capital_finance",
+        "policy_regulatory",
+        "policy_research_thinktank"
+      ],
+      "visibility_tier": "internal_only",
+      "contains_raw_text": false,
+      "contains_profile_urls": false,
+      "content_hash": "03915d1ffdb65d6f57c85fb44d236ca6a109291c314d65b736f0678d58882092",
+      "storage_path": "data/industry/internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-57f74fa81e92.json",
+      "summary_cn": "政策金融组 daily-industry-evidence-pack-input"
+    }
+  ],
+  "payloads": [
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-41e93b734857",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-dc23e9644909",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5"
+      ],
+      "responsibility_id": "capital-finance",
+      "metric_input_completeness": {
+        "accepted_event_count": 1,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "capital_finance",
+      "bucket": "accepted",
+      "events": [
+        {
+          "event_id": "evt-51541b7359b8",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-26T17:30:00+08:00",
+          "ingested_at": "2026-06-26T17:30:00+08:00",
+          "freshness_anchor_kind": "observed_at",
+          "freshness_profile_id": "capital_finance.freshness.v1",
+          "axis": "capital_finance",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "finance-runtime-helper",
+            "display_name": "SEC Filing",
+            "source_type": "financial_filing",
+            "source_family": "finance_sec_filing",
+            "authority_tier": "core",
+            "primary_source_distance": "primary",
+            "access_mode": "api",
+            "cost_tier": "free",
+            "review_status": "active",
+            "named_source": "SEC EDGAR",
+            "language": "zh",
+            "region": "global"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 0.91,
+            "matched_reasons": [
+              "finance-runtime-helper"
+            ]
+          },
+          "evidence": {
+            "title": "资本主证 helper",
+            "summary_cn": "finance helper accepted",
+            "raw_ref": "raw://raw-51541b7359b8",
+            "finance_signal_kind": "capital_allocation"
+          },
+          "collected_by_agent_id": "finance-agent",
+          "responsibility_id": "capital-finance",
+          "execution_context": {
+            "primary_responsibility_id": "capital-finance",
+            "default_owner_agent_id": "finance-agent",
+            "operational_executor_id": "finance-agent",
+            "takeover_mode": "none"
+          },
+          "tool_route_id": "capital_finance:primary_tool:sec-edgar-api",
+          "audit": {
+            "public_safe": true,
+            "redaction_policy_version": "industry-redaction.v1",
+            "dedupe_key": "dedupe-e351a7eee129",
+            "source_chain_key": "chain-26720b7374df"
+          }
+        }
+      ]
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-dd0165798b0e",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-cc93f4d299a6",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5"
+      ],
+      "responsibility_id": "capital-finance",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "capital_finance",
+      "bucket": "counter",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-2cc8ae16f9b9",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-28428ba82df0",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5"
+      ],
+      "responsibility_id": "capital-finance",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "capital_finance",
+      "bucket": "diagnostic",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-817d051e6d6b",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-d24a04222b9f",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5"
+      ],
+      "responsibility_id": "capital-finance",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "capital_finance",
+      "bucket": "rejected",
+      "events": []
+    },
+    {
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-672043390aa3",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-6229d35c5dbe",
+      "responsibility_id": "capital-finance",
+      "axis": "capital_finance",
+      "primary_tool_ids": [
+        "sec-edgar-api",
+        "portfolio-company-ir-feed",
+        "public-company-filings",
+        "earnings-call-transcripts",
+        "public-ma-announcements"
+      ],
+      "secondary_toolset_ids": [
+        "company-investor-relations-docs",
+        "public-fund-reports",
+        "industry-finance-data"
+      ],
+      "fallback_tool_ids": [
+        "licensed-market-discovery",
+        "market-report-research"
+      ],
+      "last_resort_tool_ids": [
+        "manual-finance-triage"
+      ],
+      "eligible_tool_ids": [
+        "sec-edgar-api"
+      ],
+      "selected_from_tool_ids": [
+        "sec-edgar-api"
+      ],
+      "attempted_tool_ids": [],
+      "active_route_level": "primary_tool",
+      "active_tool_ids": [
+        "sec-edgar-api"
+      ],
+      "active_source_class": "official_structured_api",
+      "route_status": {
+        "primary_tool": {
+          "state": "degraded",
+          "reason_codes": [
+            "partial_tool_availability"
+          ]
+        },
+        "secondary_toolset": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "fallback_tools": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "last_resort_mode": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        }
+      },
+      "budget_status": {
+        "profile_id": "axis-runtime-budget-profile.v1/capital_finance",
+        "budget_exceeded": false,
+        "spent_summary_cn": "预算在安全范围内"
+      },
+      "degraded": false,
+      "degradation_reason_codes": [],
+      "registry_snapshot_ref": "registry://industry/source-authority/finance/v1",
+      "tool_registry_snapshot_ref": "registry://industry/tool-catalog/finance/v1",
+      "report": {
+        "axis": "capital_finance",
+        "primary_tool_ids": [
+          "sec-edgar-api",
+          "portfolio-company-ir-feed",
+          "public-company-filings",
+          "earnings-call-transcripts",
+          "public-ma-announcements"
+        ],
+        "secondary_toolset_ids": [
+          "company-investor-relations-docs",
+          "public-fund-reports",
+          "industry-finance-data"
+        ],
+        "fallback_tool_ids": [
+          "licensed-market-discovery",
+          "market-report-research"
+        ],
+        "last_resort_tool_ids": [
+          "manual-finance-triage"
+        ],
+        "eligible_tool_ids": [
+          "sec-edgar-api"
+        ],
+        "selected_from_tool_ids": [
+          "sec-edgar-api"
+        ],
+        "attempted_tool_ids": [],
+        "selection_scorecard_version": "tool-selection-scorecard.v1",
+        "selection_score_total": 0.91,
+        "selection_score_breakdown": {
+          "source_fidelity": 0.16,
+          "citation_traceability": 0.14,
+          "output_structure": 0.14,
+          "freshness_sla_fit": 0.14,
+          "stability": 0.12,
+          "cost_efficiency": 0.11,
+          "license_risk_fit": 0.1
+        },
+        "veto_reason_codes": [],
+        "selection_reason_codes": [
+          "route_primary_tool",
+          "official_structured_api"
+        ],
+        "active_route_level": "primary_tool",
+        "active_tool_ids": [
+          "sec-edgar-api"
+        ],
+        "active_source_class": "official_structured_api",
+        "route_status": {
+          "primary_tool": {
+            "state": "degraded",
+            "reason_codes": [
+              "partial_tool_availability"
+            ]
+          },
+          "secondary_toolset": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "fallback_tools": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "last_resort_mode": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          }
+        },
+        "budget_status": {
+          "profile_id": "axis-runtime-budget-profile.v1/capital_finance",
+          "budget_exceeded": false,
+          "spent_summary_cn": "预算在安全范围内"
+        },
+        "degraded": false,
+        "degradation_reason_codes": [],
+        "candidate_ref_count": 1,
+        "accepted_ref_count": 1,
+        "citation_trace_rate": 1,
+        "evidence_event_ids": [
+          "evt-51541b7359b8"
+        ],
+        "rejected_event_ids": [],
+        "source_tiers_present": [
+          "core"
+        ],
+        "access_modes_present": [
+          "api"
+        ],
+        "review_statuses_present": [
+          "active"
+        ],
+        "source_families_present": [
+          "finance_sec_filing"
+        ],
+        "named_sources_present": [
+          "SEC EDGAR"
+        ],
+        "missing_source_families": [],
+        "optional_paid_source_families": [],
+        "human_exception_required": false,
+        "registry_snapshot_ref": "registry://industry/source-authority/finance/v1",
+        "tool_registry_snapshot_ref": "registry://industry/tool-catalog/finance/v1",
+        "summary_cn": "capital_finance 采用 primary_tool 路线，来源类型为 official_structured_api"
+      }
+    },
+    {
+      "payload_schema": "industry-agent-contribution.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-ca523152c879",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-aa3e67c07eb4",
+      "actual_agent_id": "finance-agent",
+      "responsibility_id": "capital-finance",
+      "status": "ok",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79"
+      ],
+      "contribution": {
+        "responsibility_id": "capital-finance",
+        "handled_by_agent_id": "finance-agent",
+        "execution_context": {
+          "primary_responsibility_id": "capital-finance",
+          "default_owner_agent_id": "finance-agent",
+          "operational_executor_id": "finance-agent",
+          "takeover_mode": "none"
+        },
+        "status": "ok",
+        "covered_axes": [
+          "capital_finance"
+        ],
+        "event_count": 1,
+        "accepted_event_count": 1,
+        "assisted_event_count": 0,
+        "rejected_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "metric_input_gap_count": 0,
+        "unscorable_event_count": 0,
+        "profile_blocked_event_count": 0,
+        "input_artifact_refs": [],
+        "output_artifact_refs": [
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79"
+        ],
+        "tool_route_ids": [
+          "capital_finance:primary_tool"
+        ],
+        "contribution_summary_cn": "capital-finance 已完成事件、coverage 和 handoff 产出"
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-4bc81041e6e3",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-ae9d96b776d4",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b"
+      ],
+      "responsibility_id": "policy-regulatory",
+      "metric_input_completeness": {
+        "accepted_event_count": 1,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_regulatory",
+      "bucket": "accepted",
+      "events": [
+        {
+          "event_id": "evt-44a47b338da8",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-26T17:30:00+08:00",
+          "ingested_at": "2026-06-26T17:30:00+08:00",
+          "freshness_anchor_kind": "observed_at",
+          "freshness_profile_id": "policy_regulatory.freshness.v1",
+          "axis": "policy_regulatory",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "reg-runtime-helper",
+            "display_name": "监管公告",
+            "source_type": "policy",
+            "source_family": "policy_regulatory_filing",
+            "authority_tier": "core",
+            "primary_source_distance": "primary",
+            "access_mode": "public",
+            "cost_tier": "free",
+            "review_status": "active",
+            "named_source": "Federal Register",
+            "language": "zh",
+            "region": "global"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 0.9,
+            "matched_reasons": [
+              "reg-runtime-helper"
+            ]
+          },
+          "evidence": {
+            "title": "监管主证 helper",
+            "summary_cn": "regulatory helper accepted",
+            "raw_ref": "raw://raw-44a47b338da8",
+            "policy_signal_kind": "confirmed_approval"
+          },
+          "collected_by_agent_id": "policy-agent",
+          "responsibility_id": "policy-regulatory",
+          "execution_context": {
+            "primary_responsibility_id": "policy-regulatory",
+            "default_owner_agent_id": "policy-agent",
+            "operational_executor_id": "policy-agent",
+            "takeover_mode": "none"
+          },
+          "tool_route_id": "policy_regulatory:primary_tool:official-regulator-rss",
+          "audit": {
+            "public_safe": true,
+            "redaction_policy_version": "industry-redaction.v1",
+            "dedupe_key": "dedupe-e9e5130bf418",
+            "source_chain_key": "chain-40df5224c4a1"
+          }
+        }
+      ]
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-907f97156eec",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-3c8ab552e3e0",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b"
+      ],
+      "responsibility_id": "policy-regulatory",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_regulatory",
+      "bucket": "counter",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-d9b1612f7655",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-f1e4a9a5564f",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b"
+      ],
+      "responsibility_id": "policy-regulatory",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_regulatory",
+      "bucket": "diagnostic",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-f4dd7fd1b356",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-8d638fae8878",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b"
+      ],
+      "responsibility_id": "policy-regulatory",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_regulatory",
+      "bucket": "rejected",
+      "events": []
+    },
+    {
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-c8f01f8c49a1",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-375b8dd7b4cb",
+      "responsibility_id": "policy-regulatory",
+      "axis": "policy_regulatory",
+      "primary_tool_ids": [
+        "official-regulator-rss",
+        "government-policy-library",
+        "standards-body-docs",
+        "public-procurement-notices",
+        "official-project-announcements"
+      ],
+      "secondary_toolset_ids": [
+        "regulator-open-data",
+        "approval-bulletins"
+      ],
+      "fallback_tool_ids": [
+        "policy-domain-search",
+        "official-policy-document-search"
+      ],
+      "last_resort_tool_ids": [
+        "manual-regulatory-triage"
+      ],
+      "eligible_tool_ids": [
+        "official-regulator-rss"
+      ],
+      "selected_from_tool_ids": [
+        "official-regulator-rss"
+      ],
+      "attempted_tool_ids": [],
+      "active_route_level": "primary_tool",
+      "active_tool_ids": [
+        "official-regulator-rss"
+      ],
+      "active_source_class": "official_structured_api",
+      "route_status": {
+        "primary_tool": {
+          "state": "degraded",
+          "reason_codes": [
+            "partial_tool_availability"
+          ]
+        },
+        "secondary_toolset": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "fallback_tools": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "last_resort_mode": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        }
+      },
+      "budget_status": {
+        "profile_id": "axis-runtime-budget-profile.v1/policy_regulatory",
+        "budget_exceeded": false,
+        "spent_summary_cn": "预算在安全范围内"
+      },
+      "degraded": false,
+      "degradation_reason_codes": [],
+      "registry_snapshot_ref": "registry://industry/source-authority/policy/v1",
+      "tool_registry_snapshot_ref": "registry://industry/tool-catalog/policy/v1",
+      "report": {
+        "axis": "policy_regulatory",
+        "primary_tool_ids": [
+          "official-regulator-rss",
+          "government-policy-library",
+          "standards-body-docs",
+          "public-procurement-notices",
+          "official-project-announcements"
+        ],
+        "secondary_toolset_ids": [
+          "regulator-open-data",
+          "approval-bulletins"
+        ],
+        "fallback_tool_ids": [
+          "policy-domain-search",
+          "official-policy-document-search"
+        ],
+        "last_resort_tool_ids": [
+          "manual-regulatory-triage"
+        ],
+        "eligible_tool_ids": [
+          "official-regulator-rss"
+        ],
+        "selected_from_tool_ids": [
+          "official-regulator-rss"
+        ],
+        "attempted_tool_ids": [],
+        "selection_scorecard_version": "tool-selection-scorecard.v1",
+        "selection_score_total": 0.91,
+        "selection_score_breakdown": {
+          "source_fidelity": 0.16,
+          "citation_traceability": 0.14,
+          "output_structure": 0.14,
+          "freshness_sla_fit": 0.14,
+          "stability": 0.12,
+          "cost_efficiency": 0.11,
+          "license_risk_fit": 0.1
+        },
+        "veto_reason_codes": [],
+        "selection_reason_codes": [
+          "route_primary_tool",
+          "official_structured_api"
+        ],
+        "active_route_level": "primary_tool",
+        "active_tool_ids": [
+          "official-regulator-rss"
+        ],
+        "active_source_class": "official_structured_api",
+        "route_status": {
+          "primary_tool": {
+            "state": "degraded",
+            "reason_codes": [
+              "partial_tool_availability"
+            ]
+          },
+          "secondary_toolset": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "fallback_tools": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "last_resort_mode": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          }
+        },
+        "budget_status": {
+          "profile_id": "axis-runtime-budget-profile.v1/policy_regulatory",
+          "budget_exceeded": false,
+          "spent_summary_cn": "预算在安全范围内"
+        },
+        "degraded": false,
+        "degradation_reason_codes": [],
+        "candidate_ref_count": 1,
+        "accepted_ref_count": 1,
+        "citation_trace_rate": 1,
+        "evidence_event_ids": [
+          "evt-44a47b338da8"
+        ],
+        "rejected_event_ids": [],
+        "source_tiers_present": [
+          "core"
+        ],
+        "access_modes_present": [
+          "public"
+        ],
+        "review_statuses_present": [
+          "active"
+        ],
+        "source_families_present": [
+          "policy_regulatory_filing"
+        ],
+        "named_sources_present": [
+          "Federal Register"
+        ],
+        "missing_source_families": [],
+        "optional_paid_source_families": [],
+        "human_exception_required": false,
+        "registry_snapshot_ref": "registry://industry/source-authority/policy/v1",
+        "tool_registry_snapshot_ref": "registry://industry/tool-catalog/policy/v1",
+        "summary_cn": "policy_regulatory 采用 primary_tool 路线，来源类型为 official_structured_api"
+      }
+    },
+    {
+      "payload_schema": "industry-agent-contribution.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-319336dee9f7",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-2e568336150e",
+      "actual_agent_id": "policy-agent",
+      "responsibility_id": "policy-regulatory",
+      "status": "ok",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd"
+      ],
+      "contribution": {
+        "responsibility_id": "policy-regulatory",
+        "handled_by_agent_id": "policy-agent",
+        "execution_context": {
+          "primary_responsibility_id": "policy-regulatory",
+          "default_owner_agent_id": "policy-agent",
+          "operational_executor_id": "policy-agent",
+          "takeover_mode": "none"
+        },
+        "status": "ok",
+        "covered_axes": [
+          "policy_regulatory"
+        ],
+        "event_count": 1,
+        "accepted_event_count": 1,
+        "assisted_event_count": 0,
+        "rejected_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "metric_input_gap_count": 0,
+        "unscorable_event_count": 0,
+        "profile_blocked_event_count": 0,
+        "input_artifact_refs": [],
+        "output_artifact_refs": [
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd"
+        ],
+        "tool_route_ids": [
+          "policy_regulatory:primary_tool"
+        ],
+        "contribution_summary_cn": "policy-regulatory 已完成事件、coverage 和 handoff 产出"
+      }
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-2b74042426b2",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-f7ce21c825fa",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "responsibility_id": "policy-research-thinktank",
+      "metric_input_completeness": {
+        "accepted_event_count": 1,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_research_thinktank",
+      "bucket": "accepted",
+      "events": [
+        {
+          "event_id": "evt-cc11dd8959d2",
+          "schema_version": "industry-signal-event.v1",
+          "observed_at": "2026-06-26T17:30:00+08:00",
+          "ingested_at": "2026-06-26T17:30:00+08:00",
+          "freshness_anchor_kind": "observed_at",
+          "freshness_profile_id": "policy_research_thinktank.freshness.v1",
+          "axis": "policy_research_thinktank",
+          "source_polarity_cue": "supporting",
+          "source": {
+            "source_id": "thinktank-runtime-helper",
+            "display_name": "智库报告",
+            "source_type": "thinktank_report",
+            "source_family": "thinktank_institutional_report",
+            "authority_tier": "proven",
+            "primary_source_distance": "primary",
+            "access_mode": "public",
+            "cost_tier": "free",
+            "review_status": "active",
+            "named_source": "RAND",
+            "language": "zh",
+            "region": "global"
+          },
+          "agent_relevance": {
+            "state": "agent_core",
+            "score": 0.82,
+            "matched_reasons": [
+              "thinktank-runtime-helper"
+            ]
+          },
+          "evidence": {
+            "title": "智库主证 helper",
+            "summary_cn": "thinktank helper accepted",
+            "raw_ref": "raw://raw-cc11dd8959d2",
+            "policy_signal_kind": "thinktank_viewpoint"
+          },
+          "collected_by_agent_id": "policy-agent",
+          "responsibility_id": "policy-research-thinktank",
+          "execution_context": {
+            "primary_responsibility_id": "policy-research-thinktank",
+            "default_owner_agent_id": "policy-agent",
+            "operational_executor_id": "policy-agent",
+            "takeover_mode": "none"
+          },
+          "tool_route_id": "policy_research_thinktank:primary_tool:thinktank-report-registry",
+          "audit": {
+            "public_safe": true,
+            "redaction_policy_version": "industry-redaction.v1",
+            "dedupe_key": "dedupe-b16df912b56a",
+            "source_chain_key": "chain-df400bb55f1b"
+          }
+        }
+      ]
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-3503e9c95572",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-170e9cc33cb3",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "responsibility_id": "policy-research-thinktank",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_research_thinktank",
+      "bucket": "counter",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-c657aed8a9fe",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-f8cba9119c1c",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "responsibility_id": "policy-research-thinktank",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_research_thinktank",
+      "bucket": "diagnostic",
+      "events": []
+    },
+    {
+      "payload_schema": "industry-signal-event-batch.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-13fca303943d",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-2bbc3a42db6e",
+      "events_ref": "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960",
+      "raw_tool_output_refs": [],
+      "agent_contribution_ref": "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+      "tool_status_report_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "responsibility_id": "policy-research-thinktank",
+      "metric_input_completeness": {
+        "accepted_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "rejected_event_count": 0
+      },
+      "axis": "policy_research_thinktank",
+      "bucket": "rejected",
+      "events": []
+    },
+    {
+      "payload_schema": "axis-tool-coverage-report.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-016ec255c692",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-492d15261888",
+      "responsibility_id": "policy-research-thinktank",
+      "axis": "policy_research_thinktank",
+      "primary_tool_ids": [
+        "thinktank-report-registry",
+        "institution-research-briefs",
+        "oecd-ai-policy-observatory",
+        "cset-policy-briefs",
+        "stanford-ai-index",
+        "brookings-ai-research",
+        "rand-ai-research"
+      ],
+      "secondary_toolset_ids": [
+        "research-library-index",
+        "policy-research-series-index"
+      ],
+      "fallback_tool_ids": [
+        "thinktank-domain-search",
+        "institution-report-search"
+      ],
+      "last_resort_tool_ids": [
+        "manual-thinktank-triage"
+      ],
+      "eligible_tool_ids": [
+        "thinktank-report-registry"
+      ],
+      "selected_from_tool_ids": [
+        "thinktank-report-registry"
+      ],
+      "attempted_tool_ids": [],
+      "active_route_level": "primary_tool",
+      "active_tool_ids": [
+        "thinktank-report-registry"
+      ],
+      "active_source_class": "official_owned_feed_or_doc",
+      "route_status": {
+        "primary_tool": {
+          "state": "degraded",
+          "reason_codes": [
+            "partial_tool_availability"
+          ]
+        },
+        "secondary_toolset": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "fallback_tools": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        },
+        "last_resort_mode": {
+          "state": "blocked",
+          "reason_codes": [
+            "tool_unavailable"
+          ]
+        }
+      },
+      "budget_status": {
+        "profile_id": "axis-runtime-budget-profile.v1/policy_research_thinktank",
+        "budget_exceeded": false,
+        "spent_summary_cn": "预算在安全范围内"
+      },
+      "degraded": false,
+      "degradation_reason_codes": [],
+      "registry_snapshot_ref": "registry://industry/source-authority/thinktank/v1",
+      "tool_registry_snapshot_ref": "registry://industry/tool-catalog/thinktank/v1",
+      "report": {
+        "axis": "policy_research_thinktank",
+        "primary_tool_ids": [
+          "thinktank-report-registry",
+          "institution-research-briefs",
+          "oecd-ai-policy-observatory",
+          "cset-policy-briefs",
+          "stanford-ai-index",
+          "brookings-ai-research",
+          "rand-ai-research"
+        ],
+        "secondary_toolset_ids": [
+          "research-library-index",
+          "policy-research-series-index"
+        ],
+        "fallback_tool_ids": [
+          "thinktank-domain-search",
+          "institution-report-search"
+        ],
+        "last_resort_tool_ids": [
+          "manual-thinktank-triage"
+        ],
+        "eligible_tool_ids": [
+          "thinktank-report-registry"
+        ],
+        "selected_from_tool_ids": [
+          "thinktank-report-registry"
+        ],
+        "attempted_tool_ids": [],
+        "selection_scorecard_version": "tool-selection-scorecard.v1",
+        "selection_score_total": 0.91,
+        "selection_score_breakdown": {
+          "source_fidelity": 0.16,
+          "citation_traceability": 0.14,
+          "output_structure": 0.14,
+          "freshness_sla_fit": 0.14,
+          "stability": 0.12,
+          "cost_efficiency": 0.11,
+          "license_risk_fit": 0.1
+        },
+        "veto_reason_codes": [],
+        "selection_reason_codes": [
+          "route_primary_tool",
+          "official_owned_feed_or_doc"
+        ],
+        "active_route_level": "primary_tool",
+        "active_tool_ids": [
+          "thinktank-report-registry"
+        ],
+        "active_source_class": "official_owned_feed_or_doc",
+        "route_status": {
+          "primary_tool": {
+            "state": "degraded",
+            "reason_codes": [
+              "partial_tool_availability"
+            ]
+          },
+          "secondary_toolset": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "fallback_tools": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          },
+          "last_resort_mode": {
+            "state": "blocked",
+            "reason_codes": [
+              "tool_unavailable"
+            ]
+          }
+        },
+        "budget_status": {
+          "profile_id": "axis-runtime-budget-profile.v1/policy_research_thinktank",
+          "budget_exceeded": false,
+          "spent_summary_cn": "预算在安全范围内"
+        },
+        "degraded": false,
+        "degradation_reason_codes": [],
+        "candidate_ref_count": 1,
+        "accepted_ref_count": 1,
+        "citation_trace_rate": 1,
+        "evidence_event_ids": [
+          "evt-cc11dd8959d2"
+        ],
+        "rejected_event_ids": [],
+        "source_tiers_present": [
+          "proven"
+        ],
+        "access_modes_present": [
+          "public"
+        ],
+        "review_statuses_present": [
+          "active"
+        ],
+        "source_families_present": [
+          "thinktank_institutional_report"
+        ],
+        "named_sources_present": [
+          "RAND"
+        ],
+        "missing_source_families": [],
+        "optional_paid_source_families": [],
+        "human_exception_required": false,
+        "registry_snapshot_ref": "registry://industry/source-authority/thinktank/v1",
+        "tool_registry_snapshot_ref": "registry://industry/tool-catalog/thinktank/v1",
+        "summary_cn": "policy_research_thinktank 采用 primary_tool 路线，来源类型为 official_owned_feed_or_doc"
+      }
+    },
+    {
+      "payload_schema": "industry-agent-contribution.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-41e65a5c0cc9",
+      "run_id": "run-group-runtime-helper-1",
+      "source_message_id": "msg-144f17f808d4",
+      "actual_agent_id": "policy-agent",
+      "responsibility_id": "policy-research-thinktank",
+      "status": "ok",
+      "input_artifact_refs": [],
+      "output_artifact_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960"
+      ],
+      "contribution": {
+        "responsibility_id": "policy-research-thinktank",
+        "handled_by_agent_id": "policy-agent",
+        "execution_context": {
+          "primary_responsibility_id": "policy-research-thinktank",
+          "default_owner_agent_id": "policy-agent",
+          "operational_executor_id": "policy-agent",
+          "takeover_mode": "none"
+        },
+        "status": "ok",
+        "covered_axes": [
+          "policy_research_thinktank"
+        ],
+        "event_count": 1,
+        "accepted_event_count": 1,
+        "assisted_event_count": 0,
+        "rejected_event_count": 0,
+        "counter_event_count": 0,
+        "diagnostic_event_count": 0,
+        "metric_input_gap_count": 0,
+        "unscorable_event_count": 0,
+        "profile_blocked_event_count": 0,
+        "input_artifact_refs": [],
+        "output_artifact_refs": [
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+          "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960"
+        ],
+        "tool_route_ids": [
+          "policy_research_thinktank:primary_tool"
+        ],
+        "contribution_summary_cn": "policy-research-thinktank 已完成事件、coverage 和 handoff 产出"
+      }
+    },
+    {
+      "payload_schema": "daily-industry-evidence-pack-input.v1",
+      "schema_version": "1.0.0",
+      "payload_id": "payload-6675edb45ccc",
+      "run_id": "run-group-runtime-helper-1",
+      "window_start": "2026-06-20T00:00:00+08:00",
+      "window_end": "2026-06-26T23:59:59+08:00",
+      "source_message_id": "msg-8d7037364d29",
+      "source_message_ids": [
+        "msg-dc23e9644909",
+        "msg-d24a04222b9f",
+        "msg-6229d35c5dbe",
+        "msg-aa3e67c07eb4",
+        "msg-ae9d96b776d4",
+        "msg-8d638fae8878",
+        "msg-375b8dd7b4cb",
+        "msg-2e568336150e",
+        "msg-f7ce21c825fa",
+        "msg-2bbc3a42db6e",
+        "msg-492d15261888",
+        "msg-144f17f808d4"
+      ],
+      "normalized_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3"
+      ],
+      "rejected_event_batch_refs": [
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd",
+        "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960"
+      ],
+      "coverage_refs": [
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5",
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b",
+        "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9"
+      ],
+      "contribution_refs": [
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+        "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6"
+      ]
+    }
+  ],
+  "artifactRefs": [
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-d44b8e754f3e",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-342822de4a46",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-0f9402982610",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-4bddd791be79",
+    "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-36b562eaacc5",
+    "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-9b2bd25e6c33",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-b6a971009b22",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-194d634b927f",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-38182343c975",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-1f4c38d659bd",
+    "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-b46510f59d2b",
+    "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-618b5712b2a6",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-229ff593f4b3",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-793d99ce6139",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-811abff7cd53",
+    "industry://internal/2026-06-26/industry-signal-event-batch.v1/artifact-bcaafac4a960",
+    "industry://internal/2026-06-26/axis-tool-coverage-report.v1/artifact-670707823ab9",
+    "industry://internal/2026-06-26/industry-agent-contribution.v1/artifact-859e461284d6",
+    "industry://internal/2026-06-26/daily-industry-evidence-pack-input.v1/artifact-57f74fa81e92"
+  ]
+}

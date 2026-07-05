@@ -1,0 +1,27 @@
+# Policy Finance Handoff Note
+
+- 当前实现已经形成可交给中台消费的正式 bundle，稳定入口已通过 `src/industry/agents/policy-agent/index.ts` 导出 `buildPolicyFinanceGroupHandoff(...)` 与 `buildPolicyFinanceHandoffBundle(...)`。
+- bundle 内 payload 已统一到 canonical schema：
+  - `industry-signal-event-batch.v1`
+  - `axis-tool-coverage-report.v1`
+  - `industry-agent-contribution.v1`
+  - `daily-industry-evidence-pack-input.v1`
+- message `kind`、`payload_schema`、`industry://internal/...` artifact ref、`source_message_id` 顶层字段已对齐中台 `Phase 1A`。
+- same-run / claim-critical 场景下，producer 已可透传：
+  - `dispatch_context_ref`
+  - `scheduling_key`
+  - `claim_partition_id` 或 `candidate_group_id`
+  - `claim_admission_assessment_ref`
+  - `capacity_reservation_refs`
+- 当前可直接复用的联调样本：
+  - 正例：`fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json`
+  - 反例：`fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json`
+- 当前联调校验已覆盖：
+  - `validateFinancePolicyHandoff(...)`
+  - `validateSameRunConsumerRefs(...)`
+  - `validateDispatchRuntimeGate(...)`
+- 中台已完成：
+  - dispatch runtime 对 same-run refs 的实际消费链路
+  - shared governance profile、reason/state 字典的正式联调收口
+- 当前这批交付物已经覆盖 producer -> dry-run -> runtime path；后续只进入最终跨组集成与总验收。
+- 本组不再新增共享 runtime；若中台消费链路需要共享 helper，请由中台上收。

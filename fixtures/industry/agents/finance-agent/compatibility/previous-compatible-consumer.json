@@ -1,0 +1,5 @@
+{
+  "schema_version": "industry-agent-message.v1",
+  "manifest_schema_version": "1.0.0",
+  "expected": "consumable"
+}

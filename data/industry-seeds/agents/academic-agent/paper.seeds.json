@@ -1,0 +1,54 @@
+[
+  {
+    "id": "paper-agent-memory-preprint",
+    "axis": "research_paper",
+    "title": "Agent Memory Layers for Long-Horizon Tool Use",
+    "summary_cn": "研究提出分层 Agent memory 结构，并提供 arXiv 与代码仓库引用链。",
+    "observed_at": "2026-06-20T00:00:00.000Z",
+    "published_at": "2026-06-18T00:00:00.000Z",
+    "source_key": "arxiv",
+    "source_url": "https://arxiv.org/abs/2606.12345",
+    "polarity": "supporting",
+    "freshness_anchor_kind": "first_release",
+    "canonical_refs": {
+      "arxiv_id": "2606.12345",
+      "code_url": "https://github.com/example/agent-memory-layers"
+    },
+    "venue": "arXiv",
+    "venue_year": 2026,
+    "organization": "Example Research",
+    "authors": ["A. Li", "B. Wang"]
+  },
+  {
+    "id": "paper-agent-memory-replication-counter",
+    "axis": "research_paper",
+    "title": "Replication Notes on Agent Memory Layers",
+    "summary_cn": "复现结果指出原论文在长序列工具调用场景存在性能回落，可作为 counter 事件。",
+    "observed_at": "2026-06-23T00:00:00.000Z",
+    "published_at": "2026-06-22T00:00:00.000Z",
+    "source_key": "code",
+    "source_url": "https://github.com/example/agent-memory-replication",
+    "polarity": "counter",
+    "freshness_anchor_kind": "code_or_replication_release",
+    "canonical_refs": {
+      "code_url": "https://github.com/example/agent-memory-replication",
+      "arxiv_id": "2606.12345"
+    },
+    "venue": "GitHub Replication",
+    "venue_year": 2026
+  },
+  {
+    "id": "paper-missing-citation-trace",
+    "axis": "research_paper",
+    "title": "Untraceable Agent Paper Recap",
+    "summary_cn": "只有摘要转述，没有 DOI、arXiv、OpenReview 或 proceedings 链接，应拒绝进入 accepted。",
+    "observed_at": "2026-06-24T00:00:00.000Z",
+    "published_at": "2026-06-23T00:00:00.000Z",
+    "source_key": "benchmark",
+    "source_url": "https://example.com/agent-paper-recap",
+    "polarity": "supporting",
+    "freshness_anchor_kind": "first_release",
+    "venue": "Unknown Blog",
+    "venue_year": 2026
+  }
+]

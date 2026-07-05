@@ -130,6 +130,52 @@ describe("renderDailyRunSummary observer section", () => {
         quantity_target_met_count: 0,
         observer_promotion_candidate_count: 1,
       },
+      industry_runtime_summary: {
+        artifact_kind: "industry_runtime_summary",
+        date: "2026-06-12",
+        generated_at: "2026-06-12T08:00:00.000Z",
+        overall_status: "industry_runtime_contracts_ready",
+        platform_contract: {
+          fixture_id: "platform-phase1-current-consumer.v1",
+          published_for: ["finance-agent", "policy-agent"],
+          handoff_payload_schema_count: 4,
+          feedback_payload_schema_count: 3,
+          runtime_artifact_schema_count: 6,
+          shared_governance_published: true,
+          shared_governance_profile_count: 33,
+          dispatch_gate: {
+            same_run_requires_count: 5,
+            high_cost_requires_reservation_state: "granted",
+            budget_rejected_blocks_start: true,
+            async_only_review_is_not_same_run_available: true,
+          },
+          event_consumer_gate: {
+            execution_context_primary_responsibility_matches_responsibility: true,
+            operational_executor_id_required: true,
+            takeover_requires_takeover_audit_ref: true,
+          },
+        },
+        policy_finance: {
+          status: "policy_finance_runtime_ready",
+          negative_reason_code: "dispatch_context_missing",
+          runtime_consumed_same_run_messages: 19,
+          activation_profile_ids: ["axis-activation-policy.v1/finance_capital"],
+          stop_profile_ids: ["canonical-fetch-stop-policy.v1/finance_capital"],
+          review_profile_ids: ["same-run-review-availability-policy.v1/policy_finance"],
+        },
+        product_ecosystem: {
+          status: "normalization_dry_run_ready",
+          normalized_event_batch_refs_count: 6,
+          coverage_refs_count: 5,
+          contribution_refs_count: 6,
+        },
+        academic_preparatory: {
+          status: "academic_preparatory_normalization_dry_run_ready",
+          blocked_until: "formal_academic_handoff",
+          promotion_ready: false,
+          normalized_event_batch_refs_count: 2,
+        },
+      },
       observer_top_candidates: [],
       watchouts: [],
       next_focus: [],
@@ -145,5 +191,9 @@ describe("renderDailyRunSummary observer section", () => {
     expect(rendered).toContain("explanation_status: partial");
     expect(rendered).toContain("trend_window_read_status: insufficient");
     expect(rendered).toContain("summary_generation_failed:project:openai/agents-sdk");
+    expect(rendered).toContain("## Industry Runtime");
+    expect(rendered).toContain("governance_published=true");
+    expect(rendered).toContain("policy_finance: status=policy_finance_runtime_ready");
+    expect(rendered).toContain("activation_profiles=axis-activation-policy.v1/finance_capital");
   });
 });

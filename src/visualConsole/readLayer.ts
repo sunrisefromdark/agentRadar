@@ -5,7 +5,9 @@ import type {
   DailyRunSummary,
   EcosystemObserverArtifact,
   GitHubEnrichmentAuditEntry,
+  IndustryRuntimeSummaryArtifact,
   KnowledgeCard,
+  PolicyFinanceRuntimeReplayArtifact,
   ProjectLibraryEnhancementArtifact,
   RawSignal,
   VerifyDailyResult,
@@ -88,6 +90,17 @@ export function listAvailableDailyDates(): string[] {
     .sort();
 }
 
+export function listAvailableRunHealthDates(): string[] {
+  if (!fs.existsSync(REPORTS_DIR)) return [];
+  const dates = new Set<string>();
+  for (const entry of readCachedDirectoryEntries(REPORTS_DIR)) {
+    const date =
+      /^(\d{4}-\d{2}-\d{2})\.(?:daily|run-summary|verify-daily|industry-runtime-summary|policy-finance-runtime-replay)\.json$/.exec(entry)?.[1];
+    if (date) dates.add(date);
+  }
+  return [...dates].sort();
+}
+
 export function listAvailableWeeklyAnchors(): string[] {
   if (!fs.existsSync(REPORTS_DIR)) return [];
   return readCachedDirectoryEntries(REPORTS_DIR)
@@ -104,6 +117,16 @@ export function getDailyReport(date: string): ReadResult<DailyReport> {
 export function getRunSummary(date: string): ReadResult<DailyRunSummary> {
   const filepath = path.join("data", "reports", `${date}.run-summary.json`);
   return validateDateInput(date, filepath) ?? readJsonStrict<DailyRunSummary>(filepath);
+}
+
+export function getIndustryRuntimeSummary(date: string): ReadResult<IndustryRuntimeSummaryArtifact> {
+  const filepath = path.join("data", "reports", `${date}.industry-runtime-summary.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<IndustryRuntimeSummaryArtifact>(filepath);
+}
+
+export function getPolicyFinanceRuntimeReplay(date: string): ReadResult<PolicyFinanceRuntimeReplayArtifact> {
+  const filepath = path.join("data", "reports", `${date}.policy-finance-runtime-replay.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<PolicyFinanceRuntimeReplayArtifact>(filepath);
 }
 
 export function getVerifyDailyResult(date: string): ReadResult<VerifyDailyResult> {
@@ -246,6 +269,48 @@ export function getDailyNavigatorPreview(date: string): DailyTimeNavigatorPrevie
       slice_key: date,
       generated_at: daily.status === "ok" ? daily.value.generated_at : null,
       top_level_state: summarizeDailyPreviewState(daily, runSummary, verify),
+      enhancement_status: daily.status === "ok" ? daily.value.enhancement_status : null,
+      top_decision_count: daily.status === "ok" ? readPreviewTopDecisionCount(daily.value) : 0,
+      source_active_count: sourceStatus.filter((entry) => entry.status === "active").length,
+      failed_count: sourceStatus.filter((entry) => entry.status === "failed").length,
+      empty_count: sourceStatus.filter((entry) => entry.status === "empty").length,
+      verify_status: verify.status === "ok" ? verify.value.status : null,
+    };
+  });
+}
+
+export function getRunHealthNavigatorPreview(date: string): DailyTimeNavigatorPreview {
+  const signature = getFilesystemStateSignature([
+    path.join("data", "reports", `${date}.daily.json`),
+    path.join("data", "reports", `${date}.run-summary.json`),
+    path.join("data", "reports", `${date}.industry-runtime-summary.json`),
+    path.join("data", "reports", `${date}.verify-daily.json`),
+  ]);
+  return readDerivedCache(dailyNavigatorPreviewCache, `run-health:${date}`, signature, () => {
+    const daily = getDailyReport(date);
+    const runSummary = getRunSummary(date);
+    const industryRuntimeSummary = getIndustryRuntimeSummary(date);
+    const verify = getVerifyDailyResult(date);
+    const sourceStatus = runSummary.status === "ok" ? runSummary.value.source_status : [];
+    const hasPartialRuntime = runSummary.status === "ok" || industryRuntimeSummary.status === "ok" || verify.status === "ok";
+
+    return {
+      kind: "daily",
+      slice_key: date,
+      generated_at:
+        daily.status === "ok"
+          ? daily.value.generated_at
+          : runSummary.status === "ok"
+            ? runSummary.value.generated_at
+            : industryRuntimeSummary.status === "ok"
+              ? industryRuntimeSummary.value.generated_at
+              : null,
+      top_level_state:
+        daily.status === "ok"
+          ? summarizeDailyPreviewState(daily, runSummary, verify)
+          : hasPartialRuntime
+            ? "degraded"
+            : "failed",
       enhancement_status: daily.status === "ok" ? daily.value.enhancement_status : null,
       top_decision_count: daily.status === "ok" ? readPreviewTopDecisionCount(daily.value) : 0,
       source_active_count: sourceStatus.filter((entry) => entry.status === "active").length,

@@ -1,0 +1,41 @@
+{
+  "view_id": "consumer-weekly-industry-view-2026-06-26",
+  "schema_version": "consumer-weekly-industry-view.v1",
+  "source_weekly_section_ref": "industry://internal/2026-06-26/weekly-industry-trend-section.v2/cross-group",
+  "visible_card_ids": [
+    "card-claim-evt-51541b7359b8",
+    "card-claim-evt-44a47b338da8",
+    "card-claim-evt-cc11dd8959d2",
+    "card-claim-paper-agent-memory-preprint",
+    "card-claim-conf-neurips-workshop-agents",
+    "card-claim-evt-d5de86b0981d",
+    "card-claim-evt-b0fe5f8da165",
+    "card-claim-evt-609ea9dd545b",
+    "card-claim-evt-150547a98a8f",
+    "card-claim-evt-b58e55e3847e"
+  ],
+  "headline_card_ids": [],
+  "watchlist_card_ids": [
+    "card-claim-evt-51541b7359b8",
+    "card-claim-evt-44a47b338da8",
+    "card-claim-evt-cc11dd8959d2",
+    "card-claim-paper-agent-memory-preprint",
+    "card-claim-conf-neurips-workshop-agents",
+    "card-claim-evt-d5de86b0981d",
+    "card-claim-evt-b0fe5f8da165",
+    "card-claim-evt-609ea9dd545b",
+    "card-claim-evt-150547a98a8f",
+    "card-claim-evt-b58e55e3847e"
+  ],
+  "needs_review_card_ids": [],
+  "hidden_card_ids": [],
+  "ordering_basis": [
+    "consumer_readiness_state",
+    "consumer_display_priority",
+    "decision_tier",
+    "decision_confidence",
+    "coverage_audit_state"
+  ],
+  "card_projection_refs": [],
+  "blocked_reason_codes": []
+}

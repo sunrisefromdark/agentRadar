@@ -759,8 +759,22 @@ body.theme-dark .chip-button {
   display: flex;
   justify-content: flex-end;
   align-items: flex-start;
-  width: min(396px, calc(100vw - 24px));
+  width: auto;
   pointer-events: none;
+}
+
+.projects-ai-assistant-host.is-floating {
+  right: auto;
+}
+
+.projects-ai-assistant-host.is-dragging,
+body.projects-ai-dragging {
+  user-select: none;
+}
+
+.projects-ai-assistant-host.is-dragging {
+  transition: none;
+  will-change: transform;
 }
 
 .projects-ai-launch {
@@ -778,6 +792,9 @@ body.theme-dark .chip-button {
     0 20px 40px rgba(15, 23, 42, 0.14),
     inset 0 1px 0 rgba(255, 255, 255, 0.88);
   transform: translateX(4px);
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
 }
 
 .projects-ai-launch-avatar {
@@ -799,6 +816,7 @@ body.theme-dark .chip-button {
   height: 100%;
   object-fit: cover;
   display: block;
+  -webkit-user-drag: none;
 }
 
 .projects-ai-panel {
@@ -836,6 +854,10 @@ body.theme-dark .chip-button {
   padding: 12px 16px;
   border-bottom: 1px solid rgba(148, 163, 184, 0.14);
   background: linear-gradient(135deg, rgba(239, 246, 255, 0.98), rgba(255, 255, 255, 0.98));
+}
+
+.projects-ai-assistant-host.is-dragging .projects-ai-launch {
+  cursor: grabbing;
 }
 
 .projects-ai-panel-copy {

@@ -6,6 +6,7 @@ import type {
   EnhancementStatus,
   GitHubEnrichmentAuditEntry,
   HeadProjectExceptionReason,
+  IndustryRuntimeWindowSummary,
   KnowledgeCard,
   ObserverPresetBucket,
   ObserverPresetFilter,
@@ -129,6 +130,8 @@ export interface RunSnapshot {
   date: string;
   daily_report: DailyReport;
   run_summary: DailyRunSummary | null;
+  industry_runtime_summary?: DailyRunSummary["industry_runtime_summary"] | null;
+  policy_finance_runtime_replay?: import("../types.ts").PolicyFinanceRuntimeReplayArtifact | null;
   verify_result: VerifyDailyResult | null;
   github_audit: GitHubEnrichmentAuditEntry[] | null;
   observer_artifact: EcosystemObserverArtifact | null;
@@ -137,6 +140,7 @@ export interface RunSnapshot {
 export interface WeeklySnapshot {
   anchor_date: string;
   markdown: ParsedWeeklyReport;
+  industry_runtime_window_summary: IndustryRuntimeWindowSummary | null;
   judgment_status: ReadStatus;
   judgment_enhancement_status: EnhancementStatus | null;
   judgment_rule_candidate_count: number;

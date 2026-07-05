@@ -3,7 +3,7 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`Completed`，截至 `2026-06-29` 已推进到 `Phase 5 weekly artifacts ready / ready_for_publication`；三组输入已被中台接收，`reject_list=[]`，closed fact snapshot、claim builder、counter-evidence audit、decision context、tier decision input 与 weekly packaging 均已 ready；最近 7 日 `DailyIndustryEvidencePack.v2` refs 已可被本地中台消费，`publication_readiness_status=ready`；`coverage_vs_tier_case` / `counter_override_case` 与 `DecisionDiffAudit` 已冻结并进入 Phase 6 ready 状态；中台本地执行计划无剩余待办，外部发布/展示流程可直接承接已物化的 public projection。
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -20,6 +20,33 @@
 ## 目标
 
 只做全组共享的窄口子：schema 真源、registry snapshot、normalization、audit、tier decision、weekly 拼装。领域 seed / domain fixture / 领域 docs 已前推给前三组，不再由本组吞下。
+
+当前分支优先目标已推进为：把已就绪的政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 replay/eval 输入并入中台 readiness/backlog；生成 ref-only daily pack、rolling snapshot、academic dry-run feedback、cross-group replay/eval backlog、eval coverage audit、全量 accepted closed fact snapshot、claim candidate batch、counter-evidence audit、decision-context artifact、internal `WeeklyIndustryTrendSection`、`ConsumerWeeklyIndustryView` 与 `PublicWeeklyIndustryProjection`。最近 7 日 `DailyIndustryEvidencePack.v2` 在当前本地代码中已可消费，`evidence_window_status=ok`，公开投影已物化为独立 public artifact；中台本地 `next_platform_actions=[]`，外部发布/展示渠道可直接消费该 public projection。
+
+## 当前推进状态（2026-06-29）
+
+| Phase | 状态 | 已落地证据 | 未完成原因 / 下一步 |
+| --- | --- | --- | --- |
+| `Phase 1A-1` 目录骨架 bootstrap | `Completed` | `src/industry/platform/{contracts,registry,normalization,audit,trend,output}/`、`src/industry/agents/*`、`fixtures/industry/agents/*`、`data/industry-seeds/agents/*` 已存在；`src/__tests__/industry/platform/contract.test.ts` 覆盖目录冻结。 | 无阻塞。A/B/C 可继续在各自私有目录写 producer，不需要等待中台。 |
+| `Phase 1A-2` schema 真源与 artifact 路径 | `Completed` | `schemas/industry/canonical-schema.bundle.json`、`compatibility-matrix.json`、`reason-code-registry.json`、`state-transition-registry.json`；`src/industry/platform/contracts/{schemaRegistry,payloadRegistry,artifactPaths}.ts`。 | 后续只接受 schema-change-note；不得由 A/B/C 直接改 `schemas/industry/*`。 |
+| `Phase 1A-3` current / negative fixtures | `Completed` | `fixtures/industry/platform/current-consumer/phase1-runtime.json`、`fixtures/industry/platform/negative/phase1-runtime.json`；contract test 覆盖 current、previous-compatible、unknown higher major、kind mismatch、missing refs。 | 无阻塞。A/B/C 应按这些 fixture 补齐 consumer contract。 |
+| `Phase 1B` shared governance | `Completed` | `src/industry/platform/contracts/sharedGovernance.ts` 发布 Phase 1 profile / feedback payload 列表，验证 reason/state/profile 均存在。 | 无阻塞。A/B/C activation / budget / review 正式接线必须消费这里的 profile id。 |
+| `Phase 1C` dispatch / budget runtime base | `Completed` | `src/industry/platform/contracts/dispatchRuntime.ts`、`consumerFixtures.ts`；fixtures 覆盖 dispatch context、reservation、budget、async_only review gate。 | 无阻塞。命中 same-run 的 A/B/C 消息必须带 `dispatch_context_ref`、`scheduling_key`、stable claim key、admission ref、reservation refs。 |
+| `Phase 1C+` main coordinator 边界 | `Completed` | contract test 验证没有 `main-coordinator` 新 Agent，`src/types.ts` / `src/cli.ts` 不持有 coordinator 私有状态。 | 无阻塞。后续 scheduler / middleware 只能落在 contracts / registry，不能回写 weekly 热点文件。 |
+| `Phase 2` registry snapshot 与 shared governance | `Completed for current Phase2 snapshot` | 新增 `fixtures/industry/platform/current-consumer/phase2-registry-snapshot.json`，冻结 `platform-phase2-registry-snapshot-current.v1`，覆盖 policy finance / academic / product ecosystem 三组 registry snapshot、tool registry snapshot、seed refs、authority refs；`src/industry/platform/registry/runtimeSnapshot.ts` 统一生成 runtime snapshot，继续隔离 runtime snapshot plane 与 governance review plane，`async_only` 走 `conservative_consumption`；产品生态、政策金融、学术 formal dry-run 的中台消费路径均已消费共享 refs，不再消费 `stub://industry/registry-snapshot/current`。 | 当前 Phase2 窄口子已闭合；Phase3-5 daily pack / rolling snapshot / runtime summary 已改用 Phase2 fixture refs。后续只在 A/B/C 提交新合法 refs 或 governance 争议升级时增量刷新 snapshot。 |
+| `Phase 3` normalization 与 fact snapshot | `Completed for current accepted inputs` | `src/industry/platform/normalization/financePolicyDryRun.ts` 已消费政策金融 current bundle 与 runtime refs；`src/industry/platform/normalization/academicDryRun.ts` 已消费学术 formal current bundle；`src/industry/platform/normalization/productEcosystemDryRun.ts` 已消费产品生态 formal bundle；`cross_group_integration_readiness` 已写出 ref-only `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1`、academic `normalization-feedback.v1`、cross-group replay/eval backlog、`closed_fact_snapshot_prep` 与覆盖政策金融、学术、产品生态 accepted events 的 `FactResolutionAudit`。 | 三组当前输入已收口，`reject_list=[]`；无须三组继续迭代，除非后续出现新的 normalization / schema / audit 失败反馈。 |
+| `Phase 4` claim-builder 与 audit | `Passed for current closed snapshot` | `cross_group_integration_readiness` 已 materialize `claim-candidate-batch.v1`、claim evidence links、`audit-request.v1`、`audit-result.v1` 与 `counter-evidence-audit.v1`；`blocking_claim_candidate_ids=[]`、`high_impact_unresolved_group_ids=[]`。 | 当前闭环无审计阻塞；继续保留 public output block，等待 tier 输入完整。 |
+| `Phase 5` tier decision 与 weekly 三层输出 | `Weekly artifacts ready / ready_for_publication` | `tier_profile_rules.status=ready`，`decision_context_artifact.status=ready`，`tier_decision_input.status=ready`，`weekly_packaging.status=ready`；`weekly_output_ready=true`，`blocked_until=ready_for_publication`，`next_platform_actions=[]`，internal / consumer / public 三层 artifacts 已分别写入 `data/industry/internal/.../weekly-industry-trend-section.v2/cross-group.json`、`data/industry/consumer/.../consumer-weekly-industry-view.v1/cross-group.json` 与 `data/industry/public/.../public-weekly-industry-projection.v1/cross-group.json`。 | 当前无需三组新增输入；中台本地无剩余待办，外部发布/展示渠道可直接消费已物化的 public projection。 |
+| `Phase 6` eval / replay / structure | `Ready` | `src/industry/platform/audit/productEcosystemPhase6Assembly.ts` 与 `src/industry/platform/audit/crossGroupIntegrationReadiness.ts` 已接受产品生态 `phase6-delivery-manifest.json` / `phase6-replay-refs.json`，并把政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入合入 cross-group readiness；`replay_eval_backlog` 已含 policy / academic / product 三组 fixture refs、product replay window ids、`positive_canonical_case` / `near_boundary_case` / `anti_upgrade_case` / `coverage_vs_tier_case` / `counter_override_case` 五类 eval coverage。 | `fixtures/industry/platform/eval/coverage-vs-tier-case.json` 与 `fixtures/industry/platform/eval/counter-override-case.json` 已冻结；`decision_diff_audit_status=ready`，无剩余 Phase 6 eval/diff audit 阻塞。 |
+
+## 继续推进所需输入
+
+| 产出方 | 必须交付 | 解锁阶段 |
+| --- | --- | --- |
+| `1号执行人` 政策金融组 | 当前无需新增输入。 | 已进入 closed fact snapshot、claim builder 与 audit；只有后续出现新的 normalization / schema / audit 失败反馈时才需要回改本组资产。 |
+| `2号执行人` 学术前沿组 | 当前无需新增输入。 | `academic_formal_handoff_ready` 已被中台消费，`normalization-feedback.v1` 为 dry-run ready；positive canonical / near-boundary / replay / eval / owner-boundary refs 已排入 backlog。 |
+| `3号执行人` 产品生态 / 社区新闻组 | 当前无需新增输入。 | `product_ecosystem_phase6_inputs_accepted` 已进入 cross-group readiness，`eval_backlog_ready=true`；只有后续出现新的 normalization / schema / audit 失败反馈时才需要回改本组资产。 |
+| `4号执行人` 中台裁决组 | 当前无需其他三组新增输入；最近 7 日 `DailyIndustryEvidencePack.v2` refs 已可消费，`coverage_vs_tier_case` / `counter_override_case` 与 DecisionDiffAudit 已冻结。 | 中台已生成 internal / consumer / public 三层 weekly artifacts；中台本地无剩余待办，若发布渠道另有外部流程则由该流程承接已物化的 `PublicWeeklyIndustryProjection`。 |
 
 ## 负责范围
 
@@ -513,3 +540,18 @@
 | --- | --- | --- | --- |
 | 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已补齐 D 组对 decision profiles、daily/rolling/trend artifacts、bootstrap 验证职责与 daily 聚合 writer/owner 的冻结定义 |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/registry.test.ts` | `Completed` | 新增 Phase 2 最小 registry runtime snapshot / governance review plane 边界测试，2 tests passed |
+| 2026-06-27 | `pnpm install` | `Completed` | 按 lockfile 恢复本 worktree 依赖后执行验证 |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform` | `Completed` | 中台平台测试 3 files / 36 tests passed |
+| 2026-06-27 | `pnpm run typecheck` | `Completed` | `tsc --noEmit` passed |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts` | `Completed` | 产品生态 formal bundle 已接入中台 registry snapshot / normalization dry-run，4 tests passed，返回 `normalization-feedback.v1` dry-run payload |
+| 2026-06-27 | `pnpm exec vitest run src/__tests__/industry/platform/normalization.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` | `Completed` | 政策金融线 runtime / snapshot 接线验证通过：2 files / 11 tests passed |
+| 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 中台已接收产品生态 Phase 6 delivery manifest / replay refs，固定 product-only assembly 状态为 `product_ecosystem_phase6_inputs_accepted`，并阻止提前生成 weekly 输出 |
+| 2026-06-28 | `corepack pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 新增 `cross_group_integration_readiness`，确认政策金融 runtime、学术 formal dry-run、产品生态 Phase 6 输入可进入 Phase 3 backlog；ref-only daily pack / rolling snapshot 已 ready。 |
+| 2026-06-28 | `corepack pnpm exec tsx src/cli.ts cross-group-integration-readiness --date 2026-06-26` | `Passed` | 刷新 `data/reports/2026-06-26.cross-group-integration-readiness.json` 与 latest；`reject_list=[]`，`claim_builder.status=ready`，`counter_evidence_audit.status=passed`，`decision_context_artifact.status=ready`，仅缺 `recent_7d_daily_pack_refs`。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | `replay_eval_backlog` 已扩展为 policy / academic / product 三组 refs、product replay window ids 与 eval coverage audit；`positive_canonical_case` / `near_boundary_case` / `anti_upgrade_case` 已有 refs，`coverage_vs_tier_case` / `counter_override_case` 与 DecisionDiffAudit 仍显式 blocked。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform` / `pnpm run typecheck` / `pnpm test` | `Passed` | 同步到 `main` 前完成回归：中台平台测试 7 files / 61 tests passed，`tsc --noEmit` passed，全量测试 55 files / 265 tests passed。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform/replay.test.ts` | `Passed` | 冻结平台自有 `coverage_vs_tier_case` / `counter_override_case` eval fixtures，并把 `DecisionDiffAudit` 推进为 `ready`；缺窗口场景继续 public blocked，窗口可用场景进入 weekly output ready。 |
+| 2026-06-29 | `pnpm exec tsx src/cli.ts cross-group-integration-readiness --date 2026-06-26` | `Passed` | 刷新 `data/reports/2026-06-26.cross-group-integration-readiness.json` 与 latest；`weekly_output_ready=true`、`blocked_until=ready_for_publication`，并写出 internal / consumer / public 三层 weekly artifacts。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform` / `pnpm run typecheck` / `pnpm test` / `git diff --check` | `Passed` | 最终收口验证：中台平台测试 7 files / 62 tests passed，`tsc --noEmit` passed，全量测试 56 files / 297 tests passed，diff check 无空白错误；`crossGroupIntegrationReadiness.ts` 已拆出 `decisionDiffAudit.ts`，最大中台源码文件 1127 行。 |
+| 2026-06-29 | `pnpm exec vitest run src/__tests__/industry/platform` / `pnpm exec vitest run src/__tests__/industry/agents/academic-agent/replay.test.ts src/__tests__/industry/agents/policy-agent/replay.test.ts` / `pnpm test` / `pnpm run typecheck` / `git diff --check` | `Passed` | Phase2 registry snapshot 收口验证：中台平台测试 7 files / 64 tests passed；领域组 delivery checksum 复测 2 files / 17 tests passed；全量测试 56 files / 299 tests passed；`tsc --noEmit` passed；diff check 无空白错误。 |

@@ -2,7 +2,7 @@
 
 ## 文档状态
 
-- 版本：`v0.2`
+- 版本：`v0.3`
 - 状态：`Approved for ExecPlan`
 - 设计输入：
   - [侧边助手自然语言搜索需求分析.md](../product-specs/侧边助手自然语言搜索需求分析.md#L1)
@@ -59,6 +59,7 @@
 ### 包含
 
 - 所有一级视图共享的右侧侧边助手入口与面板。
+- 助手入口和面板的位置拖动，位置仅在当前浏览器标签页会话内保留。
 - 当前浏览器会话内的多轮搜索上下文。
 - 每轮成功结果最多 3 个项目超链接。
 - “查看全部结果”把主项目列表切换为该轮结果。
@@ -122,6 +123,37 @@
 - 抽屉挂在 app shell 层或 body 级 assistant host，不能挂在 `.primary-content`、项目列表或 `.detail-column` 内。
 - `Projects` 的项目详情 dock 仍属于主内容布局；助手作为独立侧边层存在，详情更新不得卸载助手。
 - 非 `Projects` 视图里，抽屉负责“找”和“跳”；真正的结果承接统一回到 `Projects`。
+
+### 拖动定位
+
+拖动能力只解决一个问题：当右侧助手遮挡用户正在看的内容时，用户可以临时挪开它。
+
+默认位置仍是右侧入口；拖动不是把助手改成聊天窗口，也不是新增第二套浮层系统。
+
+默认展开态仍是右侧服务抽屉。用户拖动面板头部后，面板进入固定尺寸浮层形态，保持当前宽度和可见高度，不再强制贴右全高；双击拖动区域恢复默认右侧贴边抽屉。
+
+拖动契约：
+
+1. 拖动对象是同一个 assistant host。收起态入口和展开态面板共享同一位置。
+2. 收起态只允许从圆形入口触发拖动。
+3. 展开态只允许从面板头部触发拖动。
+4. 输入框、发送按钮、新对话、关闭、推荐方向、项目链接和 `查看全部结果` 不得触发拖动。
+5. 拖动结束后，位置必须被限制在当前视口内，不能把入口或面板拖到屏幕外。
+6. 窗口尺寸变化后必须重新 clamp 当前位置，避免响应式布局后找不到助手。
+7. 双击拖动区域恢复默认右侧位置。
+
+位置存储：
+
+- 使用 `sessionStorage`，key 与助手会话同域但字段独立。
+- 位置只保存 `{ left, top }`，不保存页面路径、query、项目结果或对话内容。
+- 新对话不重置位置；关闭当前浏览器标签页后位置自然消失。
+- 位置不得写入 `SideAssistantSearchSession`，避免会话重置、schema 修复或结果态恢复误伤拖动位置。
+
+移动端：
+
+- 移动端不要求展开态面板可拖。
+- 收起态入口可以保持默认位置；若实现拖动，也必须同样 clamp 到视口内。
+- 不允许因为拖动导致底部输入区被系统键盘永久遮挡。
 
 ### 移动端
 
@@ -246,6 +278,12 @@ interface SideAssistantMainResult {
   project_ids: string[];
   applied_at: string;
 }
+
+interface SideAssistantPlacementState {
+  schema_version: "side_assistant_placement.v1";
+  left: number;
+  top: number;
+}
 ```
 
 字段语义：
@@ -256,6 +294,7 @@ interface SideAssistantMainResult {
 - `project_ids` 只引用现有项目库项目，不保存项目事实副本。
 - `seen_project_ids` 记录本会话已经预览给用户的项目，用来避免“再给我几个”重复上一轮 3 条链接。
 - `scope_key` 由 `date + lang + filters + sort + path` 稳定生成；只有当前页面作用域一致时，才允许恢复 `active_main_result`。
+- `SideAssistantPlacementState` 独立保存助手 host 的当前视口位置，不参与搜索、排序、结果恢复或多轮上下文。
 
 ### 新对话
 
@@ -474,6 +513,8 @@ collapsed
 | `project_ids` 为空 | 不展示空链接列表，给出改写建议或热门回退 |
 | `project_id` 映射不到本地项目 | 跳过该链接，不补造 |
 | sessionStorage 不可用 | 本轮对话仍可用，刷新不保证保留，并显示非阻塞提示 |
+| placement 超出视口 | 自动 clamp 回可见区域 |
+| 拖动中发生 route 切换 | 结束拖动并保留最后一个可见位置 |
 
 敏感领域：
 
@@ -487,7 +528,15 @@ collapsed
 - `app/visualConsole/clientScript.ts`：把助手 runtime 从 `Projects` workbench 初始化里拆出来，变成全局状态、sessionStorage、请求、预览链接、主列表切换、详情/跳转分流控制器。
 - `app/visualConsole/ossPages.ts` 或 shell renderer：assistant host 容器与全局挂载位置。
 - `app/visualConsole/ossProjectsPage.ts`：只保留 `Projects` 结果承接和 detail dock 适配，不再拥有助手生命周期。
-- 样式文件：右侧全高抽屉、快捷问题卡片、底部输入区、状态条。
+- 样式文件：右侧全高抽屉、快捷问题卡片、底部输入区、状态条、拖动中的 cursor 和 user-select 状态。
+
+拖动实现约束：
+
+- 复用现有 assistant host，不新增 portal、overlay manager 或第三方拖拽库。
+- 使用 Pointer Events，不用 mouse/touch 两套分支。
+- 拖动开始时记录 pointer 与 host 左上角偏移；移动时只更新 host 的 `left/top`。
+- 第一次拖动后，host 从默认 right/bottom 定位切换为 left/top 定位。
+- 拖动逻辑必须先判断最近的可交互控件，避免点击按钮或链接时误触拖动。
 
 不建议改动：
 
@@ -503,6 +552,9 @@ collapsed
 ### 单元 / DOM 测试
 
 - `sessionStorage` 能保存并恢复 `messages`、`search_context`、`active_main_result`。
+- 拖动助手入口或面板头部后，刷新当前标签页仍能恢复位置；关闭标签页后不要求保留。
+- 拖动位置不能超出视口；缩放或调整窗口后助手仍可见。
+- 点击输入框、按钮、项目链接、`查看全部结果` 时不得误触拖动。
 - `新对话` 会清空会话并恢复默认项目库态。
 - `返回普通项目库` 只清除结果态，不清空当前会话对话内容。
 - `project_ids` 只映射现有项目记录，映射不到时不生成假链接。

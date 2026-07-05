@@ -29,6 +29,58 @@ function writeJson(filepath: string, value: unknown): void {
   fs.writeFileSync(filepath, JSON.stringify(value, null, 2));
 }
 
+function writePolicyFinanceRuntimeReplay(root: string): void {
+  writeJson(path.join(root, "data", "reports", "2026-06-12.policy-finance-runtime-replay.json"), {
+    artifact_kind: "policy_finance_runtime_replay",
+    date: "2026-06-12",
+    generated_at: "2026-06-12T08:00:00.000Z",
+    fixture_id: "policy-finance-phase1-runtime-ready-inputs.v1",
+    current_status: "policy_finance_runtime_ready",
+    negative_reason_code: "dispatch_context_missing",
+    runtime_consumed_same_run_messages: 19,
+    activation_profile_ids: ["axis-activation-policy.v1/capital_finance"],
+    stop_profile_ids: ["canonical-fetch-stop-policy.v1/capital_finance"],
+    review_profile_ids: ["same-run-review-availability-policy.v1/policy_finance"],
+  });
+}
+
+function writeIndustryRuntimeSummary(root: string): void {
+  writeJson(path.join(root, "data", "reports", "2026-06-12.industry-runtime-summary.json"), {
+    artifact_kind: "industry_runtime_summary",
+    date: "2026-06-12",
+    generated_at: "2026-06-12T08:00:00.000Z",
+    overall_status: "industry_runtime_contracts_ready",
+    platform_contract: {
+      fixture_id: "platform-phase1-current-consumer.v1",
+      published_for: ["finance-agent", "policy-agent"],
+      handoff_payload_schema_count: 4,
+      feedback_payload_schema_count: 3,
+      runtime_artifact_schema_count: 6,
+      shared_governance_published: true,
+      shared_governance_profile_count: 33,
+      dispatch_gate: {
+        same_run_requires_count: 5,
+        high_cost_requires_reservation_state: "granted",
+        budget_rejected_blocks_start: true,
+        async_only_review_is_not_same_run_available: true,
+      },
+      event_consumer_gate: {
+        execution_context_primary_responsibility_matches_responsibility: true,
+        operational_executor_id_required: true,
+        takeover_requires_takeover_audit_ref: true,
+      },
+    },
+    policy_finance: {
+      status: "policy_finance_runtime_ready",
+      activation_profile_ids: ["axis-activation-policy.v1/finance_capital"],
+      stop_profile_ids: ["canonical-fetch-stop-policy.v1/finance_capital"],
+      review_profile_ids: ["same-run-review-availability-policy.v1/policy_finance"],
+    },
+    product_ecosystem: { status: "normalization_dry_run_ready" },
+    academic_preparatory: { status: "academic_preparatory_normalization_dry_run_ready" },
+  });
+}
+
 function makeSummary(): DailyRunSummary {
   return {
     date: "2026-06-12",
@@ -181,6 +233,8 @@ describe("buildVerifyDailyResult project-search contract checks", () => {
 
     writeJson(path.join(root, "data", "reports", "2026-06-12.run-summary.json"), summary);
     writeJson(path.join(root, "data", "reports", "2026-06-12.daily.json"), report);
+    writePolicyFinanceRuntimeReplay(root);
+    writeIndustryRuntimeSummary(root);
     writeJson(path.join(root, "data", "raw", "github", "2026-06-12.enrichment.json"), []);
 
     const result = buildVerifyDailyResult("2026-06-12");
@@ -192,6 +246,12 @@ describe("buildVerifyDailyResult project-search contract checks", () => {
     expect(checkNames.get("mission_degraded_semantics")).toBe("pass");
     expect(checkNames.get("rolling_inventory_audit_present")).toBe("warn");
     expect(checkNames.get("rolling_inventory_targets_met")).toBe("warn");
+    expect(checkNames.get("policy_finance_runtime_replay_artifact")).toBe("pass");
+    expect(checkNames.get("policy_finance_runtime_same_run_messages")).toBe("pass");
+    expect(checkNames.get("industry_runtime_summary_artifact")).toBe("pass");
+    expect(checkNames.get("industry_runtime_group_statuses")).toBe("pass");
+    expect(checkNames.get("industry_runtime_platform_contract")).toBe("pass");
+    expect(checkNames.get("industry_runtime_policy_finance_profiles")).toBe("pass");
   });
 
   it("fails when explore ribbon is emitted despite a full mission quota", () => {
@@ -260,9 +320,25 @@ describe("buildVerifyDailyResult project-search contract checks", () => {
 
     writeJson(path.join(root, "data", "reports", "2026-06-12.run-summary.json"), summary);
     writeJson(path.join(root, "data", "reports", "2026-06-12.daily.json"), report);
+    writePolicyFinanceRuntimeReplay(root);
+    writeIndustryRuntimeSummary(root);
     writeJson(path.join(root, "data", "raw", "github", "2026-06-12.enrichment.json"), []);
 
     const result = buildVerifyDailyResult("2026-06-12");
     expect(result.checks.find((check) => check.name === "mission_quota_and_explore_ribbon_contract")?.status).toBe("fail");
+  });
+
+  it("fails when policy-finance runtime replay artifact is missing", () => {
+    const root = setupWorkspace();
+    const summary = makeSummary();
+    const report = makeReport();
+
+    writeJson(path.join(root, "data", "reports", "2026-06-12.run-summary.json"), summary);
+    writeJson(path.join(root, "data", "reports", "2026-06-12.daily.json"), report);
+    writeJson(path.join(root, "data", "raw", "github", "2026-06-12.enrichment.json"), []);
+
+    const result = buildVerifyDailyResult("2026-06-12");
+    expect(result.status).toBe("fail");
+    expect(result.checks.find((check) => check.name === "policy_finance_runtime_replay_artifact")?.status).toBe("fail");
   });
 });

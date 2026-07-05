@@ -1,0 +1,29 @@
+{
+  "schema_version": "daily-industry-evidence-pack.v2",
+  "date": "2026-06-24",
+  "source_message_ids": [
+    "data/reports/2026-06-24.daily.json",
+    "data/reports/2026-06-24.run-summary.json",
+    "data/reports/2026-06-24.verify-daily.json"
+  ],
+  "input_artifact_refs": [
+    "data/raw/2026-06-24.json",
+    "data/normalized/2026-06-24.json",
+    "data/classifications/2026-06-24.json",
+    "data/scores/2026-06-24.json",
+    "data/reports/2026-06-24.daily.json",
+    "data/reports/2026-06-24.daily.md",
+    "data/reports/2026-06-24.run-summary.json",
+    "data/reports/2026-06-24.verify-daily.json"
+  ],
+  "normalized_event_batch_ref": "data/normalized/2026-06-24.json",
+  "rejected_event_batch_ref": "data/reports/2026-06-24.verify-daily.json",
+  "agent_contributions": [],
+  "accepted_event_count": 0,
+  "rejected_event_count": 0,
+  "registry_snapshot_ref": "data/reports/2026-06-24.run-summary.json",
+  "tool_registry_snapshot_ref": "data/reports/2026-06-24.verify-daily.json",
+  "public_projection": "blocked_until_audit",
+  "cost_and_degradation_summary": "restored ref-only historical daily pack from existing daily artifacts",
+  "coverage_summary": "ordinary daily artifacts restored from main workspace"
+}

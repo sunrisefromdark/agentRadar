@@ -44,7 +44,9 @@ export type DirectionCoverageOutcome =
   | "matched"
   | "weak_signal"
   | "noise_only"
+  | "partial_remote_failure"
   | "zero_candidate"
+  | "circuit_open"
   | "search_failed"
   | "disabled";
 export type DailyExposureBucket = "today_pulse" | "mission_match" | "explore_ribbon" | "historical_context";
@@ -452,6 +454,7 @@ export interface WeeklySemanticInputScoreWindow {
 export interface WeeklySemanticInputBundle {
   window_start: string;
   window_end: string;
+  industry_runtime_window_summary?: IndustryRuntimeWindowSummary;
   scored_project_windows: WeeklySemanticInputScoreWindow[];
   trend_candidates: WeeklyTrendCandidate[];
   weekly_focus_projects: WeeklySemanticInputProject[];
@@ -602,6 +605,7 @@ export interface WeeklyReport {
   window_start: string;
   window_end: string;
   enhancement_status: EnhancementStatus;
+  industry_runtime_window_summary?: IndustryRuntimeWindowSummary;
   personalized_weekly_focus_applicable: boolean;
   personalized_weekly_focus_note_cn?: string;
   overall_summary_cn: string;
@@ -616,6 +620,7 @@ export interface WeeklyReport {
 
 export interface WeeklyAuditReport {
   enhancement_status: EnhancementStatus;
+  industry_runtime_window_summary?: IndustryRuntimeWindowSummary;
   personalized_weekly_focus: PersonalizedWeeklyFocus[];
   rejected_outputs: RejectedOutput[];
 }
@@ -634,6 +639,7 @@ export interface WeeklyJudgmentReport {
   window_start: string;
   window_end: string;
   enhancement_status: EnhancementStatus;
+  industry_runtime_window_summary?: IndustryRuntimeWindowSummary;
   executive_summary_cn: string;
   rule_materials: WeeklyJudgmentRuleMaterials;
   established_trends: FinalWeeklyTrend[];
@@ -861,6 +867,85 @@ export interface DailyRunSummaryExternalDiscovery {
   warnings: string[];
 }
 
+export interface IndustryRuntimeSummaryArtifact {
+  artifact_kind: "industry_runtime_summary";
+  date: string;
+  generated_at: string;
+  overall_status: "industry_runtime_contracts_ready";
+  platform_contract: {
+    fixture_id: string;
+    registry_snapshot_fixture_id?: string;
+    published_for: string[];
+    handoff_payload_schema_count: number;
+    feedback_payload_schema_count: number;
+    runtime_artifact_schema_count: number;
+    shared_governance_published: boolean;
+    shared_governance_profile_count: number;
+    dispatch_gate: {
+      same_run_requires_count: number;
+      high_cost_requires_reservation_state: string;
+      budget_rejected_blocks_start: boolean;
+      async_only_review_is_not_same_run_available: boolean;
+    };
+    event_consumer_gate: {
+      execution_context_primary_responsibility_matches_responsibility: boolean;
+      operational_executor_id_required: boolean;
+      takeover_requires_takeover_audit_ref: boolean;
+    };
+  };
+  policy_finance: {
+    status: string;
+    negative_reason_code: string;
+    runtime_consumed_same_run_messages: number;
+    activation_profile_ids?: string[];
+    stop_profile_ids?: string[];
+    review_profile_ids?: string[];
+  };
+  product_ecosystem: {
+    status: string;
+    normalized_event_batch_refs_count: number;
+    coverage_refs_count: number;
+    contribution_refs_count: number;
+  };
+  academic_preparatory: {
+    status: string;
+    blocked_until: string;
+    promotion_ready: boolean;
+    normalized_event_batch_refs_count: number;
+  };
+}
+
+export interface PolicyFinanceRuntimeReplayArtifact {
+  artifact_kind: "policy_finance_runtime_replay";
+  date: string;
+  generated_at: string;
+  fixture_id: string;
+  current_status: string;
+  negative_reason_code: string;
+  runtime_consumed_same_run_messages: number;
+  activation_profile_ids: string[];
+  stop_profile_ids: string[];
+  review_profile_ids: string[];
+}
+
+export interface IndustryRuntimeWindowSummary {
+  window_day_count: number;
+  days_with_run_summary: number;
+  days_with_industry_runtime_summary: number;
+  missing_run_summary_dates: string[];
+  missing_industry_runtime_summary_dates: string[];
+  policy_finance_runtime_ready_days: string[];
+  product_ecosystem_dry_run_ready_days: string[];
+  academic_preparatory_ready_days: string[];
+  latest_summary_date: string | null;
+  latest_overall_status: IndustryRuntimeSummaryArtifact["overall_status"] | null;
+  latest_academic_blocked_until: string | null;
+  latest_platform_contract_fixture: string | null;
+  latest_policy_finance_activation_profile_ids: string[];
+  latest_policy_finance_stop_profile_ids: string[];
+  latest_policy_finance_review_profile_ids: string[];
+}
+
 export interface DailyRunSummary {
   date: string;
   generated_at: string;
@@ -900,6 +985,7 @@ export interface DailyRunSummary {
   diagnostics: DailyRunSummaryDiagnostics;
   top_projects: DailyRunSummaryTopProject[];
   external_discovery?: DailyRunSummaryExternalDiscovery;
+  industry_runtime_summary?: IndustryRuntimeSummaryArtifact;
   observer_status?: {
     ecosystem_focus: ObserverStatus;
   };

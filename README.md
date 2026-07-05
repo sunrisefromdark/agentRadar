@@ -303,6 +303,14 @@ corepack pnpm run-weekly
 corepack pnpm sync-weekly
 ```
 
+### 中台收口
+
+```bash
+corepack pnpm cross-group-integration-readiness -- --date 2026-06-26
+```
+
+这个命令只会把已接收的跨组输入 materialize 成中台内部收口工件，包含 `DailyIndustryEvidencePack.v2`、`RollingEvidenceWindowSnapshot.v1` 和 weekly 壳；它不会补写历史 raw 数据，也不会在最近 7 日 evidence window 缺失时伪造公开 weekly。
+
 ### 其他
 
 ```bash

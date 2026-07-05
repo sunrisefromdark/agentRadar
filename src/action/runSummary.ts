@@ -2,6 +2,7 @@ import type {
   DailyReport,
   DailyRunSummary,
   DailyRunSummaryDiagnostics,
+  IndustryRuntimeSummaryArtifact,
   LlmRunDiagnostics,
   DailyRunSummaryQuality,
   DailyRunSummarySourceStatus,
@@ -570,6 +571,7 @@ export function buildDailyRunSummary(
     sourceStatus?: DailyRunSummarySourceStatus[];
     classificationsCount: number;
     llmDiagnostics?: LlmRunDiagnostics;
+    industryRuntimeSummary?: IndustryRuntimeSummaryArtifact;
     githubStarDelta?: GitHubStarDeltaSummary;
     observer?: {
       status: ObserverStatus;
@@ -668,6 +670,7 @@ export function buildDailyRunSummary(
         }
       : undefined;
   summary.completion_notes = completionNotes(counts, summarySources, quality, opts.dryRun);
+  summary.industry_runtime_summary = opts.industryRuntimeSummary;
   if (opts.observer) {
     summary.observer_status = { ecosystem_focus: opts.observer.status };
     summary.observer_candidate_count = opts.observer.candidateCount;
@@ -882,6 +885,21 @@ function renderMissionSummary(summary: DailyRunSummary): string[] {
   ];
 }
 
+function renderIndustryRuntimeSummary(summary: DailyRunSummary): string[] {
+  const artifact = summary.industry_runtime_summary;
+  if (!artifact) return ["- industry runtime summary unavailable"];
+
+  return [
+    `- overall_status: ${artifact.overall_status}`,
+    `- platform_contract: fixture=${artifact.platform_contract.fixture_id}; published_for=${artifact.platform_contract.published_for.join(",")}; governance_published=${artifact.platform_contract.shared_governance_published ? "true" : "false"}; governance_profiles=${artifact.platform_contract.shared_governance_profile_count}; handoff_payload_schemas=${artifact.platform_contract.handoff_payload_schema_count}; feedback_payload_schemas=${artifact.platform_contract.feedback_payload_schema_count}; runtime_artifact_schemas=${artifact.platform_contract.runtime_artifact_schema_count}`,
+    `- dispatch_gate: same_run_requires=${artifact.platform_contract.dispatch_gate.same_run_requires_count}; reservation_state=${artifact.platform_contract.dispatch_gate.high_cost_requires_reservation_state}; budget_rejected_blocks_start=${artifact.platform_contract.dispatch_gate.budget_rejected_blocks_start ? "true" : "false"}; async_only_review_blocks_same_run=${artifact.platform_contract.dispatch_gate.async_only_review_is_not_same_run_available ? "true" : "false"}`,
+    `- event_consumer_gate: responsibility_match=${artifact.platform_contract.event_consumer_gate.execution_context_primary_responsibility_matches_responsibility ? "true" : "false"}; operational_executor_required=${artifact.platform_contract.event_consumer_gate.operational_executor_id_required ? "true" : "false"}; takeover_requires_audit_ref=${artifact.platform_contract.event_consumer_gate.takeover_requires_takeover_audit_ref ? "true" : "false"}`,
+    `- policy_finance: status=${artifact.policy_finance.status}; negative_reason=${artifact.policy_finance.negative_reason_code}; same_run_messages=${artifact.policy_finance.runtime_consumed_same_run_messages}; activation_profiles=${artifact.policy_finance.activation_profile_ids?.join(",") || "none"}; stop_profiles=${artifact.policy_finance.stop_profile_ids?.join(",") || "none"}; review_profiles=${artifact.policy_finance.review_profile_ids?.join(",") || "none"}`,
+    `- product_ecosystem: status=${artifact.product_ecosystem.status}; normalized_refs=${artifact.product_ecosystem.normalized_event_batch_refs_count}; coverage_refs=${artifact.product_ecosystem.coverage_refs_count}; contribution_refs=${artifact.product_ecosystem.contribution_refs_count}`,
+    `- academic_preparatory: status=${artifact.academic_preparatory.status}; blocked_until=${artifact.academic_preparatory.blocked_until}; promotion_ready=${artifact.academic_preparatory.promotion_ready ? "true" : "false"}; normalized_refs=${artifact.academic_preparatory.normalized_event_batch_refs_count}`,
+  ];
+}
+
 export function renderDailyRunSummary(summary: DailyRunSummary): string {
   return [
     `# Agent Trend Radar 运行摘要 ${summary.date}`,
@@ -931,6 +949,11 @@ export function renderDailyRunSummary(summary: DailyRunSummary): string {
     "## Mission Discovery",
     "",
     ...renderMissionSummary(summary),
+    "",
+    "## Observer Status",
+    "## Industry Runtime",
+    "",
+    ...renderIndustryRuntimeSummary(summary),
     "",
     "## Observer Status",
     "",

@@ -1,0 +1,31 @@
+{
+  "manifest_id": "academic-phase1-next-platform-actions.v1",
+  "status": "academic_formal_handoff_ready",
+  "executor_4_can_continue_phase2_partial_without_more_academic_inputs": true,
+  "ready_inputs": {
+    "delivery_manifest": "fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json",
+    "current_bundle": "fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json",
+    "negative_bundle": "fixtures/industry/agents/academic-agent/replay/phase1-missing-owner-boundary-bundle.json",
+    "positive_canonical": "fixtures/industry/agents/academic-agent/eval/positive-canonical-paper.json",
+    "near_boundary": "fixtures/industry/agents/academic-agent/eval/near-boundary-leaderboard.json",
+    "replay_window": "fixtures/industry/agents/academic-agent/replay/academic-replay-window.json",
+    "eval": "fixtures/industry/agents/academic-agent/eval/anti-upgrade-preprint.json",
+    "owner_boundary": "fixtures/industry/agents/academic-agent/owner-boundary/news-relays-paper.json",
+    "handoff_note": "src/industry/agents/academic-agent/handoff-note.md",
+    "normalization_dry_run": "src/industry/platform/normalization/academicDryRun.ts"
+  },
+  "remaining_platform_actions": [
+    {
+      "owner": "executor_4",
+      "target_area": "src/industry/platform/normalization/*",
+      "action": "consume_current_bundle_for_dry_run",
+      "done_when": "consumeAcademicHandoffForDryRun accepts the academic formal current bundle and surfaces normalization-feedback.v1 for the current dry-run path"
+    },
+    {
+      "owner": "executor_4",
+      "target_area": "src/__tests__/industry/platform/*",
+      "action": "wire_academic_eval_assets_into_phase6_backlog",
+      "done_when": "positive canonical, near-boundary, replay, eval, and owner-boundary refs are queued for platform replay/eval assembly without asking academic for more semantic fixtures"
+    }
+  ]
+}

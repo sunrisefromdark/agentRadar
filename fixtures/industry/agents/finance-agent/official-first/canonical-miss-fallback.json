@@ -1,0 +1,5 @@
+{
+  "scenario": "capital_finance official-first miss",
+  "expected_route_level": "fallback_tools",
+  "expected_reason_codes": ["no_canonical_source_available", "route_fallback_tools"]
+}

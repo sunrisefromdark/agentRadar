@@ -1,0 +1,7 @@
+{
+  "case_id": "community-post-news-retell",
+  "original_owner": "cn-community",
+  "retell_source_type": "media_report",
+  "expected_bucket": "diagnostic",
+  "expected_reason": "news_retell_kept_as_context_not_direct_owner"
+}

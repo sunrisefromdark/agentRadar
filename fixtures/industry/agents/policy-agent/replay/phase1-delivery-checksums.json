@@ -1,0 +1,70 @@
+{
+  "manifest_id": "policy-finance-phase1-delivery-checksums.v1",
+  "algorithm": "sha256",
+  "entries": [
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-delivery-manifest.json",
+      "sha256": "4dfc96ca2be11ef9c6dd455ad6d3e244fe4954dcc8d61ed270383cc719a632ab"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-next-platform-actions.json",
+      "sha256": "d48fe064fc42f9ef382d3d9b23b3b7186cf5e49dcd2f44a9eded14ce32a3673e"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-runtime-ready-inputs.json",
+      "sha256": "38c3a90ceb93d183582dbb2a0eb564e815fda93e8d9c96eca5d9ece1141c6801"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-current-bundle.json",
+      "sha256": "34c4994415b21d87f919b3ea0b959ca021a963a8ef103dfbb730a787ea433f39"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/replay/phase1-missing-stable-claim-key-bundle.json",
+      "sha256": "ca5f6140a836ac00a4c8539c42ce81da60a7d48ffe80156e7d445bc4ff5c8a64"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-current-consumer.json",
+      "sha256": "3380031a710c34e98623b2f2988980c0488fa1c7f462a90806d561e0f08a5957"
+    },
+    {
+      "path": "fixtures/industry/agents/policy-agent/compatibility/same-run-missing-stable-claim-key-negative.json",
+      "sha256": "a98b72d1cd7e857493d5a1a3cfe33ba0c6ea1621f93032a2f862b0d6dd23d256"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/handoff-note.md",
+      "sha256": "067bb780c777c8e16ef4fbb8837d878e2cb8654601165fa3a0069c51aa792231"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/shared-runtime-note.md",
+      "sha256": "0100f0b86f8bc994393554e1317e3551a443b81c39a5299ce93d82f5a1721b25"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/index.ts",
+      "sha256": "e8956a332d781b6ce56f73316caa70b94c6860fe1d65be21633854b357a59e86"
+    },
+    {
+      "path": "src/industry/agents/policy-agent/handoff.ts",
+      "sha256": "c5a32ac4b28f0c83eb58c67dc373e03cfc95908add97a13fed4f869b523d51f9"
+    },
+    {
+      "path": "src/industry/agents/finance-agent/index.ts",
+      "sha256": "5f8621f8a9b190f4389488d6f943d48b764e8db09af65a500860a899d8b361c0"
+    },
+    {
+      "path": "src/industry/platform/normalization/financePolicyDryRun.ts",
+      "sha256": "2e8110a7cbc410488a32232d88bfe6f72633f71d18b1e37f21196b23e8b0b20d"
+    },
+    {
+      "path": "src/industry/platform/normalization/policyFinanceRuntimeReplay.ts",
+      "sha256": "ee28b24e01905c25c42df1a4e3644486084a4a96bdc575c1b5cc070235459aff"
+    },
+    {
+      "path": "fixtures/industry/platform/current-consumer/phase1-runtime.json",
+      "sha256": "db40a4322fb207d576801b3b6bd1acb95d3e4797864ebbb720f889fdb28813d5"
+    },
+    {
+      "path": "fixtures/industry/platform/negative/phase1-runtime.json",
+      "sha256": "9ba38817d53656efcdd1b776fcb6b0bf0d906992985c5658704c4e77b45ab028"
+    }
+  ]
+}

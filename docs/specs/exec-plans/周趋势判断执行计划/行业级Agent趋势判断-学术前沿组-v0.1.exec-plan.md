@@ -3,7 +3,8 @@
 ## 文档状态
 
 - 版本：`v0.1`
-- 当前状态：`Draft`
+- 当前状态：`In Progress`
+- 最近更新：`2026-06-28`
 - 上游总控：
   - `docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-v0.1.exec-plan.md`
 - 对应设计：
@@ -14,6 +15,38 @@
   - `docs/specs/design-docs/行业级Agent趋势判断设计/08-验证追溯与完成定义.md`
   - `docs/specs/design-docs/行业级Agent趋势判断设计/09-术语与审计词汇表.md`
 - 负责人：`2号执行人`
+
+### 当前推进结论
+
+- 当前主线已做到：`Step 3 / Phase 1A formal handoff delivered`，且已补齐中台继续推进所需的 Phase 4 producer 侧语义资产
+- 当前可交付状态：
+  - academic 两轴已能产出正式 `industry-signal-event-batch.v1`
+  - 两条 `axis-tool-coverage-report.v1`
+  - 两条 `industry-agent-contribution.v1`
+  - 一条 `daily-industry-evidence-pack-input.v1`
+  - 一套 machine-readable academic formal bundle：
+    - `fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json`
+    - `fixtures/industry/agents/academic-agent/replay/phase1-missing-owner-boundary-bundle.json`
+    - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json`
+    - `fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json`
+    - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-checksums.json`
+  - replay / owner-boundary / anti-upgrade 基础样本 refs，外加 academic `positive canonical` / `near-boundary` refs，已显式挂进 formal bundle 与 delivery manifest，可供中台直接消费
+- 当前未继续推进的原因：
+  - 中台 `Phase 1B / 1C` 与 academic dry-run consumer 已存在；当前真正等待的是 `4号执行人` 按这批正式 handoff 资产推进其 `Phase 2 / 3 partial` 消费链路，并反馈 contract/runtime gap 或 Phase 6 组装缺口
+- 当前阻塞责任人：
+  - `4号执行人`（中台裁决组）
+
+### 阶段进度
+
+| 阶段 | 状态 | 当前结论 | 说明 |
+| --- | --- | --- | --- |
+| Phase 1：source 与 freshness 基线 | `Completed` | 已完成 | `paper/conference source`、citation trace、freshness anchor、事件 builder 已落地并有 unit / replay 测试 |
+| Phase 2：event 生产 | `Completed` | 已完成 | `research_paper` / `conference_academic` accepted / counter / diagnostic / rejected batch 已稳定产出 |
+| Phase 3：tool coverage 与 rejection | `Completed` | 已完成 | 两轴 coverage、rejection / anti-upgrade / owner-boundary 基线已落地 |
+| Phase 3A：daily handoff 冻结 | `Completed` | 已完成 | 已收口到 `daily-industry-evidence-pack-input.v1`，保持轻索引，不内嵌全量 event |
+| Phase 4：academic replay fixture | `Completed` | 学术组 producer 侧交付已完成 | replay window、owner-boundary、anti-upgrade、positive canonical、near-boundary、formal current/negative bundle、delivery manifest、next-platform-actions、delivery checksums 已落地；中台可据此继续其 Phase 2 / 3 partial 与 Phase 6 backlog 组装 |
+| Phase 5：review / budget / same-run / claim-critical 后接线 | `Blocked` | 等中台消费学术 formal handoff | 该阶段不是本组单独推进即可完成；中台需先把 current bundle / delivery manifest 接入其 `Phase 2 / 3 partial` 路径，再决定是否反馈本组补充字段 |
+| 最终 weekly 集成与总验收 | `Not Started` | 尚未进入 | 需等三组正式 handoff 全部完成后再统一进入 |
 
 ## 目标
 
@@ -156,14 +189,19 @@
 
 ### 你只在这些时点必须等待
 
-- 只有在你要做正式跨组 handoff 时，才需要等待 `4号执行人` 的 `Phase 1A`。
-- 只有在你要把 citation / freshness 规则固化到正式 payload，并让中台开始消费时，才需要等 canonical schema、reason/state 真源和 current fixtures。
-- 只有在你要接 same-run 的 claim-critical 路径时，才需要等 dispatch / budget runtime 基座。
+- `Phase 1A` 的 canonical schema、reason/state 真源、artifact path、payload 正式名这一档依赖已满足，本组已据此收口 formal handoff。
+- 只有在你要让中台开始实际消费 academic formal bundle，并反馈 contract/runtime gap 时，才需要等待 `4号执行人` 把 `phase1-current-bundle + delivery manifest + positive canonical / near-boundary refs` 接进其中台 `Phase 2 / 3 partial` 路径。
+- 只有在你要接 same-run 的 claim-critical 路径时，才需要等 dispatch / budget runtime 基座真正进入可消费阶段。
 
 ### 等到什么产物出来再继续
 
-- 等到 `4号执行人` 发出 canonical schema、reason/state 真源、artifact path、payload 正式名。
-- 等到 current consumer fixtures 可用后，再把本地 seam 收口成正式 handoff。
+- 等到 `4号执行人` 消费：
+  - `fixtures/industry/agents/academic-agent/replay/phase1-current-bundle.json`
+  - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-manifest.json`
+  - `fixtures/industry/agents/academic-agent/replay/phase1-next-platform-actions.json`
+  - `fixtures/industry/agents/academic-agent/replay/phase1-delivery-checksums.json`
+  - delivery manifest / formal bundle 中声明的 `positive canonical`、`near-boundary`、`replay`、`eval`、`owner-boundary` refs
+- 等到 `4号执行人` 反馈其 `Phase 2 / 3 partial` 接线后的 contract/runtime gap，再决定本组是否补 academic 专属 compatibility fixture。
 
 ### 不要等什么
 
@@ -175,9 +213,29 @@
 
 1. 先在本组目录里把 paper / conference source、citation trace、freshness 规则、replay window、local seam、测试骨架做起来。
 2. 等 `4号执行人` 发出 `Phase 1A` 的 canonical schema、reason/state 真源、payload 正式名、artifact path 后，把本地 seam 收口成正式 handoff。
-3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；如果本组先准备好，就先进入 contract test 和 normalization dry-run，不等另外两组。
-4. 等 `4号执行人` 发布 `Phase 1B / 1C` 后，再把 review / budget / same-run 全文抓取或深补证这类后接线能力接上。
+3. 先把本组正式 envelope / payload / manifest / refs 交给 `4号执行人`；本轮已进一步固定为 machine-readable current/negative bundle、delivery manifest、next-platform-actions、delivery checksums，以及显式 `positive canonical / near-boundary` refs，不等另外两组即可先做 contract test 和 normalization dry-run。
+4. 等 `4号执行人` 把学术 formal handoff 接进其中台 `Phase 2 / 3 partial` 路径后，再看是否还需要本组补 `review / budget / same-run / claim-critical` 相关字段或 fixture。
 5. 最后等三组都完成正式 handoff 后，再一起进入最终 weekly 集成和总验收。
+
+### 当前停点与继续条件
+
+当前停在第 `3` 步之后，原因不是本组 formal handoff 缺失，而是学术组已把中台继续推进所需的 producer 侧资产交齐，下一段必须由中台先实际消费这批输入。
+
+要继续推进本组下一段实现，至少需要以下外部产出：
+
+1. 需要 `4号执行人` 先消费并接入本组 formal handoff：
+   - `phase1-current-bundle.json`
+   - `phase1-delivery-manifest.json`
+   - `phase1-next-platform-actions.json`
+   - `phase1-delivery-checksums.json`
+   - formal bundle / delivery manifest 内声明的 positive canonical / near-boundary / replay / eval / owner-boundary fixture refs
+2. 需要 `4号执行人` 在其中台 `Phase 2 / 3 partial` 路径里反馈：
+   - 是否仍缺 academic 专属 compatibility fixture
+   - 是否仍缺 academic 侧补充字段或 lineage 约束
+   - 是否还缺中台 Phase 6 组装所需的 academic 资产索引格式
+3. 需要另外两组完成各自正式 handoff，之后才能进入最终 weekly 集成和总验收。
+
+在以上产出就绪前，本组不再继续扩展 `same-run`、`claim-critical`、`review`、`budget` 路径，避免在 academic 目录内提前实现中台运行时语义。
 
 ## 输出与 handoff
 
@@ -189,7 +247,12 @@
 2. 两条 `axis-tool-coverage-report.v1` envelope + payload + manifest
 3. 两条 `industry-agent-contribution.v1` envelope + payload + manifest
 4. `daily-industry-evidence-pack-input.v1` envelope + payload + manifest
-5. replay / eval 所需 academic fixtures
+5. replay / eval 所需 academic fixtures：
+   - `positive canonical`
+   - `near-boundary`
+   - replay window
+   - anti-upgrade
+   - owner-boundary
 6. 若命中 same-run admission / budget / review，必须附 `dispatch_context_ref`、`scheduling_key` 与相关 refs
 7. `cross_responsibility_attestation_refs?`、owner boundary 反例、academic anti-upgrade / boundary fixture refs
 
@@ -299,3 +362,18 @@ handoff 要求：
 | --- | --- | --- | --- |
 | 2026-06-23 | 未运行 | `Not Started` | 本轮仅生成子计划 |
 | 2026-06-23 | 手工修订子计划 | `Completed` | 已对齐 `agent-relevance-profile.v1` 依赖、目录骨架前置条件与 daily handoff 数组合同 |
+| 2026-06-27 | `npm.cmd run code-review:preflight` | `Passed` | 仓库内 code review skill gate 通过 |
+| 2026-06-27 | `npm.cmd run testing-skill:preflight` | `Passed` | 仓库内 testing skill gate 通过 |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --write --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 已写入本执行计划对应的 targeted preflight receipt |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --check --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 当前 exec-plan receipt 与实现技能 hash 校验通过 |
+| 2026-06-27 | `npm.cmd test -- src/__tests__/industry/agents/academic-agent src/__tests__/industry/platform/contract.test.ts` | `Passed` | `45` 个 test files、`197` 个 tests 全部通过，包含 artifact ref identity 回归测试 |
+| 2026-06-27 | `npm.cmd run typecheck` | `Passed` | 学术 handoff 收口后的类型检查通过 |
+| 2026-06-27 | `npm.cmd test -- src/__tests__/industry/agents/academic-agent/contract.test.ts src/__tests__/industry/agents/academic-agent/replay.test.ts src/__tests__/industry/platform/contract.test.ts` | `Passed` | `45` 个 test files、`202` 个 tests 全部通过，覆盖 academic formal bundle、current/negative bundle fixture、delivery manifest 与平台 gate |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --write --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | formal handoff 与执行计划更正后，targeted preflight receipt 已重写 |
+| 2026-06-27 | `npm.cmd run code-implementation:preflight -- --check --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 最新 exec-plan receipt 与实现技能 hash 校验通过 |
+| 2026-06-28 | `npm.cmd test -- src/__tests__/industry/agents/academic-agent/contract.test.ts src/__tests__/industry/agents/academic-agent/replay.test.ts src/__tests__/industry/platform/contract.test.ts src/__tests__/industry/platform/normalization.test.ts` | `Passed` | `47` 个 test files、`226` 个 tests 全部通过，覆盖 positive canonical / near-boundary refs、next-platform-actions、delivery checksums 与 academic dry-run gate |
+| 2026-06-28 | `npm.cmd run typecheck` | `Passed` | academic formal handoff 新增 fixture refs 后类型检查通过 |
+| 2026-06-28 | `npm.cmd run code-review:preflight` | `Passed` | 仓库内 code review skill gate 通过 |
+| 2026-06-28 | `npm.cmd run testing-skill:preflight` | `Passed` | 仓库内 testing skill gate 通过 |
+| 2026-06-28 | `npm.cmd run code-implementation:preflight -- --write --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 本轮补齐中台继续推进所需 handoff 资产后，targeted preflight receipt 已重写 |
+| 2026-06-28 | `npm.cmd run code-implementation:preflight -- --check --exec-plan docs/specs/exec-plans/周趋势判断执行计划/行业级Agent趋势判断-学术前沿组-v0.1.exec-plan.md` | `Passed` | 最新 exec-plan receipt 与实现技能 hash 校验通过 |

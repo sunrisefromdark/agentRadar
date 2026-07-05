@@ -69,6 +69,16 @@ Weekly report MUST 回答：
 
 输出必须抽象为趋势，例如 `agent runtime + persistent memory + self-improving`，不能只列 repo。
 
+### AgentReach 外部讨论趋势
+
+Weekly report MAY 消费 `data/external-discovery/windows/YYYY-MM-DD.discussion-trend-window.json`，但只能作为 external secondary evidence：
+
+- 只展示 `weekly_eligible=true` 且 `verdict=external_reinforcement` 的项目级趋势补证。
+- 只展示 `weekly_eligible=true` 且 `verdict=watch_signal` 的方向级观察。
+- `noise_spike` 只能进入风险、噪声或 audit 说明，不能作为正向趋势材料。
+- `not_found`、`parse_error`、`insufficient`、`partial`、`failed`、`skipped` 必须保留各自语义，不能渲染成同一种空列表。
+- Action 层不得回退读取 `data/raw/external-discovery/**`，不得把外部趋势写入 primary score、ranking 或 `discussion_score`。
+
 ## 失败模式
 
 | 失败 | 语义 | 预期处理 |
@@ -103,6 +113,7 @@ Weekly report MUST 回答：
 | --- | --- | --- | --- |
 | `src/action/dailyReport.ts` | 新项目、高分、异常增长、evidence 输出 | 单元测试 + dry-run | 本文件「Daily Report 契约」 |
 | `src/action/weeklyReport.ts` | 三个周报问题是否被回答 | 单元测试 + 报告审查 | 本文件「Weekly Report 契约」 |
+| `src/action/*weekly*` | AgentReach 外部讨论趋势是否只作为 secondary evidence | `externalDiscussionTrendWindowWeekly.test.ts` | 本文件「AgentReach 外部讨论趋势」 |
 | `src/action/knowledgeCard.ts` | card 字段是否完整、机器区/人工区是否隔离 | 单元测试 | 本文件「Knowledge Card 契约」「KB 更新契约」 |
 | `data/reports/*.md` | 人类可读报告是否生成 | 冒烟检查 | 本文件「输出」 |
 | `data/kb/*.md` | KB card 是否生成且重入更新不覆盖人工区 | 冒烟检查 + 重入测试 | 本文件「KB 构建」「KB 重入更新」 |

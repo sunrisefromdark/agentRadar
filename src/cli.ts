@@ -28,6 +28,7 @@ import { captureTrackedRepoStarSnapshots } from "./signal/githubTrackedStars.ts"
 import { buildMissionInventoryAudit } from "./signal/missionInventoryAudit.ts";
 import { runMissionDeepDiscovery } from "./signal/missionDeepDiscovery.ts";
 import { runMissionScoutDiscovery } from "./signal/missionScoutDiscovery.ts";
+import { runDailyExternalDiscoveryIntegration } from "./externalDiscovery/dailyIntegration.ts";
 import {
   ensureDataDirs,
   readJsonFile,
@@ -87,6 +88,7 @@ interface CliOptions {
   anchorDate?: string;
   recordAgentMemory?: boolean;
   inputPath?: string;
+  externalDiscoveryInputPath?: string;
 }
 
 type FlagHandler = (opts: CliOptions, argv: string[], index: number) => number;
@@ -156,6 +158,10 @@ const FLAG_HANDLERS: Record<string, FlagHandler> = {
   },
   "--input": (opts, argv, index) => {
     if (argv[index + 1]) opts.inputPath = argv[index + 1];
+    return index + 1;
+  },
+  "--external-discovery-input": (opts, argv, index) => {
+    if (argv[index + 1]) opts.externalDiscoveryInputPath = argv[index + 1];
     return index + 1;
   },
 };
@@ -748,11 +754,31 @@ export async function runDaily(opts: CliOptions): Promise<void> {
       recent_daily_reports: readRecentDailyReports(opts.date, 5),
     }),
   );
-  await generateProjectLibraryEnhancements({
+  const projectLibraryArtifact = await generateProjectLibraryEnhancements({
     date: opts.date,
     scored,
     config,
     observerEntries: observer.artifact.entries,
+    dryRun,
+  });
+  const externalDiscovery = await runDailyExternalDiscoveryIntegration({
+    date: opts.date,
+    generatedAt,
+    config,
+    dryRun,
+    inputPath: opts.externalDiscoveryInputPath,
+    explicitInput: Boolean(opts.externalDiscoveryInputPath),
+    scoredProjects: scored,
+    projectLibraryArtifact,
+  });
+  logger.info("external discovery integration completed", {
+    date: opts.date,
+    status: externalDiscovery.aggregate.status,
+    acceptedEvents: externalDiscovery.aggregate.accepted_event_count,
+    candidates: externalDiscovery.input_build.eligible_count,
+    explanationStatus: externalDiscovery.explanations.status,
+    enhancedExplanations: externalDiscovery.explanations.audit.enhanced_count,
+    fallbackExplanations: externalDiscovery.explanations.audit.fallback_count,
     dryRun,
   });
   reportWithFreshness.llm_diagnostics = {
@@ -826,6 +852,35 @@ export async function runDaily(opts: CliOptions): Promise<void> {
         matched_by: entry.matched_by,
         source_notes: entry.source_notes,
       })),
+    },
+    externalDiscovery: {
+      aggregate_status: externalDiscovery.aggregate.status,
+      aggregate_status_reason: externalDiscovery.aggregate.status_reason,
+      accepted_event_count: externalDiscovery.aggregate.accepted_event_count,
+      rejected_event_count: externalDiscovery.aggregate.rejected_event_count,
+      observation_candidate_count: externalDiscovery.aggregate.observation_candidates.length,
+      project_evidence_count: externalDiscovery.aggregate.project_evidence.length,
+      direction_evidence_count: externalDiscovery.aggregate.direction_evidence.length,
+      explanation_status: externalDiscovery.explanations.status,
+      explanation_status_reason: externalDiscovery.explanations.status_reason,
+      explanation_eligible_count: externalDiscovery.explanations.audit.eligible_count,
+      explanation_attempted_count: externalDiscovery.explanations.audit.attempted_count,
+      explanation_enhanced_count: externalDiscovery.explanations.audit.enhanced_count,
+      explanation_fallback_count: externalDiscovery.explanations.audit.fallback_count,
+      explanation_rejected_count: externalDiscovery.explanations.audit.rejected_count,
+      trend_window_read_status: externalDiscovery.trend_window.status,
+      trend_window_status: externalDiscovery.trend_window.status,
+      trend_window_path: externalDiscovery.paths.trend_window,
+      trend_window_usable_day_count: externalDiscovery.trend_window.coverage.usable_day_count,
+      trend_window_project_trend_count: externalDiscovery.trend_window.project_trends.length,
+      trend_window_direction_trend_count: externalDiscovery.trend_window.direction_trends.length,
+      trend_window_failed_date_count: externalDiscovery.trend_window.coverage.failed_dates.length,
+      trend_window_missing_date_count: externalDiscovery.trend_window.coverage.missing_dates.length,
+      warning_count: externalDiscovery.aggregate.audit.warnings.length + externalDiscovery.explanations.audit.warnings.length,
+      warnings: [
+        ...externalDiscovery.aggregate.audit.warnings.map((warning) => `${warning.reason_code}:${warning.reason_detail}`),
+        ...externalDiscovery.explanations.audit.warnings.map((warning) => `${warning.reason_code}:${warning.reason_detail}`),
+      ].slice(0, 20),
     },
     industryRuntimeSummary,
     missionInventoryAudit,

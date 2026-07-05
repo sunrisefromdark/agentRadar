@@ -610,6 +610,7 @@ export function buildDailyRunSummary(
         >
       >;
     };
+    externalDiscovery?: DailyRunSummary["external_discovery"];
     missionInventoryAudit?: {
       rolling_30d_searchable_catalog_count: number;
       rolling_30d_vertical_or_task_oriented_count: number;
@@ -679,6 +680,7 @@ export function buildDailyRunSummary(
     summary.candidate_catalog_additions = opts.observer.promotionCandidates;
     summary.observer_top_candidates = opts.observer.topCandidates;
   }
+  summary.external_discovery = opts.externalDiscovery;
   summary.mission_metrics = buildMissionMetrics(summary);
   if (opts.missionInventoryAudit) {
     summary.mission_metrics = {
@@ -831,6 +833,26 @@ function renderObserverSummary(summary: DailyRunSummary): string[] {
   ];
 }
 
+function renderExternalDiscoverySummary(summary: DailyRunSummary): string[] {
+  const external = summary.external_discovery;
+  if (!external) return ["- external_discovery: unavailable"];
+  const warnings = Array.isArray(external.warnings) ? external.warnings : [];
+
+  return [
+    `- aggregate_status: ${external.aggregate_status}${external.aggregate_status_reason ? ` (${external.aggregate_status_reason})` : ""}`,
+    `- accepted_events: ${external.accepted_event_count}; rejected_events=${external.rejected_event_count}; candidates=${external.observation_candidate_count}`,
+    `- evidence: project=${external.project_evidence_count}; direction=${external.direction_evidence_count}`,
+    `- explanation_status: ${external.explanation_status}${external.explanation_status_reason ? ` (${external.explanation_status_reason})` : ""}`,
+    `- explanations: eligible=${external.explanation_eligible_count}; attempted=${external.explanation_attempted_count}; enhanced=${external.explanation_enhanced_count}; fallback=${external.explanation_fallback_count}; rejected=${external.explanation_rejected_count}`,
+    `- trend_window_read_status: ${external.trend_window_read_status}`,
+    `- trend_window_status: ${external.trend_window_status ?? "unavailable"}`,
+    `- trend_window_path: ${external.trend_window_path}`,
+    `- trend_window_coverage: usable_days=${external.trend_window_usable_day_count}; failed_dates=${external.trend_window_failed_date_count}; missing_dates=${external.trend_window_missing_date_count}`,
+    `- trend_window_items: project=${external.trend_window_project_trend_count}; direction=${external.trend_window_direction_trend_count}`,
+    ...(warnings.length > 0 ? warnings.slice(0, 8).map((warning) => `- warning: ${warning}`) : ["- warnings: none"]),
+  ];
+}
+
 function renderMissionSummary(summary: DailyRunSummary): string[] {
   const coverageAtlas = summary.coverage_atlas ?? [];
   const gapLedger = summary.gap_ledger ?? [];
@@ -920,10 +942,15 @@ export function renderDailyRunSummary(summary: DailyRunSummary): string {
       (source) => `- ${source.source}: ${statusLabel(source.status)} | enabled=${source.enabled} | items=${source.item_count} | projects=${source.distinct_projects}`,
     ),
     "",
+    "## AgentReach 外部发现",
+    "",
+    ...renderExternalDiscoverySummary(summary),
+    "",
     "## Mission Discovery",
     "",
     ...renderMissionSummary(summary),
     "",
+    "## Observer Status",
     "## Industry Runtime",
     "",
     ...renderIndustryRuntimeSummary(summary),

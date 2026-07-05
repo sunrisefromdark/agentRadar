@@ -7,6 +7,7 @@ export const DATA_DIRS = [
   "data/raw/github",
   "data/raw/github-stars",
   "data/raw/trendshift",
+  "data/external-discovery",
   "data/classifications",
   "data/normalized",
   "data/scores",

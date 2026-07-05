@@ -100,8 +100,11 @@ export class DeepSeekProvider extends OpenAICompatibleProvider {
         thinking: { type: "disabled" },
         ...(wantsJsonOutput(prompt) ? { response_format: { type: "json_object" } } : {}),
       };
-      const response = await this.client.chat.completions.create(
-        request as OpenAI.Chat.ChatCompletionCreateParamsNonStreaming,
+      const response = await this.runWithTimeout((signal) =>
+        this.client.chat.completions.create(
+          request as OpenAI.Chat.ChatCompletionCreateParamsNonStreaming,
+          { signal },
+        ),
       );
       const text = response.choices[0]?.message?.content;
       if (!text) {

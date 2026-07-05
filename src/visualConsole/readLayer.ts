@@ -16,6 +16,7 @@ import type {
   WeeklyReport,
 } from "../types.ts";
 import type { MissionScoutEnhancementArtifact } from "../signal/missionScoutEnhancement.ts";
+import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
 import { getFilesystemStateSignature, readCachedDirectoryEntries, readCachedJsonFile, readCachedTextFile } from "./fileCache.ts";
 import { parseWeeklyMarkdown } from "./weeklyMarkdown.ts";
 import type { DailyTimeNavigatorPreview, ReadResult, TopLevelViewStatus, WeeklyTimeNavigatorPreview } from "./types.ts";
@@ -187,6 +188,11 @@ export function getObserverArtifact(date: string): ReadResult<EcosystemObserverA
 export function getProjectLibraryEnhancementArtifact(date: string): ReadResult<ProjectLibraryEnhancementArtifact> {
   const filepath = path.join("data", "reports", `${date}.project-library.json`);
   return validateDateInput(date, filepath) ?? readJsonStrict<ProjectLibraryEnhancementArtifact>(filepath);
+}
+
+export function getExternalCandidateExplanationsArtifact(date: string): ReadResult<ExternalCandidateExplanationArtifact> {
+  const filepath = path.join("data", "external-discovery", `${date}.candidate-explanations.json`);
+  return validateDateInput(date, filepath) ?? readJsonStrict<ExternalCandidateExplanationArtifact>(filepath);
 }
 
 export function getMissionScoutArtifact(date: string): ReadResult<{ raw_signals?: RawSignal[] }> {

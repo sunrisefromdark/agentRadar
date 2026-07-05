@@ -1,4 +1,11 @@
+import fs from "node:fs";
 import path from "node:path";
+import { externalAggregatePath, externalCandidateExplanationsPath } from "../externalDiscovery/paths.ts";
+import { assertPublicSafeAggregate, assertPublicSafeTrendWindow } from "../externalDiscovery/redaction.ts";
+import { assertPublicSafeCandidateExplanations } from "../externalDiscovery/explanationRedaction.ts";
+import type { ExternalCandidateExplanationArtifact } from "../externalDiscovery/explanations.ts";
+import { readExternalDiscussionTrendWindowByDate, type ExternalDiscussionTrendWindowReadResult } from "../externalDiscovery/trendWindowIntegration.ts";
+import { isExternalPlatform } from "../externalDiscovery/types.ts";
 import { readJsonFile } from "../storage/files.ts";
 import type {
   DailyReport,
@@ -36,6 +43,12 @@ type PolicyFinanceRuntimeReplayArtifact = {
 
 function industryRuntimeSummaryPath(date: string): string {
   return path.join("data", "reports", `${date}.industry-runtime-summary.json`);
+}
+
+interface OptionalJsonRead {
+  exists: boolean;
+  value?: unknown;
+  error?: string;
 }
 
 function aggregateStatus(checks: VerificationCheck[]): VerifyDailyResult["status"] {
@@ -449,6 +462,81 @@ function projectSearchContractChecks(summary: DailyRunSummary, report: DailyRepo
   ];
 }
 
+function externalAggregateContractChecks(filepath: string, aggregateRead: OptionalJsonRead): VerificationCheck[] {
+  if (!aggregateRead.exists) {
+    return [
+      buildCheck(
+        "external_discovery_aggregate_contract",
+        "pass",
+        `external aggregate not present at ${filepath}; external layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (aggregateRead.error) {
+    return [buildCheck("external_discovery_aggregate_contract", "fail", `external aggregate unreadable: ${aggregateRead.error}`)];
+  }
+
+  const aggregate = aggregateRead.value;
+  const redaction = assertPublicSafeAggregate(aggregate);
+  const inspection = inspectExternalAggregateContract(aggregate);
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...inspection.issues,
+  ];
+
+  return [
+    buildCheck(
+      "external_discovery_aggregate_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `external aggregate public-safe; project_evidence=${inspection.projectEvidenceCount}; direction_evidence=${inspection.directionEvidenceCount}; named_actor_rows=${inspection.namedActorRows}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
+function externalCandidateExplanationContractChecks(
+  filepath: string,
+  aggregateRead: OptionalJsonRead,
+  explanationsRead: OptionalJsonRead,
+): VerificationCheck[] {
+  if (!explanationsRead.exists) {
+    const needsExplanationArtifact = aggregateNeedsCandidateExplanations(aggregateRead.value);
+    return [
+      buildCheck(
+        "external_candidate_explanations_contract",
+        needsExplanationArtifact ? "fail" : "pass",
+        needsExplanationArtifact
+          ? `candidate explanations missing at ${filepath}; external aggregate has accepted events or candidates`
+          : `candidate explanations not present at ${filepath}; external explanation layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (explanationsRead.error) {
+    return [buildCheck("external_candidate_explanations_contract", "fail", `candidate explanations unreadable: ${explanationsRead.error}`)];
+  }
+
+  const artifact = explanationsRead.value as ExternalCandidateExplanationArtifact;
+  const redaction = assertPublicSafeCandidateExplanations(artifact);
+  const inspection = inspectExternalCandidateExplanationContract(artifact, aggregateRead.value);
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...inspection.issues,
+  ];
+
+  return [
+    buildCheck(
+      "external_candidate_explanations_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `candidate explanations public-safe; status=${inspection.status}; eligible=${inspection.eligibleCount}; enhanced=${inspection.enhancedCount}; fallback=${inspection.fallbackCount}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
 function policyFinanceRuntimeReplayChecks(
   artifact: PolicyFinanceRuntimeReplayArtifact | null,
   artifactPath: string,
@@ -475,6 +563,338 @@ function policyFinanceRuntimeReplayChecks(
       `runtime_consumed_same_run_messages=${artifact.runtime_consumed_same_run_messages ?? "missing"}`,
     ),
   ];
+}
+
+function externalTrendWindowContractChecks(
+  summary: DailyRunSummary,
+  trendWindowRead: ExternalDiscussionTrendWindowReadResult,
+): VerificationCheck[] {
+  const externalSummary = summary.external_discovery;
+  if (trendWindowRead.read_status === "not_found") {
+    const status = externalSummary ? "warn" : "pass";
+    return [
+      buildCheck(
+        "external_discussion_trend_window_contract",
+        status,
+        externalSummary
+          ? `trend window missing at ${trendWindowRead.path}; external discovery summary expected a trend artifact`
+          : `trend window not present at ${trendWindowRead.path}; external layer not run for this date`,
+      ),
+    ];
+  }
+
+  if (trendWindowRead.read_status === "parse_error" || !trendWindowRead.trend_window) {
+    return [
+      buildCheck(
+        "external_discussion_trend_window_contract",
+        "fail",
+        `trend window unreadable at ${trendWindowRead.path}: ${trendWindowRead.error ?? "parse_error"}`,
+      ),
+    ];
+  }
+
+  const trendWindow = trendWindowRead.trend_window;
+  const redaction = assertPublicSafeTrendWindow(trendWindow);
+  const itemIssues = [
+    ...trendWindow.project_trends
+      .filter((item) => item.scope !== "project")
+      .map((item) => `project_trends contains non-project item ${item.trend_id}`),
+    ...trendWindow.direction_trends
+      .filter((item) => item.scope !== "direction")
+      .map((item) => `direction_trends contains non-direction item ${item.trend_id}`),
+    ...[...trendWindow.project_trends, ...trendWindow.direction_trends]
+      .filter((item) => item.cannot_be_primary_conclusion !== true)
+      .map((item) => `${item.trend_id} missing cannot_be_primary_conclusion=true`),
+    ...trendWindow.direction_trends
+      .filter((item) => item.weekly_eligible && item.weekly_gate_reasons.length < 2)
+      .map((item) => `${item.trend_id} direction weekly eligibility does not satisfy 4-choose-2 gate`),
+    ...[...trendWindow.project_trends, ...trendWindow.direction_trends]
+      .filter((item) => item.verdict === "noise_spike" && item.weekly_eligible)
+      .map((item) => `${item.trend_id} noise_spike must not be weekly eligible`),
+  ];
+  const summaryIssues = externalSummary
+    ? [
+        ...(externalSummary.trend_window_read_status !== trendWindowRead.read_status
+          ? [`summary read status ${externalSummary.trend_window_read_status} does not match artifact read status ${trendWindowRead.read_status}`]
+          : []),
+        ...(externalSummary.trend_window_status !== trendWindow.status
+          ? [`summary trend status ${externalSummary.trend_window_status ?? "missing"} does not match artifact status ${trendWindow.status}`]
+          : []),
+        ...(externalSummary.trend_window_path.replace(/\\/g, "/") !== trendWindowRead.path.replace(/\\/g, "/")
+          ? [`summary trend path ${externalSummary.trend_window_path} does not match ${trendWindowRead.path}`]
+          : []),
+      ]
+    : [];
+  const issues = [
+    ...(!redaction.ok ? [`redaction=${redaction.reason_codes.join(",")}`] : []),
+    ...itemIssues,
+    ...summaryIssues,
+  ];
+
+  return [
+    buildCheck(
+      "external_discussion_trend_window_contract",
+      issues.length === 0 ? "pass" : "fail",
+      issues.length === 0
+        ? `trend window ${trendWindowRead.read_status}; usable_days=${trendWindow.coverage.usable_day_count}; project_trends=${trendWindow.project_trends.length}; direction_trends=${trendWindow.direction_trends.length}`
+        : issues.join("; "),
+    ),
+  ];
+}
+
+function aggregateNeedsCandidateExplanations(aggregate: unknown): boolean {
+  if (!isRecord(aggregate)) return false;
+  const acceptedEventCount = typeof aggregate.accepted_event_count === "number" ? aggregate.accepted_event_count : 0;
+  const candidates = Array.isArray(aggregate.observation_candidates) ? aggregate.observation_candidates : [];
+  return acceptedEventCount > 0 || candidates.length > 0;
+}
+
+function inspectExternalCandidateExplanationContract(value: unknown, aggregate: unknown): {
+  status: string;
+  eligibleCount: number;
+  enhancedCount: number;
+  fallbackCount: number;
+  issues: string[];
+} {
+  const issues: string[] = [];
+  if (!isRecord(value)) {
+    return { status: "unknown", eligibleCount: 0, enhancedCount: 0, fallbackCount: 0, issues: ["candidate explanations must be an object"] };
+  }
+
+  if (value.schema_version !== "external-discovery.candidate-explanations.v1") {
+    issues.push("schema_version must be external-discovery.candidate-explanations.v1");
+  }
+  if (value.public_safe !== true || value.contains_raw_text !== false || value.contains_profile_urls !== false) {
+    issues.push("candidate explanations must carry public_safe=true, contains_raw_text=false, contains_profile_urls=false");
+  }
+  if (isRecord(aggregate) && typeof aggregate.source_input_hash === "string" && value.aggregate_source_input_hash !== aggregate.source_input_hash) {
+    issues.push("aggregate_source_input_hash does not match external aggregate source_input_hash");
+  }
+  if (typeof value.input_context_hash !== "string" || value.input_context_hash.length === 0) {
+    issues.push("input_context_hash missing");
+  }
+
+  const explanations = Array.isArray(value.explanations) ? value.explanations : [];
+  const audit = isRecord(value.audit) ? value.audit : {};
+  const eligibleCount = Number(audit.eligible_count ?? 0);
+  const enhancedCount = Number(audit.enhanced_count ?? 0);
+  const fallbackCount = Number(audit.fallback_count ?? 0);
+  const status = typeof value.status === "string" ? value.status : "unknown";
+  const fallbackCountFromRows = explanations.filter((item) => isRecord(item) && item.summary_source === "rules_fallback").length;
+
+  if (fallbackCount !== fallbackCountFromRows) {
+    issues.push("fallback_count does not match rules_fallback rows");
+  }
+  if (status === "ok" && eligibleCount > 0 && enhancedCount / eligibleCount < 0.7) {
+    issues.push("status ok requires enhanced coverage >= 70%");
+  }
+
+  return {
+    status,
+    eligibleCount,
+    enhancedCount,
+    fallbackCount,
+    issues,
+  };
+}
+
+function inspectExternalAggregateContract(value: unknown): {
+  projectEvidenceCount: number;
+  directionEvidenceCount: number;
+  namedActorRows: number;
+  issues: string[];
+} {
+  const issues: string[] = [];
+  if (!isRecord(value)) {
+    return { projectEvidenceCount: 0, directionEvidenceCount: 0, namedActorRows: 0, issues: ["external aggregate must be an object"] };
+  }
+
+  if (value.schema_version !== "external-discovery.aggregate.v1") {
+    issues.push("schema_version must be external-discovery.aggregate.v1");
+  }
+
+  const projectEvidence = evidenceArray(value.project_evidence, "project_evidence", issues);
+  const directionEvidence = evidenceArray(value.direction_evidence, "direction_evidence", issues);
+  let namedActorRows = 0;
+
+  for (const [sectionName, evidenceRows] of [
+    ["project_evidence", projectEvidence],
+    ["direction_evidence", directionEvidence],
+  ] as const) {
+    evidenceRows.forEach((evidence, evidenceIndex) => {
+      if (!isRecord(evidence)) {
+        issues.push(`${sectionName}[${evidenceIndex}] must be an object`);
+        return;
+      }
+      if (!Array.isArray(evidence.named_registry_actors)) {
+        issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors must be an array`);
+        return;
+      }
+      evidence.named_registry_actors.forEach((actor, actorIndex) => {
+        namedActorRows += 1;
+        if (!isRecord(actor)) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}] must be an object`);
+          return;
+        }
+        const sourceRoles = actor.source_roles;
+        if (!Array.isArray(sourceRoles) || sourceRoles.length === 0) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}].source_roles must be non-empty`);
+          return;
+        }
+        const invalidRoles = sourceRoles.filter((role) => !isNamedActorSourceRole(role));
+        if (invalidRoles.length > 0) {
+          issues.push(`${sectionName}[${evidenceIndex}].named_registry_actors[${actorIndex}].source_roles has invalid roles`);
+        }
+      });
+      issues.push(...inspectPublicActorContract(evidence, `${sectionName}[${evidenceIndex}]`));
+    });
+  }
+
+  return {
+    projectEvidenceCount: projectEvidence.length,
+    directionEvidenceCount: directionEvidence.length,
+    namedActorRows,
+    issues,
+  };
+}
+
+function evidenceArray(value: unknown, name: string, issues: string[]): unknown[] {
+  if (Array.isArray(value)) return value;
+  issues.push(`${name} must be an array`);
+  return [];
+}
+
+function isNamedActorSourceRole(value: unknown): boolean {
+  return value === "social_discussant" || value === "official_publisher" || value === "official_owner";
+}
+
+function inspectPublicActorContract(evidence: Record<string, unknown>, prefix: string): string[] {
+  return [
+    ...inspectPublicActors(evidence.public_actors, `${prefix}.public_actors`),
+    ...inspectPublicActorAudit(evidence.public_actor_audit, `${prefix}.public_actor_audit`),
+  ];
+}
+
+function inspectPublicActors(value: unknown, prefix: string): string[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return [`${prefix} must be an array`];
+  const issues: string[] = [];
+  value.forEach((actor, index) => {
+    const actorPrefix = `${prefix}[${index}]`;
+    if (!isRecord(actor)) {
+      issues.push(`${actorPrefix} must be an object`);
+      return;
+    }
+    if (typeof actor.public_actor_id !== "string" || actor.public_actor_id.length === 0) {
+      issues.push(`${actorPrefix}.public_actor_id missing`);
+    } else if (/^https?:\/\//i.test(actor.public_actor_id) || /[?#\s\u0000-\u001F\u007F]/.test(actor.public_actor_id)) {
+      issues.push(`${actorPrefix}.public_actor_id must be a safe non-URL id`);
+    }
+    if (typeof actor.display_name !== "string" || actor.display_name.length === 0) {
+      issues.push(`${actorPrefix}.display_name missing`);
+    } else if (
+      actor.display_name.length > 80 ||
+      /https?:\/\//i.test(actor.display_name) ||
+      /[\u0000-\u001F\u007F]/.test(actor.display_name) ||
+      /\b(cookie|session|oauth|bearer|token|api[_ -]?key|password)\b/i.test(actor.display_name)
+    ) {
+      issues.push(`${actorPrefix}.display_name must be public-safe`);
+    }
+    if (!isExternalActorType(actor.actor_type)) issues.push(`${actorPrefix}.actor_type invalid`);
+    if (!isPublicActorRole(actor.actor_role)) issues.push(`${actorPrefix}.actor_role invalid`);
+    if (!isPublicActorSourceKind(actor.source_kind)) issues.push(`${actorPrefix}.source_kind invalid`);
+    if (!isPublicActorSourceBasis(actor.source_basis)) issues.push(`${actorPrefix}.source_basis invalid`);
+    if (!isPublicActorTierBasis(actor.tier_basis)) issues.push(`${actorPrefix}.tier_basis invalid`);
+    if (actor.authority_tier !== undefined && !isPublicActorAuthorityTier(actor.authority_tier)) {
+      issues.push(`${actorPrefix}.authority_tier invalid`);
+    }
+    if (typeof actor.is_head_actor !== "boolean") {
+      issues.push(`${actorPrefix}.is_head_actor must be boolean`);
+    }
+    if (actor.is_head_actor === true && actor.tier_basis !== "registry_match") {
+      issues.push(`${actorPrefix}.is_head_actor requires registry_match tier_basis`);
+    }
+    if (actor.is_head_actor === true && actor.actor_role !== "registry_entity") {
+      issues.push(`${actorPrefix}.is_head_actor requires registry_entity role`);
+    }
+    if ((actor.actor_role === "official_publisher" || actor.actor_role === "project_owner") && actor.is_head_actor === true) {
+      issues.push(`${actorPrefix}.official/project sources cannot be head discussion actors`);
+    }
+    if (typeof actor.event_count !== "number" || actor.event_count <= 0) issues.push(`${actorPrefix}.event_count invalid`);
+    if (!Array.isArray(actor.platforms) || actor.platforms.some((platform) => !isExternalPlatform(platform))) {
+      issues.push(`${actorPrefix}.platforms invalid`);
+    }
+  });
+  return issues;
+}
+
+function inspectPublicActorAudit(value: unknown, prefix: string): string[] {
+  if (value === undefined) return [];
+  if (!Array.isArray(value)) return [`${prefix} must be an array`];
+  const issues: string[] = [];
+  value.forEach((audit, index) => {
+    const auditPrefix = `${prefix}[${index}]`;
+    if (!isRecord(audit)) {
+      issues.push(`${auditPrefix} must be an object`);
+      return;
+    }
+    const extraKeys = Object.keys(audit).filter((key) => !["platform", "status", "reason", "event_count"].includes(key));
+    if (extraKeys.length > 0) issues.push(`${auditPrefix} must not contain raw or extra fields`);
+    if (!isExternalPlatform(audit.platform)) issues.push(`${auditPrefix}.platform invalid`);
+    if (!isIdentityStatus(audit.status)) issues.push(`${auditPrefix}.status invalid`);
+    if (!isIdentityReason(audit.reason)) issues.push(`${auditPrefix}.reason invalid`);
+    if (audit.status === "available" && audit.reason !== "actor_public_identity_available") {
+      issues.push(`${auditPrefix}.available status must use actor_public_identity_available`);
+    }
+    if (audit.status !== "available" && audit.reason === "actor_public_identity_available") {
+      issues.push(`${auditPrefix}.non-available status must not use actor_public_identity_available`);
+    }
+    if (typeof audit.event_count !== "number" || audit.event_count <= 0) issues.push(`${auditPrefix}.event_count invalid`);
+  });
+  return issues;
+}
+
+function isExternalActorType(value: unknown): boolean {
+  return value === "institution" || value === "team" || value === "person" || value === "community" || value === "unknown";
+}
+
+function isPublicActorRole(value: unknown): boolean {
+  return value === "discussion_actor" || value === "community_source" || value === "official_publisher" || value === "project_owner" || value === "registry_entity";
+}
+
+function isPublicActorSourceKind(value: unknown): boolean {
+  return value === "registry_entity" || value === "x_handle" || value === "reddit_community" || value === "reddit_user" || value === "hn_user" || value === "github_owner" || value === "official_domain" || value === "provider_actor";
+}
+
+function isPublicActorSourceBasis(value: unknown): boolean {
+  return value === "registry_match" || value === "explicit_actor_field" || value === "source_url_path" || value === "official_source_url" || value === "target_official_url";
+}
+
+function isPublicActorTierBasis(value: unknown): boolean {
+  return value === "registry_match" || value === "provider_hint" || value === "none";
+}
+
+function isPublicActorAuthorityTier(value: unknown): boolean {
+  return value === "core" || value === "proven" || value === "watch" || value === "ordinary" || value === "unknown";
+}
+
+function isIdentityStatus(value: unknown): boolean {
+  return value === "available" || value === "missing" || value === "invalid_reserved_path" || value === "redacted";
+}
+
+function isIdentityReason(value: unknown): boolean {
+  return (
+    value === "actor_public_identity_available" ||
+    value === "actor_public_identity_missing" ||
+    value === "x_reserved_or_indirect_url" ||
+    value === "official_source_url_missing" ||
+    value === "registry_entity_not_matched" ||
+    value === "redacted_for_public_safety"
+  );
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
 }
 
 function industryRuntimeSummaryChecks(
@@ -590,6 +1010,11 @@ function buildChecks(
   summary: DailyRunSummary,
   githubAudit: GitHubEnrichmentAuditEntry[],
   report: DailyReport | null,
+  externalAggregateFilepath: string,
+  externalAggregate: OptionalJsonRead,
+  externalCandidateExplanationsFilepath: string,
+  externalCandidateExplanations: OptionalJsonRead,
+  externalTrendWindow: ExternalDiscussionTrendWindowReadResult,
   policyFinanceRuntimeReplay: PolicyFinanceRuntimeReplayArtifact | null,
   policyFinanceRuntimeReplayArtifactPath: string,
   industryRuntimeSummary: IndustryRuntimeSummaryArtifact | null,
@@ -602,12 +1027,27 @@ function buildChecks(
     ...llmChecks(summary),
     ...freshnessChecks(summary),
     ...projectSearchContractChecks(summary, report),
+    ...externalAggregateContractChecks(externalAggregateFilepath, externalAggregate),
+    ...externalCandidateExplanationContractChecks(externalCandidateExplanationsFilepath, externalAggregate, externalCandidateExplanations),
+    ...externalTrendWindowContractChecks(summary, externalTrendWindow),
     ...policyFinanceRuntimeReplayChecks(policyFinanceRuntimeReplay, policyFinanceRuntimeReplayArtifactPath),
     ...industryRuntimeSummaryChecks(industryRuntimeSummary, industryRuntimeSummaryArtifactPath),
   ];
   const githubCheck = githubAuditCheck(summary, githubAudit);
   if (githubCheck) checks.push(githubCheck);
   return checks;
+}
+
+function readOptionalJson(filepath: string): OptionalJsonRead {
+  if (!fs.existsSync(filepath)) return { exists: false };
+  try {
+    return { exists: true, value: readJsonFile<unknown>(filepath, null) };
+  } catch (error) {
+    return {
+      exists: true,
+      error: error instanceof Error ? error.message : String(error),
+    };
+  }
 }
 
 /**
@@ -618,11 +1058,16 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
   const runSummaryPath = summaryPath(date);
   const githubEnrichmentPath = githubAuditPath(date);
   const reportPath = dailyReportPath(date);
+  const externalAggregateFilepath = externalAggregatePath(date);
+  const externalCandidateExplanationsFilepath = externalCandidateExplanationsPath(date);
   const policyFinanceRuntimeReplayArtifactPath = policyFinanceRuntimeReplayPath(date);
   const industryRuntimeSummaryArtifactPath = industryRuntimeSummaryPath(date);
   const summary = readJsonFile<DailyRunSummary | null>(runSummaryPath, null);
   const githubAudit = readJsonFile<GitHubEnrichmentAuditEntry[]>(githubEnrichmentPath, []);
   const report = readJsonFile<DailyReport | null>(reportPath, null);
+  const externalAggregate = readOptionalJson(externalAggregateFilepath);
+  const externalCandidateExplanations = readOptionalJson(externalCandidateExplanationsFilepath);
+  const externalTrendWindow = readExternalDiscussionTrendWindowByDate(date);
   const policyFinanceRuntimeReplay = readJsonFile<PolicyFinanceRuntimeReplayArtifact | null>(
     policyFinanceRuntimeReplayArtifactPath,
     null,
@@ -638,6 +1083,11 @@ export function buildVerifyDailyResult(date: string): VerifyDailyResult {
     normalizedSummary,
     githubAudit,
     report,
+    externalAggregateFilepath,
+    externalAggregate,
+    externalCandidateExplanationsFilepath,
+    externalCandidateExplanations,
+    externalTrendWindow,
     policyFinanceRuntimeReplay,
     policyFinanceRuntimeReplayArtifactPath,
     industryRuntimeSummary,

@@ -104,7 +104,11 @@ AgentRadar 把这些步骤连成一套完整工作流，并把结果沉淀成每
 
 仓库内开源版自带一个轻量本地 Web Console，用来浏览已生成产物。
 
-### 6. 在线托管版本
+### 6. AgentReach 外部发现边界
+
+开源版只消费本地 AgentReach JSON artifact，不内置平台登录、账号态、cookie、session、OAuth 或私有 provider diagnostics。`data/raw/external-discovery/` 默认只作为本地输入目录；可公开提交的是通过脱敏校验的 `data/external-discovery/*.aggregate.json`。
+
+### 7. 在线托管版本
 
 - 在线地址：[`https://app.agentradar.top/`](https://app.agentradar.top/)
 - 可直接查看首页、项目库、本周趋势、数据状态和新兴潜力项目

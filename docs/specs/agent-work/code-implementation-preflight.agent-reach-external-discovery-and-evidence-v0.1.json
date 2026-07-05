@@ -1,0 +1,8 @@
+{
+  "skill_path": "docs/specs/agent-work/CodeImplementation_Skill.md",
+  "skill_sha256": "a15bb25d65ff2b12867a3255812d109d0821d6838a89b232392cbfaa70b7a95d",
+  "exec_plan_path": "docs/specs/exec-plans/agent-reach-external-discovery-and-evidence-v0.1.exec-plan.md",
+  "exec_plan_sha256": "e539dadd9aa4f55c5cf29cc0fc6e15a310e126b7a4ae7a13747d1aed1636a4ca",
+  "generated_at": "2026-06-30T04:31:29.714Z",
+  "acknowledged": true
+}

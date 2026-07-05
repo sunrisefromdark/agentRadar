@@ -1,3 +1,11 @@
+import type {
+  ExternalTrendBindingConfidence,
+  ExternalTrendMomentum,
+  ExternalTrendVerdict,
+  ExternalTrendWindowReadStatus,
+  ExternalTrendWindowStatus,
+} from "./externalDiscovery/types.ts";
+
 export type SignalSource =
   | "agents-radar"
   | "trendshift"
@@ -485,6 +493,39 @@ export interface WeeklyEvidenceMatrix {
   axes: WeeklyEvidenceAxis[];
 }
 
+export interface WeeklyExternalDiscussionTrendItem {
+  scope: "project" | "direction";
+  target_key: string;
+  display_name: string;
+  target_url?: string;
+  binding_confidence: ExternalTrendBindingConfidence;
+  official_signal: boolean;
+  weekly_eligible: boolean;
+  momentum: ExternalTrendMomentum;
+  verdict: ExternalTrendVerdict;
+  mention_count_total: number;
+  source_count: number;
+  active_day_count: number;
+  platform_count: number;
+  named_registry_actor_count: number;
+  evidence_ids: string[];
+  caveats: string[];
+}
+
+export interface WeeklyExternalDiscussionTrendSummary {
+  read_status: ExternalTrendWindowReadStatus;
+  status?: ExternalTrendWindowStatus;
+  path: string;
+  usable_day_count: number;
+  project_trend_count: number;
+  direction_trend_count: number;
+  failed_date_count: number;
+  missing_date_count: number;
+  secondary_evidence: WeeklyExternalDiscussionTrendItem[];
+  direction_observations: WeeklyExternalDiscussionTrendItem[];
+  noise_items: WeeklyExternalDiscussionTrendItem[];
+}
+
 export interface FinalWeeklyTrend {
   trend_id: string;
   trend_name_cn: string;
@@ -570,6 +611,7 @@ export interface WeeklyReport {
   overall_summary_cn: string;
   supporting_trend_keys: string[];
   evidence_matrix?: WeeklyEvidenceMatrix;
+  external_discussion_trends?: WeeklyExternalDiscussionTrendSummary;
   core_trend_cards: CoreTrendCard[];
   personalized_weekly_focus: PersonalizedWeeklyFocus[];
   weak_signal_cards: WeakSignalCard[];
@@ -604,6 +646,7 @@ export interface WeeklyJudgmentReport {
   observing_trends: FinalWeeklyTrendObservation[];
   audit_conclusion: WeeklyAuditConclusion;
   evidence_matrix?: WeeklyEvidenceMatrix;
+  external_discussion_trends?: WeeklyExternalDiscussionTrendSummary;
   enhancement_audit: EnhancementAudit;
 }
 
@@ -797,6 +840,33 @@ export interface DailyRunSummaryTopProject {
   risks: string[];
 }
 
+export interface DailyRunSummaryExternalDiscovery {
+  aggregate_status: "ok" | "skipped" | "partial" | "failed";
+  aggregate_status_reason?: string;
+  accepted_event_count: number;
+  rejected_event_count: number;
+  observation_candidate_count: number;
+  project_evidence_count: number;
+  direction_evidence_count: number;
+  explanation_status: "ok" | "partial" | "skipped" | "failed";
+  explanation_status_reason?: string;
+  explanation_eligible_count: number;
+  explanation_attempted_count: number;
+  explanation_enhanced_count: number;
+  explanation_fallback_count: number;
+  explanation_rejected_count: number;
+  trend_window_read_status: ExternalTrendWindowReadStatus;
+  trend_window_status?: ExternalTrendWindowStatus;
+  trend_window_path: string;
+  trend_window_usable_day_count: number;
+  trend_window_project_trend_count: number;
+  trend_window_direction_trend_count: number;
+  trend_window_failed_date_count: number;
+  trend_window_missing_date_count: number;
+  warning_count: number;
+  warnings: string[];
+}
+
 export interface IndustryRuntimeSummaryArtifact {
   artifact_kind: "industry_runtime_summary";
   date: string;
@@ -914,6 +984,7 @@ export interface DailyRunSummary {
   quality: DailyRunSummaryQuality;
   diagnostics: DailyRunSummaryDiagnostics;
   top_projects: DailyRunSummaryTopProject[];
+  external_discovery?: DailyRunSummaryExternalDiscovery;
   industry_runtime_summary?: IndustryRuntimeSummaryArtifact;
   observer_status?: {
     ecosystem_focus: ObserverStatus;

@@ -19,5 +19,10 @@ data/agent-memory/**
 !data/agent-memory/.gitkeep
 data/upstream/**
 !data/upstream/.gitkeep
+data/raw/external-discovery/**
+!data/raw/external-discovery/
+!data/raw/external-discovery/fixtures/
+!data/raw/external-discovery/fixtures/**
+data/external-discovery/*.candidate-explanations.json
 
 .worktrees/

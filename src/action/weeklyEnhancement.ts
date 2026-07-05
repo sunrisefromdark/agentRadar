@@ -19,6 +19,8 @@ import type {
   WeeklyEvidenceProject,
   WeeklyEvidenceAxis,
   WeeklyEvidenceMatrix,
+  WeeklyExternalDiscussionTrendItem,
+  WeeklyExternalDiscussionTrendSummary,
   WeeklyJudgmentReport,
   WeeklyReport,
   WeeklySemanticInputBundle,
@@ -41,6 +43,8 @@ import {
   buildWeeklyTrendCandidatesV2,
 } from "./weeklyJudgmentRules.ts";
 import { applyWeeklyTrendAgentReview, buildWeeklyTrendAgentPrompt } from "./weeklyTrendAgent.ts";
+import { readExternalDiscussionTrendWindowByDate } from "../externalDiscovery/trendWindowIntegration.ts";
+import type { ExternalTrendItem } from "../externalDiscovery/types.ts";
 
 type WindowDay = {
   date: string;
@@ -363,6 +367,65 @@ function buildWeeklyEvidenceMatrix(
 ): WeeklyEvidenceMatrix {
   const { focusedTrendKey, focusedTrendName } = resolveFocusedTrend(report);
   return buildTrendScopedEvidenceMatrix(focusedTrendKey, focusedTrendName, weeklyFocusProjects);
+}
+
+function buildWeeklyExternalDiscussionTrendSummary(anchorDate: string): WeeklyExternalDiscussionTrendSummary {
+  const read = readExternalDiscussionTrendWindowByDate(anchorDate);
+  const trendWindow = read.trend_window;
+  if (!trendWindow) {
+    return {
+      read_status: read.read_status,
+      path: read.path,
+      usable_day_count: 0,
+      project_trend_count: 0,
+      direction_trend_count: 0,
+      failed_date_count: 0,
+      missing_date_count: 0,
+      secondary_evidence: [],
+      direction_observations: [],
+      noise_items: [],
+    };
+  }
+
+  const allItems = [...trendWindow.project_trends, ...trendWindow.direction_trends];
+  return {
+    read_status: read.read_status,
+    status: trendWindow.status,
+    path: read.path,
+    usable_day_count: trendWindow.coverage.usable_day_count,
+    project_trend_count: trendWindow.project_trends.length,
+    direction_trend_count: trendWindow.direction_trends.length,
+    failed_date_count: trendWindow.coverage.failed_dates.length,
+    missing_date_count: trendWindow.coverage.missing_dates.length,
+    secondary_evidence: trendWindow.project_trends
+      .filter((item) => item.weekly_eligible && item.verdict === "external_reinforcement")
+      .map(weeklyExternalDiscussionTrendItem),
+    direction_observations: trendWindow.direction_trends
+      .filter((item) => item.weekly_eligible && item.verdict === "watch_signal")
+      .map(weeklyExternalDiscussionTrendItem),
+    noise_items: allItems.filter((item) => item.verdict === "noise_spike").map(weeklyExternalDiscussionTrendItem),
+  };
+}
+
+function weeklyExternalDiscussionTrendItem(item: ExternalTrendItem): WeeklyExternalDiscussionTrendItem {
+  return {
+    scope: item.scope,
+    target_key: item.target_key,
+    display_name: item.display_name,
+    target_url: item.target_url,
+    binding_confidence: item.binding_confidence,
+    official_signal: item.official_signal,
+    weekly_eligible: item.weekly_eligible,
+    momentum: item.momentum,
+    verdict: item.verdict,
+    mention_count_total: item.mention_count_total,
+    source_count: item.source_count,
+    active_day_count: item.active_day_count,
+    platform_count: item.platform_count,
+    named_registry_actor_count: item.named_registry_actors.length,
+    evidence_ids: [...item.evidence_ids],
+    caveats: [...item.caveats],
+  };
 }
 
 function addBucket(
@@ -1046,6 +1109,7 @@ function buildCompatibilityWeeklyReport(
       judgment.enhancement_status === "rules-only" ? overallSummary(coreCards, weakSignals) : judgment.executive_summary_cn,
     supporting_trend_keys: coreCards.map((card) => card.trend_key),
     core_trend_cards: attachCoreTrendEvidenceMatrices(coreCards, weeklyFocusProjects),
+    external_discussion_trends: judgment.external_discussion_trends,
     personalized_weekly_focus: personalized,
     weak_signal_cards: weakSignals,
     enhancement_audit: { rejected_outputs: [] },
@@ -1097,6 +1161,7 @@ function buildWeeklyJudgmentReport(
     observing_trends: review.observing_trends,
     audit_conclusion: review.audit_findings,
     evidence_matrix: undefined,
+    external_discussion_trends: buildWeeklyExternalDiscussionTrendSummary(days[days.length - 1]?.date ?? ""),
     enhancement_audit: { rejected_outputs: rejectedOutputs },
   };
 }

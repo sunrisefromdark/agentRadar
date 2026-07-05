@@ -58,6 +58,31 @@ describe("renderDailyRunSummary observer section", () => {
         },
       },
       top_projects: [],
+      external_discovery: {
+        aggregate_status: "ok",
+        accepted_event_count: 2,
+        rejected_event_count: 0,
+        observation_candidate_count: 1,
+        project_evidence_count: 1,
+        direction_evidence_count: 1,
+        explanation_status: "partial",
+        explanation_status_reason: "partial_llm_failure",
+        explanation_eligible_count: 1,
+        explanation_attempted_count: 1,
+        explanation_enhanced_count: 0,
+        explanation_fallback_count: 1,
+        explanation_rejected_count: 1,
+        trend_window_read_status: "insufficient",
+        trend_window_status: "insufficient",
+        trend_window_path: "data/external-discovery/windows/2026-06-12.discussion-trend-window.json",
+        trend_window_usable_day_count: 1,
+        trend_window_project_trend_count: 1,
+        trend_window_direction_trend_count: 0,
+        trend_window_failed_date_count: 0,
+        trend_window_missing_date_count: 6,
+        warning_count: 1,
+        warnings: ["summary_generation_failed:project:openai/agents-sdk"],
+      },
       observer_status: {
         ecosystem_focus: "active",
       },
@@ -162,6 +187,10 @@ describe("renderDailyRunSummary observer section", () => {
     expect(rendered).toContain("observer_promotion_candidate multi-agent-coordination");
     expect(rendered).toContain("observer_promotion_candidate_count: 1");
     expect(rendered).toContain("pressure_state_distribution");
+    expect(rendered).toContain("## AgentReach 外部发现");
+    expect(rendered).toContain("explanation_status: partial");
+    expect(rendered).toContain("trend_window_read_status: insufficient");
+    expect(rendered).toContain("summary_generation_failed:project:openai/agents-sdk");
     expect(rendered).toContain("## Industry Runtime");
     expect(rendered).toContain("governance_published=true");
     expect(rendered).toContain("policy_finance: status=policy_finance_runtime_ready");

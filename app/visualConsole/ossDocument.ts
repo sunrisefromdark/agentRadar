@@ -145,6 +145,7 @@ function routeIntent(route: WebRoute, lang: UiLang): string {
     weekly: ["先抓住本周真正形成的趋势主线。", "Capture the real trend structure for this week."],
     "run-health": ["先定位这轮产物哪里需要谨慎。", "Locate what in this run needs caution first."],
     observer: ["先看哪些长尾候选值得继续观察。", "Check which observer candidates are worth continued follow-up."],
+    agentreach: ["先看外部层发现了什么候选，再看证据来自哪里。", "Check external candidates first, then inspect their evidence sources."],
     kb: ["先读摘要，再决定要不要深入。", "Read the summary first, then decide whether to dive deeper."],
   };
   const [zh, en] = copyByRoute[route];
@@ -162,6 +163,7 @@ function renderHeader(route: WebRoute, requestUrl: URL, rendered: RenderedRoute,
     { label: ui.navWeekly, route: "weekly", href: toViewHref("weekly", lang, theme, { anchor: weeklyAnchor, date: dailyDate }) },
     { label: ui.navRunHealth, route: "run-health", href: toViewHref("run-health", lang, theme, { date: dailyDate, source_view: route }) },
     { label: uiText(lang, "新兴潜力项目", "Observer"), route: "observer", href: toViewHref("observer", lang, theme, { date: dailyDate, source_view: route }) },
+    { label: ui.navAgentReach, route: "agentreach", href: toViewHref("agentreach", lang, theme, { date: dailyDate, source_view: route }) },
   ];
 
   return `
@@ -350,7 +352,8 @@ export function renderDocument(
       rendered.route === "projects" ||
       rendered.route === "weekly" ||
       rendered.route === "run-health" ||
-      rendered.route === "observer"
+      rendered.route === "observer" ||
+      rendered.route === "agentreach"
         ? ""
         : renderContextBar(rendered, requestUrl, lang),
     bannerHtml: "",

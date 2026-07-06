@@ -524,8 +524,8 @@ export function renderClientScriptSource(): string {
         };
 
         const scrollKey = "visual-console-scroll-target";
-        const routes = new Set(["/overview", "/projects", "/weekly", "/run-health", "/observer", "/kb"]);
-        const reactRuntimeRoutes = new Set(["overview", "weekly", "run-health", "observer"]);
+        const routes = new Set(["/overview", "/projects", "/weekly", "/run-health", "/observer", "/agentreach", "/kb"]);
+        const reactRuntimeRoutes = new Set(["overview", "weekly", "run-health", "observer", "agentreach"]);
         const reactImportMapId = "visual-console-react-import-map";
         const reactMountScriptId = "visual-console-react-mount-script";
         const reactMountScriptSrc = "/app-client/mount.js";
@@ -558,6 +558,10 @@ export function renderClientScriptSource(): string {
           {
             scriptId: "observer-react-payload",
             windowKey: "__OBSERVER_INITIAL_DATA__",
+          },
+          {
+            scriptId: "agentreach-react-payload",
+            windowKey: "__AGENTREACH_INITIAL_DATA__",
           },
         ];
         const routePrefetchCache = new Map();

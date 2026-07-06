@@ -29,10 +29,18 @@ import { getFilesystemStateSignature } from "./fileCache.ts";
 import { parseKnowledgeCardMarkdown } from "./kbMarkdown.ts";
 import { isDefaultDemotedProject } from "./projectRanking.ts";
 import {
+  buildAgentReachDisplayModel,
+  type AgentReachDisplayModel,
+} from "./agentReachViewModel.ts";
+import {
   getDailyReport,
+  getDailyExternalAggregate,
+  getExternalCandidateExplanationsArtifact,
   getDailyNavigatorPreview,
   getGithubEnrichmentAudit,
   getIndustryRuntimeSummary,
+  getLatestDailyExternalAggregate,
+  getLatestExternalCandidateExplanationsArtifact,
   getKbCard,
   getKbIndex,
   getMissionScoutArtifact,
@@ -53,6 +61,7 @@ import { makeState } from "./status.ts";
 import type {
   DailyTimeNavigatorPreview,
   DrilldownRef,
+  AgentReachViewModel,
   KnowledgeBaseViewModel,
   ObserverViewModel,
   ObserverProjection,
@@ -118,6 +127,10 @@ function readDerivedCache<T>(
 
 function repoKeyFromProject(project: { repo_full_name?: string; repo_url: string; project_name: string }): string {
   return (project.repo_full_name ?? project.repo_url.replace(/^https?:\/\/github\.com\//i, "")).toLowerCase();
+}
+
+function uniqueStrings(values: Array<string | null | undefined>): string[] {
+  return [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
 }
 
 function makeBanner(args: {
@@ -1839,6 +1852,41 @@ function buildObserverRouteFrame(model: Pick<ObserverViewModel, "state" | "artif
   };
 }
 
+function buildAgentReachRouteFrame(model: Pick<AgentReachViewModel, "state" | "candidates" | "status">): RouteFrameModel {
+  return {
+    route: "agentreach",
+    hero: makeSurfaceBlock({
+      id: "agentreach-external-discovery-hero",
+      role: "hero",
+      title: "External Discovery Workbench",
+      state: model.state.status,
+      body: "AgentReach external signals are secondary-only evidence.",
+      emphasis: "primary",
+    }),
+    stage: [
+      makeSurfaceBlock({
+        id: "agentreach-candidates-stage",
+        role: "stage",
+        title: "Candidate Bench",
+        state: model.state.status,
+        body: `${model.candidates.length} external candidate(s) are available.`,
+        emphasis: "primary",
+      }),
+      makeSurfaceBlock({
+        id: "agentreach-evidence-stage",
+        role: "stage",
+        title: "Evidence Detail",
+        state: model.state.status,
+      }),
+    ],
+    rail: [makeSurfaceBlock({ id: "agentreach-coverage-rail", role: "rail", title: "Coverage Status" })],
+    strip: [makeSurfaceBlock({ id: "agentreach-filter-strip", role: "strip", title: "Filter Chips" })],
+    dock: null,
+    reader: null,
+    audit: buildAuditSurface("agentreach", model.state),
+  };
+}
+
 function buildKnowledgeBaseRouteFrame(model: Pick<KnowledgeBaseViewModel, "state" | "selected_card">): RouteFrameModel {
   return {
     route: "kb",
@@ -2323,6 +2371,126 @@ export function buildObserverView(dateOrLatest: string, options?: { requestInter
     entries: (artifact?.entries ?? []).map((entry) => observerEntryToProjection(entry)),
   };
   view.route_frame = buildObserverRouteFrame(view);
+  return view;
+}
+
+function buildAgentReachStateEntries(display: AgentReachDisplayModel, stale: boolean) {
+  const entries = [];
+  if (display.status.provider_status === "missing") {
+    entries.push({ status: "failed" as const, reason: display.status.reason });
+    return entries;
+  }
+  if (stale) entries.push({ status: "stale" as const, reason: "latest 已解析到非当天结果" });
+  if (display.status.provider_status === "failed") {
+    entries.push({ status: "failed" as const, reason: display.status.reason });
+  }
+  if (display.status.provider_status === "partial") {
+    entries.push({ status: "degraded" as const, reason: display.status.reason });
+  }
+  if (display.status.provider_status === "skipped") {
+    entries.push({ status: "degraded" as const, reason: display.status.reason || "外部层未执行" });
+  }
+  if (display.status.data_source !== "aggregate") {
+    entries.push({ status: "degraded" as const, reason: `AgentReach 使用 ${display.status.data_source} 降级数据源` });
+  }
+  if (display.candidates.length === 0 && display.status.provider_status !== "failed") {
+    entries.push({ status: "empty" as const, reason: "今天暂无可展示的外部候选" });
+  }
+  if (entries.length === 0) entries.push({ status: "ready" as const, reason: "AgentReach aggregate 可直接消费" });
+  return entries;
+}
+
+export function buildAgentReachView(dateOrLatest: string): AgentReachViewModel {
+  const resolved = resolveDailyContext(dateOrLatest);
+  if (resolved.status === "failed" || !resolved.context.selected_date) {
+    const display = buildAgentReachDisplayModel({
+      aggregate: null,
+      aggregateReadStatus: "unsupported_context",
+    });
+    const state = makeState([{ status: "failed", reason: resolved.status === "failed" ? resolved.message : "daily 上下文缺失" }]);
+    const view: AgentReachViewModel = {
+      context: resolved.context,
+      banner: makeBanner({
+        title: "AgentReach",
+        contextLabel: "daily",
+        generatedAt: null,
+        githubStatus: "external-discovery",
+        sourceHealth: display.source_health,
+        notes: state.reasons,
+      }),
+      state,
+      time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
+      route_frame: {} as RouteFrameModel,
+      status: display.status,
+      summary_cards: display.summary_cards,
+      filters: display.filters,
+      candidates: display.candidates,
+      evidence_by_id: display.evidence_by_id,
+      sources_by_event_id: display.sources_by_event_id,
+      coverage: display.coverage,
+      direction_snapshot: display.direction_snapshot,
+      warnings: display.warnings,
+    };
+    view.route_frame = buildAgentReachRouteFrame(view);
+    return view;
+  }
+
+  const datedAggregate = getDailyExternalAggregate(resolved.context.selected_date);
+  const usesLatestAggregate = datedAggregate.status !== "ok";
+  const aggregate =
+    datedAggregate.status === "ok" ? datedAggregate : getLatestDailyExternalAggregate();
+  const datedCandidateExplanations =
+    aggregate.status === "ok" ? getExternalCandidateExplanationsArtifact(aggregate.value.date) : null;
+  const candidateExplanations =
+    datedCandidateExplanations?.status === "ok"
+      ? datedCandidateExplanations
+      : usesLatestAggregate
+        ? getLatestExternalCandidateExplanationsArtifact()
+        : datedCandidateExplanations;
+  const daily = getDailyReport(resolved.context.selected_date);
+  const summary = getRunSummary(resolved.context.selected_date);
+  const display = buildAgentReachDisplayModel({
+    aggregate: aggregate.status === "ok" ? aggregate.value : null,
+    candidateExplanations: candidateExplanations?.status === "ok" ? candidateExplanations.value : null,
+    candidateExplanationsReadStatus: candidateExplanations?.status,
+    candidateExplanationsPath: candidateExplanations?.path ?? null,
+    aggregateReadStatus: aggregate.status,
+    aggregatePath: aggregate.path,
+    dailySection: null,
+    runSummary: summary.status === "ok" ? summary.value.external_discovery ?? null : null,
+  });
+  const generatedAt =
+    display.generated_at ??
+    (daily.status === "ok" ? daily.value.generated_at : null) ??
+    (summary.status === "ok" ? summary.value.generated_at : null);
+  resolved.context.generated_at = generatedAt;
+  const state = makeState(buildAgentReachStateEntries(display, resolved.context.stale));
+
+  const view: AgentReachViewModel = {
+    context: resolved.context,
+    banner: makeBanner({
+      title: "AgentReach",
+      contextLabel: resolved.context.selected_date,
+      generatedAt,
+      enhancementStatus: null,
+      githubStatus: "external-discovery",
+      sourceHealth: display.source_health,
+      notes: uniqueStrings([...display.warnings, ...state.reasons]),
+    }),
+    state,
+    time_navigator: buildDailyNavigator(resolved.context.selected_date, resolved.context.stale, null),
+    route_frame: {} as RouteFrameModel,
+    status: display.status,
+    summary_cards: display.summary_cards,
+    filters: display.filters,
+    candidates: display.candidates,
+    evidence_by_id: display.evidence_by_id,
+    sources_by_event_id: display.sources_by_event_id,
+    coverage: display.coverage,
+    direction_snapshot: display.direction_snapshot,
+    warnings: display.warnings,
+  };
+  view.route_frame = buildAgentReachRouteFrame(view);
   return view;
 }
 

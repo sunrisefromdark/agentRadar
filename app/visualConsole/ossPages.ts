@@ -10,7 +10,8 @@ import type {
   ObserverPresetFilter,
 } from "../../src/types.ts";
 import { buildProjectsView } from "../../src/visualConsole/build.ts";
-import type { KnowledgeBaseViewModel, ObserverViewModel, OverviewViewModel, ProjectsViewModel, RunHealthViewModel, WeeklyViewModel } from "../../src/visualConsole/types.ts";
+import type { AgentReachViewModel, KnowledgeBaseViewModel, ObserverViewModel, OverviewViewModel, ProjectsViewModel, RunHealthViewModel, WeeklyViewModel } from "../../src/visualConsole/types.ts";
+import AgentReachView, { type AgentReachViewProps } from "../client/AgentReachView.tsx";
 import App, { type AppProps as OverviewReactAppProps } from "../client/App.tsx";
 import ObserverView, { type ObserverViewProps } from "../client/ObserverView.tsx";
 import RunHealthView, { type RunHealthViewProps } from "../client/RunHealth.tsx";
@@ -48,6 +49,8 @@ export function renderPrimary(rendered: RenderedRoute, requestUrl: URL, lang: Ui
         return renderRunHealthPage(rendered.model, lang);
       case "observer":
         return renderObserverPage(rendered.model, requestUrl, lang, theme);
+      case "agentreach":
+        return renderAgentReachPage(rendered.model, requestUrl, lang, theme);
       case "kb":
         return renderKnowledgeBasePage(rendered.model, requestUrl, lang, theme);
     }
@@ -2204,6 +2207,36 @@ function renderObserverPage(model: ObserverViewModel, requestUrl: URL, lang: UiL
   return `
     <div id="observer-react-root" data-react-observer="true" data-react-ssr="false">
       ${renderToStaticMarkup(createElement(ObserverView, buildObserverReactProps(model, requestUrl, lang, theme)))}
+    </div>
+  `;
+}
+
+export function buildAgentReachReactProps(model: AgentReachViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): AgentReachViewProps {
+  const requestedCandidateId = requestUrl.searchParams.get("candidate") ?? "";
+  const initialSelectedId = model.candidates.some((candidate) => candidate.candidate_id === requestedCandidateId)
+    ? requestedCandidateId
+    : model.candidates[0]?.candidate_id ?? null;
+
+  return {
+    lang,
+    initialTheme: theme,
+    initialSelectedId,
+    status: model.status,
+    summary_cards: model.summary_cards,
+    filters: model.filters,
+    candidates: model.candidates,
+    coverage: model.coverage,
+    direction_snapshot: model.direction_snapshot,
+    warnings: model.warnings,
+    state: model.state,
+    banner: model.banner,
+  };
+}
+
+function renderAgentReachPage(model: AgentReachViewModel, requestUrl: URL, lang: UiLang, theme: UiTheme): string {
+  return `
+    <div id="agentreach-react-root" data-react-agentreach="true" data-react-ssr="false">
+      ${renderToStaticMarkup(createElement(AgentReachView, buildAgentReachReactProps(model, requestUrl, lang, theme)))}
     </div>
   `;
 }

@@ -320,6 +320,19 @@ corepack pnpm typecheck
 corepack pnpm test
 ```
 
+### 代码审查
+
+```bash
+corepack pnpm ocr
+corepack pnpm code-review:ocr
+corepack pnpm code-review:ocr:required
+corepack pnpm code-review:ocr:scan
+```
+
+`corepack pnpm ocr` 是手动跑 OpenCodeReview 的快捷命令，等价于 `code-review:ocr`，默认做增量 diff 审查；`code-review:ocr:required` 用于需要失败即阻断的本地门禁；`code-review:ocr:scan` 只用于首次基线、较大重构或高风险模块专项扫描。
+
+OCR 自动审查默认关闭：本地只有在 `AGENT_RADAR_OCR_PRE_PUSH=1 git push` 时才会挂到 pre-push；GitHub PR 只有设置 `OCR_REVIEW_ENABLED=true` 后才会在 `opened`、`synchronize`、`reopened`、`ready_for_review` 时运行。PR 默认非阻断，只有 `OCR_REVIEW_BLOCKING=true` 才会让 OCR 失败阻断。OCR 默认排除 `.env*`、`data/**`、构建产物、生成站点和 lockfile；更多接入策略见 `docs/specs/agent-work/open-code-review.md`。
+
 ## 数据与边界
 
 ### 当前重点观察方向

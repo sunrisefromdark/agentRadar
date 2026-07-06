@@ -1,0 +1,138 @@
+name: open-code-review
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+      - ready_for_review
+
+permissions:
+  contents: read
+
+jobs:
+  ocr-fork-notice:
+    if: ${{ vars.OCR_REVIEW_ENABLED == 'true' && github.event.pull_request.head.repo.full_name != github.repository }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Skip fork pull request
+        run: echo "::notice::Open Code Review is skipped for fork pull requests because repository secrets are unavailable in pull_request workflows."
+
+  ocr-review:
+    if: ${{ vars.OCR_REVIEW_ENABLED == 'true' && github.event.pull_request.head.repo.full_name == github.repository }}
+    runs-on: ubuntu-latest
+    env:
+      OCR_LLM_URL: ${{ vars.OCR_LLM_URL }}
+      OCR_LLM_TOKEN: ${{ secrets.OCR_LLM_TOKEN }}
+      OCR_LLM_MODEL: ${{ vars.OCR_LLM_MODEL }}
+      OCR_USE_ANTHROPIC: ${{ vars.OCR_USE_ANTHROPIC }}
+      OCR_LLM_AUTH_HEADER: ${{ vars.OCR_LLM_AUTH_HEADER }}
+      OCR_LLM_EXTRA_HEADERS: ${{ secrets.OCR_LLM_EXTRA_HEADERS }}
+      OCR_LLM_TIMEOUT: ${{ vars.OCR_LLM_TIMEOUT }}
+      OCR_REVIEW_BLOCKING: ${{ vars.OCR_REVIEW_BLOCKING }}
+      HARD_EXCLUDES: "node_modules/**,dist/**,tmp/**,data/**,github-pages-site/**,github-profile/**,.git/**,.env,.env.*,pnpm-lock.yaml"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run PR diff review
+        run: |
+          set +e
+          mkdir -p artifacts/open-code-review
+
+          write_status() {
+            status="$1"
+            reason="${2:-}"
+            printf '{\n  "status": "%s",\n  "reason": "%s"\n}\n' "$status" "$reason" > artifacts/open-code-review/status.json
+          }
+
+          require_env() {
+            name="$1"
+            value="$(printenv "$name")"
+            if [ -z "$value" ]; then
+              echo "::notice::$name is required for Open Code Review."
+              return 1
+            fi
+            return 0
+          }
+
+          require_env OCR_LLM_URL
+          url_status=$?
+          require_env OCR_LLM_TOKEN
+          token_status=$?
+          require_env OCR_LLM_MODEL
+          model_status=$?
+          if [ "$url_status" -ne 0 ] || [ "$token_status" -ne 0 ] || [ "$model_status" -ne 0 ]; then
+            write_status config_failed missing_provider_config
+            exit 0
+          fi
+
+          npm install -g @alibaba-group/open-code-review@1.7.1 >&2
+          install_status=$?
+          if [ "$install_status" -ne 0 ]; then
+            echo "::notice::Open Code Review installation failed."
+            write_status review_failed install_failed
+            exit 0
+          fi
+
+          version_output="$(ocr version 2>&1)"
+          echo "$version_output" >&2
+          echo "$version_output" | grep -q "1.7.1"
+          version_status=$?
+          if [ "$version_status" -ne 0 ]; then
+            echo "::notice::Open Code Review version mismatch; expected 1.7.1."
+            write_status review_failed version_mismatch
+            exit 0
+          fi
+
+          ocr llm test >&2
+          llm_status=$?
+          if [ "$llm_status" -ne 0 ]; then
+            echo "::notice::Open Code Review LLM connectivity test failed."
+            write_status llm_test_failed llm_test_failed
+            exit 0
+          fi
+
+          ocr review \
+            --from "${{ github.event.pull_request.base.sha }}" \
+            --to "${{ github.event.pull_request.head.sha }}" \
+            --audience agent \
+            --format json \
+            --exclude "$HARD_EXCLUDES" \
+            > artifacts/open-code-review/review.json
+          review_status=$?
+          if [ "$review_status" -ne 0 ]; then
+            echo "::notice::Open Code Review review failed."
+            write_status review_failed review_failed
+            exit 0
+          fi
+
+          write_status review_passed ""
+
+      - name: Apply blocking policy
+        if: always()
+        run: |
+          status="missing_status"
+          if [ -f artifacts/open-code-review/status.json ]; then
+            status="$(grep -o '"status": "[^"]*"' artifacts/open-code-review/status.json | head -n 1 | cut -d '"' -f 4)"
+          fi
+
+          if [ "${OCR_REVIEW_BLOCKING:-false}" = "true" ] && [ "$status" != "review_passed" ]; then
+            echo "::error::Open Code Review did not pass: $status"
+            exit 1
+          fi
+
+          if [ "$status" != "review_passed" ]; then
+            echo "::notice::Open Code Review did not pass but is non-blocking: $status"
+          fi
+
+      - name: Upload review artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: open-code-review
+          path: artifacts/open-code-review/
+          retention-days: 7

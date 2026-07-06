@@ -312,6 +312,19 @@ corepack pnpm typecheck
 corepack pnpm test
 ```
 
+### Code review
+
+```bash
+corepack pnpm ocr
+corepack pnpm code-review:ocr
+corepack pnpm code-review:ocr:required
+corepack pnpm code-review:ocr:scan
+```
+
+`corepack pnpm ocr` is the short manual OpenCodeReview command and is equivalent to `code-review:ocr`; it runs diff-focused review by default. Use `code-review:ocr:required` for local gates that should fail when OCR cannot run, and `code-review:ocr:scan` only for the initial baseline, larger refactors, or targeted high-risk modules.
+
+Automatic OCR review is off by default: locally it only joins pre-push when you run `AGENT_RADAR_OCR_PRE_PUSH=1 git push`; on GitHub PRs it only runs after `OCR_REVIEW_ENABLED=true`, on `opened`, `synchronize`, `reopened`, and `ready_for_review`. PR review is non-blocking by default, and only blocks when `OCR_REVIEW_BLOCKING=true`. OCR excludes `.env*`, `data/**`, build output, generated sites, and the lockfile by default. See `docs/specs/agent-work/open-code-review.md` for the integration policy.
+
 ## Data boundary
 
 ### Current focus directions

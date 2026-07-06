@@ -6,6 +6,7 @@
 
 | 文件 | 状态 | 用途 | 下一步 |
 | --- | --- | --- | --- |
+| `open-code-review-integration-v0.1.exec-plan.md` | `Draft` | 为 `alibaba/open-code-review` 接入当前仓库冻结 diff-first 审查、scan 基线、可选 pre-push gate、默认关闭 PR workflow 与密钥/扫描边界 | 本地实现和确定性验证已完成；启用前配置 OCR provider secrets / variables，并先跑一次非阻断同仓 PR smoke |
 | `self-evolving-skill-tree-v0.1.exec-plan.md` | `Completed` | 为仓库内 Agent 工作层落地分层记忆、manual registry、project-facts、learned skill lifecycle、routing receipts 与技能树治理 | Phase 3 已完成；后续若要扩 allow-list、approval source 或 operator surface，必须新开 follow-up exec-plan |
 | `trend-radar-ui-v3-stage-redesign-v0.1.exec-plan.md` | `Completed` | 为 `UI V3` 舞台化前端重设计落地 Page Frame、Surface Role Contract、五个一级路由舞台化、Dock/Reader 语法与验证矩阵 | 已完成实现与验证；后续如需推进 P1/P2 增强或治理既有 lint 质量债，另开 follow-up exec-plan |
 | `trend-radar-ui-v2-layout-hierarchy-remediation-v0.1.exec-plan.md` | `Blocked` | 纠正 UI V2 中 `Overview` 卡片拼盘、`Weekly` 核心趋势半屏化、弱信号越级抢主舞台等信息层级与排版问题 | UI 实现与回归已完成；仓库级 `npm run lint` 仍被既有 quality gate 债务阻塞，若要全绿需单独治理 |

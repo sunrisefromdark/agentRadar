@@ -1,0 +1,21 @@
+{
+  "exclude": [
+    "node_modules/**",
+    "dist/**",
+    "tmp/**",
+    "data/**",
+    "github-pages-site/**",
+    "github-profile/**",
+    ".git/**",
+    ".env",
+    ".env.*",
+    "pnpm-lock.yaml"
+  ],
+  "rules": [
+    {
+      "path": "**/*",
+      "rule": "docs/specs/agent-work/codeReviewSkill.md",
+      "merge_system_rule": true
+    }
+  ]
+}

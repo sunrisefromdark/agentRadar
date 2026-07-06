@@ -9,3 +9,8 @@ corepack pnpm typecheck
 
 echo "[pre-push] running tests"
 corepack pnpm test
+
+if [ "${AGENT_RADAR_OCR_PRE_PUSH:-0}" = "1" ]; then
+  echo "[pre-push] running open-code-review"
+  corepack pnpm code-review:ocr:required
+fi

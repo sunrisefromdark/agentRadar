@@ -53,7 +53,7 @@
 - 相关 `exec-plan`
 - 对应测试或结构守护
 
-## Agent 必读顺序
+## Agent 必读的顺序
 
 1. `docs/specs/README.md`
 2. `docs/specs/system-spec.md`

@@ -28,7 +28,7 @@ export function observationCandidateForUnmatchedEvent(event: ExternalSignalEvent
       target_key: event.target_key,
       qualification: "direction_observation",
       can_enter_daily: false,
-      can_enter_weekly: true,
+      can_enter_weekly: false,
       cannot_be_primary_conclusion: true,
     };
   }
@@ -38,7 +38,7 @@ export function observationCandidateForUnmatchedEvent(event: ExternalSignalEvent
       target_key: event.target_key,
       qualification: "needs_primary_confirmation",
       can_enter_daily: true,
-      can_enter_weekly: true,
+      can_enter_weekly: false,
       cannot_be_primary_conclusion: true,
     };
   }

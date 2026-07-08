@@ -715,6 +715,7 @@ function inspectExternalAggregateContract(value: unknown): {
 
   const projectEvidence = evidenceArray(value.project_evidence, "project_evidence", issues);
   const directionEvidence = evidenceArray(value.direction_evidence, "direction_evidence", issues);
+  const candidates = candidateArray(value.observation_candidates, "observation_candidates", issues);
   let namedActorRows = 0;
 
   for (const [sectionName, evidenceRows] of [
@@ -749,6 +750,23 @@ function inspectExternalAggregateContract(value: unknown): {
       issues.push(...inspectPublicActorContract(evidence, `${sectionName}[${evidenceIndex}]`));
     });
   }
+  candidates.forEach((candidate, candidateIndex) => {
+    if (!isRecord(candidate)) {
+      issues.push(`observation_candidates[${candidateIndex}] must be an object`);
+      return;
+    }
+    if (candidate.cannot_be_primary_conclusion !== true) {
+      issues.push(`observation_candidates[${candidateIndex}].cannot_be_primary_conclusion must be true`);
+    }
+    if (candidate.quality_bucket === "weak_single_source" && candidate.can_enter_weekly === true) {
+      issues.push(`observation_candidates[${candidateIndex}] weak_single_source must not be weekly eligible`);
+    }
+    if (candidate.quality_score !== undefined) {
+      if (typeof candidate.quality_score !== "number" || candidate.quality_score < 0 || candidate.quality_score > 100) {
+        issues.push(`observation_candidates[${candidateIndex}].quality_score must be between 0 and 100`);
+      }
+    }
+  });
 
   return {
     projectEvidenceCount: projectEvidence.length,
@@ -759,6 +777,12 @@ function inspectExternalAggregateContract(value: unknown): {
 }
 
 function evidenceArray(value: unknown, name: string, issues: string[]): unknown[] {
+  if (Array.isArray(value)) return value;
+  issues.push(`${name} must be an array`);
+  return [];
+}
+
+function candidateArray(value: unknown, name: string, issues: string[]): unknown[] {
   if (Array.isArray(value)) return value;
   issues.push(`${name} must be an array`);
   return [];

@@ -103,6 +103,31 @@ describe("external candidate explanation input builder", () => {
     expect(result.warnings.map((item) => item.reason_code)).toContain("direction_candidate_low_confidence");
   });
 
+  it("uses conservative eligibility when explaining legacy aggregates without observation candidates", () => {
+    const legacyAggregate = aggregate([
+      event({
+        event_id: "direction-legacy-1",
+        scope: "direction",
+        target_type: "topic",
+        target_key: "agent memory evaluation workflows",
+        derived_signal_kinds: ["discovery"],
+      }),
+    ]);
+    legacyAggregate.observation_candidates = [];
+
+    const result = buildCandidateExplanationInputs({
+      aggregate: legacyAggregate,
+    });
+
+    expect(result.inputs[0]).toMatchObject({
+      candidate_key: "direction:agent memory evaluation workflows",
+      explanation_scope: "direction_signal",
+      can_enter_daily: false,
+      can_enter_weekly: false,
+      cannot_be_primary_conclusion: true,
+    });
+  });
+
   it("removes urls from natural-language explanation inputs before public-safe validation", () => {
     const scored = [
       {

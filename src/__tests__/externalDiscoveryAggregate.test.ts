@@ -246,4 +246,204 @@ describe("external discovery aggregate", () => {
     ]);
     expect(aggregate.project_evidence[0]?.event_ids).toEqual(["old-official-blog", "recent-x"]);
   });
+
+  it("downgrades official single-source single-event candidates and keeps them out of weekly", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "official-weak",
+          platform: "official_web",
+          raw_event_kind: "official_release",
+          derived_signal_kinds: ["discovery"],
+          target_key: "https://example.com/agent-launch",
+          actor: {
+            actor_type: "team",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.observation_candidates).toHaveLength(1);
+    expect(aggregate.observation_candidates[0]).toMatchObject({
+      target_key: "https://example.com/agent-launch",
+      quality_bucket: "weak_single_source",
+      display_bucket: "weak_followup",
+      can_enter_daily: false,
+      can_enter_weekly: false,
+      cannot_be_primary_conclusion: true,
+      platforms: ["official_web"],
+      mention_count: 1,
+      distinct_actor_count: 1,
+      top_tier_actor_count: 0,
+    });
+    expect(aggregate.observation_candidates[0]?.quality_score).toBeLessThanOrEqual(20);
+    expect(aggregate.observation_candidates[0]?.quality_reasons).toEqual(expect.arrayContaining([
+      "weak_single_source",
+      "single_platform",
+      "single_event",
+      "weekly_gate_not_met",
+      "cannot_be_primary_conclusion",
+    ]));
+  });
+
+  it("sorts social discussion ahead of weak official single-source candidates", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "official-weak",
+          platform: "official_web",
+          raw_event_kind: "official_release",
+          derived_signal_kinds: ["discovery"],
+          target_key: "weak-official",
+          actor: {
+            actor_type: "team",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+          },
+        }),
+        event({
+          event_id: "hn-discussion",
+          platform: "hacker_news",
+          raw_event_kind: "discussion",
+          derived_signal_kinds: ["discovery"],
+          target_key: "hn-project",
+          actor: {
+            actor_type: "community",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+            identity_hash: "hn-user-1",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.observation_candidates.map((candidate) => candidate.target_key)).toEqual(["hn-project", "weak-official"]);
+    expect(aggregate.observation_candidates[0]).toMatchObject({
+      quality_bucket: "social_discussion",
+      display_bucket: "new_discovery",
+      can_enter_daily: true,
+      can_enter_weekly: false,
+    });
+    expect(aggregate.observation_candidates[1]).toMatchObject({
+      quality_bucket: "weak_single_source",
+      display_bucket: "weak_followup",
+      can_enter_daily: false,
+      can_enter_weekly: false,
+    });
+  });
+
+  it("promotes cross-platform project evidence within the external layer only", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "x-cross",
+          platform: "x_twitter",
+          target_key: "cross/project",
+          source_published_at: "2026-06-29T00:00:00.000Z",
+        }),
+        event({
+          event_id: "reddit-cross",
+          platform: "reddit",
+          target_key: "cross/project",
+          source_published_at: "2026-06-29T02:00:00.000Z",
+          actor: {
+            actor_type: "community",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+            identity_hash: "reddit-user-1",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.observation_candidates[0]).toMatchObject({
+      target_key: "cross/project",
+      quality_bucket: "cross_platform_confirmed",
+      display_bucket: "project_evidence",
+      can_enter_daily: true,
+      can_enter_weekly: true,
+      cannot_be_primary_conclusion: true,
+      platforms: ["reddit", "x_twitter"],
+      mention_count: 2,
+    });
+    expect(aggregate.observation_candidates[0]?.quality_reasons).toContain("cross_platform_confirmed");
+  });
+
+  it("keeps direction single-day signals as direction observations without daily or weekly eligibility", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "direction-1",
+          scope: "direction",
+          target_type: "topic",
+          target_key: "agent-browser-use",
+          derived_signal_kinds: ["discovery"],
+          platform: "hacker_news",
+          actor: {
+            actor_type: "community",
+            effective_tier: "ordinary",
+            tier_basis: "none",
+            identity_hash: "hn-user-1",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.observation_candidates[0]).toMatchObject({
+      candidate_kind: "direction",
+      target_key: "agent-browser-use",
+      qualification: "direction_observation",
+      quality_bucket: "social_discussion",
+      display_bucket: "direction_observation",
+      can_enter_daily: false,
+      can_enter_weekly: false,
+      cannot_be_primary_conclusion: true,
+    });
+    expect(aggregate.observation_candidates[0]?.quality_reasons).toEqual(expect.arrayContaining([
+      "direction_candidate",
+      "weekly_gate_not_met",
+      "cannot_be_primary_conclusion",
+    ]));
+  });
+
+  it("does not upgrade official weak signals only because URL-derived public actors exist", () => {
+    const aggregate = buildDailyExternalAggregate({
+      date: "2026-06-30",
+      generated_at: "2026-06-30T01:00:00.000Z",
+      events: [
+        event({
+          event_id: "official-owner-only",
+          platform: "official_web",
+          raw_event_kind: "official_release",
+          derived_signal_kinds: ["discovery"],
+          url: "https://github.com/anthropics/claude-code/releases/tag/v1",
+          target_repo_url: "https://github.com/anthropics/claude-code",
+          target_key: "https://github.com/anthropics/claude-code",
+          actor: {
+            actor_type: "team",
+            effective_tier: "watch",
+            tier_basis: "none",
+          },
+        }),
+      ],
+    });
+
+    expect(aggregate.project_evidence[0]?.public_actors?.some((actor) => actor.source_kind === "github_owner")).toBe(true);
+    expect(aggregate.observation_candidates[0]).toMatchObject({
+      quality_bucket: "weak_single_source",
+      display_bucket: "weak_followup",
+      can_enter_daily: false,
+      can_enter_weekly: false,
+    });
+  });
 });

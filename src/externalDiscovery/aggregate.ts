@@ -5,10 +5,14 @@ import type {
   DailyExternalAggregate,
   ExternalActorTier,
   ExternalActorType,
+  ExternalCandidateDisplayBucket,
+  ExternalCandidateQualityBucket,
+  ExternalCandidateQualityReason,
   ExternalEvidence,
   ExternalNamedRegistryActor,
   ExternalNamedActorSourceRole,
   ExternalPlatform,
+  ExternalPublicActor,
   ExternalSignalEvent,
   ExternalSignalKind,
   ObservationCandidate,
@@ -31,12 +35,65 @@ const registryTierRank: Record<ExternalNamedRegistryActor["registry_tier"], numb
 
 const SOCIAL_RECENCY_WINDOW_DAYS = 30;
 const SOCIAL_RECENCY_PLATFORMS = new Set<ExternalPlatform>(["x_twitter", "reddit"]);
+const SOCIAL_DISCUSSION_PLATFORMS = new Set<ExternalPlatform>(["x_twitter", "reddit", "hacker_news"]);
+const OFFICIAL_PLATFORMS = new Set<ExternalPlatform>(["official_web", "official_blog"]);
+
+const qualityBucketRank: Record<ExternalCandidateQualityBucket, number> = {
+  cross_platform_confirmed: 0,
+  social_discussion: 1,
+  official_source: 2,
+  weak_single_source: 3,
+};
+
+const displayBucketRank: Record<ExternalCandidateDisplayBucket, number> = {
+  project_evidence: 0,
+  new_discovery: 1,
+  direction_observation: 2,
+  official_signal: 3,
+  weak_followup: 4,
+};
+
+function rankDisplayBucket(bucket: ObservationCandidate["display_bucket"] | undefined): number {
+  switch (bucket) {
+    case "project_evidence":
+      return 0;
+    case "new_discovery":
+    case "new_discoveries":
+    case "community_discussions":
+      return 1;
+    case "direction_observation":
+    case "direction_observations":
+      return 2;
+    case "official_signal":
+    case "official_releases":
+      return 3;
+    case "weak_followup":
+    case "needs_followup":
+      return 4;
+    default:
+      return displayBucketRank.weak_followup;
+  }
+}
+
+const qualityScoreCap: Record<ExternalCandidateQualityBucket, number> = {
+  cross_platform_confirmed: 100,
+  social_discussion: 75,
+  official_source: 55,
+  weak_single_source: 20,
+};
 
 export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateInput): DailyExternalAggregate {
   const rawEvents = input.events ?? input.provider_result?.events ?? [];
   const recentEvents = filterRecentSocialEvents(rawEvents, input.date);
   const events = recentEvents.events;
   const rejectedEvents = [...(input.provider_result?.rejected_events ?? []), ...recentEvents.rejected_events];
+  const projectEvidence = buildEvidence(events.filter((event) => event.scope === "project"));
+  const directionEvidence = buildEvidence(events.filter((event) => event.scope === "direction"));
+  const observationCandidates = normalizeObservationCandidates({
+    candidates: input.observation_candidates ?? [],
+    projectEvidence,
+    directionEvidence,
+  });
   const aggregate: DailyExternalAggregate = {
     schema_version: "external-discovery.aggregate.v1",
     date: input.date,
@@ -55,9 +112,9 @@ export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateIn
     rejected_event_count: rejectedEvents.length,
     platform_counts: countPlatforms(events),
     derived_signal_kind_counts: countSignalKinds(events),
-    project_evidence: buildEvidence(events.filter((event) => event.scope === "project")),
-    direction_evidence: buildEvidence(events.filter((event) => event.scope === "direction")),
-    observation_candidates: input.observation_candidates ?? [],
+    project_evidence: projectEvidence,
+    direction_evidence: directionEvidence,
+    observation_candidates: observationCandidates,
     audit: {
       rejected_events: rejectedEvents,
       warnings: [...(input.provider_result?.warnings ?? []), ...recentEvents.warnings, ...namedActorRoleWarnings(events)],
@@ -70,6 +127,232 @@ export function buildDailyExternalAggregate(input: BuildDailyExternalAggregateIn
   }
 
   return aggregate;
+}
+
+function normalizeObservationCandidates(input: {
+  candidates: ObservationCandidate[];
+  projectEvidence: ExternalEvidence[];
+  directionEvidence: ExternalEvidence[];
+}): ObservationCandidate[] {
+  const projectEvidenceByTargetKey = evidenceByTargetKey(input.projectEvidence);
+  const directionEvidenceByTargetKey = evidenceByTargetKey(input.directionEvidence);
+  const baseCandidates = input.candidates.length > 0 ? input.candidates : candidatesFromEvidence(input.projectEvidence, input.directionEvidence);
+
+  return uniqueCandidates(baseCandidates)
+    .map((candidate) => normalizeObservationCandidate(candidate, projectEvidenceByTargetKey, directionEvidenceByTargetKey))
+    .sort(compareCandidates);
+}
+
+function candidatesFromEvidence(projectEvidence: ExternalEvidence[], directionEvidence: ExternalEvidence[]): ObservationCandidate[] {
+  const fromProject = projectEvidence.map((evidence): ObservationCandidate => ({
+    candidate_kind: "project",
+    target_key: evidence.target_key,
+    qualification: "needs_primary_confirmation",
+    can_enter_daily: false,
+    can_enter_weekly: false,
+    cannot_be_primary_conclusion: true,
+  }));
+  const fromDirection = directionEvidence.map((evidence): ObservationCandidate => ({
+    candidate_kind: "direction",
+    target_key: evidence.target_key,
+    qualification: "direction_observation",
+    can_enter_daily: false,
+    can_enter_weekly: false,
+    cannot_be_primary_conclusion: true,
+  }));
+  return [...fromProject, ...fromDirection];
+}
+
+function normalizeObservationCandidate(
+  candidate: ObservationCandidate,
+  projectEvidenceByTargetKey: Map<string, ExternalEvidence[]>,
+  directionEvidenceByTargetKey: Map<string, ExternalEvidence[]>,
+): ObservationCandidate {
+  const evidence = evidenceForCandidate(candidate, projectEvidenceByTargetKey, directionEvidenceByTargetKey);
+  const metrics = candidateMetrics(evidence);
+  const qualityBucket = qualityBucketForCandidate(evidence, metrics);
+  const displayBucket = displayBucketForCandidate(candidate, evidence, qualityBucket);
+  const eligibility = eligibilityForCandidate(displayBucket, qualityBucket, metrics);
+  const qualityReasons = qualityReasonsForCandidate(candidate, evidence, metrics, qualityBucket, eligibility.can_enter_weekly);
+
+  return {
+    ...candidate,
+    can_enter_daily: eligibility.can_enter_daily,
+    can_enter_weekly: eligibility.can_enter_weekly,
+    cannot_be_primary_conclusion: true,
+    quality_bucket: qualityBucket,
+    display_bucket: displayBucket,
+    quality_reasons: qualityReasons,
+    quality_score: qualityScoreForCandidate(qualityBucket, metrics),
+    evidence_ids: evidence.map((item) => item.evidence_id).sort(),
+    platforms: metrics.platforms,
+    mention_count: metrics.mention_count,
+    distinct_actor_count: metrics.distinct_actor_count,
+    top_tier_actor_count: metrics.top_tier_actor_count,
+  };
+}
+
+function evidenceByTargetKey(evidence: ExternalEvidence[]): Map<string, ExternalEvidence[]> {
+  const map = new Map<string, ExternalEvidence[]>();
+  for (const item of evidence) {
+    map.set(item.target_key, [...(map.get(item.target_key) ?? []), item]);
+  }
+  return map;
+}
+
+function evidenceForCandidate(
+  candidate: ObservationCandidate,
+  projectEvidenceByTargetKey: Map<string, ExternalEvidence[]>,
+  directionEvidenceByTargetKey: Map<string, ExternalEvidence[]>,
+): ExternalEvidence[] {
+  if (candidate.candidate_kind === "direction" || candidate.qualification === "direction_observation") {
+    return directionEvidenceByTargetKey.get(candidate.target_key) ?? projectEvidenceByTargetKey.get(candidate.target_key) ?? [];
+  }
+  return projectEvidenceByTargetKey.get(candidate.target_key) ?? directionEvidenceByTargetKey.get(candidate.target_key) ?? [];
+}
+
+function candidateMetrics(evidence: ExternalEvidence[]): {
+  platforms: ExternalPlatform[];
+  mention_count: number;
+  distinct_actor_count: number;
+  top_tier_actor_count: number;
+  has_quality_public_actor: boolean;
+  has_named_registry_actor: boolean;
+  derived_signal_kinds: ExternalSignalKind[];
+} {
+  return {
+    platforms: unique(evidence.flatMap((item) => item.platforms)).sort() as ExternalPlatform[],
+    mention_count: evidence.reduce((sum, item) => sum + item.mention_count, 0),
+    distinct_actor_count: evidence.reduce((sum, item) => sum + item.distinct_actor_count, 0),
+    top_tier_actor_count: evidence.reduce((sum, item) => sum + item.top_tier_actor_count, 0),
+    has_quality_public_actor: evidence.some((item) => hasQualityPublicActor(item.public_actors ?? [])),
+    has_named_registry_actor: evidence.some((item) => item.named_registry_actors.length > 0),
+    derived_signal_kinds: unique(evidence.flatMap((item) => item.derived_signal_kinds)).sort() as ExternalSignalKind[],
+  };
+}
+
+function qualityBucketForCandidate(
+  evidence: ExternalEvidence[],
+  metrics: ReturnType<typeof candidateMetrics>,
+): ExternalCandidateQualityBucket {
+  if (evidence.length === 0 || metrics.platforms.length === 0) return "weak_single_source";
+  if (metrics.platforms.length >= 2) return "cross_platform_confirmed";
+  if (metrics.platforms.some((platform) => SOCIAL_DISCUSSION_PLATFORMS.has(platform))) return "social_discussion";
+  if (metrics.platforms.every((platform) => OFFICIAL_PLATFORMS.has(platform))) {
+    if (
+      metrics.mention_count <= 1 &&
+      metrics.distinct_actor_count <= 1 &&
+      metrics.top_tier_actor_count === 0 &&
+      !metrics.has_named_registry_actor &&
+      !metrics.has_quality_public_actor
+    ) {
+      return "weak_single_source";
+    }
+    return "official_source";
+  }
+  return "weak_single_source";
+}
+
+function displayBucketForCandidate(
+  candidate: ObservationCandidate,
+  evidence: ExternalEvidence[],
+  qualityBucket: ExternalCandidateQualityBucket,
+): ExternalCandidateDisplayBucket {
+  if (candidate.candidate_kind === "direction" || candidate.qualification === "direction_observation") return "direction_observation";
+  if (qualityBucket === "weak_single_source") return "weak_followup";
+  const platforms = unique(evidence.flatMap((item) => item.platforms)) as ExternalPlatform[];
+  const derivedKinds = unique(evidence.flatMap((item) => item.derived_signal_kinds)) as ExternalSignalKind[];
+  if (derivedKinds.includes("evidence")) return "project_evidence";
+  if (platforms.length > 0 && platforms.every((platform) => OFFICIAL_PLATFORMS.has(platform))) return "official_signal";
+  return "new_discovery";
+}
+
+function eligibilityForCandidate(
+  displayBucket: ExternalCandidateDisplayBucket,
+  qualityBucket: ExternalCandidateQualityBucket,
+  metrics: ReturnType<typeof candidateMetrics>,
+): { can_enter_daily: boolean; can_enter_weekly: boolean } {
+  if (displayBucket === "direction_observation") return { can_enter_daily: false, can_enter_weekly: false };
+  if (qualityBucket === "cross_platform_confirmed") return { can_enter_daily: true, can_enter_weekly: true };
+  if (qualityBucket === "social_discussion") {
+    return {
+      can_enter_daily: true,
+      can_enter_weekly: metrics.mention_count >= 2 || metrics.distinct_actor_count >= 2 || metrics.top_tier_actor_count > 0,
+    };
+  }
+  if (qualityBucket === "official_source") {
+    return {
+      can_enter_daily: true,
+      can_enter_weekly: metrics.mention_count >= 2 || metrics.top_tier_actor_count > 0,
+    };
+  }
+  return { can_enter_daily: false, can_enter_weekly: false };
+}
+
+function qualityReasonsForCandidate(
+  candidate: ObservationCandidate,
+  evidence: ExternalEvidence[],
+  metrics: ReturnType<typeof candidateMetrics>,
+  qualityBucket: ExternalCandidateQualityBucket,
+  canEnterWeekly: boolean,
+): ExternalCandidateQualityReason[] {
+  if (evidence.length === 0) return ["evidence_missing"];
+  const reasons: ExternalCandidateQualityReason[] = [];
+  if (qualityBucket === "cross_platform_confirmed") reasons.push("cross_platform_confirmed");
+  if (qualityBucket === "social_discussion") reasons.push("social_platform_discussion");
+  if (qualityBucket === "official_source") reasons.push("official_platform_signal");
+  if (qualityBucket === "weak_single_source") reasons.push("weak_single_source");
+  if (metrics.platforms.length === 1) reasons.push("single_platform");
+  if (metrics.mention_count <= 1) reasons.push("single_event");
+  if (metrics.derived_signal_kinds.includes("evidence")) reasons.push("external_evidence_present");
+  if (candidate.candidate_kind === "direction" || candidate.qualification === "direction_observation") reasons.push("direction_candidate");
+  if (metrics.has_named_registry_actor) reasons.push("named_registry_actor_present");
+  if (metrics.has_quality_public_actor) reasons.push("quality_public_actor_present");
+  if (!canEnterWeekly) reasons.push("weekly_gate_not_met");
+  reasons.push("cannot_be_primary_conclusion");
+  return unique(reasons);
+}
+
+function qualityScoreForCandidate(
+  qualityBucket: ExternalCandidateQualityBucket,
+  metrics: ReturnType<typeof candidateMetrics>,
+): number {
+  const base =
+    (metrics.platforms.length >= 2 ? 30 : 0) +
+    (metrics.platforms.some((platform) => SOCIAL_DISCUSSION_PLATFORMS.has(platform)) ? 18 : 0) +
+    (metrics.platforms.some((platform) => OFFICIAL_PLATFORMS.has(platform)) ? 8 : 0) +
+    Math.min(20, metrics.mention_count * 4) +
+    Math.min(20, metrics.distinct_actor_count * 5) +
+    Math.min(20, metrics.top_tier_actor_count * 10) +
+    (metrics.has_named_registry_actor || metrics.has_quality_public_actor ? 10 : 0);
+  return Math.max(0, Math.min(qualityScoreCap[qualityBucket], base));
+}
+
+function hasQualityPublicActor(publicActors: ExternalPublicActor[]): boolean {
+  return publicActors.some((actor) =>
+    actor.actor_role === "discussion_actor" || actor.actor_role === "community_source" || actor.actor_role === "registry_entity",
+  );
+}
+
+function uniqueCandidates(candidates: ObservationCandidate[]): ObservationCandidate[] {
+  const byKey = new Map<string, ObservationCandidate>();
+  for (const candidate of candidates) {
+    const key = `${candidate.candidate_kind}:${candidate.target_key}:${candidate.qualification}`;
+    if (!byKey.has(key)) byKey.set(key, candidate);
+  }
+  return [...byKey.values()];
+}
+
+function compareCandidates(a: ObservationCandidate, b: ObservationCandidate): number {
+  return (
+    qualityBucketRank[a.quality_bucket ?? "weak_single_source"] - qualityBucketRank[b.quality_bucket ?? "weak_single_source"] ||
+    rankDisplayBucket(a.display_bucket) - rankDisplayBucket(b.display_bucket) ||
+    (b.quality_score ?? 0) - (a.quality_score ?? 0) ||
+    (b.platforms?.length ?? 0) - (a.platforms?.length ?? 0) ||
+    (b.mention_count ?? 0) - (a.mention_count ?? 0) ||
+    (b.top_tier_actor_count ?? 0) - (a.top_tier_actor_count ?? 0) ||
+    a.target_key.localeCompare(b.target_key)
+  );
 }
 
 function filterRecentSocialEvents(events: ExternalSignalEvent[], date: string): {

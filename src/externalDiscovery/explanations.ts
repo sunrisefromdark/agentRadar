@@ -584,15 +584,15 @@ function readCandidateBase(aggregate: DailyExternalAggregate): ObservationCandid
     target_key: evidence.target_key,
     qualification: "needs_primary_confirmation",
     can_enter_daily: true,
-    can_enter_weekly: evidence.platforms.length > 1 || evidence.mention_count >= 2,
+    can_enter_weekly: false,
     cannot_be_primary_conclusion: true,
   }));
   const fromDirection = aggregate.direction_evidence.map((evidence): ObservationCandidate => ({
     candidate_kind: "direction",
     target_key: evidence.target_key,
     qualification: "direction_observation",
-    can_enter_daily: true,
-    can_enter_weekly: evidence.platforms.length > 1 || evidence.mention_count >= 3,
+    can_enter_daily: false,
+    can_enter_weekly: false,
     cannot_be_primary_conclusion: true,
   }));
   return uniqueCandidates([...fromProject, ...fromDirection]);

@@ -333,4 +333,54 @@ describe("external discovery daily verification contract", () => {
     expect(check?.status).toBe("fail");
     expect(check?.detail).toContain("official/project sources cannot be head discussion actors");
   });
+
+  it("fails persisted aggregates that make weak single-source candidates weekly eligible", () => {
+    const root = setupWorkspace();
+    const aggregate = makeExternalAggregate();
+    aggregate.observation_candidates = [
+      {
+        candidate_kind: "project",
+        target_key: "openai/agents-sdk",
+        qualification: "needs_primary_confirmation",
+        can_enter_daily: false,
+        can_enter_weekly: true,
+        cannot_be_primary_conclusion: true,
+        quality_bucket: "weak_single_source",
+        display_bucket: "weak_followup",
+        quality_score: 10,
+      },
+    ];
+    writeDailyInputs(root, aggregate, makeCandidateExplanations());
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_discovery_aggregate_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("weak_single_source must not be weekly eligible");
+  });
+
+  it("fails persisted aggregates with candidate quality scores outside 0-100", () => {
+    const root = setupWorkspace();
+    const aggregate = makeExternalAggregate();
+    aggregate.observation_candidates = [
+      {
+        candidate_kind: "project",
+        target_key: "openai/agents-sdk",
+        qualification: "needs_primary_confirmation",
+        can_enter_daily: true,
+        can_enter_weekly: true,
+        cannot_be_primary_conclusion: true,
+        quality_bucket: "cross_platform_confirmed",
+        display_bucket: "project_evidence",
+        quality_score: 101,
+      },
+    ];
+    writeDailyInputs(root, aggregate, makeCandidateExplanations());
+
+    const result = buildVerifyDailyResult(date);
+    const check = result.checks.find((item) => item.name === "external_discovery_aggregate_contract");
+
+    expect(check?.status).toBe("fail");
+    expect(check?.detail).toContain("quality_score must be between 0 and 100");
+  });
 });

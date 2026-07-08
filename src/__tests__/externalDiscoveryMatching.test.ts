@@ -46,6 +46,7 @@ describe("external discovery matching", () => {
       candidate_kind: "project",
       qualification: "needs_primary_confirmation",
       can_enter_daily: true,
+      can_enter_weekly: false,
       cannot_be_primary_conclusion: true,
     });
     expect(
@@ -59,7 +60,7 @@ describe("external discovery matching", () => {
       candidate_kind: "direction",
       qualification: "direction_observation",
       can_enter_daily: false,
-      can_enter_weekly: true,
+      can_enter_weekly: false,
       cannot_be_primary_conclusion: true,
     });
   });

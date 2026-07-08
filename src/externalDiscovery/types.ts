@@ -32,6 +32,31 @@ export type ExternalPublicActorIdentityReason =
   | "official_source_url_missing"
   | "registry_entity_not_matched"
   | "redacted_for_public_safety";
+export type ExternalCandidateQualityBucket =
+  | "cross_platform_confirmed"
+  | "social_discussion"
+  | "official_source"
+  | "weak_single_source";
+export type ExternalCandidateDisplayBucket =
+  | "project_evidence"
+  | "new_discovery"
+  | "direction_observation"
+  | "official_signal"
+  | "weak_followup";
+export type ExternalCandidateQualityReason =
+  | "cross_platform_confirmed"
+  | "social_platform_discussion"
+  | "official_platform_signal"
+  | "weak_single_source"
+  | "single_platform"
+  | "single_event"
+  | "evidence_missing"
+  | "external_evidence_present"
+  | "direction_candidate"
+  | "named_registry_actor_present"
+  | "quality_public_actor_present"
+  | "weekly_gate_not_met"
+  | "cannot_be_primary_conclusion";
 export type ExternalTrendWindowStatus = "ok" | "partial" | "failed" | "insufficient" | "skipped";
 export type ExternalTrendWindowReadStatus =
   | "ok"
@@ -136,6 +161,34 @@ export const EXTERNAL_PUBLIC_ACTOR_IDENTITY_REASONS = [
   "official_source_url_missing",
   "registry_entity_not_matched",
   "redacted_for_public_safety",
+] as const;
+export const EXTERNAL_CANDIDATE_QUALITY_BUCKETS = [
+  "cross_platform_confirmed",
+  "social_discussion",
+  "official_source",
+  "weak_single_source",
+] as const;
+export const EXTERNAL_CANDIDATE_DISPLAY_BUCKETS = [
+  "project_evidence",
+  "new_discovery",
+  "direction_observation",
+  "official_signal",
+  "weak_followup",
+] as const;
+export const EXTERNAL_CANDIDATE_QUALITY_REASONS = [
+  "cross_platform_confirmed",
+  "social_platform_discussion",
+  "official_platform_signal",
+  "weak_single_source",
+  "single_platform",
+  "single_event",
+  "evidence_missing",
+  "external_evidence_present",
+  "direction_candidate",
+  "named_registry_actor_present",
+  "quality_public_actor_present",
+  "weekly_gate_not_met",
+  "cannot_be_primary_conclusion",
 ] as const;
 export const EXTERNAL_TREND_WINDOW_READ_STATUSES = ["ok", "not_found", "parse_error", "partial", "insufficient", "failed", "skipped"] as const;
 export const EXTERNAL_WEEKLY_GATE_REASONS = [
@@ -308,8 +361,15 @@ export interface ObservationCandidate {
     persistence?: number;
     authority?: number;
   };
-  display_bucket?: ExternalDisplayBucket;
+  display_bucket?: ExternalDisplayBucket | ExternalCandidateDisplayBucket;
   display_reasons?: string[];
+  quality_bucket?: ExternalCandidateQualityBucket;
+  quality_reasons?: ExternalCandidateQualityReason[];
+  quality_score?: number;
+  platforms?: ExternalPlatform[];
+  mention_count?: number;
+  distinct_actor_count?: number;
+  top_tier_actor_count?: number;
 }
 
 export interface ExternalDiscoveryAudit {
